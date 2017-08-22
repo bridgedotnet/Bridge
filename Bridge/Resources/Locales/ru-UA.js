@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-UA", true), {
         abbreviatedDayNames: ["вс","пн","вт","ср","чт","пт","сб"],
         abbreviatedMonthGenitiveNames: ["янв.","февр.","мар.","апр.","мая","июн.","июл.","авг.","сент.","окт.","нояб.","дек.",""],
         abbreviatedMonthNames: ["янв.","февр.","март","апр.","май","июнь","июль","авг.","сент.","окт.","нояб.","дек.",""],
-        amDesignator: "ДП",
+        amDesignator: "AM",
         dateSeparator: ".",
         dayNames: ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-UA", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря",""],
         monthNames: ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь",""],
-        pmDesignator: "ПП",
+        pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.MM.yyyy",
         shortestDayNames: ["вс","пн","вт","ср","чт","пт","сб"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-UA", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy 'г'.",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "ru-UA",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

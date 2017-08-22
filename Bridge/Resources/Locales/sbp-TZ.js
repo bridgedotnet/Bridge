@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sbp-TZ", true), {
         abbreviatedDayNames: ["Mul","Jtt","Jnn","Jtn","Alh","Iju","Jmo"],
         abbreviatedMonthGenitiveNames: ["Mup","Mwi","Msh","Mun","Mag","Muj","Msp","Mpg","Mye","Mok","Mus","Muh",""],
         abbreviatedMonthNames: ["Mup","Mwi","Msh","Mun","Mag","Muj","Msp","Mpg","Mye","Mok","Mus","Muh",""],
-        amDesignator: "AM",
+        amDesignator: "Lwamilawu",
         dateSeparator: "/",
         dayNames: ["Mulungu","Jumatatu","Jumanne","Jumatano","Alahamisi","Ijumaa","Jumamosi"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sbp-TZ", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Mupalangulwa","Mwitope","Mushende","Munyi","Mushende Magali","Mujimbi","Mushipepo","Mupuguto","Munyense","Mokhu","Musongandembwe","Muhaano",""],
         monthNames: ["Mupalangulwa","Mwitope","Mushende","Munyi","Mushende Magali","Mujimbi","Mushipepo","Mupuguto","Munyense","Mokhu","Musongandembwe","Muhaano",""],
-        pmDesignator: "PM",
+        pmDesignator: "Pashamihe",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Mul","Jtt","Jnn","Jtn","Alh","Iju","Jmo"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("sbp-TZ", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "sbp-TZ",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

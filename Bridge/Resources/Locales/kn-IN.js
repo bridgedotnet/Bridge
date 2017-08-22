@@ -9,7 +9,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kn-IN", true), {
         negativeInfinitySymbol: "-∞",
         positiveInfinitySymbol: "∞",
         percentSymbol: "%",
-        percentGroupSizes: [3,2],
+        percentGroupSizes: [3],
         percentDecimalDigits: 2,
         percentDecimalSeparator: ".",
         percentGroupSeparator: ",",
@@ -22,7 +22,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kn-IN", true), {
         currencyGroupSeparator: ",",
         currencyNegativePattern: 12,
         currencyPositivePattern: 0,
-        numberGroupSizes: [3,2],
+        numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
         numberGroupSeparator: ",",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("kn-IN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "kn-IN",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1099,
+        listSeparator: ",",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

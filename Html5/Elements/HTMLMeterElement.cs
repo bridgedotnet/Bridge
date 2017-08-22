@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLMeterElement")]
     public sealed class HTMLMeterElement : HTMLElement<HTMLMeterElement>
     {
-        [Template("document.createElement('meter')")]
+        [Template("document.createElement(\"meter\")")]
         public extern HTMLMeterElement();
 
         /// <summary>

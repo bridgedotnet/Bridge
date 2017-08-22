@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("mn-Mong", true), {
     englishName: "Mongolian (Traditional Mongolian)",
-    nativeName: "ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ",
+    nativeName: "ᠮᠣᠩᠭᠣᠤᠯ ᠬᠡᠯᠡ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "ᠲᠤᠭᠠᠠ ᠪᠤᠰᠤ",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Mong", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyyᠣᠨ MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "mn-Mong-CN",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 2128,
+        listSeparator: ",",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

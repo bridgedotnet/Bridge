@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLProgressElement")]
     public sealed class HTMLProgressElement : HTMLElement<HTMLProgressElement>
     {
-        [Template("document.createElement('progress')")]
+        [Template("document.createElement(\"progress\")")]
         public extern HTMLProgressElement();
 
         /// <summary>

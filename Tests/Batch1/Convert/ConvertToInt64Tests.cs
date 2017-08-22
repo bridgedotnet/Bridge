@@ -117,9 +117,9 @@ namespace Bridge.ClientTest.ConvertTests
             var longMinValue = Int64.MinValue;
             var longMaxValue = Int64.MaxValue;
 
-            string[] testValues = { "100", "-100", "0", longMinValue.ToString(), longMaxValue.ToString(), null };
-            long[] expectedValues = { 100, -100, 0, longMinValue, longMaxValue, 0 };
-            VerifyFromString(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues, true);
+            string[] testValues = { "100", "-100", "0", longMinValue.ToString(), longMaxValue.ToString(), null, "0000000000000010", "00" };
+            long[] expectedValues = { 100, -100, 0, longMinValue, longMaxValue, 0, 10, 0 };
+            VerifyFromString(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues, useTrue: true);
 
             string[] overflowValues = { ConvertConstants.INT64_OVERFLOW_MAX_STRING, ConvertConstants.INT64_OVERFLOW_MIN_STRING };
             VerifyFromStringThrows<OverflowException>(Convert.ToInt64, Convert.ToInt64, overflowValues);
@@ -137,16 +137,19 @@ namespace Bridge.ClientTest.ConvertTests
             string[] testValues = {
                 null, null, null, null,
                 ConvertConstants.INT64_MAX_STRING_BASE_16, maxSafeValue.ToString(), ConvertConstants.INT64_MAX_STRING_BASE_8, ConvertConstants.INT64_MAX_STRING_BASE_2,
-                ConvertConstants.INT64_MIN_STRING_BASE_16, minSafeValue.ToString(), ConvertConstants.INT64_MIN_STRING_BASE_8, ConvertConstants.INT64_MIN_STRING_BASE_2
+                ConvertConstants.INT64_MIN_STRING_BASE_16, minSafeValue.ToString(), ConvertConstants.INT64_MIN_STRING_BASE_8, ConvertConstants.INT64_MIN_STRING_BASE_2,
+                "0000000000000010", "0", "00"
             };
             int[] testBases = {
                 10, 2, 8, 16,
                 16, 10, 8, 2,
-                16, 10, 8, 2
+                16, 10, 8, 2,
+                16, 16, 16
             };
             long[] expectedValues = {0, 0, 0, 0,
                 maxSafeValue, maxSafeValue, maxSafeValue, maxSafeValue,
-                minSafeValue, minSafeValue, minSafeValue, minSafeValue
+                minSafeValue, minSafeValue, minSafeValue, minSafeValue,
+                16, 0, 0
             };
             VerifyFromStringWithBase(Convert.ToInt64, testValues, testBases, expectedValues, true);
 

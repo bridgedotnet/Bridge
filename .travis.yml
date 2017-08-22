@@ -44,7 +44,7 @@ before_script:
 # - if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then npm install -g grunt-cli; fi
 script:
 - if [[ ! "$SKIP_XBUILD" == "true" ]]; then cd $TRAVIS_BUILD_DIR; xbuild /p:Configuration=Release Bridge.sln; else echo "Skipping XBuild as SKIP_XBUILD"; fi
-- if [[ ! "$SKIP_SERVER_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as SKIP_SERVER_TESTS or build failed"; fi
+- if [[ ! "$SKIP_SERVER_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then cd $TRAVIS_BUILD_DIR; mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as SKIP_SERVER_TESTS or build failed"; fi
 - if [[ ! "$SKIP_CLIENT_TESTS" == "true" && ($TRAVIS_TEST_RESULT = 0 || "$SKIP_XBUILD" == "true")]]; then cd $TRAVIS_BUILD_DIR/.build/ci; cp -rf $TRAVIS_BUILD_DIR/Tests/Runner/* $TRAVIS_BUILD_DIR/.build/ci; npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
 cache:
   directories:

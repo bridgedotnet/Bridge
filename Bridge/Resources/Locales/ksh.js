@@ -1,5 +1,5 @@
 Bridge.merge(new System.Globalization.CultureInfo("ksh", true), {
-    englishName: "Ripuarian",
+    englishName: "Colognian",
     nativeName: "Kölsch",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
@@ -31,19 +31,19 @@ Bridge.merge(new System.Globalization.CultureInfo("ksh", true), {
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["Su.","Mo.","Di.","Me.","Du.","Fr.","Sa."],
-        abbreviatedMonthGenitiveNames: ["Jan","Fäb","Mäz","Apr","Mäi","Jun","Jul","Ouj","Säp","Okt","Nov","Dez",""],
-        abbreviatedMonthNames: ["Jan.","Fäb.","Mäz.","Apr.","Mäi","Jun.","Jul.","Ouj.","Säp.","Okt.","Nov.","Dez.",""],
-        amDesignator: "v.m.",
+        abbreviatedMonthGenitiveNames: ["Jan","Fäb","Mäz","Apr","Mai","Jun","Jul","Ouj","Säp","Okt","Nov","Dez",""],
+        abbreviatedMonthNames: ["Jan.","Fäb.","Mäz.","Apr.","Mai","Jun.","Jul.","Ouj.","Säp.","Okt.","Nov.","Dez.",""],
+        amDesignator: "v.M.",
         dateSeparator: ". ",
-        dayNames: ["Sunndaach","Moondaach","Dinnsdaach","Metwoch","Dunnersdaach","Friidaach","Samsdaach"],
+        dayNames: ["Sunndaach","Mohndaach","Dinnsdaach","Metwoch","Dunnersdaach","Friidaach","Samsdaach"],
         firstDayOfWeek: 1,
         fullDateTimePattern: "dddd, 'dä' d. MMMM yyyy HH:mm:ss",
         longDatePattern: "dddd, 'dä' d. MMMM yyyy",
         longTimePattern: "HH:mm:ss",
         monthDayPattern: "d. MMMM",
-        monthGenitiveNames: ["Jannewa","Fäbrowa","Määz","Aprell","Mäi","Juuni","Juuli","Oujoß","Septämber","Oktoober","Novämber","Dezämber",""],
-        monthNames: ["Jannewa","Fäbrowa","Määz","Aprell","Mäi","Juuni","Juuli","Oujoß","Septämber","Oktoober","Novämber","Dezämber",""],
-        pmDesignator: "n.m.",
+        monthGenitiveNames: ["Jannewa","Fäbrowa","Määz","Aprell","Mai","Juuni","Juuli","Oujoß","Septämber","Oktohber","Novämber","Dezämber",""],
+        monthNames: ["Jannewa","Fäbrowa","Määz","Aprell","Mai","Juuni","Juuli","Oujoß","Septämber","Oktohber","Novämber","Dezämber",""],
+        pmDesignator: "n.M.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d. M. yyyy",
         shortestDayNames: ["Su","Mo","Di","Me","Du","Fr","Sa"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ksh", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ksh-DE",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

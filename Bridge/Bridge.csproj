@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Choose>
-    <When Condition="'$(OS)' != 'Unix'">
-      <PropertyGroup>
-        <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
-      </PropertyGroup>
-    </When>
-  </Choose>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DE78B8B7-C0F5-415B-A70B-02194433F450}</ProjectGuid>
+    <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Bridge</RootNamespace>
@@ -158,6 +152,8 @@
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
     <Compile Include="System\IAsyncResult.cs" />
+    <Compile Include="System\DateTimeKind.cs" />
+    <Compile Include="System\Globalization\TextInfo.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -461,13 +457,17 @@
     <Content Include="Resources\.generated\system\collections\generic\stack\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
     <Content Include="Resources\.generated\system\console.js" />
+    <Content Include="Resources\.generated\system\dateTimeKind.js" />
+    <Content Include="Resources\.generated\system\dayOfWeek.js" />
     <Content Include="Resources\.generated\system\environment.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
+    <Content Include="Resources\.generated\system\globalization\textInfo.js" />
     <Content Include="Resources\.generated\system\guid.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
     <Content Include="Resources\.generated\system\text\encoding.js" />
+    <Content Include="Resources\.generated\system\text\regularExpressions\regex.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
@@ -1317,6 +1317,14 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Double.js" />
+    <Content Include="Resources\Locales\de-IT.js" />
+    <Content Include="Resources\Locales\es-BR.js" />
+    <Content Include="Resources\Locales\nds-DE.js" />
+    <Content Include="Resources\Locales\nds-NL.js" />
+    <Content Include="Resources\Locales\nds.js" />
+    <Content Include="Resources\Locales\pt-CH.js" />
+    <Content Include="Resources\Locales\pt-GQ.js" />
+    <Content Include="Resources\Locales\pt-LU.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />

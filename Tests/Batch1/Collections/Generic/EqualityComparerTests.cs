@@ -26,9 +26,18 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void TypePropertiesAreCorrect_SPI_1546()
+        {
+            // #1546
+            Assert.AreStrictEqual(typeof(object), typeof(EqualityComparer<object>).BaseType, "BaseType should be correct");
+        }
+
+        [Test]
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Collections.Generic.EqualityComparer`1[[System.Object, mscorlib]]", typeof(EqualityComparer<object>).FullName, "FullName should be correct");
+            Assert.True(typeof(EqualityComparer<object>).IsClass, "IsClass should be true");
+
             object dict = EqualityComparer<object>.Default;
             Assert.True(dict is EqualityComparer<object>, "is EqualityComparer<object> should be true");
             Assert.True(dict is IEqualityComparer<object>, "is IEqualityComparer<object> should be true");
@@ -50,9 +59,8 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void DefaultComparerCanDetermineEquality()
         {
-            object
-                o1 = new object(),
-                o2 = new object();
+            var o1 = new object();
+            var o2 = new object();
 
             Assert.True(EqualityComparer<object>.Default.Equals(null, null), "null, null");
             Assert.False(EqualityComparer<object>.Default.Equals(null, o1), "null, o1");
@@ -64,7 +72,10 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void DefaultComparerInvokesOverriddenGetHashCode()
         {
-            Assert.AreEqual(42158, EqualityComparer<object>.Default.GetHashCode(new MyClass { hashCode = 42158 }));
+            Assert.AreEqual(42158, EqualityComparer<object>.Default.GetHashCode(new MyClass
+            {
+                hashCode = 42158
+            }));
         }
 
         [Test]

@@ -30,22 +30,22 @@ Bridge.merge(new System.Globalization.CultureInfo("sw-CD", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["yen","kwa","pil","tat","ine","tan","sit"],
-        abbreviatedMonthGenitiveNames: ["mkw","mpi","mtu","min","mtn","mst","msb","mun","mts","mku","mkm","mkb",""],
-        abbreviatedMonthNames: ["mkw","mpi","mtu","min","mtn","mst","msb","mun","mts","mku","mkm","mkb",""],
+        abbreviatedDayNames: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"],
+        abbreviatedMonthGenitiveNames: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des",""],
+        abbreviatedMonthNames: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des",""],
         amDesignator: "AM",
         dateSeparator: "/",
-        dayNames: ["siku ya yenga","siku ya kwanza","siku ya pili","siku ya tatu","siku ya ine","siku ya tanu","siku ya sita"],
+        dayNames: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"],
         firstDayOfWeek: 1,
-        fullDateTimePattern: "dddd d MMMM yyyy HH:mm:ss",
-        longDatePattern: "dddd d MMMM yyyy",
+        fullDateTimePattern: "dddd, d MMMM yyyy HH:mm:ss",
+        longDatePattern: "dddd, d MMMM yyyy",
         longTimePattern: "HH:mm:ss",
         monthDayPattern: "d MMMM",
-        monthGenitiveNames: ["mwezi ya kwanja","mwezi ya pili","mwezi ya tatu","mwezi ya ine","mwezi ya tanu","mwezi ya sita","mwezi ya saba","mwezi ya munane","mwezi ya tisa","mwezi ya kumi","mwezi ya kumi na moya","mwezi ya kumi ya mbili",""],
-        monthNames: ["mwezi ya kwanja","mwezi ya pili","mwezi ya tatu","mwezi ya ine","mwezi ya tanu","mwezi ya sita","mwezi ya saba","mwezi ya munane","mwezi ya tisa","mwezi ya kumi","mwezi ya kumi na moya","mwezi ya kumi ya mbili",""],
+        monthGenitiveNames: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba",""],
+        monthNames: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-        shortDatePattern: "d/M/yyyy",
+        shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("sw-CD", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "sw-CD",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

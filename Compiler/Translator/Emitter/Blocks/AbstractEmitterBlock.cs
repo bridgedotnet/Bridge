@@ -162,8 +162,15 @@ namespace Bridge.Translator
 
             if (node is BinaryOperatorExpression)
             {
-                new BinaryOperatorBlock(this.Emitter, (BinaryOperatorExpression)node).WriteAsyncBinaryExpression(index);
-                return null;
+                var binaryOperatorExpression = (BinaryOperatorExpression) node;
+                if (binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseAnd ||
+                    binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                    binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalOr ||
+                    binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalAnd)
+                {
+                    new BinaryOperatorBlock(this.Emitter, binaryOperatorExpression).WriteAsyncBinaryExpression(index);
+                    return null;
+                }
             }
 
             if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(node))

@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl-TJ", true), {
     englishName: "Tajik (Cyrillic, Tajikistan)",
-    nativeName: "Тоҷикӣ (Тоҷикистон)",
+    nativeName: "тоҷикӣ (Тоҷикистон)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl-TJ", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "tg-Cyrl-TJ",
+        EBCDICCodePage: 20880,
+        IsRightToLeft: false,
+        LCID: 1064,
+        listSeparator: ";",
+        MacCodePage: 10007,
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

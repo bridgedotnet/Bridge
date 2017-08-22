@@ -11,9 +11,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.OverflowException", typeof(OverflowException).FullName, "Name");
+            Assert.True(typeof(OverflowException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(ArithmeticException), typeof(OverflowException).BaseType, "BaseType");
             object d = new OverflowException();
             Assert.True(d is OverflowException, "is OverflowException");
             Assert.True(d is Exception, "is Exception");
+
+            var interfaces = typeof(OverflowException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length, "Interfaces length");
         }
 
         [Test]

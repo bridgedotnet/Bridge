@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
     nativeName: "қазақ тілі (Қазақстан)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN",
+        nanSymbol: "сан емес",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
         abbreviatedDayNames: ["Жс","Дс","Сс","Ср","Бс","Жм","Сб"],
         abbreviatedMonthGenitiveNames: ["қаң.","ақп.","нау.","сәу.","мам.","мау.","шіл.","там.","қыр.","қаз.","қар.","жел.",""],
         abbreviatedMonthNames: ["Қаң.","Ақп.","Нау.","Сәу.","Мам.","Мау.","Шіл.","Там.","Қыр.","Қаз.","Қар.","Жел.",""],
-        amDesignator: "таңғы",
+        amDesignator: "AM",
         dateSeparator: ".",
         dayNames: ["жексенбі","дүйсенбі","сейсенбі","сәрсенбі","бейсенбі","жұма","сенбі"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан",""],
         monthNames: ["Қаңтар","Ақпан","Наурыз","Сәуір","Мамыр","Маусым","Шілде","Тамыз","Қыркүйек","Қазан","Қараша","Желтоқсан",""],
-        pmDesignator: "түскі/кешкі",
+        pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.MM.yyyy",
         shortestDayNames: ["Жс","Дс","Сс","Ср","Бс","Жм","Сб"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy 'ж'. MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "kk-KZ",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1087,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

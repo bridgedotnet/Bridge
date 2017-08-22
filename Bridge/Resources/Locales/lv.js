@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
     nativeName: "latviešu",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "nav skaitlis",
+        nanSymbol: "NS",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -16,7 +16,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
         percentPositivePattern: 1,
         percentNegativePattern: 1,
         currencySymbol: "€",
-        currencyGroupSizes: [2],
+        currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: " ",
@@ -30,10 +30,10 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Sv","Pr","Ot","Tr","Ce","Pk","Se"],
+        abbreviatedDayNames: ["svētd.","pirmd.","otrd.","trešd.","ceturtd.","piektd.","sestd."],
         abbreviatedMonthGenitiveNames: ["janv.","febr.","marts","apr.","maijs","jūn.","jūl.","aug.","sept.","okt.","nov.","dec.",""],
-        abbreviatedMonthNames: ["Janv.","Febr.","Marts","Apr.","Maijs","Jūn.","Jūl.","Aug.","Sept.","Okt.","Nov.","Dec.",""],
-        amDesignator: "AM",
+        abbreviatedMonthNames: ["janv.","febr.","marts","apr.","maijs","jūn.","jūl.","aug.","sept.","okt.","nov.","dec.",""],
+        amDesignator: "priekšp.",
         dateSeparator: ".",
         dayNames: ["svētdiena","pirmdiena","otrdiena","trešdiena","ceturtdiena","piektdiena","sestdiena"],
         firstDayOfWeek: 1,
@@ -42,8 +42,8 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
         longTimePattern: "HH:mm:ss",
         monthDayPattern: "d. MMMM",
         monthGenitiveNames: ["janvāris","februāris","marts","aprīlis","maijs","jūnijs","jūlijs","augusts","septembris","oktobris","novembris","decembris",""],
-        monthNames: ["Janvāris","Februāris","Marts","Aprīlis","Maijs","Jūnijs","Jūlijs","Augusts","Septembris","Oktobris","Novembris","Decembris",""],
-        pmDesignator: "PM",
+        monthNames: ["janvāris","februāris","marts","aprīlis","maijs","jūnijs","jūlijs","augusts","septembris","oktobris","novembris","decembris",""],
+        pmDesignator: "pēcp.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.MM.yyyy",
         shortestDayNames: ["Sv","Pr","Ot","Tr","Ce","Pk","Se"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy. 'g'. MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1257,
+        CultureName: "lv-LV",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1062,
+        listSeparator: ";",
+        MacCodePage: 10029,
+        OEMCodePage: 775,
+        IsReadOnly: true
     })
 });

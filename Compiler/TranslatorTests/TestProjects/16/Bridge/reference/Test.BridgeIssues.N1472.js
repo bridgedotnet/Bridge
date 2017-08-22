@@ -16,7 +16,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 // The method checks that local variales used as a parameter in a method with multiple keys in a [Template]
                 // will NOT be wrapped with temp variable
                 // DoSomethingTemplate(localVar, localVar);
-                var localVar = {  };
+                var localVar = { };
                 DoSomethingTemplate(Bridge.unbox(localVar), Bridge.unbox(localVar));
             },
             UseWithField: function () {

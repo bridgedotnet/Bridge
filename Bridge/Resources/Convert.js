@@ -402,7 +402,7 @@
                     res = new System.UInt64(Bridge.$Long.fromString(str, true, fromBase));
                 }
 
-                if (res.toString(fromBase) !== str) {
+                if (res.toString(fromBase) !== System.String.trimStartZeros(str)) {
                     throw new System.OverflowException("Value was either too large or too small.");
                 }
 
@@ -822,9 +822,7 @@
                 case typeCodes.Decimal:
                     return scope.internal.typeRanges.Decimal_MinValue;
                 case typeCodes.DateTime:
-                    var date = new Date(0);
-                    date.setFullYear(1);
-                    return date;
+                    return System.DateTime.getMinValue();
 
                 default:
                     return null;
@@ -859,6 +857,8 @@
                     return scope.internal.typeRanges.Double_MaxValue;
                 case typeCodes.Decimal:
                     return scope.internal.typeRanges.Decimal_MaxValue;
+                case typeCodes.DateTime:
+                    return System.DateTime.getMaxValue();
                 default:
                     throw new System.ArgumentOutOfRangeException("typeCode", "The specified typeCode is undefined.");
             }
@@ -971,13 +971,13 @@
                         if (typeCode === typeCodes.Int64) {
                             value = new System.Int64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else if (typeCode === typeCodes.UInt64) {
                             value = new System.UInt64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else {

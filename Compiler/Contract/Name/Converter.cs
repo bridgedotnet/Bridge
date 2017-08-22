@@ -230,7 +230,7 @@ namespace Bridge.Contract
             if (semantic.Entity is IMember)
             {
                 bool isIgnore = semantic.Entity.DeclaringTypeDefinition != null && semantic.Emitter.Validator.IsExternalType(semantic.Entity.DeclaringTypeDefinition);
-                if (!isIgnore && semantic.Entity.IsStatic && Helpers.IsReservedStaticName(name))
+                if (!isIgnore && semantic.Entity.IsStatic && Helpers.IsReservedStaticName(name, false))
                 {
                     name = Helpers.ChangeReservedWord(name);
                 }

@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLSelectElement")]
     public sealed class HTMLSelectElement : HTMLElement<HTMLSelectElement>
     {
-        [Template("document.createElement('select')")]
+        [Template("document.createElement(\"select\")")]
         public extern HTMLSelectElement();
 
         /// <summary>

@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -9,6 +11,22 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "String - {0}")]
     public class StringTests
     {
+        private class MyFormattable : IFormattable
+        {
+            public string ToString(string format, IFormatProvider formatProvider)
+            {
+                return "Formatted: " + format + ", " + (formatProvider == null ? "null formatProvider" : formatProvider.GetType().FullName);
+            }
+        }
+
+        private class MyFormatProvider : IFormatProvider
+        {
+            public object GetFormat(Type type)
+            {
+                return CultureInfo.InvariantCulture.GetFormat(type);
+            }
+        }
+
         private class MyEnumerable<T> : IEnumerable<T>
         {
             private readonly T[] _items;
@@ -30,20 +48,23 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1597()
         {
             Assert.AreEqual("System.String", typeof(string).FullName, "#2066");
+            Assert.True(typeof(string).IsClass);
+            // #1597
+            Assert.True(typeof(IComparable<string>).IsAssignableFrom(typeof(string)));
+            Assert.True(typeof(IEquatable<string>).IsAssignableFrom(typeof(string)));
             object s = "X";
             Assert.True(s is string);
-        }
-
-        [Test]
-        public void StringInterfaces()
-        {
-            object s = "X";
             Assert.True(s is object, "string is object");
             Assert.True(s is IComparable<string>);
             Assert.True(s is IEquatable<string>);
+
+            var interfaces = typeof(string).GetInterfaces();
+            Assert.AreEqual(7, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<string>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<string>)));
         }
 
         [Test]
@@ -65,6 +86,12 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void CharArrayWithStartIndexAndLengthConstructorWorks()
+        {
+            Assert.AreEqual("bc", new string(new[] { 'a', 'b', 'c', 'D' }, 1, 2));
+        }
+
+        [Test]
         public void EmptyFieldWorks()
         {
             Assert.AreEqual("", string.Empty);
@@ -75,19 +102,6 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.AreEqual(4, "abcd".Length);
         }
-
-        // Not C# API #2392
-        //[Test]
-        //public void CharAtWorks()
-        //{
-        //    Assert.AreEqual("c", "abcd".CharAt(2));
-        //}
-
-        //[Test]
-        //public void CharCodeAtWorks()
-        //{
-        //    Assert.AreEqual((int)'c', (int)"abcd".CharCodeAt(2));
-        //}
 
         // #353
         [Test]
@@ -100,8 +114,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(-1, "abcd".CompareTo("ABCE"));
 
             // Phantom JS engine has different implementation of stringCompare
-            var expected = !Utilities.BrowserHelper.IsPhantomJs() ? - 1 : 1;
+            var expected = !Utilities.BrowserHelper.IsPhantomJs() ? -1 : 1;
             Assert.AreEqual(expected, "abcd".CompareTo("ABCD"));
+
+            Assert.True("".CompareTo(null) > 0);
         }
 
         [Test]
@@ -110,6 +126,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(string.Compare("abcd", "abcd") == 0);
             Assert.True(string.Compare("abcd", "abcb") > 0);
             Assert.True(string.Compare("abcd", "abce") < 0);
+
+            Assert.True(string.Compare(null, "") < 0);
+            Assert.True(string.Compare("", null) > 0);
+            Assert.True(string.Compare(null, null) == 0);
         }
 
         [Test]
@@ -121,6 +141,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(string.Compare("abcd", "ABCD", true) == 0);
             Assert.True(string.Compare("abcd", "ABCB", true) > 0);
             Assert.True(string.Compare("abcd", "ABCE", true) < 0);
+
+            Assert.True(string.Compare(null, "", true) < 0);
+            Assert.True(string.Compare("", null, true) > 0);
+            Assert.True(string.Compare(null, null, true) == 0);
         }
 
         [Test]
@@ -167,12 +191,28 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void StaticEqualsWorks()
         {
+            Assert.True(string.Equals("abcd", "abcd", StringComparison.InvariantCulture));
+            Assert.False(string.Equals("abcd", "abce", StringComparison.InvariantCulture));
+            Assert.False(string.Equals("abcd", "ABCD", StringComparison.InvariantCulture));
+            Assert.True(string.Equals("abcd", "abcd", StringComparison.InvariantCultureIgnoreCase));
+            Assert.False(string.Equals("abcd", "abce", StringComparison.InvariantCultureIgnoreCase));
+            Assert.True(string.Equals("abcd", "ABCD", StringComparison.InvariantCultureIgnoreCase));
+
             Assert.True(string.Equals("abcd", "abcd"));
             Assert.False(string.Equals("abcd", "abce"));
             Assert.False(string.Equals("abcd", "ABCD"));
             Assert.True(string.Equals("abcd", "abcd"));
             Assert.False(string.Equals("abcd", "abce"));
             Assert.False(string.Equals("abcd", "ABCD"));
+
+            Assert.True(string.Equals("", ""));
+            Assert.True(string.Equals("", "", StringComparison.InvariantCultureIgnoreCase));
+            Assert.True(string.Equals(null, null));
+            Assert.True(string.Equals(null, null, StringComparison.InvariantCultureIgnoreCase));
+            Assert.False(string.Equals(null, ""));
+            Assert.False(string.Equals(null, "", StringComparison.InvariantCultureIgnoreCase));
+            Assert.False(string.Equals("", null));
+            Assert.False(string.Equals("", null, StringComparison.InvariantCultureIgnoreCase));
         }
 
         [Test]
@@ -207,9 +247,19 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void FormatWorksWithIFormattable()
+        public void FormatWorksWithIFormattable_SPI_1598()
         {
             Assert.AreEqual("3.14", string.Format("{0:F2}", 22.0 / 7.0));
+            // #1598
+            //Assert.AreEqual("Formatted: FMT, null formatProvider", string.Format("{0:FMT}", new MyFormattable()));
+        }
+
+        [Test]
+        public void FormatWorksWithIFormattableAndFormatProvider_SPI_1598()
+        {
+            Assert.AreEqual("3.14", string.Format(new MyFormatProvider(), "{0:F2}", 22.0 / 7.0));
+            // #1598
+            //Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
         }
 
         [Test]
@@ -308,8 +358,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void LastIndexOfCharWorks()
         {
-            Assert.AreEqual(1, "abc".LastIndexOf("b"));
-            Assert.AreEqual(-1, "abc".LastIndexOf("d"));
+            Assert.AreEqual(1, "abc".LastIndexOf('b'));
+            Assert.AreEqual(-1, "abc".LastIndexOf('d'));
         }
 
         [Test]
@@ -322,8 +372,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void LastIndexOfCharWithStartIndexWorks()
         {
-            Assert.AreEqual(1, "abcabc".LastIndexOf("b", 3));
-            Assert.AreEqual(-1, "abcabc".LastIndexOf("d", 3));
+            Assert.AreEqual(1, "abcabc".LastIndexOf('b', 3));
+            Assert.AreEqual(-1, "abcabc".LastIndexOf('d', 3));
         }
 
         [Test]
@@ -452,85 +502,78 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ReplaceCharWorks()
         {
-            Assert.AreEqual("xbcxbcxbc", "abcabcabc".Replace("a", "x"));
+            Assert.AreEqual("xbcxbcxbc", "abcabcabc".Replace('a', 'x'));
         }
 
         [Test]
         public void SplitWithCharWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split('b'));
+            Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split('b'));
         }
 
         [Test]
         public void SplitWithCharsAndLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "cabcabc" }, "abcabcabc".Split(new[] { 'b' }, 2));
+            Assert.AreEqual(new[] { "a", "cabcabc" }, "abcabcabc".Split(new[] { 'b' }, 2));
         }
 
         [Test]
         public void SplitWithCharsAndStringSplitOptionsAndLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "cabcabc" }, "abxcabcabc".Split(new[] { 'b', 'x' }, 2, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "cabcabc" }, "abxcabcabc".Split(new[] { 'b', 'x' }, 2, StringSplitOptions.RemoveEmptyEntries));
         }
 
         [Test]
         public void SomeNetSplitTests()
         {
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de", "" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "bc", "de", "" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "", "bc", "de", "" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "", "", "bc", "de", "" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bc", "de", "" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "bc", "de", "" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "", "bc", "de", "" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "", "", "bc", "de", "" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.None));
 
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, StringSplitOptions.RemoveEmptyEntries));
 
-            Assert.AreDeepEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "a", "bc", "de", "" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "bc", "de", "" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "", "bc", "de", "" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "a", "", "", "bc", "de", "" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bc", "de" }, "axybcxzde".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bc", "de", "" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "bc", "de", "" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "", "bc", "de", "" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "a", "", "", "bc", "de", "" }, "xzaxyxzxybcxzdexz".Split(new[] { "xy", "xz" }, 100, StringSplitOptions.None));
 
-            Assert.AreDeepEqual(new[] { "a", "bcxzde" }, "axybcxzde".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "a", "bcxzdexz" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "a", "xzbcxzdexz" }, "axyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "", "axybcxzdexz" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bcxzde" }, "axybcxzde".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "bcxzdexz" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a", "xzbcxzdexz" }, "axyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "", "axybcxzdexz" }, "xzaxybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.None));
 
-            Assert.AreDeepEqual(new[] { "a", "bcxzde" }, "axybcxzde".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bcxzdexz" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bcxzdexz" }, "axyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
-            Assert.AreDeepEqual(new[] { "a", "bcxzdexz" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bcxzde" }, "axybcxzde".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bcxzdexz" }, "axybcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bcxzdexz" }, "axyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a", "bcxzdexz" }, "xzaxyxzbcxzdexz".Split(new[] { "xy", "xz" }, 2, StringSplitOptions.RemoveEmptyEntries));
         }
 
         [Test]
         public void SplitWithCharsWorks()
         {
-            Assert.AreDeepEqual(new[] { "Lorem", "Ipsum", "", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }));
-            Assert.AreDeepEqual(new[] { "Lorem", "Ipsum", "", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "Lorem", "Ipsum", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "Lorem", "Ipsum", "", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }));
+            Assert.AreEqual(new[] { "Lorem", "Ipsum", "", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "Lorem", "Ipsum", "dolor", "sit", "amet" }, "Lorem Ipsum, dolor[sit amet".Split(new[] { ',', ' ', '[' }, StringSplitOptions.RemoveEmptyEntries));
         }
 
         [Test]
         public void SplitWithStringsWorks()
         {
-            Assert.AreDeepEqual(new[] { "a ", " b ", " b ", " c and c ", "", "", " d ", " d ", " e" }, "a is b if b is c and c isifis d if d is e".Split(new[] { "is", "if" }, StringSplitOptions.None));
-            Assert.AreDeepEqual(new[] { "a ", " b ", " b ", " c and c ", " d ", " d ", " e" }, "a is b if b is c and c isifis d if d is e".Split(new[] { "is", "if" }, StringSplitOptions.RemoveEmptyEntries));
+            Assert.AreEqual(new[] { "a ", " b ", " b ", " c and c ", "", "", " d ", " d ", " e" }, "a is b if b is c and c isifis d if d is e".Split(new[] { "is", "if" }, StringSplitOptions.None));
+            Assert.AreEqual(new[] { "a ", " b ", " b ", " c and c ", " d ", " d ", " e" }, "a is b if b is c and c isifis d if d is e".Split(new[] { "is", "if" }, StringSplitOptions.RemoveEmptyEntries));
         }
 
         [Test]
         public void SplitWithStringsAndLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "abcabc" }, "abcbcabcabc".Split(new[] { "bc" }, 2, StringSplitOptions.RemoveEmptyEntries));
-        }
-
-        [Test]
-        public void StartsWithCharWorks()
-        {
-            Assert.True("abc".StartsWith("a"));
-            Assert.False("abc".StartsWith("b"));
+            Assert.AreEqual(new[] { "a", "abcabc" }, "abcbcabcabc".Split(new[] { "bc" }, 2, StringSplitOptions.RemoveEmptyEntries));
         }
 
         [Test]
@@ -566,6 +609,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(numbers.Substring(100, 101), "");
 
             Assert.AreEqual(numbers.Substring(2, 4), "2345");
+        }
+
+        [Test]
+        public void SubstringWithLengthWorks()
+        {
+            Assert.AreEqual("cd", "abcde".Substring(2, 2));
         }
 
         [Test]
@@ -713,12 +762,23 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void CompareToWorks()
+        public void StaticCompareToWorks()
         {
             Assert.True(string.Compare("abcd", "abcd") == 0);
             Assert.True(string.Compare("abcd", "abcD") != 0);
             Assert.True(string.Compare("abcd", "abcb") > 0);
             Assert.True(string.Compare("abcd", "abce") < 0);
+        }
+
+        [Test]
+        public void CompareToWorks()
+        {
+            Assert.True("abcd".CompareTo("abcd") == 0);
+            Assert.True("abcd".CompareTo("abcD") != 0);
+            Assert.True("abcd".CompareTo("abcb") > 0);
+            Assert.True("abcd".CompareTo("abce") < 0);
+
+            Assert.True("".CompareTo(null) > 0);
         }
 
         [Test]
@@ -733,13 +793,15 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void JoinWorks()
+        public void JoinWorks_SPI_1599()
         {
             Assert.AreEqual("a, ab, abc, abcd", string.Join(", ", new[] { "a", "ab", "abc", "abcd" }));
             Assert.AreEqual("ab, abc", string.Join(", ", new[] { "a", "ab", "abc", "abcd" }, 1, 2));
 
             IEnumerable<int> intValues = new MyEnumerable<int>(new[] { 1, 5, 6 });
+            // #1599
             Assert.AreEqual("1, 5, 6", String.Join(", ", intValues));
+
             IEnumerable<string> stringValues = new MyEnumerable<string>(new[] { "a", "ab", "abc", "abcd" });
             Assert.AreEqual("a, ab, abc, abcd", String.Join(", ", stringValues));
             Assert.AreEqual("a, 1, abc, False", String.Join(", ", new Object[] { "a", 1, "abc", false }));
@@ -758,7 +820,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ToCharArrayWorks()
         {
             string text = "Lorem sit dolor";
-            Assert.AreDeepEqual(new[] { 'L', 'o', 'r', 'e', 'm', ' ', 's', 'i', 't', ' ', 'd', 'o', 'l', 'o', 'r' }, text.ToCharArray());
+            Assert.AreEqual(new[] { 'L', 'o', 'r', 'e', 'm', ' ', 's', 'i', 't', ' ', 'd', 'o', 'l', 'o', 'r' }, text.ToCharArray());
         }
 
         [Test]

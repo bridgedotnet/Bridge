@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("quz", true), {
     englishName: "Quechua",
-    nativeName: "runasimi",
+    nativeName: "Runasimi",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("quz", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "quz-BO",
+        EBCDICCodePage: 20284,
+        IsRightToLeft: false,
+        LCID: 1131,
+        listSeparator: ",",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

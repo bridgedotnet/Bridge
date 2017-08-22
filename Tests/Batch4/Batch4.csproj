@@ -46,119 +46,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActivatorTests.cs" />
-    <Compile Include="Collections\JsDictionaryTests.cs" />
+    <Compile Include="SimpleTypes\JsDateTests.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="RefParameterTests.cs" />
-    <Compile Include="ArgumentsTests.cs" />
-    <Compile Include="ArrayTests.cs" />
     <Compile Include="AppDomainTests.cs" />
-    <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
-    <Compile Include="Collections\Generic\IReadOnlyListTests.cs" />
-    <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
-    <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
-    <Compile Include="Collections\Generic\IDictionaryTests.cs" />
-    <Compile Include="ConvertTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
-    <Compile Include="Exceptions\ArithmeticExceptionTests.cs" />
-    <Compile Include="Exceptions\OverflowExceptionTests.cs" />
-    <Compile Include="Exceptions\TaskCanceledExceptionTests.cs" />
-    <Compile Include="Exceptions\OperationCanceledExceptionTests.cs" />
-    <Compile Include="PropertyAccessorTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
-    <Compile Include="Diagnostics\Contracts\ContractTests.cs" />
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
-    <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
-    <Compile Include="EnvironmentTests.cs" />
-    <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
-    <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
-    <Compile Include="Reflection\AssemblyTests.cs" />
-    <Compile Include="StopwatchTests.cs" />
-    <Compile Include="CultureInfoTests.cs" />
-    <Compile Include="NumberFormatInfoTests.cs" />
-    <Compile Include="DateTimeFormatInfoTests.cs" />
-    <Compile Include="Collections\TypedArrays\ArrayBufferTests.cs" />
-    <Compile Include="Collections\TypedArrays\DataViewTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint8ClampedArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Float64ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Float32ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint16ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint32ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint8ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int16ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int8ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int32ArrayTests.cs" />
-    <Compile Include="GuidTests.cs" />
-    <Compile Include="Exceptions\AggregateExceptionTests.cs" />
-    <Compile Include="Exceptions\ArgumentExceptionTests.cs" />
-    <Compile Include="Exceptions\ArgumentNullExceptionTests.cs" />
-    <Compile Include="Exceptions\AmbiguousMatchExceptionTests.cs" />
-    <Compile Include="Exceptions\ArgumentOutOfRangeExceptionTests.cs" />
-    <Compile Include="Exceptions\ExceptionTests.cs" />
-    <Compile Include="Exceptions\InvalidCastExceptionTests.cs" />
-    <Compile Include="Exceptions\NullReferenceExceptionTests.cs" />
-    <Compile Include="Exceptions\KeyNotFoundExceptionTests.cs" />
-    <Compile Include="Exceptions\PromiseExceptionTests.cs" />
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
-    <Compile Include="Exceptions\InvalidOperationExceptionTests.cs" />
-    <Compile Include="Exceptions\NotSupportedExceptionTests.cs" />
-    <Compile Include="Exceptions\FormatExceptionTests.cs" />
-    <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
-    <Compile Include="Threading\Tasks\AsyncTests.cs" />
-    <Compile Include="Collections\Generic\ComparerTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
-    <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
-    <Compile Include="Linq\Expressions\ExpressionTests.cs" />
-    <Compile Include="Reflection\GetMembersTests.cs" />
-    <Compile Include="Reflection\ReflectionTests.cs" />
-    <Compile Include="IFormattableTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
-    <Compile Include="Collections\Generic\IListTests.cs" />
-    <Compile Include="Collections\Generic\ICollectionTests.cs" />
-    <Compile Include="Collections\Generic\IEnumerableTests.cs" />
-    <Compile Include="ExceptionTests.cs" />
     <Compile Include="LazyTests.cs" />
-    <Compile Include="IEquatableTests.cs" />
-    <Compile Include="Collections\Generic\EqualityComparerTests.cs" />
-    <Compile Include="IComparableTests.cs" />
-    <Compile Include="SimpleTypes\ObjectTests.cs" />
-    <Compile Include="Threading\Tasks\PromiseTests.cs" />
-    <Compile Include="Threading\Tasks\TaskTests.cs" />
-    <Compile Include="MultidimArrayTests.cs" />
-    <Compile Include="Collections\Generic\IteratorBlockTests.cs" />
-    <Compile Include="Collections\Generic\QueueTests.cs" />
-    <Compile Include="SimpleTypes\BooleanTests.cs" />
-    <Compile Include="SimpleTypes\TimeSpanTests.cs" />
-    <Compile Include="SimpleTypes\ByteTests.cs" />
-    <Compile Include="Collections\Generic\StackTests.cs" />
-    <Compile Include="Collections\Generic\GenericDictionaryTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
-    <Compile Include="Text\RegularExpressions\RegexTests.cs" />
-    <Compile Include="Collections\Generic\ListTests.cs" />
-    <Compile Include="Reflection\TypeSystemLanguageSupportTests.cs" />
-    <Compile Include="Reflection\TypeSystemTests.cs" />
-    <Compile Include="SimpleTypes\UInt16Tests.cs" />
-    <Compile Include="SimpleTypes\UInt32Tests.cs" />
-    <Compile Include="SimpleTypes\UInt64Tests.cs" />
-    <Compile Include="SimpleTypes\TupleTests.cs" />
-    <Compile Include="RandomTests.cs" />
-    <Compile Include="SimpleTypes\SingleTests.cs" />
-    <Compile Include="SimpleTypes\SByteTests.cs" />
-    <Compile Include="NullableTests.cs" />
-    <Compile Include="MathTests.cs" />
-    <Compile Include="SimpleTypes\Int64Tests.cs" />
     <Compile Include="SimpleTypes\Int32Tests.cs" />
-    <Compile Include="SimpleTypes\Int16Tests.cs" />
-    <Compile Include="SimpleTypes\DoubleTests.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />
-    <Compile Include="SimpleTypes\JsDateTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reflection\Resource2.bin" />
-    <EmbeddedResource Include="Reflection\Resource1.bin" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-rc\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

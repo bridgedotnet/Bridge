@@ -27,11 +27,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestFieldInitializer()
         {
-            Assert.AreEqual(0, Bridge1390.b);
-            Assert.AreEqual(DateTime.MinValue, Bridge1390.time);
-            Assert.AreEqual(null, Bridge1390.d1);
-            Assert.AreEqual(null, Bridge1390.ar1);
-            Assert.AreEqual(8, Bridge1390.order2);
+            Assert.AreEqual(0, b);
+            Assert.AreEqual(DateTime.MinValue, time);
+            Assert.AreEqual(null, d1);
+            Assert.AreEqual(null, ar1);
+            Assert.AreEqual(8, order2);
         }
     }
 }

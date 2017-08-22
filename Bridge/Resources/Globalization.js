@@ -56,7 +56,7 @@
                     timeSeparator: ":",
                     universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     yearMonthPattern: "yyyy MMMM",
-                    roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+                    roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
                 });
             }
         },
@@ -283,7 +283,18 @@
                     englishName: "Invariant Language (Invariant Country)",
                     nativeName: "Invariant Language (Invariant Country)",
                     numberFormat: System.Globalization.NumberFormatInfo.invariantInfo,
-                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo
+                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo,
+                    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+                        ANSICodePage: 1252,
+                        CultureName: "",
+                        EBCDICCodePage: 37,
+                        listSeparator: ",",
+                        IsRightToLeft: false,
+                        LCID: 127,
+                        MacCodePage: 10000,
+                        OEMCodePage: 437,
+                        IsReadOnly: true
+                    })
                 });
 
                 this.setCurrentCulture(System.Globalization.CultureInfo.invariantCulture);
@@ -301,11 +312,19 @@
             },
 
             getCultureInfo: function (name) {
-                if (!name) {
+                if (name == null) {
                     throw new System.ArgumentNullException("name");
+                } else if (name === "") {
+                    return System.Globalization.CultureInfo.invariantCulture;
                 }
 
-                return this.cultures[name];
+                var c = this.cultures[name];
+
+                if (c == null) {
+                    throw new System.Globalization.CultureNotFoundException("name", name);
+                }
+
+                return c;
             },
 
             getCultures: function () {
@@ -329,19 +348,34 @@
                 System.Globalization.CultureInfo.cultures = {};
             }
 
-            if (System.Globalization.CultureInfo.cultures[name]) {
-                Bridge.copy(this, System.Globalization.CultureInfo.cultures[name], [
-                    "englishName",
-                    "nativeName",
-                    "numberFormat",
-                    "dateTimeFormat"
-                ]);
+            if (name == null) {
+                throw new System.ArgumentNullException("name");
+            }
+
+            var c;
+
+            if (name === "") {
+                c =  System.Globalization.CultureInfo.invariantCulture;
             } else {
+                c = System.Globalization.CultureInfo.cultures[name];
+            }
+
+            if (c == null) {
                 if (!create) {
                     throw new System.Globalization.CultureNotFoundException("name", name);
                 }
 
                 System.Globalization.CultureInfo.cultures[name] = this;
+            } else {
+                Bridge.copy(this, c, [
+                            "englishName",
+                            "nativeName",
+                            "numberFormat",
+                            "dateTimeFormat",
+                            "TextInfo"
+                ]);
+
+                this.TextInfo.IsReadOnly = false;
             }
         },
 

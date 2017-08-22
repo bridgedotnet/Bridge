@@ -1,6 +1,6 @@
 ﻿{
   "output": "..\\Runner\\ClientTestHelper",
-  "cleanOutputFolderBeforeBuild": true,
+  "cleanOutputFolderBeforeBuildPatter": "*.*",
   "outputFormatting": "Formatted",
   "fileName": "code.js",
   "outputBy": "Project",
@@ -16,12 +16,18 @@
     {
       "name": "bridge.js",
       "extract": false
-    }, {
+    },
+    {
       "name": "bridge.meta.js",
       "extract": false
-    }, {
+    },
+    {
       "name": "bridge.console.js",
       "extract": false
     }
-  ]
+  ],
+  "test": {
+    "skipResources": true,
+    "skipAuxiliary": true
+  }
 }

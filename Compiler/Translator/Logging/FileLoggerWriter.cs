@@ -22,6 +22,7 @@ namespace Bridge.Translator.Logging
 
         private bool IsInitializedSuccessfully { get; set; }
         private int InitializationCount { get; set; }
+        private bool IsCleanedUp { get; set; }
         private Queue<BufferedMessage> Buffer { get; set; }
 
         public bool AlwaysLogErrors { get { return false; } }
@@ -50,6 +51,7 @@ namespace Bridge.Translator.Logging
         public void SetParameters(string baseDir, string fileName, long? maxSize)
         {
             IsInitializedSuccessfully = false;
+            IsCleanedUp = false;
             InitializationCount = 0;
 
             if (string.IsNullOrEmpty(baseDir))
@@ -58,14 +60,7 @@ namespace Bridge.Translator.Logging
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(Path.GetExtension(baseDir)))
-                {
-                    this.BaseDirectory = baseDir;
-                }
-                else
-                {
-                    this.BaseDirectory = Path.GetDirectoryName(baseDir);
-                }
+                this.BaseDirectory = (new FileHelper()).GetDirectoryAndFilenamePathComponents(baseDir)[0];
             }
 
             this.FileName = string.IsNullOrEmpty(fileName) ? LoggerFileName : Path.GetFileName(fileName);
@@ -110,10 +105,11 @@ namespace Bridge.Translator.Logging
                     loggerFile.Directory.Create();
                 }
 
-                if (loggerFile.Exists && loggerFile.Length > MaxLogFileSize)
-                {
-                    loggerFile.Delete();
-                }
+                // Uncomment this lines if max file size logic required and handle fileMode in Flush()
+                //if (loggerFile.Exists && loggerFile.Length > MaxLogFileSize)
+                //{
+                //    loggerFile.Delete();
+                //}
 
                 IsInitializedSuccessfully = true;
             }
@@ -163,8 +159,17 @@ namespace Bridge.Translator.Logging
             {
                 try
                 {
+                    var fileMode = FileMode.Append;
+
+                    if (!IsCleanedUp)
+                    {
+                        fileMode = FileMode.Create;
+                        IsCleanedUp = true;
+                    }
+
                     FileInfo file = new FileInfo(this.FullName);
-                    using (Stream stream = file.Open(FileMode.Append, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
+
+                    using (Stream stream = file.Open(fileMode, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
                     {
                         using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                         {

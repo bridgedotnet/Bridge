@@ -328,7 +328,12 @@ namespace Bridge.Translator
         {
             BinaryOperatorExpression binaryOperatorExpression = this.BinaryOperatorExpression;
 
-            if (this.Emitter.IsAsync && this.GetAwaiters(binaryOperatorExpression).Length > 0)
+            if (this.Emitter.IsAsync && (
+                binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseAnd ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalOr ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalAnd
+                ) && this.GetAwaiters(binaryOperatorExpression).Length > 0)
             {
                 if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(binaryOperatorExpression))
                 {
@@ -484,8 +489,9 @@ namespace Bridge.Translator
                 }
             }
 
+            var insideOverflowContext = ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression);
             if (binaryOperatorExpression.Operator == BinaryOperatorType.Divide &&
-                !(this.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression)) &&
+                !(this.Emitter.IsJavaScriptOverflowMode && !insideOverflowContext) &&
                 (
                     (Helpers.IsIntegerType(leftResolverResult.Type, this.Emitter.Resolver) &&
                     Helpers.IsIntegerType(rightResolverResult.Type, this.Emitter.Resolver)) ||
@@ -503,7 +509,7 @@ namespace Bridge.Translator
             }
 
             if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply &&
-                !(this.Emitter.IsJavaScriptOverflowMode || ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression)) &&
+                !(this.Emitter.IsJavaScriptOverflowMode && !insideOverflowContext) &&
                 (
                     (Helpers.IsInteger32Type(leftResolverResult.Type, this.Emitter.Resolver) &&
                     Helpers.IsInteger32Type(rightResolverResult.Type, this.Emitter.Resolver) &&
@@ -519,6 +525,12 @@ namespace Bridge.Translator
                 this.WritePart(binaryOperatorExpression.Left, toStringForLeft, leftResolverResult);
                 this.Write(", ");
                 this.WritePart(binaryOperatorExpression.Right, toStringForRight, rightResolverResult);
+
+                if (ConversionBlock.IsInCheckedContext(this.Emitter, this.BinaryOperatorExpression))
+                {
+                    this.Write(", 1");
+                }
+
                 this.Write(")");
                 return;
             }
@@ -1034,7 +1046,7 @@ namespace Bridge.Translator
             {
                 var toStringMethod = rr.Type.GetMembers().FirstOrDefault(m =>
                 {
-                    if (m.Name == "ToString" && !m.IsStatic && m.ReturnType.IsKnownType(KnownTypeCode.String) && m.IsOverride)
+                    if (m.Name == CS.Methods.TOSTRING && !m.IsStatic && m.ReturnType.IsKnownType(KnownTypeCode.String) && m.IsOverride)
                     {
                         var method = m as IMethod;
 

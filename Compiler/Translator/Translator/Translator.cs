@@ -17,7 +17,7 @@ namespace Bridge.Translator
 {
     public partial class Translator : ITranslator
     {
-        public const string Bridge_ASSEMBLY = CS.NS.ROOT;
+        public const string Bridge_ASSEMBLY = CS.NS.BRIDGE;
         public const string Bridge_ASSEMBLY_DOT = Bridge_ASSEMBLY + ".";
         public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
         public const string BridgeResourcesJsonFormatList = "Bridge.Resources.json";
@@ -302,14 +302,30 @@ namespace Bridge.Translator
 
                 try
                 {
-                    IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
-
                     var list = new List<AssemblyDefinition>(this.References.Count());
 
                     this.Log.Trace("Sorting references...");
 
-                    foreach (var processes in sorted)
+                    this.Log.Trace("\t\tCalculate sorting references...");
+                    //IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
+                    TopologicalSort sorted = graph.CalculateSort();
+                    this.Log.Trace("\t\tCalculate sorting references done");
+
+                    // The fix required for Mono 5.0.0.94
+                    // It does not "understand" TopologicalSort's Enumerator in foreach
+                    // foreach (var processes in sorted)
+                    // The code is modified to get it "directly" and "typed"
+                    var sortedISetEnumerable = sorted as IEnumerable<ISet<OrderedProcess>>;
+                    this.Log.Trace("\t\tGot Enumerable<ISet<OrderedProcess>>");
+
+                    var sortedISetEnumerator = sortedISetEnumerable.GetEnumerator();
+                    this.Log.Trace("\t\tGot Enumerator<ISet<OrderedProcess>>");
+
+                    //foreach (var processes in sorted)
+                    while (sortedISetEnumerator.MoveNext())
                     {
+                        var processes = sortedISetEnumerator.Current;
+
                         foreach (var process in processes)
                         {
                             this.Log.Trace("\tHandling " + process.Name);

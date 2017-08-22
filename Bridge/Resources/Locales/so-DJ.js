@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("so-DJ", true), {
         abbreviatedDayNames: ["Axd","Isn","Tal","Arb","Kha","Jim","Sab"],
         abbreviatedMonthGenitiveNames: ["Kob","Lab","Sad","Afr","Sha","Lix","Tod","Sid","Sag","Tob","KIT","LIT",""],
         abbreviatedMonthNames: ["Kob","Lab","Sad","Afr","Sha","Lix","Tod","Sid","Sag","Tob","KIT","LIT",""],
-        amDesignator: "AM",
+        amDesignator: "sn.",
         dateSeparator: "/",
         dayNames: ["Axad","Isniin","Talaado","Arbaco","Khamiis","Jimco","Sabti"],
         firstDayOfWeek: 6,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("so-DJ", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Bisha Koobaad","Bisha Labaad","Bisha Saddexaad","Bisha Afraad","Bisha Shanaad","Bisha Lixaad","Bisha Todobaad","Bisha Sideedaad","Bisha Sagaalaad","Bisha Tobnaad","Bisha Kow iyo Tobnaad","Bisha Laba iyo Tobnaad",""],
         monthNames: ["Bisha Koobaad","Bisha Labaad","Bisha Saddexaad","Bisha Afraad","Bisha Shanaad","Bisha Lixaad","Bisha Todobaad","Bisha Sideedaad","Bisha Sagaalaad","Bisha Tobnaad","Bisha Kow iyo Tobnaad","Bisha Laba iyo Tobnaad",""],
-        pmDesignator: "PM",
+        pmDesignator: "gn.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Axd","Isn","Tal","Arb","Kha","Jim","Sab"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("so-DJ", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "so-DJ",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

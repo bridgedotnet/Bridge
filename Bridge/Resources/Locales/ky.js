@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ky", true), {
         fullDateTimePattern: "dd-MMMM yyyy'-ж.' HH:mm:ss",
         longDatePattern: "dd-MMMM yyyy'-ж.'",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "MMMM d",
+        monthDayPattern: "d-MMMM",
         monthGenitiveNames: ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь",""],
         monthNames: ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь",""],
         pmDesignator: "",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ky", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy'-ж.'",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "ky-KG",
+        EBCDICCodePage: 20880,
+        IsRightToLeft: false,
+        LCID: 1088,
+        listSeparator: ";",
+        MacCodePage: 10007,
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

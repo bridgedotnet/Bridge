@@ -369,7 +369,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write("{};");
+                        this.Write("{ };");
                     }
 
                     this.WriteNewLine();

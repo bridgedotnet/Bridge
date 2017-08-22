@@ -31,7 +31,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["Die","Hën","Mar","Mër","Enj","Pre","Sht"],
-        abbreviatedMonthGenitiveNames: ["Jan","Shk","Mar","Pri","Maj","Qer","Kor","Gsh","Sht","Tet","Nën","Dhj",""],
+        abbreviatedMonthGenitiveNames: ["jan","shk","mar","pri","maj","qer","kor","gsh","sht","tet","nën","dhj",""],
         abbreviatedMonthNames: ["Jan","Shk","Mar","Pri","Maj","Qer","Kor","Gsh","Sht","Tet","Nën","Dhj",""],
         amDesignator: "e paradites",
         dateSeparator: ".",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1250,
+        CultureName: "sq-AL",
+        EBCDICCodePage: 20880,
+        IsRightToLeft: false,
+        LCID: 1052,
+        listSeparator: ";",
+        MacCodePage: 10029,
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

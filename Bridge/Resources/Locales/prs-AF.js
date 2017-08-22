@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
     nativeName: "درى (افغانستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "غ ع",
+        nanSymbol: "ناعدد",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1256,
+        CultureName: "prs-AF",
+        EBCDICCodePage: 20420,
+        IsRightToLeft: true,
+        LCID: 1164,
+        listSeparator: ";",
+        MacCodePage: 10004,
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

@@ -20,12 +20,12 @@ namespace Bridge.Translator
                 return 0;
             }
 
-            if (x.Key == CS.NS.ROOT)
+            if (x.Key == CS.NS.BRIDGE)
             {
                 return -1;
             }
 
-            if (y.Key == CS.NS.ROOT)
+            if (y.Key == CS.NS.BRIDGE)
             {
                 return 1;
             }
@@ -53,12 +53,12 @@ namespace Bridge.Translator
                 return 0;
             }
 
-            if (x.Key == CS.NS.ROOT)
+            if (x.Key == CS.NS.BRIDGE)
             {
                 return -1;
             }
 
-            if (y.Key == CS.NS.ROOT)
+            if (y.Key == CS.NS.BRIDGE)
             {
                 return 1;
             }
@@ -288,12 +288,26 @@ namespace Bridge.Translator
                     System.Array.Clear(hitCounters, 0, hitCounters.Length);
 
                     this.Log.Trace("\t\tCalculate sorting...");
-                    IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
+                    TopologicalSort sorted = graph.CalculateSort();
                     this.Log.Trace("\t\tCalculate sorting done");
 
+                    this.Log.Trace("\t\tGetting Reflection names for " + this.Types.Count + " types...");
+
                     var list = new List<ITypeInfo>(this.Types.Count);
-                    foreach (var processes in sorted)
+                    // The fix required for Mono 5.0.0.94
+                    // It does not "understand" TopologicalSort's Enumerator in foreach
+                    // foreach (var processes in sorted)
+                    // The code is modified to get it "directly" and "typed"
+                    var sortedISetEnumerable = sorted as IEnumerable<ISet<OrderedProcess>>;
+                    this.Log.Trace("\t\tGot Enumerable<ISet<OrderedProcess>>");
+
+                    var sortedISetEnumerator = sortedISetEnumerable.GetEnumerator();
+                    this.Log.Trace("\t\tGot Enumerator<ISet<OrderedProcess>>");
+
+                    while (sortedISetEnumerator.MoveNext())
                     {
+                        var processes = sortedISetEnumerator.Current;
+
                         hitCounters[0]++;
 
                         foreach (var process in processes)
@@ -302,7 +316,9 @@ namespace Bridge.Translator
                             hitCounters[1]++;
 
                             tInfo = this.Types.First(ti => GetReflectionName(ti.Type) == process.Name);
+
                             var reflectionName = GetReflectionName(tInfo.Type);
+
                             if (list.All(t => GetReflectionName(t.Type) != reflectionName))
                             {
                                 hitCounters[2]++;
@@ -310,6 +326,8 @@ namespace Bridge.Translator
                             }
                         }
                     }
+
+                    this.Log.Trace("\t\tGetting Reflection names done");
 
                     this.Types.Clear();
                     this.Types.AddRange(list);

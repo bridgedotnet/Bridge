@@ -8,7 +8,7 @@ namespace Bridge.Html5
     [Name("Text")]
     public class Text : CharacterData
     {
-        [Template("document.createTextNode('')")]
+        [Template("document.createTextNode(\"\")")]
         public Text()
         {
         }

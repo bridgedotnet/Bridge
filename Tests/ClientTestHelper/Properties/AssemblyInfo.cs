@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Bridge client tests helper")]
@@ -10,3 +11,5 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("13940d0b-c16d-40b6-ba71-18c9eb086832")]
 [assembly: AssemblyFileVersion("1.2.3.4")]
+
+[assembly: InternalsVisibleTo("Bridge.ClientTest.Batch3")]

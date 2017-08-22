@@ -414,8 +414,7 @@ namespace Bridge.Translator
                 if (rr != null)
                 {
                     if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply &&
-                        !(block.Emitter.IsJavaScriptOverflowMode ||
-                          ConversionBlock.InsideOverflowContext(block.Emitter, binaryOperatorExpression)) &&
+                        !(block.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(block.Emitter, binaryOperatorExpression)) &&
                         (
                             (Helpers.IsInteger32Type(leftResolverResult.Type, block.Emitter.Resolver) &&
                             Helpers.IsInteger32Type(rightResolverResult.Type, block.Emitter.Resolver) &&
@@ -670,7 +669,7 @@ namespace Bridge.Translator
             NarrowingNumericOrEnumerationConversion(block, expression, NullableType.IsNullable(targetType) ? NullableType.GetUnderlyingType(targetType) : targetType, true, isChecked, NullableType.IsNullable(sourceType));
         }
 
-        public static bool IsInCheckedContext(IEmitter emitter, Expression expression)
+        public static bool IsInCheckedContext(IEmitter emitter, Expression expression, bool? defValue = null)
         {
             var found = false;
             expression.GetParent(p =>
@@ -695,10 +694,15 @@ namespace Bridge.Translator
                 return true;
             }
 
+            if (defValue.HasValue)
+            {
+                return defValue.Value;
+            }
+
             return emitter.AssemblyInfo.OverflowMode.HasValue && emitter.AssemblyInfo.OverflowMode == OverflowMode.Checked;
         }
 
-        public static bool IsInUncheckedContext(IEmitter emitter, Expression expression)
+        public static bool IsInUncheckedContext(IEmitter emitter, Expression expression, bool? defValue = null)
         {
             var found = false;
             expression.GetParent(p =>
@@ -721,6 +725,11 @@ namespace Bridge.Translator
             if (found)
             {
                 return true;
+            }
+
+            if (defValue.HasValue)
+            {
+                return defValue.Value;
             }
 
             return !emitter.AssemblyInfo.OverflowMode.HasValue || emitter.AssemblyInfo.OverflowMode == OverflowMode.Unchecked;

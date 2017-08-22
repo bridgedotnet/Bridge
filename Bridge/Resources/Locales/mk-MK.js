@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: ".",
-        currencyNegativePattern: 9,
-        currencyPositivePattern: 2,
+        currencyNegativePattern: 8,
+        currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
         abbreviatedDayNames: ["нед.","пон.","вт.","сре.","чет.","пет.","саб."],
         abbreviatedMonthGenitiveNames: ["јан.","фев.","мар.","апр.","мај","јун.","јул.","авг.","септ.","окт.","ноем.","дек.",""],
         abbreviatedMonthNames: ["јан.","фев.","мар.","апр.","мај","јун.","јул.","авг.","септ.","окт.","ноем.","дек.",""],
-        amDesignator: "претпладне",
+        amDesignator: "претпл.",
         dateSeparator: ".",
         dayNames: ["недела","понеделник","вторник","среда","четврток","петок","сабота"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["јануари","февруари","март","април","мај","јуни","јули","август","септември","октомври","ноември","декември",""],
         monthNames: ["јануари","февруари","март","април","мај","јуни","јули","август","септември","октомври","ноември","декември",""],
-        pmDesignator: "попладне",
+        pmDesignator: "попл.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.M.yyyy",
         shortestDayNames: ["не","по","вт","ср","че","пе","са"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy 'г'.",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "mk-MK",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1071,
+        listSeparator: ";",
+        MacCodePage: 10007,
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

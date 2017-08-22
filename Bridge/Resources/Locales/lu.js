@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lu", true), {
         abbreviatedDayNames: ["Lum","Nko","Ndy","Ndg","Njw","Ngv","Lub"],
         abbreviatedMonthGenitiveNames: ["Cio","Lui","Lus","Muu","Lum","Luf","Kab","Lush","Lut","Lun","Kas","Cis",""],
         abbreviatedMonthNames: ["Cio","Lui","Lus","Muu","Lum","Luf","Kab","Lush","Lut","Lun","Kas","Cis",""],
-        amDesignator: "AM",
+        amDesignator: "Dinda",
         dateSeparator: "/",
         dayNames: ["Lumingu","Nkodya","Ndàayà","Ndangù","Njòwa","Ngòvya","Lubingu"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lu", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Ciongo","Lùishi","Lusòlo","Mùuyà","Lumùngùlù","Lufuimi","Kabàlàshìpù","Lùshìkà","Lutongolo","Lungùdi","Kaswèkèsè","Ciswà",""],
         monthNames: ["Ciongo","Lùishi","Lusòlo","Mùuyà","Lumùngùlù","Lufuimi","Kabàlàshìpù","Lùshìkà","Lutongolo","Lungùdi","Kaswèkèsè","Ciswà",""],
-        pmDesignator: "PM",
+        pmDesignator: "Dilolo",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["Lum","Nko","Ndy","Ndg","Njw","Ngv","Lub"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("lu", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "lu-CD",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

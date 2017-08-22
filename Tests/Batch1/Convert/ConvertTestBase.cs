@@ -104,7 +104,7 @@ namespace Bridge.ClientTest.ConvertTests
         /// <summary>
         /// Verify that the provided convert delegate produces expectedValues given testValues.
         /// </summary>
-        protected void Verify<TInput>(Func<TInput, TOutput> convert, TInput[] testValues, TOutput[] expectedValues, bool useTrue = false)
+        protected void Verify<TInput>(Func<TInput, TOutput> convert, TInput[] testValues, TOutput[] expectedValues, Action<TOutput, TOutput, string> assert = null, bool useTrue = false)
         {
             if (expectedValues == null || testValues == null || expectedValues.Length != testValues.Length)
             {
@@ -122,18 +122,25 @@ namespace Bridge.ClientTest.ConvertTests
 
                     var expected = expectedValues[i];
 
-                    if (useTrue)
+                    if (assert != null)
                     {
-                        Assert.True(expected.Equals(result), "Test: " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                        assert(expected, result, "Test set " + i + ": ");
                     }
                     else
                     {
-                        Assert.AreEqual(expected, result, "Test: " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                        if (useTrue)
+                        {
+                            Assert.True(expected.Equals(result), "Test set " + i + ": " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                        }
+                        else
+                        {
+                            Assert.AreEqual(expected, result, "Test set " + i + ": " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Assert.Fail("Exception occurred while Verify " + testValue + " Exception: " + ex.ToString());
+                    Assert.Fail("Test set " + i + ": " + "Exception occurred while Verify " + testValue + " Exception: " + ex.ToString());
                 }
             }
         }
@@ -172,19 +179,19 @@ namespace Bridge.ClientTest.ConvertTests
         /// <summary>
         /// Verify that the provided convert delegates produce expectedValues given testValues
         /// </summary>
-        protected void VerifyFromString(Func<string, TOutput> convert, Func<string, IFormatProvider, TOutput> convertWithFormatProvider, string[] testValues, TOutput[] expectedValues, bool useTrue = false)
+        protected void VerifyFromString(Func<string, TOutput> convert, Func<string, IFormatProvider, TOutput> convertWithFormatProvider, string[] testValues, TOutput[] expectedValues, Action<TOutput, TOutput, string> assert = null, bool useTrue = false)
         {
-            Verify(convert, testValues, expectedValues, useTrue);
-            Verify(input => convertWithFormatProvider(input, TestFormatProvider.s_instance), testValues, expectedValues, useTrue);
+            Verify(convert, testValues, expectedValues, assert, useTrue);
+            Verify(input => convertWithFormatProvider(input, TestFormatProvider.s_instance), testValues, expectedValues, assert, useTrue);
         }
 
         /// <summary>
         /// Verify that the provided convert delegates produce expectedValues given testValues
         /// </summary>
-        protected void VerifyFromObject(Func<object, TOutput> convert, Func<object, IFormatProvider, TOutput> convertWithFormatProvider, object[] testValues, TOutput[] expectedValues)
+        protected void VerifyFromObject(Func<object, TOutput> convert, Func<object, IFormatProvider, TOutput> convertWithFormatProvider, object[] testValues, TOutput[] expectedValues, Action<TOutput, TOutput, string> assert = null)
         {
-            Verify(convert, testValues, expectedValues);
-            Verify(input => convertWithFormatProvider(input, TestFormatProvider.s_instance), testValues, expectedValues);
+            Verify(convert, testValues, expectedValues, assert);
+            Verify(input => convertWithFormatProvider(input, TestFormatProvider.s_instance), testValues, expectedValues, assert);
         }
 
         /// <summary>
@@ -328,7 +335,7 @@ namespace Bridge.ClientTest.ConvertTests
 
             public object GetFormat(Type formatType)
             {
-                return this;
+                return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat;
             }
 
             public string Format(string format, object arg, IFormatProvider formatProvider)
@@ -336,9 +343,9 @@ namespace Bridge.ClientTest.ConvertTests
                 return arg.ToString();
             }
 
-            public string GetAllDateTimePatterns(string format, bool returnNull)
+            public string[] GetAllDateTimePatterns(string format, bool returnNull)
             {
-                return "G";
+                return new[] { System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FullDateTimePattern };
             }
         }
     }

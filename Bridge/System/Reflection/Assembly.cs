@@ -22,7 +22,7 @@ namespace System.Reflection
         /// <param name="assemblyName">The display name of an assembly.</param>
         /// <param name="typeName">The full name of a type.</param>
         /// <returns>The full name of the type qualified by the display name of the assembly.</returns>
-        [Template("{typeName} + ', ' + {assemblyName}")]
+        [Template("{typeName} + \", \" + {assemblyName}")]
         public static extern string CreateQualifiedName(string assemblyName, string typeName);
 
         /// <summary>

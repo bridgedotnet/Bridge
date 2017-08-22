@@ -1,5 +1,6 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
+using Bridge.Translator.Logging;
 using Microsoft.Ajax.Utilities;
 using Mono.Cecil;
 using System;
@@ -182,7 +183,20 @@ namespace Bridge.Translator
                     ? "*" + Files.Extensions.JS + "|*" + Files.Extensions.DTS
                     : this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern;
 
-                CleanDirectory(outputPath, searchPattern);
+                string logFileFullPath = null;
+                var l = this.Log as Logger;
+
+                if (l != null)
+                {
+                    var fileWriter = l.GetFileLogger();
+
+                    if (fileWriter != null)
+                    {
+                        logFileFullPath = fileWriter.FullName;
+                    }
+                }
+
+                CleanDirectory(outputPath, searchPattern, logFileFullPath);
             }
         }
 
@@ -394,7 +408,7 @@ namespace Bridge.Translator
 
             this.Log.Info("Extracting Locales...");
 
-            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == CS.NS.ROOT);
+            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == CS.NS.BRIDGE);
             var localesResources = bridgeAssembly.MainModule.Resources.Where(r => r.Name.StartsWith(Translator.LocalesPrefix)).Cast<EmbeddedResource>();
             var locales = this.AssemblyInfo.Locales.Split(';');
 
@@ -482,7 +496,7 @@ namespace Bridge.Translator
 
             var combinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales", TranslatorOutputKind.Locale);
 
-            if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
+            if (combinedLocales != null && !string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
             {
                 combinedLocales.Location = this.AssemblyInfo.LocalesOutput;
             }
@@ -505,38 +519,46 @@ namespace Bridge.Translator
             }
 
             var needNewLine = false;
+            StringBuilder buffer = null;
+            int bufferLength = 0;
 
             var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputKind.ProjectOutput);
 
-            var buffer = combinedOutput.Content.Builder;
-
-            var bufferLength = buffer.Length;
-
-            if (bufferLength > 0)
+            if (combinedOutput?.Content?.Builder != null)
             {
-                needNewLine = true;
+                buffer = combinedOutput.Content.Builder;
+
+                bufferLength = buffer.Length;
+
+                if (bufferLength > 0)
+                {
+                    needNewLine = true;
+                }
             }
 
             if (this.Outputs.CombinedLocales != null)
             {
-                this.Log.Trace("Added combined locales.");
-
                 if (needNewLine)
                 {
                     NewLine(buffer);
                     needNewLine = false;
                 }
 
-                combinedOutput.Content.Builder.Append(this.Outputs.CombinedLocales.Content.GetContent(true));
-
-                if (buffer.Length > bufferLength)
-                {
-                    needNewLine = true;
-                }
-
-                bufferLength = buffer.Length;
+                combinedOutput = Combine(combinedOutput, new List<TranslatorOutputItem> { this.Outputs.CombinedLocales }, fileName, "combined locales output", TranslatorOutputKind.ProjectOutput);
 
                 this.Outputs.CombinedLocales = null;
+
+                if (combinedOutput?.Content?.Builder != null)
+                {
+                    buffer = combinedOutput.Content.Builder;
+
+                    if (buffer.Length > bufferLength)
+                    {
+                        needNewLine = true;
+                    }
+
+                    bufferLength = buffer.Length;
+                }
             }
 
             if (needNewLine)
@@ -545,7 +567,7 @@ namespace Bridge.Translator
                 needNewLine = false;
             }
 
-            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
+            combinedOutput = Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
 
             this.Outputs.Combined = combinedOutput;
 
@@ -853,7 +875,7 @@ namespace Bridge.Translator
             return settings;
         }
 
-        private void CleanDirectory(string outputPath, string searchPattern)
+        private void CleanDirectory(string outputPath, string searchPattern, params string[] systemFilesToIgnore)
         {
             this.Log.Info("Cleaning output folder " + (outputPath ?? string.Empty) + " with search pattern (" + (searchPattern ?? string.Empty) + ") ...");
 
@@ -881,13 +903,48 @@ namespace Bridge.Translator
                 }
 
                 var filesToDelete = new List<FileInfo>();
+                var filesToSkip = new List<Tuple<string, FileInfo>>();
                 foreach (var pattern in patterns)
                 {
-                    filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    if (string.IsNullOrEmpty(pattern))
+                    {
+                        continue;
+                    }
+
+                    if (pattern.StartsWith("!"))
+                    {
+                        if (pattern.Length > 1)
+                        {
+                            filesToSkip.AddRange(outputDirectory.GetFiles(pattern.Substring(1), SearchOption.AllDirectories).Select(x => Tuple.Create(pattern, x)));
+                        }
+                    }
+                    else
+                    {
+                        filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    }
+                }
+
+                if (systemFilesToIgnore != null && systemFilesToIgnore.All(x => string.IsNullOrEmpty(x)))
+                {
+                    systemFilesToIgnore = null;
                 }
 
                 foreach (var file in filesToDelete)
                 {
+                    if (systemFilesToIgnore != null && systemFilesToIgnore.Any(x => x == file.FullName))
+                    {
+                        this.Log.Trace("skip cleaning " + file.FullName + " as it is a system file");
+                        continue;
+                    }
+
+                    var skipPattern = filesToSkip.FirstOrDefault(x => x.Item2.FullName == file.FullName);
+
+                    if (skipPattern != null)
+                    {
+                        this.Log.Trace("skip cleaning " + file.FullName + " as it has skip pattern " + skipPattern.Item1);
+                        continue;
+                    }
+
                     this.Log.Trace("cleaning " + file.FullName);
                     file.Delete();
                 }

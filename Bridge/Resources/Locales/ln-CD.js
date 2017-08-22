@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("ln-CD", true), {
     englishName: "Lingala (Congo DRC)",
-    nativeName: "lingála (Repibiki demokratiki ya Kongó)",
+    nativeName: "lingála (Republíki ya Kongó Demokratíki)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ln-CD", true), {
         abbreviatedDayNames: ["eye","ybo","mbl","mst","min","mtn","mps"],
         abbreviatedMonthGenitiveNames: ["yan","fbl","msi","apl","mai","yun","yul","agt","stb","ɔtb","nvb","dsb",""],
         abbreviatedMonthNames: ["yan","fbl","msi","apl","mai","yun","yul","agt","stb","ɔtb","nvb","dsb",""],
-        amDesignator: "AM",
+        amDesignator: "ntɔ́ngɔ́",
         dateSeparator: "/",
         dayNames: ["eyenga","mokɔlɔ mwa yambo","mokɔlɔ mwa míbalé","mokɔlɔ mwa mísáto","mokɔlɔ ya mínéi","mokɔlɔ ya mítáno","mpɔ́sɔ"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ln-CD", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["sánzá ya yambo","sánzá ya míbalé","sánzá ya mísáto","sánzá ya mínei","sánzá ya mítáno","sánzá ya motóbá","sánzá ya nsambo","sánzá ya mwambe","sánzá ya libwa","sánzá ya zómi","sánzá ya zómi na mɔ̌kɔ́","sánzá ya zómi na míbalé",""],
         monthNames: ["sánzá ya yambo","sánzá ya míbalé","sánzá ya mísáto","sánzá ya mínei","sánzá ya mítáno","sánzá ya motóbá","sánzá ya nsambo","sánzá ya mwambe","sánzá ya libwa","sánzá ya zómi","sánzá ya zómi na mɔ̌kɔ́","sánzá ya zómi na míbalé",""],
-        pmDesignator: "PM",
+        pmDesignator: "mpókwa",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["eye","ybo","mbl","mst","min","mtn","mps"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ln-CD", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ln-CD",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

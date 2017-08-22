@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ee", true), {
         abbreviatedDayNames: ["kɔs","dzo","bla","kuɖ","yaw","fiɖ","mem"],
         abbreviatedMonthGenitiveNames: ["dzv","dzd","ted","afɔ","dam","mas","sia","dea","any","kel","ade","dzm",""],
         abbreviatedMonthNames: ["dzv","dzd","ted","afɔ","dam","mas","sia","dea","any","kel","ade","dzm",""],
-        amDesignator: "AM",
+        amDesignator: "ŋdi",
         dateSeparator: "/",
         dayNames: ["kɔsiɖa","dzoɖa","blaɖa","kuɖa","yawoɖa","fiɖa","memleɖa"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ee", true), {
         monthDayPattern: "MMMM d 'lia'",
         monthGenitiveNames: ["dzove","dzodze","tedoxe","afɔfĩe","dama","masa","siamlɔm","deasiamime","anyɔnyɔ","kele","adeɛmekpɔxe","dzome",""],
         monthNames: ["dzove","dzodze","tedoxe","afɔfĩe","dama","masa","siamlɔm","deasiamime","anyɔnyɔ","kele","adeɛmekpɔxe","dzome",""],
-        pmDesignator: "PM",
+        pmDesignator: "ɣetrɔ",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "M/d/yyyy",
         shortestDayNames: ["kɔs","dzo","bla","kuɖ","yaw","fiɖ","mem"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ee", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ee-GH",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

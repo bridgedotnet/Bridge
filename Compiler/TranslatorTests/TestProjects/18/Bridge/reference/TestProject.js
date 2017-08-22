@@ -2,7 +2,7 @@
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Options3; };
                 (function (){
                     this.Id = null;

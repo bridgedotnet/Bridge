@@ -1,4 +1,6 @@
-![bridge-repo-header](https://user-images.githubusercontent.com/62210/27444113-89c3f518-5732-11e7-9911-f8cb31aaef14.png)
+![Bridge.NET logo](https://speed.bridge.net/identity/bridgedotnet-sh.png)
+
+<p align="center"><img src="https://user-images.githubusercontent.com/62210/29276839-1759fbe8-80cd-11e7-921c-d509e0e2a22c.png"></p>
 
 [![Build status](https://ci.appveyor.com/api/projects/status/nm2f0c0u1jx0sniq/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectDotNet/bridge/branch/master)
 [![Build Status](https://travis-ci.org/bridgedotnet/Bridge.svg?branch=master)](https://travis-ci.org/bridgedotnet/Bridge)
@@ -85,19 +87,19 @@ Bridge.define("Demo.Program", {
 
 ## Installation
 
-A full list of installation options available at [bridge.net/download/](http://bridge.net/download/), including full support on Windows, Mac OS and Linux for [Visual Studio Code](https://code.visualstudio.com/) and [Mono Develop](http://www.monodevelop.com/).
+A full list of installation options available at [bridge.net/download/](http://bridge.net/download/), including full support for Visual Studio and Visual Studio Community on Windows, and Visual Studio Mac.
 
 ### Bridge for Visual Studio
 
-If you're using Visual Studio, the best way to get started is by adding the Bridge.NET for Visual Studio [extension](https://visualstudiogallery.msdn.microsoft.com/dca5c80f-a0df-4944-8343-9c905db84757).
+If you're using Visual Studio for Windoes, the easiest way to get started is by adding the Bridge.NET for Visual Studio [extension](https://visualstudiogallery.msdn.microsoft.com/dca5c80f-a0df-4944-8343-9c905db84757).
 
 From within Visual Studio, go to the `Tools > Extensions and Updates...`.
 
-![Visual Studio Extensions and Updates](https://cloud.githubusercontent.com/assets/62210/13193691/10876f0a-d73a-11e5-809d-69b090da6769.png)
+![Bridge for Visual Studio](https://user-images.githubusercontent.com/62210/29292228-932ebb7e-8103-11e7-952a-3088274acf10.png)
 
 From the options on the left side, be sure to select **Online**, then search for **Bridge**. Clicking **Download** will install Bridge for Visual Studio. After installation is complete, Visual Studio may require a restart. 
 
-![Bridge for Visual Studio](https://cloud.githubusercontent.com/assets/62210/13193692/10964c46-d73a-11e5-8350-700236c98016.png)
+![Visual Studio Extensions and Updates](https://user-images.githubusercontent.com/62210/29292229-93406b44-8103-11e7-90a0-30232486a5a7.png)
 
 Once installation is complete you will have a new **Bridge.NET** project type. When creating new Bridge enabled projects, select this project type. 
 ### NuGet
@@ -143,11 +145,11 @@ Show your support by adding a **built with Bridge.NET** badge to your projects R
 We need your help spreading the word about Bridge. Any of the following items will help:
 
 1. Add a [Badge](#badges)
-1. Star **[Bridge](https://github.com/bridgedotnet/Bridge/)** project on GitHub
-1. Leave a review on [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BridgeNET.BridgeNET)
+1. Star the [Bridge](https://github.com/bridgedotnet/Bridge/) project on GitHub
+1. Leave a review at [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BridgeNET.BridgeNET)
 1. Blog about Bridge.NET
 1. Tweet about [@bridgedotnet](https://twitter.com/bridgedotnet)
-1. Start a discussion on [Reddit](http://reddit.com/r/programming)
+1. Start a discussion on [Reddit](http://reddit.com/r/programming) or [Hacker News](https://news.ycombinator.com/)
 1. Answer Bridge related questions on [StackOverflow](http://stackoverflow.com/questions/tagged/bridge.net)
 1. Give a local usergroup presentation on Bridge
 1. Give a conference talk on Bridge
@@ -156,7 +158,7 @@ We need your help spreading the word about Bridge. Any of the following items wi
 
 ## Testing
 
-Bridge is continually tested and the full test runner is available at http://testing.bridge.net/. 
+Bridge is continually tested with the full test runner available at http://testing.bridge.net/. 
 
 ## Credits
 

@@ -4,7 +4,7 @@
 /// <reference path="..\..\Runner\TypeScript\App1\misc.b.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\typeScriptTest.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\typeScript.issues.d.ts" />
-
+"use strict";
 QUnit.module("TypeScript - Issues");
 QUnit.test("#290", function (assert) {
     var c1 = new Misc.A.Class1();

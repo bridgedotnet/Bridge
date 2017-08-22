@@ -65,7 +65,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The location of the key on the keyboard or other input device
         /// </summary>
-        public readonly KeyLocation Location;
+        public readonly Union<ulong, KeyLocation> Location;
 
         /// <summary>
         /// Indicates whether the "meta" key was pressed when the event fired.
@@ -1235,6 +1235,37 @@ namespace Bridge.Html5
     [Name("Object")]
     public class KeyboardEventInit : UIEventInit
     {
+        /// <summary>
+        /// Optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.Key.
+        /// </summary>
+        public string Key;
+
+        /// <summary>
+        /// Optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.Code.
+        /// </summary>
+        public string Code;
+
+        /// <summary>
+        /// The location of the key on the keyboard or other input device.
+        /// Optional and defaulting to Standard (0), of type unsigned long, that sets the value of KeyboardEvent.Location.
+        /// </summary>
+        public Union<ulong, KeyLocation> Location;
+
+        /// <summary>
+        /// Optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.Repeat.
+        /// </summary>
+        public bool Repeat;
+
+        /// <summary>
+        /// Optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.IsComposing.
+        /// </summary>
+        public bool IsComposing;
+
+        /// <summary>
+        /// Optional and defaulting to 0, of type unsigned long, that sets the value of the deprecated KeyboardEvent.Which.
+        /// </summary>
+        public long Which;
+
         /// <summary>
         /// Indicates whether the ALT key was pressed when the event fired.
         /// </summary>

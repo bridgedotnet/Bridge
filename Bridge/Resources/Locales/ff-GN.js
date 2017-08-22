@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ff-GN", true), {
         abbreviatedDayNames: ["dew","aaɓ","maw","nje","naa","mwd","hbi"],
         abbreviatedMonthGenitiveNames: ["sii","col","mbo","see","duu","kor","mor","juk","slt","yar","jol","bow",""],
         abbreviatedMonthNames: ["sii","col","mbo","see","duu","kor","mor","juk","slt","yar","jol","bow",""],
-        amDesignator: "AM",
+        amDesignator: "subaka",
         dateSeparator: "/",
         dayNames: ["dewo","aaɓnde","mawbaare","njeslaare","naasaande","mawnde","hoore-biir"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ff-GN", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["siilo","colte","mbooy","seeɗto","duujal","korse","morso","juko","siilto","yarkomaa","jolal","bowte",""],
         monthNames: ["siilo","colte","mbooy","seeɗto","duujal","korse","morso","juko","siilto","yarkomaa","jolal","bowte",""],
-        pmDesignator: "PM",
+        pmDesignator: "kikiiɗe",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["dew","aaɓ","maw","nje","naa","mwd","hbi"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ff-GN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "ff-GN",
+        EBCDICCodePage: 20297,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

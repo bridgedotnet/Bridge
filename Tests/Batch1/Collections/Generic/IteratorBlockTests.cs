@@ -1,4 +1,5 @@
-﻿using Bridge.Test.NUnit;
+﻿using Bridge.ClientTestHelper;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -129,9 +130,10 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void EnumeratingIEnumeratorIteratorToEndWorks()
+        public void EnumeratingIEnumeratorIteratorToEndWorks_SPI_1555()
         {
             // #1329 Yield support
+            // #1555
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerator(2);
 
@@ -144,10 +146,10 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks()
+        public void PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555()
         {
             // #1329 Yield support
-
+            // #1555
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerator(5);
 
@@ -197,10 +199,10 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void EnumeratingIEnumerableIteratorToEndWorks()
+        public void EnumeratingIEnumerableIteratorToEndWorks_SPI_1555()
         {
             // #1329 Yield support
-
+            // #1555
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerable(2);
 
@@ -221,10 +223,10 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks()
+        public void PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555()
         {
             // #1329 Yield support
-
+            // #1555
             var sb = new StringBuilder();
             int n = 0;
             foreach (var i in new C(sb).GetEnumerable(5))

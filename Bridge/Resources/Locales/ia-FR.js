@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ia-FR", true), {
         abbreviatedDayNames: ["dom","lun","mar","mer","jov","ven","sab"],
         abbreviatedMonthGenitiveNames: ["jan","feb","mar","apr","mai","jun","jul","aug","sep","oct","nov","dec",""],
         abbreviatedMonthNames: ["jan","feb","mar","apr","mai","jun","jul","aug","sep","oct","nov","dec",""],
-        amDesignator: "AM",
+        amDesignator: "a.m.",
         dateSeparator: "/",
         dayNames: ["dominica","lunedi","martedi","mercuridi","jovedi","venerdi","sabbato"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ia-FR", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["januario","februario","martio","april","maio","junio","julio","augusto","septembre","octobre","novembre","decembre",""],
         monthNames: ["januario","februario","martio","april","maio","junio","julio","augusto","septembre","octobre","novembre","decembre",""],
-        pmDesignator: "PM",
+        pmDesignator: "p.m.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy/MM/dd",
         shortestDayNames: ["dom","lun","mar","mer","jov","ven","sab"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ia-FR", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ia-FR",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

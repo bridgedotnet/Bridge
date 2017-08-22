@@ -129,8 +129,8 @@ namespace Bridge.ClientTest.ConvertTests
             var ushortMaxValue = ushort.MaxValue;
             var uintMaxValue = uint.MaxValue;
 
-            string[] testValues = { "1000", "0", ushortMaxValue.ToString(), uintMaxValue.ToString(), null };
-            ulong[] expectedValues = { 1000, 0, ushort.MaxValue, uint.MaxValue, 0 };
+            string[] testValues = { "1000", "0", ushortMaxValue.ToString(), uintMaxValue.ToString(), null, "0000000000000010", "00" };
+            ulong[] expectedValues = { 1000, 0, ushort.MaxValue, uint.MaxValue, 0, 10, 0 };
             VerifyFromString(Convert.ToUInt64, Convert.ToUInt64, testValues, expectedValues);
 
             var longMaxValue = ulong.MaxValue;
@@ -150,9 +150,9 @@ namespace Bridge.ClientTest.ConvertTests
         {
             var maxSafeValue = UInt64.MaxValue;
 
-            string[] testValues = { null, null, null, null, ConvertConstants.UINT64_MAX_STRING_BASE_16, maxSafeValue.ToString(), ConvertConstants.UINT64_MAX_STRING_BASE_8, ConvertConstants.UINT64_MAX_STRING_BASE_2 };
-            int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2 };
-            ulong[] expectedValues = { 0, 0, 0, 0, maxSafeValue, maxSafeValue, maxSafeValue, maxSafeValue };
+            string[] testValues = { null, null, null, null, ConvertConstants.UINT64_MAX_STRING_BASE_16, maxSafeValue.ToString(), ConvertConstants.UINT64_MAX_STRING_BASE_8, ConvertConstants.UINT64_MAX_STRING_BASE_2, "0000000000000010", "00", "0" };
+            int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 16, 16 };
+            ulong[] expectedValues = { 0, 0, 0, 0, maxSafeValue, maxSafeValue, maxSafeValue, maxSafeValue, 16, 0, 0 };
             VerifyFromStringWithBase(Convert.ToUInt64, testValues, testBases, expectedValues, true);
 
             string[] overflowValues = { ConvertConstants.UINT64_OVERFLOW_MAX_STRING, ConvertConstants.UINT64_OVERFLOW_MIN_STRING };

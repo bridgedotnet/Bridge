@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLTitleElement")]
     public sealed class HTMLTitleElement : HTMLElement<HTMLTitleElement>
     {
-        [Template("document.createElement('title')")]
+        [Template("document.createElement(\"title\")")]
         public extern HTMLTitleElement();
 
         /// <summary>

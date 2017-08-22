@@ -282,7 +282,7 @@ namespace Bridge.Contract
             if (globalMethods != null)
             {
                 var value = globalMethods.PositionalArguments.Count > 0 && (bool)globalMethods.PositionalArguments.First().ConstantValue;
-                globalTarget = !removeGlobal || value ? "Bridge.global" : "";
+                globalTarget = !removeGlobal || value ? JS.Types.Bridge.Global.NAME : "";
             }
             else
             {
@@ -433,7 +433,7 @@ namespace Bridge.Contract
             }
 
             var tDef = type.GetDefinition();
-            var skipSuffix = tDef != null && tDef.ParentAssembly.AssemblyName != CS.NS.ROOT && emitter.Validator.IsExternalType(tDef) && Helpers.IsIgnoreGeneric(tDef);
+            var skipSuffix = tDef != null && tDef.ParentAssembly.AssemblyName != CS.NS.BRIDGE && emitter.Validator.IsExternalType(tDef) && Helpers.IsIgnoreGeneric(tDef);
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0 && !skipSuffix)
             {
@@ -595,7 +595,17 @@ namespace Bridge.Contract
 
             var symbol = resolveResult.Type as ISymbol;
 
-            return BridgeTypes.ToJsName(resolveResult.Type, emitter, astType.Parent is TypeOfExpression && symbol != null && symbol.SymbolKind == SymbolKind.TypeDefinition);
+            var name = BridgeTypes.ToJsName(
+                resolveResult.Type,
+                emitter,
+                astType.Parent is TypeOfExpression && symbol != null && symbol.SymbolKind == SymbolKind.TypeDefinition);
+
+            if (name != CS.NS.BRIDGE && !name.StartsWith(CS.Bridge.DOTNAME) && astType.ToString().StartsWith(CS.NS.GLOBAL))
+            {
+                return JS.Types.Bridge.Global.DOTNAME + name;
+            }
+
+            return name;
         }
 
         public static void EnsureModule(BridgeType type)

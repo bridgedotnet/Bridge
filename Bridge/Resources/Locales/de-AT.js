@@ -19,7 +19,7 @@ Bridge.merge(new System.Globalization.CultureInfo("de-AT", true), {
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
-        currencyGroupSeparator: " ",
+        currencyGroupSeparator: ".",
         currencyNegativePattern: 9,
         currencyPositivePattern: 2,
         numberGroupSizes: [3],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("de-AT", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "de-AT",
+        EBCDICCodePage: 20273,
+        IsRightToLeft: false,
+        LCID: 3079,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

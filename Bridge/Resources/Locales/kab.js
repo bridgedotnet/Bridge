@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kab", true), {
         abbreviatedDayNames: ["Yan","San","Kraḍ","Kuẓ","Sam","Sḍis","Say"],
         abbreviatedMonthGenitiveNames: ["Yen","Fur","Meɣ","Yeb","May","Yun","Yul","Ɣuc","Cte","Tub","Nun","Duǧ",""],
         abbreviatedMonthNames: ["Yen","Fur","Meɣ","Yeb","May","Yun","Yul","Ɣuc","Cte","Tub","Nun","Duǧ",""],
-        amDesignator: "AM",
+        amDesignator: "n tufat",
         dateSeparator: "/",
         dayNames: ["Yanass","Sanass","Kraḍass","Kuẓass","Samass","Sḍisass","Sayass"],
         firstDayOfWeek: 6,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kab", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["Yennayer","Fuṛar","Meɣres","Yebrir","Mayyu","Yunyu","Yulyu","Ɣuct","Ctembeṛ","Tubeṛ","Nunembeṛ","Duǧembeṛ",""],
         monthNames: ["Yennayer","Fuṛar","Meɣres","Yebrir","Mayyu","Yunyu","Yulyu","Ɣuct","Ctembeṛ","Tubeṛ","Nunembeṛ","Duǧembeṛ",""],
-        pmDesignator: "PM",
+        pmDesignator: "n tmeddit",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["Yan","San","Kraḍ","Kuẓ","Sam","Sḍis","Say"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("kab", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "kab-DZ",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

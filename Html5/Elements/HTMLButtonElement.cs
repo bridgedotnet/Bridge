@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLButtonElement")]
     public sealed class HTMLButtonElement : HTMLElement<HTMLButtonElement>
     {
-        [Template("document.createElement('button')")]
+        [Template("document.createElement(\"button\")")]
         public extern HTMLButtonElement();
 
         /// <summary>

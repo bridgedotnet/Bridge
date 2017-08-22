@@ -37,9 +37,9 @@ Bridge.merge(new System.Globalization.CultureInfo("en-BW", true), {
         dateSeparator: "/",
         dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
         firstDayOfWeek: 0,
-        fullDateTimePattern: "dddd, dd MMMM yyyy h:mm:ss tt",
+        fullDateTimePattern: "dddd, dd MMMM yyyy HH:mm:ss",
         longDatePattern: "dddd, dd MMMM yyyy",
-        longTimePattern: "h:mm:ss tt",
+        longTimePattern: "HH:mm:ss",
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["January","February","March","April","May","June","July","August","September","October","November","December",""],
         monthNames: ["January","February","March","April","May","June","July","August","September","October","November","December",""],
@@ -47,12 +47,24 @@ Bridge.merge(new System.Globalization.CultureInfo("en-BW", true), {
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Su","Mo","Tu","We","Th","Fr","Sa"],
-        shortTimePattern: "h:mm tt",
+        shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "en-BW",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ",",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

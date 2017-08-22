@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("teo", true), {
         abbreviatedDayNames: ["Jum","Bar","Aar","Uni","Ung","Kan","Sab"],
         abbreviatedMonthGenitiveNames: ["Rar","Muk","Kwa","Dun","Mar","Mod","Jol","Ped","Sok","Tib","Lab","Poo",""],
         abbreviatedMonthNames: ["Rar","Muk","Kwa","Dun","Mar","Mod","Jol","Ped","Sok","Tib","Lab","Poo",""],
-        amDesignator: "AM",
+        amDesignator: "Taparachu",
         dateSeparator: "/",
         dayNames: ["Nakaejuma","Nakaebarasa","Nakaare","Nakauni","Nakaung’on","Nakakany","Nakasabiti"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("teo", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Orara","Omuk","Okwamg’","Odung’el","Omaruk","Omodok’king’ol","Ojola","Opedel","Osokosokoma","Otibar","Olabor","Opoo",""],
         monthNames: ["Orara","Omuk","Okwamg’","Odung’el","Omaruk","Omodok’king’ol","Ojola","Opedel","Osokosokoma","Otibar","Olabor","Opoo",""],
-        pmDesignator: "PM",
+        pmDesignator: "Ebongi",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Jum","Bar","Aar","Uni","Ung","Kan","Sab"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("teo", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "teo-UG",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

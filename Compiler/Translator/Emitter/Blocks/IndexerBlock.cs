@@ -344,7 +344,7 @@ namespace Bridge.Translator
                     else
                     {
                         nativeImplementation =
-                            memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                            memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.BRIDGE ||
                             !this.Emitter.Validator.IsExternalType(memberResolveResult.Member.DeclaringTypeDefinition);
                     }
 
@@ -1341,8 +1341,9 @@ namespace Bridge.Translator
                            (memberTargetrr.TargetResult is ThisResolveResult ||
                             memberTargetrr.TargetResult is TypeResolveResult ||
                             memberTargetrr.TargetResult is LocalResolveResult);
-            bool isSimple = targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
-                            targetrr is ConstantResolveResult || isField;
+            bool isArray = targetrr.Type.Kind == TypeKind.Array && !ConversionBlock.IsInUncheckedContext(this.Emitter, indexerExpression, false);
+            bool isSimple = !isArray || (targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
+                            targetrr is ConstantResolveResult || isField);
             string targetVar = null;
 
             if (!isSimple)
@@ -1397,26 +1398,32 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteOpenBracket();
-                    this.Write(JS.Types.System.Array.INDEX);
-                    this.WriteOpenParentheses();
+                    if (isArray)
+                    {
+                        this.Write(JS.Types.System.Array.INDEX);
+                        this.WriteOpenParentheses();
+                    }
                 }
 
                 index.AcceptVisitor(this.Emitter);
 
                 if (!this.isRefArg)
                 {
-                    this.WriteComma();
-
-                    if (targetVar != null)
+                    if (isArray)
                     {
-                        this.Write(targetVar);
-                    }
-                    else
-                    {
-                        indexerExpression.Target.AcceptVisitor(this.Emitter);
-                    }
+                        this.WriteComma();
 
-                    this.WriteCloseParentheses();
+                        if (targetVar != null)
+                        {
+                            this.Write(targetVar);
+                        }
+                        else
+                        {
+                            indexerExpression.Target.AcceptVisitor(this.Emitter);
+                        }
+
+                        this.WriteCloseParentheses();
+                    }
                     this.WriteCloseBracket();
                 }
 

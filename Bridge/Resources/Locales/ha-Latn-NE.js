@@ -30,7 +30,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NE", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Lh","Li","Ta","Lr","Al","Ju","As"],
+        abbreviatedDayNames: ["Lah","Lit","Tal","Lar","Alh","Jum","Asa"],
         abbreviatedMonthGenitiveNames: ["Jan","Fab","Mar","Afi","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis",""],
         abbreviatedMonthNames: ["Jan","Fab","Mar","Afi","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis",""],
         amDesignator: "AM",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "ha-Latn-NE",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

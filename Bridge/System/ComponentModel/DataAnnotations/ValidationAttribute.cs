@@ -24,7 +24,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Allows for providing a resource accessor function that will be used by the <see cref="ErrorMessageString" />
         /// property to retrieve the error message.  An example would be to have something like
-        /// CustomAttribute() : base( () =&gt; MyResources.MyErrorMessage ) {}.
+        /// CustomAttribute() : base( () =&gt; MyResources.MyErrorMessage ) { }.
         /// </summary>
         /// <param name="errorMessageAccessor">The <see cref="Func{T}" /> that will return an error message.</param>
         protected extern ValidationAttribute(Func<string> errorMessageAccessor);

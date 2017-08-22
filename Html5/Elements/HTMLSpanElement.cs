@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLSpanElement")]
     public sealed class HTMLSpanElement : HTMLElement<HTMLSpanElement>
     {
-        [Template("document.createElement('span')")]
+        [Template("document.createElement(\"span\")")]
         public extern HTMLSpanElement();
     }
 }

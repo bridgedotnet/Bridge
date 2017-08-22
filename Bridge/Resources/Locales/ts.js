@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("ts", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: " ",
-        currencyNegativePattern: 1,
-        currencyPositivePattern: 0,
+        currencyNegativePattern: 9,
+        currencyPositivePattern: 2,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
@@ -35,7 +35,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ts", true), {
         abbreviatedMonthNames: ["Sun","Yan","Kul","Dzi","Mud","Kho","Maw","Mha","Ndz","Nhl","Huk","N’w",""],
         amDesignator: "AM",
         dateSeparator: "-",
-        dayNames: ["Sonto","Musumbhunuku","Ravumbirhi","Ravunharhu","Ravumune","Ravuntlhanu","Mugqivela"],
+        dayNames: ["Sonta","Musumbhunuku","Ravumbirhi","Ravunharhu","Ravumune","Ravuntlhanu","Mugqivela"],
         firstDayOfWeek: 0,
         fullDateTimePattern: "yyyy MMMM d, dddd HH:mm:ss",
         longDatePattern: "yyyy MMMM d, dddd",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ts", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ts-ZA",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1073,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

@@ -2,21 +2,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!--This value will be used if NuGetUseExplicitVersion != true and the target is not able to read version automatically-->
-    <DefaultPackageVersion>16.0.0-rc</DefaultPackageVersion>
+    <DefaultPackageVersion>16.1.0</DefaultPackageVersion>
     <OnWin>true</OnWin>
-    <OnWin Condition="'$(OS)' != 'Windows_NT'">false</OnWin>
+    <OnWin Condition="'$(OS)' == 'Unix' OR '$(OS)' == 'OSX'">false</OnWin>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
     <!-- Download nuget.exe if it does not already exist -->
     <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
+  <PropertyGroup Condition="$(OnWin) == true">
     <!-- Windows specific commands -->
     <NuGetToolsPath>$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</NuGetToolsPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
+  <PropertyGroup Condition="$(OnWin) != true">
     <!-- We need to launch nuget.exe with the mono command if we're not on windows -->
     <NuGetToolsPath>$(SolutionDir).nuget</NuGetToolsPath>
   </PropertyGroup>
@@ -25,14 +25,14 @@
     <!-- NuGet command -->
     <NuGetExePath Condition=" '$(NuGetExePath)' == ''">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
 
-    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition="$(OnWin) == true">"$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition="$(OnWin) != true">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
 
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
-    <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
+    <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND $(OnWin) == true ">-NonInteractive</NonInteractiveSwitch>
 
-    <PaddedSolutionDir Condition="'$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
-    <PaddedSolutionDir Condition="'$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="$(OnWin) == true">"$(SolutionDir) "</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="$(OnWin) != true">"$(SolutionDir)"</PaddedSolutionDir>
 
     <!-- Make the build depend on restore packages -->
     <BuildDependsOn Condition="$(NuGetBuildPackage) == 'true'">
@@ -57,27 +57,35 @@
   </Target>
 
   <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites; AfterBuild">
+    <Message Text="Starting nuget packaging:" Importance="high" />
+    <Message Text="NuGetPackageSourcePath: %(NuGetPackageSourcePath.Path)" Importance="high" />
+    <Message Text="OS: $(OS)" Importance="high" />
+    <Message Text="TargetPlatformIdentifier: $(TargetPlatformIdentifier)" Importance="high" />
+    <Message Text="OnWin: $(OnWin)" Importance="high" />
+    <Message Text="MonoBuild: $(MonoBuild)" Importance="high" />
+    <Message Text="NetCoreBuild: $(NetCoreBuild)" Importance="high" />
+
     <PropertyGroup>
       <NuGetUseExplicitVersion Condition=" '$(NuGetUseExplicitVersion)' == '' ">false</NuGetUseExplicitVersion>
       <!-- Set default NuGetPackageOutputDir if not defined-->
       <!-- NuGetPackageOutputDir == true means package version will be taken from nuspec-->
       <!-- NuGetPackageOutputDir == false means package version will be taken from $(SolutionDir).build\common\CommonAssemblyInfo.cs or project's output assembly version-->
-      <NuGetPackageOutputDir Condition="'$(OS)' == 'Windows_NT' AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
-      <NuGetPackageOutputDir Condition="'$(OS)' != 'Windows_NT' AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(OutDir)</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir Condition="$(OnWin) == true AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir Condition="$(OnWin) != true AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(OutDir)</NuGetPackageOutputDir>
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('\\'))</NuGetPackageOutputDir>
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
     <!--Inline tasks not supported in xbuild-->
     <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+    <GetAssemblyIdentity Condition="$(OnWin) == true" AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo" />
     </GetAssemblyIdentity>
 
     <PropertyGroup>
       <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
       <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
-      <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
+      <CouldNotGetApplicationVersion Condition="$(ApplicationVersion) == '*Undefined*' OR '$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
       <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
     </PropertyGroup>
 
@@ -92,14 +100,14 @@
 
     <Message Text="SmallApplicationVersion by matching ApplicationVersion: $(SmallApplicationVersion)" Importance="high" />-->
 
-    <GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
+    <GetAssemblyVersionFromTextFile Condition="$(OnWin) == true AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion" />
     </GetAssemblyVersionFromTextFile>
 
-    <Message Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromTextFile: @(AssemblyInformationalVersion)" Importance="high" />
+    <Message Condition="$(OnWin) == true AND $(NuGetUseExplicitVersion) == 'false'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromTextFile: @(AssemblyInformationalVersion)" Importance="high" />
 
     <PropertyGroup>
-      <NeedGetAssemblyVersionFromDll Condition="'$(OS)' == 'Windows_NT' AND '$(NuGetUseExplicitVersion)' == 'false' AND ('@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*')">true</NeedGetAssemblyVersionFromDll>
+      <NeedGetAssemblyVersionFromDll Condition="$(OnWin) == true AND '$(NuGetUseExplicitVersion)' == 'false' AND ('@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*')">true</NeedGetAssemblyVersionFromDll>
     </PropertyGroup>
 
     <GetAssemblyVersionFromDll Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
@@ -126,8 +134,8 @@
       <NuGetCommand>$(NuGetCommand.Trim('\'))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Replace("//", "/"))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Trim('/'))</NuGetCommand>
-      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('/', '\'))</NuGetCommand>
-      <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('\', '/'))</NuGetCommand>
+      <NuGetCommand Condition="$(OnWin) == true">$(NuGetCommand.Replace('/', '\'))</NuGetCommand>
+      <NuGetCommand Condition="$(OnWin) != true">$(NuGetCommand.Replace('\', '/'))</NuGetCommand>
     </PropertyGroup>
 
     <Message Text="NuGetCommand  after trim: $(NuGetCommand)" Importance="high" />
@@ -136,10 +144,10 @@
     It allows multiple packages created-->
     <Exec Command="$(NuGetCommand) pack &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
       LogStandardErrorAsError="true"
-      Condition="'$(OS)' == 'Windows_NT'" />
+      Condition="$(OnWin) == true" />
 
-    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
-      Condition=" '$(OS)' != 'Windows_NT' " />
+    <Exec Command="$(NuGetCommand) pack &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+      Condition="$(OnWin) != true" />
 
     <ItemGroup>
       <NuGetPackageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg" />

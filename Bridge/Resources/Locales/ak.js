@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ak", true), {
         abbreviatedDayNames: ["Kwe","Dwo","Ben","Wuk","Yaw","Fia","Mem"],
         abbreviatedMonthGenitiveNames: ["S-Ɔ","K-Ɔ","E-Ɔ","E-O","E-K","O-A","A-K","D-Ɔ","F-Ɛ","Ɔ-A","Ɔ-O","M-Ɔ",""],
         abbreviatedMonthNames: ["S-Ɔ","K-Ɔ","E-Ɔ","E-O","E-K","O-A","A-K","D-Ɔ","F-Ɛ","Ɔ-A","Ɔ-O","M-Ɔ",""],
-        amDesignator: "AM",
+        amDesignator: "AN",
         dateSeparator: "/",
         dayNames: ["Kwesida","Dwowda","Benada","Wukuda","Yawda","Fida","Memeneda"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ak", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Sanda-Ɔpɛpɔn","Kwakwar-Ɔgyefuo","Ebɔw-Ɔbenem","Ebɔbira-Oforisuo","Esusow Aketseaba-Kɔtɔnimba","Obirade-Ayɛwohomumu","Ayɛwoho-Kitawonsa","Difuu-Ɔsandaa","Fankwa-Ɛbɔ","Ɔbɛsɛ-Ahinime","Ɔberɛfɛw-Obubuo","Mumu-Ɔpɛnimba",""],
         monthNames: ["Sanda-Ɔpɛpɔn","Kwakwar-Ɔgyefuo","Ebɔw-Ɔbenem","Ebɔbira-Oforisuo","Esusow Aketseaba-Kɔtɔnimba","Obirade-Ayɛwohomumu","Ayɛwoho-Kitawonsa","Difuu-Ɔsandaa","Fankwa-Ɛbɔ","Ɔbɛsɛ-Ahinime","Ɔberɛfɛw-Obubuo","Mumu-Ɔpɛnimba",""],
-        pmDesignator: "PM",
+        pmDesignator: "EW",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy/MM/dd",
         shortestDayNames: ["Kwe","Dwo","Ben","Wuk","Yaw","Fia","Mem"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ak", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ak-GH",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLScriptElement")]
     public sealed class HTMLScriptElement : HTMLElement<HTMLScriptElement>
     {
-        [Template("document.createElement('script')")]
+        [Template("document.createElement(\"script\")")]
         public extern HTMLScriptElement();
 
         /// <summary>

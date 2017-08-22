@@ -188,7 +188,10 @@ namespace Bridge.Contract
         {
             get
             {
-                if (Content == null || (Content.Buffer == null && Content.String == null && Content.Builder == null))
+                if (Content == null ||
+                    ((Content.Buffer == null || Content.Buffer.Length == 0)
+                    && (Content.String == null || Content.String.Length == 0)
+                    && (Content.Builder == null || Content.Builder.Length == 0)))
                 {
                     isEmpty = true;
                 }
@@ -211,7 +214,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public string GetOutputPath(string basePath = null, bool htmlAdjusted = false)
+        public string GetOutputPath(string basePath = null, bool htmlAdjusted = false, ILogger logger = null)
         {
             var item = this;
 
@@ -237,14 +240,24 @@ namespace Bridge.Contract
 
             if (basePath != null)
             {
-                if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != '\\')
+                if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != Path.DirectorySeparatorChar)
                 {
-                    basePath = basePath + '\\';
+                    basePath = basePath + Path.DirectorySeparatorChar;
                 }
 
                 basePath = Path.GetFullPath(basePath);
 
+                if (logger != null)
+                {
+                    logger.Trace("\tbase: " + basePath);
+                }
+
                 path = MakeRelative(path, basePath);
+
+                if (logger != null)
+                {
+                    logger.Trace("\tpath: " + path);
+                }
             }
 
             if (htmlAdjusted)

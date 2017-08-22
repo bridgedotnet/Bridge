@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("is-IS", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "is-IS",
+        EBCDICCodePage: 20871,
+        IsRightToLeft: false,
+        LCID: 1039,
+        listSeparator: ";",
+        MacCodePage: 10079,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

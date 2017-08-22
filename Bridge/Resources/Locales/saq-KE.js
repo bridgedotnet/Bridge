@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("saq-KE", true), {
         abbreviatedDayNames: ["Are","Kun","Ong","Ine","Ile","Sap","Kwe"],
         abbreviatedMonthGenitiveNames: ["Obo","Waa","Oku","Ong","Ime","Ile","Sap","Isi","Saa","Tom","Tob","Tow",""],
         abbreviatedMonthNames: ["Obo","Waa","Oku","Ong","Ime","Ile","Sap","Isi","Saa","Tom","Tob","Tow",""],
-        amDesignator: "AM",
+        amDesignator: "Tesiran",
         dateSeparator: "/",
         dayNames: ["Mderot ee are","Mderot ee kuni","Mderot ee ong’wan","Mderot ee inet","Mderot ee ile","Mderot ee sapa","Mderot ee kwe"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("saq-KE", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Lapa le obo","Lapa le waare","Lapa le okuni","Lapa le ong’wan","Lapa le imet","Lapa le ile","Lapa le sapa","Lapa le isiet","Lapa le saal","Lapa le tomon","Lapa le tomon obo","Lapa le tomon waare",""],
         monthNames: ["Lapa le obo","Lapa le waare","Lapa le okuni","Lapa le ong’wan","Lapa le imet","Lapa le ile","Lapa le sapa","Lapa le isiet","Lapa le saal","Lapa le tomon","Lapa le tomon obo","Lapa le tomon waare",""],
-        pmDesignator: "PM",
+        pmDesignator: "Teipa",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Are","Kun","Ong","Ine","Ile","Sap","Kwe"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("saq-KE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "saq-KE",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

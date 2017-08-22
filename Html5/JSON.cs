@@ -19,7 +19,7 @@ namespace Bridge.Html5
         /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}))")]
-        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        [Obsolete("Please use Newtonsoft.Json. See https://github.com/bridgedotnet/Bridge.Newtonsoft.Json for more information.")]
         public static extern T Parse<T>(string text);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Bridge.Html5
         /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(new Array(), JSON.parse({text}), null, function(){return Bridge.createInstance({T});})")]
-        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        [Obsolete("Please use Newtonsoft.Json. See https://github.com/bridgedotnet/Bridge.Newtonsoft.Json for more information.")]
         public static extern T[] ParseAsArray<T>(string text) where T : new();
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Bridge.Html5
         /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
-        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        [Obsolete("Please use Newtonsoft.Json. See https://github.com/bridgedotnet/Bridge.Newtonsoft.Json for more information.")]
         public static extern T Parse<T>(string text, Delegate reviver);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Bridge.Html5
         /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
-        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        [Obsolete("Please use Newtonsoft.Json. See https://github.com/bridgedotnet/Bridge.Newtonsoft.Json for more information.")]
         public static extern T Parse<T>(string text, Func<string, object, object> reviver);
 
         /// <summary>

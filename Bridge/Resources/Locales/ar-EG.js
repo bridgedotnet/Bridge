@@ -10,7 +10,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
         positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
-        percentDecimalDigits: 3,
+        percentDecimalDigits: 2,
         percentDecimalSeparator: ".",
         percentGroupSeparator: ",",
         percentPositivePattern: 1,
@@ -23,7 +23,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
         currencyNegativePattern: 8,
         currencyPositivePattern: 3,
         numberGroupSizes: [3],
-        numberDecimalDigits: 3,
+        numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
         numberGroupSeparator: ",",
         numberNegativePattern: 1
@@ -41,8 +41,8 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
         longDatePattern: "dd MMMM, yyyy",
         longTimePattern: "hh:mm:ss tt",
         monthDayPattern: "dd MMMM",
-        monthGenitiveNames: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليه","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر",""],
-        monthNames: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليه","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر",""],
+        monthGenitiveNames: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر",""],
+        monthNames: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر",""],
         pmDesignator: "م",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1256,
+        CultureName: "ar-EG",
+        EBCDICCodePage: 20420,
+        IsRightToLeft: true,
+        LCID: 3073,
+        listSeparator: ";",
+        MacCodePage: 10004,
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

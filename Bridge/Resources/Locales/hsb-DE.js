@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
         abbreviatedDayNames: ["nje","pón","wut","srj","štw","pja","sob"],
         abbreviatedMonthGenitiveNames: ["jan.","feb.","měr.","apr.","mej.","jun.","jul.","awg.","sep.","okt.","now.","dec.",""],
         abbreviatedMonthNames: ["jan","feb","měr","apr","mej","jun","jul","awg","sep","okt","now","dec",""],
-        amDesignator: "AM",
+        amDesignator: "dopołdnja",
         dateSeparator: ".",
         dayNames: ["njedźela","póndźela","wutora","srjeda","štwórtk","pjatk","sobota"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["januara","februara","měrca","apryla","meje","junija","julija","awgusta","septembra","oktobra","nowembra","decembra",""],
         monthNames: ["januar","februar","měrc","apryl","meja","junij","julij","awgust","september","oktober","nowember","december",""],
-        pmDesignator: "PM",
+        pmDesignator: "popołdnju",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d.M.yyyy",
         shortestDayNames: ["nj","pó","wu","sr","št","pj","so"],
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "hsb-DE",
+        EBCDICCodePage: 870,
+        IsRightToLeft: false,
+        LCID: 1070,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

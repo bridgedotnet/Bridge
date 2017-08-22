@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLBRElement")]
     public sealed class HTMLBRElement : HTMLElement<HTMLBRElement>
     {
-        [Template("document.createElement('br')")]
+        [Template("document.createElement(\"br\")")]
         public extern HTMLBRElement();
 
         /// <summary>

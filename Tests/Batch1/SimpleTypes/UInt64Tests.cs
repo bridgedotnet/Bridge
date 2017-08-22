@@ -1,5 +1,7 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -21,16 +23,26 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.True((object)(ulong)0 is ulong);
             Assert.False((object)0.5 is ulong);
             Assert.AreEqual("System.UInt64", typeof(ulong).FullName);
+            Assert.False(typeof(ulong).IsClass);
+            Assert.True(typeof(IComparable<ulong>).IsAssignableFrom(typeof(ulong)));
+            Assert.True(typeof(IEquatable<ulong>).IsAssignableFrom(typeof(ulong)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(ulong)));
             object l = (ulong)0;
             Assert.True(l is ulong);
             Assert.True(l is IComparable<ulong>);
             Assert.True(l is IEquatable<ulong>);
             Assert.True(l is IFormattable);
+
+            var interfaces = typeof(ulong).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<ulong>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<ulong>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -43,31 +55,41 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void CastsWork()
         {
-            long i2 = 0, i3 = 234, i4 = 9223372036854775000;
-            long? ni2 = 0, ni3 = 234, ni4 = 9223372036854775000, ni6 = null;
+            long i1 = -1, i2 = 0, i3 = 234, i4 = 9223372036854775000;
+            long? ni1 = -1, ni2 = 0, ni3 = 234, ni4 = 9223372036854775000, ni6 = null;
 
             unchecked
             {
-                Assert.True(0 == (ulong)i2, "0 unchecked");
-                Assert.True(234 == (ulong)i3, "234 unchecked");
-                Assert.True(9223372036854775000 == (ulong)i4, "9223372036854775000 unchecked");
+                Assert.True((ulong)i1 > 1e18, "-1 unchecked");
+                Assert.AreEqual(0UL, (ulong)i2, "0 unchecked");
+                Assert.AreEqual(234UL, (ulong)i3, "234 unchecked");
+                Assert.AreEqual(9223372036854775000UL, (ulong)i4, "9223372036854775000 unchecked");
 
-                Assert.True(0 == (ulong?)ni2, "nullable 0 unchecked");
-                Assert.True(234 == (ulong?)ni3, "nullable 234 unchecked");
-                Assert.True(9223372036854775000 == (ulong?)ni4, "nullable 9223372036854775000 unchecked");
-                Assert.True(null == (ulong?)ni6, "null unchecked");
+                Assert.True((ulong?)ni1 > 1e18, "nullable -1 unchecked");
+                Assert.AreEqual(0UL, (ulong?)ni2, "nullable 0 unchecked");
+                Assert.AreEqual(234UL, (ulong?)ni3, "nullable 234 unchecked");
+                Assert.AreEqual(9223372036854775000UL, (ulong?)ni4, "nullable 9223372036854775000 unchecked");
+                Assert.AreEqual(null, (ulong?)ni6, "null unchecked");
             }
 
             checked
             {
-                Assert.True(0 == (ulong)i2, "0 checked");
-                Assert.True(234 == (ulong)i3, "234 checked");
-                Assert.True(9223372036854775000 == (ulong)i4, "9223372036854775000 checked");
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (ulong)i1;
+                }, "-1 checked");
+                Assert.AreEqual(0UL, (ulong)i2, "0 checked");
+                Assert.AreEqual(234UL, (ulong)i3, "234 checked");
+                Assert.AreEqual(9223372036854775000UL, (ulong)i4, "9223372036854775000 checked");
 
-                Assert.True(0 == (ulong?)ni2, "nullable 0 checked");
-                Assert.True(234 == (ulong?)ni3, "nullable 234 checked");
-                Assert.True(9223372036854775000 == (ulong?)ni4, "nullable 9223372036854775000 checked");
-                Assert.True(null == (ulong?)ni6, "null checked");
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (ulong?)ni1;
+                }, "nullable -1 checked");
+                Assert.AreEqual(0UL, (ulong?)ni2, "nullable 0 checked");
+                Assert.AreEqual(234UL, (ulong?)ni3, "nullable 234 checked");
+                Assert.AreEqual(9223372036854775000UL, (ulong?)ni4, "nullable 9223372036854775000 checked");
+                Assert.AreEqual(null, (ulong?)ni6, "null checked");
             }
         }
 
@@ -137,25 +159,25 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void DefaultValueIs0()
         {
-            Assert.True(0 == GetDefaultValue<ulong>());
+            Assert.AreEqual(0UL, GetDefaultValue<ulong>());
         }
 
         [Test]
         public void DefaultConstructorReturnsZero()
         {
-            Assert.True(0 == new ulong());
+            Assert.AreEqual(0UL, new ulong());
         }
 
         [Test]
         public void CreatingInstanceReturnsZero()
         {
-            Assert.True(0 == Activator.CreateInstance<ulong>());
+            Assert.AreEqual(0UL, Activator.CreateInstance<ulong>());
         }
 
         [Test]
         public void ConstantsWork()
         {
-            Assert.True(0 == ulong.MinValue);
+            Assert.AreEqual(0UL, ulong.MinValue);
         }
 
         [Test]
@@ -165,10 +187,29 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("123", ((ulong)0x123).ToString("x"));
         }
+
+        [Test]
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("123", ((ulong)0x123).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("123", ((IFormattable)((ulong)0x123)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((ulong)0x123).LocaleFormat("x"), "123");
+        //}
 
         [Test]
         public void CastingOfLargeValuesToUInt64Works_SPI_1591()
@@ -183,7 +224,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void DivisionOfLargeUInt64Works()
         {
             ulong v1 = 50000000000L, v2 = 3;
-            Assert.True(16666666666 == (v1 / v2));
+            Assert.AreEqual(16666666666UL, v1 / v2);
         }
 
         [Test]
@@ -192,43 +233,58 @@ namespace Bridge.ClientTest.SimpleTypes
             ulong numberResult;
             bool result = ulong.TryParse("23445", out numberResult);
             Assert.True(result);
-            Assert.True(23445 == numberResult);
+            Assert.AreEqual(23445UL, numberResult);
+
+            result = ulong.TryParse("0000000000000000", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+
+            result = ulong.TryParse("0", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+
+            result = ulong.TryParse("0000000000000010", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(10UL, numberResult, "#3031");
 
             result = ulong.TryParse("", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0UL, numberResult);
 
             result = ulong.TryParse(null, out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0UL, numberResult);
 
             result = ulong.TryParse("notanumber", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0UL, numberResult);
 
             result = ulong.TryParse("-1", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0UL, numberResult);
 
             result = ulong.TryParse("2.5", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0UL, numberResult);
 
             result = ulong.TryParse("100000000000000000000", out numberResult);
             Assert.False(result);
-            Assert.True(numberResult == 0);
+            Assert.AreEqual(0UL, numberResult);
         }
 
         [Test]
         public void ParseWorks()
         {
-            Assert.True(23445 == ulong.Parse("23445"));
-            Assert.Throws(() => ulong.Parse(""));
-            Assert.Throws(() => ulong.Parse(null));
-            Assert.Throws(() => ulong.Parse("notanumber"));
-            Assert.Throws(() => ulong.Parse("-1"));
-            Assert.Throws(() => ulong.Parse("2.5"));
-            Assert.Throws(() => ulong.Parse("100000000000000000000"));
+            Assert.AreEqual(23445UL, ulong.Parse("23445"));
+            NumberHelper.AssertNumber(10UL, ulong.Parse("0000000000000010"), "#3031");
+            NumberHelper.AssertNumber(0UL, ulong.Parse("0"), "#3031");
+            NumberHelper.AssertNumber(0UL, ulong.Parse("000000000000000"), "#3031");
+            Assert.Throws<FormatException>(() => ulong.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => ulong.Parse(null));
+            Assert.Throws<FormatException>(() => ulong.Parse("notanumber"));
+            Assert.Throws<OverflowException>(() => ulong.Parse("-1"));
+            Assert.Throws<FormatException>(() => ulong.Parse("2.5"));
+            Assert.Throws<OverflowException>(() => ulong.Parse("100000000000000000000"));
         }
 
         [Test]

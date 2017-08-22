@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -8,18 +9,28 @@ namespace Bridge.ClientTest.SimpleTypes
     public class UInt32Tests
     {
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.False((object)(int)0 is uint);
             Assert.False((object)0.5 is uint);
             Assert.False((object)-1 is uint);
             Assert.False((object)4294967296 is uint);
             Assert.AreEqual("System.UInt32", typeof(uint).FullName);
+            Assert.False(typeof(uint).IsClass);
+            Assert.True(typeof(IComparable<uint>).IsAssignableFrom(typeof(uint)));
+            Assert.True(typeof(IEquatable<uint>).IsAssignableFrom(typeof(uint)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(uint)));
             object i = (uint)0;
             Assert.True(i is uint);
             Assert.True(i is IComparable<uint>);
             Assert.True(i is IEquatable<uint>);
             Assert.True(i is IFormattable);
+
+            var interfaces = typeof(uint).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<uint>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<uint>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -46,17 +57,29 @@ namespace Bridge.ClientTest.SimpleTypes
 
             checked
             {
-                Assert.Throws(() => { var b = (uint)i1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (uint)i1;
+                }, "-1 checked");
                 Assert.AreStrictEqual(0, (uint)i2, "0 checked");
                 Assert.AreStrictEqual(234, (uint)i3, "234 checked");
                 Assert.AreStrictEqual(4294967295, (uint)i4, "4294967295 checked");
-                Assert.Throws(() => { var b = (uint)i5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (uint)i5;
+                }, "4294967296 checked");
 
-                Assert.Throws(() => { var b = (uint?)ni1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (uint?)ni1;
+                }, "nullable -1 checked");
                 Assert.AreStrictEqual(0, (uint?)ni2, "nullable 0 checked");
                 Assert.AreStrictEqual(234, (uint?)ni3, "nullable 234 checked");
                 Assert.AreStrictEqual(4294967295, (uint?)ni4, "nullable 4294967295 checked");
-                Assert.Throws(() => { var b = (uint?)ni5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (uint?)ni5;
+                }, "nullable 4294967296 checked");
                 Assert.AreStrictEqual(null, (uint?)ni6, "null checked");
             }
         }
@@ -98,13 +121,32 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("123", ((uint)0x123).ToString("x"));
         }
 
         [Test]
-        public void TryParseWorks()
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("123", ((uint)0x123).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("123", ((IFormattable)((uint)0x123)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((uint)0x123).LocaleFormat("x"), "123");
+        //}
+
+        [Test]
+        public void TryParseWorks_SPI_1592()
         {
             uint numberResult;
             bool result = uint.TryParse("23445", out numberResult);
@@ -125,7 +167,7 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = uint.TryParse("-1", out numberResult);
             Assert.False(result);
-            Assert.AreEqual(-1, numberResult);
+            Assert.AreEqual(0, numberResult, "#1592");
 
             result = uint.TryParse("2.5", out numberResult);
             Assert.False(result);
@@ -136,12 +178,12 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             Assert.AreEqual(23445, uint.Parse("23445"));
-            Assert.Throws(() => uint.Parse(""));
-            Assert.Throws(() => uint.Parse(null));
-            Assert.Throws(() => uint.Parse("notanumber"));
-            Assert.Throws(() => uint.Parse("4294967296"));
-            Assert.Throws(() => uint.Parse("-1"));
-            Assert.Throws(() => uint.Parse("2.5"));
+            Assert.Throws<FormatException>(() => uint.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => uint.Parse(null));
+            Assert.Throws<FormatException>(() => uint.Parse("notanumber"));
+            Assert.Throws<OverflowException>(() => uint.Parse("4294967296"));
+            Assert.Throws<OverflowException>(() => uint.Parse("-1"));
+            Assert.Throws<FormatException>(() => uint.Parse("2.5"));
         }
 
         [Test]

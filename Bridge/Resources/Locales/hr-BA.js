@@ -34,7 +34,7 @@ Bridge.merge(new System.Globalization.CultureInfo("hr-BA", true), {
         abbreviatedMonthGenitiveNames: ["sij","velj","ožu","tra","svi","lip","srp","kol","ruj","lis","stu","pro",""],
         abbreviatedMonthNames: ["sij","velj","ožu","tra","svi","lip","srp","kol","ruj","lis","stu","pro",""],
         amDesignator: "AM",
-        dateSeparator: ".",
+        dateSeparator: ". ",
         dayNames: ["nedjelja","ponedjeljak","utorak","srijeda","četvrtak","petak","subota"],
         firstDayOfWeek: 1,
         fullDateTimePattern: "dddd, d. MMMM yyyy. HH:mm:ss",
@@ -45,7 +45,7 @@ Bridge.merge(new System.Globalization.CultureInfo("hr-BA", true), {
         monthNames: ["siječanj","veljača","ožujak","travanj","svibanj","lipanj","srpanj","kolovoz","rujan","listopad","studeni","prosinac",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-        shortDatePattern: "dd.MM.yyyy.",
+        shortDatePattern: "d. M. yyyy.",
         shortestDayNames: ["ned","pon","uto","sri","čet","pet","sub"],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -53,6 +53,18 @@ Bridge.merge(new System.Globalization.CultureInfo("hr-BA", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy.",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1250,
+        CultureName: "hr-BA",
+        EBCDICCodePage: 870,
+        IsRightToLeft: false,
+        LCID: 4122,
+        listSeparator: ";",
+        MacCodePage: 10082,
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

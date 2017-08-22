@@ -191,6 +191,7 @@ Tests/**/App_Readme/
 /Tests/Runner/Batch2/bridge.test.qunit.js
 /Tests/Runner/Batch3/bridge.test.qunit.js
 /Tests/Runner/Batch4/bridge.test.qunit.js
+/Tests/Runner/ClientTestHelper/Bridge.Test
 /Bridge.Sandbox.sln
-/.build/packages/
-!/.build/packages/*.bat
+/.build/packages/*.nupkg
+/.build/packages/*.exe
