@@ -12,6 +12,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("CreateAndInitializationModes - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateAndInitializationModesTests.Test);
             QUnit.test("ObjectCreateMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateModeTests.Test);
             QUnit.test("ObjectInitializationMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.InitializationModeTests.Test);
+            QUnit.test("Create<T> - TestExternalInterface", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestExternalInterface);
+            QUnit.test("Create<T> - TestClass", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestClass);
             QUnit.module("Activator");
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithoutArgumentsWorks);
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);
@@ -14522,6 +14524,36 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.NumberFormatSpecifiersTests", $t.File = "Batch1\\Format\\NumberFormatSpecifiersTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests)],
+        statics: {
+            methods: {
+                TestExternalInterface: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalInterface()", $t.Line = "464", $t));
+                    t.Fixture.TestExternalInterface();
+                },
+                TestClass: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClass()", $t.Line = "496", $t));
+                    t.Fixture.TestClass();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }

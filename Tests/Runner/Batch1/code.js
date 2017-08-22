@@ -27466,6 +27466,73 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests", {
+        methods: {
+            TestExternalInterface: function () {
+                var c = { };
+                c.id = 1;
+                Bridge.Test.NUnit.Assert.AreEqual(1, c.id);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c));
+
+                var c2 = { };
+                c2.id = 2;
+                c2.Name = "Nancy";
+                Bridge.Test.NUnit.Assert.AreEqual(2, c2.id);
+                Bridge.Test.NUnit.Assert.AreEqual("Nancy", c2.Name);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c2));
+
+                var c21 = { };
+                c21.id = 2;
+                c21.Name = "Nancy";
+                Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(c21, c2));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(c21, c2));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c21));
+
+                c21.id = 21;
+                Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(c21, c2));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(c21, c2));
+
+                var c3 = { };
+                c3.id = 3;
+                Bridge.Test.NUnit.Assert.AreEqual(3, c3.id);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c));
+            },
+            TestClass: function () {
+                var c = { };
+                c.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id = 1;
+                Bridge.Test.NUnit.Assert.AreEqual(1, c.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c));
+
+                var c2 = { };
+                c2.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id = 2;
+                c2.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config4$Name = "Nancy";
+                Bridge.Test.NUnit.Assert.AreEqual(2, c2.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id);
+                Bridge.Test.NUnit.Assert.AreEqual("Nancy", c2.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config4$Name);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c2));
+
+                var c21 = { };
+                c21.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id = 2;
+                c21.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config4$Name = "Nancy";
+                Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(c21, c2));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(c21, c2));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c21));
+
+                c21.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id = 21;
+                Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(c21, c2));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(c21, c2));
+
+                var c3 = { };
+                c3.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id = 3;
+                Bridge.Test.NUnit.Assert.AreEqual(3, c3.Bridge$ClientTest$ObjectLiteralTests$ObjectLiteralCreateTests$Config3$id);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.getHashCode(c));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests.Config3", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests", {
         methods: {
             AccessorsCanBeInvokedInstance: function () {
@@ -49678,6 +49745,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 return $this;
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests.Config4", {
+        inherits: [Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests.Config3],
+        $kind: "interface"
     });
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests.D3", {
