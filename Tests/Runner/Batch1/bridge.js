@@ -3386,7 +3386,7 @@
 
             var rankInfo = Bridge.Reflection._extractArrayRank(name);
             rank = rankInfo.rank;
-            name = rankInfo.name;            
+            name = rankInfo.name;
 
             if (asm.$types) {
                 var t = asm.$types[name] || null;
@@ -3544,7 +3544,7 @@
                 typeName = typeName.replace(/\[(,*)\]/g, function (match, g1) {
                     return "<" + (g1.length + 1) + ">"
                 });
-            }            
+            }
 
             var next = function () {
                 for (; ;) {
@@ -3563,7 +3563,7 @@
                     }
 
                     return m;
-                }                
+                }
             };
 
             re = re || /[[,\]]/g;
@@ -3662,7 +3662,7 @@
                     }
                 }
             }
-            
+
             t = targs.length ? t.apply(null, targs) : t;
 
             if (t && t.$staticInit) {
