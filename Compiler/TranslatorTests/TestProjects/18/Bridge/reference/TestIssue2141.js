@@ -35,7 +35,7 @@
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue2141.Config3; };
                 (function (){
                     this.Id = null;

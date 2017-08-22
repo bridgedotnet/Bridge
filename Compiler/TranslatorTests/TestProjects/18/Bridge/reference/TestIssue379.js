@@ -2,7 +2,7 @@
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataDefaultValue; };
                 (function (){
                     this.Int1 = 0;
@@ -17,7 +17,7 @@
                 return $this;
             },
             $ctor1: function (mode) {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataDefaultValue; };
                 (function (){
                     this.Int1 = 0;
@@ -39,7 +39,7 @@
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataIgnore; };
                 (function (){
                     this.Int1 = 0;
@@ -54,7 +54,7 @@
                 return $this;
             },
             $ctor1: function (mode) {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataIgnore; };
                 (function (){
                     this.Int1 = 0;
@@ -76,7 +76,7 @@
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataInitializer; };
                 (function (){
                     this.Int1 = 0;
@@ -91,7 +91,7 @@
                 return $this;
             },
             $ctor1: function (mode) {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return TestIssue379.DataInitializer; };
                 (function (){
                     this.Int1 = 0;
