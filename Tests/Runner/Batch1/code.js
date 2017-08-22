@@ -5357,11 +5357,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
                 this.AssertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
                 this.AssertLogMessageObject("#29 - ", null, "");
-                this.AssertLogMessageObject("#30 - ", {  }, "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#30 - ", { }, "{}"); // Improved in #1994
                 this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
                 this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "{}"); // Improved in #1994
                 this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "  \"Name\": \"Frank\",", "  \"Age\": 55,", "  \"Admin\": true", "}"])); // Improved in #1994
-                this.AssertLogMessageObject("#34 - ", {  }.toString(), "[object Object]");
+                this.AssertLogMessageObject("#34 - ", { }.toString(), "[object Object]");
                 this.AssertLogMessageObject("#35 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA().toString(), "I'm ClassA");
                 this.AssertLogMessageObject("#36 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB().toString(), "[object Object]");
                 this.AssertLogMessageObject("#37 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC().toString(), "[object Object]");
@@ -6719,8 +6719,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.Collections.Generic.EqualityComparer$1(System.Object).def.getHashCode2(undefined));
             },
             DefaultComparerCanDetermineEquality: function () {
-                var o1 = {  };
-                var o2 = {  };
+                var o1 = { };
+                var o2 = { };
 
                 Bridge.Test.NUnit.Assert.True(System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(null, null), "null, null");
                 Bridge.Test.NUnit.Assert.False(System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(null, o1), "null, o1");
@@ -21547,7 +21547,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.JsonTests.TestClass4; };
                 (function (){
                     this.i = 0;
@@ -27163,7 +27163,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TestObjectLiteral: function () {
                 var $t;
                 var c = { Temp: "Frank" };
-                var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.GetTmp.call({  }, c);
+                var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.GetTmp.call({ }, c);
                 Bridge.Test.NUnit.Assert.AreEqual("1: Frank", tempFrank, "Check call works");
 
                 var options = { Data: { Name: c.Temp } };
@@ -27230,7 +27230,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
                 (function (){
                     this.field1 = 0;
@@ -27316,7 +27316,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(3, config3.Val1, "config3 Val1");
                 Bridge.Test.NUnit.Assert.AreEqual(13, config3.Val2, "config3 Val2");
 
-                var config4 = {  };
+                var config4 = { };
                 Bridge.Test.NUnit.Assert.NotNull(config4, "Ignore and Plain Modes config4 created");
                 Bridge.Test.NUnit.Assert.Null(config4.Val1, "config4 Val1");
                 Bridge.Test.NUnit.Assert.Null(config4.Val2, "config4 Val2");
@@ -27338,7 +27338,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1; };
                 (function (){
                     this.Val1 = 1;
@@ -27354,7 +27354,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3; };
                 (function (){
                     this.Val1 = 3;
@@ -27370,7 +27370,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5; };
                 (function (){
                     this.Val1 = 5;
@@ -27395,12 +27395,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(2, config2.Val1, "config2 Val1");
                 Bridge.Test.NUnit.Assert.AreEqual(12, config2.Val2, "config2 Val2");
 
-                var config3 = {  };
+                var config3 = { };
                 Bridge.Test.NUnit.Assert.NotNull(config3, "Plain Mode config3 created");
                 Bridge.Test.NUnit.Assert.Null(config3.Val1, "config3 Val1");
                 Bridge.Test.NUnit.Assert.Null(config3.Val2, "config3 Val2");
 
-                var config4 = {  };
+                var config4 = { };
                 Bridge.Test.NUnit.Assert.NotNull(config4, "Plain Mode config4 created");
                 Bridge.Test.NUnit.Assert.Null(config4.Val1, "config4 Val1");
                 Bridge.Test.NUnit.Assert.Null(config4.Val2, "config4 Val2");
@@ -27412,7 +27412,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1; };
                 (function (){
                     this.Val1 = 1;
@@ -27428,7 +27428,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2; };
                 (function (){
                     this.Val1 = 2;
@@ -27443,7 +27443,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests", {
         methods: {
             Test: function () {
-                var config1 = {  };
+                var config1 = { };
                 Bridge.Test.NUnit.Assert.NotNull(config1, "Default Mode config1 created");
                 Bridge.Test.NUnit.Assert.Null(config1.Val1, "config1 Val1");
                 Bridge.Test.NUnit.Assert.Null(config1.Val2, "config1 Val2");
@@ -27458,7 +27458,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(3, config3.Val1, "config3 Val1");
                 Bridge.Test.NUnit.Assert.Null(config3.Val2, "config3 Val2");
 
-                var config4 = {  };
+                var config4 = { };
                 Bridge.Test.NUnit.Assert.NotNull(config4, "Ignore Mode config4 created");
                 Bridge.Test.NUnit.Assert.Null(config4.Val1, "config4 Val1");
                 Bridge.Test.NUnit.Assert.Null(config4.Val2, "config4 Val2");
@@ -30570,9 +30570,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         methods: {
             TypeIsWorksForReferenceTypes: function () {
-                Bridge.Test.NUnit.Assert.False(Bridge.is({  }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1), "#1");
+                Bridge.Test.NUnit.Assert.False(Bridge.is({ }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1), "#1");
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1()), "#2");
-                Bridge.Test.NUnit.Assert.False(Bridge.is({  }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1), "#3");
+                Bridge.Test.NUnit.Assert.False(Bridge.is({ }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1), "#3");
                 Bridge.Test.NUnit.Assert.False(Bridge.is(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1), "#4");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1), "#5");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1), "#6");
@@ -30710,9 +30710,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(Bridge.hasValue(null), "#138");
             },
             TypeAsWorksForReferenceTypes: function () {
-                Bridge.Test.NUnit.Assert.False((Bridge.as({  }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1)) != null, "#1");
+                Bridge.Test.NUnit.Assert.False((Bridge.as({ }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1)) != null, "#1");
                 Bridge.Test.NUnit.Assert.True((new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1()) != null, "#2");
-                Bridge.Test.NUnit.Assert.False((Bridge.as({  }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1)) != null, "#3");
+                Bridge.Test.NUnit.Assert.False((Bridge.as({ }, Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1)) != null, "#3");
                 Bridge.Test.NUnit.Assert.False((Bridge.as(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1)) != null, "#4");
                 Bridge.Test.NUnit.Assert.True((Bridge.as(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1)) != null, "#5");
                 Bridge.Test.NUnit.Assert.True((Bridge.as(new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1(), Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1)) != null, "#6");
@@ -30850,9 +30850,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False((null) != null, "#138");
             },
             CastWorksForReferenceTypes: function () {
-                Bridge.Test.NUnit.Assert.False(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1, {  }), "#1");
+                Bridge.Test.NUnit.Assert.False(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1, { }), "#1");
                 Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(System.Object, new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1()), "#2");
-                Bridge.Test.NUnit.Assert.False(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1, {  }), "#3");
+                Bridge.Test.NUnit.Assert.False(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1, { }), "#3");
                 Bridge.Test.NUnit.Assert.False(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1, new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1()), "#4");
                 Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1, new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1()), "#5");
                 Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.CanConvert(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1, new Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D1()), "#6");
@@ -30997,7 +30997,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
                 Bridge.Test.NUnit.Assert.AreEqual("System.String", Bridge.Reflection.getTypeFullName(System.String));
                 Bridge.Test.NUnit.Assert.AreEqual("Function", Bridge.Reflection.getTypeFullName(Function));
-                Bridge.Test.NUnit.Assert.AreEqual("System.Object", Bridge.Reflection.getTypeFullName(Bridge.getType({  })));
+                Bridge.Test.NUnit.Assert.AreEqual("System.Object", Bridge.Reflection.getTypeFullName(Bridge.getType({ })));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Int32[]", Bridge.Reflection.getTypeFullName(Bridge.getType(System.Array.init([1, 2], System.Int32))));
             },
             GetTypeOnNullInstanceThrowsException: function () {
@@ -31747,9 +31747,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.Int32)));
             },
             IsInstanceOfTypeWorksForReferenceTypes: function () {
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({  }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#1");
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({ }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#1");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1(), System.Object), "#2");
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({  }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#3");
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({ }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#3");
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1), "#4");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#5");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#6");
@@ -31772,9 +31772,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Reflection.TypeSystemTests.E1, System.Enum.toStringFn(Bridge.ClientTest.Reflection.TypeSystemTests.E1)), System.Object), "#23");
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType(null, System.Object), "#24");
 
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({  }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#25");
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({ }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#25");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1(), System.Object), "#26");
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({  }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#27");
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType({ }, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#27");
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1), "#28");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#29");
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D1(), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#30");
@@ -32521,7 +32521,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         methods: {
             GetHashCodeWoksForObject_SPI_1570: function () {
                 // #1570
-                var o1 = {  }, o2 = {  };
+                var o1 = { }, o2 = { };
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(o1), Bridge.getHashCode(o1));
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(o2), Bridge.getHashCode(o2));
             }
@@ -32578,7 +32578,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             DeleteWorksForJsClass_SPI_1571: function () {
                 // #1571
-                var c = {  };
+                var c = { };
                 c.i = 42;
                 Bridge.Test.NUnit.Assert.AreEqual(42, c.i);
 
@@ -32587,7 +32587,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.Null(c.i);
                 Bridge.Test.NUnit.Assert.AreEqual("undefined", (typeof c.i));
 
-                var c2 = {  };
+                var c2 = { };
                 c2.i = 43;
                 Bridge.Test.NUnit.Assert.AreEqual(43, c2.i);
                 var f = $asm.$.Bridge.ClientTest.ScriptTests.f1;
@@ -36497,18 +36497,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TypeIsWorksForInt32: function () {
                 Bridge.Test.NUnit.Assert.False(Bridge.is(null, System.Int32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(1.5, System.Double, System.Double.format, System.Double.getHashCode), System.Int32));
-                Bridge.Test.NUnit.Assert.False(Bridge.is({  }, System.Int32));
+                Bridge.Test.NUnit.Assert.False(Bridge.is({ }, System.Int32));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(1, System.Int32), System.Int32));
             },
             TypeAsWorksForInt32: function () {
                 Bridge.Test.NUnit.Assert.False((null) != null);
-                Bridge.Test.NUnit.Assert.False((Bridge.as({  }, System.Int32, true)) != null);
+                Bridge.Test.NUnit.Assert.False((Bridge.as({ }, System.Int32, true)) != null);
                 Bridge.Test.NUnit.Assert.False((Bridge.as(Bridge.box(1.5, System.Double, System.Double.format, System.Double.getHashCode), System.Int32, true)) != null);
                 Bridge.Test.NUnit.Assert.True((Bridge.as(1, System.Int32, true)) != null);
             },
             UnboxingWorksForInt32: function () {
                 var _null = null;
-                var o = {  };
+                var o = { };
                 var d = Bridge.box(1.5, System.Double, System.Double.format, System.Double.getHashCode);
                 var i = Bridge.box(1, System.Int32);
                 Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.cast(Bridge.unbox(_null), System.Int32, true));
@@ -37891,28 +37891,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.SimpleTypes.ObjectTests", {
         methods: {
             TypePropertiesAreCorrect: function () {
-                Bridge.Test.NUnit.Assert.True(Bridge.hasValue({  }));
+                Bridge.Test.NUnit.Assert.True(Bridge.hasValue({ }));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Object", Bridge.Reflection.getTypeFullName(System.Object));
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isClass(System.Object));
             },
             CanGetHashCodeForObject: function () {
-                var o = {  };
+                var o = { };
                 var c = Bridge.getHashCode(o);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(c, System.Int32), System.Int32));
             },
             RepeatedCallsToGetHashCodeReturnsSameValue: function () {
-                var o = {  };
+                var o = { };
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(o), Bridge.getHashCode(o));
             },
             ObjectIsEqualToItself: function () {
-                var o = {  };
+                var o = { };
                 Bridge.Test.NUnit.Assert.True(Bridge.equals(o, o));
             },
             ObjectIsNotEqualToOtherObject: function () {
-                Bridge.Test.NUnit.Assert.False(Bridge.equals({  }, {  }));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals({ }, { }));
             },
             StaticEqualsWorks: function () {
-                var o1 = {  }, o2 = {  };
+                var o1 = { }, o2 = { };
                 Bridge.Test.NUnit.Assert.True(Bridge.equals(null, null));
                 Bridge.Test.NUnit.Assert.False(Bridge.equals(null, o1));
                 Bridge.Test.NUnit.Assert.False(Bridge.equals(o1, null));
@@ -37920,7 +37920,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(Bridge.equals(o1, o2));
             },
             ReferenceEqualsWorks: function () {
-                var o1 = {  }, o2 = {  }, n = null;
+                var o1 = { }, o2 = { }, n = null;
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(n, n), "n, n");
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(n, undefined), "n, Script.Undefined");
                 Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(o1, o2), "o1, o2");
@@ -39142,7 +39142,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var v1 = new System.Version.$ctor3(100, 200, 300, 26214900);
                     var v2 = new System.Version.$ctor3(100, 200, 300, 26214900);
                     var v3 = new System.Version.$ctor3(101, 200, 300, 26214900);
-                    var o = {  };
+                    var o = { };
                     var o2 = v2;
 
                     Bridge.Test.NUnit.Assert.True(v1.equalsT(v2), "v1.Equals(v2)");
@@ -40443,7 +40443,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 System.Console.WriteLine(o);
                 this.AssertConsoleMessage("#12", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["4"]));
 
-                o = {  };
+                o = { };
                 System.Console.WriteLine(o);
                 this.AssertConsoleMessage("#13", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["{}"])); // Non .Net behavior, should be System.Object
 
@@ -40889,7 +40889,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 System.Console.Write(o);
                 this.AssertConsoleMessage("#12", "4");
 
-                o = {  };
+                o = { };
                 System.Console.Write(o);
                 this.AssertConsoleMessage("#13", "{}"); // Non .Net behavior, should be System.Object
 
@@ -43592,7 +43592,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             RegisterWithArgumentOnACancelledSourceInvokesTheCallback: function () {
                 var cts = new System.Threading.CancellationTokenSource();
-                var context = {  };
+                var context = { };
                 cts.cancel();
                 var state = 0;
                 cts.token.register(function (c) {
@@ -43618,7 +43618,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             RegisterOnACancelledSourceWithContextRethrowsAThrownException: function () {
                 var ex1 = new System.Exception();
-                var context = {  };
+                var context = { };
                 var cts = new System.Threading.CancellationTokenSource();
                 cts.cancel();
                 try {
@@ -43635,7 +43635,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             RegisterOverloadsWithUseSynchronizationContextWork: function () {
                 var cts = new System.Threading.CancellationTokenSource();
-                var context = {  };
+                var context = { };
                 cts.cancel();
                 var numCalled = 0;
                 cts.token.register(function (c) {
@@ -43674,7 +43674,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var ct = new System.Threading.CancellationToken(true);
 
                 var state = 0;
-                var context = {  };
+                var context = { };
                 ct.register(function () {
                     state = 1;
                 });
@@ -45491,7 +45491,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var completeAsync = Bridge.Test.NUnit.Assert.Async();
 
                 var taskRun = false, continuationRun = false;
-                var state = {  };
+                var state = { };
 
                 var task = new System.Threading.Tasks.Task(function (s) {
                     Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(state, s), "The state should be correct.");
@@ -45596,7 +45596,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var completeAsync = Bridge.Test.NUnit.Assert.Async();
 
                 var taskRun = false, continuationRun = false;
-                var state = {  };
+                var state = { };
 
                 var task = new (System.Threading.Tasks.Task$1(System.Int32))(function (s) {
                     Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(state, s), "The state should be correct.");
@@ -46535,7 +46535,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([false], System.Boolean);
                 this.VerifyFromObject(function (value) { return System.Convert.toBoolean(value); }, function (value, provider) { return System.Convert.toBoolean(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toBoolean(value); }, function (value, provider) { return System.Convert.toBoolean(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -46713,7 +46713,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.Byte);
                 this.VerifyFromObject(function (value) { return System.Convert.toByte(value); }, function (value, provider) { return System.Convert.toByte(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toByte(value); }, function (value, provider) { return System.Convert.toByte(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -47015,7 +47015,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.Char);
                 this.Verify(System.Object, function (value) { return System.Convert.toChar(value, null, 1); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyThrows(System.InvalidCastException, System.Object, function (value) { return System.Convert.toChar(value, null, 1); }, invalidValues);
             },
             FromSByte: function () {
@@ -47241,13 +47241,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests, {
         f1: function () {
-            System.Convert.toDateTime({  });
+            System.Convert.toDateTime({ });
         },
         f2: function (err) {
             return Bridge.is(err, System.InvalidCastException);
         },
         f3: function () {
-            System.Convert.toDateTime({  }, Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests.s_dateTimeFormatInfo);
+            System.Convert.toDateTime({ }, Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests.s_dateTimeFormatInfo);
         },
         f4: function () {
             System.Convert.toDateTime(Bridge.box(false, System.Boolean, System.Boolean.toString));
@@ -47379,7 +47379,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([System.Decimal(0)], System.Decimal);
                 this.VerifyFromObject(function (value) { return System.Convert.toDecimal(value); }, function (value, provider) { return System.Convert.toDecimal(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toDecimal(value); }, function (value, provider) { return System.Convert.toDecimal(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -47553,7 +47553,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0.0], System.Double);
                 this.VerifyFromObject(function (value) { return System.Convert.toDouble(value); }, function (value, provider) { return System.Convert.toDouble(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toDouble(value); }, function (value, provider) { return System.Convert.toDouble(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -47720,7 +47720,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.Int16);
                 this.VerifyFromObject(function (value) { return System.Convert.toInt16(value); }, function (value, provider) { return System.Convert.toInt16(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toInt16(value); }, function (value, provider) { return System.Convert.toInt16(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -47993,7 +47993,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.Int32);
                 this.VerifyFromObject(function (value) { return System.Convert.toInt32(value); }, function (value, provider) { return System.Convert.toInt32(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }], System.Object);
+                var invalidValues = System.Array.init([{ }], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toInt32(value); }, function (value, provider) { return System.Convert.toInt32(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -48260,7 +48260,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([System.Int64(0)], System.Int64);
                 this.VerifyFromObject(function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -48548,7 +48548,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.SByte);
                 this.VerifyFromObject(function (value) { return System.Convert.toSByte(value); }, function (value, provider) { return System.Convert.toSByte(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toSByte(value); }, function (value, provider) { return System.Convert.toSByte(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -48816,7 +48816,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0.0], System.Single);
                 this.VerifyFromObject(function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -48971,7 +48971,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.UInt16);
                 this.VerifyFromObject(function (value) { return System.Convert.toUInt16(value); }, function (value, provider) { return System.Convert.toUInt16(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toUInt16(value); }, function (value, provider) { return System.Convert.toUInt16(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -49227,7 +49227,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([0], System.UInt32);
                 this.VerifyFromObject(function (value) { return System.Convert.toUInt32(value); }, function (value, provider) { return System.Convert.toUInt32(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toUInt32(value); }, function (value, provider) { return System.Convert.toUInt32(value, provider); }, invalidValues);
             },
             FromSByte: function () {
@@ -49491,7 +49491,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var expectedValues = System.Array.init([System.UInt64(0)], System.UInt64);
                 this.VerifyFromObject(function (value) { return System.Convert.toUInt64(value); }, function (value, provider) { return System.Convert.toUInt64(value, provider); }, testValues, expectedValues);
 
-                var invalidValues = System.Array.init([{  }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
+                var invalidValues = System.Array.init([{ }, Bridge.box(System.DateTime.getNow(), System.DateTime, System.DateTime.format)], System.Object);
                 this.VerifyFromObjectThrows(System.InvalidCastException, function (value) { return System.Convert.toUInt64(value); }, function (value, provider) { return System.Convert.toUInt64(value, provider); }, invalidValues);
             },
             FromSByte: function () {

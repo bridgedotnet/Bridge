@@ -104,9 +104,9 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         statics: {
             methods: {
                 TestStrictNullChecksOptionForNulls: function () {
-                    var temp = {  };
+                    var temp = { };
                     var temp1 = temp;
-                    var temp2 = {  };
+                    var temp2 = { };
                     var l = System.Int64(5);
                     var ol = System.Int64(5);
                     var oi = Bridge.box(5, System.Int32);
