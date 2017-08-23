@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -33246,6 +33244,27 @@ Bridge.$N1391Result =                     r;
         f1: function (_o46) {
             _o46.add("123", "Test");
             return _o46;
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3063", {
+        statics: {
+            methods: {
+                TestAssigmentWithIndexer: function () {
+                    var $t;
+                    var data = System.Array.init([
+                        10, 
+                        20, 
+                        30
+                    ], System.Int32);
+                    var i = 0;
+                    data[System.Array.index(($t = Bridge.identity(i, (i = (i + 1) | 0))), data)] = (data[System.Array.index($t, data)] + 1) | 0;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(11, data[System.Array.index(0, data)]);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, data[System.Array.index(1, data)]);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, i);
+                }
+            }
         }
     });
 

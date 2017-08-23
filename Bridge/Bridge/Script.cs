@@ -310,6 +310,10 @@ namespace Bridge
         [Unbox(false)]
         public static extern T FromTemp<T>(string name);
 
+        [Template("{name:gettmp}")]
+        [Unbox(false)]
+        public static extern T FromTemp<T>(string name, T t);
+
         [Template("{action:body}")]
         public static extern object FromLambda(Action action);
 
