@@ -5,6 +5,7 @@ namespace System.Text
 {
     [Reflectable]
     [FileName("system\\text\\encoding.js")]
+    [Convention]
     public class ASCIIEncoding : Encoding
     {
         public override int CodePage => 20127;
