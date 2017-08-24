@@ -1056,7 +1056,15 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write(this.Emitter.GetEntityName(member.Member));
+                        var memberName = this.Emitter.GetEntityName(member.Member);
+                        if (isRefArg)
+                        {
+                            this.WriteScript(memberName);
+                        }
+                        else
+                        {
+                            this.WriteIdentifier(memberName);
+                        }
                     }
                 }
 

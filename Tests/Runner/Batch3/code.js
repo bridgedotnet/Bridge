@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25012,6 +25010,42 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", guid.toString()), JSON.stringify(obj));
                 }
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081", {
+        statics: {
+            methods: {
+                TestNonStandardName: function () {
+                    var $t;
+                    var usualClass = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081.UsualClass(), $t["UsualClass Field"] = 3, $t["UsualClass Prop"] = 4, $t);
+                    Bridge.Test.NUnit.Assert.AreEqual(3, usualClass["UsualClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, usualClass["UsualClass Prop"]);
+
+                    usualClass["UsualClass Field"] = 1;
+                    usualClass["UsualClass Prop"] = 2;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, usualClass["UsualClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, usualClass["UsualClass Prop"]);
+
+                    var objectLiteral = { "ObjectLiteralClass Field": 3, "ObjectLiteralClass Prop": 4 };
+                    Bridge.Test.NUnit.Assert.AreEqual(3, objectLiteral["ObjectLiteralClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, objectLiteral["ObjectLiteralClass Prop"]);
+
+                    objectLiteral["ObjectLiteralClass Field"] = 1;
+                    objectLiteral["ObjectLiteralClass Prop"] = 2;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, objectLiteral["ObjectLiteralClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, objectLiteral["ObjectLiteralClass Prop"]);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081.UsualClass", {
+        fields: {
+            "UsualClass Field": 0
+        },
+        props: {
+            "UsualClass Prop": 0
         }
     });
 
