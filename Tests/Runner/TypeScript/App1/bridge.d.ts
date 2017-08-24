@@ -1102,7 +1102,7 @@ module Text {
         replace(oldValue: string, newValue: string, startIndex?: number, count?: number): StringBuilder;
     }
 
-	export interface UTF32Encoding extends System.Text.Encoding {
+    export interface UTF32Encoding extends System.Text.Encoding {
         CodePage: number;
         EncodingName: string;
         ToCodePoints(str: string): number[];
