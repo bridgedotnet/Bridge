@@ -1094,7 +1094,7 @@ module Text {
         insert(index: number, value: string, count?: number): StringBuilder;
         replace(oldValue: string, newValue: string, startIndex?: number, count?: number): StringBuilder;
     }
-	
+
 	export interface UTF32Encoding extends System.Text.Encoding {
         CodePage: number;
         EncodingName: string;
