@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25010,6 +25008,44 @@ Bridge.$N1391Result =                     r;
 
                     var obj = { guid: guid };
                     Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", guid.toString()), JSON.stringify(obj));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086", {
+        statics: {
+            fields: {
+                sb: null
+            },
+            methods: {
+                Test: function (target) {
+                    target.Property = "SomeString";
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("Value=", target.Property));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append("Length=" + target.Property.length);
+                },
+                TestAccessorsOverride: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb = new System.Text.StringBuilder();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.Test(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A());
+                    Bridge.Test.NUnit.Assert.AreEqual("A Set! SomeStringValue=A Get!Length=6", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.toString());
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb = new System.Text.StringBuilder();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.Test(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.B());
+                    Bridge.Test.NUnit.Assert.AreEqual("B Set! SomeStringValue=A Get!Length=6", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A", {
+        props: {
+            Property: {
+                get: function () {
+                    return "A Get!";
+                },
+                set: function (value) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("A Set! ", value));
                 }
             }
         }
@@ -35059,6 +35095,17 @@ Bridge.$N1391Result =                     r;
         methods: {
             toString: function () {
                 return this.Name;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.B", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A],
+        props: {
+            Property: {
+                set: function (value) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("B Set! ", value));
+                }
             }
         }
     });
