@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25010,6 +25008,29 @@ Bridge.$N1391Result =                     r;
 
                     var obj = { guid: guid };
                     Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", guid.toString()), JSON.stringify(obj));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088", {
+        statics: {
+            methods: {
+                TestBaseProperty: function () {
+                    for (var i = 0; i < 2; i = (i + 1) | 0) {
+                        var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.A();
+                        Bridge.Test.NUnit.Assert.AreEqual(2, a.x);
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.Base", {
+        props: {
+            x: {
+                get: function () {
+                    return 1;
                 }
             }
         }
@@ -35059,6 +35080,17 @@ Bridge.$N1391Result =                     r;
         methods: {
             toString: function () {
                 return this.Name;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.A", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.Base],
+        props: {
+            x: {
+                get: function () {
+                    return ((Bridge.ensureBaseProperty(this, "x").$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3088$Base$x + 1) | 0);
+                }
             }
         }
     });
