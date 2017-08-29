@@ -31,6 +31,14 @@ namespace Bridge.Translator
             this.compilation = this.CreateCompilation();
         }
 
+        public SharpSixRewriter(SharpSixRewriter rewriter)
+        {
+            this.translator = rewriter.translator;
+            this.logger = rewriter.logger;
+            this.compilation = rewriter.compilation;
+        }
+
+
         public string Rewrite(int index)
         {
             var syntaxTree = this.compilation.SyntaxTrees[index];
