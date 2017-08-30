@@ -1184,6 +1184,8 @@
                 return b.equals(a);
             } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
                 return Bridge.fn.equals.call(a, b);
+            } else if (a.kind && a.ticks && b.kind && b.ticks) {
+                return a.ticks === b.ticks;
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
