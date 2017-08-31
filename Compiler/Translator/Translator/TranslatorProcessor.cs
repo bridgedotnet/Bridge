@@ -90,8 +90,6 @@ namespace Bridge.Translator
             var projectPath = Path.GetDirectoryName(translator.Location);
             logger.Info("projectPath is " + projectPath);
 
-            //System.Diagnostics.Debugger.Launch();
-
             if (bridgeOptions.ExtractCore)
             {
                 translator.ExtractCore(outputPath, projectPath);

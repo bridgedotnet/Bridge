@@ -211,6 +211,18 @@ namespace Bridge.Translator
                         {
                             foreach (var part in partSource)
                             {
+                                //if (part.Key.Assembly != null)
+                                //{
+                                //    this.Log.Trace("Resource part " + part.Key.ResourceName + " is not embedded into resources as it is from another assembly " + part.Key.Assembly);
+                                //    continue;
+                                //}
+
+                                if (part.Value == null)
+                                {
+                                    this.Log.Trace("Resource part " + part.Key.ResourceName + " from " + part.Key.Assembly + " is not embedded into resources as it is empty");
+                                    continue;
+                                }
+
                                 var partResource = new BridgeResourceInfo
                                 {
                                     Name = null,

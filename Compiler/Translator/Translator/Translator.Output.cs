@@ -229,6 +229,8 @@ namespace Bridge.Translator
 
         protected virtual void AddReferencedOutput(string outputPath, AssemblyDefinition assembly, BridgeResourceInfo resource, string fileName, Func<string, string> preHandler = null)
         {
+            this.Log.Trace("Adding referenced output " + resource.Name);
+
             var currentAssembly = GetAssemblyNameForResource(assembly);
 
             var combinedResource = (resource.Parts != null && resource.Parts.Length > 0);
@@ -237,6 +239,8 @@ namespace Bridge.Translator
 
             if (combinedResource)
             {
+                this.Log.Trace("The resource contains parts");
+
                 var contentBuffer = new StringBuilder();
                 var needNewLine = false;
                 var noConsole = this.AssemblyInfo.Console.Enabled != true;
@@ -244,25 +248,36 @@ namespace Bridge.Translator
 
                 foreach (var part in resource.Parts)
                 {
+                    this.Log.Trace("Handling part " + part.Assembly + " " + part.ResourceName);
+
                     bool needPart = true;
+
+                    System.Reflection.AssemblyName partAssemblyName = null;
 
                     if (part.Assembly != null)
                     {
-                        var assemblyName = GetAssemblyNameFromResource(part.Assembly);
+                        partAssemblyName = GetAssemblyNameFromResource(part.Assembly);
 
                         if (noConsole
-                            && assemblyName.Name == Translator.Bridge_ASSEMBLY
+                            && partAssemblyName.Name == Translator.Bridge_ASSEMBLY
                             && (string.Compare(part.Name, BridgeConsoleName, true) == 0
                                 || string.Compare(part.Name, fileHelper.GetMinifiedJSFileName(BridgeConsoleName), true) == 0)
                             )
                         {
                             // Skip Bridge console resource
                             needPart = false;
+
+                            this.Log.Trace("Skipping this part as it is Bridge Console and the Console option disabled");
                         }
                         else
                         {
                             var partContentName = GetExtractedResourceName(part.Assembly, part.Name);
                             needPart = ExtractedScripts.Add(partContentName);
+
+                            if (!needPart)
+                            {
+                                this.Log.Trace("Skipping this part as it is already added");
+                            }
                         }
                     }
 
@@ -273,7 +288,108 @@ namespace Bridge.Translator
                             NewLine(contentBuffer);
                         }
 
-                        contentBuffer.Append(ReadEmbeddedResource(assembly, part.ResourceName, true, preHandler).Item2);
+                        string partContent = null;
+                        var resourcePartName = part.ResourceName;
+
+                        if (partAssemblyName == null)
+                        {
+                            this.Log.Trace("Using assembly " + assembly.FullName + " to search resource part " + resourcePartName);
+
+                            partContent = ReadEmbeddedResource(assembly, resourcePartName, true, preHandler).Item2;
+                        }
+                        else
+                        {
+                            var partAssembly = this.References
+                                .Where(x => x.Name.Name == partAssemblyName.Name)
+                                .OrderByDescending(x => x.Name.Version)
+                                .FirstOrDefault();
+
+                            if (partAssembly == null)
+                            {
+                                this.Log.Warn("Did not find assembly for resource part " + resourcePartName + " by assembly name " + partAssemblyName.Name + ". Skipping this item!");
+                                continue;
+                            }
+
+                            if (partAssembly.Name.Version != partAssemblyName.Version)
+                            {
+                                this.Log.Info("Found different assembly version (higher) " + partAssembly.FullName + " for resource part" + resourcePartName + " from " + assembly.FullName);
+                            }
+                            else
+                            {
+                                this.Log.Trace("Found exact assembly version " + partAssembly.FullName + " for resource part" + resourcePartName);
+                            }
+
+                            var resourcePartFound = false;
+
+                            try
+                            {
+                                partContent = ReadEmbeddedResource(partAssembly, resourcePartName, true, preHandler).Item2;
+                                resourcePartFound = true;
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                this.Log.Trace("Did not find resource part " + resourcePartName + " in " + partAssembly.FullName + ". Will try to find it by short name " + part.Name);
+                            }
+
+                            if (!resourcePartFound)
+                            {
+                                try
+                                {
+                                    partContent = ReadEmbeddedResource(partAssembly, part.Name, true, preHandler).Item2;
+                                    resourcePartFound = true;
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    this.Log.Trace("Did not find resource part " + part.Name + " in " + partAssembly.FullName);
+                                }
+
+                                if (!resourcePartFound)
+                                {
+                                    if (partAssembly.Name.Version != partAssemblyName.Version)
+                                    {
+                                        var partAssemblyExactVersion = this.References
+                                            .Where(x => x.FullName == partAssemblyName.FullName)
+                                            .FirstOrDefault();
+
+                                        if (partAssemblyExactVersion != null)
+                                        {
+                                            this.Log.Trace("Trying to find it in the part's assembly by long name " + part.Name);
+
+                                            try
+                                            {
+                                                partContent = ReadEmbeddedResource(partAssemblyExactVersion, resourcePartName, true, preHandler).Item2;
+                                                resourcePartFound = true;
+                                            }
+                                            catch (InvalidOperationException)
+                                            {
+                                                this.Log.Trace("Did not find resource part " + resourcePartName + " in " + partAssemblyExactVersion.FullName + ". Will try to find it by short name " + part.Name);
+                                            }
+
+                                            if (!resourcePartFound)
+                                            {
+                                                try
+                                                {
+                                                    partContent = ReadEmbeddedResource(partAssemblyExactVersion, part.Name, true, preHandler).Item2;
+                                                    resourcePartFound = true;
+                                                }
+                                                catch (InvalidOperationException)
+                                                {
+                                                    this.Log.Trace("Did not find resource part " + part.Name + " in " + partAssemblyExactVersion.FullName + ". Will try to find it by the resource's assembly by long name " + resourcePartName);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (!resourcePartFound)
+                                    {
+                                        partContent = ReadEmbeddedResource(assembly, resourcePartName, true, preHandler).Item2;
+                                        resourcePartFound = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        contentBuffer.Append(partContent);
 
                         needNewLine = true;
                     }
