@@ -28,6 +28,16 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public Dictionary<BridgeResourceInfoPart, string> CombinedResourcePartsNonMinified
+        {
+            get; set;
+        }
+
+        public Dictionary<BridgeResourceInfoPart, string> CombinedResourcePartsMinified
+        {
+            get; set;
+        }
+
         public TranslatorOutputItem CombinedLocales
         {
             get; set;
@@ -126,6 +136,11 @@ namespace Bridge.Contract
 
     public class TranslatorOutputItem
     {
+        public string Assembly
+        {
+            get; set;
+        }
+
         public string Name
         {
             get; set;
@@ -161,7 +176,6 @@ namespace Bridge.Contract
                 fullPath = value;
             }
         }
-
 
         public TranslatorOutputType OutputType
         {

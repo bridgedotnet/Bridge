@@ -21,8 +21,10 @@ namespace Bridge.Translator
         public const string Bridge_ASSEMBLY_DOT = Bridge_ASSEMBLY + ".";
         public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
         public const string BridgeResourcesJsonFormatList = "Bridge.Resources.json";
+        public const string BridgeResourcesCombinedPrefix = "Bridge.Resources.Parts.";
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
         public const string DefaultLocalesOutputName = "Bridge.Locales.js";
+        public const string BridgeConsoleName = "bridge.console.js";
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
         public const string SystemAssemblyName = "mscorlib";

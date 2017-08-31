@@ -91,6 +91,7 @@
     <Compile Include="Config\SourceMapConfig.cs" />
     <Compile Include="Config\VersionContext.cs" />
     <Compile Include="Constants\Messages.cs" />
+    <Compile Include="BridgeResourceInfo.cs" />
     <Compile Include="TranslatorOutput.cs" />
     <Compile Include="UnicodeNewline.cs" />
     <Compile Include="Constants\Files.cs" />
