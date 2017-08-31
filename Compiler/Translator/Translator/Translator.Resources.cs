@@ -144,7 +144,7 @@ namespace Bridge.Translator
 
                     this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
 
-                    var isCombined = outputItem.OutputKind.HasFlag(TranslatorOutputKind.Combined);
+                    var isCombined = outputItem.OutputKind.HasFlag(TranslatorOutputKind.Combined) && this.Outputs.Combined != null;
                     var isMinified = outputItem.OutputKind.HasFlag(TranslatorOutputKind.Minified);
 
                     if (isCombined)
