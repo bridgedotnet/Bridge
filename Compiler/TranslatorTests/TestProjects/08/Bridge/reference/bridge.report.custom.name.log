@@ -1,4 +1,8 @@
 Resources:
-    allCombined.js       24.127 KB
-    allCombined.min.js   13.899 KB
-    allCombined.d.ts      0.270 KB
+    allCombined.js                                 24.127 KB
+    Bridge.Resources.Parts.bridge.console.js       22.303 KB
+    Bridge.Resources.Parts.allCombined.js           0.636 KB
+    allCombined.min.js                             13.899 KB
+    Bridge.Resources.Parts.bridge.console.min.js   13.259 KB
+    Bridge.Resources.Parts.allCombined.min.js       0.398 KB
+    allCombined.d.ts                                0.270 KB
