@@ -393,6 +393,15 @@ namespace Bridge.Translator
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.Metadata);
         }
 
+        public bool CheckIfRequiresSourceMap(BridgeResourceInfoPart resourcePart)
+        {
+            var fileHelper = new FileHelper();
+
+            return resourcePart != null
+                && resourcePart.Assembly == null // i.e. this assembly output
+                && fileHelper.IsJS(resourcePart.Name);
+        }
+
         public TranslatorOutputItem FindTranslatorOutputItem(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))

@@ -233,9 +233,17 @@ namespace Bridge.Translator
 
                                 var partContent = new byte[0];
 
-                                if (part.Value != null)
+                                if (!string.IsNullOrEmpty(part.Value))
                                 {
-                                    partContent = OutputEncoding.GetBytes(part.Value);
+                                    if (CheckIfRequiresSourceMap(part.Key))
+                                    {
+                                        var partSourceMap = this.GenerateSourceMap(part.Key.Name, part.Value);
+                                        partContent = OutputEncoding.GetBytes(partSourceMap);
+                                    }
+                                    else
+                                    {
+                                        partContent = OutputEncoding.GetBytes(part.Value);
+                                    }
                                 }
 
                                 yield return Tuple.Create(partResource, partContent);
