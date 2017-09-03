@@ -7,6 +7,7 @@ namespace System.Text
     /// </summary>
     [Reflectable]
     [FileName("system\\text\\encoding.js")]
+    [Convention]
     public abstract class Encoding : IBridgeClass
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace System.Text
 {
     [Reflectable]
     [FileName("system\\text\\encoding.js")]
+    [Convention]
     public class UTF32Encoding : Encoding
     {
         private bool bigEndian;

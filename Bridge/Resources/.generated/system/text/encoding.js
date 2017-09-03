@@ -24,10 +24,10 @@
                 }
             },
             methods: {
-                convert: function (srcEncoding, dstEncoding, bytes) {
-                    return System.Text.Encoding.convert$1(srcEncoding, dstEncoding, bytes, 0, bytes.length);
+                Convert: function (srcEncoding, dstEncoding, bytes) {
+                    return System.Text.Encoding.Convert$1(srcEncoding, dstEncoding, bytes, 0, bytes.length);
                 },
-                convert$1: function (srcEncoding, dstEncoding, bytes, index, count) {
+                Convert$1: function (srcEncoding, dstEncoding, bytes, index, count) {
                     if (srcEncoding == null || dstEncoding == null) {
                         throw new System.ArgumentNullException(srcEncoding == null ? "srcEncoding" : "dstEncoding");
                     }
@@ -36,9 +36,9 @@
                         throw new System.ArgumentNullException("bytes");
                     }
 
-                    return dstEncoding.getBytes(srcEncoding.getChars$1(bytes, index, count));
+                    return dstEncoding.GetBytes(srcEncoding.GetChars$1(bytes, index, count));
                 },
-                getEncoding: function (codepage) {
+                GetEncoding: function (codepage) {
                     switch (codepage) {
                         case 1200: 
                             return System.Text.Encoding.Unicode;
@@ -55,7 +55,7 @@
                     }
                     throw new System.NotSupportedException();
                 },
-                getEncoding$1: function (codepage) {
+                GetEncoding$1: function (codepage) {
                     switch (codepage) {
                         case "utf-16": 
                             return System.Text.Encoding.Unicode;
@@ -72,7 +72,7 @@
                     }
                     throw new System.NotSupportedException();
                 },
-                getEncodings: function () {
+                GetEncodings: function () {
                     if (System.Text.Encoding._encodings != null) {
                         return System.Text.Encoding._encodings;
                     }
@@ -110,74 +110,74 @@
             }
         },
         methods: {
-            encode$1: function (chars, index, count) {
+            Encode$1: function (chars, index, count) {
                 var writtenCount = { };
-                return this.encode$3(System.String.fromCharArray(chars, index, count), null, 0, writtenCount);
+                return this.Encode$3(System.String.fromCharArray(chars, index, count), null, 0, writtenCount);
             },
-            encode$5: function (s, index, count, outputBytes, outputIndex) {
+            Encode$5: function (s, index, count, outputBytes, outputIndex) {
                 var writtenBytes = { };
-                this.encode$3(s.substr(index, count), outputBytes, outputIndex, writtenBytes);
+                this.Encode$3(s.substr(index, count), outputBytes, outputIndex, writtenBytes);
                 return writtenBytes.v;
             },
-            encode$4: function (chars, index, count, outputBytes, outputIndex) {
+            Encode$4: function (chars, index, count, outputBytes, outputIndex) {
                 var writtenBytes = { };
-                this.encode$3(System.String.fromCharArray(chars, index, count), outputBytes, outputIndex, writtenBytes);
+                this.Encode$3(System.String.fromCharArray(chars, index, count), outputBytes, outputIndex, writtenBytes);
                 return writtenBytes.v;
             },
-            encode: function (chars) {
+            Encode: function (chars) {
                 var count = { };
-                return this.encode$3(System.String.fromCharArray(chars), null, 0, count);
+                return this.Encode$3(System.String.fromCharArray(chars), null, 0, count);
             },
-            encode$2: function (str) {
+            Encode$2: function (str) {
                 var count = { };
-                return this.encode$3(str, null, 0, count);
+                return this.Encode$3(str, null, 0, count);
             },
-            decode$1: function (bytes, index, count) {
-                return this.decode$2(bytes, index, count, null, 0);
+            Decode$1: function (bytes, index, count) {
+                return this.Decode$2(bytes, index, count, null, 0);
             },
-            decode: function (bytes) {
-                return this.decode$2(bytes, 0, bytes.length, null, 0);
+            Decode: function (bytes) {
+                return this.Decode$2(bytes, 0, bytes.length, null, 0);
             },
-            getByteCount: function (chars) {
-                return this.getByteCount$1(chars, 0, chars.length);
+            GetByteCount: function (chars) {
+                return this.GetByteCount$1(chars, 0, chars.length);
             },
-            getByteCount$2: function (s) {
-                return this.encode$2(s).length;
+            GetByteCount$2: function (s) {
+                return this.Encode$2(s).length;
             },
-            getByteCount$1: function (chars, index, count) {
-                return this.encode$1(chars, index, count).length;
+            GetByteCount$1: function (chars, index, count) {
+                return this.Encode$1(chars, index, count).length;
             },
-            getBytes: function (chars) {
-                return this.getBytes$1(chars, 0, chars.length);
+            GetBytes: function (chars) {
+                return this.GetBytes$1(chars, 0, chars.length);
             },
-            getBytes$1: function (chars, index, count) {
-                return this.encode$2(System.String.fromCharArray(chars, index, count));
+            GetBytes$1: function (chars, index, count) {
+                return this.Encode$2(System.String.fromCharArray(chars, index, count));
             },
-            getBytes$3: function (chars, charIndex, charCount, bytes, byteIndex) {
-                return this.encode$4(chars, charIndex, charCount, bytes, byteIndex);
+            GetBytes$3: function (chars, charIndex, charCount, bytes, byteIndex) {
+                return this.Encode$4(chars, charIndex, charCount, bytes, byteIndex);
             },
-            getBytes$2: function (s) {
-                return this.encode$2(s);
+            GetBytes$2: function (s) {
+                return this.Encode$2(s);
             },
-            getBytes$4: function (s, charIndex, charCount, bytes, byteIndex) {
-                return this.encode$5(s, charIndex, charCount, bytes, byteIndex);
+            GetBytes$4: function (s, charIndex, charCount, bytes, byteIndex) {
+                return this.Encode$5(s, charIndex, charCount, bytes, byteIndex);
             },
-            getCharCount: function (bytes) {
-                return this.decode(bytes).length;
+            GetCharCount: function (bytes) {
+                return this.Decode(bytes).length;
             },
-            getCharCount$1: function (bytes, index, count) {
-                return this.decode$1(bytes, index, count).length;
+            GetCharCount$1: function (bytes, index, count) {
+                return this.Decode$1(bytes, index, count).length;
             },
-            getChars: function (bytes) {
+            GetChars: function (bytes) {
                 var $t;
-                return ($t = this.decode(bytes), System.String.toCharArray($t, 0, $t.length));
+                return ($t = this.Decode(bytes), System.String.toCharArray($t, 0, $t.length));
             },
-            getChars$1: function (bytes, index, count) {
+            GetChars$1: function (bytes, index, count) {
                 var $t;
-                return ($t = this.decode$1(bytes, index, count), System.String.toCharArray($t, 0, $t.length));
+                return ($t = this.Decode$1(bytes, index, count), System.String.toCharArray($t, 0, $t.length));
             },
-            getChars$2: function (bytes, byteIndex, byteCount, chars, charIndex) {
-                var s = this.decode$1(bytes, byteIndex, byteCount);
+            GetChars$2: function (bytes, byteIndex, byteCount, chars, charIndex) {
+                var s = this.Decode$1(bytes, byteIndex, byteCount);
                 var arr = System.String.toCharArray(s, 0, s.length);
 
                 if (chars.length < (((arr.length + charIndex) | 0))) {
@@ -190,11 +190,11 @@
 
                 return arr.length;
             },
-            getString: function (bytes) {
-                return this.decode(bytes);
+            GetString: function (bytes) {
+                return this.Decode(bytes);
             },
-            getString$1: function (bytes, index, count) {
-                return this.decode$1(bytes, index, count);
+            GetString$1: function (bytes, index, count) {
+                return this.Decode$1(bytes, index, count);
             }
         }
     });
@@ -215,13 +215,13 @@
         }
     },
     methods: {
-        getEncoding: function () {
-            return System.Text.Encoding.getEncoding(this.CodePage);
+        GetEncoding: function () {
+            return System.Text.Encoding.GetEncoding(this.CodePage);
         },
-        getHashCode: function () {
+        GetHashCode: function () {
             return this.CodePage;
         },
-        equals: function (o) {
+        Equals: function (o) {
             var that = Bridge.as(o, System.Text.EncodingInfo);
             return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
         }
@@ -243,7 +243,7 @@
             }
         },
         methods: {
-            encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
+            Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
                 var hasBuffer = outputBytes != null;
 
                 if (!hasBuffer) {
@@ -274,7 +274,7 @@
 
                 return new Uint8Array(outputBytes);
             },
-            decode$2: function (bytes, index, count, chars, charIndex) {
+            Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
                 var result = "";
                 var endpoint = (position + count) | 0;
@@ -291,7 +291,7 @@
 
                 return result;
             },
-            getMaxByteCount: function (charCount) {
+            GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
                     throw new System.ArgumentOutOfRangeException("charCount");
                 }
@@ -304,7 +304,7 @@
 
                 return System.Int64.clip32(byteCount);
             },
-            getMaxCharCount: function (byteCount) {
+            GetMaxCharCount: function (byteCount) {
                 if (byteCount < 0) {
                     throw new System.ArgumentOutOfRangeException("byteCount");
                 }
@@ -356,7 +356,7 @@
             }
         },
         methods: {
-            encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
+            Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
                 var hasBuffer = outputBytes != null;
                 var recorded = 0;
                 var surrogate_1st = 0;
@@ -459,7 +459,7 @@
 
                 return new Uint8Array(outputBytes);
             },
-            decode$2: function (bytes, index, count, chars, charIndex) {
+            Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
                 var result = "";
                 var endpoint = (position + count) | 0;
@@ -524,7 +524,7 @@
 
                 return result;
             },
-            getMaxByteCount: function (charCount) {
+            GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
                     throw new System.ArgumentOutOfRangeException("charCount");
                 }
@@ -538,7 +538,7 @@
 
                 return System.Int64.clip32(byteCount);
             },
-            getMaxCharCount: function (byteCount) {
+            GetMaxCharCount: function (byteCount) {
                 if (byteCount < 0) {
                     throw new System.ArgumentOutOfRangeException("byteCount");
                 }
@@ -601,7 +601,7 @@
             }
         },
         methods: {
-            toCodePoints: function (str) {
+            ToCodePoints: function (str) {
                 var surrogate_1st = 0;
                 var unicode_codes = System.Array.init(0, 0, System.Char);
                 var fallback = Bridge.fn.bind(this, function () {
@@ -639,7 +639,7 @@
 
                 return unicode_codes;
             },
-            encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
+            Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
                 var hasBuffer = outputBytes != null;
                 var recorded = 0;
 
@@ -677,7 +677,7 @@
                     outputBytes = System.Array.init(0, 0, System.Byte);
                 }
 
-                var unicode_codes = this.toCodePoints(s);
+                var unicode_codes = this.ToCodePoints(s);
                 for (var i = 0; i < unicode_codes.length; i = (i + 1) | 0) {
                     write32(unicode_codes[System.Array.index(i, unicode_codes)]);
                 }
@@ -690,7 +690,7 @@
 
                 return new Uint8Array(outputBytes);
             },
-            decode$2: function (bytes, index, count, chars, charIndex) {
+            Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
                 var result = "";
                 var endpoint = (position + count) | 0;
@@ -749,7 +749,7 @@
 
                 return result;
             },
-            getMaxByteCount: function (charCount) {
+            GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
                     throw new System.ArgumentOutOfRangeException("charCount");
                 }
@@ -763,7 +763,7 @@
 
                 return System.Int64.clip32(byteCount);
             },
-            getMaxCharCount: function (byteCount) {
+            GetMaxCharCount: function (byteCount) {
                 if (byteCount < 0) {
                     throw new System.ArgumentOutOfRangeException("byteCount");
                 }
@@ -783,7 +783,7 @@
         inherits: [System.Text.Encoding],
         statics: {
             methods: {
-                escape: function (chars) {
+                Escape: function (chars) {
                     return chars.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
                 }
             }
@@ -815,13 +815,13 @@
             }
         },
         methods: {
-            encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
-                var setD = System.String.concat("A-Za-z0-9", System.Text.UTF7Encoding.escape("'(),-./:?"));
+            Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
+                var setD = System.String.concat("A-Za-z0-9", System.Text.UTF7Encoding.Escape("'(),-./:?"));
 
                 var encode = $asm.$.System.Text.UTF7Encoding.f1;
 
-                var setO = System.Text.UTF7Encoding.escape("!\"#$%&*;<=>@[]^_`{|}");
-                var setW = System.Text.UTF7Encoding.escape(" \r\n\t");
+                var setO = System.Text.UTF7Encoding.Escape("!\"#$%&*;<=>@[]^_`{|}");
+                var setW = System.Text.UTF7Encoding.Escape(" \r\n\t");
 
                 s = s.replace(new RegExp("[^" + setW + setD + (this.allowOptionals ? setO : "") + "]+", 'g'), function(chunk) {return '+' + (chunk === '+' ? '' : encode(chunk)) + '-';});
 
@@ -847,7 +847,7 @@
 
                 return new Uint8Array(arr);
             },
-            decode$2: function (bytes, index, count, chars, charIndex) {
+            Decode$2: function (bytes, index, count, chars, charIndex) {
                 var _base64ToArrayBuffer = $asm.$.System.Text.UTF7Encoding.f2;
 
                 var decode = function (s) {
@@ -862,7 +862,7 @@
                 var str = System.String.fromCharArray(bytes, index, count);
                 return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function (_, chunk) {if (chunk === '') {return _ == '+-' ? '+' : '';}return decode(chunk);});
             },
-            getMaxByteCount: function (charCount) {
+            GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
                     throw new System.ArgumentOutOfRangeException("charCount");
                 }
@@ -875,7 +875,7 @@
 
                 return System.Int64.clip32(byteCount);
             },
-            getMaxCharCount: function (byteCount) {
+            GetMaxCharCount: function (byteCount) {
                 if (byteCount < 0) {
                     throw new System.ArgumentOutOfRangeException("byteCount");
                 }
@@ -960,7 +960,7 @@
             }
         },
         methods: {
-            encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
+            Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
                 var hasBuffer = outputBytes != null;
                 var record = 0;
 
@@ -1020,7 +1020,7 @@
 
                 return new Uint8Array(outputBytes);
             },
-            decode$2: function (bytes, index, count, chars, charIndex) {
+            Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
                 var result = "";
                 var surrogate1 = 0;
@@ -1126,7 +1126,7 @@
 
                 return result;
             },
-            getMaxByteCount: function (charCount) {
+            GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
                     throw new System.ArgumentOutOfRangeException("charCount");
                 }
@@ -1141,7 +1141,7 @@
 
                 return System.Int64.clip32(byteCount);
             },
-            getMaxCharCount: function (byteCount) {
+            GetMaxCharCount: function (byteCount) {
                 if (byteCount < 0) {
                     throw new System.ArgumentOutOfRangeException("byteCount");
                 }

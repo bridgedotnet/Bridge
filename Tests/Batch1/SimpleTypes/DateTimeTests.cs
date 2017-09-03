@@ -902,6 +902,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local) == new DateTime(2011, 7, 12, 1, 7, 3, 4, DateTimeKind.Local));
             Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc) == new DateTime(2011, 7, 12, 8, 2, 3, 4, DateTimeKind.Utc));
 
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(now == anotherNow, "#3098");
+
             // Removed because DateTime is non-nullable value type
             // After move of Date.cs class to Bridge.Html5 namespace,
             // these tests started failing. Possibly due to moving explicit operator.
@@ -984,6 +988,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(new DateTime(10000).Equals((object)new DateTime(0)));
             Assert.False(new DateTime(0).Equals((object)new DateTime(10000)));
             Assert.True(new DateTime(10000).Equals((object)new DateTime(10000)));
+
+            Assert.False(DateTime.Now.Equals(new object()));
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(now.Equals(anotherNow), "#3098");
         }
 
         [Test]
@@ -998,6 +1008,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(((IEquatable<DateTime>)new DateTime(10000)).Equals(new DateTime(0)));
             Assert.False(((IEquatable<DateTime>)new DateTime(0)).Equals(new DateTime(10000)));
             Assert.True(((IEquatable<DateTime>)new DateTime(10000)).Equals(new DateTime(10000)));
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(((IEquatable<DateTime>)now).Equals(anotherNow), "#3098");
         }
 
         [Test]
@@ -1007,6 +1021,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(DateTime.Equals(new DateTime(10000), new DateTime(0)));
             Assert.False(DateTime.Equals(new DateTime(0), new DateTime(10000)));
             Assert.True(DateTime.Equals(new DateTime(10000), new DateTime(10000)));
+
+            Assert.False(DateTime.Equals(DateTime.Now, true));
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(DateTime.Equals(now, anotherNow), "#3098");
         }
 
         [Test]
@@ -1015,6 +1035,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(new DateTime(0).CompareTo(new DateTime(0)) == 0);
             Assert.True(new DateTime(10000).CompareTo(new DateTime(0)) > 0);
             Assert.True(new DateTime(0).CompareTo(new DateTime(10000)) < 0);
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(now.CompareTo(anotherNow) == 0, "#3098");
         }
 
         [Test]
@@ -1023,6 +1047,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(DateTime.Compare(new DateTime(0), new DateTime(0)) == 0);
             Assert.True(DateTime.Compare(new DateTime(10000), new DateTime(0)) > 0);
             Assert.True(DateTime.Compare(new DateTime(0), new DateTime(10000)) < 0);
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(DateTime.Compare(now, anotherNow) == 0, "#3098");
         }
 
         [Test]
@@ -1032,6 +1060,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(((IComparable<DateTime>)new DateTime(0)).CompareTo(new DateTime(0)) == 0);
             Assert.True(((IComparable<DateTime>)new DateTime(10000)).CompareTo(new DateTime(0)) > 0);
             Assert.True(((IComparable<DateTime>)new DateTime(0)).CompareTo(new DateTime(10000)) < 0);
+
+            DateTime now = DateTime.Now;
+            DateTime anotherNow = DateTime.SpecifyKind(now, DateTimeKind.Utc);
+            Assert.True(((IComparable<DateTime>)now).CompareTo(anotherNow) == 0, "#3098");
         }
 
         [Test]

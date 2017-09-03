@@ -6,6 +6,7 @@ namespace System.Text
 {
     [Reflectable]
     [FileName("system\\text\\encoding.js")]
+    [Convention]
     public class UTF7Encoding : Encoding
     {
         private bool allowOptionals;
