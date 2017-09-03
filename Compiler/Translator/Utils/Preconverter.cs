@@ -393,10 +393,10 @@ namespace Bridge.Translator
             var orr = rr as OperatorResolveResult;
             var simpleIndex = true;
 
-            if(orr != null)
+            if (orr != null)
             {
                 var accessrr = orr.Operands[0] as ArrayAccessResolveResult;
-                if(accessrr != null)
+                if (accessrr != null)
                 {
                     foreach (var index in accessrr.Indexes)
                     {
@@ -455,10 +455,10 @@ namespace Bridge.Translator
                 {
                     leftIndexerArgs = new List<Expression>();
                     rightIndexerArgs = new List<Expression>();
-  
+
                     foreach (var index in indexerExpr.Arguments)
                     {
-                                                var expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "ToTemp"), new PrimitiveExpression("idx" + tempKey), index.Clone());
+                        var expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "ToTemp"), new PrimitiveExpression("idx" + tempKey), index.Clone());
                         leftIndexerArgs.Add(expr);
 
                         expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "FromTemp"), new PrimitiveExpression("idx" + tempKey++), index.Clone());
