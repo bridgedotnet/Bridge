@@ -225,9 +225,9 @@
             var scopeType = Bridge.getType(scope),
                 descriptors = scopeType.$descriptors || [];
 
-            descriptors.$propMap = descriptors.$propMap || {};
+            scope.$propMap = scope.$propMap || {};
 
-            if (descriptors.$propMap[name]) {
+            if (scope.$propMap[name]) {
                 return scope;
             }
 
@@ -248,7 +248,7 @@
                 }
             }
 
-            descriptors.$propMap[name] = true;
+            scope.$propMap[name] = true;
 
             return scope;
         },

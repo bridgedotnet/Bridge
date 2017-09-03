@@ -341,7 +341,7 @@ namespace Bridge.Translator
             return insideCatch ? (CatchClause)target : null;
         }
 
-        public void WriteIdentifier(string name, bool script = true)
+        public void WriteIdentifier(string name, bool script = true, bool colon = false)
         {
             var isValid = Helpers.IsValidIdentifier(name);
 
@@ -351,7 +351,11 @@ namespace Bridge.Translator
             }
             else
             {
-                if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
+                if(colon)
+                {
+                    this.WriteScript(name);
+                }
+                else if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
                 {
                     --this.Emitter.Output.Length;
                     this.Write("[");
