@@ -197,7 +197,7 @@ namespace Bridge.Translator
 
                         if (modifier == "raw")
                         {
-                            s = s.Trim('"');
+                            s = block.RemoveTokens(s).Trim('"');
                         }
                     }
 
@@ -926,7 +926,7 @@ namespace Bridge.Translator
 
                                 if (modifier == "raw")
                                 {
-                                    s = s.Trim('"');
+                                    s = this.RemoveTokens(s).Trim('"');
                                 }
                             }
                             else
@@ -997,7 +997,7 @@ namespace Bridge.Translator
 
                                 if (modifier == "raw")
                                 {
-                                    s = s.Trim('"');
+                                    s = this.RemoveTokens(s).Trim('"');
                                 }
                             }
                             else
@@ -1051,7 +1051,7 @@ namespace Bridge.Translator
 
                                 if (modifier == "raw")
                                 {
-                                    s = s.Trim('"');
+                                    s = this.RemoveTokens(s).Trim('"');
                                 }
                             }
                             else
@@ -1222,7 +1222,7 @@ namespace Bridge.Translator
 
                     if (modifier == "raw")
                     {
-                        s = s.Trim('"');
+                        s = this.RemoveTokens(s).Trim('"');
                     }
                 }
                 else

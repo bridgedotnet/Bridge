@@ -1,6 +1,5 @@
 using System;
 using Bridge.Test.NUnit;
-using Bridge.Html5;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,7 +9,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class C
         {
-
             [Template("({c})")]
             [Script("return c")]
             static public implicit operator C(string c)

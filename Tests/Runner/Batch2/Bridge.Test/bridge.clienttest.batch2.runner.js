@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.2.1
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals) {
     
@@ -34,6 +34,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
             QUnit.test("#1122 - Batch2 TestClippingInJavaScriptOverflowMode", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122.TestClippingInJavaScriptOverflowMode);
             QUnit.test("#1122 - Batch2 TestIntegerDivisionInJavaScriptOverflowMode", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122.TestIntegerDivisionInJavaScriptOverflowMode);
             QUnit.test("#1204 - Batch2 TestStrictNullChecksOptionForNulls", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1204.TestStrictNullChecksOptionForNulls);
+            QUnit.test("#3075 - Batch2 TestRawModifier", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N3075.TestRawModifier);
             QUnit.test("#772 - Batch2 TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772.TypePropertiesAreCorrect);
             QUnit.test("#772 - Batch2 LengthWorks", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772.LengthWorks);
             QUnit.test("#772 - Batch2 RankIsOne", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772.RankIsOne);
@@ -264,6 +265,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N1204", $t.File = "Batch2\\BridgeIssues\\N1204.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N3075", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N3075)],
+        statics: {
+            methods: {
+                TestRawModifier: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N3075).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N3075, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestRawModifier()", $t.Line = "24", $t));
+                    t.Fixture.TestRawModifier();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N3075", $t.File = "Batch2\\BridgeIssues\\N3075.cs", $t);
                 }
                 return this.context;
             }
