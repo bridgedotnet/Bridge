@@ -933,6 +933,13 @@ namespace Bridge.Translator
 
         private string GetExtractedResourceName(string assemblyName, string resourceName)
         {
+            var assembly = GetAssemblyNameFromResource(assemblyName);
+
+            if (assembly != null && !string.IsNullOrEmpty(assembly.Name))
+            {
+                return assembly.Name + " | " + resourceName;
+            }
+
             return assemblyName + " | " + resourceName;
         }
 
