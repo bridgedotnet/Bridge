@@ -300,7 +300,7 @@ namespace Bridge.Translator
                 this.WriteComma();
                 this.Write(tempVar);
                 this.WriteDot();
-                this.Write(this.Emitter.GetEntityName(rr.Member));
+                this.WriteIdentifier(this.Emitter.GetEntityName(rr.Member));
                 this.Write(" = ");
                 expression.AcceptVisitor(this.Emitter);
             }
@@ -481,7 +481,8 @@ namespace Bridge.Translator
 
                     Expression expression = namedExression != null ? namedExression.Expression : namedArgumentExpression.Expression;
 
-                    this.Write(name, ": ");
+                    this.WriteIdentifier(name, true, true);
+                    this.Write(": ");
                     expression.AcceptVisitor(this.Emitter);
 
                     names.Add(name);
@@ -546,7 +547,8 @@ namespace Bridge.Translator
 
                             needComma = true;
 
-                            this.Write(name, ": ");
+                            this.WriteIdentifier(name, true, true);
+                            this.Write(": ");
 
                             var argType = prop.ReturnType;
                             var defValue = Inspector.GetDefaultFieldValue(argType, null);
@@ -591,7 +593,8 @@ namespace Bridge.Translator
 
                             needComma = true;
 
-                            this.Write(name, ": ");
+                            this.WriteIdentifier(name, true, true);
+                            this.Write(": ");
                             var primitiveExpr = member.Initializer as PrimitiveExpression;
 
                             if (mode == 2 && (member.Initializer == null || member.Initializer.IsNull) && !(member.VarInitializer == null || member.VarInitializer.Initializer.IsNull))

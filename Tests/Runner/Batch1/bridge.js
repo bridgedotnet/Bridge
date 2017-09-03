@@ -1,7 +1,7 @@
 /**
- * @version   : 16.2.1 - Bridge.NET
+ * @version   : 16.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-08-24
+ * @date      : 2017-09-06
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -1185,6 +1185,10 @@
             } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
                 return Bridge.fn.equals.call(a, b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
+                if (a.kind !== undefined && a.ticks !== undefined && b.kind !== undefined && b.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
                 return true;
@@ -1314,6 +1318,10 @@
 
                 return a < b ? -1 : (a > b ? 1 : 0);
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return Bridge.compare(a.ticks, b.ticks);
+                }
+
                 return Bridge.compare(a.valueOf(), b.valueOf());
             }
 
@@ -1372,6 +1380,10 @@
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
                 return a === b;
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             }
 
@@ -2015,11 +2027,11 @@
                         }
 
                         if (d && d.get && !v.get) {
-                            v.get = Bridge.emptyFn;
+                            v.get = d.get;
                         }
 
                         if (d && d.set && !v.set) {
-                            v.set = Bridge.emptyFn;
+                            v.set = d.set;
                         }
                     }
 
@@ -3086,8 +3098,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.2.1";
-        Bridge.SystemAssembly.compiler = "16.2.1";
+        Bridge.SystemAssembly.version = "16.3.0";
+        Bridge.SystemAssembly.compiler = "16.3.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
