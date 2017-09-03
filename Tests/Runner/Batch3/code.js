@@ -27,10 +27,10 @@ var Bridge3001_SomeLib = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.2.1
+ * @version 16.3.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.2.1
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -25015,6 +25015,119 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081", {
+        statics: {
+            methods: {
+                TestNonStandardName: function () {
+                    var $t;
+                    var usualClass = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081.UsualClass(), $t["UsualClass Field"] = 3, $t["UsualClass Prop"] = 4, $t);
+                    Bridge.Test.NUnit.Assert.AreEqual(3, usualClass["UsualClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, usualClass["UsualClass Prop"]);
+
+                    usualClass["UsualClass Field"] = 1;
+                    usualClass["UsualClass Prop"] = 2;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, usualClass["UsualClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, usualClass["UsualClass Prop"]);
+
+                    var objectLiteral = { "ObjectLiteralClass Field": 3, "ObjectLiteralClass Prop": 4 };
+                    Bridge.Test.NUnit.Assert.AreEqual(3, objectLiteral["ObjectLiteralClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, objectLiteral["ObjectLiteralClass Prop"]);
+
+                    objectLiteral["ObjectLiteralClass Field"] = 1;
+                    objectLiteral["ObjectLiteralClass Prop"] = 2;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, objectLiteral["ObjectLiteralClass Field"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, objectLiteral["ObjectLiteralClass Prop"]);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3081.UsualClass", {
+        fields: {
+            "UsualClass Field": 0
+        },
+        props: {
+            "UsualClass Prop": 0
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086", {
+        statics: {
+            fields: {
+                sb: null
+            },
+            methods: {
+                Test: function (target) {
+                    target.Property = "SomeString";
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("Value=", target.Property));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append("Length=" + target.Property.length);
+                },
+                TestAccessorsOverride: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb = new System.Text.StringBuilder();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.Test(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A());
+                    Bridge.Test.NUnit.Assert.AreEqual("A Set! SomeStringValue=A Get!Length=6", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.toString());
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb = new System.Text.StringBuilder();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.Test(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.B());
+                    Bridge.Test.NUnit.Assert.AreEqual("B Set! SomeStringValue=A Get!Length=6", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A", {
+        props: {
+            Property: {
+                get: function () {
+                    return "A Get!";
+                },
+                set: function (value) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("A Set! ", value));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088", {
+        statics: {
+            methods: {
+                TestBaseProperty: function () {
+                    for (var i = 0; i < 2; i = (i + 1) | 0) {
+                        var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.A();
+                        Bridge.Test.NUnit.Assert.AreEqual(2, a.x);
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.Base", {
+        props: {
+            x: {
+                get: function () {
+                    return 1;
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089", {
+        statics: {
+            methods: {
+                method: function () {
+                    return "test";
+                },
+                TestOperatorTemplate: function () {
+                    var c = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.method());
+                    Bridge.Test.NUnit.Assert.AreEqual("test", c);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -35059,6 +35172,28 @@ Bridge.$N1391Result =                     r;
         methods: {
             toString: function () {
                 return this.Name;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.B", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.A],
+        props: {
+            Property: {
+                set: function (value) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3086.sb.append(System.String.concat("B Set! ", value));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.A", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3088.Base],
+        props: {
+            x: {
+                get: function () {
+                    return ((Bridge.ensureBaseProperty(this, "x").$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3088$Base$x + 1) | 0);
+                }
             }
         }
     });

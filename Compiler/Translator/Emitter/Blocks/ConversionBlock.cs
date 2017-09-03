@@ -683,7 +683,7 @@ namespace Bridge.Translator
 
                     if (expression is InvocationExpression)
                     {
-                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, (InvocationExpression)expression), inline).Emit();
+                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, (InvocationExpression)expression, method), inline, method).Emit();
                     }
                     else if (expression is ObjectCreateExpression)
                     {
