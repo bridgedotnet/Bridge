@@ -92,6 +92,36 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void CopyToWorks()
+        {
+            string strSource = "changed";
+            char[] destination = { 'T', 'h', 'e', ' ', 'i', 'n', 'i', 't', 'i', 'a', 'l', ' ',
+                'a', 'r', 'r', 'a', 'y' };
+
+            // Embed the source string in the destination string
+            strSource.CopyTo(0, destination, 4, strSource.Length);
+
+            Assert.AreEqual("The changed array", string.Join("", destination.Select(x => Char.ToString(x))));
+
+            strSource = "A different string";
+
+            // Embed only a section of the source string in the destination
+            strSource.CopyTo(2, destination, 3, 9);
+
+            Assert.AreEqual("Thedifferentarray", string.Join("", destination.Select(x => Char.ToString(x))));
+
+            Assert.Throws<ArgumentNullException>(() => { strSource.CopyTo(0, null, 4, strSource.Length); });
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(-1, destination, 4, strSource.Length); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, -1, strSource.Length); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 4, -1); });
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(100, destination, 4, strSource.Length); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 100, strSource.Length); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 4, 200); });
+        }
+
+        [Test]
         public void EmptyFieldWorks()
         {
             Assert.AreEqual("", string.Empty);

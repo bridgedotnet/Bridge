@@ -1,7 +1,7 @@
 /**
- * @version   : 16.1.0 - Bridge.NET
+ * @version   : 16.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-08-14
+ * @date      : 2017-09-06
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -94,7 +94,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
  * @version 1.0.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2015 Object.NET, Inc.
- * @compiler Bridge.NET 16.1.0
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     "use strict";

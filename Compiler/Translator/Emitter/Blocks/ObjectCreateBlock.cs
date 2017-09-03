@@ -129,10 +129,15 @@ namespace Bridge.Translator
             {
                 this.WriteOpenBrace();
                 this.WriteSpace();
+                var pos = this.Emitter.Output.Length;
 
                 this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
 
-                this.WriteSpace();
+                if (pos < this.Emitter.Output.Length)
+                {
+                    this.WriteSpace();
+                }
+
                 this.WriteCloseBrace();
             }
             else
@@ -259,7 +264,7 @@ namespace Bridge.Translator
             }
             else if (item is ArrayInitializerExpression)
             {
-                var arrayInitializer = (ArrayInitializerExpression) item;
+                var arrayInitializer = (ArrayInitializerExpression)item;
 
                 foreach (var el in arrayInitializer.Elements)
                 {
@@ -269,7 +274,7 @@ namespace Bridge.Translator
             else if (item is IdentifierExpression)
             {
                 this.WriteComma();
-                var identifierExpression = (IdentifierExpression) item;
+                var identifierExpression = (IdentifierExpression)item;
                 new IdentifierBlock(this.Emitter, identifierExpression).Emit();
             }
             else
@@ -283,7 +288,7 @@ namespace Bridge.Translator
         {
             if (expression is ArrayInitializerExpression)
             {
-                var arrayInitializer = (ArrayInitializerExpression) expression;
+                var arrayInitializer = (ArrayInitializerExpression)expression;
 
                 foreach (var el in arrayInitializer.Elements)
                 {
@@ -488,12 +493,6 @@ namespace Bridge.Translator
                 var key = BridgeTypes.GetTypeDefinitionKey(type);
                 var tinfo = this.Emitter.Types.FirstOrDefault(t => t.Key == key);
 
-                if (tinfo == null)
-                {
-                    return;
-                }
-                var itype = tinfo.Type as ITypeDefinition;
-
                 var mode = 0;
                 if (rr != null)
                 {
@@ -520,10 +519,49 @@ namespace Bridge.Translator
                             }
                         }
                     }
-                    else if (itype != null)
+                    else if (type != null)
                     {
                         mode = this.Emitter.Validator.GetObjectInitializationMode(type);
                     }
+                }
+
+                if (tinfo == null)
+                {
+                    if (mode == 2)
+                    {
+                        var properties = rr.Member.DeclaringTypeDefinition.GetProperties(null, GetMemberOptions.IgnoreInheritedMembers);
+                        foreach (var prop in properties)
+                        {
+                            var name = OverloadsCollection.Create(this.Emitter, prop).GetOverloadName();
+
+                            if (names.Contains(name))
+                            {
+                                continue;
+                            }
+
+                            if (needComma)
+                            {
+                                this.WriteComma();
+                            }
+
+                            needComma = true;
+
+                            this.Write(name, ": ");
+
+                            var argType = prop.ReturnType;
+                            var defValue = Inspector.GetDefaultFieldValue(argType, null);
+                            if (defValue == argType)
+                            {
+                                this.Write(Inspector.GetStructDefaultValue(argType, this.Emitter));
+                            }
+                            else
+                            {
+                                this.Write(defValue);
+                            }
+                        }
+                    }
+
+                    return;
                 }
 
                 if (mode != 0)

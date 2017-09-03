@@ -1,7 +1,7 @@
 /*
- * @version   : 16.1.0 - Bridge.NET
+ * @version   : 16.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-08-14
+ * @date      : 2017-09-06
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md.
  */
@@ -1101,6 +1101,168 @@ module Text {
         insert(index: number, value: string, count?: number): StringBuilder;
         replace(oldValue: string, newValue: string, startIndex?: number, count?: number): StringBuilder;
     }
+
+    export interface UTF32Encoding extends System.Text.Encoding {
+        CodePage: number;
+        EncodingName: string;
+        ToCodePoints(str: string): number[];
+        Encode$3(s: string, outputBytes: number[], outputIndex: number, writtenBytes: {v: number}): number[];
+        Decode$2(bytes: number[], index: number, count: number, chars: number[], charIndex: number): string;
+        GetMaxByteCount(charCount: number): number;
+        GetMaxCharCount(byteCount: number): number;
+    }
+    export interface UTF32EncodingFunc extends Function {
+        prototype: UTF32Encoding;
+        new (): UTF32Encoding;
+        ctor: {
+            new (): UTF32Encoding
+        };
+        $ctor1: {
+            new (bigEndian: boolean, byteOrderMark: boolean): UTF32Encoding
+        };
+        $ctor2: {
+            new (bigEndian: boolean, byteOrderMark: boolean, throwOnInvalidBytes: boolean): UTF32Encoding
+        };
+    }
+    var UTF32Encoding: UTF32EncodingFunc;
+
+    export interface UnicodeEncoding extends System.Text.Encoding {
+        CodePage: number;
+        EncodingName: string;
+        Encode$3(s: string, outputBytes: number[], outputIndex: number, writtenBytes: {v: number}): number[];
+        Decode$2(bytes: number[], index: number, count: number, chars: number[], charIndex: number): string;
+        GetMaxByteCount(charCount: number): number;
+        GetMaxCharCount(byteCount: number): number;
+    }
+    export interface UnicodeEncodingFunc extends Function {
+        prototype: UnicodeEncoding;
+        new (): UnicodeEncoding;
+        ctor: {
+            new (): UnicodeEncoding
+        };
+        $ctor1: {
+            new (bigEndian: boolean, byteOrderMark: boolean): UnicodeEncoding
+        };
+        $ctor2: {
+            new (bigEndian: boolean, byteOrderMark: boolean, throwOnInvalidBytes: boolean): UnicodeEncoding
+        };
+    }
+    var UnicodeEncoding: UnicodeEncodingFunc;
+
+    export interface ASCIIEncoding extends System.Text.Encoding {
+        CodePage: number;
+        EncodingName: string;
+        Encode$3(s: string, outputBytes: number[], outputIndex: number, writtenBytes: {v: number}): number[];
+        Decode$2(bytes: number[], index: number, count: number, chars: number[], charIndex: number): string;
+        GetMaxByteCount(charCount: number): number;
+        GetMaxCharCount(byteCount: number): number;
+    }
+    export interface ASCIIEncodingFunc extends Function {
+        prototype: ASCIIEncoding;
+        new (): ASCIIEncoding;
+    }
+    var ASCIIEncoding: ASCIIEncodingFunc;
+
+    export interface Encoding {
+        CodePage: number;
+        EncodingName: string;
+        Encode$1(chars: number[], index: number, count: number): number[];
+        Encode$5(s: string, index: number, count: number, outputBytes: number[], outputIndex: number): number;
+        Encode$4(chars: number[], index: number, count: number, outputBytes: number[], outputIndex: number): number;
+        Encode(chars: number[]): number[];
+        Encode$2(str: string): number[];
+        Decode$1(bytes: number[], index: number, count: number): string;
+        Decode(bytes: number[]): string;
+        GetByteCount(chars: number[]): number;
+        GetByteCount$2(s: string): number;
+        GetByteCount$1(chars: number[], index: number, count: number): number;
+        GetBytes(chars: number[]): number[];
+        GetBytes$1(chars: number[], index: number, count: number): number[];
+        GetBytes$3(chars: number[], charIndex: number, charCount: number, bytes: number[], byteIndex: number): number;
+        GetBytes$2(s: string): number[];
+        GetBytes$4(s: string, charIndex: number, charCount: number, bytes: number[], byteIndex: number): number;
+        GetCharCount(bytes: number[]): number;
+        GetCharCount$1(bytes: number[], index: number, count: number): number;
+        GetChars(bytes: number[]): number[];
+        GetChars$1(bytes: number[], index: number, count: number): number[];
+        GetChars$2(bytes: number[], byteIndex: number, byteCount: number, chars: number[], charIndex: number): number;
+        GetString(bytes: number[]): string;
+        GetString$1(bytes: number[], index: number, count: number): string;
+    }
+    export interface EncodingFunc extends Function {
+        prototype: Encoding;
+        new (): Encoding;
+        Default: System.Text.Encoding;
+        Unicode: System.Text.Encoding;
+        ASCII: System.Text.Encoding;
+        BigEndianUnicode: System.Text.Encoding;
+        UTF7: System.Text.Encoding;
+        UTF8: System.Text.Encoding;
+        UTF32: System.Text.Encoding;
+        Convert(srcEncoding: System.Text.Encoding, dstEncoding: System.Text.Encoding, bytes: number[]): number[];
+        Convert$1(srcEncoding: System.Text.Encoding, dstEncoding: System.Text.Encoding, bytes: number[], index: number, count: number): number[];
+        GetEncoding(codepage: number): System.Text.Encoding;
+        GetEncoding$1(codepage: string): System.Text.Encoding;
+        GetEncodings(): System.Text.EncodingInfo[];
+    }
+    var Encoding: EncodingFunc;
+
+    export interface EncodingInfo {
+        CodePage: number;
+        Name: string;
+        DisplayName: string;
+        GetEncoding(): System.Text.Encoding;
+        GetHashCode(): number;
+        Equals(o: System.Object): boolean;
+    }
+    export interface EncodingInfoFunc extends Function {
+        prototype: EncodingInfo;
+    }
+    var EncodingInfo: EncodingInfoFunc;
+
+    export interface UTF7Encoding extends System.Text.Encoding {
+        CodePage: number;
+        EncodingName: string;
+        Encode$3(s: string, outputBytes: number[], outputIndex: number, writtenBytes: {v: number}): number[];
+        Decode$2(bytes: number[], index: number, count: number, chars: number[], charIndex: number): string;
+        GetMaxByteCount(charCount: number): number;
+        GetMaxCharCount(byteCount: number): number;
+    }
+    export interface UTF7EncodingFunc extends Function {
+        prototype: UTF7Encoding;
+        new (): UTF7Encoding;
+        ctor: {
+            new (): UTF7Encoding
+        };
+        $ctor1: {
+            new (allowOptionals: boolean): UTF7Encoding
+        };
+        Escape(chars: string): string;
+    }
+    var UTF7Encoding: UTF7EncodingFunc;
+
+    export interface UTF8Encoding extends System.Text.Encoding {
+        CodePage: number;
+        EncodingName: string;
+        Encode$3(s: string, outputBytes: number[], outputIndex: number, writtenBytes: {v: number}): number[];
+        Decode$2(bytes: number[], index: number, count: number, chars: number[], charIndex: number): string;
+        GetMaxByteCount(charCount: number): number;
+        GetMaxCharCount(byteCount: number): number;
+    }
+    export interface UTF8EncodingFunc extends Function {
+        prototype: UTF8Encoding;
+        new (): UTF8Encoding;
+        ctor: {
+            new (): UTF8Encoding
+        };
+        $ctor1: {
+            new (encoderShouldEmitUTF8Identifier: boolean): UTF8Encoding
+        };
+        $ctor2: {
+            new (encoderShouldEmitUTF8Identifier: boolean, throwOnInvalidBytes: boolean): UTF8Encoding
+        };
+    }
+    var UTF8Encoding: UTF8EncodingFunc;
 }
 
 module Threading {

@@ -1,8 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Bridge.ClientTest.Batch3")]
-
-namespace Bridge.ClientTestHelper
+﻿namespace Bridge.ClientTestHelper
 {
     public class N2190
     {

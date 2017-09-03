@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.1.0
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
@@ -12,6 +12,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("CreateAndInitializationModes - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateAndInitializationModesTests.Test);
             QUnit.test("ObjectCreateMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateModeTests.Test);
             QUnit.test("ObjectInitializationMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.InitializationModeTests.Test);
+            QUnit.test("Create<T> - TestExternalInterface", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestExternalInterface);
+            QUnit.test("Create<T> - TestClass", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestClass);
             QUnit.module("Activator");
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithoutArgumentsWorks);
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);
@@ -966,6 +968,37 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Stopwatch - StartAndStopWork", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.StartAndStopWork);
             QUnit.test("Stopwatch - ElapsedWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.ElapsedWorks);
             QUnit.test("Stopwatch - GetTimestampWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.GetTimestampWorks);
+            QUnit.module("Encoding");
+            QUnit.test("ASCIIEncoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests.Decode);
+            QUnit.test("ASCIIEncoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("ASCIIEncoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests.Encode);
+            QUnit.test("ASCIIEncoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("ASCIIEncoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("ASCIIEncoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UnicodeEncoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests.Decode);
+            QUnit.test("UnicodeEncoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("UnicodeEncoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests.Encode);
+            QUnit.test("UnicodeEncoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UnicodeEncoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UnicodeEncoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF32Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests.Decode);
+            QUnit.test("UTF32Encoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("UTF32Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests.Encode);
+            QUnit.test("UTF32Encoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UTF32Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF32Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF7Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests.Decode);
+            QUnit.test("UTF7Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests.Encode);
+            QUnit.test("UTF7Encoding - EncodeAdvanced", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests.EncodeAdvanced);
+            QUnit.test("UTF7Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF7Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF8Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests.Decode);
+            QUnit.test("UTF8Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.Encode);
+            QUnit.test("UTF8Encoding - GetBytes_ValidASCIIUnicode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.GetBytes_ValidASCIIUnicode);
+            QUnit.test("UTF8Encoding - GetBytes_InvalidASCIIUnicode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.GetBytes_InvalidASCIIUnicode);
+            QUnit.test("UTF8Encoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UTF8Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF8Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests.GetMaxCharCount);
             QUnit.module("Enum");
             QUnit.test("Enum - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests.TypePropertiesAreCorrect);
             QUnit.test("Enum - DefaultValueOfEnumClassIsNull", Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests.DefaultValueOfEnumClassIsNull);
@@ -2220,6 +2253,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Char - FormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.FormatWorks);
             QUnit.test("Char - IFormattableToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IFormattableToStringWorks);
             QUnit.test("Char - ToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.ToStringWorks);
+            QUnit.test("Char - StaticToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.StaticToStringWorks);
             QUnit.test("Char - GetHashCodeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.GetHashCodeWorks);
             QUnit.test("Char - EqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.EqualsWorks);
             QUnit.test("Char - IEquatableEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IEquatableEqualsWorks);
@@ -2552,6 +2586,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("String - CharAndCountConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.CharAndCountConstructorWorks);
             QUnit.test("String - CharArrayConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.CharArrayConstructorWorks);
             QUnit.test("String - CharArrayWithStartIndexAndLengthConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.CharArrayWithStartIndexAndLengthConstructorWorks);
+            QUnit.test("String - CopyToWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.CopyToWorks);
             QUnit.test("String - EmptyFieldWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.EmptyFieldWorks);
             QUnit.test("String - LengthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.LengthPropertyWorks);
             QUnit.test("String - CompareToWorks_353", Bridge.Test.Runtime.BridgeClientTestRunner.StringTests.CompareToWorks_353);
@@ -3227,7 +3262,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ActivatorTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ActivatorTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ActivatorTests", $t.File = "Batch1\\ActivatorTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3287,7 +3322,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.AggregateExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/AggregateExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.AggregateExceptionTests", $t.File = "Batch1\\Exceptions\\AggregateExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3327,7 +3362,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/AmbiguousMatchExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests", $t.File = "Batch1\\Exceptions\\AmbiguousMatchExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3377,7 +3412,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/ArgumentExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentExceptionTests", $t.File = "Batch1\\Exceptions\\ArgumentExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3422,7 +3457,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentNullExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/ArgumentNullExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentNullExceptionTests", $t.File = "Batch1\\Exceptions\\ArgumentNullExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3472,7 +3507,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentOutOfRangeExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/ArgumentOutOfRangeExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArgumentOutOfRangeExceptionTests", $t.File = "Batch1\\Exceptions\\ArgumentOutOfRangeExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3512,7 +3547,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArgumentsTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ArgumentsTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArgumentsTests", $t.File = "Batch1\\ArgumentsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3552,7 +3587,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArithmeticExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/ArithmeticExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ArithmeticExceptionTests", $t.File = "Batch1\\Exceptions\\ArithmeticExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3587,7 +3622,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.ArrayBufferTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/ArrayBufferTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.ArrayBufferTests", $t.File = "Batch1\\Collections\\Native\\ArrayBufferTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3927,7 +3962,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArrayTests.ArrayTestsSet1", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArrayTests.ArrayTestsSet1", $t.File = "Batch1\\ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4052,7 +4087,97 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArrayTests.ArrayTestsSet2", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArrayTests.ArrayTestsSet2", $t.File = "Batch1\\ArrayTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "33", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "63", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "39", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "92", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "22", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingGetMaxTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4092,7 +4217,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convention/AssemblyAttributeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests", $t.File = "Batch1\\Convention\\AssemblyAttributeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4202,7 +4327,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Batch1.Reflection.AssemblyTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/AssemblyTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Batch1.Reflection.AssemblyTests", $t.File = "Batch1\\Reflection\\AssemblyTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4252,7 +4377,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.AsyncTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Threading/Tasks/AsyncTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.AsyncTests", $t.File = "Batch1\\Threading\\Tasks\\AsyncTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4342,7 +4467,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Batch1.Reflection.AttributeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/AttributeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Batch1.Reflection.AttributeTests", $t.File = "Batch1\\Reflection\\AttributeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4452,7 +4577,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BitConverterTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BitConverterTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BitConverterTests", $t.File = "Batch1\\BitConverterTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4572,7 +4697,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.BooleanTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/BooleanTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.BooleanTests", $t.File = "Batch1\\SimpleTypes\\BooleanTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4602,7 +4727,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.TypeSystemTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/TypeSystemTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.TypeSystemTests", $t.File = "Batch1\\TypeSystemTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4627,7 +4752,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.Bridge1529", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ObjectLiteralTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.Bridge1529", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4707,7 +4832,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BridgeConsoleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BridgeConsoleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BridgeConsoleTests", $t.File = "Batch1\\BridgeConsoleTests.cs", $t);
                 }
                 return this.context;
             },
@@ -4785,7 +4910,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.JavaScript.BridgeRegexTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/JavaScript/BridgeRegexTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.JavaScript.BridgeRegexTests", $t.File = "Batch1\\Text\\RegularExpressions\\JavaScript\\BridgeRegexTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4900,7 +5025,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.ByteTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/ByteTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.ByteTests", $t.File = "Batch1\\SimpleTypes\\ByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5060,7 +5185,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.CancellationTokenTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Threading/CancellationTokenTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.CancellationTokenTests", $t.File = "Batch1\\Threading\\CancellationTokenTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5126,84 +5251,89 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWorks()", $t.Line = "133", $t));
                     t.Fixture.ToStringWorks();
                 },
+                StaticToStringWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticToStringWorks()", $t.Line = "139", $t));
+                    t.Fixture.StaticToStringWorks();
+                },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "153", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "159", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 EqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "161", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "167", $t));
                     t.Fixture.EqualsWorks();
                 },
                 IEquatableEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "177", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "183", $t));
                     t.Fixture.IEquatableEqualsWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "186", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "192", $t));
                     t.Fixture.CompareToWorks();
                 },
                 IsLowerWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLowerWorks()", $t.Line = "195", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLowerWorks()", $t.Line = "201", $t));
                     t.Fixture.IsLowerWorks();
                 },
                 IsUpperWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsUpperWorks()", $t.Line = "203", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsUpperWorks()", $t.Line = "209", $t));
                     t.Fixture.IsUpperWorks();
                 },
                 ToLowerWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "224", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "230", $t));
                     t.Fixture.ToLowerWorks();
                 },
                 ToUpperWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "232", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "238", $t));
                     t.Fixture.ToUpperWorks();
                 },
                 IsDigitWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWorks()", $t.Line = "240", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWorks()", $t.Line = "246", $t));
                     t.Fixture.IsDigitWorks();
                 },
                 IsDigitWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "249", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "255", $t));
                     t.Fixture.IsDigitWithStringAndIndexWorks();
                 },
                 IsWhiteSpaceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "263", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "269", $t));
                     t.Fixture.IsWhiteSpaceWorks();
                 },
                 IsWhiteSpaceWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "272", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "278", $t));
                     t.Fixture.IsWhiteSpaceWithStringAndIndexWorks();
                 },
                 IsPunctuationWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWorks()", $t.Line = "286", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWorks()", $t.Line = "292", $t));
                     t.Fixture.IsPunctuationWorks();
                 },
                 IsPunctuationWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWithStringAndIndexWorks()", $t.Line = "296", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWithStringAndIndexWorks()", $t.Line = "302", $t));
                     t.Fixture.IsPunctuationWithStringAndIndexWorks();
                 },
                 IsLetterWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWorks()", $t.Line = "307", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWorks()", $t.Line = "313", $t));
                     t.Fixture.IsLetterWorks();
                 },
                 IsLetterWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWithStringAndIndexWorks()", $t.Line = "316", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWithStringAndIndexWorks()", $t.Line = "322", $t));
                     t.Fixture.IsLetterWithStringAndIndexWorks();
                 }
             }
@@ -5215,7 +5345,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.CharTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/CharTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.CharTests", $t.File = "Batch1\\SimpleTypes\\CharTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5255,7 +5385,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.CheckedInsideUncheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CheckedUncheckedTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.CheckedInsideUncheckedTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5295,7 +5425,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.CheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CheckedUncheckedTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.CheckedTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5385,7 +5515,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convention/ClassAttributeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests", $t.File = "Batch1\\Convention\\ClassAttributeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5430,7 +5560,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.CommonExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/CommonExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.CommonExceptionTests", $t.File = "Batch1\\Exceptions\\CommonExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5480,7 +5610,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ComparerTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/ComparerTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ComparerTests", $t.File = "Batch1\\Collections\\Generic\\ComparerTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5560,7 +5690,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Diagnostics.Contracts.ContractTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Diagnostics/Contracts/ContractTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Diagnostics.Contracts.ContractTests", $t.File = "Batch1\\Diagnostics\\Contracts\\ContractTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5690,7 +5820,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertFromBase64Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests", $t.File = "Batch1\\Convert\\ConvertFromBase64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -5750,7 +5880,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToBase64CharArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests", $t.File = "Batch1\\Convert\\ConvertToBase64CharArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5815,7 +5945,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBase64StringTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToBase64StringTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBase64StringTests", $t.File = "Batch1\\Convert\\ConvertToBase64StringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5905,7 +6035,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBooleanTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToBooleanTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToBooleanTests", $t.File = "Batch1\\Convert\\ConvertToBooleanTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6000,7 +6130,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToByteTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToByteTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToByteTests", $t.File = "Batch1\\Convert\\ConvertToByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6105,7 +6235,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToCharTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToCharTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToCharTests", $t.File = "Batch1\\Convert\\ConvertToCharTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6200,7 +6330,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToDateTimeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests", $t.File = "Batch1\\Convert\\ConvertToDateTimeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6290,7 +6420,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDecimalTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToDecimalTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDecimalTests", $t.File = "Batch1\\Convert\\ConvertToDecimalTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6380,7 +6510,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDoubleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToDoubleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToDoubleTests", $t.File = "Batch1\\Convert\\ConvertToDoubleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6480,7 +6610,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt16Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToInt16Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt16Tests", $t.File = "Batch1\\Convert\\ConvertToInt16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -6580,7 +6710,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt32Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToInt32Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt32Tests", $t.File = "Batch1\\Convert\\ConvertToInt32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -6680,7 +6810,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt64Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToInt64Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToInt64Tests", $t.File = "Batch1\\Convert\\ConvertToInt64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -6780,7 +6910,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToSByteTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToSByteTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToSByteTests", $t.File = "Batch1\\Convert\\ConvertToSByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6870,7 +7000,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToSingleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToSingleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToSingleTests", $t.File = "Batch1\\Convert\\ConvertToSingleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7090,7 +7220,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToStringTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToStringTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToStringTests", $t.File = "Batch1\\Convert\\ConvertToStringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7190,7 +7320,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt16Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToUInt16Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt16Tests", $t.File = "Batch1\\Convert\\ConvertToUInt16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7290,7 +7420,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt32Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToUInt32Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt32Tests", $t.File = "Batch1\\Convert\\ConvertToUInt32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7390,7 +7520,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt64Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Convert/ConvertToUInt64Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ConvertTests.ConvertToUInt64Tests", $t.File = "Batch1\\Convert\\ConvertToUInt64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7415,7 +7545,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ObjectLiteralTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7440,7 +7570,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.CreateModeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ObjectLiteralTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.CreateModeTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7500,7 +7630,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CultureInfoTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CultureInfoTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CultureInfoTests", $t.File = "Batch1\\CultureInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7565,7 +7695,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.CultureNotFoundExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/CultureNotFoundExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.CultureNotFoundExceptionTests", $t.File = "Batch1\\Exceptions\\CultureNotFoundExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7685,7 +7815,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.DataViewTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/DataViewTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.DataViewTests", $t.File = "Batch1\\Collections\\Native\\DataViewTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8040,7 +8170,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DateTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/JsDateTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DateTests", $t.File = "Batch1\\SimpleTypes\\JsDateTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8075,7 +8205,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.DateTimeFormatInfoTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Format/DateTimeFormatInfoTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.DateTimeFormatInfoTests", $t.File = "Batch1\\Format\\DateTimeFormatInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8155,7 +8285,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DecimalMathTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/DecimalMathTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DecimalMathTests", $t.File = "Batch1\\DecimalMathTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8480,7 +8610,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DecimalTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/DecimalTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DecimalTests", $t.File = "Batch1\\SimpleTypes\\DecimalTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8590,7 +8720,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DelegateTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/DelegateTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DelegateTests", $t.File = "Batch1\\DelegateTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8630,7 +8760,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.DivideByZeroExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/DivideByZeroExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.DivideByZeroExceptionTests", $t.File = "Batch1\\Exceptions\\DivideByZeroExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8665,7 +8795,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DOMParserTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/DOMParserTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.DOMParserTests", $t.File = "Batch1\\DOMParserTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9015,7 +9145,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DoubleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/DoubleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.DoubleTests", $t.File = "Batch1\\SimpleTypes\\DoubleTests.cs", $t);
                 }
                 return this.context;
             },
@@ -9166,7 +9296,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.EnumTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/EnumTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.EnumTests", $t.File = "Batch1\\SimpleTypes\\EnumTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9351,7 +9481,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.EnvironmentTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/EnvironmentTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.EnvironmentTests", $t.File = "Batch1\\EnvironmentTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9406,7 +9536,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.EqualityComparerTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/EqualityComparerTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.EqualityComparerTests", $t.File = "Batch1\\Collections\\Generic\\EqualityComparerTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9456,7 +9586,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/ExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.ExceptionTests", $t.File = "Batch1\\Exceptions\\ExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9701,7 +9831,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.Expressions.ExpressionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/Expressions/ExpressionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.Expressions.ExpressionTests", $t.File = "Batch1\\Linq\\Expressions\\ExpressionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9861,7 +9991,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Float32ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Float32ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Float32ArrayTests", $t.File = "Batch1\\Collections\\Native\\Float32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10021,7 +10151,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Float64ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Float64ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Float64ArrayTests", $t.File = "Batch1\\Collections\\Native\\Float64ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10061,7 +10191,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.FormatExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/FormatExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.FormatExceptionTests", $t.File = "Batch1\\Exceptions\\FormatExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10121,7 +10251,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.FormattableStringTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/FormattableStringTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.FormattableStringTests", $t.File = "Batch1\\FormattableStringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10156,7 +10286,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.FunctionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/FunctionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.FunctionTests", $t.File = "Batch1\\FunctionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10321,7 +10451,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.GenericDictionaryTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/GenericDictionaryTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.GenericDictionaryTests", $t.File = "Batch1\\Collections\\Generic\\GenericDictionaryTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10481,7 +10611,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.GetMembersTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/GetMembersTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.GetMembersTests", $t.File = "Batch1\\Reflection\\GetMembersTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10631,7 +10761,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.GuidTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/GuidTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.GuidTests", $t.File = "Batch1\\GuidTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10751,7 +10881,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ICollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/ICollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ICollectionTests", $t.File = "Batch1\\Collections\\Generic\\ICollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10776,7 +10906,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.IComparableTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/IComparableTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.IComparableTests", $t.File = "Batch1\\IComparableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10856,7 +10986,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IDictionaryTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IDictionaryTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IDictionaryTests", $t.File = "Batch1\\Collections\\Generic\\IDictionaryTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10906,7 +11036,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IEnumerableTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IEnumerableTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IEnumerableTests", $t.File = "Batch1\\Collections\\Generic\\IEnumerableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10931,7 +11061,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.IEquatableTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/IEquatableTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.IEquatableTests", $t.File = "Batch1\\IEquatableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11056,7 +11186,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IListTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IListTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IListTests", $t.File = "Batch1\\Collections\\Generic\\IListTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11096,7 +11226,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.IndexOutOfRangeExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/IndexOutOfRangeExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.IndexOutOfRangeExceptionTests", $t.File = "Batch1\\Exceptions\\IndexOutOfRangeExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11121,7 +11251,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ObjectLiteralTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11281,7 +11411,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int16ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Int16ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int16ArrayTests", $t.File = "Batch1\\Collections\\Native\\Int16ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11396,7 +11526,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int16Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/Int16Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int16Tests", $t.File = "Batch1\\SimpleTypes\\Int16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -11556,7 +11686,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int32ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Int32ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int32ArrayTests", $t.File = "Batch1\\Collections\\Native\\Int32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11706,7 +11836,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int32Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/Int32Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int32Tests", $t.File = "Batch1\\SimpleTypes\\Int32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -11846,7 +11976,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int64Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/Int64Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.Int64Tests", $t.File = "Batch1\\SimpleTypes\\Int64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -12006,7 +12136,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int8ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Int8ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Int8ArrayTests", $t.File = "Batch1\\Collections\\Native\\Int8ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12046,7 +12176,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.InvalidCastExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/InvalidCastExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.InvalidCastExceptionTests", $t.File = "Batch1\\Exceptions\\InvalidCastExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12086,7 +12216,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.InvalidOperationExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/InvalidOperationExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.InvalidOperationExceptionTests", $t.File = "Batch1\\Exceptions\\InvalidOperationExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12141,7 +12271,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyCollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IReadOnlyCollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyCollectionTests", $t.File = "Batch1\\Collections\\Generic\\IReadOnlyCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12206,7 +12336,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyDictionaryTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IReadOnlyDictionaryTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyDictionaryTests", $t.File = "Batch1\\Collections\\Generic\\IReadOnlyDictionaryTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12256,7 +12386,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyListTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IReadOnlyListTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IReadOnlyListTests", $t.File = "Batch1\\Collections\\Generic\\IReadOnlyListTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12326,7 +12456,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IteratorBlockTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/IteratorBlockTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.IteratorBlockTests", $t.File = "Batch1\\Collections\\Generic\\IteratorBlockTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12614,192 +12744,192 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 DateInequalityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateInequalityWorks()", $t.Line = "914", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateInequalityWorks()", $t.Line = "918", $t));
                     t.Fixture.DateInequalityWorks();
                 },
                 DateLessThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessThanWorks()", $t.Line = "939", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessThanWorks()", $t.Line = "943", $t));
                     t.Fixture.DateLessThanWorks();
                 },
                 DateLessEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessEqualWorks()", $t.Line = "947", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessEqualWorks()", $t.Line = "951", $t));
                     t.Fixture.DateLessEqualWorks();
                 },
                 DateGreaterThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterThanWorks()", $t.Line = "955", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterThanWorks()", $t.Line = "959", $t));
                     t.Fixture.DateGreaterThanWorks();
                 },
                 DateGreaterEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterEqualWorks()", $t.Line = "963", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterEqualWorks()", $t.Line = "967", $t));
                     t.Fixture.DateGreaterEqualWorks();
                 },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "971", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "975", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 EqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "980", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "984", $t));
                     t.Fixture.EqualsWorks();
                 },
                 IEquatableEqualsWorks_SPI_1608: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks_SPI_1608()", $t.Line = "989", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks_SPI_1608()", $t.Line = "999", $t));
                     t.Fixture.IEquatableEqualsWorks_SPI_1608();
                 },
                 StaticEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticEqualsWorks()", $t.Line = "1003", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticEqualsWorks()", $t.Line = "1017", $t));
                     t.Fixture.StaticEqualsWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "1012", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "1032", $t));
                     t.Fixture.CompareToWorks();
                 },
                 StaticCompareWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareWorks()", $t.Line = "1020", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareWorks()", $t.Line = "1044", $t));
                     t.Fixture.StaticCompareWorks();
                 },
                 IComparableCompareToWorks_SPI_1609: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks_SPI_1609()", $t.Line = "1028", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks_SPI_1609()", $t.Line = "1056", $t));
                     t.Fixture.IComparableCompareToWorks_SPI_1609();
                 },
                 DatePropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DatePropertyWorks()", $t.Line = "1037", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DatePropertyWorks()", $t.Line = "1069", $t));
                     t.Fixture.DatePropertyWorks();
                 },
                 DayPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayPropertyWorks()", $t.Line = "1044", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayPropertyWorks()", $t.Line = "1076", $t));
                     t.Fixture.DayPropertyWorks();
                 },
                 DayOfWeekPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfWeekPropertyWorks()", $t.Line = "1051", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfWeekPropertyWorks()", $t.Line = "1083", $t));
                     t.Fixture.DayOfWeekPropertyWorks();
                 },
                 DayOfYearPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfYearPropertyWorks()", $t.Line = "1058", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfYearPropertyWorks()", $t.Line = "1090", $t));
                     t.Fixture.DayOfYearPropertyWorks();
                 },
                 HourPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "HourPropertyWorks()", $t.Line = "1065", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "HourPropertyWorks()", $t.Line = "1097", $t));
                     t.Fixture.HourPropertyWorks();
                 },
                 MillisecondPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MillisecondPropertyWorks()", $t.Line = "1072", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MillisecondPropertyWorks()", $t.Line = "1104", $t));
                     t.Fixture.MillisecondPropertyWorks();
                 },
                 MinutePropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MinutePropertyWorks()", $t.Line = "1079", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MinutePropertyWorks()", $t.Line = "1111", $t));
                     t.Fixture.MinutePropertyWorks();
                 },
                 MonthPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MonthPropertyWorks()", $t.Line = "1086", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MonthPropertyWorks()", $t.Line = "1118", $t));
                     t.Fixture.MonthPropertyWorks();
                 },
                 SecondPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SecondPropertyWorks()", $t.Line = "1093", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SecondPropertyWorks()", $t.Line = "1125", $t));
                     t.Fixture.SecondPropertyWorks();
                 },
                 YearPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YearPropertyWorks()", $t.Line = "1100", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YearPropertyWorks()", $t.Line = "1132", $t));
                     t.Fixture.YearPropertyWorks();
                 },
                 AddDaysWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddDaysWorks()", $t.Line = "1107", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddDaysWorks()", $t.Line = "1139", $t));
                     t.Fixture.AddDaysWorks();
                 },
                 AddDaysForDSTWorks_N2967: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddDaysForDSTWorks_N2967()", $t.Line = "1116", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddDaysForDSTWorks_N2967()", $t.Line = "1148", $t));
                     t.Fixture.AddDaysForDSTWorks_N2967();
                 },
                 AddHoursWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddHoursWorks()", $t.Line = "1136", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddHoursWorks()", $t.Line = "1168", $t));
                     t.Fixture.AddHoursWorks();
                 },
                 AddMillisecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMillisecondsWorks()", $t.Line = "1145", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMillisecondsWorks()", $t.Line = "1177", $t));
                     t.Fixture.AddMillisecondsWorks();
                 },
                 AddMinutesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMinutesWorks()", $t.Line = "1154", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMinutesWorks()", $t.Line = "1186", $t));
                     t.Fixture.AddMinutesWorks();
                 },
                 AddMonthsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsWorks()", $t.Line = "1163", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsWorks()", $t.Line = "1195", $t));
                     t.Fixture.AddMonthsWorks();
                 },
                 AddMonthsEdgeCasesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsEdgeCasesWorks()", $t.Line = "1172", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsEdgeCasesWorks()", $t.Line = "1204", $t));
                     t.Fixture.AddMonthsEdgeCasesWorks();
                 },
                 AddSecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddSecondsWorks()", $t.Line = "1198", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddSecondsWorks()", $t.Line = "1230", $t));
                     t.Fixture.AddSecondsWorks();
                 },
                 AddYearsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddYearsWorks()", $t.Line = "1207", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddYearsWorks()", $t.Line = "1239", $t));
                     t.Fixture.AddYearsWorks();
                 },
                 AddYearsWorks_N2963: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddYearsWorks_N2963()", $t.Line = "1217", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddYearsWorks_N2963()", $t.Line = "1249", $t));
                     t.Fixture.AddYearsWorks_N2963();
                 },
                 DaysInMonthWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DaysInMonthWorks()", $t.Line = "1231", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DaysInMonthWorks()", $t.Line = "1263", $t));
                     t.Fixture.DaysInMonthWorks();
                 },
                 IsLeapYearWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLeapYearWorks()", $t.Line = "1250", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLeapYearWorks()", $t.Line = "1282", $t));
                     t.Fixture.IsLeapYearWorks();
                 },
                 SpecifyKindWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SpecifyKindWorks()", $t.Line = "1258", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SpecifyKindWorks()", $t.Line = "1290", $t));
                     t.Fixture.SpecifyKindWorks();
                 },
                 CreateUnixTimestampAndConvertBackToDateTime: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreateUnixTimestampAndConvertBackToDateTime()", $t.Line = "1295", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreateUnixTimestampAndConvertBackToDateTime()", $t.Line = "1327", $t));
                     t.Fixture.CreateUnixTimestampAndConvertBackToDateTime();
                 },
                 ToShortDateStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortDateStringWorks()", $t.Line = "1321", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortDateStringWorks()", $t.Line = "1353", $t));
                     t.Fixture.ToShortDateStringWorks();
                 },
                 ToShortTimeStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortTimeStringWorks()", $t.Line = "1346", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortTimeStringWorks()", $t.Line = "1378", $t));
                     t.Fixture.ToShortTimeStringWorks();
                 }
             }
@@ -12811,7 +12941,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.JsDateTimeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/DateTimeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.JsDateTimeTests", $t.File = "Batch1\\SimpleTypes\\DateTimeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12986,7 +13116,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.JsonTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Serialization/JsonTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.JsonTests", $t.File = "Batch1\\Serialization\\JsonTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13076,7 +13206,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.JsStringTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/JsStringTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.JsStringTests", $t.File = "Batch1\\SimpleTypes\\JsStringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13116,7 +13246,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.KeyNotFoundExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/KeyNotFoundExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.KeyNotFoundExceptionTests", $t.File = "Batch1\\Exceptions\\KeyNotFoundExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13166,7 +13296,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.KeyValuePairTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/KeyValuePairTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.KeyValuePairTests", $t.File = "Batch1\\Collections\\Generic\\KeyValuePairTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13511,7 +13641,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ListTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/ListTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ListTests", $t.File = "Batch1\\Collections\\Generic\\ListTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13856,7 +13986,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MathTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/MathTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MathTests", $t.File = "Batch1\\MathTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13886,7 +14016,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MixinTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/MixinTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MixinTests", $t.File = "Batch1\\MixinTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13981,7 +14111,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MultidimArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/MultidimArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MultidimArrayTests", $t.File = "Batch1\\MultidimArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14006,7 +14136,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MutationObserverTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/MutationObserverTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.MutationObserverTests", $t.File = "Batch1\\MutationObserverTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14046,7 +14176,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NotImplementedExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/NotImplementedExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NotImplementedExceptionTests", $t.File = "Batch1\\Exceptions\\NotImplementedExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14086,7 +14216,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NotSupportedExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/NotSupportedExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NotSupportedExceptionTests", $t.File = "Batch1\\Exceptions\\NotSupportedExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14336,7 +14466,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.NullableTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/NullableTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.NullableTests", $t.File = "Batch1\\NullableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14381,7 +14511,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NullReferenceExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/NullReferenceExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.NullReferenceExceptionTests", $t.File = "Batch1\\Exceptions\\NullReferenceExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14416,7 +14546,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.NumberFormatInfoTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Format/NumberFormatInfoTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.NumberFormatInfoTests", $t.File = "Batch1\\Format\\NumberFormatInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14521,7 +14651,37 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.NumberFormatSpecifiersTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Format/NumberFormatSpecifiersTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.NumberFormatSpecifiersTests", $t.File = "Batch1\\Format\\NumberFormatSpecifiersTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests)],
+        statics: {
+            methods: {
+                TestExternalInterface: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalInterface()", $t.Line = "464", $t));
+                    t.Fixture.TestExternalInterface();
+                },
+                TestClass: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClass()", $t.Line = "496", $t));
+                    t.Fixture.TestClass();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14581,7 +14741,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.ObjectTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/ObjectTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.ObjectTests", $t.File = "Batch1\\SimpleTypes\\ObjectTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14636,7 +14796,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OperationCanceledExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/OperationCanceledExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OperationCanceledExceptionTests", $t.File = "Batch1\\Exceptions\\OperationCanceledExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14676,7 +14836,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OutOfMemoryExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/OutOfMemoryExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OutOfMemoryExceptionTests", $t.File = "Batch1\\Exceptions\\OutOfMemoryExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14716,7 +14876,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OverflowExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/OverflowExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.OverflowExceptionTests", $t.File = "Batch1\\Exceptions\\OverflowExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14756,7 +14916,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.PromiseExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/PromiseExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.PromiseExceptionTests", $t.File = "Batch1\\Exceptions\\PromiseExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14806,7 +14966,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.PromiseTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Threading/Tasks/PromiseTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.PromiseTests", $t.File = "Batch1\\Threading\\Tasks\\PromiseTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14856,7 +15016,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.PropertyAccessorTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/PropertyAccessorTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.PropertyAccessorTests", $t.File = "Batch1\\PropertyAccessorTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14911,7 +15071,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.QueueTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/QueueTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.QueueTests", $t.File = "Batch1\\Collections\\Generic\\QueueTests.cs", $t);
                 }
                 return this.context;
             }
@@ -14986,7 +15146,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.RandomTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/RandomTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.RandomTests", $t.File = "Batch1\\RandomTests.cs", $t);
                 }
                 return this.context;
             }
@@ -15021,7 +15181,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.RankExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/RankExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.RankExceptionTests", $t.File = "Batch1\\Exceptions\\RankExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -15206,7 +15366,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/ObjectModel/ReadOnlyCollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests", $t.File = "Batch1\\Collections\\ObjectModel\\ReadOnlyCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -15686,7 +15846,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.ReflectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/ReflectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.ReflectionTests", $t.File = "Batch1\\Reflection\\ReflectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -15731,7 +15891,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.RefParameterTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/RefParameterTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.RefParameterTests", $t.File = "Batch1\\BasicCSharp\\RefParameterTests.cs", $t);
                 }
                 return this.context;
             }
@@ -15966,7 +16126,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexAlternationTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexAlternationTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexAlternationTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexAlternationTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16091,7 +16251,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexAnchorsTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexAnchorsTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexAnchorsTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexAnchorsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16186,7 +16346,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexBackreferenceTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexBackreferenceTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexBackreferenceTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexBackreferenceTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16261,7 +16421,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexBalancingGroupsTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexBalancingGroupsTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexBalancingGroupsTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexBalancingGroupsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16306,7 +16466,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexCaptureCollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexCaptureCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16566,7 +16726,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexCharClassesTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexCharClassesTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16651,7 +16811,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexEntityTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexEntityTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16771,7 +16931,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexEscapesTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexEscapesTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16811,7 +16971,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexEscapeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexEscapeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexEscapeTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexEscapeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16871,7 +17031,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexExamplesTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexExamplesTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexExamplesTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexExamplesTests.cs", $t);
                 }
                 return this.context;
             }
@@ -16916,7 +17076,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexGroupCollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexGroupCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17126,7 +17286,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexInlineOptionsTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexInlineOptionsTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexInlineOptionsTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexInlineOptionsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17171,7 +17331,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexIsMatchTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexIsMatchTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexIsMatchTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexIsMatchTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17246,7 +17406,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexLookaheadTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexLookaheadTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexLookaheadTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexLookaheadTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17326,7 +17486,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexLookbehindTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexLookbehindTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexLookbehindTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexLookbehindTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17381,7 +17541,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexMatchCollectionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexMatchCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17436,7 +17596,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexMatchEntityTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexMatchEntityTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17481,7 +17641,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchesTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexMatchesTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchesTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexMatchesTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17526,7 +17686,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchSparseTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Entities/RegexMatchSparseTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchSparseTests", $t.File = "Batch1\\Text\\RegularExpressions\\Entities\\RegexMatchSparseTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17576,7 +17736,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexMatchTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexMatchTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17621,7 +17781,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.RegexMatchTimeoutExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/RegexMatchTimeoutExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.RegexMatchTimeoutExceptionTests", $t.File = "Batch1\\Exceptions\\RegexMatchTimeoutExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17681,7 +17841,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexNonbacktrackingTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexNonbacktrackingTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexNonbacktrackingTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexNonbacktrackingTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17786,7 +17946,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexOptionsTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexOptionsTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexOptionsTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexOptionsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -17926,7 +18086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexQuantifiersTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexQuantifiersTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexQuantifiersTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexQuantifiersTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18011,7 +18171,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexReplaceTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexReplaceTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18131,7 +18291,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexSplitTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/Methods/RegexSplitTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.Methods.RegexSplitTests", $t.File = "Batch1\\Text\\RegularExpressions\\Methods\\RegexSplitTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18216,7 +18376,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/RegularExpressions/RegexTimeoutTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests", $t.File = "Batch1\\Text\\RegularExpressions\\RegexTimeoutTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18241,7 +18401,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Runtime.CompilerServices.RuntimeHelpersTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Runtime/CompilerServices/RuntimeHelpersTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Runtime.CompilerServices.RuntimeHelpersTests", $t.File = "Batch1\\Runtime\\CompilerServices\\RuntimeHelpersTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18356,7 +18516,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.SByteTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/SByteTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.SByteTests", $t.File = "Batch1\\SimpleTypes\\SByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18436,7 +18596,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ScriptTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/ScriptTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ScriptTests", $t.File = "Batch1\\ScriptTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18586,7 +18746,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.SingleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/SingleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.SingleTests", $t.File = "Batch1\\SimpleTypes\\SingleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18686,7 +18846,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.StackTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Generic/StackTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.StackTests", $t.File = "Batch1\\Collections\\Generic\\StackTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18766,7 +18926,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Diagnostics.StopwatchTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Diagnostics/StopwatchTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Diagnostics.StopwatchTests", $t.File = "Batch1\\Diagnostics\\StopwatchTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18921,7 +19081,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.StringBuilderTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Text/StringBuilderTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.StringBuilderTests", $t.File = "Batch1\\Text\\StringBuilderTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18991,7 +19151,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.StringFormatTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Format/StringFormatTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Format.StringFormatTests", $t.File = "Batch1\\Format\\StringFormatTests.cs", $t);
                 }
                 return this.context;
             }
@@ -19027,394 +19187,399 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CharArrayWithStartIndexAndLengthConstructorWorks()", $t.Line = "88", $t));
                     t.Fixture.CharArrayWithStartIndexAndLengthConstructorWorks();
                 },
+                CopyToWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CopyToWorks()", $t.Line = "94", $t));
+                    t.Fixture.CopyToWorks();
+                },
                 EmptyFieldWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EmptyFieldWorks()", $t.Line = "94", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EmptyFieldWorks()", $t.Line = "124", $t));
                     t.Fixture.EmptyFieldWorks();
                 },
                 LengthPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthPropertyWorks()", $t.Line = "100", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthPropertyWorks()", $t.Line = "130", $t));
                     t.Fixture.LengthPropertyWorks();
                 },
                 CompareToWorks_353: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks_353()", $t.Line = "107", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks_353()", $t.Line = "137", $t));
                     t.Fixture.CompareToWorks_353();
                 },
                 CompareWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareWorks()", $t.Line = "123", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareWorks()", $t.Line = "153", $t));
                     t.Fixture.CompareWorks();
                 },
                 CompareWithIgnoreCaseArgWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareWithIgnoreCaseArgWorks()", $t.Line = "135", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareWithIgnoreCaseArgWorks()", $t.Line = "165", $t));
                     t.Fixture.CompareWithIgnoreCaseArgWorks();
                 },
                 ConcatWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWorks()", $t.Line = "150", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWorks()", $t.Line = "180", $t));
                     t.Fixture.ConcatWorks();
                 },
                 ConcatWithObjectsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWithObjectsWorks()", $t.Line = "163", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWithObjectsWorks()", $t.Line = "193", $t));
                     t.Fixture.ConcatWithObjectsWorks();
                 },
                 EndsWithCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EndsWithCharWorks()", $t.Line = "177", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EndsWithCharWorks()", $t.Line = "207", $t));
                     t.Fixture.EndsWithCharWorks();
                 },
                 EndsWithStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EndsWithStringWorks()", $t.Line = "184", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EndsWithStringWorks()", $t.Line = "214", $t));
                     t.Fixture.EndsWithStringWorks();
                 },
                 StaticEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticEqualsWorks()", $t.Line = "191", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticEqualsWorks()", $t.Line = "221", $t));
                     t.Fixture.StaticEqualsWorks();
                 },
                 FormatWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "218", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "248", $t));
                     t.Fixture.FormatWorks();
                 },
                 FormatWorksExtended: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksExtended()", $t.Line = "237", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksExtended()", $t.Line = "267", $t));
                     t.Fixture.FormatWorksExtended();
                 },
                 FormatWorksWithIFormattable_SPI_1598: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksWithIFormattable_SPI_1598()", $t.Line = "249", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksWithIFormattable_SPI_1598()", $t.Line = "279", $t));
                     t.Fixture.FormatWorksWithIFormattable_SPI_1598();
                 },
                 FormatWorksWithIFormattableAndFormatProvider_SPI_1598: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksWithIFormattableAndFormatProvider_SPI_1598()", $t.Line = "257", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorksWithIFormattableAndFormatProvider_SPI_1598()", $t.Line = "287", $t));
                     t.Fixture.FormatWorksWithIFormattableAndFormatProvider_SPI_1598();
                 },
                 FormatCanUseEscapedBraces: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatCanUseEscapedBraces()", $t.Line = "265", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatCanUseEscapedBraces()", $t.Line = "295", $t));
                     t.Fixture.FormatCanUseEscapedBraces();
                 },
                 IndexOfCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWorks()", $t.Line = "271", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWorks()", $t.Line = "301", $t));
                     t.Fixture.IndexOfCharWorks();
                 },
                 IndexOfStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWorks()", $t.Line = "278", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWorks()", $t.Line = "308", $t));
                     t.Fixture.IndexOfStringWorks();
                 },
                 IndexOfCharWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWithStartIndexWorks()", $t.Line = "285", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWithStartIndexWorks()", $t.Line = "315", $t));
                     t.Fixture.IndexOfCharWithStartIndexWorks();
                 },
                 IndexOfCharWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWithStartIndexAndCountWorks()", $t.Line = "292", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfCharWithStartIndexAndCountWorks()", $t.Line = "322", $t));
                     t.Fixture.IndexOfCharWithStartIndexAndCountWorks();
                 },
                 IndexOfStringWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWithStartIndexWorks()", $t.Line = "300", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWithStartIndexWorks()", $t.Line = "330", $t));
                     t.Fixture.IndexOfStringWithStartIndexWorks();
                 },
                 IndexOfStringWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWithStartIndexAndCountWorks()", $t.Line = "307", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfStringWithStartIndexAndCountWorks()", $t.Line = "337", $t));
                     t.Fixture.IndexOfStringWithStartIndexAndCountWorks();
                 },
                 IndexOfAnyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWorks()", $t.Line = "315", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWorks()", $t.Line = "345", $t));
                     t.Fixture.IndexOfAnyWorks();
                 },
                 IndexOfAnyWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWithStartIndexWorks()", $t.Line = "324", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWithStartIndexWorks()", $t.Line = "354", $t));
                     t.Fixture.IndexOfAnyWithStartIndexWorks();
                 },
                 IndexOfAnyWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWithStartIndexAndCountWorks()", $t.Line = "333", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfAnyWithStartIndexAndCountWorks()", $t.Line = "363", $t));
                     t.Fixture.IndexOfAnyWithStartIndexAndCountWorks();
                 },
                 InsertWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InsertWorks()", $t.Line = "343", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InsertWorks()", $t.Line = "373", $t));
                     t.Fixture.InsertWorks();
                 },
                 IsNullOrEmptyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsNullOrEmptyWorks()", $t.Line = "349", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsNullOrEmptyWorks()", $t.Line = "379", $t));
                     t.Fixture.IsNullOrEmptyWorks();
                 },
                 LastIndexOfCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWorks()", $t.Line = "358", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWorks()", $t.Line = "388", $t));
                     t.Fixture.LastIndexOfCharWorks();
                 },
                 LastIndexOfStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWorks()", $t.Line = "365", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWorks()", $t.Line = "395", $t));
                     t.Fixture.LastIndexOfStringWorks();
                 },
                 LastIndexOfCharWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWithStartIndexWorks()", $t.Line = "372", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWithStartIndexWorks()", $t.Line = "402", $t));
                     t.Fixture.LastIndexOfCharWithStartIndexWorks();
                 },
                 LastIndexOfStringWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWithStartIndexWorks()", $t.Line = "379", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWithStartIndexWorks()", $t.Line = "409", $t));
                     t.Fixture.LastIndexOfStringWithStartIndexWorks();
                 },
                 LastIndexOfCharWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWithStartIndexAndCountWorks()", $t.Line = "386", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfCharWithStartIndexAndCountWorks()", $t.Line = "416", $t));
                     t.Fixture.LastIndexOfCharWithStartIndexAndCountWorks();
                 },
                 LastIndexOfStringWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWithStartIndexAndCountWorks()", $t.Line = "394", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfStringWithStartIndexAndCountWorks()", $t.Line = "424", $t));
                     t.Fixture.LastIndexOfStringWithStartIndexAndCountWorks();
                 },
                 LastIndexOfAnyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWorks()", $t.Line = "402", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWorks()", $t.Line = "432", $t));
                     t.Fixture.LastIndexOfAnyWorks();
                 },
                 LastIndexOfAnyWithStartIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWithStartIndexWorks()", $t.Line = "411", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWithStartIndexWorks()", $t.Line = "441", $t));
                     t.Fixture.LastIndexOfAnyWithStartIndexWorks();
                 },
                 LastIndexOfAnyWithStartIndexAndCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWithStartIndexAndCountWorks()", $t.Line = "420", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LastIndexOfAnyWithStartIndexAndCountWorks()", $t.Line = "450", $t));
                     t.Fixture.LastIndexOfAnyWithStartIndexAndCountWorks();
                 },
                 PadLeftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadLeftWorks()", $t.Line = "430", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadLeftWorks()", $t.Line = "460", $t));
                     t.Fixture.PadLeftWorks();
                 },
                 PadLeftWithCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadLeftWithCharWorks()", $t.Line = "436", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadLeftWithCharWorks()", $t.Line = "466", $t));
                     t.Fixture.PadLeftWithCharWorks();
                 },
                 PadRightWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadRightWorks()", $t.Line = "442", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadRightWorks()", $t.Line = "472", $t));
                     t.Fixture.PadRightWorks();
                 },
                 PadRightWithCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadRightWithCharWorks()", $t.Line = "448", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PadRightWithCharWorks()", $t.Line = "478", $t));
                     t.Fixture.PadRightWithCharWorks();
                 },
                 RemoveWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemoveWorks()", $t.Line = "454", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemoveWorks()", $t.Line = "484", $t));
                     t.Fixture.RemoveWorks();
                 },
                 RemoveWithCountWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemoveWithCountWorks()", $t.Line = "467", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemoveWithCountWorks()", $t.Line = "497", $t));
                     t.Fixture.RemoveWithCountWorks();
                 },
                 ReplaceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReplaceWorks()", $t.Line = "495", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReplaceWorks()", $t.Line = "525", $t));
                     t.Fixture.ReplaceWorks();
                 },
                 ReplaceCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReplaceCharWorks()", $t.Line = "502", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReplaceCharWorks()", $t.Line = "532", $t));
                     t.Fixture.ReplaceCharWorks();
                 },
                 SplitWithCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharWorks()", $t.Line = "508", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharWorks()", $t.Line = "538", $t));
                     t.Fixture.SplitWithCharWorks();
                 },
                 SplitWithCharsAndLimitWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsAndLimitWorks()", $t.Line = "514", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsAndLimitWorks()", $t.Line = "544", $t));
                     t.Fixture.SplitWithCharsAndLimitWorks();
                 },
                 SplitWithCharsAndStringSplitOptionsAndLimitWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsAndStringSplitOptionsAndLimitWorks()", $t.Line = "520", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsAndStringSplitOptionsAndLimitWorks()", $t.Line = "550", $t));
                     t.Fixture.SplitWithCharsAndStringSplitOptionsAndLimitWorks();
                 },
                 SomeNetSplitTests: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SomeNetSplitTests()", $t.Line = "526", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SomeNetSplitTests()", $t.Line = "556", $t));
                     t.Fixture.SomeNetSplitTests();
                 },
                 SplitWithCharsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsWorks()", $t.Line = "558", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithCharsWorks()", $t.Line = "588", $t));
                     t.Fixture.SplitWithCharsWorks();
                 },
                 SplitWithStringsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithStringsWorks()", $t.Line = "566", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithStringsWorks()", $t.Line = "596", $t));
                     t.Fixture.SplitWithStringsWorks();
                 },
                 SplitWithStringsAndLimitWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithStringsAndLimitWorks()", $t.Line = "573", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SplitWithStringsAndLimitWorks()", $t.Line = "603", $t));
                     t.Fixture.SplitWithStringsAndLimitWorks();
                 },
                 StartsWithStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StartsWithStringWorks()", $t.Line = "579", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StartsWithStringWorks()", $t.Line = "609", $t));
                     t.Fixture.StartsWithStringWorks();
                 },
                 SubstringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringWorks()", $t.Line = "586", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringWorks()", $t.Line = "616", $t));
                     t.Fixture.SubstringWorks();
                 },
                 SubstringWithLengthWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringWithLengthWorks()", $t.Line = "614", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringWithLengthWorks()", $t.Line = "644", $t));
                     t.Fixture.SubstringWithLengthWorks();
                 },
                 ToLowerCaseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerCaseWorks()", $t.Line = "620", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerCaseWorks()", $t.Line = "650", $t));
                     t.Fixture.ToLowerCaseWorks();
                 },
                 ToUpperCaseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperCaseWorks()", $t.Line = "626", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperCaseWorks()", $t.Line = "656", $t));
                     t.Fixture.ToUpperCaseWorks();
                 },
                 ToLowerWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "632", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "662", $t));
                     t.Fixture.ToLowerWorks();
                 },
                 ToUpperWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "638", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "668", $t));
                     t.Fixture.ToUpperWorks();
                 },
                 TrimWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimWorks()", $t.Line = "644", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimWorks()", $t.Line = "674", $t));
                     t.Fixture.TrimWorks();
                 },
                 TrimCharsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimCharsWorks()", $t.Line = "650", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimCharsWorks()", $t.Line = "680", $t));
                     t.Fixture.TrimCharsWorks();
                 },
                 TrimStartCharsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimStartCharsWorks()", $t.Line = "656", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimStartCharsWorks()", $t.Line = "686", $t));
                     t.Fixture.TrimStartCharsWorks();
                 },
                 TrimEndCharsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimEndCharsWorks()", $t.Line = "662", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimEndCharsWorks()", $t.Line = "692", $t));
                     t.Fixture.TrimEndCharsWorks();
                 },
                 TrimStartWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimStartWorks()", $t.Line = "668", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimStartWorks()", $t.Line = "698", $t));
                     t.Fixture.TrimStartWorks();
                 },
                 TrimEndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimEndWorks()", $t.Line = "674", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TrimEndWorks()", $t.Line = "704", $t));
                     t.Fixture.TrimEndWorks();
                 },
                 StringEqualityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringEqualityWorks()", $t.Line = "680", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringEqualityWorks()", $t.Line = "710", $t));
                     t.Fixture.StringEqualityWorks();
                 },
                 StringInequalityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringInequalityWorks()", $t.Line = "690", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringInequalityWorks()", $t.Line = "720", $t));
                     t.Fixture.StringInequalityWorks();
                 },
                 StringIndexingWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringIndexingWorks()", $t.Line = "700", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringIndexingWorks()", $t.Line = "730", $t));
                     t.Fixture.StringIndexingWorks();
                 },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "710", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "740", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 InstanceEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InstanceEqualsWorks()", $t.Line = "720", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InstanceEqualsWorks()", $t.Line = "750", $t));
                     t.Fixture.InstanceEqualsWorks();
                 },
                 IEquatableEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "735", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "765", $t));
                     t.Fixture.IEquatableEqualsWorks();
                 },
                 StringEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringEqualsWorks()", $t.Line = "753", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringEqualsWorks()", $t.Line = "783", $t));
                     t.Fixture.StringEqualsWorks();
                 },
                 StaticCompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareToWorks()", $t.Line = "764", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareToWorks()", $t.Line = "794", $t));
                     t.Fixture.StaticCompareToWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "773", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "803", $t));
                     t.Fixture.CompareToWorks();
                 },
                 IComparableCompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "784", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "814", $t));
                     t.Fixture.IComparableCompareToWorks();
                 },
                 JoinWorks_SPI_1599: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "JoinWorks_SPI_1599()", $t.Line = "795", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "JoinWorks_SPI_1599()", $t.Line = "825", $t));
                     t.Fixture.JoinWorks_SPI_1599();
                 },
                 ContainsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "810", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "840", $t));
                     t.Fixture.ContainsWorks();
                 },
                 ToCharArrayWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToCharArrayWorks()", $t.Line = "819", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToCharArrayWorks()", $t.Line = "849", $t));
                     t.Fixture.ToCharArrayWorks();
                 },
                 Strings: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Strings()", $t.Line = "826", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Strings()", $t.Line = "856", $t));
                     Bridge.ClientTest.SimpleTypes.StringTests.Strings();
                 },
                 Enumerable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Enumerable()", $t.Line = "952", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringTests, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Enumerable()", $t.Line = "982", $t));
                     Bridge.ClientTest.SimpleTypes.StringTests.Enumerable();
                 }
             }
@@ -19426,7 +19591,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.StringTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/StringTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.StringTests", $t.File = "Batch1\\SimpleTypes\\StringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -19926,7 +20091,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SystemConsoleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SystemConsoleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SystemConsoleTests", $t.File = "Batch1\\SystemConsoleTests.cs", $t);
                 }
                 return this.context;
             },
@@ -19972,7 +20137,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.SystemExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/SystemExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.SystemExceptionTests", $t.File = "Batch1\\Exceptions\\SystemExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -20017,7 +20182,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.TaskCanceledExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/TaskCanceledExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.TaskCanceledExceptionTests", $t.File = "Batch1\\Exceptions\\TaskCanceledExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -20262,7 +20427,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.TaskTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Threading/Tasks/TaskTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.TaskTests", $t.File = "Batch1\\Threading\\Tasks\\TaskTests.cs", $t);
                 }
                 return this.context;
             }
@@ -20297,7 +20462,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestAbstractClass", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestAbstractClass.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestAbstractClass", $t.File = "Batch1\\BasicCSharp\\TestAbstractClass.cs", $t);
                 }
                 return this.context;
             }
@@ -20310,7 +20475,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "31", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "27", $t));
                     Bridge.ClientTest.CSharp6.TestAutoProps.TestBasic();
                 }
             }
@@ -20322,7 +20487,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestAutoProps", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestAutoProps.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestAutoProps", $t.File = "Batch1\\CSharp6\\TestAutoProps.cs", $t);
                 }
                 return this.context;
             }
@@ -20347,7 +20512,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestAwaitInCatchFinally", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestAwaitInCatchFinally.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestAwaitInCatchFinally", $t.File = "Batch1\\CSharp6\\TestAwaitInCatchFinally.cs", $t);
                 }
                 return this.context;
             }
@@ -20372,7 +20537,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestConditionAccess", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestConditionalAccess.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestConditionAccess", $t.File = "Batch1\\CSharp6\\TestConditionalAccess.cs", $t);
                 }
                 return this.context;
             }
@@ -20417,7 +20582,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExceptionFilter", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestExceptionFilter.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExceptionFilter", $t.File = "Batch1\\CSharp6\\TestExceptionFilter.cs", $t);
                 }
                 return this.context;
             }
@@ -20442,7 +20607,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExpressionBodyFunction", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestExpressionBodyFunction.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExpressionBodyFunction", $t.File = "Batch1\\CSharp6\\TestExpressionBodyFunction.cs", $t);
                 }
                 return this.context;
             }
@@ -20472,7 +20637,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestGoto", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestGoto.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestGoto", $t.File = "Batch1\\BasicCSharp\\TestGoto.cs", $t);
                 }
                 return this.context;
             }
@@ -20497,7 +20662,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestIndexInitializer", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestIndexInitializer.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestIndexInitializer", $t.File = "Batch1\\CSharp6\\TestIndexInitializer.cs", $t);
                 }
                 return this.context;
             }
@@ -20532,7 +20697,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestInheritance", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestInheritance.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestInheritance", $t.File = "Batch1\\BasicCSharp\\TestInheritance.cs", $t);
                 }
                 return this.context;
             }
@@ -20567,7 +20732,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestInterfaces", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestInterfaces.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestInterfaces", $t.File = "Batch1\\BasicCSharp\\TestInterfaces.cs", $t);
                 }
                 return this.context;
             }
@@ -20580,7 +20745,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "37", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "35", $t));
                     Bridge.ClientTest.CSharp6.TestInterpolatedStrings.TestBasic();
                 }
             }
@@ -20592,7 +20757,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestInterpolatedStrings", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestInterpolatedStrings.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestInterpolatedStrings", $t.File = "Batch1\\CSharp6\\TestInterpolatedStrings.cs", $t);
                 }
                 return this.context;
             }
@@ -20622,7 +20787,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqAggregateOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqAggregateOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqAggregateOperators", $t.File = "Batch1\\Linq\\TestLinqAggregateOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20647,7 +20812,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqConversionOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqConversionOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqConversionOperators", $t.File = "Batch1\\Linq\\TestLinqConversionOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20672,7 +20837,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqElementOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqElementOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqElementOperators", $t.File = "Batch1\\Linq\\TestLinqElementOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20697,7 +20862,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqGenerationOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqGenerationOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqGenerationOperators", $t.File = "Batch1\\Linq\\TestLinqGenerationOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20732,7 +20897,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqGroupingOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqGroupingOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqGroupingOperators", $t.File = "Batch1\\Linq\\TestLinqGroupingOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20757,7 +20922,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqJoinOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqJoinOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqJoinOperators", $t.File = "Batch1\\Linq\\TestLinqJoinOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20782,7 +20947,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqMiscellaneousOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators", $t.File = "Batch1\\Linq\\TestLinqMiscellaneousOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20807,7 +20972,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqOrderingOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqOrderingOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqOrderingOperators", $t.File = "Batch1\\Linq\\TestLinqOrderingOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20832,7 +20997,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqPartitioningOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqPartitioningOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqPartitioningOperators", $t.File = "Batch1\\Linq\\TestLinqPartitioningOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20857,7 +21022,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqProjectionOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqProjectionOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqProjectionOperators", $t.File = "Batch1\\Linq\\TestLinqProjectionOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20882,7 +21047,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqQuantifiers", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqQuantifiers.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqQuantifiers", $t.File = "Batch1\\Linq\\TestLinqQuantifiers.cs", $t);
                 }
                 return this.context;
             }
@@ -20907,7 +21072,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqQueryExecution", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqQueryExecution.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqQueryExecution", $t.File = "Batch1\\Linq\\TestLinqQueryExecution.cs", $t);
                 }
                 return this.context;
             }
@@ -20932,7 +21097,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqRestrictionOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqRestrictionOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqRestrictionOperators", $t.File = "Batch1\\Linq\\TestLinqRestrictionOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20957,7 +21122,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqSetOperators", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Linq/TestLinqSetOperators.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Linq.TestLinqSetOperators", $t.File = "Batch1\\Linq\\TestLinqSetOperators.cs", $t);
                 }
                 return this.context;
             }
@@ -20982,7 +21147,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestMethodParametersClass", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestMethodParametersClass.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestMethodParametersClass", $t.File = "Batch1\\BasicCSharp\\TestMethodParametersClass.cs", $t);
                 }
                 return this.context;
             }
@@ -21007,7 +21172,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestNameOf", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestNameof.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestNameOf", $t.File = "Batch1\\CSharp6\\TestNameof.cs", $t);
                 }
                 return this.context;
             }
@@ -21032,7 +21197,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestOverloadInstanceMethods", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestOverloadInstanceMethods.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestOverloadInstanceMethods", $t.File = "Batch1\\BasicCSharp\\TestOverloadInstanceMethods.cs", $t);
                 }
                 return this.context;
             }
@@ -21057,7 +21222,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestOverloadStaticMethods", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestOverloadStaticMethods.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestOverloadStaticMethods", $t.File = "Batch1\\BasicCSharp\\TestOverloadStaticMethods.cs", $t);
                 }
                 return this.context;
             }
@@ -21092,7 +21257,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestReferenceTypes", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestReferenceTypes.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestReferenceTypes", $t.File = "Batch1\\BasicCSharp\\TestReferenceTypes.cs", $t);
                 }
                 return this.context;
             }
@@ -21137,7 +21302,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestTryCatchBlocks.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks", $t.File = "Batch1\\BasicCSharp\\TestTryCatchBlocks.cs", $t);
                 }
                 return this.context;
             }
@@ -21172,7 +21337,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestTryCatchFinallyBlocks.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks", $t.File = "Batch1\\BasicCSharp\\TestTryCatchFinallyBlocks.cs", $t);
                 }
                 return this.context;
             }
@@ -21322,7 +21487,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.TestUserDefinedStructs", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestUserDefinedStructs.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.TestUserDefinedStructs", $t.File = "Batch1\\BasicCSharp\\TestUserDefinedStructs.cs", $t);
                 }
                 return this.context;
             }
@@ -21347,7 +21512,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestUsingStatic", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CSharp6/TestUsingStatic.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestUsingStatic", $t.File = "Batch1\\CSharp6\\TestUsingStatic.cs", $t);
                 }
                 return this.context;
             }
@@ -21377,7 +21542,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestValueTypes", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestValueTypes.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestValueTypes", $t.File = "Batch1\\BasicCSharp\\TestValueTypes.cs", $t);
                 }
                 return this.context;
             }
@@ -21427,7 +21592,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TestVersion", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/TestVersion.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TestVersion", $t.File = "Batch1\\SimpleTypes\\TestVersion.cs", $t);
                 }
                 return this.context;
             }
@@ -21452,7 +21617,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestVirtualMethods", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/BasicCSharp/TestVirtualMethods.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestVirtualMethods", $t.File = "Batch1\\BasicCSharp\\TestVirtualMethods.cs", $t);
                 }
                 return this.context;
             }
@@ -21492,7 +21657,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.TimeoutExceptionTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Exceptions/TimeoutExceptionTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Exceptions.TimeoutExceptionTests", $t.File = "Batch1\\Exceptions\\TimeoutExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -21542,7 +21707,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.TimerTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Threading/TimerTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Threading.TimerTests", $t.File = "Batch1\\Threading\\TimerTests.cs", $t);
                 }
                 return this.context;
             }
@@ -21677,7 +21842,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TimeSpanTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/TimeSpanTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TimeSpanTests", $t.File = "Batch1\\SimpleTypes\\TimeSpanTests.cs", $t);
                 }
                 return this.context;
             }
@@ -21737,7 +21902,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TupleTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/TupleTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.TupleTests", $t.File = "Batch1\\SimpleTypes\\TupleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -21882,7 +22047,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeAttributeTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/TypeAttributeTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeAttributeTests", $t.File = "Batch1\\Reflection\\TypeAttributeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -21937,7 +22102,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/TypeSystemLanguageSupportTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests", $t.File = "Batch1\\Reflection\\TypeSystemLanguageSupportTests.cs", $t);
                 }
                 return this.context;
             }
@@ -22307,7 +22472,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeSystemTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Reflection/TypeSystemTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Reflection.TypeSystemTests", $t.File = "Batch1\\Reflection\\TypeSystemTests.cs", $t);
                 }
                 return this.context;
             }
@@ -22467,7 +22632,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint16ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Uint16ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint16ArrayTests", $t.File = "Batch1\\Collections\\Native\\Uint16ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -22582,7 +22747,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt16Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/UInt16Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt16Tests", $t.File = "Batch1\\SimpleTypes\\UInt16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -22742,7 +22907,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint32ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Uint32ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint32ArrayTests", $t.File = "Batch1\\Collections\\Native\\Uint32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -22857,7 +23022,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt32Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/UInt32Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt32Tests", $t.File = "Batch1\\SimpleTypes\\UInt32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -22997,7 +23162,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt64Tests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/SimpleTypes/UInt64Tests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.UInt64Tests", $t.File = "Batch1\\SimpleTypes\\UInt64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -23157,7 +23322,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint8ArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Uint8ArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint8ArrayTests", $t.File = "Batch1\\Collections\\Native\\Uint8ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -23322,7 +23487,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/Uint8ClampedArrayTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests", $t.File = "Batch1\\Collections\\Native\\Uint8ClampedArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -23362,7 +23527,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.UncheckedInsideCheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CheckedUncheckedTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.UncheckedInsideCheckedTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
                 }
                 return this.context;
             }
@@ -23402,7 +23567,367 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.UncheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CheckedUncheckedTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.UncheckedTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "74", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "137", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "56", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "108", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "31", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "49", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "96", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "49", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "96", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "30", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "104", $t));
+                    t.Fixture.Decode();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "62", $t));
+                    t.Fixture.Encode();
+                },
+                EncodeAdvanced: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EncodeAdvanced()", $t.Line = "108", $t));
+                    t.Fixture.EncodeAdvanced();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "24", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "104", $t));
+                    t.Fixture.Decode();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "117", $t));
+                    t.Fixture.Encode();
+                },
+                GetBytes_ValidASCIIUnicode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetBytes_ValidASCIIUnicode()", $t.Line = "178", $t));
+                    Bridge.ClientTest.Text.UTF8EncodingEncodeTests.GetBytes_ValidASCIIUnicode();
+                },
+                GetBytes_InvalidASCIIUnicode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetBytes_InvalidASCIIUnicode()", $t.Line = "196", $t));
+                    Bridge.ClientTest.Text.UTF8EncodingEncodeTests.GetBytes_InvalidASCIIUnicode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "214", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "26", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingGetMaxTests.cs", $t);
                 }
                 return this.context;
             }
@@ -23427,7 +23952,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.WeakMapTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/Collections/Native/WeakMapTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.WeakMapTests", $t.File = "Batch1\\Collections\\Native\\WeakMapTests.cs", $t);
                 }
                 return this.context;
             }
@@ -23467,7 +23992,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.WithNoUncheckedKeywordTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch1/CheckedUncheckedTests.cs", $t);
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.WithNoUncheckedKeywordTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
                 }
                 return this.context;
             }

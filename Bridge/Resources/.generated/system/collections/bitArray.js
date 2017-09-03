@@ -142,8 +142,7 @@
                 this._version = 0;
             },
             ctor: function (values) {
-                this.$initialize();                
-				var $t;
+                this.$initialize();                var $t;
 
                 if (values == null) {
                     throw new System.ArgumentNullException("values");

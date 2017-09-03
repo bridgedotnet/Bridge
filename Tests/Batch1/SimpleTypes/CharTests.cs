@@ -136,6 +136,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("A", 'A'.ToString());
         }
 
+        [Test]
+        public void StaticToStringWorks()
+        {
+            Assert.AreEqual("B", Char.ToString('B'));
+        }
+
         // Not C# API
         //[Test]
         //public void ToLocaleStringWorks()

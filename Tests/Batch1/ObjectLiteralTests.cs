@@ -422,5 +422,108 @@ namespace Bridge.ClientTest
                 Assert.Null(config6.Val2, "config6 Val2");
             }
         }
+
+        [Category(Constants.MODULE_OBJECTLITERAL)]
+        [TestFixture(TestNameFormat = "Create<T> - {0}")]
+        public class ObjectLiteralCreateTests
+        {
+            [ExternalInterface(false)]
+            public interface Config1
+            {
+                int id
+                {
+                    get; set;
+                }
+            }
+
+            [ExternalInterface(false)]
+            public interface Config2: Config1
+            {
+                string Name
+                {
+                    get; set;
+                }
+            }
+
+            public interface Config3
+            {
+                int id
+                {
+                    get; set;
+                }
+            }
+
+            public interface Config4 : Config3
+            {
+                string Name
+                {
+                    get; set;
+                }
+            }
+
+            [Test]
+            public void TestExternalInterface()
+            {
+                var c = ObjectLiteral.Create<Config1>();
+                c.id = 1;
+                Assert.AreEqual(1, c.id);
+                Assert.NotNull(c.GetHashCode());
+
+                var c2 = ObjectLiteral.Create<Config2>();
+                c2.id = 2;
+                c2.Name = "Nancy";
+                Assert.AreEqual(2, c2.id);
+                Assert.AreEqual("Nancy", c2.Name);
+                Assert.NotNull(c2.GetHashCode());
+
+                var c21 = ObjectLiteral.Create<Config2>();
+                c21.id = 2;
+                c21.Name = "Nancy";
+                Assert.False(c21 == c2);
+                Assert.False(c21.Equals(c2));
+                Assert.NotNull(c21.GetHashCode());
+
+                c21.id = 21;
+                Assert.False(c21 == c2);
+                Assert.False(c21.Equals(c2));
+
+                Config1 c3 = ObjectLiteral.Create<Config2>();
+                c3.id = 3;
+                Assert.AreEqual(3, c3.id);
+                Assert.NotNull(c.GetHashCode());
+            }
+
+            [Test]
+            public void TestClass()
+            {
+                var c = ObjectLiteral.Create<Config3>();
+                c.id = 1;
+                Assert.AreEqual(1, c.id);
+                Assert.NotNull(c.GetHashCode());
+
+                var c2 = ObjectLiteral.Create<Config4>();
+                c2.id = 2;
+                c2.Name = "Nancy";
+                Assert.AreEqual(2, c2.id);
+                Assert.AreEqual("Nancy", c2.Name);
+                Assert.NotNull(c2.GetHashCode());
+
+                var c21 = ObjectLiteral.Create<Config4>();
+                c21.id = 2;
+                c21.Name = "Nancy";
+                Assert.False(c21 == c2);
+                Assert.False(c21.Equals(c2));
+                Assert.NotNull(c21.GetHashCode());
+
+                c21.id = 21;
+                Assert.False(c21 == c2);
+                Assert.False(c21.Equals(c2));
+
+                Config3 c3 = ObjectLiteral.Create<Config4>();
+                c3.id = 3;
+                Assert.AreEqual(3, c3.id);
+                Assert.NotNull(c.GetHashCode());
+            }
+        }
     }
 }

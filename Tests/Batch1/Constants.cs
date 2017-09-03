@@ -38,6 +38,7 @@
         public const string MODULE_ENUM = "Enum";
         public const string MODULE_GUID = "Guid";
         public const string MODULE_STRUCT = "Struct";
+        public const string MODULE_ENCODING = "Encoding";
 
         public const string MODULE_MATH = "Math";
         public const string MODULE_DECIMAL_MATH = "Decimal Math";

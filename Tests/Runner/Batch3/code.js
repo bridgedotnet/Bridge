@@ -27,10 +27,10 @@ var Bridge3001_SomeLib = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.1.0
+ * @version 16.3.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.1.0
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -2400,7 +2400,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             methods: {
                 TestNullComparing: function () {
-                    var temp = {  };
+                    var temp = { };
                     var varNull = null;
                     var varUndefined = temp["this-prop-undefined"];
 
@@ -6275,7 +6275,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $hasOwnProperty = 4;
 
-                        var o = {  };
+                        var o = { };
                         o.hasOwnProperty("v");
 
                         Bridge.Test.NUnit.Assert.AreEqual(4, $hasOwnProperty, "hasOwnProperty");
@@ -6324,7 +6324,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $isPrototypeOf = 7;
 
-                        var o4 = {  }.isPrototypeOf(null);
+                        var o4 = { }.isPrototypeOf(null);
 
                         Bridge.Test.NUnit.Assert.AreEqual(7, $isPrototypeOf, "isPrototypeOf");
                     }
@@ -6361,7 +6361,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $Object = 10;
 
-                        var o7 = {  };
+                        var o7 = { };
 
                         Bridge.Test.NUnit.Assert.AreEqual(10, $Object, "Object");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o7), $Object, "Not Object");
@@ -6387,7 +6387,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $toString = 12;
 
-                        var o9 = {  }.toString();
+                        var o9 = { }.toString();
 
                         Bridge.Test.NUnit.Assert.AreEqual(12, $toString, "toString");
                         Bridge.Test.NUnit.Assert.AreNotEqual(o9, $toString, "Not toString");
@@ -6413,7 +6413,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $valueOf = 14;
 
-                        var o11 = {  }.valueOf();
+                        var o11 = { }.valueOf();
 
                         Bridge.Test.NUnit.Assert.AreEqual(14, $valueOf, "valueOf");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o11), $valueOf, "Not valueOf");
@@ -11106,7 +11106,7 @@ Bridge.$N1391Result =                     r;
                     }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test))());
                 Bridge.Test.NUnit.Assert.False(l.contains(t));
 
-                var o = {  };
+                var o = { };
                 var l1 = function (_o26) {
                         _o26.add(o);
                         return _o26;
@@ -14098,7 +14098,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestObjectLiteralReflection: function () {
                     var $t;
-                    var ol = {  };
+                    var ol = { };
                     var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray(System.String);
                     Bridge.Test.NUnit.Assert.AreEqual(0, props.length);
 
@@ -14136,7 +14136,7 @@ Bridge.$N1391Result =                     r;
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1; };
                 (function (){
                     this.ShouldSeeThis1 = 0;
@@ -14199,8 +14199,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestGenericMethodInObjectLiteral: function () {
-                    var o1 = {  };
-                    var o2 = {  };
+                    var o1 = { };
+                    var o2 = { };
                     var o3 = Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(System.String).prototype.m1.call(o1, System.Int32, o2), System.Int32);
 
                     Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.unbox(o3));
@@ -14870,7 +14870,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestMethod: function (TType) {
                     var $t;
-                    return ($t = new TType(), $t.TestIntProperty = 2, $t.TestStringProperty = "initializer", $t.TestObjectProperty = String.fromCharCode.apply(null, System.Array.init([105], System.Char)), $t);
+                    return ($t = new TType(), $t.TestIntProperty = 2, $t.TestStringProperty = "initializer", $t.TestObjectProperty = System.String.fromCharArray(System.Array.init([105], System.Char)), $t);
                 },
                 TestCreatingGenericInstanceWithInitializer: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).TestIntProperty);
@@ -14892,7 +14892,7 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.TestIntProperty = 1;
                 this.TestStringProperty = "constructor";
-                this.TestObjectProperty = String.fromCharCode.apply(null, System.Array.init([99], System.Char));
+                this.TestObjectProperty = System.String.fromCharArray(System.Array.init([99], System.Char));
             }
         }
     });
@@ -16224,7 +16224,7 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.any = {  };
+                this.any = { };
             }
         }
     });
@@ -16236,7 +16236,7 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.any = {  };
+                this.any = { };
             }
         }
     });
@@ -16250,7 +16250,7 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.any = {  };
+                this.any = { };
             }
         }
     });
@@ -16596,7 +16596,7 @@ Bridge.$N1391Result =                     r;
                     type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2338.Foo(System.Char, c);
                     Bridge.Test.NUnit.Assert.AreEqual("Char", Bridge.Reflection.getTypeName(type));
 
-                    var o = {  };
+                    var o = { };
                     type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2338.Foo(System.Object, o);
                     Bridge.Test.NUnit.Assert.AreEqual("Object", Bridge.Reflection.getTypeName(type));
                 }
@@ -16687,7 +16687,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, "string");
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
@@ -16712,7 +16712,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, "string");
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
@@ -16745,7 +16745,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, "string");
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
@@ -16773,7 +16773,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, "string");
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
@@ -16795,7 +16795,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, "string");
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, System.Boolean.toString));
@@ -16815,7 +16815,7 @@ Bridge.$N1391Result =                     r;
 
                     // Expected InvalidCastException will be fixed as part of another issue
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, {  });
+                        System.Array.setItem(list, 0, { });
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
@@ -17221,7 +17221,7 @@ Bridge.$N1391Result =                     r;
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2; };
                 (function (){
                     this.a1 = null;
@@ -18234,7 +18234,7 @@ Bridge.$N1391Result =                     r;
             init: function () {
                 this.Name = "";
                 this.Password = "";
-                this.Provider = {  };
+                this.Provider = { };
                 this.User = "";
             }
         }
@@ -18259,7 +18259,7 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.TraceLevels = {  };
+                this.TraceLevels = { };
             }
         }
     });
@@ -18270,7 +18270,7 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.ApplicationType = {  };
+                this.ApplicationType = { };
             }
         }
     });
@@ -18577,7 +18577,7 @@ Bridge.$N1391Result =                     r;
                                         }
                                         case 1: {
                                             $taskResult1 = $task1.getAwaitedResult();
-                                            $tcs.setResult({  });
+                                            $tcs.setResult({ });
                                             return;
                                         }
                                         default: {
@@ -18623,7 +18623,7 @@ Bridge.$N1391Result =                     r;
                                         }
                                         case 1: {
                                             $taskResult1 = $task1.getAwaitedResult();
-                                            $tcs.setResult({  });
+                                            $tcs.setResult({ });
                                             return;
                                         }
                                         default: {
@@ -18649,7 +18649,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             ReturnObject2: function () {
                 var tcs = new System.Threading.Tasks.TaskCompletionSource();
-                tcs.setResult({  });
+                tcs.setResult({ });
 
                 return tcs.task;
             }
@@ -19869,7 +19869,7 @@ Bridge.$N1391Result =                     r;
                     // Nothing gets written for Class1 in the output JavaScript due to the "new object()" argument.
                     // If null is used instead (as commented-out) then it works as expected.
                     // No compile error.
-                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge266B.Test("test", {  });
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge266B.Test("test", { });
                 }
             }
         }
@@ -23735,7 +23735,7 @@ Bridge.$N1391Result =                     r;
                         i = (i + 5) | 0;
                     });
 
-                    test.OnRegister({});
+                    test.OnRegister({ });
                     Bridge.Test.NUnit.Assert.AreEqual(6, i);
                 }
             }
@@ -23777,7 +23777,7 @@ Bridge.$N1391Result =                     r;
                     test.addRegister(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test_RegisterCommon);
                     test.addRegister(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test_RegisterCommon);
 
-                    test.OnRegister({});
+                    test.OnRegister({ });
                     Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.temp);
                 }
             }
@@ -24053,7 +24053,7 @@ Bridge.$N1391Result =                     r;
             },
             methods: {
                 InvokeEvent: function () {
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2923.Test(null, {});
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2923.Test(null, { });
                 },
                 TestEventInitializer: function () {
                     var i = 0;
@@ -24431,8 +24431,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -24978,6 +24980,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3064", {
+        statics: {
+            methods: {
+                TestObjectInitializationMode: function () {
+                    var obj = { Number: 0 };
+                    Bridge.Test.NUnit.Assert.AreStrictEqual(0, obj.Number);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306Component$1", function (TProps) { return {
         statics: {
             methods: {
@@ -24987,6 +25000,20 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3076", {
+        statics: {
+            methods: {
+                TestGuidStringify: function () {
+                    var guid = System.Guid.newGuid();
+                    Bridge.Test.NUnit.Assert.AreEqual(System.String.concat("\"", guid.toString(), "\""), JSON.stringify(guid));
+
+                    var obj = { guid: guid };
+                    Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", guid.toString()), JSON.stringify(obj));
+                }
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
@@ -25918,7 +25945,7 @@ Bridge.$N1391Result =                     r;
 
                 evt = Bridge.fn.combine(evt, Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge520.Source.f2));
 
-                evt(this, {});
+                evt(this, { });
             }
         }
     });
@@ -32654,8 +32681,8 @@ Bridge.$N1391Result =                     r;
                 },
                 N341: function () {
                     var $t;
-                    var o11 = {  };
-                    var o12 = {  };
+                    var o11 = { };
+                    var o12 = { };
                     var b1 = System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(o11, o12);
                     Bridge.Test.NUnit.Assert.False(b1, "EqualityComparer<object>.Default.Equals(o11, o12) works");
 
@@ -33983,7 +34010,7 @@ Bridge.$N1391Result =                     r;
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract; };
                 (function (){
                     this.Value = 0;
@@ -33997,7 +34024,7 @@ Bridge.$N1391Result =                     r;
         $literal: true,
         ctors: {
             ctor: function () {
-                var $this = {};
+                var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2; };
                 (function (){
                     this.Value = 0;
@@ -34303,8 +34330,8 @@ Bridge.$N1391Result =                     r;
             },
             ctors: {
                 init: function () {
-                    this.StaticField = {  };
-                    this.StaticProperty = {  };
+                    this.StaticField = { };
+                    this.StaticProperty = { };
                 },
                 ctor: function () {
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.addStaticEvent(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.Component_StaticEvent);
@@ -34336,8 +34363,8 @@ Bridge.$N1391Result =                     r;
         },
         ctors: {
             init: function () {
-                this.InstanceField = {  };
-                this.InstanceProperty = {  };
+                this.InstanceField = { };
+                this.InstanceProperty = { };
             },
             ctor: function () {
                 this.$initialize();
@@ -34569,7 +34596,7 @@ Bridge.$N1391Result =                     r;
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions.ctor.call(this);
                 this.HasHdsAlwaysEnabled = true;
                 this.LogConnectionLoss = true;
-                this.Provider = {  };
+                this.Provider = { };
                 this.Server = "";
                 this.System = "NT";
             }

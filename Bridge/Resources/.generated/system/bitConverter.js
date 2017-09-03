@@ -172,7 +172,7 @@
                     }
 
                     // We don't need the last '-' character
-                    return String.fromCharCode.apply(null, chArray.slice(0, 0 + ((chArray.length - 1) | 0)));
+                    return System.String.fromCharArray(chArray, 0, ((chArray.length - 1) | 0));
                 },
                 toString: function (value) {
                     if (value == null) {

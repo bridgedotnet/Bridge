@@ -1,7 +1,7 @@
 /**
- * @version   : 16.1.0 - Bridge.NET
+ * @version   : 16.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-08-14
+ * @date      : 2017-09-06
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -92,7 +92,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     var v = "";
 
                     if (value != null) {
-                        v = (value.toString == {}.toString) ? JSON.stringify(value, null, 2) : value.toString();
+                        v = (value.toString == { }.toString) ? JSON.stringify(value, null, 2) : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {

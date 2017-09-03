@@ -164,6 +164,23 @@
     <Compile Include="Reflection\TypeSystemTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="SimpleTypes\JsStringTests.cs" />
+    <Compile Include="Text\Encoding\ASCIIEncoding\ASCIIEncodingDecodeTests.cs" />
+    <Compile Include="Text\Encoding\ASCIIEncoding\ASCIIEncodingGetMaxTests.cs" />
+    <Compile Include="Text\Encoding\ASCIIEncoding\ASCIIEncodingEncodeTests.cs" />
+    <Compile Include="Text\Encoding\NegativeEncodingTests.cs" />
+    <Compile Include="Text\Encoding\EncodingHelpers.cs" />
+    <Compile Include="Text\Encoding\UnicodeEncoding\UnicodeEncodingDecodeTests.cs" />
+    <Compile Include="Text\Encoding\UnicodeEncoding\UnicodeEncodingEncodeTests.cs" />
+    <Compile Include="Text\Encoding\UnicodeEncoding\UnicodeEncodingGetMaxTests.cs" />
+    <Compile Include="Text\Encoding\UTF8Encoding\UTF8EncodingDecodeTests.cs" />
+    <Compile Include="Text\Encoding\UTF8Encoding\UTF8EncodingEncodeTests.cs" />
+    <Compile Include="Text\Encoding\UTF8Encoding\UTF8EncodingGetMaxTests.cs" />
+    <Compile Include="Text\Encoding\UTF7Encoding\UTF7EncodingDecodeTests.cs" />
+    <Compile Include="Text\Encoding\UTF7Encoding\UTF7EncodingEncodeTests.cs" />
+    <Compile Include="Text\Encoding\UTF7Encoding\UTF7EncodingGetMaxTests.cs" />
+    <Compile Include="Text\Encoding\UTF32Encoding\UTF32EncodingGetMaxTests.cs" />
+    <Compile Include="Text\Encoding\UTF32Encoding\UTF32EncodingDecodeTests.cs" />
+    <Compile Include="Text\Encoding\UTF32Encoding\UTF32EncodingEncodeTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexAlternationTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexBalancingGroupsTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexCharClassesTests.cs" />
@@ -305,6 +322,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">
