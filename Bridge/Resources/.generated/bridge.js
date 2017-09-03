@@ -1184,9 +1184,11 @@
                 return b.equals(a);
             } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
                 return Bridge.fn.equals.call(a, b);
-            } else if (a.kind && a.ticks && b.kind && b.ticks) {
-                return a.ticks === b.ticks;
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
+                if (a.kind !== undefined && a.ticks !== undefined && b.kind !== undefined && b.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
                 return true;
@@ -1316,6 +1318,10 @@
 
                 return a < b ? -1 : (a > b ? 1 : 0);
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return Bridge.compare(a.ticks, b.ticks);
+                }
+
                 return Bridge.compare(a.valueOf(), b.valueOf());
             }
 
@@ -1374,6 +1380,10 @@
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
                 return a === b;
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             }
 
