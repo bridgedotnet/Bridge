@@ -1,6 +1,5 @@
 using System;
 using Bridge.Test.NUnit;
-using Bridge.Html5;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,15 +9,27 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Base
         {
-            public virtual int x { get { return 1; } }
+            public virtual int x
+            {
+                get
+                {
+                    return 1;
+                }
+            }
 
         }
         public class A : Base
         {
-            public override int x { get { return base.x + 1; } }
+            public override int x
+            {
+                get
+                {
+                    return base.x + 1;
+                }
+            }
         }
 
-        [Test]
+        [Test(ExpectedCount = 2)]
         public static void TestBaseProperty()
         {
             for (var i = 0; i < 2; i++)
