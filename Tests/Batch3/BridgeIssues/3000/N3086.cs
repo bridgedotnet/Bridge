@@ -1,6 +1,5 @@
-using System;
 using Bridge.Test.NUnit;
-using Bridge.Html5;
+using System;
 using System.Text;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -44,6 +43,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         private static StringBuilder sb;
+
         [Test]
         public static void TestAccessorsOverride()
         {
