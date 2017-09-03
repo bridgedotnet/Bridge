@@ -208,3 +208,13 @@ QUnit.test("#2911", function (assert) {
     assert.ok(true);
 });
 
+QUnit.test("#2984 Encoding", function (assert) {
+    var text = "Hello!";
+
+    var bytes = System.Text.Encoding.UTF8.GetBytes$2(text);
+    assert.deepEqual (bytes, new Uint8Array([72, 101, 108, 108, 111, 33]));
+
+    var returnText = System.Text.Encoding.UTF8.GetString(bytes);
+    assert.equal(returnText, "Hello!");
+});
+

@@ -14,8 +14,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public int Field;
 
             [Name("UsualClass Prop")]
-            public int Prop { get; set; }
-       } 
+            public int Prop
+            {
+                get; set;
+            }
+        }
 
         [ObjectLiteral]
         class ObjectLiteralClass
@@ -24,7 +27,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public int Field;
 
             [Name("ObjectLiteralClass Prop")]
-            public int Prop { get; set; }
+            public int Prop
+            {
+                get; set;
+            }
         }
 
         [Test]
