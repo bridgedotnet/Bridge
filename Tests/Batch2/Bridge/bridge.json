@@ -11,6 +11,7 @@
   "html": {
     "disabled": true
   },
+  // Required for test #3075
   "sourceMap": true,
   "resources": [
     {
