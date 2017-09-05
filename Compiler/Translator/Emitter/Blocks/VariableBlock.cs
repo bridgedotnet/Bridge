@@ -25,6 +25,8 @@ namespace Bridge.Translator
             this.VisitVariableDeclarationStatement();
         }
 
+        internal string lastVarName;
+        internal bool lastIsReferenceLocal;
         protected virtual void VisitVariableDeclarationStatement()
         {
             bool needVar = true;
@@ -39,6 +41,7 @@ namespace Bridge.Translator
                 this.WriteSourceMapName(variable.Name);
 
                 var varName = this.AddLocal(variable.Name, variable, this.VariableDeclarationStatement.Type);
+                lastVarName = varName;
 
                 if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(JS.Vars.FIX_ARGUMENT_NAME))
                 {
@@ -59,6 +62,7 @@ namespace Bridge.Translator
                     isReferenceLocal = this.Emitter.LocalsMap[lrr.Variable].EndsWith(".v");
                 }
 
+                lastIsReferenceLocal = isReferenceLocal;
                 var hasInitializer = !variable.Initializer.IsNull;
 
                 if (variable.Initializer.IsNull && !this.VariableDeclarationStatement.Type.IsVar())

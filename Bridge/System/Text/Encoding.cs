@@ -10,6 +10,8 @@ namespace System.Text
     [Convention]
     public abstract class Encoding : IBridgeClass
     {
+        internal bool _hasError;
+
         /// <summary>
         /// When overridden in a derived class, gets the code page identifier of the current Encoding.
         /// </summary>

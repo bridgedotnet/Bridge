@@ -54,6 +54,38 @@
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />
+    <Compile Include="IO\BinaryReader\BinaryReaderTests.cs" />
+    <Compile Include="IO\BinaryWriter\BinaryWriter.WriteByteCharTests.cs" />
+    <Compile Include="IO\BinaryWriter\BinaryWriter.WriteTests.cs" />
+    <Compile Include="IO\BinaryWriter\BinaryWriterTests.cs" />
+    <Compile Include="IO\BufferedStream\BufferedStream.FlushTests.cs" />
+    <Compile Include="IO\BufferedStream\BufferedStream.InvalidParameters.cs" />
+    <Compile Include="IO\BufferedStream\BufferedStreamTests.cs" />
+    <Compile Include="IO\CallTrackingStream.cs" />
+    <Compile Include="IO\DelegateStream.cs" />
+    <Compile Include="IO\MemoryStream\MemoryStream.ConstructorTests.cs" />
+    <Compile Include="IO\MemoryStream\MemoryStream.GetBufferTests.cs" />
+    <Compile Include="IO\MemoryStream\MemoryStream.TryGetBufferTests.cs" />
+    <Compile Include="IO\MemoryStream\MemoryStreamTests.cs" />
+    <Compile Include="IO\StreamReader\StreamReader.CtorTests.cs" />
+    <Compile Include="IO\StreamReader\StreamReader.StringCtorTests.cs" />
+    <Compile Include="IO\StreamReader\StreamReaderTests.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.BaseStream.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.CloseTests.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.CtorTests.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.FlushTests.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.StringCtorTests.cs" />
+    <Compile Include="IO\StreamWriter\StreamWriter.WriteTests.cs" />
+    <Compile Include="IO\Stream\Stream.APMMethodsTests.cs" />
+    <Compile Include="IO\Stream\Stream.AsyncTests.cs" />
+    <Compile Include="IO\Stream\Stream.CopyToTests.cs" />
+    <Compile Include="IO\Stream\Stream.Methods.cs" />
+    <Compile Include="IO\Stream\Stream.NullTests.cs" />
+    <Compile Include="IO\Stream\Stream.TestLeaveOpen.cs" />
+    <Compile Include="IO\Stream\Stream.TimeoutTests.cs" />
+    <Compile Include="IO\StringReader\StringReader.CtorTests.cs" />
+    <Compile Include="IO\StringWriter\StringWriterTests.cs" />
+    <Compile Include="IO\WrappedMemoryStream.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="ScriptTests.cs" />
     <Compile Include="SimpleTypes\JsDateTests.cs" />
@@ -322,7 +354,6 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">

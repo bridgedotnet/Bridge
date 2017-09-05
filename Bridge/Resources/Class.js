@@ -35,7 +35,7 @@
                         d,
                         cfg;
 
-                    if (v != null && Bridge.isJSObject(v) && (!v.get || !v.set)) {
+                    if (v != null && Bridge.isPlainObject(v) && (!v.get || !v.set)) {
                         for (var k = 0; k < descriptors.length; k++) {
                             if (descriptors[k].name === name) {
                                 d = descriptors[k];

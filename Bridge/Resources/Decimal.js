@@ -513,6 +513,54 @@
         return d;
     };
 
+    System.Decimal.prototype.getBytes = function () {
+        var s = this.value.s,
+            e = this.value.e,
+            d = this.value.d,
+            bytes = System.Array.init(23, 0, System.Byte);
+
+        bytes[0] = s & 255;
+        bytes[1] = e;
+
+        if (d && d.length > 0) {
+            bytes[2] = d.length * 4;
+
+            for (var i = 0; i < d.length; i++) {
+                bytes[i*4 + 3] = d[i] & 255;
+                bytes[i*4 + 4] = (d[i] >> 8) & 255;
+                bytes[i*4 + 5] = (d[i] >> 16) & 255;
+                bytes[i*4 + 6] = (d[i] >> 24) & 255;
+            }            
+        }
+        else {
+            bytes[2] = 0;
+        }
+
+        return bytes;
+    };
+
+    System.Decimal.fromBytes = function (bytes) {
+        var value = new System.Decimal(0),
+            s = Bridge.Int.sxb(bytes[0] & 255),
+            e = bytes[1],
+            ln = bytes[2],
+            d = [];
+
+        value.value.s = s;
+        value.value.e = e;
+
+        if (ln > 0) {
+            for (var i = 3; i < (ln + 3);) {
+                d.push(bytes[i] | bytes[i + 1] << 8 | bytes[i + 2] << 16 | bytes[i + 3] << 24);
+                i = i + 4;
+            }
+        }
+        
+        value.value.d = d;
+
+        return value;
+    };
+
     Bridge.$Decimal.config({ precision: 29 });
 
     System.Decimal.Zero = System.Decimal(0);
