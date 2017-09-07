@@ -20,6 +20,27 @@ namespace Bridge.Translator
             set;
         }
 
+        public CompilerRule OldRules { get; private set; }
+
+        protected override void BeginEmit()
+        {
+            base.BeginEmit();
+            this.OldRules = this.Emitter.Rules;
+
+            var rr = this.Emitter.Resolver.ResolveNode(this.IndexerDeclaration, this.Emitter) as MemberResolveResult;
+
+            if (rr != null)
+            {
+                this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
+            }
+        }
+
+        protected override void EndEmit()
+        {
+            base.EndEmit();
+            this.Emitter.Rules = this.OldRules;
+        }
+
         protected override void DoEmit()
         {
             var rr = this.Emitter.Resolver.ResolveNode(this.IndexerDeclaration, this.Emitter) as MemberResolveResult;

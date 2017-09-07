@@ -515,6 +515,17 @@ namespace Bridge.Contract
             get;
         }
 
+        Dictionary<IAssembly, CompilerRule[]> AssemblyCompilerRuleCache
+        {
+            get;
+        }
+
+        Dictionary<ITypeDefinition, CompilerRule[]> ClassCompilerRuleCache
+        {
+            get;
+        }
+
         bool InConstructor { get; set; }
+        CompilerRule Rules { get; set; }
     }
 }

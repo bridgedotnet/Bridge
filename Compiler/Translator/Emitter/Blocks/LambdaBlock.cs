@@ -231,11 +231,17 @@ namespace Bridge.Translator
             var rr = this.Emitter.Resolver.ResolveNode(context, this.Emitter);
             var oldLifting = this.Emitter.ForbidLifting;
             this.Emitter.ForbidLifting = false;
-            var analyzer = new CaptureAnalyzer(this.Emitter);
-            analyzer.Analyze(this.Body, this.Parameters.Select(p => p.Name));
+            var noLiftingRule = this.Emitter.Rules.Lambda == LambdaRule.Plain;
+            CaptureAnalyzer analyzer = null;
+
+            if(!noLiftingRule)
+            {
+                analyzer = new CaptureAnalyzer(this.Emitter);
+                analyzer.Analyze(this.Body, this.Parameters.Select(p => p.Name));
+            }            
 
             var oldLevel = this.Emitter.Level;
-            if (analyzer.UsedVariables.Count == 0)
+            if (!noLiftingRule && analyzer.UsedVariables.Count == 0)
             {
                 this.Emitter.ResetLevel();
                 Indent();
@@ -327,7 +333,7 @@ namespace Bridge.Translator
                 this.EmitTempVars(pos);
             }
 
-            if (analyzer.UsedVariables.Count == 0)
+            if (!noLiftingRule && analyzer.UsedVariables.Count == 0)
             {
                 if (!this.Emitter.ForbidLifting)
                 {

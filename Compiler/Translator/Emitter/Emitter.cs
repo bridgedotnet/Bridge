@@ -41,6 +41,8 @@ namespace Bridge.Translator
             this.Cache = new EmitterCache();
             this.AssemblyNameRuleCache = new Dictionary<IAssembly, NameRule[]>();
             this.ClassNameRuleCache = new Dictionary<ITypeDefinition, NameRule[]>();
+            this.AssemblyCompilerRuleCache = new Dictionary<IAssembly, CompilerRule[]>();
+            this.ClassCompilerRuleCache = new Dictionary<ITypeDefinition, CompilerRule[]>();
         }
 
         public virtual List<TranslatorOutputItem> Emit()

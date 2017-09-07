@@ -31,7 +31,7 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
-            if (this.Plain)
+            if (this.Plain || this.Emitter.Rules.AnonymousType == AnonymousTypeRule.Plain)
             {
                 this.VisitPlainAnonymousTypeCreateExpression();
             }
