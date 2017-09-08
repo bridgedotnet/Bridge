@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -353,65 +354,14 @@ namespace Bridge.ClientTest
                 message + "GetBytes() from " + input);
 
             var back = convertBack(bytes, 0);
-            AssertApproximatelyIfDoubleOrFloat(back, input, message + "Convert back aligned. ");
+            NumberHelper.AssertNumberWithEpsilon1(input, back, message + "Convert back aligned. ");
 
             // Also try unaligned startIndex
             byte[] longerBytes = new byte[bytes.Length + 1];
             longerBytes[0] = 0;
             Array.Copy(bytes, 0, longerBytes, 1, bytes.Length);
             back = convertBack(longerBytes, 1);
-            AssertApproximatelyIfDoubleOrFloat(back, input, message + "Convert back unaligned. ");
-        }
-
-        private static void AssertApproximatelyIfDoubleOrFloat<TInput>(TInput back, TInput input, string message)
-        {
-            var useEpsilon = typeof(TInput) == typeof(double) || typeof(TInput) == typeof(float);
-
-            if (useEpsilon)
-            {
-                var epsilon = 1e-1;
-
-                if (typeof(TInput) == typeof(double))
-                {
-                    var diff = input.As<double>() - back.As<double>();
-
-                    if (diff < 0)
-                    {
-                        diff = -diff;
-                    }
-
-                    if (diff < epsilon)
-                    {
-                        Assert.True(true, message + input + " vs " + back);
-                    }
-                    else
-                    {
-                        Assert.AreEqual(input.ToString(), back.ToString(), message + "Counted with epsilon: " + epsilon);
-                    }
-                }
-                else
-                {
-                    var diff = input.As<float>() - back.As<float>();
-
-                    if (diff < 0)
-                    {
-                        diff = -diff;
-                    }
-
-                    if (diff < epsilon)
-                    {
-                        Assert.True(true, message + input + " vs " + back);
-                    }
-                    else
-                    {
-                        Assert.AreEqual(input.ToString(), back.ToString(), message + "Counted with epsilon: " + epsilon);
-                    }
-                }
-            }
-            else
-            {
-                Assert.AreEqual(input.ToString(), back.ToString(), message);
-            }
+            NumberHelper.AssertNumberWithEpsilon1(input, back, message + "Convert back unaligned. ");
         }
     }
 }

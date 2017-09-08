@@ -519,7 +519,7 @@ namespace Bridge.ClientTest.Reflection
         [Test] // #2161
         public void IsNotPublicWorks()
         {
-            Assert.True(typeof(Utilities.DecimalHelper).IsNotPublic);
+            Assert.True(typeof(Utilities.NotPublicClass).IsNotPublic);
             Assert.False(typeof(TypeSystemTests).IsNotPublic);
             Assert.False(typeof(CA1).IsNotPublic);
             Assert.False(typeof(CA2).IsNotPublic);

@@ -769,28 +769,28 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = System.Decimal(5.0);
 
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.div(System.Decimal(2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(2.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(2.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.add(System.Decimal(2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc();
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc();
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.5), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.div(System.Decimal(2)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = $t, $t)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.div(System.Decimal(2)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = $t, $t)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.add(System.Decimal(1)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = $t1, $t1)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.add(System.Decimal(1)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = $t1, $t1)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc(), $t2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc(), $t2)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc())));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1.inc())));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Prop1);
                 },
                 TestIndexerOps: function () {
                     var $t, $t1, $t2;
@@ -798,92 +798,87 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     app.setItem(0, System.Decimal(5.0));
 
                     app.setItem(0, app.getItem(0).div(System.Decimal(2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(2.5), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(2.5), app.getItem(0));
 
                     app.setItem(0, app.getItem(0).add(System.Decimal(2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.5), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.5), app.getItem(0));
 
                     app.setItem(0, app.getItem(0).inc());
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.5), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.5), app.getItem(0));
 
                     app.setItem(0, app.getItem(0).inc());
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.5), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.5), app.getItem(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = app.getItem(0).div(System.Decimal(2)), app.setItem(0, $t), $t)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = app.getItem(0).div(System.Decimal(2)), app.setItem(0, $t), $t)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), app.getItem(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = app.getItem(0).add(System.Decimal(1)), app.setItem(0, $t1), $t1)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = app.getItem(0).add(System.Decimal(1)), app.setItem(0, $t1), $t1)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), app.getItem(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = app.getItem(0), app.setItem(0, $t2.inc()), $t2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.25), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = app.getItem(0), app.setItem(0, $t2.inc()), $t2)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.25), app.getItem(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = app.getItem(0), app.setItem(0, $t2.inc()), app.getItem(0))));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), app.getItem(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = app.getItem(0), app.setItem(0, $t2.inc()), app.getItem(0))));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), app.getItem(0));
                 },
                 TestDictOps: function () {
                     var $t, $t1, $t2;
                     var dict = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Decimal))());
 
                     dict.set(0, dict.get(0).div(System.Decimal(2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(2.5), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(2.5), dict.get(0));
 
                     dict.set(0, dict.get(0).add(System.Decimal(2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.5), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.5), dict.get(0));
 
                     dict.set(0, dict.get(0).inc());
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.5), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.5), dict.get(0));
 
                     dict.set(0, dict.get(0).inc());
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.5), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.5), dict.get(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = dict.get(0).div(System.Decimal(2)), dict.set(0, $t), $t)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = dict.get(0).div(System.Decimal(2)), dict.set(0, $t), $t)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), dict.get(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = dict.get(0).add(System.Decimal(1)), dict.set(0, $t1), $t1)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t1 = dict.get(0).add(System.Decimal(1)), dict.set(0, $t1), $t1)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), dict.get(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = dict.get(0), dict.set(0, $t2.inc()), $t2)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.25), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = dict.get(0), dict.set(0, $t2.inc()), $t2)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.25), dict.get(0));
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = dict.get(0), dict.set(0, $t2.inc()), dict.get(0))));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), dict.get(0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t2 = dict.get(0), dict.set(0, $t2.inc()), dict.get(0))));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), dict.get(0));
                 },
                 TestVariableOps: function () {
                     var $t;
                     var i1 = System.Decimal(5);
 
                     i1 = i1.div(System.Decimal(2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(2.5), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(2.5), i1);
 
                     i1 = i1.add(System.Decimal(2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.5), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.5), i1);
 
                     i1 = i1.inc();
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.5), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.5), i1);
 
                     i1 = i1.inc();
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.5), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.5), i1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.div(System.Decimal(2)))));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(3.25), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.div(System.Decimal(2)))));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(3.25), i1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.add(System.Decimal(1)))));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.add(System.Decimal(1)))));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), i1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = i1, i1 = i1.inc(), $t)));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(5.25), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(4.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method(($t = i1, i1 = i1.inc(), $t)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(5.25), i1);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.inc())));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.AssertIsDecimalAndEqualTo(System.Decimal(6.25), i1);
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal.Method((i1 = i1.inc())));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$1(System.Decimal(6.25), i1);
                 },
                 Method: function (i) {
                     return i;
-                },
-                AssertIsDecimalAndEqualTo: function (expected, actual, message) {
-                    if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(expected, System.Decimal), message);
-                    Bridge.Test.NUnit.Assert.AreStrictEqual(expected.toString(), actual.toString(), message);
                 }
             }
         },
@@ -8226,45 +8221,29 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1566", {
         methods: {
             TestMathLog10: function () {
-                this.AssertAlmostEqual(0.477121254719662, Bridge.Math.logWithBase(3.0, 10.0));
-                this.AssertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 10.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 10.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 10.0));
-                this.AssertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 10.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(0.477121254719662, Bridge.Math.logWithBase(3.0, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(-3.0, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 10.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 10.0));
             },
             TestMathLogWithBase: function () {
-                this.AssertAlmostEqual(1.0, Bridge.Math.logWithBase(3.0, 3.0));
-                this.AssertAlmostEqual(2.40217350273, Bridge.Math.logWithBase(14, 3.0));
-                this.AssertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 3.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 3.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 3.0));
-                this.AssertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 3.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(1.0, Bridge.Math.logWithBase(3.0, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(2.40217350273, Bridge.Math.logWithBase(14, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(-3.0, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 3.0));
             },
             TestMathLog: function () {
-                this.AssertAlmostEqual(1.09861228866811, Bridge.Math.log(3.0));
-                this.AssertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.log(0.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.log(-3.0));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NaN));
-                this.AssertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.log(Number.POSITIVE_INFINITY));
-                this.AssertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NEGATIVE_INFINITY));
-            },
-            AssertAlmostEqual: function (expected, actual) {
-                var se = System.Double.format(expected);
-                var sa = System.Double.format(actual);
-
-                if (Bridge.referenceEquals(sa, se)) {
-                    Bridge.Test.NUnit.Assert.True(true, "Actual:" + System.Double.format(actual) + " vs Expected:" + System.Double.format(expected));
-                    return;
-                }
-
-                var diff = actual - expected;
-                if (diff < 0) {
-                    diff = -diff;
-                }
-
-                Bridge.Test.NUnit.Assert.True(diff < 1E-08, "Actual:" + System.Double.format(actual) + " vs Expected:" + System.Double.format(expected));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(1.09861228866811, Bridge.Math.log(3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NEGATIVE_INFINITY, Bridge.Math.log(0.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.log(-3.0));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.log(Number.NaN));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.POSITIVE_INFINITY, Bridge.Math.log(Number.POSITIVE_INFINITY));
+                Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(Number.NaN, Bridge.Math.log(Number.NEGATIVE_INFINITY));
             }
         }
     });
@@ -17247,7 +17226,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestSqrt: function () {
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2399.AssertAlmostEqual(1.73205080756888, Math.sqrt(3.0));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDoubleWithEpsilon8(1.73205080756888, Math.sqrt(3.0));
                     Bridge.Test.NUnit.Assert.AreEqual(0.0, Math.sqrt(0.0));
                     Bridge.Test.NUnit.Assert.AreEqual(Number.NaN, Math.sqrt(-3.0));
                     Bridge.Test.NUnit.Assert.AreEqual(Number.NaN, Math.sqrt(Number.NaN));
@@ -17255,13 +17234,6 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(Number.NaN, Math.sqrt(Number.NEGATIVE_INFINITY));
                     Bridge.Test.NUnit.Assert.AreEqual(3, Math.sqrt(9));
                     Bridge.Test.NUnit.Assert.AreEqual(3, Math.sqrt(System.Int64(9)));
-                },
-                AssertAlmostEqual: function (d1, d2) {
-                    var diff = d2 - d1;
-                    if (diff < 0) {
-                        diff = -diff;
-                    }
-                    Bridge.Test.NUnit.Assert.True(diff < 1E-08);
                 }
             }
         }
@@ -19707,121 +19679,117 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644", {
         statics: {
             methods: {
-                AssertNumber: function (expected, actual, message) {
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.getType(expected)), Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
-                },
                 TestMax: function () {
                     var byte1 = 10;
                     var byte2 = 20;
                     byte1 = Math.max(byte1, byte2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.Byte), Bridge.box(byte1, System.Byte), "byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(Bridge.box(20, System.Byte), Bridge.box(byte1, System.Byte), "byte");
 
                     var sbyte1 = 10;
                     var sbyte2 = 20;
                     sbyte1 = Math.max(sbyte1, sbyte2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.SByte), Bridge.box(sbyte1, System.SByte), "sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20, System.SByte), sbyte1, "sbyte");
 
                     var short1 = 10;
                     var short2 = 20;
                     short1 = Math.max(short1, short2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.Int16), Bridge.box(short1, System.Int16), "short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20, System.Int16), short1, "short");
 
                     var ushort1 = 10;
                     var ushort2 = 20;
                     ushort1 = Math.max(ushort1, ushort2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.UInt16), Bridge.box(ushort1, System.UInt16), "ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20, System.UInt16), ushort1, "ushort");
 
                     var int1 = 10;
                     var int2 = 20;
                     int1 = Math.max(int1, int2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.Int32), Bridge.box(int1, System.Int32), "int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20, System.Int32), int1, "int");
 
                     var uint1 = 10;
                     var uint2 = 20;
                     uint1 = Math.max(uint1, uint2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20, System.UInt32), Bridge.box(uint1, System.UInt32), "unit");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20, System.UInt32), uint1, "unit");
 
                     var long1 = System.Int64(10);
                     var long2 = System.Int64(20);
                     long1 = System.Int64.max(long1, long2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.Int64(20), long1, "long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Int64(20), System.Int64.toNumber(long1), "long");
 
                     var ulong1 = System.UInt64(10);
                     var ulong2 = System.UInt64(20);
                     ulong1 = System.UInt64.max(ulong1, ulong2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.UInt64(20), ulong1, "ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.UInt64(20), System.Int64.toNumber(ulong1), "ulong");
 
                     var float1 = 10;
                     var float2 = 20;
                     float1 = Math.max(float1, float2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20.0, System.Single, System.Single.format, System.Single.getHashCode), Bridge.box(float1, System.Single, System.Single.format, System.Single.getHashCode), "float");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20.0, System.Single, System.Single.format, System.Single.getHashCode), float1, "float");
 
                     var double1 = 10;
                     var double2 = 20;
                     double1 = Math.max(double1, double2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(20.0, System.Double, System.Double.format, System.Double.getHashCode), Bridge.box(double1, System.Double, System.Double.format, System.Double.getHashCode), "double");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(20.0, System.Double, System.Double.format, System.Double.getHashCode), double1, "double");
 
                     var decimal1 = System.Decimal(10);
                     var decimal2 = System.Decimal(20);
                     decimal1 = System.Decimal.max(decimal1, decimal2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.Decimal(20.0), decimal1, "decimal");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(20.0), decimal1, "decimal");
                 },
                 TestMin: function () {
                     var byte1 = 10;
                     var byte2 = 20;
                     byte2 = Math.min(byte1, byte2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.Byte), Bridge.box(byte2, System.Byte), "byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.Byte), byte2, "byte");
 
                     var sbyte1 = 10;
                     var sbyte2 = 20;
                     sbyte2 = Math.min(sbyte1, sbyte2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.SByte), Bridge.box(sbyte2, System.SByte), "sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.SByte), sbyte2, "sbyte");
 
                     var short1 = 10;
                     var short2 = 20;
                     short2 = Math.min(short1, short2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.Int16), Bridge.box(short2, System.Int16), "short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.Int16), short2, "short");
 
                     var ushort1 = 10;
                     var ushort2 = 20;
                     ushort2 = Math.min(ushort1, ushort2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.UInt16), Bridge.box(ushort2, System.UInt16), "ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.UInt16), ushort2, "ushort");
 
                     var int1 = 10;
                     var int2 = 20;
                     int2 = Math.min(int1, int2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.Int32), Bridge.box(int2, System.Int32), "int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.Int32), int2, "int");
 
                     var uint1 = 10;
                     var uint2 = 20;
                     uint2 = Math.min(uint1, uint2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10, System.UInt32), Bridge.box(uint2, System.UInt32), "uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10, System.UInt32), uint2, "uint");
 
                     var long1 = System.Int64(10);
                     var long2 = System.Int64(20);
                     long2 = System.Int64.min(long1, long2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.Int64(10), long2, "long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Int64(10), System.Int64.toNumber(long2), "long");
 
                     var ulong1 = System.UInt64(10);
                     var ulong2 = System.UInt64(20);
                     ulong2 = System.UInt64.min(ulong1, ulong2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.UInt64(10), ulong2, "ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.UInt64(10), System.Int64.toNumber(ulong2), "ulong");
 
                     var float1 = 10;
                     var float2 = 20;
                     float2 = Math.min(float1, float2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10.0, System.Single, System.Single.format, System.Single.getHashCode), Bridge.box(float2, System.Single, System.Single.format, System.Single.getHashCode), "float");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10.0, System.Single, System.Single.format, System.Single.getHashCode), float2, "float");
 
                     var double1 = 10;
                     var double2 = 20;
                     double2 = Math.min(double1, double2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(Bridge.box(10.0, System.Double, System.Double.format, System.Double.getHashCode), Bridge.box(double2, System.Double, System.Double.format, System.Double.getHashCode), "double");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(Bridge.box(10.0, System.Double, System.Double.format, System.Double.getHashCode), double2, "double");
 
                     var decimal1 = System.Decimal(10);
                     var decimal2 = System.Decimal(20);
                     decimal2 = System.Decimal.min(decimal1, decimal2);
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.Decimal(10.0), decimal2, "decimal");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(10.0), decimal2, "decimal");
                 }
             }
         }
@@ -27205,75 +27173,75 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 6), System.Decimal(1.4), "Bridge583 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 6), System.Decimal(1.6), "Bridge583 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 6), System.Decimal(123.4568), "Bridge583 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 6), System.Decimal(123.456789), "Bridge583 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 6), System.Decimal(123.456789), "Bridge583 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 6), System.Decimal(-123.0), "Bridge583 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(1.4), System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 6), "Bridge583 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(1.6), System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 6), "Bridge583 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(123.4568), System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 6), "Bridge583 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(123.456789), System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 6), "Bridge583 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(123.456789), System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 6), "Bridge583 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Decimal(-123.0), System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 6), "Bridge583 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 0), 1.5, "Bridge583 Up 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 0), 1.6, "Bridge583 Up 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 0), 123.4568, "Bridge583 Up 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 0), 123.456789, "Bridge583 Up 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 0), 123.456789, "Bridge583 Up 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 0), -124.0, "Bridge583 Up 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 0), 1.5, "Bridge583 Up 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 0), 1.6, "Bridge583 Up 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 0), 123.4568, "Bridge583 Up 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 0), 123.456789, "Bridge583 Up 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 0), 123.456789, "Bridge583 Up 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 0), -124.0, "Bridge583 Up 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 4), 1.5, "Bridge583 AwayFromZero 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 4), 1.6, "Bridge583 AwayFromZero 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 4), 123.4568, "Bridge583 AwayFromZero 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 4), 123.456789, "Bridge583 AwayFromZero 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 4), 123.456789, "Bridge583 AwayFromZero 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 4), -123.0, "Bridge583 AwayFromZero 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 4), 1.5, "Bridge583 AwayFromZero 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 4), 1.6, "Bridge583 AwayFromZero 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 4), 123.4568, "Bridge583 AwayFromZero 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 4), 123.456789, "Bridge583 AwayFromZero 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 4), 123.456789, "Bridge583 AwayFromZero 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 4), -123.0, "Bridge583 AwayFromZero 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 1), 1.4, "Bridge583 Down 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 1), 1.5, "Bridge583 Down 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 1), 123.4567, "Bridge583 Down 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 1), 123.456789, "Bridge583 Down 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 1), 123.456789, "Bridge583 Down 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 1), -123.0, "Bridge583 Down 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 1), 1.4, "Bridge583 Down 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 1), 1.5, "Bridge583 Down 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 1), 123.4567, "Bridge583 Down 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 1), 123.456789, "Bridge583 Down 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 1), 123.456789, "Bridge583 Down 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 1), -123.0, "Bridge583 Down 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 2), 1.5, "Bridge583 InfinityPos 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 2), 1.6, "Bridge583 InfinityPos 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 2), 123.4568, "Bridge583 InfinityPos 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 2), 123.456789, "Bridge583 InfinityPos 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 2), 123.456789, "Bridge583 InfinityPos 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 2), -123.0, "Bridge583 InfinityPos 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 2), 1.5, "Bridge583 InfinityPos 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 2), 1.6, "Bridge583 InfinityPos 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 2), 123.4568, "Bridge583 InfinityPos 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 2), 123.456789, "Bridge583 InfinityPos 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 2), 123.456789, "Bridge583 InfinityPos 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 2), -123.0, "Bridge583 InfinityPos 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 3), 1.4, "Bridge583 InfinityNeg 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 3), 1.5, "Bridge583 InfinityNeg 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 3), 123.4567, "Bridge583 InfinityNeg 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 3), 123.456789, "Bridge583 InfinityNeg 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 3), 123.456789, "Bridge583 InfinityNeg 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 3), -124.0, "Bridge583 InfinityNeg 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 3), 1.4, "Bridge583 InfinityNeg 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 3), 1.5, "Bridge583 InfinityNeg 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 3), 123.4567, "Bridge583 InfinityNeg 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 3), 123.456789, "Bridge583 InfinityNeg 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 3), 123.456789, "Bridge583 InfinityNeg 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 3), -124.0, "Bridge583 InfinityNeg 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 5), 1.4, "Bridge583 TowardsZero 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 5), 1.5, "Bridge583 TowardsZero 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 5), 123.4568, "Bridge583 TowardsZero 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 5), 123.456789, "Bridge583 TowardsZero 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 5), 123.456789, "Bridge583 TowardsZero 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 5), -123.0, "Bridge583 TowardsZero 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 5), 1.4, "Bridge583 TowardsZero 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 5), 1.5, "Bridge583 TowardsZero 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 5), 123.4568, "Bridge583 TowardsZero 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 5), 123.456789, "Bridge583 TowardsZero 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 5), 123.456789, "Bridge583 TowardsZero 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 5), -123.0, "Bridge583 TowardsZero 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 6), 1.4, "Bridge583 ToEven 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 6), 1.6, "Bridge583 ToEven 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 6), 123.4568, "Bridge583 ToEven 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 6), 123.456789, "Bridge583 ToEven 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 6), 123.456789, "Bridge583 ToEven 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 6), -123.0, "Bridge583 ToEven 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 6), 1.4, "Bridge583 ToEven 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 6), 1.6, "Bridge583 ToEven 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 6), 123.4568, "Bridge583 ToEven 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 6), 123.456789, "Bridge583 ToEven 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 6), 123.456789, "Bridge583 ToEven 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 6), -123.0, "Bridge583 ToEven 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 7), 1.5, "Bridge583 Ceil 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 7), 1.6, "Bridge583 Ceil 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 7), 123.4568, "Bridge583 Ceil 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 7), 123.456789, "Bridge583 Ceil 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 7), 123.456789, "Bridge583 Ceil 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 7), -123.0, "Bridge583 Ceil 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 7), 1.5, "Bridge583 Ceil 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 7), 1.6, "Bridge583 Ceil 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 7), 123.4568, "Bridge583 Ceil 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 7), 123.456789, "Bridge583 Ceil 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 7), 123.456789, "Bridge583 Ceil 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 7), -123.0, "Bridge583 Ceil 6");
 
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 8), 1.4, "Bridge583 Floor 1");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 8), 1.5, "Bridge583 Floor 2");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 8), 123.4568, "Bridge583 Floor 3");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 8), 123.456789, "Bridge583 Floor 4");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 8), 123.456789, "Bridge583 Floor 5");
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 8), -123.0, "Bridge583 Floor 6");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.45), 1, 8), 1.4, "Bridge583 Floor 1");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(1.55), 1, 8), 1.5, "Bridge583 Floor 2");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 4, 8), 123.4568, "Bridge583 Floor 3");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 6, 8), 123.456789, "Bridge583 Floor 4");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(123.456789), 8, 8), 123.456789, "Bridge583 Floor 5");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble(System.Decimal.toDecimalPlaces(System.Decimal(-123.456), 0, 8), -123.0, "Bridge583 Floor 6");
                 }
             }
         }
@@ -32451,42 +32419,35 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.N1122", {
         statics: {
             methods: {
-                AssertNumber: function (expected, actual, message) {
-                    if (message === void 0) { message = null; }
-                    var a = actual != null ? actual.toString() : "null";
-                    var e = expected != null ? expected.toString() : "null";
-
-                    Bridge.Test.NUnit.Assert.AreEqual(e, a, message);
-                },
                 TestClippingInDefaultOverflowMode: function () {
                     var x = System.Double.max;
 
                     var y1 = Bridge.Int.clip32(Math.floor(x / 0.2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(y1, System.Int32), "int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(y1, System.Int32), "int");
 
                     var y2 = Bridge.Int.clipu32(Math.floor(x / 0.2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y2, System.UInt32), "uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(y2, System.UInt32), "uint");
 
                     var z1 = Bridge.Int.clip64(Math.floor(x / 0.2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, z1, "long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, z1, "long");
 
                     var z2 = Bridge.Int.clipu64(Math.floor(x / 0.2));
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, z2, "ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, z2, "ulong");
                 },
                 TestIntegerDivisionInDefaultMode: function () {
                     var x = 1.1;
 
                     var y1 = Bridge.Int.clip32(1 / x);
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Int32), Bridge.box(y1, System.Int32), "int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Int32), Bridge.box(y1, System.Int32), "int");
 
                     var y2 = Bridge.Int.clipu32(1 / x);
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y2, System.UInt32), "uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(y2, System.UInt32), "uint");
 
                     var z1 = Bridge.Int.clip64(1 / x);
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64(0), z1, "long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64(0), z1, "long");
 
                     var z2 = Bridge.Int.clipu64(1 / x);
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64(0), z2, "ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64(0), z2, "ulong");
                 },
                 TestInfinityCastDefaultOverflowMode: function () {
                     var pi = Number.POSITIVE_INFINITY;
@@ -32502,14 +32463,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte), "PositiveInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte), "PositiveInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16), "PositiveInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16), "PositiveInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32), "PositiveInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32), "PositiveInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, y7, "PositiveInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, y8, "PositiveInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte), "PositiveInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte), "PositiveInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16), "PositiveInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16), "PositiveInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32), "PositiveInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32), "PositiveInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, y7, "PositiveInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, y8, "PositiveInfinity -> ulong");
 
                     var ni = Number.NEGATIVE_INFINITY;
 
@@ -32524,14 +32485,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte), "NegativeInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte), "NegativeInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16), "NegativeInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16), "NegativeInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32), "NegativeInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32), "NegativeInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, z7, "NegativeInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, z8, "NegativeInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte), "NegativeInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte), "NegativeInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16), "NegativeInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16), "NegativeInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32), "NegativeInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32), "NegativeInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, z7, "NegativeInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, z8, "NegativeInfinity -> ulong");
                 },
                 TestInfinityCastWithNullable1DefaultOverflowMode: function () {
                     var pi = Number.POSITIVE_INFINITY;
@@ -32547,14 +32508,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, y7, "PositiveInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, y8, "PositiveInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, y7, "PositiveInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, y8, "PositiveInfinity -> ulong");
 
                     var ni = Number.NEGATIVE_INFINITY;
 
@@ -32569,14 +32530,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, z7, "NegativeInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, z8, "NegativeInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, z7, "NegativeInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, z8, "NegativeInfinity -> ulong");
                 },
                 TestInfinityCastWithNullable2DefaultOverflowMode: function () {
                     var pi = Number.POSITIVE_INFINITY;
@@ -32592,14 +32553,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(System.Nullable.getValue(y1), System.Byte), "PositiveInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(System.Nullable.getValue(y2), System.SByte), "PositiveInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(System.Nullable.getValue(y3), System.Int16), "PositiveInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(System.Nullable.getValue(y4), System.UInt16), "PositiveInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(System.Nullable.getValue(y5), System.Int32), "PositiveInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(System.Nullable.getValue(y6), System.UInt32), "PositiveInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, System.Nullable.getValue(y7), "PositiveInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, System.Nullable.getValue(y8), "PositiveInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(System.Nullable.getValue(y1), System.Byte), "PositiveInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(System.Nullable.getValue(y2), System.SByte), "PositiveInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(System.Nullable.getValue(y3), System.Int16), "PositiveInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(System.Nullable.getValue(y4), System.UInt16), "PositiveInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(System.Nullable.getValue(y5), System.Int32), "PositiveInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(System.Nullable.getValue(y6), System.UInt32), "PositiveInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, System.Nullable.getValue(y7), "PositiveInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, System.Nullable.getValue(y8), "PositiveInfinity -> ulong");
 
                     var ni = Number.NEGATIVE_INFINITY;
 
@@ -32614,14 +32575,14 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(System.Nullable.getValue(z1), System.Byte), "NegativeInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(System.Nullable.getValue(z2), System.SByte), "NegativeInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(System.Nullable.getValue(z3), System.Int16), "NegativeInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(System.Nullable.getValue(z4), System.UInt16), "NegativeInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(System.Nullable.getValue(z5), System.Int32), "NegativeInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(System.Nullable.getValue(z6), System.UInt32), "NegativeInfinity -> uint");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, System.Nullable.getValue(z7), "NegativeInfinity -> long");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, System.Nullable.getValue(z8), "NegativeInfinity -> ulong");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.Byte), Bridge.box(System.Nullable.getValue(z1), System.Byte), "NegativeInfinity -> byte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-128, System.SByte), Bridge.box(System.Nullable.getValue(z2), System.SByte), "NegativeInfinity -> sbyte");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-32768, System.Int16), Bridge.box(System.Nullable.getValue(z3), System.Int16), "NegativeInfinity -> short");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt16), Bridge.box(System.Nullable.getValue(z4), System.UInt16), "NegativeInfinity -> ushort");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(-2147483648, System.Int32), Bridge.box(System.Nullable.getValue(z5), System.Int32), "NegativeInfinity -> int");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(Bridge.box(0, System.UInt32), Bridge.box(System.Nullable.getValue(z6), System.UInt32), "NegativeInfinity -> uint");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.Int64.MinValue, System.Nullable.getValue(z7), "NegativeInfinity -> long");
+                    Bridge.ClientTestHelper.NumberHelper.AssertNumberByRepresentation(System.UInt64.MinValue, System.Nullable.getValue(z8), "NegativeInfinity -> ulong");
                 }
             }
         }
@@ -32997,21 +32958,10 @@ Bridge.$N1391Result =                     r;
                 },
                 N409: function () {
                     var a = System.Decimal.round(System.Decimal(3.5), 6);
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(a, "4", "Math.Round(3.5M)");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("4", a, "Math.Round(3.5M)");
 
                     var b = System.Decimal.round(System.Decimal(4.5), 6);
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(b, "4", "Math.Round(4.5M)");
-                },
-                EnsureNumber: function (actual, expected, message) {
-                    Bridge.Test.NUnit.Assert.AreEqual(expected, actual.toString(), message);
-                },
-                AssertAlmostEqual: function (actual, expected, message) {
-                    var diff = expected - actual;
-                    if (diff < 0) {
-                        diff = -diff;
-                    }
-
-                    Bridge.Test.NUnit.Assert.True(diff < 1E-08, System.String.concat(message, "actual: ", System.Double.format(actual), "expeted:", System.Double.format(expected)));
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("4", b, "Math.Round(4.5M)");
                 },
                 N410: function () {
                     // Decimal consts
@@ -33021,11 +32971,11 @@ Bridge.$N1391Result =                     r;
                     var DecimalMaxValue = System.Decimal.MaxValue;
                     var DecimalMinValue = System.Decimal.MinValue;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalZero, "0", "DecimalZero");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalOne, "1", "DecimalOne");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMinusOne, "-1", "DecimalMinusOne");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMaxValue, "79228162514264337593543950335", "DecimalMaxValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMinValue, "-79228162514264337593543950335", "DecimalMinValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("0", DecimalZero, "DecimalZero");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("1", DecimalOne, "DecimalOne");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("-1", DecimalMinusOne, "DecimalMinusOne");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("79228162514264337593543950335", DecimalMaxValue, "DecimalMaxValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("-79228162514264337593543950335", DecimalMinValue, "DecimalMinValue");
 
                     // Decimal consts in expressions
                     var dz = System.Decimal(0.0);
@@ -33035,11 +32985,11 @@ Bridge.$N1391Result =                     r;
                     DecimalMaxValue = System.Decimal.MaxValue.add(dz);
                     DecimalMinValue = System.Decimal.MinValue.add(dz);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalZero, "0", "DecimalZeroin expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalOne, "1", "DecimalOnein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMinusOne, "-1", "DecimalMinusOnein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMaxValue, "79228162514264337593543950335", "DecimalMaxValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(DecimalMinValue, "-79228162514264337593543950335", "DecimalMinValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("0", DecimalZero, "DecimalZeroin expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("1", DecimalOne, "DecimalOnein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("-1", DecimalMinusOne, "DecimalMinusOnein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("79228162514264337593543950335", DecimalMaxValue, "DecimalMaxValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("-79228162514264337593543950335", DecimalMinValue, "DecimalMinValuein expression");
 
                     var numberPositiveInfinity = Number.POSITIVE_INFINITY;
                     var numberNegativeInfinity = Number.NEGATIVE_INFINITY;
@@ -33053,9 +33003,9 @@ Bridge.$N1391Result =                     r;
                     var DoublePositiveInfinity = Number.POSITIVE_INFINITY;
                     var DoubleNaN = Number.NaN;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, System.Double.format, System.Double.getHashCode), "1.79769313486232E+308", "DoubleMaxValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, System.Double.format, System.Double.getHashCode), "-1.79769313486232E+308", "DoubleMinValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, System.Double.format, System.Double.getHashCode), "4.94065645841247E-324", "DoubleEpsilon");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("1.79769313486232E+308", DoubleMaxValue, "DoubleMaxValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("-1.79769313486232E+308", DoubleMinValue, "DoubleMinValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("4.94065645841247E-324", DoubleEpsilon, "DoubleEpsilon");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNegativeInfinity), DoubleNegativeInfinity, "DoubleNegativeInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberPositiveInfinity), DoublePositiveInfinity, "DoublePositiveInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNaN), DoubleNaN, "DoubleNaN");
@@ -33069,9 +33019,9 @@ Bridge.$N1391Result =                     r;
                     DoublePositiveInfinity = Number.POSITIVE_INFINITY + dblz;
                     DoubleNaN = Number.NaN + dblz;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, System.Double.format, System.Double.getHashCode), "1.79769313486232E+308", "DoubleMaxValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, System.Double.format, System.Double.getHashCode), "-1.79769313486232E+308", "DoubleMinValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, System.Double.format, System.Double.getHashCode), "4.94065645841247E-324", "DoubleEpsilonin expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("1.79769313486232E+308", DoubleMaxValue, "DoubleMaxValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("-1.79769313486232E+308", DoubleMinValue, "DoubleMinValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("4.94065645841247E-324", DoubleEpsilon, "DoubleEpsilonin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNegativeInfinity), DoubleNegativeInfinity, "DoubleNegativeInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberPositiveInfinity), DoublePositiveInfinity, "DoublePositiveInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNaN), DoubleNaN, "DoubleNaNin expression");
@@ -33080,17 +33030,17 @@ Bridge.$N1391Result =                     r;
                     var MathE = Math.E;
                     var MathPI = Math.PI;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, System.Double.format, System.Double.getHashCode), "2.71828182845905", "MathE");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("2.71828182845905", MathE, "MathE");
                     //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, System.Double.format, System.Double.getHashCode), "3.14159265358979", "MathPI");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("3.14159265358979", MathPI, "MathPI");
 
                     // Math consts in expression
                     MathE = 2.7182818284590451;
                     MathPI = 3.1415926535897931;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, System.Double.format, System.Double.getHashCode), "2.71828182845905", "MathEin expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("2.71828182845905", MathE, "MathEin expression");
                     //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, System.Double.format, System.Double.getHashCode), "3.14159265358979", "MathPIin expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDouble$1("3.14159265358979", MathPI, "MathPIin expression");
 
                     // Single consts
                     var SingleMaxValue = 3.40282347E+38;
@@ -33100,9 +33050,9 @@ Bridge.$N1391Result =                     r;
                     var SingleNegativeInfinity = Number.NEGATIVE_INFINITY;
                     var SinglePositiveInfinity = Number.POSITIVE_INFINITY;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, System.Single.format, System.Single.getHashCode), "3.402823E+38", "SingleMaxValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, System.Single.format, System.Single.getHashCode), "-3.402823E+38", "SingleMinValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, System.Single.format, System.Single.getHashCode), "1.401298E-45", "SingleEpsilon");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("3.402823E+38", SingleMaxValue, "SingleMaxValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("-3.402823E+38", SingleMinValue, "SingleMinValue");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("1.401298E-45", SingleEpsilon, "SingleEpsilon");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNaN), SingleNaN, "SingleNaN");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNegativeInfinity), SingleNegativeInfinity, "SingleNegativeInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberPositiveInfinity), SinglePositiveInfinity, "SinglePositiveInfinity");
@@ -33116,9 +33066,9 @@ Bridge.$N1391Result =                     r;
                     SingleNegativeInfinity = Number.NEGATIVE_INFINITY + fz;
                     SinglePositiveInfinity = Number.POSITIVE_INFINITY + fz;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, System.Single.format, System.Single.getHashCode), "3.402823E+38", "SingleMaxValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, System.Single.format, System.Single.getHashCode), "-3.402823E+38", "SingleMinValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, System.Single.format, System.Single.getHashCode), "1.401298E-45", "SingleEpsilonin expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("3.402823E+38", SingleMaxValue, "SingleMaxValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("-3.402823E+38", SingleMinValue, "SingleMinValuein expression");
+                    Bridge.ClientTestHelper.NumberHelper.AssertFloat("1.401298E-45", SingleEpsilon, "SingleEpsilonin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNaN), SingleNaN, "SingleNaNin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberNegativeInfinity), SingleNegativeInfinity, "SingleNegativeInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(numberPositiveInfinity), SinglePositiveInfinity, "SinglePositiveInfinityin expression");
@@ -33180,10 +33130,10 @@ Bridge.$N1391Result =                     r;
                 },
                 N442: function () {
                     var a = System.Decimal(3.5);
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(a.round(), "4", "a.Round(3.5M)");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("4", a.round(), "a.Round(3.5M)");
 
                     var b = System.Decimal(4.5);
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(b.round(), "4", "b.Round(4.5M)");
+                    Bridge.ClientTestHelper.NumberHelper.AssertDecimal$2("4", b.round(), "b.Round(4.5M)");
                 },
                 N460: function () {
                     var number;
@@ -33365,23 +33315,6 @@ Bridge.$N1391Result =                     r;
                     var appCodeName = navigator.appCodeName;
 
                     return System.String.format("userAgent:{0} appVersion:{1} product:{2} appName:{3} appCodeName:{4}", userAgent, appVersion, product, appName, appCodeName);
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.Utilities.DecimalHelper", {
-        statics: {
-            methods: {
-                AssertIsDecimalAndEqualTo$1: function (v, d, message) {
-                    if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreStrictEqual(true, Bridge.is(v, System.Decimal), message);
-                    Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d), v.toString(), message);
-                },
-                AssertIsDecimalAndEqualTo: function (v, d, message) {
-                    if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreStrictEqual(true, Bridge.is(v, System.Decimal), message);
-                    Bridge.Test.NUnit.Assert.AreStrictEqual(d.toString(), v.toString(), message);
                 }
             }
         }

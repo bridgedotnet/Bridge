@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 
 using System;
 using System.Text;
@@ -310,18 +311,12 @@ namespace Bridge.ClientTest
         {
             if (JSMode)
             {
-                AssertIsDecimalAndEqualTo(result, (decimal)expected - (dotNetDiff.HasValue ? dotNetDiff.Value : 0m), message);
+                NumberHelper.AssertDecimal((decimal)expected - (dotNetDiff.HasValue ? dotNetDiff.Value : 0m), result, message);
             }
             else
             {
-                AssertIsDecimalAndEqualTo(result, expected, message);
+                NumberHelper.AssertDecimal(expected, result, message);
             }
-        }
-
-        private static void AssertIsDecimalAndEqualTo(object actual, object expected, string message)
-        {
-            Assert.True(actual is decimal, "isDecimal " + message);
-            Assert.AreStrictEqual(expected.ToString(), actual.ToString(), "StrictEqual " + message);
         }
 
         private static string GetDifferenceReport(decimal difference)

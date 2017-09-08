@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -166,28 +167,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Prop1 = 5m;
 
                 Prop1 /= 2;
-                AssertIsDecimalAndEqualTo(2.5m, Prop1);
+                NumberHelper.AssertDecimal(2.5m, Prop1);
 
                 Prop1 += 2;
-                AssertIsDecimalAndEqualTo(4.5m, Prop1);
+                NumberHelper.AssertDecimal(4.5m, Prop1);
 
                 Prop1++;
-                AssertIsDecimalAndEqualTo(5.5m, Prop1);
+                NumberHelper.AssertDecimal(5.5m, Prop1);
 
                 ++Prop1;
-                AssertIsDecimalAndEqualTo(6.5m, Prop1);
+                NumberHelper.AssertDecimal(6.5m, Prop1);
 
-                AssertIsDecimalAndEqualTo(3.25m, Method(Prop1 /= 2));
-                AssertIsDecimalAndEqualTo(3.25m, Prop1);
+                NumberHelper.AssertDecimal(3.25m, Method(Prop1 /= 2));
+                NumberHelper.AssertDecimal(3.25m, Prop1);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(Prop1 += 1));
-                AssertIsDecimalAndEqualTo(4.25m, Prop1);
+                NumberHelper.AssertDecimal(4.25m, Method(Prop1 += 1));
+                NumberHelper.AssertDecimal(4.25m, Prop1);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(Prop1++));
-                AssertIsDecimalAndEqualTo(5.25m, Prop1);
+                NumberHelper.AssertDecimal(4.25m, Method(Prop1++));
+                NumberHelper.AssertDecimal(5.25m, Prop1);
 
-                AssertIsDecimalAndEqualTo(6.25m, Method(++Prop1));
-                AssertIsDecimalAndEqualTo(6.25m, Prop1);
+                NumberHelper.AssertDecimal(6.25m, Method(++Prop1));
+                NumberHelper.AssertDecimal(6.25m, Prop1);
             }
 
             [Test(ExpectedCount = 24)]
@@ -197,28 +198,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 app[0] = 5m;
 
                 app[0] /= 2;
-                AssertIsDecimalAndEqualTo(2.5m, app[0]);
+                NumberHelper.AssertDecimal(2.5m, app[0]);
 
                 app[0] += 2;
-                AssertIsDecimalAndEqualTo(4.5m, app[0]);
+                NumberHelper.AssertDecimal(4.5m, app[0]);
 
                 app[0]++;
-                AssertIsDecimalAndEqualTo(5.5m, app[0]);
+                NumberHelper.AssertDecimal(5.5m, app[0]);
 
                 ++app[0];
-                AssertIsDecimalAndEqualTo(6.5m, app[0]);
+                NumberHelper.AssertDecimal(6.5m, app[0]);
 
-                AssertIsDecimalAndEqualTo(3.25m, Method(app[0] /= 2));
-                AssertIsDecimalAndEqualTo(3.25m, app[0]);
+                NumberHelper.AssertDecimal(3.25m, Method(app[0] /= 2));
+                NumberHelper.AssertDecimal(3.25m, app[0]);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(app[0] += 1));
-                AssertIsDecimalAndEqualTo(4.25m, app[0]);
+                NumberHelper.AssertDecimal(4.25m, Method(app[0] += 1));
+                NumberHelper.AssertDecimal(4.25m, app[0]);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(app[0]++));
-                AssertIsDecimalAndEqualTo(5.25m, app[0]);
+                NumberHelper.AssertDecimal(4.25m, Method(app[0]++));
+                NumberHelper.AssertDecimal(5.25m, app[0]);
 
-                AssertIsDecimalAndEqualTo(6.25m, Method(++app[0]));
-                AssertIsDecimalAndEqualTo(6.25m, app[0]);
+                NumberHelper.AssertDecimal(6.25m, Method(++app[0]));
+                NumberHelper.AssertDecimal(6.25m, app[0]);
             }
 
             [Test(ExpectedCount = 24)]
@@ -227,28 +228,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 var dict = new Dictionary<int, decimal> { { 0, 5m } };
 
                 dict[0] /= 2;
-                AssertIsDecimalAndEqualTo(2.5m, dict[0]);
+                NumberHelper.AssertDecimal(2.5m, dict[0]);
 
                 dict[0] += 2;
-                AssertIsDecimalAndEqualTo(4.5m, dict[0]);
+                NumberHelper.AssertDecimal(4.5m, dict[0]);
 
                 dict[0]++;
-                AssertIsDecimalAndEqualTo(5.5m, dict[0]);
+                NumberHelper.AssertDecimal(5.5m, dict[0]);
 
                 ++dict[0];
-                AssertIsDecimalAndEqualTo(6.5m, dict[0]);
+                NumberHelper.AssertDecimal(6.5m, dict[0]);
 
-                AssertIsDecimalAndEqualTo(3.25m, Method(dict[0] /= 2));
-                AssertIsDecimalAndEqualTo(3.25m, dict[0]);
+                NumberHelper.AssertDecimal(3.25m, Method(dict[0] /= 2));
+                NumberHelper.AssertDecimal(3.25m, dict[0]);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(dict[0] += 1));
-                AssertIsDecimalAndEqualTo(4.25m, dict[0]);
+                NumberHelper.AssertDecimal(4.25m, Method(dict[0] += 1));
+                NumberHelper.AssertDecimal(4.25m, dict[0]);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(dict[0]++));
-                AssertIsDecimalAndEqualTo(5.25m, dict[0]);
+                NumberHelper.AssertDecimal(4.25m, Method(dict[0]++));
+                NumberHelper.AssertDecimal(5.25m, dict[0]);
 
-                AssertIsDecimalAndEqualTo(6.25m, Method(++dict[0]));
-                AssertIsDecimalAndEqualTo(6.25m, dict[0]);
+                NumberHelper.AssertDecimal(6.25m, Method(++dict[0]));
+                NumberHelper.AssertDecimal(6.25m, dict[0]);
             }
 
             [Test(ExpectedCount = 24)]
@@ -257,28 +258,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 decimal i1 = 5;
 
                 i1 /= 2;
-                AssertIsDecimalAndEqualTo(2.5m, i1);
+                NumberHelper.AssertDecimal(2.5m, i1);
 
                 i1 += 2;
-                AssertIsDecimalAndEqualTo(4.5m, i1);
+                NumberHelper.AssertDecimal(4.5m, i1);
 
                 i1++;
-                AssertIsDecimalAndEqualTo(5.5m, i1);
+                NumberHelper.AssertDecimal(5.5m, i1);
 
                 ++i1;
-                AssertIsDecimalAndEqualTo(6.5m, i1);
+                NumberHelper.AssertDecimal(6.5m, i1);
 
-                AssertIsDecimalAndEqualTo(3.25m, Method(i1 /= 2));
-                AssertIsDecimalAndEqualTo(3.25m, i1);
+                NumberHelper.AssertDecimal(3.25m, Method(i1 /= 2));
+                NumberHelper.AssertDecimal(3.25m, i1);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(i1 += 1));
-                AssertIsDecimalAndEqualTo(4.25m, i1);
+                NumberHelper.AssertDecimal(4.25m, Method(i1 += 1));
+                NumberHelper.AssertDecimal(4.25m, i1);
 
-                AssertIsDecimalAndEqualTo(4.25m, Method(i1++));
-                AssertIsDecimalAndEqualTo(5.25m, i1);
+                NumberHelper.AssertDecimal(4.25m, Method(i1++));
+                NumberHelper.AssertDecimal(5.25m, i1);
 
-                AssertIsDecimalAndEqualTo(6.25m, Method(++i1));
-                AssertIsDecimalAndEqualTo(6.25m, i1);
+                NumberHelper.AssertDecimal(6.25m, Method(++i1));
+                NumberHelper.AssertDecimal(6.25m, i1);
             }
 
             public static decimal Prop1
@@ -303,12 +304,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     dict[i] = value;
                 }
-            }
-
-            private static void AssertIsDecimalAndEqualTo(object expected, object actual, string message = null)
-            {
-                Assert.True(expected is decimal, message);
-                Assert.AreStrictEqual(expected.ToString(), actual.ToString(), message);
             }
         }
     }

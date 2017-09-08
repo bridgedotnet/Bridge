@@ -639,7 +639,6 @@
     <Compile Include="BridgeIssues\3100\N3112.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
-    <Compile Include="Utilities\DecimalHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />

@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -351,36 +352,36 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TryParseCurrentCultureWorks()
         {
-            AssertTryParse(true, 10.0, "10", "t1");
-            AssertTryParse(true, 1010.0, "  10,10  ", "t2");
-            AssertTryParse(true, 10210.0, "10,2,10", "t3");
-            AssertTryParse(true, 1011111.0, "10,1,1,1,1,1", "t4");
-            AssertTryParse(true, 1000.0, "10,00", "t5");
-            AssertTryParse(true, 10102.5, "10,10,2.5", "t6");
-            AssertTryParse(true, double.NaN, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t7" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
-            AssertTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "t8" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
-            AssertTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "t9" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
-            AssertTryParse(true, -123.0, "-123", "t10");
-            AssertTryParse(true, 123.0, "123", "t11");
-            AssertTryParse(true, 123.0, "  123  ", "t12");
-            AssertTryParse(true, 0.0, "0", "t13");
-            AssertTryParse(true, 567.89, "567.89", "t14");
-            AssertTryParse(true, -567.89, "-567.89", "t15");
-            AssertTryParse(true, 1E23, "1E23", "t16");
+            NumberHelper.AssertDoubleTryParse(true, 10.0, "10", "t1");
+            NumberHelper.AssertDoubleTryParse(true, 1010.0, "  10,10  ", "t2");
+            NumberHelper.AssertDoubleTryParse(true, 10210.0, "10,2,10", "t3");
+            NumberHelper.AssertDoubleTryParse(true, 1011111.0, "10,1,1,1,1,1", "t4");
+            NumberHelper.AssertDoubleTryParse(true, 1000.0, "10,00", "t5");
+            NumberHelper.AssertDoubleTryParse(true, 10102.5, "10,10,2.5", "t6");
+            NumberHelper.AssertDoubleTryParse(true, double.NaN, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t7" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            NumberHelper.AssertDoubleTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "t8" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
+            NumberHelper.AssertDoubleTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "t9" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
+            NumberHelper.AssertDoubleTryParse(true, -123.0, "-123", "t10");
+            NumberHelper.AssertDoubleTryParse(true, 123.0, "123", "t11");
+            NumberHelper.AssertDoubleTryParse(true, 123.0, "  123  ", "t12");
+            NumberHelper.AssertDoubleTryParse(true, 0.0, "0", "t13");
+            NumberHelper.AssertDoubleTryParse(true, 567.89, "567.89", "t14");
+            NumberHelper.AssertDoubleTryParse(true, -567.89, "-567.89", "t15");
+            NumberHelper.AssertDoubleTryParse(true, 1E23, "1E23", "t16");
 
-            AssertTryParse(false, 0.0, "", "f1");
-            AssertTryParse(false, 0.0, "b", "f2");
-            AssertTryParse(false, 0.0, "10a", "f3");
-            AssertTryParse(false, 0.0, "a10", "f4");
-            AssertTryParse(false, 0.0, "10.2.10", "f5");
-            AssertTryParse(false, 0.0, "10,2.5,0", "f6");
-            AssertTryParse(false, 0.0, "10,2.5,0.0", "f7");
-            AssertTryParse(false, 0.0, "1e10e", "f8");
-            AssertTryParse(false, 0.0, null, "f9");
-            AssertTryParse(false, 0.0, " ", "f10");
-            AssertTryParse(false, 0.0, "Garbage", "f11");
-            AssertTryParse(false, 0.0, "(123)", "f12");
-            AssertTryParse(false, 0.0, "$1000", "f13");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "", "f1");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "b", "f2");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10a", "f3");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "a10", "f4");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10.2.10", "f5");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,2.5,0", "f6");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,2.5,0.0", "f7");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "1e10e", "f8");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, null, "f9");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, " ", "f10");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "Garbage", "f11");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "(123)", "f12");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "$1000", "f13");
         }
 
         [Test]
@@ -388,46 +389,37 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             SetRuCulture();
 
-            AssertTryParse(true, 10.0, "10", "t1");
-            AssertTryParse(true, 10.1, "  10,10  ", "t2");
-            AssertTryParse(true, 10.0, "10,00", "t3");
-            AssertTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "t5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
-            AssertTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "t6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
-            AssertTryParse(true, -123.0, "-123", "t7");
-            AssertTryParse(true, 123.0, "123", "t8");
-            AssertTryParse(true, 123.0, "  123  ", "t9");
-            AssertTryParse(true, 0.0, "0", "t10");
-            AssertTryParse(true, 567.89, "567,89", "t11");
-            AssertTryParse(true, -567.89, "-567,89", "t12");
-            AssertTryParse(true, 1E23, "1E23", "t13");
+            NumberHelper.AssertDoubleTryParse(true, 10.0, "10", "t1");
+            NumberHelper.AssertDoubleTryParse(true, 10.1, "  10,10  ", "t2");
+            NumberHelper.AssertDoubleTryParse(true, 10.0, "10,00", "t3");
+            NumberHelper.AssertDoubleTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "t5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
+            NumberHelper.AssertDoubleTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "t6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
+            NumberHelper.AssertDoubleTryParse(true, -123.0, "-123", "t7");
+            NumberHelper.AssertDoubleTryParse(true, 123.0, "123", "t8");
+            NumberHelper.AssertDoubleTryParse(true, 123.0, "  123  ", "t9");
+            NumberHelper.AssertDoubleTryParse(true, 0.0, "0", "t10");
+            NumberHelper.AssertDoubleTryParse(true, 567.89, "567,89", "t11");
+            NumberHelper.AssertDoubleTryParse(true, -567.89, "-567,89", "t12");
+            NumberHelper.AssertDoubleTryParse(true, 1E23, "1E23", "t13");
 
-            AssertTryParse(false, 0.0, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
-            AssertTryParse(false, 0.0, "", "f1");
-            AssertTryParse(false, 0.0, "b", "f2");
-            AssertTryParse(false, 0.0, "10a", "f3");
-            AssertTryParse(false, 0.0, "a10", "f4");
-            AssertTryParse(false, 0.0, "10.2.10", "f5");
-            AssertTryParse(false, 0.0, "10,2.5,0", "f6");
-            AssertTryParse(false, 0.0, "10,2.5,0.0", "f7");
-            AssertTryParse(false, 0.0, "1e10e", "f8");
-            AssertTryParse(false, 0.0, "  10.10  ", "f9");
-            AssertTryParse(false, 0.0, "10,2,10", "f10");
-            AssertTryParse(false, 0.0, "10,1,1,1,1,1", "f11");
-            AssertTryParse(false, 0.0, "10,10,2.5", "f12");
-            AssertTryParse(false, 0.0, null, "f13");
-            AssertTryParse(false, 0.0, " ", "f14");
-            AssertTryParse(false, 0.0, "Garbage", "f15");
-            AssertTryParse(false, 0.0, "(123)", "f16");
-            AssertTryParse(false, 0.0, "$1000", "f17");
-        }
-
-        private void AssertTryParse(bool r, double expected, string s, string message)
-        {
-            double d;
-            var b = double.TryParse(s, out d);
-
-            Assert.AreEqual(r, b, message);
-            Assert.AreEqual(expected, d, message);
+            NumberHelper.AssertDoubleTryParse(false, 0.0, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "", "f1");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "b", "f2");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10a", "f3");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "a10", "f4");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10.2.10", "f5");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,2.5,0", "f6");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,2.5,0.0", "f7");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "1e10e", "f8");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "  10.10  ", "f9");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,2,10", "f10");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,1,1,1,1,1", "f11");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "10,10,2.5", "f12");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, null, "f13");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, " ", "f14");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "Garbage", "f15");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "(123)", "f16");
+            NumberHelper.AssertDoubleTryParse(false, 0.0, "$1000", "f17");
         }
     }
 }
