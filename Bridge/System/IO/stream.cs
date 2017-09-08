@@ -27,7 +27,7 @@ using Bridge;
 namespace System.IO
 {
     [Reflectable]
-    [FileName("system\\IO\\io.js")]
+    [FileName("system\\io\\io.js")]
     [Convention]
     public abstract class Stream : IDisposable
     {

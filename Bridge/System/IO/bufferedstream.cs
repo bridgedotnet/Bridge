@@ -58,7 +58,7 @@ namespace System.IO
     /// actual specified buffer size.
     /// </summary>
     [Reflectable]
-    [FileName("system\\IO\\io.js")]
+    [FileName("system\\io\\io.js")]
     [Convention]
     public sealed class BufferedStream : Stream
     {

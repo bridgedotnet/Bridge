@@ -9,7 +9,7 @@ using System.Text;
 namespace System.IO
 {
     [Reflectable]
-    [FileName("system\\IO\\io.js")]
+    [FileName("system\\io\\io.js")]
     [Convention]
     abstract internal class Iterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource>
     {
@@ -94,7 +94,7 @@ namespace System.IO
     //    reader (Dev10 Bugs 904764).
     //
     [Reflectable]
-    [FileName("system\\IO\\io.js")]
+    [FileName("system\\io\\io.js")]
     [Convention]
     internal class ReadLinesIterator : Iterator<string>
     {
