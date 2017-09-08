@@ -54,7 +54,8 @@ namespace Bridge.ClientTest.IO
         }
 
         [Test]
-        public void CloseCausesFlush() {
+        public void CloseCausesFlush()
+        {
             StreamWriter sw2;
             Stream memstr2;
 
@@ -63,8 +64,8 @@ namespace Bridge.ClientTest.IO
             memstr2 = CreateStream();
             sw2 = new StreamWriter(memstr2);
 
-            var strTemp = "HelloWorld" ;
-            sw2.Write( strTemp);
+            var strTemp = "HelloWorld";
+            sw2.Write(strTemp);
             Assert.True(0 == memstr2.Length);
 
             sw2.Flush();
@@ -72,13 +73,14 @@ namespace Bridge.ClientTest.IO
         }
 
         [Test]
-        public void CantFlushAfterDispose() {
+        public void CantFlushAfterDispose()
+        {
             // [] Flushing disposed writer should throw
             //-----------------------------------------------------------------
 
             Stream memstr2 = CreateStream();
             StreamWriter sw2 = new StreamWriter(memstr2);
-            
+
             sw2.Dispose();
             Assert.Throws<Exception>(() => sw2.Flush());
         }

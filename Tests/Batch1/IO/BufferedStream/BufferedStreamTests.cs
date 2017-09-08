@@ -277,7 +277,8 @@ namespace Bridge.ClientTest.IO
         }
 
         public void EndCallback(IAsyncResult ar)
-        { }
+        {
+        }
 
         [Test]
         public void BeginEndReadTest()

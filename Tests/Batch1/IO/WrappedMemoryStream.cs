@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.IO
         private bool _canRead;
         private bool _canSeek;
 
-        public WrappedMemoryStream(bool canRead, bool canWrite, bool canSeek) : 
+        public WrappedMemoryStream(bool canRead, bool canWrite, bool canSeek) :
             this(canRead, canWrite, canSeek, null)
         {
         }
@@ -86,7 +86,7 @@ namespace Bridge.ClientTest.IO
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-           return  wrapped.Seek(offset, origin);
+            return wrapped.Seek(offset, origin);
         }
 
         public override void SetLength(long value)

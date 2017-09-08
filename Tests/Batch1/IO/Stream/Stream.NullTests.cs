@@ -21,7 +21,7 @@ namespace Bridge.ClientTest.IO
             // side effects, so call them twice to
             // make sure they don't throw something
             // the second time around
-            
+
             Stream.Null.Flush();
             Stream.Null.Flush();
         }
@@ -32,27 +32,27 @@ namespace Bridge.ClientTest.IO
             Stream.Null.Dispose();
             Stream.Null.Dispose(); // Dispose shouldn't have any side effects
         }
-        
+
         [Test]
         public static void TestNullStream_CopyTo()
         {
             Stream source = Stream.Null;
-            
+
             int originalCapacity = 0;
             var destination = new MemoryStream(originalCapacity);
-            
+
             source.CopyTo(destination, 12345);
             source.CopyTo(destination, 67890);
-            
+
             Assert.True(0 == source.Position);
             Assert.True(0 == destination.Position);
-            
+
             Assert.True(0 == source.Length);
             Assert.True(0 == destination.Length);
-            
+
             Assert.AreEqual(originalCapacity, destination.Capacity);
         }
-        
+
         [Test]
         public static void TestNullStream_CopyToAsyncValidation()
         {
@@ -60,12 +60,12 @@ namespace Bridge.ClientTest.IO
             // implementation from the base class, which did check its
             // arguments, we have to make sure it validates them as
             // well for compat.
-            
+
             var disposedStream = new MemoryStream();
             disposedStream.Dispose();
-            
+
             var readOnlyStream = new MemoryStream(new byte[1], writable: false);
-            
+
             Assert.Throws<ArgumentNullException>(() => Stream.Null.CopyTo(null));
             Assert.Throws<ArgumentNullException>(() => Stream.Null.CopyTo(null, -123)); // Should check if destination == null first
             Assert.Throws<ArgumentOutOfRangeException>(() => Stream.Null.CopyTo(Stream.Null, 0)); // 0 shouldn't be a valid buffer size
@@ -73,13 +73,13 @@ namespace Bridge.ClientTest.IO
             Assert.Throws<Exception>(() => Stream.Null.CopyTo(disposedStream));
             Assert.Throws<NotSupportedException>(() => Stream.Null.CopyTo(readOnlyStream));
         }
-        
+
         [Test]
         public static void TestNullStream_Read()
         {
             var data = NullStream_ReadWriteData;
 
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 byte[] buffer = (byte[])item[0];
                 int offset = (int)item[1];
@@ -97,19 +97,19 @@ namespace Bridge.ClientTest.IO
                 Assert.AreEqual(0, read);
                 Assert.AreEqual(copy, buffer);
                 Assert.True(0 == source.Position);
-            }            
+            }
         }
-        
+
         [Test]
         public static void TestNullStream_ReadByte()
         {
             Stream source = Stream.Null;
-            
+
             int data = source.ReadByte();
             Assert.AreEqual(-1, data);
             Assert.True(0 == source.Position);
         }
-        
+
         [Test]
         public static void TestNullStream_Write()
         {
@@ -132,12 +132,12 @@ namespace Bridge.ClientTest.IO
                 Assert.True(0 == source.Position);
             }
         }
-        
+
         [Test]
         public static void TestNullStream_WriteByte()
         {
             Stream source = Stream.Null;
-            
+
             source.WriteByte(3);
             Assert.True(0 == source.Position);
         }

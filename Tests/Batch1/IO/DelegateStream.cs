@@ -62,20 +62,69 @@ namespace Bridge.ClientTest.IO
             _writeFunc = writeFunc;
         }
 
-        public override bool CanRead { get { return _canReadFunc(); } }
-        public override bool CanSeek { get { return _canSeekFunc(); } }
-        public override bool CanWrite { get { return _canWriteFunc(); } }
+        public override bool CanRead
+        {
+            get
+            {
+                return _canReadFunc();
+            }
+        }
+        public override bool CanSeek
+        {
+            get
+            {
+                return _canSeekFunc();
+            }
+        }
+        public override bool CanWrite
+        {
+            get
+            {
+                return _canWriteFunc();
+            }
+        }
 
-        public override void Flush() { _flushFunc(); }
+        public override void Flush()
+        {
+            _flushFunc();
+        }
 
-        public override long Length { get { return _lengthFunc(); } }
-        public override long Position { get { return _positionGetFunc(); } set { _positionSetFunc(value); } }
+        public override long Length
+        {
+            get
+            {
+                return _lengthFunc();
+            }
+        }
+        public override long Position
+        {
+            get
+            {
+                return _positionGetFunc();
+            }
+            set
+            {
+                _positionSetFunc(value);
+            }
+        }
 
-        public override int Read(byte[] buffer, int offset, int count) { return _readFunc(buffer, offset, count); }
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return _readFunc(buffer, offset, count);
+        }
 
-        public override long Seek(long offset, SeekOrigin origin) { return _seekFunc(offset, origin); }
-        public override void SetLength(long value) { _setLengthFunc(value); }
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            return _seekFunc(offset, origin);
+        }
+        public override void SetLength(long value)
+        {
+            _setLengthFunc(value);
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { _writeFunc(buffer, offset, count); }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            _writeFunc(buffer, offset, count);
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace Bridge.ClientTest.IO
             ,'\uC3A0'
             ,'A'
             ,'5'
-            ,'\uFE70' 
+            ,'\uFE70'
             ,'-'
             ,';'
             ,'\u00E6'
@@ -304,7 +304,7 @@ namespace Bridge.ClientTest.IO
             sw.WriteLine("World!");
 
             Assert.AreEqual(
-                string.Format("H{0}ello{0}World!{0}", "\r\n"), 
+                string.Format("H{0}ello{0}World!{0}", "\r\n"),
                 sw.ToString());
         }
 
@@ -383,7 +383,7 @@ namespace Bridge.ClientTest.IO
             sw.WriteLine(new Object());
             Assert.AreEqual("[object Object]\r\n", sw.ToString());
         }
-    
+
         [Test]
         public static void TestWriteLineAsyncCharArray()
         {

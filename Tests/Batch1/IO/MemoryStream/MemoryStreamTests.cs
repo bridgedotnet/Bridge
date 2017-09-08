@@ -243,7 +243,7 @@ namespace Bridge.ClientTest.IO
         public void CopyTo()
         {
             var data = CopyToData();
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 Stream source = (Stream)item[0];
                 byte[] expected = (byte[])item[1];
@@ -254,7 +254,7 @@ namespace Bridge.ClientTest.IO
                     Assert.True(source.Position >= source.Length && source.Position <= int.MaxValue); // Copying the data should have read to the end of the stream or stayed past the end.
                     Assert.AreEqual(expected, destination.ToArray());
                 }
-            }            
+            }
         }
 
         public static IEnumerable<object[]> CopyToData()

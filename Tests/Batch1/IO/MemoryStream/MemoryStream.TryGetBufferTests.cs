@@ -103,7 +103,7 @@ namespace Bridge.ClientTest.IO
         {
             var data = GetArraysVariedBySize();
             foreach (var objectse in data)
-	        {
+            {
                 byte[] array = (byte[])objectse[0];
                 var stream = new MemoryStream(array);
 
@@ -112,7 +112,7 @@ namespace Bridge.ClientTest.IO
 
                 // publiclyVisible = false;
                 Assert.True(default(ArraySegment<byte>).Equals(result));
-            }            
+            }
         }
 
         [Test]
@@ -129,7 +129,7 @@ namespace Bridge.ClientTest.IO
 
                 // publiclyVisible = false;
                 Assert.True(default(ArraySegment<byte>).Equals(result));
-            }                
+            }
         }
 
         [Test]

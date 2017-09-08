@@ -52,7 +52,7 @@ namespace Bridge.ClientTest.IO
             dr2.Dispose();
             mstr.Dispose();
 
-            //If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.  
+            //If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.
             //They cannot use BinaryReader's ReadChar().  Similarly, data written using Write(char) can't be read back using ReadChars(int).
 
             //A high-surrogate is a Unicode code point in the range U+D800 through U+DBFF and a low-surrogate is a Unicode code point in the range U+DC00 through U+DFFF
@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.IO
         [Test]
         public void BinaryWriter_WriteCharTest_Negative()
         {
-            //If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.  
+            //If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.
             //They cannot use BinaryReader's ReadChar().  Similarly, data written using Write(char) can't be read back using ReadChars(int).
 
             //A high-surrogate is a Unicode code point in the range U+D800 through U+DBFF and a low-surrogate is a Unicode code point in the range U+DC00 through U+DFFF
@@ -417,22 +417,22 @@ namespace Bridge.ClientTest.IO
 
         /// <summary>
         /// Cases Tested:
-        /// If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.  
+        /// If someone writes out characters using BinaryWriter's Write(char[]) method, they must use something like BinaryReader's ReadChars(int) method to read it back in.
         /// They cannot use BinaryReader's ReadChar().  Similarly, data written using Write(char) can't be read back using ReadChars(int).
         /// A high-surrogate is a Unicode code point in the range U+D800 through U+DBFF and a low-surrogate is a Unicode code point in the range U+DC00 through U+DFFF
-        /// 
+        ///
         /// We don't throw on the second read but then throws continuously - note the loop count difference in the 2 loops
-        /// 
+        ///
         /// BinaryReader was reverting to its original location instead of advancing. This was changed to skip past the char in the surrogate range.
-        /// The affected method is InternalReadOneChar (IROC). Note that the work here is slightly complicated by the way surrogates are handled by 
-        /// the decoding classes. When IROC calls decoder.GetChars(), if the bytes passed in are surrogates, UnicodeEncoding doesn't report it. 
-        /// charsRead would end up being one value, and since BinaryReader doesn't have the logic telling it exactly how many bytes total to expect, 
-        /// it calls GetChars in a second loop. In that loop, UnicodeEncoding matches up a surrogate pair. If it realizes it's too big for the encoding, 
-        /// then it throws an ArgumentException (chars overflow). This meant that BinaryReader.IROC is advancing past two chars in the surrogate 
-        /// range, which is why the position actually needs to be moved back (but not past the first surrogate char).  
-        /// 
-        /// Note that UnicodeEncoding doesn't always throw when it encounters two successive chars in the surrogate range. The exception 
-        /// encountered here happens if it finds a valid pair but then determines it's too long. If the pair isn't valid (a low then a high), 
+        /// The affected method is InternalReadOneChar (IROC). Note that the work here is slightly complicated by the way surrogates are handled by
+        /// the decoding classes. When IROC calls decoder.GetChars(), if the bytes passed in are surrogates, UnicodeEncoding doesn't report it.
+        /// charsRead would end up being one value, and since BinaryReader doesn't have the logic telling it exactly how many bytes total to expect,
+        /// it calls GetChars in a second loop. In that loop, UnicodeEncoding matches up a surrogate pair. If it realizes it's too big for the encoding,
+        /// then it throws an ArgumentException (chars overflow). This meant that BinaryReader.IROC is advancing past two chars in the surrogate
+        /// range, which is why the position actually needs to be moved back (but not past the first surrogate char).
+        ///
+        /// Note that UnicodeEncoding doesn't always throw when it encounters two successive chars in the surrogate range. The exception
+        /// encountered here happens if it finds a valid pair but then determines it's too long. If the pair isn't valid (a low then a high),
         /// then it returns 0xfffd, which is why BinaryReader.ReadChar needs to do an explicit check. (It always throws when it encounters a surrogate)
         /// </summary>
         [Test]
@@ -465,7 +465,7 @@ namespace Bridge.ClientTest.IO
                 }
                 catch (ArgumentException)
                 {
-                    // ArgumentException is sometimes thrown on ReadChar() due to the 
+                    // ArgumentException is sometimes thrown on ReadChar() due to the
                     // behavior outlined in the method summary.
                 }
             }

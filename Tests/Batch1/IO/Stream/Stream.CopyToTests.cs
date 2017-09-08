@@ -108,7 +108,7 @@ namespace Bridge.ClientTest.IO
         public void IfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize()
         {
             var data = LengthIsLessThanOrEqualToPosition();
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 long length = (long)item[0];
                 long position = (long)item[1];
@@ -142,7 +142,7 @@ namespace Bridge.ClientTest.IO
                 Assert.NotNull(outerBuffer);
                 Assert.True(outerOffset >= 0 && outerOffset <= (outerBuffer.Length - outerCount));
                 Assert.True(outerCount >= 1 && outerCount <= int.MaxValue);
-            }            
+            }
         }
 
         [Test]
@@ -210,12 +210,12 @@ namespace Bridge.ClientTest.IO
                     readFunc: (buffer, offset, count) =>
                     {
                         Assert.NotNull(buffer);
-                        Assert.True(offset >= 0  && offset <= (buffer.Length - count));
+                        Assert.True(offset >= 0 && offset <= (buffer.Length - count));
                         Assert.True(count >= 1 && count <= int.MaxValue);
 
-                    // CopyTo should always pass in the same buffer/offset/count
+                        // CopyTo should always pass in the same buffer/offset/count
 
-                    if (outerBuffer != null) Assert.AreDeepEqual(outerBuffer, buffer);
+                        if (outerBuffer != null) Assert.AreDeepEqual(outerBuffer, buffer);
                         else outerBuffer = buffer;
 
                         if (outerOffset != null) Assert.AreEqual(outerOffset, offset);
@@ -224,8 +224,8 @@ namespace Bridge.ClientTest.IO
                         if (outerCount != null) Assert.AreEqual(outerCount, count);
                         else outerCount = count;
 
-                        return --readsLeft; // CopyTo will call Read on this ReadLimit times before stopping 
-                });
+                        return --readsLeft; // CopyTo will call Read on this ReadLimit times before stopping
+                    });
 
                 var src = new CallTrackingStream(srcBase);
 

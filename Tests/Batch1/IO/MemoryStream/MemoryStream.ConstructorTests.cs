@@ -34,14 +34,14 @@ namespace Bridge.ClientTest.IO
         [Test]
         public static void MemoryStream_Ctor_OutOfRangeIndeces()
         {
-            var data = new Tuple<int, int, int>[] 
+            var data = new Tuple<int, int, int>[]
             {
                 new Tuple<int, int, int>(1, 2, 1),
                 new Tuple<int, int, int>(7, 8, 2)
             };
 
             foreach (var item in data)
-	        {
+            {
                 int arraySize = item.Item1;
                 int index = item.Item2;
                 int count = item.Item3;

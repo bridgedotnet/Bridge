@@ -73,7 +73,7 @@ namespace Bridge.ClientTest.IO
 
                     Assert.AreEqual(testString, reader.ReadString());
                 }
-            }            
+            }
         }
 
         public static IEnumerable<object[]> EncodingAndEncodingStrings
@@ -246,7 +246,7 @@ namespace Bridge.ClientTest.IO
         [Test]
         public void BinaryWriter_SeekTests_NegativeOffset()
         {
-            var data = new int[] { -1, -2, -10000, int.MinValue};
+            var data = new int[] { -1, -2, -10000, int.MinValue };
             foreach (var invalidValue in data)
             {
                 // [] IOException if offset is negative
@@ -256,7 +256,7 @@ namespace Bridge.ClientTest.IO
                     writer.Write("Hello, this is my string".ToCharArray());
                     Assert.Throws<IOException>(() => writer.Seek(invalidValue, SeekOrigin.Begin));
                 }
-            }            
+            }
         }
 
         [Test]
@@ -268,7 +268,7 @@ namespace Bridge.ClientTest.IO
             {
                 writer.Write("012345789".ToCharArray());
 
-                Assert.Throws<ArgumentException>(() => 
+                Assert.Throws<ArgumentException>(() =>
                 {
                     writer.Seek(3, ~SeekOrigin.Begin);
                 });

@@ -80,7 +80,7 @@ namespace Bridge.ClientTest.IO
             ,'\uC3A0'
             ,'A'
             ,'5'
-            ,'\uFE70' 
+            ,'\uFE70'
             ,'-'
             ,';'
             ,'\u00E6'
@@ -151,8 +151,8 @@ namespace Bridge.ClientTest.IO
         public void WriteToStreamWriter()
         {
             char[] chArr = setupArray();
-            // [] Just construct a streamwriter and write to it    
-            //-------------------------------------------------             
+            // [] Just construct a streamwriter and write to it
+            //-------------------------------------------------
             Stream ms = CreateStream();
             StreamWriter sw = new StreamWriter(ms);
             StreamReader sr;
@@ -184,7 +184,7 @@ namespace Bridge.ClientTest.IO
         public void VerifyWrittenString()
         {
             char[] chArr = setupArray();
-            // [] Write string with wide selection of characters and read it back        
+            // [] Write string with wide selection of characters and read it back
 
             StringBuilder sb = new StringBuilder(40);
             Stream ms = CreateStream();

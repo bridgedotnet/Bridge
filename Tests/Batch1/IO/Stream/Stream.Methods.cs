@@ -197,7 +197,7 @@ namespace Bridge.ClientTest.IO
 
             for (int i = 0; i < 10; i++)
             {
-                Assert.AreEqual( (byte)i, br1.ReadByte());
+                Assert.AreEqual((byte)i, br1.ReadByte());
                 Assert.AreEqual((sbyte)i, br1.ReadSByte());
                 Assert.AreEqual((short)i, br1.ReadInt16());
                 Assert.AreEqual((char)i, br1.ReadChar());

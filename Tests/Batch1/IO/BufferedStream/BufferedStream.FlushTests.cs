@@ -58,7 +58,9 @@ namespace Bridge.ClientTest.IO
                     canWriteFunc: () => true,
                     canSeekFunc: () => underlyingCanSeek,
                     readFunc: (_, __, ___) => 123,
-                    writeFunc: (_, __, ___) => { },
+                    writeFunc: (_, __, ___) =>
+                    {
+                    },
                     seekFunc: (_, __) => 123L
                 );
 
@@ -73,7 +75,7 @@ namespace Bridge.ClientTest.IO
 
                 buffered.Flush();
                 Assert.AreEqual(2, wrapper.TimesCalled(nameof(wrapper.Flush)));
-            }            
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Bridge.ClientTest.IO
 
             Assert.Throws<ArgumentNullException>(() => new StreamWriter(new MemoryStream(), null));
         }
-        
+
         [Test]
         public static void UTF8Encoding()
         {

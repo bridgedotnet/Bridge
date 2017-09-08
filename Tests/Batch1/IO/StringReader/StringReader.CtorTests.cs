@@ -41,14 +41,16 @@ namespace Bridge.ClientTest.IO
         }
 
         [Test]
-        public static void ReadEmptyString() {
+        public static void ReadEmptyString()
+        {
             StringReader sr = new StringReader(string.Empty);
             Assert.AreEqual(-1, sr.Read());
 
         }
 
         [Test]
-        public static void ReadString() {
+        public static void ReadString()
+        {
             string str1 = "Hello\0\t\v   \\ World";
             StringReader sr = new StringReader(str1);
             for (int i = 0; i < str1.Length; i++)
@@ -142,14 +144,16 @@ namespace Bridge.ClientTest.IO
         }
 
         [Test]
-        public static void ReadToEndString() {
+        public static void ReadToEndString()
+        {
             string str1 = "Hello\0\t\v   \\ World";
             StringReader sr = new StringReader(str1);
             Assert.AreEqual(str1, sr.ReadToEnd());
         }
 
         [Test]
-        public static void ReadToEndPseudoRandom() {
+        public static void ReadToEndPseudoRandom()
+        {
             // [] Try with large random strings
             //-----------------------------------------------------------
             string str1 = string.Empty;
@@ -181,7 +185,7 @@ namespace Bridge.ClientTest.IO
         {
             Assert.Throws<Exception>(() => { sr.Peek(); });
             Assert.Throws<Exception>(() => { sr.Read(); });
-            Assert.Throws<Exception>(() => { sr.Read(new char[10], 0 , 1); });
+            Assert.Throws<Exception>(() => { sr.Read(new char[10], 0, 1); });
         }
     }
 }

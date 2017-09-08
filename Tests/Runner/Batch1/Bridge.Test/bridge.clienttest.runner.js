@@ -6346,12 +6346,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 CantFlushAfterDispose: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CloseTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CloseTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CantFlushAfterDispose()", $t.Line = "74", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CloseTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CloseTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CantFlushAfterDispose()", $t.Line = "75", $t));
                     t.Fixture.CantFlushAfterDispose();
                 },
                 CantFlushAfterClose: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CloseTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CloseTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CantFlushAfterClose()", $t.Line = "86", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CloseTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CloseTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CantFlushAfterClose()", $t.Line = "88", $t));
                     t.Fixture.CantFlushAfterClose();
                 }
             }
@@ -16527,57 +16527,57 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 ReadString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadString()", $t.Line = "50", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadString()", $t.Line = "51", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadString();
                 },
                 ReadLine: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadLine()", $t.Line = "60", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadLine()", $t.Line = "62", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadLine();
                 },
                 ReadPseudoRandomString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadPseudoRandomString()", $t.Line = "77", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadPseudoRandomString()", $t.Line = "79", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadPseudoRandomString();
                 },
                 PeekEmptyString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekEmptyString()", $t.Line = "92", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekEmptyString()", $t.Line = "94", $t));
                     Bridge.ClientTest.IO.ReaderTests.PeekEmptyString();
                 },
                 PeekString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekString()", $t.Line = "100", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekString()", $t.Line = "102", $t));
                     Bridge.ClientTest.IO.ReaderTests.PeekString();
                 },
                 PeekPseudoRandomString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekPseudoRandomString()", $t.Line = "114", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekPseudoRandomString()", $t.Line = "116", $t));
                     Bridge.ClientTest.IO.ReaderTests.PeekPseudoRandomString();
                 },
                 ReadToEndEmptyString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndEmptyString()", $t.Line = "131", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndEmptyString()", $t.Line = "133", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadToEndEmptyString();
                 },
                 ReadToEndString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndString()", $t.Line = "144", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndString()", $t.Line = "146", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadToEndString();
                 },
                 ReadToEndPseudoRandom: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndPseudoRandom()", $t.Line = "151", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ReadToEndPseudoRandom()", $t.Line = "154", $t));
                     Bridge.ClientTest.IO.ReaderTests.ReadToEndPseudoRandom();
                 },
                 Closed_DisposedExceptions: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Closed_DisposedExceptions()", $t.Line = "164", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Closed_DisposedExceptions()", $t.Line = "168", $t));
                     Bridge.ClientTest.IO.ReaderTests.Closed_DisposedExceptions();
                 },
                 Disposed_DisposedExceptions: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Disposed_DisposedExceptions()", $t.Line = "172", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Disposed_DisposedExceptions()", $t.Line = "176", $t));
                     Bridge.ClientTest.IO.ReaderTests.Disposed_DisposedExceptions();
                 }
             }
@@ -20347,12 +20347,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 BeginEndReadTest: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamAPMTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamAPMTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BeginEndReadTest()", $t.Line = "24", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamAPMTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamAPMTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BeginEndReadTest()", $t.Line = "25", $t));
                     t.Fixture.BeginEndReadTest();
                 },
                 BeginEndWriteTest: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamAPMTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamAPMTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BeginEndWriteTest()", $t.Line = "32", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamAPMTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamAPMTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BeginEndWriteTest()", $t.Line = "33", $t));
                     t.Fixture.BeginEndWriteTest();
                 }
             }
@@ -23776,32 +23776,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestReadTimeoutCustomStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestReadTimeoutCustomStream()", $t.Line = "55", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestReadTimeoutCustomStream()", $t.Line = "86", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestReadTimeoutCustomStream();
                 },
                 TestReadTimeoutMemoryStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestReadTimeoutMemoryStream()", $t.Line = "61", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestReadTimeoutMemoryStream()", $t.Line = "92", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestReadTimeoutMemoryStream();
                 },
                 TestWriteTimeoutCustomStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteTimeoutCustomStream()", $t.Line = "74", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteTimeoutCustomStream()", $t.Line = "105", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestWriteTimeoutCustomStream();
                 },
                 TestWriteTimeoutMemoryStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteTimeoutMemoryStream()", $t.Line = "80", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteTimeoutMemoryStream()", $t.Line = "111", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestWriteTimeoutMemoryStream();
                 },
                 TestCanTimeoutCustomStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanTimeoutCustomStream()", $t.Line = "92", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanTimeoutCustomStream()", $t.Line = "123", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestCanTimeoutCustomStream();
                 },
                 TestCanTimeoutMemoryStream: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanTimeoutMemoryStream()", $t.Line = "98", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanTimeoutMemoryStream()", $t.Line = "129", $t));
                     Bridge.ClientTest.IO.TimeoutTests.TestCanTimeoutMemoryStream();
                 }
             }
