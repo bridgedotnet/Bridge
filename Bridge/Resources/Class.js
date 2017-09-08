@@ -43,11 +43,11 @@
                         }
 
                         if (d && d.get && !v.get) {
-                            v.get = Bridge.emptyFn;
+                            v.get = d.get;
                         }
 
                         if (d && d.set && !v.set) {
-                            v.set = Bridge.emptyFn;
+                            v.set = d.set;
                         }
                     }
 
