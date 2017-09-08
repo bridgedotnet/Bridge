@@ -25128,6 +25128,60 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112", {
+        statics: {
+            methods: {
+                TestUsingScopeWitinLoopInLambda: function () {
+                    var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112.A();
+                    a.DoSomething();
+
+                    Bridge.Test.NUnit.Assert.AreEqual(7, a.Number);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112.A", {
+        fields: {
+            Number: 0
+        },
+        methods: {
+            DoSomething: function () {
+                for (var i = 0; i < 1; i = (i + 1) | 0) {
+                    var d = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112.SomeDisposable() };
+                    try {
+                        d.v.Data = 7;
+
+                        var action = (function ($me, d) {
+                            return Bridge.fn.bind($me, function (n) {
+                                this.Number = n;
+                                var d1 = d.v;
+                            });
+                        })(this, d);
+
+                        action(d.v.Data);
+                    }
+                    finally {
+                        if (Bridge.hasValue(d.v)) {
+                            d.v.System$IDisposable$dispose();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112.SomeDisposable", {
+        inherits: [System.IDisposable],
+        fields: {
+            Data: 0
+        },
+        alias: ["dispose", "System$IDisposable$dispose"],
+        methods: {
+            dispose: function () { }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
