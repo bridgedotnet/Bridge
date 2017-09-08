@@ -489,6 +489,7 @@
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\globalization\textInfo.js" />
     <Content Include="Resources\.generated\system\guid.js" />
+    <Content Include="Resources\.generated\system\io\io.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
     <Content Include="Resources\.generated\system\text\encoding.js" />
