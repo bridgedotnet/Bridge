@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  __Error
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Centralized error methods for the IO package.  
+** Purpose: Centralized error methods for the IO package.
 ** Mostly useful for translating Win32 HRESULTs into meaningful
 ** error strings & exceptions.
 **

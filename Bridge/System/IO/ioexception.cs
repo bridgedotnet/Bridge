@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  IOException
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -29,10 +29,10 @@ namespace System.IO
         // For debugging purposes, store the complete path in the IOException
         // if possible.  Don't give it back to users due to security concerns.
         // Let the code that throws the exception worry about that.  But we can
-        // at least assist people attached to the process with a managed 
+        // at least assist people attached to the process with a managed
         // debugger.  Don't serialize it to avoid any security problems.
-        // This information isn't guaranteed to be correct, but is our second 
-        // best effort at a file or directory involved, after the exception 
+        // This information isn't guaranteed to be correct, but is our second
+        // best effort at a file or directory involved, after the exception
         // message.
         [NonSerialized]
         private String _maybeFullPath;  // For debuggers on partial trust code

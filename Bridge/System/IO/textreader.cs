@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  TextReader
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -26,29 +26,33 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using Bridge;
 
-namespace System.IO {
+namespace System.IO
+{
     // This abstract base class represents a reader that can read a sequential
     // stream of characters.  This is not intended for reading bytes -
     // there are methods on the Stream class to read bytes.
     // A subclass must minimally implement the Peek() and Read() methods.
     //
-    // This class is intended for character input, not bytes.  
-    // There are methods on the Stream class for reading bytes. 
+    // This class is intended for character input, not bytes.
+    // There are methods on the Stream class for reading bytes.
     [Reflectable]
     [FileName("system\\IO\\io.js")]
     [Convention]
-    public abstract class TextReader : IDisposable {
+    public abstract class TextReader : IDisposable
+    {
         public static readonly TextReader Null = new NullTextReader();
-    
-        protected TextReader() {}
-    
+
+        protected TextReader()
+        {
+        }
+
         // Closes this TextReader and releases any system resources associated with the
         // TextReader. Following a call to Close, any operations on the TextReader
         // may raise exceptions.
-        // 
+        //
         // This default method is empty, but descendant classes can override the
         // method to provide the appropriate functionality.
-        public virtual void Close() 
+        public virtual void Close()
         {
             Dispose(true);
         }
@@ -66,20 +70,20 @@ namespace System.IO {
         // the input stream. The current position of the TextReader is not changed by
         // this operation. The returned value is -1 if no further characters are
         // available.
-        // 
+        //
         // This default method simply returns -1.
         //
         [Pure]
-        public virtual int Peek() 
+        public virtual int Peek()
         {
             Contract.Ensures(Contract.Result<int>() >= -1);
 
             return -1;
         }
-    
+
         // Reads the next character from the input stream. The returned value is
         // -1 if no further characters are available.
-        // 
+        //
         // This default method simply returns -1.
         //
         public virtual int Read()
@@ -87,15 +91,15 @@ namespace System.IO {
             Contract.Ensures(Contract.Result<int>() >= -1);
             return -1;
         }
-    
+
         // Reads a block of characters. This method will read up to
         // count characters from this TextReader into the
         // buffer character array starting at position
         // index. Returns the actual number of characters read.
         //
-        public virtual int Read([In, Out] char[] buffer, int index, int count) 
+        public virtual int Read([In, Out] char[] buffer, int index, int count)
         {
-            if (buffer==null)
+            if (buffer == null)
                 throw new ArgumentNullException("buffer");
             if (index < 0)
                 throw new ArgumentOutOfRangeException("index");
@@ -106,9 +110,10 @@ namespace System.IO {
             Contract.Ensures(Contract.Result<int>() >= 0);
             Contract.Ensures(Contract.Result<int>() <= Contract.OldValue(count));
             Contract.EndContractBlock();
-    
+
             int n = 0;
-            do {
+            do
+            {
                 int ch = Read();
                 if (ch == -1) break;
                 buffer[index + n++] = (char)ch;
@@ -116,7 +121,7 @@ namespace System.IO {
             return n;
         }
 
-        // Reads all characters from the current position to the end of the 
+        // Reads all characters from the current position to the end of the
         // TextReader, and returns them as one string.
         public virtual String ReadToEnd()
         {
@@ -125,7 +130,7 @@ namespace System.IO {
             char[] chars = new char[4096];
             int len;
             StringBuilder sb = new StringBuilder(4096);
-            while((len=Read(chars, 0, chars.Length)) != 0) 
+            while ((len = Read(chars, 0, chars.Length)) != 0)
             {
                 sb.Append(new string(chars, 0, len));
             }
@@ -134,14 +139,15 @@ namespace System.IO {
 
         // Blocking version of read.  Returns only when count
         // characters have been read or the end of the file was reached.
-        // 
-        public virtual int ReadBlock([In, Out] char[] buffer, int index, int count) 
+        //
+        public virtual int ReadBlock([In, Out] char[] buffer, int index, int count)
         {
             Contract.Ensures(Contract.Result<int>() >= 0);
             Contract.Ensures(Contract.Result<int>() <= count);
 
             int i, n = 0;
-            do {
+            do
+            {
                 n += (i = Read(buffer, index + n, count - n));
             } while (i > 0 && n < count);
             return n;
@@ -153,13 +159,14 @@ namespace System.IO {
         // contain the terminating carriage return and/or line feed. The returned
         // value is null if the end of the input stream has been reached.
         //
-        public virtual String ReadLine() 
+        public virtual String ReadLine()
         {
             StringBuilder sb = new StringBuilder();
-            while (true) {
+            while (true)
+            {
                 int ch = Read();
                 if (ch == -1) break;
-                if (ch == '\r' || ch == '\n') 
+                if (ch == '\r' || ch == '\n')
                 {
                     if (ch == '\r' && Peek() == '\n') Read();
                     return sb.ToString();
@@ -170,28 +177,30 @@ namespace System.IO {
             return null;
         }
 
-        public static TextReader Synchronized(TextReader reader) 
+        public static TextReader Synchronized(TextReader reader)
         {
-            if (reader==null)
+            if (reader == null)
                 throw new ArgumentNullException("reader");
             Contract.Ensures(Contract.Result<TextReader>() != null);
             Contract.EndContractBlock();
 
             return reader;
         }
-        
+
         [Serializable]
         private sealed class NullTextReader : TextReader
         {
-            public NullTextReader(){}
+            public NullTextReader()
+            {
+            }
 
             [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.
-            public override int Read(char[] buffer, int index, int count) 
+            public override int Read(char[] buffer, int index, int count)
             {
                 return 0;
             }
-            
-            public override String ReadLine() 
+
+            public override String ReadLine()
             {
                 return null;
             }

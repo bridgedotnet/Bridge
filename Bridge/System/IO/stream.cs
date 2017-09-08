@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  Stream
-** 
+**
 ** <OWNER>gpaperin</OWNER>
 **
 **
@@ -161,11 +161,11 @@ namespace System.IO
 
         // Stream used to require that all cleanup logic went into Close(),
         // which was thought up before we invented IDisposable.  However, we
-        // need to follow the IDisposable pattern so that users can write 
-        // sensible subclasses without needing to inspect all their base 
+        // need to follow the IDisposable pattern so that users can write
+        // sensible subclasses without needing to inspect all their base
         // classes, and without worrying about version brittleness, from a
         // base class switching to the Dispose pattern.  We're moving
-        // Stream to the Dispose(bool) pattern - that's where all subclasses 
+        // Stream to the Dispose(bool) pattern - that's where all subclasses
         // should put their cleanup starting in V2.
         public virtual void Close()
         {
@@ -193,7 +193,7 @@ namespace System.IO
         protected virtual void Dispose(bool disposing)
         {
             // Note: Never change this to call other virtual methods on Stream
-            // like Write, since the state on subclasses has already been 
+            // like Write, since the state on subclasses has already been
             // torn down.  This is the last code to run on cleanup for a stream.
         }
 
@@ -254,10 +254,10 @@ namespace System.IO
 
         public abstract int Read([In, Out] byte[] buffer, int offset, int count);
 
-        // Reads one byte from the stream by calling Read(byte[], int, int). 
+        // Reads one byte from the stream by calling Read(byte[], int, int).
         // Will return an unsigned byte cast to an int or -1 on end of stream.
         // This implementation does not perform well because it allocates a new
-        // byte[] each time you call it, and should be overridden by any 
+        // byte[] each time you call it, and should be overridden by any
         // subclass that maintains an internal buffer.  Then, it can help perf
         // significantly for people who are reading one byte at a time.
         public virtual int ReadByte()
@@ -276,7 +276,7 @@ namespace System.IO
 
         // Writes one byte from the stream by calling Write(byte[], int, int).
         // This implementation does not perform well because it allocates a new
-        // byte[] each time you call it, and should be overridden by any 
+        // byte[] each time you call it, and should be overridden by any
         // subclass that maintains an internal buffer.  Then, it can help perf
         // significantly for people who are writing one byte at a time.
         public virtual void WriteByte(byte value)
@@ -300,11 +300,11 @@ namespace System.IO
         {
             Contract.Ensures(Contract.Result<IAsyncResult>() != null);
 
-            // To avoid a race with a stream's position pointer & generating ---- 
-            // conditions with internal buffer indexes in our own streams that 
-            // don't natively support async IO operations when there are multiple 
+            // To avoid a race with a stream's position pointer & generating ----
+            // conditions with internal buffer indexes in our own streams that
+            // don't natively support async IO operations when there are multiple
             // async requests outstanding, we will block the application's main
-            // thread and do the IO synchronously.  
+            // thread and do the IO synchronously.
             // This can't perform well - use a different approach.
             SynchronousAsyncResult asyncResult;
             try
@@ -336,11 +336,11 @@ namespace System.IO
         {
             Contract.Ensures(Contract.Result<IAsyncResult>() != null);
 
-            // To avoid a race with a stream's position pointer & generating ---- 
-            // conditions with internal buffer indexes in our own streams that 
-            // don't natively support async IO operations when there are multiple 
+            // To avoid a race with a stream's position pointer & generating ----
+            // conditions with internal buffer indexes in our own streams that
+            // don't natively support async IO operations when there are multiple
             // async requests outstanding, we will block the application's main
-            // thread and do the IO synchronously.  
+            // thread and do the IO synchronously.
             // This can't perform well - use a different approach.
             SynchronousAsyncResult asyncResult;
             try
@@ -369,35 +369,54 @@ namespace System.IO
         [Serializable]
         private sealed class NullStream : Stream
         {
-            internal NullStream() { }
+            internal NullStream()
+            {
+            }
 
             public override bool CanRead
             {
                 [Pure]
-                get { return true; }
+                get
+                {
+                    return true;
+                }
             }
 
             public override bool CanWrite
             {
                 [Pure]
-                get { return true; }
+                get
+                {
+                    return true;
+                }
             }
 
             public override bool CanSeek
             {
                 [Pure]
-                get { return true; }
+                get
+                {
+                    return true;
+                }
             }
 
             public override long Length
             {
-                get { return 0; }
+                get
+                {
+                    return 0;
+                }
             }
 
             public override long Position
             {
-                get { return 0; }
-                set { }
+                get
+                {
+                    return 0;
+                }
+                set
+                {
+                }
             }
 
             protected override void Dispose(bool disposing)
@@ -507,23 +526,32 @@ namespace System.IO
             public bool IsCompleted
             {
                 // We never hand out objects of this type to the user before the synchronous IO completed:
-                get { return true; }
+                get
+                {
+                    return true;
+                }
             }
 
             /*public WaitHandle AsyncWaitHandle {
                 get {
-                    return LazyInitializer.EnsureInitialized(ref _waitHandle, () => new ManualResetEvent(true));                    
+                    return LazyInitializer.EnsureInitialized(ref _waitHandle, () => new ManualResetEvent(true));
                 }
             }*/
 
             public Object AsyncState
             {
-                get { return _stateObject; }
+                get
+                {
+                    return _stateObject;
+                }
             }
 
             public bool CompletedSynchronously
             {
-                get { return true; }
+                get
+                {
+                    return true;
+                }
             }
 
             internal void ThrowIfError()

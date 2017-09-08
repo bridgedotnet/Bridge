@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  StringReader
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 ** Purpose: For reading text from strings

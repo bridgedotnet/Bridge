@@ -38,7 +38,10 @@ namespace Bridge.Translator
             this.EmitUsing(res, inner);
         }
 
-        public VariableDeclarationStatement VariableDeclarationStatement { get; set; }
+        public VariableDeclarationStatement VariableDeclarationStatement
+        {
+            get; set;
+        }
 
         protected virtual void EmitUsing(AstNode expression, IEnumerable<AstNode> inner)
         {
@@ -56,7 +59,7 @@ namespace Bridge.Translator
                 name = block.lastVarName;
                 isReferenceLocal = block.lastIsReferenceLocal;
 
-                if(isReferenceLocal)
+                if (isReferenceLocal)
                 {
                     name = name + ".v";
                 }

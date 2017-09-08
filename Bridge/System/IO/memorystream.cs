@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  MemoryStream
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -25,11 +25,11 @@ using Bridge;
 namespace System.IO
 {
     // A MemoryStream represents a Stream in memory (ie, it has no backing store).
-    // This stream may reduce the need for temporary buffers and files in 
-    // an application.  
-    // 
+    // This stream may reduce the need for temporary buffers and files in
+    // an application.
+    //
     // There are two ways to create a MemoryStream.  You can initialize one
-    // from an unsigned byte array, or you can create an empty one.  Empty 
+    // from an unsigned byte array, or you can create an empty one.  Empty
     // memory streams are resizable, while ones created with a byte array provide
     // a stream "view" of the data.
     [Reflectable]
@@ -125,19 +125,28 @@ namespace System.IO
         public override bool CanRead
         {
             [Pure]
-            get { return _isOpen; }
+            get
+            {
+                return _isOpen;
+            }
         }
 
         public override bool CanSeek
         {
             [Pure]
-            get { return _isOpen; }
+            get
+            {
+                return _isOpen;
+            }
         }
 
         public override bool CanWrite
         {
             [Pure]
-            get { return _writable; }
+            get
+            {
+                return _writable;
+            }
         }
 
         private void EnsureWriteable()
@@ -259,7 +268,7 @@ namespace System.IO
         // Gets & sets the capacity (number of bytes allocated) for this stream.
         // The capacity cannot be set to a value less than the current length
         // of the stream.
-        // 
+        //
         public virtual int Capacity
         {
             get
@@ -414,12 +423,12 @@ namespace System.IO
         // value must be nonnegative and less than the space remaining in
         // the array, Int32.MaxValue - origin
         // Origin is 0 in all cases other than a MemoryStream created on
-        // top of an existing array and a specific starting offset was passed 
-        // into the MemoryStream constructor.  The upper bounds prevents any 
-        // situations where a stream may be created on top of an array then 
-        // the stream is made longer than the maximum possible length of the 
+        // top of an existing array and a specific starting offset was passed
+        // into the MemoryStream constructor.  The upper bounds prevents any
+        // situations where a stream may be created on top of an array then
+        // the stream is made longer than the maximum possible length of the
         // array (Int32.MaxValue).
-        // 
+        //
         public override void SetLength(long value)
         {
             if (value < 0 || value > Int32.MaxValue)

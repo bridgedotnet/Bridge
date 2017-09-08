@@ -7,12 +7,8 @@ namespace Bridge.Translator
 {
     public class VariableBlock : AbstractEmitterBlock
     {
-        public VariableBlock(IEmitter emitter, VariableDeclarationStatement variableDeclarationStatement)
-            : base(emitter, variableDeclarationStatement)
-        {
-            this.Emitter = emitter;
-            this.VariableDeclarationStatement = variableDeclarationStatement;
-        }
+        internal string lastVarName;
+        internal bool lastIsReferenceLocal;
 
         public VariableDeclarationStatement VariableDeclarationStatement
         {
@@ -20,13 +16,18 @@ namespace Bridge.Translator
             set;
         }
 
+        public VariableBlock(IEmitter emitter, VariableDeclarationStatement variableDeclarationStatement)
+            : base(emitter, variableDeclarationStatement)
+        {
+            this.Emitter = emitter;
+            this.VariableDeclarationStatement = variableDeclarationStatement;
+        }
+
         protected override void DoEmit()
         {
             this.VisitVariableDeclarationStatement();
         }
 
-        internal string lastVarName;
-        internal bool lastIsReferenceLocal;
         protected virtual void VisitVariableDeclarationStatement()
         {
             bool needVar = true;

@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  BufferedStream
-** 
+**
 ** <OWNER>gpaperin</OWNER>
 **
 ** Purpose: A composable Stream that buffers reads & writes to the underlying stream.
@@ -29,10 +29,10 @@ namespace System.IO
     /// down underlying stream accesses when it is not needed. If you always read and write for sizes
     /// greater than the internal buffer size, then this class may not even allocate the internal buffer.
     /// See a large comment in Write for the details of the write buffer heuristic.
-    /// 
+    ///
     /// This class buffers reads and writes in a shared buffer.
     /// (If you maintained two buffers separately, one operation would always trash the other buffer
-    /// anyways, so we might as well use one buffer.) 
+    /// anyways, so we might as well use one buffer.)
     /// The assumption here is you will almost always be doing a series of reads or writes, but rarely
     /// alternate between the two of them on the same stream.
     ///
@@ -54,7 +54,7 @@ namespace System.IO
     /// faster than IO operations on the underlying stream (if this was not true, using buffering is never appropriate).
     /// The max size of this "shadow" buffer is limited as to not allocate it on the LOH.
     /// Shadowing is always transient. Even when using this technique, this class still guarantees that the number of
-    /// bytes cached (not yet written to the target stream or not yet consumed by the user) is never larger than the 
+    /// bytes cached (not yet written to the target stream or not yet consumed by the user) is never larger than the
     /// actual specified buffer size.
     /// </summary>
     [Reflectable]
@@ -79,7 +79,9 @@ namespace System.IO
 
         // Removing a private default constructor is a breaking change for the DataContractSerializer.
         // Because this ctor was here previously we need to keep it around.
-        private BufferedStream() { }
+        private BufferedStream()
+        {
+        }
 
 
         public BufferedStream(Stream stream)
@@ -180,35 +182,50 @@ namespace System.IO
         internal Stream UnderlyingStream
         {
             [Pure]
-            get { return _stream; }
+            get
+            {
+                return _stream;
+            }
         }
 
 
         internal Int32 BufferSize
         {
             [Pure]
-            get { return _bufferSize; }
+            get
+            {
+                return _bufferSize;
+            }
         }
 
 
         public override bool CanRead
         {
             [Pure]
-            get { return _stream != null && _stream.CanRead; }
+            get
+            {
+                return _stream != null && _stream.CanRead;
+            }
         }
 
 
         public override bool CanWrite
         {
             [Pure]
-            get { return _stream != null && _stream.CanWrite; }
+            get
+            {
+                return _stream != null && _stream.CanWrite;
+            }
         }
 
 
         public override bool CanSeek
         {
             [Pure]
-            get { return _stream != null && _stream.CanSeek; }
+            get
+            {
+                return _stream != null && _stream.CanSeek;
+            }
         }
 
 
@@ -329,8 +346,8 @@ namespace System.IO
             _writePos = _readPos = _readLen = 0;
         }
 
-        // Reading is done in blocks, but someone could read 1 byte from the buffer then write. 
-        // At that point, the underlying stream's pointer is out of sync with this stream's position. 
+        // Reading is done in blocks, but someone could read 1 byte from the buffer then write.
+        // At that point, the underlying stream's pointer is out of sync with this stream's position.
         // All write  functions should call this function to ensure that the buffered data is not lost.
         private void FlushRead()
         {
@@ -348,7 +365,7 @@ namespace System.IO
         private void ClearReadBufferBeforeWrite()
         {
 
-            // This is called by write methods to clear the read buffer.            
+            // This is called by write methods to clear the read buffer.
 
             Contract.Assert(_readPos <= _readLen, "_readPos <= _readLen [" + _readPos + " <= " + _readLen + "]");
 
@@ -447,8 +464,8 @@ namespace System.IO
 
             // Reading again for more data may cause us to block if we're using a device with no clear end of file,
             // such as a serial port or pipe. If we blocked here and this code was used with redirected pipes for a
-            // process's standard output, this can lead to deadlocks involving two processes.              
-            // BUT - this is a breaking change. 
+            // process's standard output, this can lead to deadlocks involving two processes.
+            // BUT - this is a breaking change.
             // So: If we could not read all bytes the user asked for from the buffer, we will try once from the underlying
             // stream thus ensuring the same blocking behaviour as if the underlying stream was not wrapped in this BufferedStream.
             if (bytesFromBuffer == count)
@@ -581,7 +598,7 @@ namespace System.IO
             // buffer space without filling it up completely, the heuristic will always tell us to use the buffer. It will also
             // tell us to use the buffer in cases where the current write would fill the buffer, but the remaining data is small
             // enough such that subsequent operations can use the buffer again.
-            // 
+            //
             // Algorithm:
             // Determine whether or not to buffer according to the heuristic (below).
             // If we decided to use the buffer:
@@ -619,7 +636,7 @@ namespace System.IO
             //
             //     +---------------------------------------+---------------------------------------+
             //     |             current buffer            | next iteration's "future" buffer      |
-            //     +---------------------------------------+---------------------------------------+ 
+            //     +---------------------------------------+---------------------------------------+
             //     |0| | | | | | | | | |1| | | | | | | | | |2| | | | | | | | | |3| | | | | | | | | |
             //     |0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|
             //     +-----------+-------------------+-------------------+---------------------------+
@@ -740,7 +757,7 @@ namespace System.IO
             {
 
                 // If we have bytes in the READ buffer, adjust the seek offset to account for the resulting difference
-                // between this stream's position and the underlying stream's position.            
+                // between this stream's position and the underlying stream's position.
                 offset -= (_readLen - _readPos);
             }
 

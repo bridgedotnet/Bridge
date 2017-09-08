@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  StringWriter
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 ** Purpose: For writing text to a string
@@ -49,7 +49,7 @@ namespace System.IO
         }
 
         // Constructs a new StringWriter that writes to the given StringBuilder.
-        // 
+        //
         public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture)
         {
         }

@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  TextWriter
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -31,11 +31,11 @@ using Bridge;
 namespace System.IO
 {
     // This abstract base class represents a writer that can write a sequential
-    // stream of characters. A subclass must minimally implement the 
+    // stream of characters. A subclass must minimally implement the
     // Write(char) method.
     //
-    // This class is intended for character output, not bytes.  
-    // There are methods on the Stream class for writing bytes. 
+    // This class is intended for character output, not bytes.
+    // There are methods on the Stream class for writing bytes.
     [Reflectable]
     [FileName("system\\IO\\io.js")]
     [Convention]
@@ -115,10 +115,13 @@ namespace System.IO
         // WriteLine methods are called. In order for text written by
         // the TextWriter to be readable by a TextReader, only one of the following line
         // terminator strings should be used: "\r", "\n", or "\r\n".
-        // 
+        //
         public virtual String NewLine
         {
-            get { return new String(CoreNewLine); }
+            get
+            {
+                return new String(CoreNewLine);
+            }
             set
             {
                 if (value == null)
@@ -135,7 +138,7 @@ namespace System.IO
                 throw new ArgumentNullException("writer");
             Contract.Ensures(Contract.Result<TextWriter>() != null);
             Contract.EndContractBlock();
-            
+
             return writer;
         }
 
@@ -210,8 +213,8 @@ namespace System.IO
             Write(value.ToString("G", FormatProvider));
         }
 
-        // Writes the text representation of an unsigned long to the text 
-        // stream. The text representation of the given value is produced 
+        // Writes the text representation of an unsigned long to the text
+        // stream. The text representation of the given value is produced
         // by calling the UInt64.ToString() method.
         //
         public virtual void Write(ulong value)
@@ -271,7 +274,7 @@ namespace System.IO
 
         // Writes out a formatted string.  Uses the same semantics as
         // String.Format.
-        // 
+        //
         public virtual void Write(String format, Object arg0)
         {
             Write(String.Format(FormatProvider, format, arg0));
@@ -279,7 +282,7 @@ namespace System.IO
 
         // Writes out a formatted string.  Uses the same semantics as
         // String.Format.
-        // 
+        //
         public virtual void Write(String format, Object arg0, Object arg1)
         {
             Write(String.Format(FormatProvider, format, arg0, arg1));
@@ -287,7 +290,7 @@ namespace System.IO
 
         // Writes out a formatted string.  Uses the same semantics as
         // String.Format.
-        // 
+        //
         public virtual void Write(String format, Object arg0, Object arg1, Object arg2)
         {
             Write(String.Format(FormatProvider, format, arg0, arg1, arg2));
@@ -295,7 +298,7 @@ namespace System.IO
 
         // Writes out a formatted string.  Uses the same semantics as
         // String.Format.
-        // 
+        //
         public virtual void Write(String format, params Object[] arg)
         {
             Write(String.Format(FormatProvider, format, arg));
@@ -355,7 +358,7 @@ namespace System.IO
             WriteLine();
         }
 
-        // Writes the text representation of an unsigned integer followed by 
+        // Writes the text representation of an unsigned integer followed by
         // a line terminator to the text stream.
         //
         public virtual void WriteLine(uint value)
@@ -373,7 +376,7 @@ namespace System.IO
             WriteLine();
         }
 
-        // Writes the text representation of an unsigned long followed by 
+        // Writes the text representation of an unsigned long followed by
         // a line terminator to the text stream.
         //
         public virtual void WriteLine(ulong value)
@@ -418,12 +421,12 @@ namespace System.IO
             else
             {
                 // We'd ideally like WriteLine to be atomic, in that one call
-                // to WriteLine equals one call to the OS (ie, so writing to 
+                // to WriteLine equals one call to the OS (ie, so writing to
                 // console while simultaneously calling printf will guarantee we
                 // write out a string and new line chars, without any interference).
                 // Additionally, we need to call ToCharArray on Strings anyways,
                 // so allocating a char[] here isn't any worse than what we were
-                // doing anyways.  We do reduce the number of calls to the 
+                // doing anyways.  We do reduce the number of calls to the
                 // backing store this way, potentially.
                 int vLen = value.Length;
                 int nlLen = CoreNewLine.Length;
@@ -468,33 +471,33 @@ namespace System.IO
             }
         }
 
-        // Writes out a formatted string and a new line.  Uses the same 
+        // Writes out a formatted string and a new line.  Uses the same
         // semantics as String.Format.
-        // 
+        //
         public virtual void WriteLine(String format, Object arg0)
         {
             WriteLine(String.Format(FormatProvider, format, arg0));
         }
 
-        // Writes out a formatted string and a new line.  Uses the same 
+        // Writes out a formatted string and a new line.  Uses the same
         // semantics as String.Format.
-        // 
+        //
         public virtual void WriteLine(String format, Object arg0, Object arg1)
         {
             WriteLine(String.Format(FormatProvider, format, arg0, arg1));
         }
 
-        // Writes out a formatted string and a new line.  Uses the same 
+        // Writes out a formatted string and a new line.  Uses the same
         // semantics as String.Format.
-        // 
+        //
         public virtual void WriteLine(String format, Object arg0, Object arg1, Object arg2)
         {
             WriteLine(String.Format(FormatProvider, format, arg0, arg1, arg2));
         }
 
-        // Writes out a formatted string and a new line.  Uses the same 
+        // Writes out a formatted string and a new line.  Uses the same
         // semantics as String.Format.
-        // 
+        //
         public virtual void WriteLine(String format, params Object[] arg)
         {
             WriteLine(String.Format(FormatProvider, format, arg));
@@ -591,7 +594,10 @@ namespace System.IO
 
             public override Encoding Encoding
             {
-                get { return Encoding.Default; }
+                get
+                {
+                    return Encoding.Default;
+                }
             }
 
             [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.

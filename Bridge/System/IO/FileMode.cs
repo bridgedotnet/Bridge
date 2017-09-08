@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** <OWNER>Microsoft</OWNER>
-** 
+**
 ** Class:  File
 **
 **

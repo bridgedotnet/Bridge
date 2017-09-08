@@ -27651,7 +27651,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 this.m_buffer = System.Array.init(minBufferSize, 0, System.Byte);
                 // m_charBuffer and m_charBytes will be left null.
 
-                // For Encodings that always use 2 bytes per char (or more), 
+                // For Encodings that always use 2 bytes per char (or more),
                 // special case them here to make Read() & Peek() faster.
                 this.m_2BytesPerChar = Bridge.is(encoding, System.Text.UnicodeEncoding);
                 // check if BinaryReader is based on MemoryStream, and keep this for it's life
@@ -27931,16 +27931,16 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 // this should never fail
 
-                // we may have read fewer than the number of characters requested if end of stream reached 
+                // we may have read fewer than the number of characters requested if end of stream reached
                 // or if the encoding makes the char count too big for the buffer (e.g. fallback sequence)
                 return (((count - charsRemaining) | 0));
             },
             InternalReadOneChar: function (allowSurrogate) {
                 if (allowSurrogate === void 0) { allowSurrogate = false; }
-                // I know having a separate InternalReadOneChar method seems a little 
+                // I know having a separate InternalReadOneChar method seems a little
                 // redundant, but this makes a scenario like the security parser code
                 // 20% faster, in addition to the optimizations for UnicodeEncoding I
-                // put in InternalReadChars.   
+                // put in InternalReadChars.
                 var charsRead = 0;
                 var numBytes = 0;
                 var posSav = System.Int64(0);
@@ -28032,7 +28032,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                     catch ($e1) {
                         $e1 = System.Exception.create($e1);
-                        // Handle surrogate char 
+                        // Handle surrogate char
 
                         if (this.m_stream.CanSeek) {
                             this.m_stream.Seek((posSav.sub(this.m_stream.Position)), System.IO.SeekOrigin.Current);
@@ -28510,7 +28510,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             Dispose$1: function (disposing) {
                 // Note: Never change this to call other virtual methods on Stream
-                // like Write, since the state on subclasses has already been 
+                // like Write, since the state on subclasses has already been
                 // torn down.  This is the last code to run on cleanup for a stream.
             },
             BeginRead: function (buffer, offset, count, callback, state) {
@@ -28562,11 +28562,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             BlockingBeginRead: function (buffer, offset, count, callback, state) {
 
-                // To avoid a race with a stream's position pointer & generating ---- 
-                // conditions with internal buffer indexes in our own streams that 
-                // don't natively support async IO operations when there are multiple 
+                // To avoid a race with a stream's position pointer & generating ----
+                // conditions with internal buffer indexes in our own streams that
+                // don't natively support async IO operations when there are multiple
                 // async requests outstanding, we will block the application's main
-                // thread and do the IO synchronously.  
+                // thread and do the IO synchronously.
                 // This can't perform well - use a different approach.
                 var asyncResult;
                 try {
@@ -28592,11 +28592,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             BlockingBeginWrite: function (buffer, offset, count, callback, state) {
 
-                // To avoid a race with a stream's position pointer & generating ---- 
-                // conditions with internal buffer indexes in our own streams that 
-                // don't natively support async IO operations when there are multiple 
+                // To avoid a race with a stream's position pointer & generating ----
+                // conditions with internal buffer indexes in our own streams that
+                // don't natively support async IO operations when there are multiple
                 // async requests outstanding, we will block the application's main
-                // thread and do the IO synchronously.  
+                // thread and do the IO synchronously.
                 // This can't perform well - use a different approach.
                 var asyncResult;
                 try {
@@ -29282,12 +29282,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     this.WriteLine();
                 } else {
                     // We'd ideally like WriteLine to be atomic, in that one call
-                    // to WriteLine equals one call to the OS (ie, so writing to 
+                    // to WriteLine equals one call to the OS (ie, so writing to
                     // console while simultaneously calling printf will guarantee we
                     // write out a string and new line chars, without any interference).
                     // Additionally, we need to call ToCharArray on Strings anyways,
                     // so allocating a char[] here isn't any worse than what we were
-                    // doing anyways.  We do reduce the number of calls to the 
+                    // doing anyways.  We do reduce the number of calls to the
                     // backing store this way, potentially.
                     var vLen = value.length;
                     var nlLen = this.CoreNewLine.length;
@@ -29574,7 +29574,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             ClearReadBufferBeforeWrite: function () {
 
-                // This is called by write methods to clear the read buffer.            
+                // This is called by write methods to clear the read buffer.
 
 
                 // No READ data in the buffer:
@@ -29658,8 +29658,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 // Reading again for more data may cause us to block if we're using a device with no clear end of file,
                 // such as a serial port or pipe. If we blocked here and this code was used with redirected pipes for a
-                // process's standard output, this can lead to deadlocks involving two processes.              
-                // BUT - this is a breaking change. 
+                // process's standard output, this can lead to deadlocks involving two processes.
+                // BUT - this is a breaking change.
                 // So: If we could not read all bytes the user asked for from the buffer, we will try once from the underlying
                 // stream thus ensuring the same blocking behaviour as if the underlying stream was not wrapped in this BufferedStream.
                 if (bytesFromBuffer === count) {
@@ -29824,7 +29824,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 //
                 //     +---------------------------------------+---------------------------------------+
                 //     |             current buffer            | next iteration's "future" buffer      |
-                //     +---------------------------------------+---------------------------------------+ 
+                //     +---------------------------------------+---------------------------------------+
                 //     |0| | | | | | | | | |1| | | | | | | | | |2| | | | | | | | | |3| | | | | | | | | |
                 //     |0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|
                 //     +-----------+-------------------+-------------------+---------------------------+
@@ -29918,7 +29918,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (((this._readLen - this._readPos) | 0) > 0 && origin === System.IO.SeekOrigin.Current) {
 
                     // If we have bytes in the READ buffer, adjust the seek offset to account for the resulting difference
-                    // between this stream's position and the underlying stream's position.            
+                    // between this stream's position and the underlying stream's position.
                     offset = offset.sub(System.Int64((((this._readLen - this._readPos) | 0))));
                 }
 
@@ -30637,7 +30637,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         return true;
                     }
 
-                    // To maintain 4.0 behavior we Dispose 
+                    // To maintain 4.0 behavior we Dispose
                     // after reading to the end of the reader.
                     this.Dispose();
                 }
@@ -30646,8 +30646,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             Clone: function () {
                 // NOTE: To maintain the same behavior with the previous yield-based
-                // iterator in 4.0, we have all the IEnumerator<T> instances share the same 
-                // underlying reader. If we have already been disposed, _reader will be null, 
+                // iterator in 4.0, we have all the IEnumerator<T> instances share the same
+                // underlying reader. If we have already been disposed, _reader will be null,
                 // which will cause CreateIterator to simply new up a new instance to start up
                 // a new iteration. Dev10 Bugs 904764 has been filed to fix this in next side-
                 // by-side release.
@@ -30920,8 +30920,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 // Dispose of our resources if this StreamReader is closable.
                 // Note that Console.In should be left open.
                 try {
-                    // Note that Stream.Close() can potentially throw here. So we need to 
-                    // ensure cleaning up internal resources, inside the finally block.  
+                    // Note that Stream.Close() can potentially throw here. So we need to
+                    // ensure cleaning up internal resources, inside the finally block.
                     if (!this.LeaveOpen && disposing && (this.stream != null)) {
                         this.stream.Close();
                     }
@@ -30989,7 +30989,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
 
                 var charsRead = 0;
-                // As a perf optimization, if we had exactly one buffer's worth of 
+                // As a perf optimization, if we had exactly one buffer's worth of
                 // data read in, let's try writing directly to the user's buffer.
                 var readToUserBuffer = { v : false };
                 while (count > 0) {
@@ -31114,7 +31114,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
 
                     // _isBlocked == whether we read fewer bytes than we asked for.
-                    // Note we must check it here because CompressBuffer or 
+                    // Note we must check it here because CompressBuffer or
                     // DetectEncoding will change byteLen.
                     this._isBlocked = (this.byteLen < this.byteBuffer.length);
 
@@ -31145,15 +31145,15 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 var charsRead = 0;
 
                 // As a perf optimization, we can decode characters DIRECTLY into a
-                // user's char[].  We absolutely must not write more characters 
-                // into the user's buffer than they asked for.  Calculating 
-                // encoding.GetMaxCharCount(byteLen) each time is potentially very 
-                // expensive - instead, cache the number of chars a full buffer's 
-                // worth of data may produce.  Yes, this makes the perf optimization 
-                // less aggressive, in that all reads that asked for fewer than AND 
-                // returned fewer than _maxCharsPerBuffer chars won't get the user 
+                // user's char[].  We absolutely must not write more characters
+                // into the user's buffer than they asked for.  Calculating
+                // encoding.GetMaxCharCount(byteLen) each time is potentially very
+                // expensive - instead, cache the number of chars a full buffer's
+                // worth of data may produce.  Yes, this makes the perf optimization
+                // less aggressive, in that all reads that asked for fewer than AND
+                // returned fewer than _maxCharsPerBuffer chars won't get the user
                 // buffer optimization.  This affects reads where the end of the
-                // Stream comes in the middle somewhere, and when you ask for 
+                // Stream comes in the middle somewhere, and when you ask for
                 // fewer chars than your buffer could produce.
                 readToUserBuffer.v = desiredChars >= this._maxCharsPerBuffer;
 
@@ -31168,7 +31168,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
 
                     // _isBlocked == whether we read fewer bytes than we asked for.
-                    // Note we must check it here because CompressBuffer or 
+                    // Note we must check it here because CompressBuffer or
                     // DetectEncoding will change byteLen.
                     this._isBlocked = (this.byteLen < this.byteBuffer.length);
 
@@ -31329,7 +31329,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         ctors: {
             ctor: function () {
                 this.$initialize();
-                System.IO.TextWriter.$ctor1.call(this, null); // Ask for CurrentCulture all the time 
+                System.IO.TextWriter.$ctor1.call(this, null); // Ask for CurrentCulture all the time
             },
             $ctor1: function (stream) {
                 System.IO.StreamWriter.$ctor4.call(this, stream, System.IO.StreamWriter.UTF8NoBOM, System.IO.StreamWriter.DefaultBufferSize, false);
@@ -31396,8 +31396,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             Dispose$1: function (disposing) {
                 try {
                     // We need to flush any buffered data if we are being closed/disposed.
-                    // Also, we never close the handles for stdout & friends.  So we can safely 
-                    // write any buffered data to those streams even during finalization, which 
+                    // Also, we never close the handles for stdout & friends.  So we can safely
+                    // write any buffered data to those streams even during finalization, which
                     // is generally the right thing to do.
                     if (this.stream != null) {
                         // Note: flush on the underlying stream can throw (ex., low disk space)
@@ -31407,14 +31407,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                 }
                 finally {
-                    // Dispose of our resources if this StreamWriter is closable. 
-                    // Note: Console.Out and other such non closable streamwriters should be left alone 
+                    // Dispose of our resources if this StreamWriter is closable.
+                    // Note: Console.Out and other such non closable streamwriters should be left alone
                     if (!this.LeaveOpen && this.stream != null) {
                         try {
                             // Attempt to close the stream even if there was an IO error from Flushing.
                             // Note that Stream.Close() can potentially throw here (may or may not be
-                            // due to the same Flush error). In this case, we still need to ensure 
-                            // cleaning up internal resources, hence the finally block.  
+                            // due to the same Flush error). In this case, we still need to ensure
+                            // cleaning up internal resources, hence the finally block.
                             if (disposing) {
                                 this.stream.Close();
                             }
@@ -31436,8 +31436,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             Flush$1: function (flushStream, flushEncoder) {
                 // flushEncoder should be true at the end of the file and if
                 // the user explicitly calls Flush (though not if AutoFlush is true).
-                // This is required to flush any dangling characters from our UTF-7 
-                // and UTF-8 encoders.  
+                // This is required to flush any dangling characters from our UTF-7
+                // and UTF-8 encoders.
                 if (this.stream == null) {
                     System.IO.__Error.WriterClosed();
                 }

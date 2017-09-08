@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  FileStream
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Exposes a Stream around a file, with full 
+** Purpose: Exposes a Stream around a file, with full
 ** synchronous and asychronous support, and buffering.
 **
 **
@@ -34,7 +34,7 @@ using System.Threading.Tasks;
  *
  * Also buffering is added into FileStream as well. Folded in the
  * code from BufferedStream, so all the comments about it being mostly
- * aggressive (and the possible perf improvement) apply to FileStream as 
+ * aggressive (and the possible perf improvement) apply to FileStream as
  * well.  Also added some buffering to the async code paths.
  *
  * Class Invariants:
@@ -43,7 +43,7 @@ using System.Threading.Tasks;
  * should be true:
  *   0 <= _readPos <= _readLen < _bufferSize
  *   0 <= _writePos < _bufferSize
- *   _readPos == _readLen && _readPos > 0 implies the read buffer is valid, 
+ *   _readPos == _readLen && _readPos > 0 implies the read buffer is valid,
  *     but we're at the end of the buffer.
  *   _readPos == _readLen == 0 means the read buffer contains garbage.
  *   Either _writePos can be greater than 0, or _readLen & _readPos can be

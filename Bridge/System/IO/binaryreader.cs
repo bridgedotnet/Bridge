@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: BinaryReader
-** 
+**
 ** <OWNER>gpaperin</OWNER>
 **
 **
@@ -40,7 +40,7 @@ namespace System.IO
         private char[] m_charBuffer;
         private int m_maxCharsSize;  // From MaxCharBytesSize & Encoding
 
-        // Performance optimization for Read() w/ Unicode.  Speeds us up by ~40% 
+        // Performance optimization for Read() w/ Unicode.  Speeds us up by ~40%
         private bool m_2BytesPerChar;
         private bool m_isMemoryStream; // "do we sit on MemoryStream?" for Read/ReadInt32 perf
         private bool m_leaveOpen;
@@ -75,7 +75,7 @@ namespace System.IO
             m_buffer = new byte[minBufferSize];
             // m_charBuffer and m_charBytes will be left null.
 
-            // For Encodings that always use 2 bytes per char (or more), 
+            // For Encodings that always use 2 bytes per char (or more),
             // special case them here to make Read() & Peek() faster.
             m_2BytesPerChar = encoding is UnicodeEncoding;
             // check if BinaryReader is based on MemoryStream, and keep this for it's life
@@ -257,10 +257,12 @@ namespace System.IO
         public virtual decimal ReadDecimal()
         {
             FillBuffer(23);
-            try {
+            try
+            {
                 return Decimal.FromBytes(m_buffer);
             }
-            catch (ArgumentException e) {
+            catch (ArgumentException e)
+            {
                 // ReadDecimal cannot leak out ArgumentException
                 throw new IOException("Arg_DecBitCtor", e);
             }
@@ -386,14 +388,14 @@ namespace System.IO
 
                 var ch = this.InternalReadOneChar(true);
 
-                if(ch == -1)
+                if (ch == -1)
                 {
                     break;
                 }
 
                 buffer[index] = (char)ch;
 
-                if(lastCharsRead == 2)
+                if (lastCharsRead == 2)
                 {
                     buffer[++index] = m_singleChar[1];
                     charsRemaining--;
@@ -406,7 +408,7 @@ namespace System.IO
             // this should never fail
             Contract.Assert(charsRemaining >= 0, "We read too many characters.");
 
-            // we may have read fewer than the number of characters requested if end of stream reached 
+            // we may have read fewer than the number of characters requested if end of stream reached
             // or if the encoding makes the char count too big for the buffer (e.g. fallback sequence)
             return (count - charsRemaining);
         }
@@ -414,10 +416,10 @@ namespace System.IO
         private int lastCharsRead = 0;
         private int InternalReadOneChar(bool allowSurrogate = false)
         {
-            // I know having a separate InternalReadOneChar method seems a little 
+            // I know having a separate InternalReadOneChar method seems a little
             // redundant, but this makes a scenario like the security parser code
             // 20% faster, in addition to the optimizations for UnicodeEncoding I
-            // put in InternalReadChars.   
+            // put in InternalReadChars.
             int charsRead = 0;
             int numBytes = 0;
             long posSav = 0;
@@ -440,12 +442,12 @@ namespace System.IO
             {
                 numBytes = m_2BytesPerChar ? 2 : 1;
 
-                if(m_encoding is UTF32Encoding)
+                if (m_encoding is UTF32Encoding)
                 {
                     numBytes = 4;
                 }
 
-                if(addByte)
+                if (addByte)
                 {
                     int r = m_stream.ReadByte();
                     m_charBytes[++internalPos] = (byte)r;
@@ -499,10 +501,10 @@ namespace System.IO
                             return -1;
                         }
 
-                        internalPos = 3;                    
+                        internalPos = 3;
                     }
                 }
-                
+
 
                 if (numBytes == 0)
                 {
@@ -521,7 +523,7 @@ namespace System.IO
                 }
                 catch
                 {
-                    // Handle surrogate char 
+                    // Handle surrogate char
 
                     if (m_stream.CanSeek)
                         m_stream.Seek((posSav - m_stream.Position), SeekOrigin.Current);
@@ -533,13 +535,13 @@ namespace System.IO
                 if (m_encoding._hasError)
                 {
                     charsRead = 0;
-                    addByte = true;    
+                    addByte = true;
                 }
 
-                if(!allowSurrogate)
+                if (!allowSurrogate)
                 {
                     Contract.Assert(charsRead < 2, "InternalReadOneChar - assuming we only got 0 or 1 char, not 2!");
-                }                
+                }
             }
 
             lastCharsRead = charsRead;
@@ -548,7 +550,7 @@ namespace System.IO
             {
                 return -1;
             }
-                
+
             return m_singleChar[0];
         }
 
