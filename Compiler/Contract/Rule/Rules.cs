@@ -11,6 +11,15 @@ namespace Bridge.Contract
     {
         private static string attributeName = "Bridge.RulesAttribute";
 
+        public static CompilerRule Default = new CompilerRule
+        {
+            Lambda = LambdaRule.Managed,
+            AnonymousType = AnonymousTypeRule.Managed,
+            Integer = IntegerRule.Managed,
+            Boxing = BoxingRule.Managed,
+            ArrayIndex = ArrayIndexRule.Managed
+        };
+
         public static CompilerRule Get(IEmitter emitter, IEntity entity)
         {
             CompilerRule memberRule = null;
@@ -88,7 +97,15 @@ namespace Bridge.Contract
 
         private static CompilerRule MergeRules(List<CompilerRule> rules)
         {
-            var resultRule = new CompilerRule();
+            var resultRule = new CompilerRule
+            {
+                Lambda = LambdaRule.Managed,
+                AnonymousType = AnonymousTypeRule.Managed,
+                Integer = IntegerRule.Managed,
+                Boxing = BoxingRule.Managed,
+                ArrayIndex = ArrayIndexRule.Managed
+            };
+
             for (int i = rules.Count - 1; i >= 0; i--)
             {
                 var rule = rules[i];
@@ -103,9 +120,9 @@ namespace Bridge.Contract
                     resultRule.AnonymousType = rule.AnonymousType;
                 }
 
-                if (rule.Arithmetic.HasValue)
+                if (rule.Integer.HasValue)
                 {
-                    resultRule.Arithmetic = rule.Arithmetic;
+                    resultRule.Integer = rule.Integer;
                 }
 
                 if (rule.ArrayIndex.HasValue)
@@ -116,11 +133,6 @@ namespace Bridge.Contract
                 if (rule.Boxing.HasValue)
                 {
                     resultRule.Boxing = rule.Boxing;
-                }
-
-                if (rule.NumberCasting.HasValue)
-                {
-                    resultRule.NumberCasting = rule.NumberCasting;
                 }
             }
 
@@ -150,12 +162,8 @@ namespace Bridge.Contract
                         rule.ArrayIndex = (ArrayIndexRule)(int)value.ConstantValue;
                         break;
 
-                    case nameof(CompilerRule.Arithmetic):
-                        rule.Arithmetic = (ArithmeticRule)(int)value.ConstantValue;
-                        break;
-
-                    case nameof(CompilerRule.NumberCasting):
-                        rule.NumberCasting = (NumberCastingRule)(int)value.ConstantValue;
+                    case nameof(CompilerRule.Integer):
+                        rule.Integer = (IntegerRule)(int)value.ConstantValue;
                         break;
 
                     case nameof(CompilerRule.AnonymousType):

@@ -56,23 +56,11 @@ namespace Bridge
 
         public
 #if BRIDGE_COMPILER
-            ArithmeticRule?
+            IntegerRule?
 #else
-            ArithmeticRule
+            IntegerRule
 #endif
-        Arithmetic
-        {
-            get;
-            set;
-        }
-
-        public
-#if BRIDGE_COMPILER
-            NumberCastingRule?
-#else
-            NumberCastingRule
-#endif
-        NumberCasting
+        Integer
         {
             get;
             set;
@@ -104,7 +92,7 @@ namespace Bridge
 #endif
     public enum LambdaRule
     {
-        Lifted = 0,
+        Managed = 0,
         Plain = 1
     }
 
@@ -113,8 +101,8 @@ namespace Bridge
 #endif
     public enum BoxingRule
     {
-        Enable = 0,
-        Disable = 1
+        Managed = 0,
+        Plain = 1
     }
 
 #if !BRIDGE_COMPILER
@@ -122,26 +110,17 @@ namespace Bridge
 #endif
     public enum ArrayIndexRule
     {
-        Overflow = 0,
-        Ignore = 1
-    }
-
-#if !BRIDGE_COMPILER
-    [NonScriptable]
-#endif
-    public enum ArithmeticRule
-    {
-        CSharp = 0,
+        Managed = 0,
         Plain = 1
     }
 
 #if !BRIDGE_COMPILER
     [NonScriptable]
 #endif
-    public enum NumberCastingRule
+    public enum IntegerRule
     {
-        Enable = 0,
-        None = 1
+        Managed = 0,
+        Plain = 1
     }
 
 #if !BRIDGE_COMPILER
@@ -149,7 +128,7 @@ namespace Bridge
 #endif
     public enum AnonymousTypeRule
     {
-        Type = 0,
+        Managed = 0,
         Plain = 1
     }
 }

@@ -1398,7 +1398,7 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteOpenBracket();
-                    if (isArray)
+                    if (isArray && this.Emitter.Rules.ArrayIndex == ArrayIndexRule.Managed)
                     {
                         this.Write(JS.Types.System.Array.INDEX);
                         this.WriteOpenParentheses();
@@ -1409,7 +1409,7 @@ namespace Bridge.Translator
 
                 if (!this.isRefArg)
                 {
-                    if (isArray)
+                    if (isArray && this.Emitter.Rules.ArrayIndex == ArrayIndexRule.Managed)
                     {
                         this.WriteComma();
 
