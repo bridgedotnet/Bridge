@@ -1939,5 +1939,37 @@ namespace Bridge.ClientTest.SimpleTypes
             d = -1.5m;
             Assert.AreEqual("-2.5", (--d).ToString(), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
         }
+
+        [Test]
+        public void InternalGetBytesWorks()
+        {
+            var a1 = new byte[] { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r1 = Decimal.GetBytes(0m);
+            Assert.AreEqual(a1, r1);
+
+            var a2 = new byte[] { 1, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r2 = Decimal.GetBytes(987.123456m);
+            Assert.AreEqual(a2, r2);
+
+            var a3 = new byte[] { 255, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r3 = Decimal.GetBytes(-987.123456m);
+            Assert.AreEqual(a3, r3);
+        }
+
+        [Test]
+        public void InternalFromBytesWorks()
+        {
+            var a1 = new byte[] { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r1 = Decimal.FromBytes(a1);
+            NumberHelper.AssertDecimal("0", r1);
+
+            var a2 = new byte[] { 1, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r2 = Decimal.FromBytes(a2);
+            NumberHelper.AssertDecimal("987.123456", r2);
+
+            var a3 = new byte[] { 255, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r3 = Decimal.FromBytes(a3);
+            NumberHelper.AssertDecimal("-987.123456", r3);
+        }
     }
 }

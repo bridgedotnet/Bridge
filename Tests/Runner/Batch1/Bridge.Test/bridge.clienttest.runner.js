@@ -2581,6 +2581,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Decimal - FullCoalesceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.FullCoalesceWorks);
             QUnit.test("Decimal - ShortCoalesceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ShortCoalesceWorks);
             QUnit.test("Decimal - ImplementationTests_SPI_1588_1590_1650", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ImplementationTests_SPI_1588_1590_1650);
+            QUnit.test("Decimal - InternalGetBytesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.InternalGetBytesWorks);
+            QUnit.test("Decimal - InternalFromBytesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.InternalFromBytesWorks);
             QUnit.test("Double - TypePropertiesAreCorrect_SPI_1717", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.TypePropertiesAreCorrect_SPI_1717);
             QUnit.test("Double - DefaultValueIs0", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.DefaultValueIs0);
             QUnit.test("Double - CreatingInstanceReturnsZero", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.CreatingInstanceReturnsZero);
@@ -9493,6 +9495,16 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ImplementationTests_SPI_1588_1590_1650()", $t.Line = "1319", $t));
                     t.Fixture.ImplementationTests_SPI_1588_1590_1650();
+                },
+                InternalGetBytesWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InternalGetBytesWorks()", $t.Line = "1943", $t));
+                    t.Fixture.InternalGetBytesWorks();
+                },
+                InternalFromBytesWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InternalFromBytesWorks()", $t.Line = "1959", $t));
+                    t.Fixture.InternalFromBytesWorks();
                 }
             }
         },
