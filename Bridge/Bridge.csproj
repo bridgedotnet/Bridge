@@ -165,12 +165,12 @@
     <Compile Include="System\IO\bufferedstream.cs" />
     <Compile Include="System\IO\endofstreamexception.cs" />
     <Compile Include="System\IO\file.cs" />
-    <Compile Include="System\IO\FileMode.cs" />
+    <Compile Include="System\IO\filemode.cs" />
     <Compile Include="System\IO\filestream.cs" />
     <Compile Include="System\IO\ioexception.cs" />
     <Compile Include="System\IO\memorystream.cs" />
     <Compile Include="System\IO\ReadLinesIterator.cs" />
-    <Compile Include="System\IO\SeekOrigin.cs" />
+    <Compile Include="System\IO\seekorigin.cs" />
     <Compile Include="System\IO\stream.cs" />
     <Compile Include="System\IO\streamreader.cs" />
     <Compile Include="System\IO\streamwriter.cs" />
