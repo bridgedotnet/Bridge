@@ -16,6 +16,10 @@
 **
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/memorystream.cs
+ */
+
 
 using System;
 using System.Runtime.InteropServices;

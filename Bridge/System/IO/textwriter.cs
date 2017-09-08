@@ -15,6 +15,9 @@
 **
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/textwriter.cs
+ */
 
 using System;
 using System.Text;

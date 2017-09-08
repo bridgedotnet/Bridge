@@ -13,6 +13,10 @@
 **
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/bufferedstream.cs
+ */
+
 using System;
 using System.Runtime.InteropServices;
 using System.Globalization;

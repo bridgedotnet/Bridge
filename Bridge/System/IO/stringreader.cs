@@ -13,7 +13,10 @@
 **
 **
 ===========================================================*/
-
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/streamreader.cs
+ */
+ 
 using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics.Contracts;

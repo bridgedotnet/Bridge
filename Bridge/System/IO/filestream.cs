@@ -15,6 +15,10 @@
 **
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/filestream.cs
+ */
+
 using System;
 using System.Security.Permissions;
 using System.Threading;

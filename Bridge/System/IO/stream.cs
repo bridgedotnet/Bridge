@@ -16,6 +16,10 @@
 **
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/stream.cs
+ */
+
 using System;
 using System.Runtime;
 using System.Runtime.InteropServices;

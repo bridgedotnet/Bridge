@@ -1,6 +1,10 @@
 using Bridge;
 using System;
 using System.Collections;
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/ReadLinesIterator.cs
+ */
+
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Runtime.Versioning;

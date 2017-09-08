@@ -15,6 +15,10 @@
 **
 **
 ============================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/binaryreader.cs
+ */
+
 using System;
 using System.Runtime;
 using System.Text;

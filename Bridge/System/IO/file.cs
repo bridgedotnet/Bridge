@@ -15,6 +15,9 @@
 **        April 09,2000 (some design refactorization)
 **
 ===========================================================*/
+/*
+ * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/file.cs
+ */
 
 using System;
 using System.Runtime.InteropServices;
