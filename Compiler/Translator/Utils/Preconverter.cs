@@ -17,7 +17,7 @@ using Mono.Cecil;
 using System.Text;
 
 namespace Bridge.Translator
-{ 
+{
     public class PreconverterDetecter : DepthFirstAstVisitor
     {
         public PreconverterDetecter(MemberResolver resolver, IEmitter emitter)
@@ -38,8 +38,14 @@ namespace Bridge.Translator
             set;
         }
 
-        internal IEmitter Emitter { get; private set; }
-        internal CompilerRule Rules { get; private set; }
+        internal IEmitter Emitter
+        {
+            get; private set;
+        }
+        internal CompilerRule Rules
+        {
+            get; private set;
+        }
 
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
@@ -101,7 +107,7 @@ namespace Bridge.Translator
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
             var rr = this.Resolver.ResolveNode(methodDeclaration, null) as MemberResolveResult;
-            if(rr != null)
+            if (rr != null)
             {
                 this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
             }
@@ -215,8 +221,14 @@ namespace Bridge.Translator
             set;
         }
 
-        internal IEmitter Emitter { get; private set; }
-        internal CompilerRule Rules { get; private set; }
+        internal IEmitter Emitter
+        {
+            get; private set;
+        }
+        internal CompilerRule Rules
+        {
+            get; private set;
+        }
 
         public override AstNode VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {

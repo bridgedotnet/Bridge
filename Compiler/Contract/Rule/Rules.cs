@@ -110,7 +110,7 @@ namespace Bridge.Contract
             {
                 var rule = rules[i];
 
-                if(rule.Lambda.HasValue)
+                if (rule.Lambda.HasValue)
                 {
                     resultRule.Lambda = rule.Lambda;
                 }
@@ -147,7 +147,7 @@ namespace Bridge.Contract
             {
                 var member = argument.Key;
                 var value = argument.Value;
-                
+
                 switch (member.Name)
                 {
                     case nameof(CompilerRule.Lambda):

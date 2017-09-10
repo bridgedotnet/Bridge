@@ -674,7 +674,7 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.Divide:
-                        this.Write(rootSpecial  ? JS.Funcs.Math.DIV : "/");
+                        this.Write(rootSpecial ? JS.Funcs.Math.DIV : "/");
                         break;
 
                     case BinaryOperatorType.Equality:
