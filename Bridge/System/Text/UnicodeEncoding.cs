@@ -167,6 +167,7 @@ namespace System.Text
             var position = index;
             var result = "";
             var endpoint = position + count;
+            this._hasError = false;
 
             Action fallback = () =>
             {
@@ -207,6 +208,7 @@ namespace System.Text
                 if (!firstWord.HasValue)
                 {
                     fallback();
+                    this._hasError = true;
                 }
                 else if ((firstWord < 0xD800) || (firstWord > 0xDFFF))
                 {
@@ -219,6 +221,7 @@ namespace System.Text
                     if (end)
                     {
                         fallback();
+                        this._hasError = true;
                     }
                     else if (!secondWord.HasValue)
                     {

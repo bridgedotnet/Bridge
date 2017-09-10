@@ -49,6 +49,7 @@
     <Compile Include="BridgeIssues\N1204.cs" />
     <Compile Include="BridgeIssues\N1122.cs" />
     <Compile Include="BridgeIssues\N1499.cs" />
+    <Compile Include="BridgeIssues\N3075.cs" />
     <Compile Include="BridgeIssues\N772.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\..\Html5\Bridge.Html5.csproj">
       <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
       <Name>Bridge.Html5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClientTestHelper\ClientTestHelper.csproj">
+      <Project>{847bf532-9724-44d0-96c5-9b393e698b7c}</Project>
+      <Name>ClientTestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

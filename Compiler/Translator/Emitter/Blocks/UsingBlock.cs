@@ -38,24 +38,40 @@ namespace Bridge.Translator
             this.EmitUsing(res, inner);
         }
 
-        public VariableDeclarationStatement VariableDeclarationStatement { get; set; }
+        public VariableDeclarationStatement VariableDeclarationStatement
+        {
+            get; set;
+        }
 
         protected virtual void EmitUsing(AstNode expression, IEnumerable<AstNode> inner)
         {
             string temp = null;
             string name = null;
+            bool isReferenceLocal = false;
+
+            this.PushLocals();
 
             var varInit = expression as VariableInitializer;
             if (varInit != null)
             {
-                name = this.AddLocal(varInit.Name, expression, this.VariableDeclarationStatement.Type);
+                var block = new VariableBlock(this.Emitter, this.VariableDeclarationStatement);
+                block.Emit();
+                name = block.lastVarName;
+                isReferenceLocal = block.lastIsReferenceLocal;
+
+                if (isReferenceLocal)
+                {
+                    name = name + ".v";
+                }
+
+                /*name = this.AddLocal(varInit.Name, expression, this.VariableDeclarationStatement.Type);
 
                 this.WriteVar();
                 this.Write(name);
                 this.Write(" = ");
                 varInit.Initializer.AcceptVisitor(this.Emitter);
                 this.WriteSemiColon();
-                this.WriteNewLine();
+                this.WriteNewLine();*/
             }
             else if (expression is IdentifierExpression)
             {
@@ -137,6 +153,8 @@ namespace Bridge.Translator
             {
                 this.RemoveTempVar(temp);
             }
+
+            this.PopLocals();
         }
     }
 }

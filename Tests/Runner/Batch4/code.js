@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests for Portarelle
- * @version 16.2.1
+ * @version 16.3.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.2.1
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     "use strict";
@@ -454,9 +454,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", {
         methods: {
-            AssertIsDecimalAndEqualTo: function (v, d) {
-                Bridge.Test.NUnit.Assert.True(Bridge.is(v, System.Decimal));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d), v.toString());
+            AssertDecimal: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.True(Bridge.is(actual, System.Decimal));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(expected), actual.toString());
             },
             ConversionsToDecimalWork_SPI_1580: function () {
                 var x = 0;
@@ -655,7 +655,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var _ = x.div(System.Decimal(0.0));
                 });
-                this.AssertIsDecimalAndEqualTo(System.Decimal(14.0).mod(x), 2);
+                this.AssertDecimal(2, System.Decimal(14.0).mod(x));
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var _ = x.mod(System.Decimal(0.0));
                 });
@@ -667,7 +667,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var _ = System.Nullable.lift2("div", x1, System.Decimal(0.0));
                 });
-                this.AssertIsDecimalAndEqualTo(System.Nullable.lift2("mod", System.Decimal(14.0), x1), 2);
+                this.AssertDecimal(2, System.Nullable.lift2("mod", System.Decimal(14.0), x1));
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var _ = System.Nullable.lift2("mod", x1, System.Decimal(0.0));
                 });
@@ -679,12 +679,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
                     d1 = System.Decimal("+123.456");
                 });
-                this.AssertIsDecimalAndEqualTo(d1, 123.456);
+                this.AssertDecimal(123.456, d1);
                 var d2 = System.Decimal(0);
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
                     d2 = System.Decimal("  +123.456  ");
                 });
-                this.AssertIsDecimalAndEqualTo(d2, 123.456);
+                this.AssertDecimal(123.456, d2);
 
                 //Assert.Throws<OverflowException>(() => decimal.Parse("999999999999999999999999999999"));
             },
@@ -695,11 +695,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 // #1586
                 b = System.Decimal.tryParse("+123.456", null, d);
                 Bridge.Test.NUnit.Assert.True(b);
-                this.AssertIsDecimalAndEqualTo(d.v, 123.456);
+                this.AssertDecimal(123.456, d.v);
 
                 b = System.Decimal.tryParse("  +123.456  ", null, d);
                 Bridge.Test.NUnit.Assert.True(b);
-                this.AssertIsDecimalAndEqualTo(d.v, 123.456);
+                this.AssertDecimal(123.456, d.v);
 
                 //b = decimal.TryParse("999999999999999999999999999999", out d);
                 //Assert.False(b);

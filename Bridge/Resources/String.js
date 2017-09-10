@@ -39,10 +39,30 @@ Bridge.define("System.String", {
         },
 
         fromCharArray: function (chars, startIndex, length) {
+            if (chars == null) {
+                throw new System.ArgumentNullException("chars");
+            }                
+
+            if (startIndex < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex");
+            }
+                
+            if (length < 0) {
+                throw new System.ArgumentOutOfRangeException("length");
+            }
+                
+            if (chars.length - startIndex < length) {
+                throw new System.ArgumentOutOfRangeException("startIndex");
+            }                
+
             var result = "";
 
             startIndex = startIndex || 0;
             length = Bridge.isNumber(length) ? length : chars.length;
+
+            if ((startIndex + length) > chars.length) {
+                length = chars.length - startIndex;
+            }
 
             for (var i = 0; i < length; i++) {
                 var ch = chars[i + startIndex] | 0;

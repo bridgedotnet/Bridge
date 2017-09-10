@@ -7,10 +7,10 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
     [TestFixture(TestNameFormat = "DecimalTests - {0}")]
     public class DecimalTests
     {
-        private void AssertIsDecimalAndEqualTo(object v, double d)
+        private void AssertDecimal(double expected, object actual)
         {
-            Assert.True(v is decimal);
-            Assert.AreStrictEqual(d.ToString(), v.ToString());
+            Assert.True(actual is decimal);
+            Assert.AreStrictEqual(expected.ToString(), actual.ToString());
         }
 
         [Test]
@@ -281,7 +281,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             {
                 var _ = x / 0m;
             });
-            AssertIsDecimalAndEqualTo(14m % x, 2);
+            AssertDecimal(2, 14m % x);
             Assert.Throws<DivideByZeroException>(() =>
             {
                 var _ = x % 0m;
@@ -300,7 +300,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             {
                 var _ = x1 / 0m;
             });
-            AssertIsDecimalAndEqualTo(14m % x1, 2);
+            AssertDecimal(2, 14m % x1);
             Assert.Throws<DivideByZeroException>(() =>
             {
                 var _ = x1 % 0m;
@@ -316,10 +316,10 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
             decimal d1 = 0;
             TestHelper.Safe(() => d1 = decimal.Parse("+123.456"));
-            AssertIsDecimalAndEqualTo(d1, 123.456);
+            AssertDecimal(123.456, d1);
             decimal d2 = 0;
             TestHelper.Safe(() => d2 = decimal.Parse("  +123.456  "));
-            AssertIsDecimalAndEqualTo(d2, 123.456);
+            AssertDecimal(123.456, d2);
 
             //Assert.Throws<OverflowException>(() => decimal.Parse("999999999999999999999999999999"));
         }
@@ -333,11 +333,11 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             // #1586
             b = decimal.TryParse("+123.456", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, 123.456);
+            AssertDecimal(123.456, d);
 
             b = decimal.TryParse("  +123.456  ", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, 123.456);
+            AssertDecimal(123.456, d);
 
             //b = decimal.TryParse("999999999999999999999999999999", out d);
             //Assert.False(b);

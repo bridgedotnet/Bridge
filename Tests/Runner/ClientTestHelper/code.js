@@ -1,7 +1,7 @@
 /**
  * Bridge Test library - a common classes shared across all test Batches
  * @version 1.2.3.4
- * @compiler Bridge.NET 16.2.1
+ * @compiler Bridge.NET 16.3.0
  */
 Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     "use strict";
@@ -158,9 +158,116 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.NumberHelper", {
         statics: {
             methods: {
+                AssertNumberByRepresentation: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    var a = actual != null ? actual.toString() : "[null]";
+                    var e = expected != null ? expected.toString() : "[null]";
+
+                    Bridge.Test.NUnit.Assert.AreEqual(e, a, System.String.concat(message, " representation"));
+                },
                 AssertNumber: function (expected, actual, message) {
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.getType(expected)), Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                },
+                AssertNumberWithEpsilon1: function (T, expected, actual, message) {
+                    var useEpsilon = Bridge.referenceEquals(T, System.Double) || Bridge.referenceEquals(T, System.Single);
+
+                    if (useEpsilon) {
+                        var epsilon = 0.1;
+
+                        if (Bridge.referenceEquals(T, System.Double)) {
+                            var diff = expected - actual;
+
+                            if (diff < 0) {
+                                diff = -diff;
+                            }
+
+                            if (diff < epsilon) {
+                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(message, expected, " vs ", actual));
+                            } else {
+                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon)));
+                            }
+                        } else {
+                            var diff1 = expected - actual;
+
+                            if (diff1 < 0) {
+                                diff1 = -diff1;
+                            }
+
+                            if (diff1 < epsilon) {
+                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(message, expected, " vs ", actual));
+                            } else {
+                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon)));
+                            }
+                        }
+                    } else {
+                        Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
+                    }
+                },
+                AssertDouble$1: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), System.String.concat(message, " representation"));
+                },
+                AssertDouble: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), System.String.concat(message, " representation"));
+                },
+                AssertDoubleWithEpsilon8: function (expected, actual) {
+                    var se = System.Double.format(expected);
+                    var sa = System.Double.format(actual);
+
+                    if (Bridge.referenceEquals(sa, se)) {
+                        Bridge.Test.NUnit.Assert.True(true, "Actual:" + System.Double.format(actual) + " vs Expected:" + System.Double.format(expected));
+                        return;
+                    }
+
+                    var diff = actual - expected;
+                    if (diff < 0) {
+                        diff = -diff;
+                    }
+
+                    Bridge.Test.NUnit.Assert.True(diff < 1E-08, "Expected " + System.Double.format(expected) + " but was " + System.Double.format(actual));
+                },
+                AssertDoubleTryParse: function (r, expected, s, message) {
+                    var actual = { };
+                    var b = System.Double.tryParse(s, null, actual);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(r, b, System.String.concat(message, " result"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), System.Double.format(actual.v), System.String.concat(message, " representation"));
+                },
+                AssertFloat: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Single", Bridge.Reflection.getTypeName(System.Single), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Single.format(actual), System.String.concat(message, " representation"));
+                },
+                AssertDecimal$1: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                },
+                AssertDecimal$2: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                },
+                AssertDecimal: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), actual.toString(), System.String.concat(message, " representation"));
+                },
+                AssertLong: function (expected, actual, message) {
+                    if (message === void 0) { message = ""; }
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Int64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
+                },
+                AssertULong: function (expected, actual, message) {
+                    if (message === void 0) { message = ""; }
+                    Bridge.Test.NUnit.Assert.AreEqual("System.UInt64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
                 }
             }
         }

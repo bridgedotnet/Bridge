@@ -51,6 +51,12 @@
     <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Html5\Ajax\XMLHttpRequest.cs">
+      <Link>Internal\XMLHttpRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\File\File.cs">
+      <Link>Internal\File.cs</Link>
+    </Compile>
     <Compile Include="..\Html5\TypedArray\ArrayBuffer.cs">
       <Link>Internal\Html5\TypedArray\ArrayBuffer.cs</Link>
     </Compile>
@@ -155,6 +161,25 @@
     <Compile Include="System\IAsyncResult.cs" />
     <Compile Include="System\DateTimeKind.cs" />
     <Compile Include="System\Globalization\TextInfo.cs" />
+    <Compile Include="System\IO\binaryreader.cs" />
+    <Compile Include="System\IO\binarywriter.cs" />
+    <Compile Include="System\IO\bufferedstream.cs" />
+    <Compile Include="System\IO\endofstreamexception.cs" />
+    <Compile Include="System\IO\file.cs" />
+    <Compile Include="System\IO\filemode.cs" />
+    <Compile Include="System\IO\filestream.cs" />
+    <Compile Include="System\IO\ioexception.cs" />
+    <Compile Include="System\IO\memorystream.cs" />
+    <Compile Include="System\IO\ReadLinesIterator.cs" />
+    <Compile Include="System\IO\seekorigin.cs" />
+    <Compile Include="System\IO\stream.cs" />
+    <Compile Include="System\IO\streamreader.cs" />
+    <Compile Include="System\IO\streamwriter.cs" />
+    <Compile Include="System\IO\stringreader.cs" />
+    <Compile Include="System\IO\stringwriter.cs" />
+    <Compile Include="System\IO\textreader.cs" />
+    <Compile Include="System\IO\textwriter.cs" />
+    <Compile Include="System\IO\__error.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -465,6 +490,7 @@
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\globalization\textInfo.js" />
     <Content Include="Resources\.generated\system\guid.js" />
+    <Content Include="Resources\.generated\system\io\io.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
     <Content Include="Resources\.generated\system\text\encoding.js" />

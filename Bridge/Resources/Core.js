@@ -1,6 +1,8 @@
     var core = {
         global: globals,
 
+        isNode: (new Function("try {return this===global;}catch(e){return false;}"))(),
+
         emptyFn: function () { },
 
         identity: function (x) {
@@ -225,9 +227,9 @@
             var scopeType = Bridge.getType(scope),
                 descriptors = scopeType.$descriptors || [];
 
-            descriptors.$propMap = descriptors.$propMap || {};
+            scope.$propMap = scope.$propMap || {};
 
-            if (descriptors.$propMap[name]) {
+            if (scope.$propMap[name]) {
                 return scope;
             }
 
@@ -248,7 +250,7 @@
                 }
             }
 
-            descriptors.$propMap[name] = true;
+            scope.$propMap[name] = true;
 
             return scope;
         },
@@ -1166,6 +1168,10 @@
             } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
                 return Bridge.fn.equals.call(a, b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
+                if (a.kind !== undefined && a.ticks !== undefined && b.kind !== undefined && b.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
                 return true;
@@ -1295,6 +1301,10 @@
 
                 return a < b ? -1 : (a > b ? 1 : 0);
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return Bridge.compare(a.ticks, b.ticks);
+                }
+
                 return Bridge.compare(a.valueOf(), b.valueOf());
             }
 
@@ -1353,6 +1363,10 @@
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
                 return a === b;
             } else if (Bridge.isDate(a)) {
+                if (a.kind !== undefined && a.ticks !== undefined) {
+                    return a.ticks.equals(b.ticks);
+                }
+
                 return a.valueOf() === b.valueOf();
             }
 

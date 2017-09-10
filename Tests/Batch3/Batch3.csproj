@@ -632,9 +632,13 @@
     <Compile Include="BridgeIssues\3000\N3064.cs" />
     <Compile Include="BridgeIssues\3000\N3071.cs" />
     <Compile Include="BridgeIssues\3000\N3076.cs" />
+    <Compile Include="BridgeIssues\3000\N3081.cs" />
+    <Compile Include="BridgeIssues\3000\N3086.cs" />
+    <Compile Include="BridgeIssues\3000\N3088.cs" />
+    <Compile Include="BridgeIssues\3000\N3089.cs" />
+    <Compile Include="BridgeIssues\3100\N3112.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
-    <Compile Include="Utilities\DecimalHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
