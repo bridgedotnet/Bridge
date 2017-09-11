@@ -611,7 +611,7 @@ namespace Bridge.Translator
                         SyntaxFactory.Token(SyntaxKind.SemicolonToken)
                     );
 
-                    
+
                     fields.Add(field);
                     newNode = newNode.ReplaceNode(newNode.Initializer, (SyntaxNode)null);
                     var trivias = node.Initializer.GetLeadingTrivia().AddRange(node.Initializer.GetTrailingTrivia());
@@ -776,16 +776,16 @@ namespace Bridge.Translator
             get; set;
         }
 
-        private class InitializerInfo
-        {
-            public IMethodSymbol method;
-            public List<InitializerInfo> nested;
-        }
-
         private int IndexInstance
         {
             get;
             set;
+        }
+
+        private class InitializerInfo
+        {
+            public IMethodSymbol method;
+            public List<InitializerInfo> nested;
         }
 
         private bool NeedRewriteInitializer(InitializerExpressionSyntax initializer, List<InitializerInfo> infos, ref bool extensionMethodExists, ref bool isImplicitElementAccessSyntax)
@@ -885,7 +885,7 @@ namespace Bridge.Translator
                 {
                     parent = parent.Parent;
                 }
-                
+
                 string instance = "_o" + ++IndexInstance;
                 if (parent != null)
                 {
@@ -907,7 +907,7 @@ namespace Bridge.Translator
                 {
                     lambda = lambda.WithAsyncKeyword(SyntaxFactory.Token(SyntaxKind.AsyncKeyword));
                 }
-                
+
                 args[1] = lambda;
 
                 var methodIdentifier = isAsync ? SyntaxFactory.IdentifierName("global::Bridge.Script.AsyncCallFor") : SyntaxFactory.IdentifierName("global::Bridge.Script.CallFor");
@@ -1070,7 +1070,7 @@ namespace Bridge.Translator
             {
                 var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.SafeFunc");
                 var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(), catchItem.Declaration.Identifier.Kind() != SyntaxKind.None ? new IdentifierReplacer(catchItem.Declaration.Identifier.Value.ToString(), SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName))).Replace(catchItem.Filter.FilterExpression) : catchItem.Filter.FilterExpression);
-                var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new [] { SyntaxFactory.Argument(
+                var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(
                     lambda
                     ) })));
 
@@ -1082,7 +1082,7 @@ namespace Bridge.Translator
             if (catchItem.Declaration.Identifier.Kind() != SyntaxKind.None)
             {
                 var variableStatement = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(catchItem.Declaration.Type,
-                    SyntaxFactory.SeparatedList<VariableDeclaratorSyntax>(new [] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(catchItem.Declaration.Identifier.Text)).WithInitializer(
+                    SyntaxFactory.SeparatedList<VariableDeclaratorSyntax>(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(catchItem.Declaration.Identifier.Text)).WithInitializer(
                         SyntaxFactory.EqualsValueClause(SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName)))
                     ) })));
 
@@ -1223,7 +1223,7 @@ namespace Bridge.Translator
 
             var newNode = needParenthesized ? SyntaxFactory.ParenthesizedExpression(SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse)) :
                                        (SyntaxNode)SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse);
- 
+
             return newNode.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
         }
     }
