@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 
 namespace Bridge.ClientTest.SimpleTypes
@@ -110,11 +111,11 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(20, time.Minutes);
             Assert.AreEqual(5, time.Seconds);
             Assert.AreEqual(14, time.Milliseconds);
-            AssertAlmostEqual(time.TotalDays, 15.430613587962963d);
-            AssertAlmostEqual(time.TotalHours, 370.33472611111108d);
-            AssertAlmostEqual(time.TotalMinutes, 22220.083566666668d);
-            AssertAlmostEqual(time.TotalSeconds, 1333205.014d);
-            AssertAlmostEqual(time.TotalMilliseconds, 1333205014.0d);
+            NumberHelper.AssertDoubleWithEpsilon8(15.430613587962963d, time.TotalDays);
+            NumberHelper.AssertDoubleWithEpsilon8(370.33472611111108d, time.TotalHours);
+            NumberHelper.AssertDoubleWithEpsilon8(22220.083566666668d, time.TotalMinutes);
+            NumberHelper.AssertDoubleWithEpsilon8(1333205.014d, time.TotalSeconds);
+            NumberHelper.AssertDoubleWithEpsilon8(1333205014.0d, time.TotalMilliseconds);
             Assert.AreEqual(15 * TimeSpan.TicksPerDay + 10 * TimeSpan.TicksPerHour + 20 * TimeSpan.TicksPerMinute + 5 * TimeSpan.TicksPerSecond + 14 * TimeSpan.TicksPerMillisecond, time.Ticks);
         }
 
@@ -229,14 +230,6 @@ namespace Bridge.ClientTest.SimpleTypes
             TimeSpan actual = time.Negate();
             Assert.True((object)actual is TimeSpan, "Should be TimeSpan");
             Assert.AreEqual((((((3 * 24) - 2) * 60 + 1) * 60) - 5) * 1000 + 4, actual.TotalMilliseconds, "Ticks should be correct");
-        }
-
-        private void AssertAlmostEqual(double d1, double d2)
-        {
-            var diff = d2 - d1;
-            if (diff < 0)
-                diff = -diff;
-            Assert.True(diff < 1e-8);
         }
 
         [Test]

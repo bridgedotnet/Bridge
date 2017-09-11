@@ -9,19 +9,6 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "Int64 - {0}")]
     public class Int64Tests
     {
-        private void AssertLong(object expected, object actual, string message = "", string checkedType = "System.Int64")
-        {
-            if (message == null)
-            {
-                message = "";
-            }
-
-            var typeMessage = message + "Type is " + checkedType;
-            Assert.AreEqual(checkedType, actual.GetType().FullName, typeMessage);
-
-            Assert.AreEqual(expected.ToString(), actual.ToString(), message);
-        }
-
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
@@ -49,8 +36,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void MinMaxValuesAreCorrect()
         {
-            AssertLong("-9223372036854775808", long.MinValue);
-            AssertLong("9223372036854775807", long.MaxValue);
+            NumberHelper.AssertLong("-9223372036854775808", long.MinValue);
+            NumberHelper.AssertLong("9223372036854775807", long.MaxValue);
         }
 
         [Test]
@@ -133,13 +120,13 @@ namespace Bridge.ClientTest.SimpleTypes
             long l6 = (long)int.MaxValue + 1;
             long l7 = (long)ulong.MinValue + 1;
 
-            AssertLong("257", ub + l1);
-            AssertLong("130", sb + l2);
-            AssertLong("65539", us + l3);
-            AssertLong("32772", ss + l4);
-            AssertLong("4294967301", ui + l5);
-            AssertLong("2147483654", si + l6);
-            AssertLong("8", (long)ul + l7);
+            NumberHelper.AssertLong("257", ub + l1);
+            NumberHelper.AssertLong("130", sb + l2);
+            NumberHelper.AssertLong("65539", us + l3);
+            NumberHelper.AssertLong("32772", ss + l4);
+            NumberHelper.AssertLong("4294967301", ui + l5);
+            NumberHelper.AssertLong("2147483654", si + l6);
+            NumberHelper.AssertLong("8", (long)ul + l7);
 
             decimal dcml = 11m;
             double dbl = 12d;
@@ -147,9 +134,9 @@ namespace Bridge.ClientTest.SimpleTypes
 
             long l = 100;
 
-            AssertLong("111", dcml + l, null, "System.Decimal");
-            AssertLong("112", dbl + l, null, "System.Double");
-            AssertLong("113", flt + l, null, "System.Single");
+            NumberHelper.AssertDecimal("111", dcml + l, null);
+            NumberHelper.AssertDouble("112", dbl + l, null);
+            NumberHelper.AssertFloat("113", flt + l, null);
         }
 
         private T GetDefaultValue<T>()
@@ -220,15 +207,15 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = long.TryParse("0000000000000000", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(0L, numberResult, "#3031");
+            NumberHelper.AssertNumber(0L, (object)numberResult, "#3031");
 
             result = long.TryParse("0", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(0L, numberResult, "#3031");
+            NumberHelper.AssertNumber(0L, (object)numberResult, "#3031");
 
             result = long.TryParse("0000000000000010", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(10L, numberResult, "#3031");
+            NumberHelper.AssertNumber(10L, (object)numberResult, "#3031");
 
             result = long.TryParse("", out numberResult);
             Assert.False(result);
@@ -260,9 +247,9 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.AreEqual(13453634535L, long.Parse("13453634535"));
             Assert.AreEqual(-234253069384953L, long.Parse("-234253069384953"));
-            NumberHelper.AssertNumber(0L, long.Parse("0"), "#3031");
-            NumberHelper.AssertNumber(0L, long.Parse("000000000000000"), "#3031");
-            NumberHelper.AssertNumber(10L, long.Parse("0000000000000010"), "#3031");
+            NumberHelper.AssertNumber(0L, (object)long.Parse("0"), "#3031");
+            NumberHelper.AssertNumber(0L, (object)long.Parse("000000000000000"), "#3031");
+            NumberHelper.AssertNumber(10L, (object)long.Parse("0000000000000010"), "#3031");
             Assert.Throws<FormatException>(() => long.Parse(""));
             Assert.Throws<ArgumentNullException>(() => long.Parse(null));
             Assert.Throws<FormatException>(() => long.Parse("notanumber"));

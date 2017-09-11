@@ -208,5 +208,10 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        CompilerRule Rules
+        {
+            get; set;
+        }
     }
  }

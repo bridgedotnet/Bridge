@@ -7,17 +7,20 @@ namespace Bridge.Translator
 {
     public class VariableBlock : AbstractEmitterBlock
     {
-        public VariableBlock(IEmitter emitter, VariableDeclarationStatement variableDeclarationStatement)
-            : base(emitter, variableDeclarationStatement)
-        {
-            this.Emitter = emitter;
-            this.VariableDeclarationStatement = variableDeclarationStatement;
-        }
+        internal string lastVarName;
+        internal bool lastIsReferenceLocal;
 
         public VariableDeclarationStatement VariableDeclarationStatement
         {
             get;
             set;
+        }
+
+        public VariableBlock(IEmitter emitter, VariableDeclarationStatement variableDeclarationStatement)
+            : base(emitter, variableDeclarationStatement)
+        {
+            this.Emitter = emitter;
+            this.VariableDeclarationStatement = variableDeclarationStatement;
         }
 
         protected override void DoEmit()
@@ -39,6 +42,7 @@ namespace Bridge.Translator
                 this.WriteSourceMapName(variable.Name);
 
                 var varName = this.AddLocal(variable.Name, variable, this.VariableDeclarationStatement.Type);
+                lastVarName = varName;
 
                 if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(JS.Vars.FIX_ARGUMENT_NAME))
                 {
@@ -59,6 +63,7 @@ namespace Bridge.Translator
                     isReferenceLocal = this.Emitter.LocalsMap[lrr.Variable].EndsWith(".v");
                 }
 
+                lastIsReferenceLocal = isReferenceLocal;
                 var hasInitializer = !variable.Initializer.IsNull;
 
                 if (variable.Initializer.IsNull && !this.VariableDeclarationStatement.Type.IsVar())

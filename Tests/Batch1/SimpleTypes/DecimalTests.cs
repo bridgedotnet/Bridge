@@ -9,12 +9,6 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "Decimal - {0}")]
     public class DecimalTests
     {
-        private void AssertIsDecimalAndEqualTo(object v, object d, string message = null)
-        {
-            Assert.AreEqual(true, v is decimal, "Is decimal: " + message);
-            Assert.AreEqual(d.ToString(), v.ToString(), "Value correct: " + message);
-        }
-
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
@@ -45,52 +39,52 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void DefaultValueIsDecimal0()
         {
-            AssertIsDecimalAndEqualTo(GetDefaultValue<decimal>(), 0);
+            NumberHelper.AssertDecimal(0, (object)this.GetDefaultValue<decimal>());
         }
 
         [Test]
         public void CreatingInstanceReturnsZero()
         {
-            AssertIsDecimalAndEqualTo(Activator.CreateInstance<decimal>(), 0);
+            NumberHelper.AssertDecimal(0, (object)Activator.CreateInstance<decimal>());
         }
 
         [Test]
         public void LiteralDecimalsWork_SPI_1590()
         {
-            AssertIsDecimalAndEqualTo(1m, 1);
-            AssertIsDecimalAndEqualTo(-1m, -1);
+            NumberHelper.AssertDecimal(1, (object)1m);
+            NumberHelper.AssertDecimal(-1, (object)-1m);
 
             // #1590
-            AssertIsDecimalAndEqualTo(7922816251426433759354395033m, "7922816251426433759354395033");
-            AssertIsDecimalAndEqualTo(-7922816251426433759354395033m, "-7922816251426433759354395033");
+            NumberHelper.AssertDecimal("7922816251426433759354395033", (object)7922816251426433759354395033m);
+            NumberHelper.AssertDecimal("-7922816251426433759354395033", (object)-7922816251426433759354395033m);
         }
 
         [Test]
         public void ConstantsWork_SPI_1590()
         {
-            AssertIsDecimalAndEqualTo(decimal.One, 1);
-            AssertIsDecimalAndEqualTo(decimal.Zero, 0);
-            AssertIsDecimalAndEqualTo(decimal.MinusOne, -1);
+            NumberHelper.AssertDecimal(1, (object)decimal.One);
+            NumberHelper.AssertDecimal(0, (object)decimal.Zero);
+            NumberHelper.AssertDecimal(-1, (object)decimal.MinusOne);
             // #1590
-            AssertIsDecimalAndEqualTo(decimal.MinValue, "-79228162514264337593543950335");
-            AssertIsDecimalAndEqualTo(decimal.MaxValue, "79228162514264337593543950335");
+            NumberHelper.AssertDecimal("-79228162514264337593543950335", (object)decimal.MinValue);
+            NumberHelper.AssertDecimal("79228162514264337593543950335", (object)decimal.MaxValue);
         }
 
         [Test]
         public void DefaultConstructorReturnsZero()
         {
-            AssertIsDecimalAndEqualTo(new Decimal(), 0);
+            NumberHelper.AssertDecimal(0, (object)new Decimal());
         }
 
         [Test]
         public void ConvertingConstructorsWork()
         {
-            AssertIsDecimalAndEqualTo(new decimal((double)0.5), 0.5);
-            AssertIsDecimalAndEqualTo(new decimal((float)1.5), 1.5);
-            AssertIsDecimalAndEqualTo(new decimal((int)2), 2);
-            AssertIsDecimalAndEqualTo(new decimal((long)3), 3);
-            AssertIsDecimalAndEqualTo(new decimal((uint)4), 4);
-            AssertIsDecimalAndEqualTo(new decimal((ulong)5), 5);
+            NumberHelper.AssertDecimal(0.5, (object)new decimal((double)0.5));
+            NumberHelper.AssertDecimal(1.5, (object)new decimal((float)1.5));
+            NumberHelper.AssertDecimal(2, (object)new decimal((int)2));
+            NumberHelper.AssertDecimal(3, (object)new decimal((long)3));
+            NumberHelper.AssertDecimal(4, (object)new decimal((uint)4));
+            NumberHelper.AssertDecimal(5, (object)new decimal((ulong)5));
         }
 
         [Test]
@@ -191,17 +185,17 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ConversionsToDecimalWork_SPI_1580()
         {
             int x = 0;
-            AssertIsDecimalAndEqualTo((decimal)(sbyte)(x + 1), 1);
-            AssertIsDecimalAndEqualTo((decimal)(byte)(x + 2), 2);
-            AssertIsDecimalAndEqualTo((decimal)(short)(x + 3), 3);
-            AssertIsDecimalAndEqualTo((decimal)(ushort)(x + 4), 4);
-            AssertIsDecimalAndEqualTo((decimal)(char)(x + '\x5'), 5);
-            AssertIsDecimalAndEqualTo((decimal)(int)(x + 6), 6);
-            AssertIsDecimalAndEqualTo((decimal)(uint)(x + 7), 7);
-            AssertIsDecimalAndEqualTo((decimal)(long)(x + 8), 8);
-            AssertIsDecimalAndEqualTo((decimal)(ulong)(x + 9), 9);
-            AssertIsDecimalAndEqualTo((decimal)(float)(x + 10.5), 10.5);
-            AssertIsDecimalAndEqualTo((decimal)(double)(x + 11.5), 11.5);
+            NumberHelper.AssertDecimal(1, (object)(decimal)(sbyte)(x + 1));
+            NumberHelper.AssertDecimal(2, (object)(decimal)(byte)(x + 2));
+            NumberHelper.AssertDecimal(3, (object)(decimal)(short)(x + 3));
+            NumberHelper.AssertDecimal(4, (object)(decimal)(ushort)(x + 4));
+            NumberHelper.AssertDecimal(5, (object)(decimal)(char)(x + '\x5'));
+            NumberHelper.AssertDecimal(6, (object)(decimal)(int)(x + 6));
+            NumberHelper.AssertDecimal(7, (object)(decimal)(uint)(x + 7));
+            NumberHelper.AssertDecimal(8, (object)(decimal)(long)(x + 8));
+            NumberHelper.AssertDecimal(9, (object)(decimal)(ulong)(x + 9));
+            NumberHelper.AssertDecimal(10.5, (object)(decimal)(float)(x + 10.5));
+            NumberHelper.AssertDecimal(11.5, (object)(decimal)(double)(x + 11.5));
 
             // #1580
             //Assert.Throws<OverflowException>(() =>
@@ -243,17 +237,17 @@ namespace Bridge.ClientTest.SimpleTypes
         public void NullableConversionsToDecimalWork_SPI_1580_1581_1587()
         {
             int? x1 = 0, x2 = null;
-            AssertIsDecimalAndEqualTo((decimal?)(sbyte?)(x1 + 1), 1);
-            AssertIsDecimalAndEqualTo((decimal?)(byte?)(x1 + 2), 2);
-            AssertIsDecimalAndEqualTo((decimal?)(short?)(x1 + 3), 3);
-            AssertIsDecimalAndEqualTo((decimal?)(ushort?)(x1 + 4), 4);
-            AssertIsDecimalAndEqualTo((decimal?)(char?)(x1 + '\x5'), 5);
-            AssertIsDecimalAndEqualTo((decimal?)(int?)(x1 + 6), 6);
-            AssertIsDecimalAndEqualTo((decimal?)(uint?)(x1 + 7), 7);
-            AssertIsDecimalAndEqualTo((decimal?)(long?)(x1 + 8), 8);
-            AssertIsDecimalAndEqualTo((decimal?)(ulong?)(x1 + 9), 9);
-            AssertIsDecimalAndEqualTo((decimal?)(float?)(x1 + 10.5), 10.5);
-            AssertIsDecimalAndEqualTo((decimal?)(double?)(x1 + 11.5), 11.5);
+            NumberHelper.AssertDecimal(1, (decimal?)(sbyte?)(x1 + 1));
+            NumberHelper.AssertDecimal(2, (decimal?)(byte?)(x1 + 2));
+            NumberHelper.AssertDecimal(3, (decimal?)(short?)(x1 + 3));
+            NumberHelper.AssertDecimal(4, (decimal?)(ushort?)(x1 + 4));
+            NumberHelper.AssertDecimal(5, (decimal?)(char?)(x1 + '\x5'));
+            NumberHelper.AssertDecimal(6, (decimal?)(int?)(x1 + 6));
+            NumberHelper.AssertDecimal(7, (decimal?)(uint?)(x1 + 7));
+            NumberHelper.AssertDecimal(8, (decimal?)(long?)(x1 + 8));
+            NumberHelper.AssertDecimal(9, (decimal?)(ulong?)(x1 + 9));
+            NumberHelper.AssertDecimal(10.5, (decimal?)(float?)(x1 + 10.5));
+            NumberHelper.AssertDecimal(11.5, (decimal?)(double?)(x1 + 11.5));
             Assert.AreEqual(null, (decimal?)(sbyte?)x2);
             Assert.AreEqual(null, (decimal?)(byte?)x2);
             Assert.AreEqual(null, (decimal?)(short?)x2);
@@ -892,20 +886,20 @@ namespace Bridge.ClientTest.SimpleTypes
         public void OperatorsWork_SPI_1583()
         {
             decimal x = 3;
-            AssertIsDecimalAndEqualTo(+x, 3);
-            AssertIsDecimalAndEqualTo(-x, -3);
-            AssertIsDecimalAndEqualTo(x + 4m, 7);
-            AssertIsDecimalAndEqualTo(x - 2m, 1);
-            AssertIsDecimalAndEqualTo(x++, 3);
-            AssertIsDecimalAndEqualTo(x, 4);
-            AssertIsDecimalAndEqualTo(++x, 5);
-            AssertIsDecimalAndEqualTo(x, 5);
-            AssertIsDecimalAndEqualTo(x--, 5);
-            AssertIsDecimalAndEqualTo(x, 4);
-            AssertIsDecimalAndEqualTo(--x, 3);
-            AssertIsDecimalAndEqualTo(x, 3);
-            AssertIsDecimalAndEqualTo(x * 3m, 9);
-            AssertIsDecimalAndEqualTo(x / 2m, 1.5);
+            NumberHelper.AssertDecimal(3, (object)+x);
+            NumberHelper.AssertDecimal(-3, (object)-x);
+            NumberHelper.AssertDecimal(7, (object)(x + 4m));
+            NumberHelper.AssertDecimal(1, (object)(x - 2m));
+            NumberHelper.AssertDecimal(3, (object)x++);
+            NumberHelper.AssertDecimal(4, (object)x);
+            NumberHelper.AssertDecimal(5, (object)++x);
+            NumberHelper.AssertDecimal(5, (object)x);
+            NumberHelper.AssertDecimal(5, (object)x--);
+            NumberHelper.AssertDecimal(4, (object)x);
+            NumberHelper.AssertDecimal(3, (object)--x);
+            NumberHelper.AssertDecimal(3, (object)x);
+            NumberHelper.AssertDecimal(9, (object)(x * 3m));
+            NumberHelper.AssertDecimal(1.5, (object)(x / 2m));
 
             // #1583
             //Assert.Throws<DivideByZeroException>(() =>
@@ -938,20 +932,20 @@ namespace Bridge.ClientTest.SimpleTypes
         public void LiftedOperatorsWork_SPI_1583()
         {
             decimal? x1 = 3, x2 = null;
-            AssertIsDecimalAndEqualTo(+x1, 3);
-            AssertIsDecimalAndEqualTo(-x1, -3);
-            AssertIsDecimalAndEqualTo(x1 + 4m, 7);
-            AssertIsDecimalAndEqualTo(x1 - 2m, 1);
-            AssertIsDecimalAndEqualTo(x1++, 3);
-            AssertIsDecimalAndEqualTo(x1, 4);
-            AssertIsDecimalAndEqualTo(++x1, 5);
-            AssertIsDecimalAndEqualTo(x1, 5);
-            AssertIsDecimalAndEqualTo(x1--, 5);
-            AssertIsDecimalAndEqualTo(x1, 4);
-            AssertIsDecimalAndEqualTo(--x1, 3);
-            AssertIsDecimalAndEqualTo(x1, 3);
-            AssertIsDecimalAndEqualTo(x1 * 3m, 9);
-            AssertIsDecimalAndEqualTo(x1 / 2m, 1.5);
+            NumberHelper.AssertDecimal(3, +x1);
+            NumberHelper.AssertDecimal(-3, -x1);
+            NumberHelper.AssertDecimal(7, x1 + 4m);
+            NumberHelper.AssertDecimal(1, x1 - 2m);
+            NumberHelper.AssertDecimal(3, x1++);
+            NumberHelper.AssertDecimal(4, x1);
+            NumberHelper.AssertDecimal(5, ++x1);
+            NumberHelper.AssertDecimal(5, x1);
+            NumberHelper.AssertDecimal(5, x1--);
+            NumberHelper.AssertDecimal(4, x1);
+            NumberHelper.AssertDecimal(3, --x1);
+            NumberHelper.AssertDecimal(3, x1);
+            NumberHelper.AssertDecimal(9, x1 * 3m);
+            NumberHelper.AssertDecimal(1.5, x1 / 2m);
 
             // #1583
             //Assert.Throws<DivideByZeroException>(() =>
@@ -1029,130 +1023,130 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void AddWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Add(3m, 4m), 7);
+            NumberHelper.AssertDecimal(7, (object)decimal.Add(3m, 4m));
         }
 
         [Test]
         public void CeilingWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Ceiling(3.1m), 4);
-            AssertIsDecimalAndEqualTo(decimal.Ceiling(-3.9m), -3);
-            AssertIsDecimalAndEqualTo(decimal.Ceiling(3m), 3);
+            NumberHelper.AssertDecimal(4, (object)decimal.Ceiling(3.1m));
+            NumberHelper.AssertDecimal(-3, (object)decimal.Ceiling(-3.9m));
+            NumberHelper.AssertDecimal(3, (object)decimal.Ceiling(3m));
         }
 
         [Test]
         public void DivideWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Divide(3m, 4m), 0.75);
+            NumberHelper.AssertDecimal(0.75, (object)decimal.Divide(3m, 4m));
         }
 
         [Test]
         public void FloorWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Floor(3.9m), 3);
-            AssertIsDecimalAndEqualTo(decimal.Floor(-3.1m), -4);
-            AssertIsDecimalAndEqualTo(decimal.Floor(3m), 3);
+            NumberHelper.AssertDecimal(3, (object)decimal.Floor(3.9m));
+            NumberHelper.AssertDecimal(-4, (object)decimal.Floor(-3.1m));
+            NumberHelper.AssertDecimal(3, (object)decimal.Floor(3m));
         }
 
         [Test]
         public void RemainderWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Remainder(14m, 3m), 2);
+            NumberHelper.AssertDecimal(2, (object)decimal.Remainder(14m, 3m));
         }
 
         [Test]
         public void MultiplyWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Multiply(3m, 2m), 6);
+            NumberHelper.AssertDecimal(6, (object)decimal.Multiply(3m, 2m));
         }
 
         [Test]
         public void NegateWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Negate(3m), -3);
+            NumberHelper.AssertDecimal(-3, (object)decimal.Negate(3m));
         }
 
         [Test]
         public void RoundWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m), 3);
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m));
         }
 
         [Test]
         public void RoundWithModeWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.Up), 4, "Up 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.Up), 4, "Up 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.Up), 4, "Up 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.Up), -4, "Up -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.Up), -4, "Up -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.Up), -4, "Up -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.Up), "Up 3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.5m, MidpointRounding.Up), "Up 3.5m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.2m, MidpointRounding.Up), "Up 3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.2m, MidpointRounding.Up), "Up -3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.5m, MidpointRounding.Up), "Up -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.Up), "Up -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.Down), 3, "Down 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.Down), 3, "Down 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.Down), 3, "Down 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.Down), -3, "Down -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.Down), -3, "Down -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.Down), -3, "Down -3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.8m, MidpointRounding.Down), "Down 3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.5m, MidpointRounding.Down), "Down 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.Down), "Down 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.Down), "Down -3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.5m, MidpointRounding.Down), "Down -3.5");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.8m, MidpointRounding.Down), "Down -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.InfinityPos), 4, "InfinityPos 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.InfinityPos), 4, "InfinityPos 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.InfinityPos), 4, "InfinityPos 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.InfinityPos), -3, "InfinityPos -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.InfinityPos), -3, "InfinityPos -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.InfinityPos), -3, "InfinityPos -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.InfinityPos), "InfinityPos 3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.5m, MidpointRounding.InfinityPos), "InfinityPos 3.5m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.2m, MidpointRounding.InfinityPos), "InfinityPos 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.InfinityPos), "InfinityPos -3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.5m, MidpointRounding.InfinityPos), "InfinityPos -3.5");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.8m, MidpointRounding.InfinityPos), "InfinityPos -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.InfinityNeg), 3, "InfinityNeg 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.InfinityNeg), 3, "InfinityNeg 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.InfinityNeg), 3, "InfinityNeg 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.InfinityNeg), -4, "InfinityNeg -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.InfinityNeg), -4, "InfinityNeg -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.InfinityNeg), -4, "InfinityNeg -3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.8m, MidpointRounding.InfinityNeg), "InfinityNeg 3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.5m, MidpointRounding.InfinityNeg), "InfinityNeg 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.InfinityNeg), "InfinityNeg 3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.2m, MidpointRounding.InfinityNeg), "InfinityNeg -3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.5m, MidpointRounding.InfinityNeg), "InfinityNeg -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.InfinityNeg), "InfinityNeg -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.TowardsZero), 4, "TowardsZero 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.TowardsZero), 3, "TowardsZero 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.TowardsZero), 3, "TowardsZero 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.TowardsZero), -3, "TowardsZero -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.TowardsZero), -3, "TowardsZero -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.TowardsZero), -4, "TowardsZero -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.TowardsZero), "TowardsZero 3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.5m, MidpointRounding.TowardsZero), "TowardsZero 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.TowardsZero), "TowardsZero 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.TowardsZero), "TowardsZero -3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.5m, MidpointRounding.TowardsZero), "TowardsZero -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.TowardsZero), "TowardsZero -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.AwayFromZero), 4, "AwayFromZero 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.AwayFromZero), 4, "AwayFromZero 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.AwayFromZero), 3, "AwayFromZero 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.AwayFromZero), -3, "AwayFromZero -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.AwayFromZero), -4, "AwayFromZero -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.AwayFromZero), -4, "AwayFromZero -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.AwayFromZero), "AwayFromZero 3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.5m, MidpointRounding.AwayFromZero), "AwayFromZero 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.AwayFromZero), "AwayFromZero 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.AwayFromZero), "AwayFromZero -3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.5m, MidpointRounding.AwayFromZero), "AwayFromZero -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.AwayFromZero), "AwayFromZero -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.Ceil), 4, "Ceil 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.Ceil), 4, "Ceil 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.Ceil), 3, "Ceil 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.Ceil), -3, "Ceil -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.Ceil), -3, "Ceil -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.Ceil), -4, "Ceil -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.Ceil), "Ceil 3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.5m, MidpointRounding.Ceil), "Ceil 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.Ceil), "Ceil 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.Ceil), "Ceil -3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.5m, MidpointRounding.Ceil), "Ceil -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.Ceil), "Ceil -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.Floor), 4, "Floor 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.Floor), 3, "Floor 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.Floor), 3, "Floor 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.Floor), -3, "Floor -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.Floor), -4, "Floor -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.Floor), -4, "Floor -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.Floor), "Floor 3.8m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.5m, MidpointRounding.Floor), "Floor 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.Floor), "Floor 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.Floor), "Floor -3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.5m, MidpointRounding.Floor), "Floor -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.Floor), "Floor -3.8m");
 
-            AssertIsDecimalAndEqualTo(decimal.Round(3.8m, MidpointRounding.ToEven), 4, "ToEven 3.8m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.5m, MidpointRounding.ToEven), 4, "ToEven 3.5m");
-            AssertIsDecimalAndEqualTo(decimal.Round(3.2m, MidpointRounding.ToEven), 3, "ToEven 3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.2m, MidpointRounding.ToEven), -3, "ToEven -3.2m");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.5m, MidpointRounding.ToEven), -4, "ToEven -3.5");
-            AssertIsDecimalAndEqualTo(decimal.Round(-3.8m, MidpointRounding.ToEven), -4, "ToEven -3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.8m, MidpointRounding.ToEven), "ToEven 3.8m");
+            NumberHelper.AssertDecimal(4, (object)decimal.Round(3.5m, MidpointRounding.ToEven), "ToEven 3.5m");
+            NumberHelper.AssertDecimal(3, (object)decimal.Round(3.2m, MidpointRounding.ToEven), "ToEven 3.2m");
+            NumberHelper.AssertDecimal(-3, (object)decimal.Round(-3.2m, MidpointRounding.ToEven), "ToEven -3.2m");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.5m, MidpointRounding.ToEven), "ToEven -3.5");
+            NumberHelper.AssertDecimal(-4, (object)decimal.Round(-3.8m, MidpointRounding.ToEven), "ToEven -3.8m");
         }
 
         [Test]
         public void ParseWorks_SPI_1586()
         {
-            AssertIsDecimalAndEqualTo(decimal.Parse("123"), 123);
-            AssertIsDecimalAndEqualTo(decimal.Parse("0.123"), .123);
-            AssertIsDecimalAndEqualTo(decimal.Parse(".123"), .123);
-            AssertIsDecimalAndEqualTo(decimal.Parse("123.456"), 123.456);
-            AssertIsDecimalAndEqualTo(decimal.Parse("-123.456"), -123.456);
+            NumberHelper.AssertDecimal(123, (object)decimal.Parse("123"));
+            NumberHelper.AssertDecimal(.123, (object)decimal.Parse("0.123"));
+            NumberHelper.AssertDecimal(.123, (object)decimal.Parse(".123"));
+            NumberHelper.AssertDecimal(123.456, (object)decimal.Parse("123.456"));
+            NumberHelper.AssertDecimal(-123.456, (object)decimal.Parse("-123.456"));
 
             // #1586
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
@@ -1176,23 +1170,23 @@ namespace Bridge.ClientTest.SimpleTypes
             bool b;
             b = decimal.TryParse("123", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, 123);
+            NumberHelper.AssertDecimal(123, (object)d);
 
             b = decimal.TryParse("0.123", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, .123);
+            NumberHelper.AssertDecimal(.123, (object)d);
 
             b = decimal.TryParse(".123", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, .123);
+            NumberHelper.AssertDecimal(.123, (object)d);
 
             b = decimal.TryParse("123.456", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, 123.456);
+            NumberHelper.AssertDecimal(123.456, (object)d);
 
             b = decimal.TryParse("-123.456", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, -123.456);
+            NumberHelper.AssertDecimal(-123.456, (object)d);
 
             // #1586
             //b = decimal.TryParse("+123.456", out d);
@@ -1205,15 +1199,15 @@ namespace Bridge.ClientTest.SimpleTypes
 
             b = decimal.TryParse("A123", out d);
             Assert.False(b);
-            AssertIsDecimalAndEqualTo(d, 0);
+            NumberHelper.AssertDecimal(0, (object)d);
 
             b = decimal.TryParse("12.34.56", out d);
             Assert.False(b);
-            AssertIsDecimalAndEqualTo(d, 0);
+            NumberHelper.AssertDecimal(0, (object)d);
 
             b = decimal.TryParse("12.", out d);
             Assert.True(b);
-            AssertIsDecimalAndEqualTo(d, 12);
+            NumberHelper.AssertDecimal(12, (object)d);
 
             //b = decimal.TryParse("999999999999999999999999999999", out d);
             //Assert.False(b);
@@ -1223,15 +1217,15 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TruncateWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Truncate(3.9m), 3);
-            AssertIsDecimalAndEqualTo(decimal.Truncate(-3.9m), -3);
-            AssertIsDecimalAndEqualTo(decimal.Truncate(3m), 3);
+            NumberHelper.AssertDecimal(3, (object)decimal.Truncate(3.9m));
+            NumberHelper.AssertDecimal(-3, (object)decimal.Truncate(-3.9m));
+            NumberHelper.AssertDecimal(3, (object)decimal.Truncate(3m));
         }
 
         [Test]
         public void SubtractWorks()
         {
-            AssertIsDecimalAndEqualTo(decimal.Subtract(7m, 3m), 4);
+            NumberHelper.AssertDecimal(4, (object)decimal.Subtract(7m, 3m));
         }
 
         [Test]
@@ -1305,7 +1299,7 @@ namespace Bridge.ClientTest.SimpleTypes
             var a = 1m;
             var b = a == 1m ? 2m : 3m;
 
-            AssertIsDecimalAndEqualTo(b, 2);
+            NumberHelper.AssertDecimal(2, (object)b);
         }
 
         [Test]
@@ -1314,12 +1308,12 @@ namespace Bridge.ClientTest.SimpleTypes
             object c = 1m;
             var d = c ?? 2m;
 
-            AssertIsDecimalAndEqualTo(d, 1);
+            NumberHelper.AssertDecimal(1, d);
 
             decimal? e = 3;
             var f = e ?? 0;
 
-            AssertIsDecimalAndEqualTo(f, 3);
+            NumberHelper.AssertDecimal(3, (object)f);
         }
 
         [Test]
@@ -1944,6 +1938,38 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("0.5", (--d).ToString(), "(new Decimal(\"1.5\").dec().toString() == \"0.5\" FAILED");
             d = -1.5m;
             Assert.AreEqual("-2.5", (--d).ToString(), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
+        }
+
+        [Test]
+        public void InternalGetBytesWorks()
+        {
+            var a1 = new byte[] { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r1 = Decimal.GetBytes(0m);
+            Assert.AreEqual(a1, r1);
+
+            var a2 = new byte[] { 1, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r2 = Decimal.GetBytes(987.123456m);
+            Assert.AreEqual(a2, r2);
+
+            var a3 = new byte[] { 255, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r3 = Decimal.GetBytes(-987.123456m);
+            Assert.AreEqual(a3, r3);
+        }
+
+        [Test]
+        public void InternalFromBytesWorks()
+        {
+            var a1 = new byte[] { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r1 = Decimal.FromBytes(a1);
+            NumberHelper.AssertDecimal("0", r1);
+
+            var a2 = new byte[] { 1, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r2 = Decimal.FromBytes(a2);
+            NumberHelper.AssertDecimal("987.123456", r2);
+
+            var a3 = new byte[] { 255, 2, 8, 219, 3, 0, 0, 128, 214, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var r3 = Decimal.FromBytes(a3);
+            NumberHelper.AssertDecimal("-987.123456", r3);
         }
     }
 }

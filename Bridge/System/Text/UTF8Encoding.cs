@@ -126,6 +126,7 @@ namespace System.Text
 
         protected override string Decode(byte[] bytes, int index, int count, char[] chars, int charIndex)
         {
+            this._hasError = false;
             var position = index;
             var result = "";
             var surrogate1 = '\u0000';
@@ -241,6 +242,7 @@ namespace System.Text
                     }
 
                     result += this.fallbackCharacter;
+                    this._hasError = true;
                 }
                 else if (surrogate1 == 0)
                 {
@@ -263,6 +265,8 @@ namespace System.Text
                 {
                     result += this.fallbackCharacter + this.fallbackCharacter;
                 }
+
+                this._hasError = true;
             }
 
             return result;

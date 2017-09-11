@@ -524,6 +524,16 @@ namespace Bridge.Translator
             get;
         }
 
+        public Dictionary<IAssembly, CompilerRule[]> AssemblyCompilerRuleCache
+        {
+            get;
+        }
+
+        public Dictionary<ITypeDefinition, CompilerRule[]> ClassCompilerRuleCache
+        {
+            get;
+        }
+
         public string SourceFileName
         {
             get;
@@ -543,6 +553,11 @@ namespace Bridge.Translator
         }
 
         public bool InConstructor
+        {
+            get; set;
+        }
+
+        public CompilerRule Rules
         {
             get; set;
         }

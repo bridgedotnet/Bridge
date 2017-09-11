@@ -12,14 +12,18 @@ using Expression = ICSharpCode.NRefactory.CSharp.Expression;
 using ExpressionStatement = ICSharpCode.NRefactory.CSharp.ExpressionStatement;
 using ParenthesizedExpression = ICSharpCode.NRefactory.CSharp.ParenthesizedExpression;
 using Statement = ICSharpCode.NRefactory.CSharp.Statement;
+using ICSharpCode.NRefactory.PatternMatching;
+using Mono.Cecil;
+using System.Text;
 
 namespace Bridge.Translator
 {
     public class PreconverterDetecter : DepthFirstAstVisitor
     {
-        public PreconverterDetecter(MemberResolver resolver)
+        public PreconverterDetecter(MemberResolver resolver, IEmitter emitter)
         {
             this.Resolver = resolver;
+            this.Emitter = emitter;
         }
 
         public bool Found
@@ -34,12 +38,21 @@ namespace Bridge.Translator
             set;
         }
 
+        internal IEmitter Emitter
+        {
+            get; private set;
+        }
+        internal CompilerRule Rules
+        {
+            get; private set;
+        }
+
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
-            if (unaryOperatorExpression.Operator == UnaryOperatorType.Increment ||
+            if (this.Rules.Integer == IntegerRule.Managed && (unaryOperatorExpression.Operator == UnaryOperatorType.Increment ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
-                unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
+                unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement))
             {
                 var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
 
@@ -67,7 +80,7 @@ namespace Bridge.Translator
             {
                 var rr = this.Resolver.ResolveNode(assignmentExpression, null);
                 var isInt = Helpers.IsIntegerType(rr.Type, this.Resolver);
-                if (isInt || !(assignmentExpression.Parent is ExpressionStatement))
+                if (this.Rules.Integer == IntegerRule.Managed && isInt || !(assignmentExpression.Parent is ExpressionStatement))
                 {
                     this.Found = true;
                 }
@@ -89,6 +102,81 @@ namespace Bridge.Translator
             }
 
             base.VisitAssignmentExpression(assignmentExpression);
+        }
+
+        public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(methodDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            base.VisitMethodDeclaration(methodDeclaration);
+        }
+
+        public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            base.VisitPropertyDeclaration(propertyDeclaration);
+        }
+
+        public override void VisitIndexerDeclaration(IndexerDeclaration indexerDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(indexerDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            base.VisitIndexerDeclaration(indexerDeclaration);
+        }
+
+        public override void VisitCustomEventDeclaration(CustomEventDeclaration eventDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(eventDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            base.VisitCustomEventDeclaration(eventDeclaration);
+        }
+
+        public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(typeDeclaration, null) as TypeResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Type.GetDefinition());
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            base.VisitTypeDeclaration(typeDeclaration);
         }
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
@@ -121,15 +209,100 @@ namespace Bridge.Translator
 
     public class PreconverterFixer : DepthFirstAstVisitor<AstNode>
     {
-        public PreconverterFixer(MemberResolver resolver)
+        public PreconverterFixer(MemberResolver resolver, IEmitter emitter)
         {
             this.Resolver = resolver;
+            this.Emitter = emitter;
         }
 
         public MemberResolver Resolver
         {
             get;
             set;
+        }
+
+        internal IEmitter Emitter
+        {
+            get; private set;
+        }
+        internal CompilerRule Rules
+        {
+            get; private set;
+        }
+
+        public override AstNode VisitMethodDeclaration(MethodDeclaration methodDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(methodDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            return base.VisitMethodDeclaration(methodDeclaration);
+        }
+
+        public override AstNode VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            return base.VisitPropertyDeclaration(propertyDeclaration);
+        }
+
+        public override AstNode VisitIndexerDeclaration(IndexerDeclaration indexerDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(indexerDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            return base.VisitIndexerDeclaration(indexerDeclaration);
+        }
+
+        public override AstNode VisitCustomEventDeclaration(CustomEventDeclaration eventDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(eventDeclaration, null) as MemberResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Member);
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            return base.VisitCustomEventDeclaration(eventDeclaration);
+        }
+
+        public override AstNode VisitTypeDeclaration(TypeDeclaration typeDeclaration)
+        {
+            var rr = this.Resolver.ResolveNode(typeDeclaration, null) as TypeResolveResult;
+            if (rr != null)
+            {
+                this.Rules = Contract.Rules.Get(this.Emitter, rr.Type.GetDefinition());
+            }
+            else
+            {
+                this.Rules = Contract.Rules.Default;
+            }
+
+            return base.VisitTypeDeclaration(typeDeclaration);
         }
 
         protected override AstNode VisitChildren(AstNode node)
@@ -297,10 +470,10 @@ namespace Bridge.Translator
 
         public override AstNode VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
-            if (unaryOperatorExpression.Operator == UnaryOperatorType.Increment ||
+            if (this.Rules.Integer == IntegerRule.Managed && (unaryOperatorExpression.Operator == UnaryOperatorType.Increment ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
-                unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
+                unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement))
             {
                 var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
 
@@ -386,12 +559,37 @@ namespace Bridge.Translator
             return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
         }
 
+        private int tempKey = 1;
         public override AstNode VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
             var rr = this.Resolver.ResolveNode(assignmentExpression, null);
+            var orr = rr as OperatorResolveResult;
+            var simpleIndex = true;
+
+            if (orr != null)
+            {
+                var accessrr = orr.Operands[0] as ArrayAccessResolveResult;
+                if (accessrr != null)
+                {
+                    foreach (var index in accessrr.Indexes)
+                    {
+                        var indexMemberTargetrr = index as MemberResolveResult;
+                        bool isIndexSimple = (indexMemberTargetrr != null && indexMemberTargetrr.Member is IField &&
+                                       (indexMemberTargetrr.TargetResult is ThisResolveResult ||
+                                        indexMemberTargetrr.TargetResult is LocalResolveResult)) || index is ThisResolveResult || index is LocalResolveResult || index is ConstantResolveResult;
+
+
+                        if (!isIndexSimple)
+                        {
+                            simpleIndex = false;
+                        }
+                    }
+                }
+            }
+
             bool found = false;
             var isInt = Helpers.IsIntegerType(rr.Type, this.Resolver);
-            if (isInt || !(assignmentExpression.Parent is ExpressionStatement))
+            if (this.Rules.Integer == IntegerRule.Managed && isInt || !(assignmentExpression.Parent is ExpressionStatement))
             {
                 found = true;
             }
@@ -419,6 +617,44 @@ namespace Bridge.Translator
                 if (clonAssignmentExpression == null)
                 {
                     clonAssignmentExpression = (AssignmentExpression)assignmentExpression.Clone();
+                }
+
+                var indexerExpr = clonAssignmentExpression.Left as IndexerExpression;
+                List<Expression> leftIndexerArgs = null;
+                List<Expression> rightIndexerArgs = null;
+                var needReturnValue = false;
+
+                if (indexerExpr != null && !simpleIndex)
+                {
+                    leftIndexerArgs = new List<Expression>();
+                    rightIndexerArgs = new List<Expression>();
+
+                    foreach (var index in indexerExpr.Arguments)
+                    {
+                        var expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "ToTemp"), new PrimitiveExpression("idx" + tempKey), index.Clone());
+                        leftIndexerArgs.Add(expr);
+
+                        expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "FromTemp"), new PrimitiveExpression("idx" + tempKey++), index.Clone());
+                        rightIndexerArgs.Add(expr);
+                    }
+
+                    needReturnValue = !(assignmentExpression.Parent is ExpressionStatement);
+
+                    if (needReturnValue && assignmentExpression.Parent is LambdaExpression)
+                    {
+                        var lambdarr = this.Resolver.ResolveNode(assignmentExpression.Parent, null) as LambdaResolveResult;
+
+                        if (lambdarr != null && lambdarr.ReturnType.Kind == TypeKind.Void)
+                        {
+                            needReturnValue = false;
+                        }
+                    }
+
+                    clonAssignmentExpression.Left = new IndexerExpression(indexerExpr.Target.Clone(), needReturnValue ? rightIndexerArgs : leftIndexerArgs);
+                }
+                else
+                {
+                    indexerExpr = null;
                 }
 
                 var op = clonAssignmentExpression.Operator;
@@ -475,7 +711,7 @@ namespace Bridge.Translator
                     : new ParenthesizedExpression(clonAssignmentExpression.Right.Clone());
 
                 clonAssignmentExpression.Right = new BinaryOperatorExpression(
-                    clonAssignmentExpression.Left.Clone(),
+                    indexerExpr != null ? new IndexerExpression(indexerExpr.Target.Clone(), needReturnValue ? leftIndexerArgs : rightIndexerArgs) : clonAssignmentExpression.Left.Clone(),
                     opType,
                     wrapRightExpression);
 

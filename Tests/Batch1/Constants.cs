@@ -107,6 +107,7 @@
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
         public const string MODULE_SCRIPT = "Script";
         public const string MODULE_RUNTIME = "Runtime helpers"; // + "Array";
+        public const string MODULE_IO = "IO";
 
         public const string IGNORE_DATE = null;
     }

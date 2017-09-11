@@ -214,7 +214,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (assignmentExpression.Operator == AssignmentOperatorType.Divide &&
+            if (assignmentExpression.Operator == AssignmentOperatorType.Divide && this.Emitter.Rules.Integer == IntegerRule.Managed &&
                 !(this.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(this.Emitter, assignmentExpression)) &&
                 !isLong && !isLongExpected &&
                 (
@@ -281,7 +281,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (assignmentExpression.Operator == AssignmentOperatorType.Multiply &&
+            if (assignmentExpression.Operator == AssignmentOperatorType.Multiply && this.Emitter.Rules.Integer == IntegerRule.Managed &&
                 !(this.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(this.Emitter, assignmentExpression)) &&
                 !isLong && !isLongExpected &&
                 (

@@ -67,9 +67,9 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             },
             $ctor1: function (initialValues) {
                 if (initialValues === void 0) { initialValues = []; }
+                var $t;
 
                 TypeScript.Issues.N2031DictionaryMap$2(T1,T2).ctor.call(this);
-                var $t;
                 $t = Bridge.getEnumerator(initialValues);
                 try {
                     while ($t.moveNext()) {
@@ -81,13 +81,13 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                         $t.System$IDisposable$dispose();
                     }
                 }}
-    },
-    methods: {
-        Add: function (t1, t2) {
-            this._forward.add(t1, t2);
-            this._reverse.add(t2, t1);
+        },
+        methods: {
+            Add: function (t1, t2) {
+                this._forward.add(t1, t2);
+                this._reverse.add(t2, t1);
+            }
         }
-    }
     }; });
 
     Bridge.define("TypeScript.Issues.N2031DictionaryMap$2.Indexer$2", function (T1, T2, T3, T4) { return {

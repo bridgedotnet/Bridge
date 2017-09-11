@@ -13,4 +13,5 @@ using Bridge;
 [assembly: Guid("76ba3097-5b23-4900-bca9-2ba3bc0afcfe")]
 [assembly: Convention(Member = ConventionMember.Field | ConventionMember.Method, Notation = Notation.LowerCamelCase)]
 
+[assembly: InternalsVisibleTo("Bridge.ClientTest")]
 [assembly: InternalsVisibleTo("Bridge.ClientTest.Batch3")]

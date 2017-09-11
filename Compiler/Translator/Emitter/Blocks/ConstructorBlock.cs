@@ -157,13 +157,27 @@ namespace Bridge.Translator
                 this.BeginBlock();
                 var beginPosition = this.Emitter.Output.Length;
 
+                var oldRules = this.Emitter.Rules;
+                var rr = this.Emitter.Resolver.ResolveNode(ctor, this.Emitter) as MemberResolveResult;
+                if (rr != null)
+                {
+                    this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
+                }
+
                 ctor.Body.AcceptChildren(this.Emitter);
 
                 if (!this.Emitter.IsAsync)
                 {
+                    var indent = this.Emitter.TempVariables.Count > 0;
                     this.EmitTempVars(beginPosition, true);
+
+                    if (indent)
+                    {
+                        this.Indent();
+                    }
                 }
 
+                this.Emitter.Rules = oldRules;
                 this.EndBlock();
                 this.ClearLocalsNamesMap(prevNamesMap);
                 this.Emitter.Comma = true;
@@ -303,6 +317,17 @@ namespace Bridge.Translator
             this.Emitter.InConstructor = true;
             foreach (var ctor in this.TypeInfo.Ctors)
             {
+                var oldRules = this.Emitter.Rules;
+
+                if (ctor.Body.HasChildren)
+                {
+                    var rr = this.Emitter.Resolver.ResolveNode(ctor, this.Emitter) as MemberResolveResult;
+                    if (rr != null)
+                    {
+                        this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
+                    }
+                }
+
                 this.EnsureComma();
                 this.ResetLocals();
                 var prevMap = this.BuildLocalsMap();
@@ -388,6 +413,8 @@ namespace Bridge.Translator
                     requireNewLine = false;
                 }
 
+                var beginPosition = this.Emitter.Output.Length;
+
                 if (noThisInvocation)
                 {
                     if (requireNewLine)
@@ -467,12 +494,12 @@ namespace Bridge.Translator
                 }
 
                 var script = this.Emitter.GetScript(ctor);
+                var hasAdditionalIndent = false;
 
                 if (script == null)
                 {
                     if (ctor.Body.HasChildren)
                     {
-                        var beginPosition = this.Emitter.Output.Length;
                         if (requireNewLine)
                         {
                             this.WriteNewLine();
@@ -482,6 +509,7 @@ namespace Bridge.Translator
 
                         if (!this.Emitter.IsAsync)
                         {
+                            hasAdditionalIndent = this.Emitter.TempVariables.Count > 0;
                             this.EmitTempVars(beginPosition, true);
                         }
                     }
@@ -518,10 +546,17 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                 }
 
+                if (hasAdditionalIndent)
+                {
+                    this.Indent();
+                }
+
                 this.EndBlock();
                 this.Emitter.Comma = true;
                 this.ClearLocalsMap(prevMap);
                 this.ClearLocalsNamesMap(prevNamesMap);
+
+                this.Emitter.Rules = oldRules;
             }
 
             this.Emitter.InConstructor = false;

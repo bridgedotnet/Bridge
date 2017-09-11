@@ -23,6 +23,7 @@ namespace Bridge.Translator
             this.Html = new HtmlConfig();
             this.Console = new ConsoleConfig();
             this.Report = new ReportConfig();
+            this.Rules = new CompilerRule();
         }
 
         /// <summary>
@@ -318,6 +319,11 @@ namespace Bridge.Translator
 
         [Newtonsoft.Json.JsonConverter(typeof(ReportConfigConverter))]
         public ReportConfig Report
+        {
+            get; set;
+        }
+
+        public CompilerRule Rules
         {
             get; set;
         }

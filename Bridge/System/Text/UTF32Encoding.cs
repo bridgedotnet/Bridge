@@ -154,6 +154,7 @@ namespace System.Text
             var position = index;
             var result = "";
             var endpoint = position + count;
+            this._hasError = false;
 
             Action fallback = () =>
             {
@@ -199,6 +200,7 @@ namespace System.Text
                 if (unicode_code == null)
                 {
                     fallback();
+                    this._hasError = true;
                     continue;
                 }
 

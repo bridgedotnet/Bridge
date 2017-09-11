@@ -90,6 +90,7 @@
             }
         },
         fields: {
+            _hasError: false,
             fallbackCharacter: 0
         },
         props: {
@@ -207,25 +208,25 @@
         },
         ctors: {
             ctor: function (codePage, name, displayName) {
-                this.$initialize();                var $t;
-
+                var $t;
+                this.$initialize();
                 this.CodePage = codePage;
                 this.Name = name;
                 this.DisplayName = ($t = displayName, $t != null ? $t : name);
-        }
-    },
-    methods: {
-        GetEncoding: function () {
-            return System.Text.Encoding.GetEncoding(this.CodePage);
+            }
         },
-        GetHashCode: function () {
-            return this.CodePage;
-        },
-        Equals: function (o) {
-            var that = Bridge.as(o, System.Text.EncodingInfo);
-            return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+        methods: {
+            GetEncoding: function () {
+                return System.Text.Encoding.GetEncoding(this.CodePage);
+            },
+            GetHashCode: function () {
+                return this.CodePage;
+            },
+            Equals: function (o) {
+                var that = Bridge.as(o, System.Text.EncodingInfo);
+                return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+            }
         }
-    }
     });
 
     Bridge.define("System.Text.ASCIIEncoding", {
@@ -463,6 +464,7 @@
                 var position = index;
                 var result = "";
                 var endpoint = (position + count) | 0;
+                this._hasError = false;
 
                 var fallback = Bridge.fn.bind(this, function () {
                     if (this.throwOnInvalid) {
@@ -496,6 +498,7 @@
 
                     if (!System.Nullable.hasValue(firstWord)) {
                         fallback();
+                        this._hasError = true;
                     } else if ((System.Nullable.lt(firstWord, 55296)) || (System.Nullable.gt(firstWord, 57343))) {
                         result = System.String.concat(result, (System.String.fromCharCode(System.Nullable.getValue(firstWord))));
                     } else if ((System.Nullable.gte(firstWord, 55296)) && (System.Nullable.lte(firstWord, 56319))) {
@@ -503,6 +506,7 @@
                         var secondWord = readPair();
                         if (end) {
                             fallback();
+                            this._hasError = true;
                         } else if (!System.Nullable.hasValue(secondWord)) {
                             fallback();
                             fallback();
@@ -694,6 +698,7 @@
                 var position = index;
                 var result = "";
                 var endpoint = (position + count) | 0;
+                this._hasError = false;
 
                 var fallback = Bridge.fn.bind(this, function () {
                     if (this.throwOnInvalid) {
@@ -732,6 +737,7 @@
 
                     if (unicode_code == null) {
                         fallback();
+                        this._hasError = true;
                         continue;
                     }
 
@@ -1021,6 +1027,7 @@
                 return new Uint8Array(outputBytes);
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
+                this._hasError = false;
                 var position = index;
                 var result = "";
                 var surrogate1 = 0;
@@ -1107,6 +1114,7 @@
                         }
 
                         result = System.String.concat(result, String.fromCharCode(this.fallbackCharacter));
+                        this._hasError = true;
                     } else if (surrogate1 === 0) {
                         result = System.String.concat(result, characters);
                     }
@@ -1122,6 +1130,8 @@
                     } else {
                         result = System.String.concat(result, (((this.fallbackCharacter + this.fallbackCharacter) | 0)));
                     }
+
+                    this._hasError = true;
                 }
 
                 return result;

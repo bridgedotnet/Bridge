@@ -310,6 +310,10 @@ namespace Bridge
         [Unbox(false)]
         public static extern T FromTemp<T>(string name);
 
+        [Template("{name:gettmp}")]
+        [Unbox(false)]
+        public static extern T FromTemp<T>(string name, T t);
+
         [Template("{action:body}")]
         public static extern object FromLambda(Action action);
 
@@ -326,5 +330,8 @@ namespace Bridge
         /// <returns>Return either function result or false in case of catch</returns>
         [Template("Bridge.safe({fn})")]
         public static extern bool SafeFunc(Func<bool> fn);
+
+        [Template("Bridge.isNode")]
+        public static readonly bool IsNode;
     }
 }

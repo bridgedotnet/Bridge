@@ -393,7 +393,7 @@ namespace Bridge.Contract
             }
 
             var conversion = block.Emitter.Resolver.Resolver.GetConversion(expression);
-            if (conversion.IsBoxingConversion || conversion.IsUnboxingConversion)
+            if (block.Emitter.Rules.Boxing == BoxingRule.Managed && (conversion.IsBoxingConversion || conversion.IsUnboxingConversion))
             {
                 return;
             }

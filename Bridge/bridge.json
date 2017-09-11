@@ -98,6 +98,7 @@
         "Resources/Text/RegularExpressions/RegexEngineProbe.js",
         "Resources/Text/RegularExpressions/RegexEngineParser.js",
         "Resources/.generated/system/text/encoding.js",
+        "Resources/.generated/system/io/io.js",
         "Resources/.generated/system/random.js",
         "Resources/.generated/system/bitConverter.js",
         "Resources/.generated/system/threading/timer.js",
