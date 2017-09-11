@@ -8,6 +8,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3107
     {
         private static string buffer;
+
+        private static event EventHandler<EventArgs> OnSomething;
+
         private static void DoSomething1(object sender, EventArgs args)
         {
             OnSomething -= DoSomething1;
@@ -25,8 +28,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             buffer += "3";
         }
-
-        private static event EventHandler<EventArgs> OnSomething;
 
         [Test]
         public static void TestEventHandlersInvocation()
@@ -63,7 +64,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             OnSomething += DoSomething2;
             OnSomething += DoSomething3;
 
-            Assert.Throws<NullReferenceException>(()=> {
+            Assert.Throws<NullReferenceException>(() =>
+            {
                 OnSomething(null, null);
                 OnSomething(null, null);
             });
