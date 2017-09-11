@@ -159,7 +159,7 @@ namespace Bridge.Translator
 
                 var oldRules = this.Emitter.Rules;
                 var rr = this.Emitter.Resolver.ResolveNode(ctor, this.Emitter) as MemberResolveResult;
-                if(rr != null)
+                if (rr != null)
                 {
                     this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
                 }
@@ -171,7 +171,7 @@ namespace Bridge.Translator
                     var indent = this.Emitter.TempVariables.Count > 0;
                     this.EmitTempVars(beginPosition, true);
 
-                    if(indent)
+                    if (indent)
                     {
                         this.Indent();
                     }
@@ -319,14 +319,14 @@ namespace Bridge.Translator
             {
                 var oldRules = this.Emitter.Rules;
 
-                if(ctor.Body.HasChildren)
+                if (ctor.Body.HasChildren)
                 {
                     var rr = this.Emitter.Resolver.ResolveNode(ctor, this.Emitter) as MemberResolveResult;
                     if (rr != null)
                     {
                         this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
                     }
-                }                
+                }
 
                 this.EnsureComma();
                 this.ResetLocals();
@@ -499,7 +499,7 @@ namespace Bridge.Translator
                 if (script == null)
                 {
                     if (ctor.Body.HasChildren)
-                    {                        
+                    {
                         if (requireNewLine)
                         {
                             this.WriteNewLine();
@@ -546,7 +546,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                 }
 
-                if(hasAdditionalIndent)
+                if (hasAdditionalIndent)
                 {
                     this.Indent();
                 }
@@ -557,7 +557,7 @@ namespace Bridge.Translator
                 this.ClearLocalsNamesMap(prevNamesMap);
 
                 this.Emitter.Rules = oldRules;
-            }           
+            }
 
             this.Emitter.InConstructor = false;
 
