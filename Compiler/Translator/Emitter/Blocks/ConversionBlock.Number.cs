@@ -400,7 +400,7 @@ namespace Bridge.Translator
 
         private static void NarrowingNumericOrEnumerationConversion(ConversionBlock block, Expression expression, IType targetType, bool fromFloatingPoint, bool isChecked, bool isNullable, bool isExplicit = true)
         {
-            if (block.Emitter.IsJavaScriptOverflowMode && !InsideOverflowContext(block.Emitter, expression))
+            if (block.Emitter.IsJavaScriptOverflowMode && !InsideOverflowContext(block.Emitter, expression) || block.Emitter.Rules.Integer == IntegerRule.Plain)
             {
                 return;
             }

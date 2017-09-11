@@ -88,7 +88,31 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void CharArrayWithStartIndexAndLengthConstructorWorks()
         {
+            Assert.AreEqual("", new string(new[] { 'a', 'b', 'c', 'D' }, 0, 0));
+            Assert.AreEqual("a", new string(new[] { 'a', 'b', 'c', 'D' }, 0, 1));
+            Assert.AreEqual("ab", new string(new[] { 'a', 'b', 'c', 'D' }, 0, 2));
             Assert.AreEqual("bc", new string(new[] { 'a', 'b', 'c', 'D' }, 1, 2));
+            Assert.AreEqual("bcD", new string(new[] { 'a', 'b', 'c', 'D' }, 1, 3));
+
+            Assert.Throws(() =>
+            {
+                new string(new[] { 'a', 'b', 'c', 'D' }, 1, 4);
+            });
+
+            Assert.Throws(() =>
+            {
+                new string(new[] { 'a', 'b', 'c', 'D' }, -1, 1);
+            });
+
+            Assert.Throws(() =>
+            {
+                new string(new[] { 'a', 'b', 'c', 'D' }, 1, -1);
+            });
+
+            Assert.Throws(() =>
+            {
+                new string(new[] { 'a', 'b', 'c', 'D' }, -1, -1);
+            });
         }
 
         [Test]

@@ -1,6 +1,8 @@
     var core = {
         global: globals,
 
+        isNode: (new Function("try {return this===global;}catch(e){return false;}"))(),
+
         emptyFn: function () { },
 
         identity: function (x) {

@@ -377,6 +377,12 @@ namespace System
         public extern bool Equals(decimal other);
 
         public override extern int GetHashCode();
+
+        [Template("{value}.getBytes()")]
+        internal static extern byte[] GetBytes(decimal value);
+
+        [Template("System.Decimal.fromBytes({bytes})")]
+        internal static extern decimal FromBytes(byte[] bytes);
     }
 
     [Name("System.Object")]

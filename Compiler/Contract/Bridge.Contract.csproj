@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;BRIDGE_COMPILER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -29,7 +29,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;BRIDGE_COMPILER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -82,6 +82,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Bridge\Attributes\RulesAttribute.cs">
+      <Link>Rule\RulesAttribute.cs</Link>
+    </Compile>
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\NamedFunctionMode.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Config\SourceMapConfig.cs" />
     <Compile Include="Config\VersionContext.cs" />
     <Compile Include="Constants\Messages.cs" />
+    <Compile Include="Rule\Rules.cs" />
     <Compile Include="TranslatorOutput.cs" />
     <Compile Include="UnicodeNewline.cs" />
     <Compile Include="Constants\Files.cs" />

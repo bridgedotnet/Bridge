@@ -490,7 +490,7 @@ namespace Bridge.Translator
             }
 
             var insideOverflowContext = ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression);
-            if (binaryOperatorExpression.Operator == BinaryOperatorType.Divide &&
+            if (binaryOperatorExpression.Operator == BinaryOperatorType.Divide && this.Emitter.Rules.Integer == IntegerRule.Managed &&
                 !(this.Emitter.IsJavaScriptOverflowMode && !insideOverflowContext) &&
                 (
                     (Helpers.IsIntegerType(leftResolverResult.Type, this.Emitter.Resolver) &&
@@ -508,7 +508,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply &&
+            if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply && this.Emitter.Rules.Integer == IntegerRule.Managed &&
                 !(this.Emitter.IsJavaScriptOverflowMode && !insideOverflowContext) &&
                 (
                     (Helpers.IsInteger32Type(leftResolverResult.Type, this.Emitter.Resolver) &&

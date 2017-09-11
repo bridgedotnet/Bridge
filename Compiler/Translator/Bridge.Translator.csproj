@@ -274,6 +274,7 @@
     <Compile Include="Emitter\Blocks\ExpressionListBlock.cs" />
     <Compile Include="Emitter\Blocks\InlineArgumentsBlock.cs" />
     <Compile Include="Emitter\Blocks\AbstractEmitterBlock.cs" />
+    <Compile Include="Emitter\TempEmitter.cs" />
     <Compile Include="Emitter\Emitter.OutputModule.cs" />
     <Compile Include="Emitter\Emitter.TypeHelpers.cs" />
     <Compile Include="Emitter\Emitter.Helpers.cs" />

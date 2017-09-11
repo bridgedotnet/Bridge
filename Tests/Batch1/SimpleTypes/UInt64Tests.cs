@@ -9,19 +9,6 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "UInt64 - {0}")]
     public class UInt64Tests
     {
-        private void AssertULong(object expected, object actual, string message = "", string checkedType = "System.UInt64")
-        {
-            if (message == null)
-            {
-                message = "";
-            }
-
-            var typeMessage = message + "Type is " + checkedType;
-            Assert.AreEqual(checkedType, actual.GetType().FullName, typeMessage);
-
-            Assert.AreEqual(expected.ToString(), actual.ToString(), message);
-        }
-
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
@@ -48,8 +35,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void MinMaxValuesAreCorrect()
         {
-            AssertULong("0", ulong.MinValue);
-            AssertULong("18446744073709551615", ulong.MaxValue);
+            NumberHelper.AssertULong("0", ulong.MinValue);
+            NumberHelper.AssertULong("18446744073709551615", ulong.MaxValue);
         }
 
         [Test]
@@ -132,13 +119,13 @@ namespace Bridge.ClientTest.SimpleTypes
             ulong l6 = (ulong)int.MaxValue + 1;
             ulong l7 = (ulong)(long)0 + 1;
 
-            AssertULong("257", ub + l1);
-            AssertULong("130", (ulong)sb + l2);
-            AssertULong("65539", us + l3);
-            AssertULong("32772", (ulong)ss + l4);
-            AssertULong("4294967301", ui + l5);
-            AssertULong("2147483654", (ulong)si + l6);
-            AssertULong("8", (ulong)sl + l7);
+            NumberHelper.AssertULong("257", ub + l1);
+            NumberHelper.AssertULong("130", (ulong)sb + l2);
+            NumberHelper.AssertULong("65539", us + l3);
+            NumberHelper.AssertULong("32772", (ulong)ss + l4);
+            NumberHelper.AssertULong("4294967301", ui + l5);
+            NumberHelper.AssertULong("2147483654", (ulong)si + l6);
+            NumberHelper.AssertULong("8", (ulong)sl + l7);
 
             decimal dcml = 11m;
             double dbl = 12d;
@@ -146,9 +133,9 @@ namespace Bridge.ClientTest.SimpleTypes
 
             long l = 100;
 
-            AssertULong("111", dcml + l, null, "System.Decimal");
-            AssertULong("112", dbl + l, null, "System.Double");
-            AssertULong("113", flt + l, null, "System.Single");
+            NumberHelper.AssertDecimal("111", dcml + l, null);
+            NumberHelper.AssertDouble("112", dbl + l, null);
+            NumberHelper.AssertFloat("113", flt + l, null);
         }
 
         private T GetDefaultValue<T>()
@@ -237,15 +224,15 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = ulong.TryParse("0000000000000000", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+            NumberHelper.AssertNumber(0UL, (object)numberResult, "#3031");
 
             result = ulong.TryParse("0", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+            NumberHelper.AssertNumber(0UL, (object)numberResult, "#3031");
 
             result = ulong.TryParse("0000000000000010", out numberResult);
             Assert.True(result);
-            NumberHelper.AssertNumber(10UL, numberResult, "#3031");
+            NumberHelper.AssertNumber(10UL, (object)numberResult, "#3031");
 
             result = ulong.TryParse("", out numberResult);
             Assert.False(result);
@@ -276,9 +263,9 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             Assert.AreEqual(23445UL, ulong.Parse("23445"));
-            NumberHelper.AssertNumber(10UL, ulong.Parse("0000000000000010"), "#3031");
-            NumberHelper.AssertNumber(0UL, ulong.Parse("0"), "#3031");
-            NumberHelper.AssertNumber(0UL, ulong.Parse("000000000000000"), "#3031");
+            NumberHelper.AssertNumber(10UL, (object)ulong.Parse("0000000000000010"), "#3031");
+            NumberHelper.AssertNumber(0UL, (object)ulong.Parse("0"), "#3031");
+            NumberHelper.AssertNumber(0UL, (object)ulong.Parse("000000000000000"), "#3031");
             Assert.Throws<FormatException>(() => ulong.Parse(""));
             Assert.Throws<ArgumentNullException>(() => ulong.Parse(null));
             Assert.Throws<FormatException>(() => ulong.Parse("notanumber"));

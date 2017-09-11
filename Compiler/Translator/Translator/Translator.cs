@@ -157,7 +157,7 @@ namespace Bridge.Translator
 
 
             var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger), this.AssemblyDefinition);
-            resolver = this.Preconvert(resolver);
+            resolver = this.Preconvert(resolver, config);
 
             this.InspectTypes(resolver, config);
 
@@ -193,19 +193,19 @@ namespace Bridge.Translator
             logger.Info("Translating done");
         }
 
-        protected virtual MemberResolver Preconvert(MemberResolver resolver)
+        protected virtual MemberResolver Preconvert(MemberResolver resolver, IAssemblyInfo config)
         {
             bool needRecompile = false;
             foreach (var sourceFile in this.ParsedSourceFiles)
             {
                 var syntaxTree = sourceFile.SyntaxTree;
-
-                var detecter = new PreconverterDetecter(resolver);
+                var tempEmitter = new TempEmitter { AssemblyInfo = config };
+                var detecter = new PreconverterDetecter(resolver, tempEmitter);
                 syntaxTree.AcceptVisitor(detecter);
 
                 if (detecter.Found)
                 {
-                    var fixer = new PreconverterFixer(resolver);
+                    var fixer = new PreconverterFixer(resolver, tempEmitter);
                     var astNode = syntaxTree.AcceptVisitor(fixer);
                     syntaxTree = astNode != null ? (SyntaxTree)astNode : syntaxTree;
                     sourceFile.SyntaxTree = syntaxTree;

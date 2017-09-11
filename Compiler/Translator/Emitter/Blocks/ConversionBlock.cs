@@ -412,7 +412,7 @@ namespace Bridge.Translator
                     || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type), block.Emitter);
                 var nullable = rr.Type.IsKnownType(KnownTypeCode.NullableOfT);
 
-                if (conversion.IsBoxingConversion && !isStringConcat)
+                if (conversion.IsBoxingConversion && !isStringConcat && block.Emitter.Rules.Boxing == BoxingRule.Managed)
                 {
                     if (needBox && !isArgument)
                     {
@@ -459,9 +459,12 @@ namespace Bridge.Translator
 
                 if (conversion.IsUnboxingConversion || isArgument && (expectedType.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackArrayObject(expectedType)) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
-                    block.Write(JS.Types.Bridge.UNBOX);
-                    block.WriteOpenParentheses();
-                    block.AfterOutput2 += ")";
+                    if (block.Emitter.Rules.Boxing == BoxingRule.Managed)
+                    {
+                        block.Write(JS.Types.Bridge.UNBOX);
+                        block.WriteOpenParentheses();
+                        block.AfterOutput2 += ")";
+                    }                    
                 }
                 else if (conversion.IsUnboxingConversion && !Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
                 {

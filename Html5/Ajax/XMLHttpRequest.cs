@@ -1,6 +1,10 @@
 using System;
 
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
     /// <summary>
     /// XMLHttpRequest is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It's now being standardized in the W3C. It provides an easy way to retrieve data from a URL without having to do a full page refresh. A Web page can update just a part of the page without disrupting what the user is doing.  XMLHttpRequest is used heavily in AJAX programming.
@@ -8,18 +12,21 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("XMLHttpRequest")]
-    public class XMLHttpRequest : XMLHttpRequestEventTarget
+    #if CORE
+    internal
+#else
+    public
+#endif
+    class XMLHttpRequest
+#if !CORE
+       : XMLHttpRequestEventTarget
+#endif
     {
         /// <summary>
         /// A JavaScript function object that is called whenever the readyState attribute changes. The callback is called from the user interface thread.
         /// </summary>
         [Name("onreadystatechange")]
         public Action OnReadyStateChange;
-
-        /// <summary>
-        /// The state of the request
-        /// </summary>
-        public readonly AjaxReadyState ReadyState;
 
         /// <summary>
         /// The response entity body according to responseType, as an ArrayBuffer, Blob, Document, JavaScript object (for "json"), or string. This is null if the request is not complete or was not successful.
@@ -30,17 +37,6 @@ namespace Bridge.Html5
         /// The response to the request as text, or null if the request was unsuccessful or has not yet been sent.
         /// </summary>
         public readonly string ResponseText;
-
-        /// <summary>
-        /// Is an enumerated value that defines the response type. For possible values refer to
-        /// enum Bridge.Html5.XMLHttpRequestResponseType.
-        /// </summary>
-        public XMLHttpRequestResponseType ResponseType;
-
-        /// <summary>
-        /// The response to the request as a DOM Document object, or null if the request was unsuccessful, has not yet been sent, or cannot be parsed as XML or HTML. The response is parsed as if it were a text/xml stream. When the responseType is set to "document" and the request has been made asynchronously, the response is parsed as a text/html stream.
-        /// </summary>
-        public readonly DocumentInstance ResponseXML;
 
         /// <summary>
         /// The status of the response to the request. This is the HTTP result code (for example, status is 200 for a successful request).
@@ -56,11 +52,6 @@ namespace Bridge.Html5
         /// The number of milliseconds a request can take before automatically being terminated. A value of 0 (which is the default) means there is no timeout.
         /// </summary>
         public int Timeout;
-
-        /// <summary>
-        /// The upload process can be tracked by adding an event listener to upload.
-        /// </summary>
-        public readonly XMLHttpRequestUpload Upload;
 
         /// <summary>
         /// Indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies or authorization headers. The default is false.
@@ -134,6 +125,30 @@ namespace Bridge.Html5
         /// Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
         /// </summary>
         /// <param name="data"></param>
+        public virtual extern void Send(string data);
+
+        /// <summary>
+        /// Sets the value of an HTTP request header. You must call setRequestHeader() after open(), but before send(). If this method is called several times with the same header, the values are merged into one single request header.
+        /// </summary>
+        /// <param name="header">The name of the header whose value is to be set.</param>
+        /// <param name="value">The value to set as the body of the header.</param>
+        public virtual extern void SetRequestHeader(string header, string value);
+
+#if !CORE
+        /// <summary>
+        /// The state of the request
+        /// </summary>
+        public readonly AjaxReadyState ReadyState;
+
+        /// <summary>
+        /// The upload process can be tracked by adding an event listener to upload.
+        /// </summary>
+        public readonly XMLHttpRequestUpload Upload;
+
+        /// <summary>
+        /// Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
+        /// </summary>
+        /// <param name="data"></param>
         public virtual extern void Send(ArrayBuffer data);
 
         /// <summary>
@@ -158,19 +173,18 @@ namespace Bridge.Html5
         /// Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
         /// </summary>
         /// <param name="data"></param>
-        public virtual extern void Send(string data);
-
-        /// <summary>
-        /// Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
-        /// </summary>
-        /// <param name="data"></param>
         public virtual extern void Send(FormData data);
 
         /// <summary>
-        /// Sets the value of an HTTP request header. You must call setRequestHeader() after open(), but before send(). If this method is called several times with the same header, the values are merged into one single request header.
+        /// Is an enumerated value that defines the response type. For possible values refer to
+        /// enum Bridge.Html5.XMLHttpRequestResponseType.
         /// </summary>
-        /// <param name="header">The name of the header whose value is to be set.</param>
-        /// <param name="value">The value to set as the body of the header.</param>
-        public virtual extern void SetRequestHeader(string header, string value);
+        public XMLHttpRequestResponseType ResponseType;
+
+        /// <summary>
+        /// The response to the request as a DOM Document object, or null if the request was unsuccessful, has not yet been sent, or cannot be parsed as XML or HTML. The response is parsed as if it were a text/xml stream. When the responseType is set to "document" and the request has been made asynchronously, the response is parsed as a text/html stream.
+        /// </summary>
+        public readonly DocumentInstance ResponseXML;
+#endif
     }
 }
