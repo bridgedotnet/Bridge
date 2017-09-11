@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25095,6 +25093,69 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107", {
+        statics: {
+            fields: {
+                buffer: null
+            },
+            events: {
+                OnSomething: null
+            },
+            methods: {
+                DoSomething1: function (sender, args) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.removeOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething1);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer, "1");
+                },
+                DoSomething2: function (sender, args) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.removeOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething2);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.removeOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething3);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer, "2");
+                },
+                DoSomething3: function (sender, args) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer, "3");
+                },
+                TestEventHandlersInvocation: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = "";
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething = null;
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething1);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.f1);
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething(null, null);
+                    Bridge.Test.NUnit.Assert.AreEqual("12", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer);
+                },
+                TestEventHandlersInvocation2: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = "";
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething = null;
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething2);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething3);
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething(null, null);
+                    Bridge.Test.NUnit.Assert.AreEqual("23", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer);
+                },
+                TestEventHandlersInvocation3: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = "";
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething = null;
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething2);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.addOnSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.DoSomething3);
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NullReferenceException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.f2);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107, {
+        f1: function (a, b) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.buffer, "2");
+        },
+        f2: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething(null, null);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107.OnSomething(null, null);
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112", {
         statics: {

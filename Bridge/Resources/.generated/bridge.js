@@ -1699,14 +1699,17 @@
             },
 
             $build: function (handlers) {
+                if (!handlers || handlers.length === 0) {
+                    return null;
+                }
+
                 var fn = function () {
-                    var list = fn.$invocationList,
-                        result = null,
+                    var result = null,
                         i,
                         handler;
 
-                    for (i = 0; i < list.length; i++) {
-                        handler = list[i];
+                    for (i = 0; i < handlers.length; i++) {
+                        handler = handlers[i];
                         result = handler.apply(null, arguments);
                     }
 
@@ -1714,10 +1717,7 @@
                 };
 
                 fn.$invocationList = handlers ? Array.prototype.slice.call(handlers, 0) : [];
-
-                if (fn.$invocationList.length === 0) {
-                    return null;
-                }
+                handlers = fn.$invocationList.slice();               
 
                 return fn;
             },
