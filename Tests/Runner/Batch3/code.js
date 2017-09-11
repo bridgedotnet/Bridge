@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25095,6 +25093,19 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3111", {
+        statics: {
+            methods: {
+                TestNullableFloatMul: function () {
+                    var a = 0.9;
+                    var b = 1.0;
+                    var c = System.Nullable.mul(a, b);
+                    Bridge.Test.NUnit.Assert.AreEqual(0.9, c);
+                }
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3112", {
         statics: {
