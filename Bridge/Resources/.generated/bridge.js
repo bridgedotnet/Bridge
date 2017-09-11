@@ -26569,25 +26569,25 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         },
         ctors: {
             ctor: function (codePage, name, displayName) {
-                this.$initialize();                var $t;
-
+                var $t;
+                this.$initialize();
                 this.CodePage = codePage;
                 this.Name = name;
                 this.DisplayName = ($t = displayName, $t != null ? $t : name);
-        }
-    },
-    methods: {
-        GetEncoding: function () {
-            return System.Text.Encoding.GetEncoding(this.CodePage);
+            }
         },
-        GetHashCode: function () {
-            return this.CodePage;
-        },
-        Equals: function (o) {
-            var that = Bridge.as(o, System.Text.EncodingInfo);
-            return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+        methods: {
+            GetEncoding: function () {
+                return System.Text.Encoding.GetEncoding(this.CodePage);
+            },
+            GetHashCode: function () {
+                return this.CodePage;
+            },
+            Equals: function (o) {
+                var that = Bridge.as(o, System.Text.EncodingInfo);
+                return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+            }
         }
-    }
     });
 
     Bridge.define("System.Text.ASCIIEncoding", {
@@ -32656,6 +32656,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 this._version = 0;
             },
             ctor: function (values) {
+                var $t;
                 this.$initialize();
                 if (values == null) {
                     throw new System.ArgumentNullException("values");
@@ -32666,7 +32667,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 for (var i = 0; i < values.length; i = (i + 1) | 0) {
                     if (values[System.Array.index(i, values)]) {
-                        this.m_array[System.Array.index(((Bridge.Int.div(i, 32)) | 0), this.m_array)] = this.m_array[System.Array.index(((Bridge.Int.div(i, 32)) | 0), this.m_array)] | (1 << (i % 32));
+                        this.m_array[System.Array.index(($t = ((Bridge.Int.div(i, 32)) | 0)), this.m_array)] = this.m_array[System.Array.index($t, this.m_array)] | (1 << (i % 32));
                     }
                 }
 
@@ -32757,14 +32758,15 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return (this.m_array[System.Array.index(((Bridge.Int.div(index, 32)) | 0), this.m_array)] & (1 << (index % 32))) !== 0;
             },
             set: function (index, value) {
+                var $t, $t1;
                 if (index < 0 || index >= this.Length) {
                     throw new System.ArgumentOutOfRangeException("index", "Index was out of range. Must be non-negative and less than the size of the collection.");
                 }
 
                 if (value) {
-                    this.m_array[System.Array.index(((Bridge.Int.div(index, 32)) | 0), this.m_array)] = this.m_array[System.Array.index(((Bridge.Int.div(index, 32)) | 0), this.m_array)] | (1 << (index % 32));
+                    this.m_array[System.Array.index(($t = ((Bridge.Int.div(index, 32)) | 0)), this.m_array)] = this.m_array[System.Array.index($t, this.m_array)] | (1 << (index % 32));
                 } else {
-                    this.m_array[System.Array.index(((Bridge.Int.div(index, 32)) | 0), this.m_array)] = this.m_array[System.Array.index(((Bridge.Int.div(index, 32)) | 0), this.m_array)] & (~(1 << (index % 32)));
+                    this.m_array[System.Array.index(($t1 = ((Bridge.Int.div(index, 32)) | 0)), this.m_array)] = this.m_array[System.Array.index($t1, this.m_array)] & (~(1 << (index % 32)));
                 }
 
                 this._version = (this._version + 1) | 0;

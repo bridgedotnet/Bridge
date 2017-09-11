@@ -14262,8 +14262,8 @@ Bridge.$N1391Result =                     r;
                 this["0a3"] = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1.STestField + 1) | 0;
             },
             ctor: function (value) {
-                this.$initialize();                var $t;
-
+                var $t;
+                this.$initialize();
                 this["0a"] = value;
                 this["0a"] = value;
                 var v = this["0a"];
@@ -14285,8 +14285,8 @@ Bridge.$N1391Result =                     r;
                 v = System.Int64.clip32(this["0l"]);
                 var l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
                 l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
+            }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass2", {
@@ -31095,9 +31095,9 @@ Bridge.$N1391Result =                     r;
                         }
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Sum = s;
+                }
             }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static", {
@@ -31123,9 +31123,9 @@ Bridge.$N1391Result =                     r;
                         }
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static.Sum = s;
+                }
             }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge883", {
@@ -33432,6 +33432,27 @@ Bridge.$N1391Result =                     r;
         f1: function (_o46) {
             _o46.add("123", "Test");
             return _o46;
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3063", {
+        statics: {
+            methods: {
+                TestAssigmentWithIndexer: function () {
+                    var $t;
+                    var data = System.Array.init([
+                        10, 
+                        20, 
+                        30
+                    ], System.Int32);
+                    var i = 0;
+                    data[System.Array.index(($t = Bridge.identity(i, (i = (i + 1) | 0))), data)] = (data[System.Array.index($t, data)] + 1) | 0;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(11, data[System.Array.index(0, data)]);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, data[System.Array.index(1, data)]);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, i);
+                }
+            }
         }
     });
 
