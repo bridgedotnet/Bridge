@@ -31,6 +31,13 @@ namespace Bridge.Translator
             this.compilation = this.CreateCompilation();
         }
 
+        public SharpSixRewriter(SharpSixRewriter rewriter)
+        {
+            this.translator = rewriter.translator;
+            this.logger = rewriter.logger;
+            this.compilation = rewriter.compilation;
+        }
+
         public string Rewrite(int index)
         {
             var syntaxTree = this.compilation.SyntaxTrees[index];
@@ -644,6 +651,8 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
             var old = this.fields;
             this.fields = new List<MemberDeclarationSyntax>();
 
@@ -662,19 +671,35 @@ namespace Bridge.Translator
             }
 
             this.fields = old;
+            this.IndexInstance = oldIndex;
 
             return c;
         }
 
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
+
             node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
             if (node.ExpressionBody != null)
             {
                 return SyntaxHelper.ToStatementBody(node);
             }
 
+            this.IndexInstance = oldIndex;
+
             return node;
+        }
+
+        public override SyntaxNode VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+        {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
+            var result = base.VisitAccessorDeclaration(node);
+
+            this.IndexInstance = oldIndex;
+            return result;
         }
 
         public override SyntaxNode VisitOperatorDeclaration(OperatorDeclarationSyntax node)
@@ -750,12 +775,17 @@ namespace Bridge.Translator
         {
             get; set;
         }
-        private int indexInstance;
 
         private class InitializerInfo
         {
             public IMethodSymbol method;
             public List<InitializerInfo> nested;
+        }
+
+        private int IndexInstance
+        {
+            get;
+            set;
         }
 
         private bool NeedRewriteInitializer(InitializerExpressionSyntax initializer, List<InitializerInfo> infos, ref bool extensionMethodExists, ref bool isImplicitElementAccessSyntax)
@@ -855,14 +885,14 @@ namespace Bridge.Translator
                 {
                     parent = parent.Parent;
                 }
-
-                string instance = "_o" + ++indexInstance;
+                
+                string instance = "_o" + ++IndexInstance;
                 if (parent != null)
                 {
                     var info = LocalUsageGatherer.GatherInfo(this.semanticModel, parent);
                     while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                     {
-                        instance = "_o" + ++indexInstance;
+                        instance = "_o" + ++IndexInstance;
                     }
                 }
 
@@ -1010,13 +1040,13 @@ namespace Bridge.Translator
 
             if (replace)
             {
-                string instance = "_e" + ++indexInstance;
+                string instance = "_e" + ++IndexInstance;
                 if (parent != null)
                 {
                     var info = LocalUsageGatherer.GatherInfo(this.semanticModel, parent);
                     while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                     {
-                        instance = "_e" + ++indexInstance;
+                        instance = "_e" + ++IndexInstance;
                     }
                 }
 

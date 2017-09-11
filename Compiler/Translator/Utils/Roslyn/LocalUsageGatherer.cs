@@ -124,6 +124,27 @@ namespace Bridge.Translator
             {
                 base.Visit(node.Expression);
             }
+
+            public override void VisitParameter(ParameterSyntax node)
+            {
+                var name = node.Identifier.Value.ToString();
+
+                if (!this.UsedVariablesNames.Contains(name))
+                {
+                    this.UsedVariablesNames.Add(name);
+                }
+                base.VisitParameter(node);
+            }
+            public override void VisitTypeParameter(TypeParameterSyntax node)
+            {
+                var name = node.Identifier.Value.ToString();
+
+                if (!this.UsedVariablesNames.Contains(name))
+                {
+                    this.UsedVariablesNames.Add(name);
+                }
+                base.VisitTypeParameter(node);
+            }
         }
 
         public static LocalUsageData GatherInfo(SemanticModel semanticModel, SyntaxNode node)
