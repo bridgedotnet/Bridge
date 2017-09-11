@@ -14283,8 +14283,8 @@ Bridge.$N1391Result =                     r;
                 this["0a3"] = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1.STestField + 1) | 0;
             },
             ctor: function (value) {
-                this.$initialize();                var $t;
-
+                var $t;
+                this.$initialize();
                 this["0a"] = value;
                 this["0a"] = value;
                 var v = this["0a"];
@@ -14306,8 +14306,8 @@ Bridge.$N1391Result =                     r;
                 v = System.Int64.clip32(this["0l"]);
                 var l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
                 l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
+            }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass2", {
@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -31012,9 +31010,9 @@ Bridge.$N1391Result =                     r;
                         }
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Sum = s;
+                }
             }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static", {
@@ -31040,9 +31038,9 @@ Bridge.$N1391Result =                     r;
                         }
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static.Sum = s;
+                }
             }
         }
-    }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge883", {

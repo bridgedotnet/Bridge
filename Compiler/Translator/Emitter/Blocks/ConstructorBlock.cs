@@ -161,7 +161,13 @@ namespace Bridge.Translator
 
                 if (!this.Emitter.IsAsync)
                 {
+                    var indent = this.Emitter.TempVariables.Count > 0;
                     this.EmitTempVars(beginPosition, true);
+
+                    if(indent)
+                    {
+                        this.Indent();
+                    }
                 }
 
                 this.EndBlock();
@@ -388,6 +394,8 @@ namespace Bridge.Translator
                     requireNewLine = false;
                 }
 
+                var beginPosition = this.Emitter.Output.Length;
+
                 if (noThisInvocation)
                 {
                     if (requireNewLine)
@@ -467,12 +475,12 @@ namespace Bridge.Translator
                 }
 
                 var script = this.Emitter.GetScript(ctor);
+                var hasAdditionalIndent = false;
 
                 if (script == null)
                 {
                     if (ctor.Body.HasChildren)
-                    {
-                        var beginPosition = this.Emitter.Output.Length;
+                    {                        
                         if (requireNewLine)
                         {
                             this.WriteNewLine();
@@ -482,6 +490,7 @@ namespace Bridge.Translator
 
                         if (!this.Emitter.IsAsync)
                         {
+                            hasAdditionalIndent = this.Emitter.TempVariables.Count > 0;
                             this.EmitTempVars(beginPosition, true);
                         }
                     }
@@ -516,6 +525,11 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("return " + JS.Vars.D_THIS + ";");
                     this.WriteNewLine();
+                }
+
+                if(hasAdditionalIndent)
+                {
+                    this.Indent();
                 }
 
                 this.EndBlock();

@@ -207,25 +207,25 @@
         },
         ctors: {
             ctor: function (codePage, name, displayName) {
-                this.$initialize();                var $t;
-
+                var $t;
+                this.$initialize();
                 this.CodePage = codePage;
                 this.Name = name;
                 this.DisplayName = ($t = displayName, $t != null ? $t : name);
-        }
-    },
-    methods: {
-        GetEncoding: function () {
-            return System.Text.Encoding.GetEncoding(this.CodePage);
+            }
         },
-        GetHashCode: function () {
-            return this.CodePage;
-        },
-        Equals: function (o) {
-            var that = Bridge.as(o, System.Text.EncodingInfo);
-            return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+        methods: {
+            GetEncoding: function () {
+                return System.Text.Encoding.GetEncoding(this.CodePage);
+            },
+            GetHashCode: function () {
+                return this.CodePage;
+            },
+            Equals: function (o) {
+                var that = Bridge.as(o, System.Text.EncodingInfo);
+                return System.Nullable.eq(this.CodePage, (that != null ? that.CodePage : null));
+            }
         }
-    }
     });
 
     Bridge.define("System.Text.ASCIIEncoding", {
