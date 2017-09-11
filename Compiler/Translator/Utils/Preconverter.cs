@@ -559,9 +559,34 @@ namespace Bridge.Translator
             return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
         }
 
+        private int tempKey = 1;
         public override AstNode VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
             var rr = this.Resolver.ResolveNode(assignmentExpression, null);
+            var orr = rr as OperatorResolveResult;
+            var simpleIndex = true;
+
+            if (orr != null)
+            {
+                var accessrr = orr.Operands[0] as ArrayAccessResolveResult;
+                if (accessrr != null)
+                {
+                    foreach (var index in accessrr.Indexes)
+                    {
+                        var indexMemberTargetrr = index as MemberResolveResult;
+                        bool isIndexSimple = (indexMemberTargetrr != null && indexMemberTargetrr.Member is IField &&
+                                       (indexMemberTargetrr.TargetResult is ThisResolveResult ||
+                                        indexMemberTargetrr.TargetResult is LocalResolveResult)) || index is ThisResolveResult || index is LocalResolveResult || index is ConstantResolveResult;
+
+
+                        if (!isIndexSimple)
+                        {
+                            simpleIndex = false;
+                        }
+                    }
+                }
+            }
+
             bool found = false;
             var isInt = Helpers.IsIntegerType(rr.Type, this.Resolver);
             if (this.Rules.Integer == IntegerRule.Managed && isInt || !(assignmentExpression.Parent is ExpressionStatement))
@@ -592,6 +617,44 @@ namespace Bridge.Translator
                 if (clonAssignmentExpression == null)
                 {
                     clonAssignmentExpression = (AssignmentExpression)assignmentExpression.Clone();
+                }
+
+                var indexerExpr = clonAssignmentExpression.Left as IndexerExpression;
+                List<Expression> leftIndexerArgs = null;
+                List<Expression> rightIndexerArgs = null;
+                var needReturnValue = false;
+
+                if (indexerExpr != null && !simpleIndex)
+                {
+                    leftIndexerArgs = new List<Expression>();
+                    rightIndexerArgs = new List<Expression>();
+
+                    foreach (var index in indexerExpr.Arguments)
+                    {
+                        var expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "ToTemp"), new PrimitiveExpression("idx" + tempKey), index.Clone());
+                        leftIndexerArgs.Add(expr);
+
+                        expr = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "FromTemp"), new PrimitiveExpression("idx" + tempKey++), index.Clone());
+                        rightIndexerArgs.Add(expr);
+                    }
+
+                    needReturnValue = !(assignmentExpression.Parent is ExpressionStatement);
+
+                    if (needReturnValue && assignmentExpression.Parent is LambdaExpression)
+                    {
+                        var lambdarr = this.Resolver.ResolveNode(assignmentExpression.Parent, null) as LambdaResolveResult;
+
+                        if (lambdarr != null && lambdarr.ReturnType.Kind == TypeKind.Void)
+                        {
+                            needReturnValue = false;
+                        }
+                    }
+
+                    clonAssignmentExpression.Left = new IndexerExpression(indexerExpr.Target.Clone(), needReturnValue ? rightIndexerArgs : leftIndexerArgs);
+                }
+                else
+                {
+                    indexerExpr = null;
                 }
 
                 var op = clonAssignmentExpression.Operator;
@@ -648,7 +711,7 @@ namespace Bridge.Translator
                     : new ParenthesizedExpression(clonAssignmentExpression.Right.Clone());
 
                 clonAssignmentExpression.Right = new BinaryOperatorExpression(
-                    clonAssignmentExpression.Left.Clone(),
+                    indexerExpr != null ? new IndexerExpression(indexerExpr.Target.Clone(), needReturnValue ? leftIndexerArgs : rightIndexerArgs) : clonAssignmentExpression.Left.Clone(),
                     opType,
                     wrapRightExpression);
 
