@@ -211,5 +211,10 @@ namespace Bridge.Translator
             get;
             set;
         }
+
+        public HashSet<string> ExtractedScripts
+        {
+            get; set;
+        } = new HashSet<string>();
     }
 }

@@ -216,7 +216,7 @@ namespace Bridge.Translator
 
             var content = this.ReadEmbeddedResource(resource);
 
-            Emitter.AddOutputItem(this.Outputs.Locales, fileName, new StringBuilder(content), TranslatorOutputKind.Locale, outputPath);
+            Emitter.AddOutputItem(this.Outputs.Locales, fileName, new StringBuilder(content), TranslatorOutputKind.Locale, location: outputPath);
         }
 
         protected virtual void AddLocaleOutputs(IEnumerable<EmbeddedResource> resources, string outputPath)
@@ -227,7 +227,198 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void AddReferencedOutput(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
+        protected virtual void AddReferencedOutput(string outputPath, AssemblyDefinition assembly, BridgeResourceInfo resource, string fileName, Func<string, string> preHandler = null)
+        {
+            this.Log.Trace("Adding referenced output " + resource.Name);
+
+            var currentAssembly = GetAssemblyNameForResource(assembly);
+
+            var combinedResource = (resource.Parts != null && resource.Parts.Length > 0);
+
+            TranslatorOutputItemContent content = null;
+
+            if (combinedResource)
+            {
+                this.Log.Trace("The resource contains parts");
+
+                var contentBuffer = new StringBuilder();
+                var needNewLine = false;
+                var noConsole = this.AssemblyInfo.Console.Enabled != true;
+                var fileHelper = new FileHelper();
+
+                foreach (var part in resource.Parts)
+                {
+                    this.Log.Trace("Handling part " + part.Assembly + " " + part.ResourceName);
+
+                    bool needPart = true;
+
+                    System.Reflection.AssemblyName partAssemblyName = null;
+
+                    if (part.Assembly != null)
+                    {
+                        partAssemblyName = GetAssemblyNameFromResource(part.Assembly);
+
+                        if (noConsole
+                            && partAssemblyName.Name == Translator.Bridge_ASSEMBLY
+                            && (string.Compare(part.Name, BridgeConsoleName, true) == 0
+                                || string.Compare(part.Name, fileHelper.GetMinifiedJSFileName(BridgeConsoleName), true) == 0)
+                            )
+                        {
+                            // Skip Bridge console resource
+                            needPart = false;
+
+                            this.Log.Trace("Skipping this part as it is Bridge Console and the Console option disabled");
+                        }
+                        else
+                        {
+                            var partContentName = GetExtractedResourceName(part.Assembly, part.Name);
+                            needPart = ExtractedScripts.Add(partContentName);
+
+                            if (!needPart)
+                            {
+                                this.Log.Trace("Skipping this part as it is already added");
+                            }
+                        }
+                    }
+
+                    if (needPart)
+                    {
+                        if (needNewLine)
+                        {
+                            NewLine(contentBuffer);
+                        }
+
+                        string partContent = null;
+                        var resourcePartName = part.ResourceName;
+
+                        if (partAssemblyName == null)
+                        {
+                            this.Log.Trace("Using assembly " + assembly.FullName + " to search resource part " + resourcePartName);
+
+                            partContent = ReadEmbeddedResource(assembly, resourcePartName, true, preHandler).Item2;
+                        }
+                        else
+                        {
+                            var partAssembly = this.References
+                                .Where(x => x.Name.Name == partAssemblyName.Name)
+                                .OrderByDescending(x => x.Name.Version)
+                                .FirstOrDefault();
+
+                            if (partAssembly == null)
+                            {
+                                this.Log.Warn("Did not find assembly for resource part " + resourcePartName + " by assembly name " + partAssemblyName.Name + ". Skipping this item!");
+                                continue;
+                            }
+
+                            if (partAssembly.Name.Version != partAssemblyName.Version)
+                            {
+                                this.Log.Info("Found different assembly version (higher) " + partAssembly.FullName + " for resource part" + resourcePartName + " from " + assembly.FullName);
+                            }
+                            else
+                            {
+                                this.Log.Trace("Found exact assembly version " + partAssembly.FullName + " for resource part" + resourcePartName);
+                            }
+
+                            var resourcePartFound = false;
+
+                            try
+                            {
+                                partContent = ReadEmbeddedResource(partAssembly, resourcePartName, true, preHandler).Item2;
+                                resourcePartFound = true;
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                this.Log.Trace("Did not find resource part " + resourcePartName + " in " + partAssembly.FullName + ". Will try to find it by short name " + part.Name);
+                            }
+
+                            if (!resourcePartFound)
+                            {
+                                try
+                                {
+                                    partContent = ReadEmbeddedResource(partAssembly, part.Name, true, preHandler).Item2;
+                                    resourcePartFound = true;
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    this.Log.Trace("Did not find resource part " + part.Name + " in " + partAssembly.FullName);
+                                }
+
+                                if (!resourcePartFound)
+                                {
+                                    if (partAssembly.Name.Version != partAssemblyName.Version)
+                                    {
+                                        var partAssemblyExactVersion = this.References
+                                            .Where(x => x.FullName == partAssemblyName.FullName)
+                                            .FirstOrDefault();
+
+                                        if (partAssemblyExactVersion != null)
+                                        {
+                                            this.Log.Trace("Trying to find it in the part's assembly by long name " + part.Name);
+
+                                            try
+                                            {
+                                                partContent = ReadEmbeddedResource(partAssemblyExactVersion, resourcePartName, true, preHandler).Item2;
+                                                resourcePartFound = true;
+                                            }
+                                            catch (InvalidOperationException)
+                                            {
+                                                this.Log.Trace("Did not find resource part " + resourcePartName + " in " + partAssemblyExactVersion.FullName + ". Will try to find it by short name " + part.Name);
+                                            }
+
+                                            if (!resourcePartFound)
+                                            {
+                                                try
+                                                {
+                                                    partContent = ReadEmbeddedResource(partAssemblyExactVersion, part.Name, true, preHandler).Item2;
+                                                    resourcePartFound = true;
+                                                }
+                                                catch (InvalidOperationException)
+                                                {
+                                                    this.Log.Trace("Did not find resource part " + part.Name + " in " + partAssemblyExactVersion.FullName + ". Will try to find it by the resource's assembly by long name " + resourcePartName);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (!resourcePartFound)
+                                    {
+                                        partContent = ReadEmbeddedResource(assembly, resourcePartName, true, preHandler).Item2;
+                                        resourcePartFound = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        contentBuffer.Append(partContent);
+
+                        needNewLine = true;
+                    }
+                }
+
+                content = contentBuffer;
+            }
+            else
+            {
+                var readAsString = FileHelper.IsJS(fileName) || preHandler != null;
+
+                var notCombinedResource = ReadEmbeddedResource(assembly, resource.Name, readAsString, preHandler);
+
+                if (readAsString)
+                {
+                    content = notCombinedResource.Item2;
+                }
+                else
+                {
+                    content = notCombinedResource.Item1;
+                }
+            }
+
+            ExtractedScripts.Add(GetExtractedResourceName(currentAssembly, resource.Name));
+
+            Emitter.AddOutputItem(this.Outputs.References, fileName, content, TranslatorOutputKind.Reference, location: outputPath, assembly: currentAssembly);
+        }
+
+        private Tuple<byte[], string> ReadEmbeddedResource(AssemblyDefinition assembly, string resourceName, bool readAsString, Func<string, string> preHandler = null)
         {
             var res = assembly.MainModule.Resources.FirstOrDefault(r => r.Name == resourceName);
 
@@ -238,25 +429,25 @@ namespace Bridge.Translator
 
             using (var resourcesStream = ((EmbeddedResource)res).GetResourceStream())
             {
-                if (FileHelper.IsJS(fileName) || preHandler != null)
+                if (readAsString)
                 {
                     using (var reader = new StreamReader(resourcesStream))
                     {
                         var content = reader.ReadToEnd();
-                        Emitter.AddOutputItem(this.Outputs.References, fileName, content, TranslatorOutputKind.Reference, outputPath);
+                        return Tuple.Create((byte[])null, content);
                     }
                 }
                 else
                 {
                     var binary = ReadStream(resourcesStream);
-                    Emitter.AddOutputItem(this.Outputs.References, fileName, binary, TranslatorOutputKind.Reference, outputPath);
+                    return Tuple.Create(binary, (string)null);
                 }
             }
         }
 
         protected virtual void AddExtractedResourceOutput(ResourceConfigItem resource, byte[] code)
         {
-            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, code, TranslatorOutputKind.Resource, resource.Output);
+            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, code, TranslatorOutputKind.Resource, location: resource.Output);
         }
 
         public void ExtractCore(string outputPath, string projectPath)
@@ -390,7 +581,7 @@ namespace Bridge.Translator
 
                     if (!isTs || this.AssemblyInfo.GenerateTypeScript)
                     {
-                        this.AddReferencedOutput(resourceOutputDirName, reference, resName, resourceOutputFileName);
+                        this.AddReferencedOutput(resourceOutputDirName, reference, resource, resourceOutputFileName);
                     }
                 }
             }
@@ -522,6 +713,14 @@ namespace Bridge.Translator
             StringBuilder buffer = null;
             int bufferLength = 0;
 
+            var combinedResourcePartsMinified = new Dictionary<BridgeResourceInfoPart, string>();
+            var combinedResourcePartsNonMinified = new Dictionary<BridgeResourceInfoPart, string>();
+
+            foreach (var referenceOutput in this.Outputs.References)
+            {
+                ConvertOutputItemIntoResourceInfoPart(combinedResourcePartsNonMinified, combinedResourcePartsMinified, referenceOutput);
+            }
+
             var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputKind.ProjectOutput);
 
             if (combinedOutput?.Content?.Builder != null)
@@ -543,6 +742,8 @@ namespace Bridge.Translator
                     NewLine(buffer);
                     needNewLine = false;
                 }
+
+                ConvertOutputItemIntoResourceInfoPart(combinedResourcePartsNonMinified, combinedResourcePartsMinified, this.Outputs.CombinedLocales);
 
                 combinedOutput = Combine(combinedOutput, new List<TranslatorOutputItem> { this.Outputs.CombinedLocales }, fileName, "combined locales output", TranslatorOutputKind.ProjectOutput);
 
@@ -567,11 +768,79 @@ namespace Bridge.Translator
                 needNewLine = false;
             }
 
-            combinedOutput = Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
+            var combinedMainOutput = Combine(null, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
+
+            ConvertOutputItemIntoResourceInfoPart(combinedResourcePartsNonMinified, combinedResourcePartsMinified, combinedMainOutput);
+
+            if (combinedOutput == null)
+            {
+                combinedOutput = combinedMainOutput;
+            }
+            else
+            {
+                if (combinedMainOutput?.Content?.Builder != null)
+                {
+                    if (combinedOutput?.Content?.Builder != null)
+                    {
+                        combinedOutput.Content.Builder.Append(combinedMainOutput.Content.GetContentAsString());
+                    }
+                    else
+                    {
+                        combinedOutput.Content = combinedMainOutput.Content;
+                    }
+                }
+
+                if (combinedMainOutput?.MinifiedVersion?.Content?.Builder != null)
+                {
+                    if (combinedOutput?.MinifiedVersion?.Content?.Builder != null)
+                    {
+                        combinedOutput.MinifiedVersion.Content.Builder.Append(combinedMainOutput.MinifiedVersion.Content.GetContentAsString());
+                    }
+                    else
+                    {
+                        combinedOutput.MinifiedVersion.Content = combinedMainOutput.MinifiedVersion.Content;
+                    }
+                }
+            }
 
             this.Outputs.Combined = combinedOutput;
 
+            this.Outputs.CombinedResourcePartsNonMinified = combinedResourcePartsNonMinified;
+            this.Outputs.CombinedResourcePartsMinified = combinedResourcePartsMinified;
+
             this.Log.Trace("Combining project outputs done");
+        }
+
+        private void ConvertOutputItemIntoResourceInfoPart(Dictionary<BridgeResourceInfoPart, string> resourcePartsNonMinified, Dictionary<BridgeResourceInfoPart, string> resourcePartsMinified, TranslatorOutputItem outputItem)
+        {
+            if (outputItem == null || outputItem.OutputType != TranslatorOutputType.JavaScript)
+            {
+                return;
+            }
+
+            if (!outputItem.IsEmpty)
+            {
+                var part = new BridgeResourceInfoPart()
+                {
+                    Assembly = outputItem.Assembly,
+                    Name = outputItem.Name,
+                    ResourceName = BridgeResourcesCombinedPrefix + outputItem.Name
+                };
+
+                resourcePartsNonMinified[part] = outputItem.Content.GetContentAsString();
+            }
+
+            if (outputItem.MinifiedVersion != null && !outputItem.MinifiedVersion.IsEmpty)
+            {
+                var part = new BridgeResourceInfoPart()
+                {
+                    Assembly = outputItem.MinifiedVersion.Assembly,
+                    Name = outputItem.MinifiedVersion.Name,
+                    ResourceName = BridgeResourcesCombinedPrefix + outputItem.MinifiedVersion.Name
+                };
+
+                resourcePartsMinified[part] = outputItem.MinifiedVersion.Content.GetContentAsString();
+            }
         }
 
         private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputKind outputKind, TranslatorOutputType[] filter = null)
@@ -817,6 +1086,7 @@ namespace Bridge.Translator
 
             output.MinifiedVersion = new TranslatorOutputItem
             {
+                Assembly = output.Assembly,
                 IsMinified = true,
                 Name = minifiedName,
                 OutputType = output.OutputType,

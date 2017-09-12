@@ -112,7 +112,7 @@ namespace Bridge.Translator
                     outputKind = outputKind | TranslatorOutputKind.Metadata;
                 }
 
-                Emitter.AddOutputItem(result, fileName, tmp, outputKind, null);
+                Emitter.AddOutputItem(result, fileName, tmp, outputKind, location: null);
             }
 
             this.Log.Trace("Combining outputs done");

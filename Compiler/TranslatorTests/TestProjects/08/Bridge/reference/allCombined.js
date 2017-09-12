@@ -1,7 +1,7 @@
 /**
  * @version   : 16.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-09-06
+ * @date      : 2017-09-11
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -519,13 +519,13 @@ Bridge.assembly("Bridge", function ($asm, globals) {
             _o6.add("fill", "#555");
             return _o6;
         },
-        f7: function (_o7) {
-            _o7.add("xmlns", this.svgNS);
-            _o7.add("width", "3.9");
-            _o7.add("height", "6.7");
-            _o7.add("viewBox", "0 0 3.9 6.7");
-            _o7.add("style", "vertical-align:middle;position: absolute;top: 10.5px;");
-            return _o7;
+        f7: function (_o1) {
+            _o1.add("xmlns", this.svgNS);
+            _o1.add("width", "3.9");
+            _o1.add("height", "6.7");
+            _o1.add("viewBox", "0 0 3.9 6.7");
+            _o1.add("style", "vertical-align:middle;position: absolute;top: 10.5px;");
+            return _o1;
         }
     });
 
