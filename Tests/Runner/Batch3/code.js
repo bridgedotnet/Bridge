@@ -24043,18 +24043,6 @@ Bridge.$N1391Result =                     r;
         f1: function (sender, e) { }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2925", {
-        statics: {
-            methods: {
-                TestIListAdd: function () {
-                    var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
-                    var idx = System.Array.add(list, Bridge.box(5, System.Int32));
-                    Bridge.Test.NUnit.Assert.AreEqual(0, idx);
-                }
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2931", {
         statics: {
             methods: {
@@ -25107,53 +25095,6 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092", {
-        statics: {
-            methods: {
-                EndsWithSaurus: function (s) {
-                    return System.String.endsWith(s.toLowerCase(), "saurus");
-                },
-                TestListTRemoveAll: function () {
-                    var $t;
-                    var dinosaurs = new (System.Collections.Generic.List$1(System.String)).ctor();
-
-                    dinosaurs.add("Compsognathus");
-                    dinosaurs.add("Amargasaurus");
-                    dinosaurs.add("Oviraptor");
-                    dinosaurs.add("Velociraptor");
-                    dinosaurs.add("Deinonychus");
-                    dinosaurs.add("Dilophosaurus");
-                    dinosaurs.add("Gallimimus");
-                    dinosaurs.add("Triceratops");
-
-                    $t = Bridge.getEnumerator(dinosaurs);
-                    try {
-                        while ($t.moveNext()) {
-                            var dinosaur = $t.Current;
-                            System.Console.WriteLine(dinosaur);
-                        }
-                    } finally {
-                        if (Bridge.is($t, System.IDisposable)) {
-                            $t.System$IDisposable$dispose();
-                        }
-                    }
-                    Bridge.Test.NUnit.Assert.False(dinosaurs.trueForAll(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus));
-                    Bridge.Test.NUnit.Assert.AreEqual("Amargasaurus", dinosaurs.find(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus));
-                    Bridge.Test.NUnit.Assert.AreEqual("Dilophosaurus", dinosaurs.findLast(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus));
-
-                    var sublist = dinosaurs.findAll(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus);
-                    Bridge.Test.NUnit.Assert.AreEqual(2, sublist.Count);
-                    Bridge.Test.NUnit.Assert.AreEqual("Amargasaurus", sublist.getItem(0));
-                    Bridge.Test.NUnit.Assert.AreEqual("Dilophosaurus", sublist.getItem(1));
-                    Bridge.Test.NUnit.Assert.AreEqual(2, dinosaurs.removeAll(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus));
-
-                    Bridge.Test.NUnit.Assert.AreEqual(6, dinosaurs.Count);
-                    Bridge.Test.NUnit.Assert.False(dinosaurs.exists(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3092.EndsWithSaurus));
-                }
-            }
-        }
-    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107", {
         statics: {

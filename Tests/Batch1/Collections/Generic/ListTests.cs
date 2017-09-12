@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -158,6 +159,16 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.AreEqual(2, arr.BinarySearch(3));
             Assert.True(arr.BinarySearch(6) < 0);
         }
+
+        // Not C# API
+        //[Test]
+        //public void BinarySearch2Works()
+        //{
+        //    var arr = new List<int> { 1, 2, 3, 3, 4, 5 };
+
+        //    Assert.AreEqual(3, arr.BinarySearch(3, 2, 3));
+        //    Assert.True(arr.BinarySearch(2, 2, 4) < 0);
+        //}
 
         private class TestReverseComparer : IComparer<int>
         {
@@ -476,6 +487,42 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void RemoveAllWorks_N3092()
+        {
+            // #3092
+            List<string> dinosaurs = new List<string>();
+
+            dinosaurs.Add("Compsognathus");
+            dinosaurs.Add("Amargasaurus");
+            dinosaurs.Add("Oviraptor");
+            dinosaurs.Add("Velociraptor");
+            dinosaurs.Add("Deinonychus");
+            dinosaurs.Add("Dilophosaurus");
+            dinosaurs.Add("Gallimimus");
+            dinosaurs.Add("Triceratops");
+
+            foreach (string dinosaur in dinosaurs)
+            {
+                Console.WriteLine(dinosaur);
+            }
+
+            Predicate<string> EndsWithSaurus = s => s.ToLower().EndsWith("saurus");
+
+            Assert.False(dinosaurs.TrueForAll(EndsWithSaurus));
+            Assert.AreEqual("Amargasaurus", dinosaurs.Find(EndsWithSaurus));
+            Assert.AreEqual("Dilophosaurus", dinosaurs.FindLast(EndsWithSaurus));
+
+            List<string> sublist = dinosaurs.FindAll(EndsWithSaurus);
+            Assert.AreEqual(2, sublist.Count);
+            Assert.AreEqual("Amargasaurus", sublist[0]);
+            Assert.AreEqual("Dilophosaurus", sublist[1]);
+            Assert.AreEqual(2, dinosaurs.RemoveAll(EndsWithSaurus));
+
+            Assert.AreEqual(6, dinosaurs.Count);
+            Assert.False(dinosaurs.Exists(EndsWithSaurus));
+        }
+
+        [Test]
         public void RemoveRangeWorks()
         {
             var list = new List<string> { "a", "b", "c", "d" };
@@ -662,6 +709,17 @@ namespace Bridge.ClientTest.Collections.Generic
             IList<string> l = new List<string> { "x", "y", "z" };
             l.RemoveAt(1);
             Assert.AreEqual(new[] { "x", "z" }, l.ToArray());
+        }
+
+        [Test]
+        public void IListNonGenericAddWorks_N2925()
+        {
+            IList l = new List<string> { "x", "y", "z" };
+            // #2925
+            var index = l.Add("a");
+
+            Assert.AreEqual(new[] { "x", "y", "z", "a" }, ((List<string>)l).ToArray());
+            Assert.AreEqual(3, index);
         }
 
         [Test]

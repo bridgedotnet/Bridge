@@ -596,7 +596,6 @@
     <Compile Include="BridgeIssues\2800\N2886.cs" />
     <Compile Include="BridgeIssues\2800\N2898.cs" />
     <Compile Include="BridgeIssues\2800\N2899.cs" />
-    <Compile Include="BridgeIssues\2900\N2925.cs" />
     <Compile Include="BridgeIssues\2900\N2901.cs" />
     <Compile Include="BridgeIssues\2900\N2903.cs" />
     <Compile Include="BridgeIssues\2900\N2904.cs" />
@@ -637,7 +636,6 @@
     <Compile Include="BridgeIssues\3000\N3081.cs" />
     <Compile Include="BridgeIssues\3000\N3086.cs" />
     <Compile Include="BridgeIssues\3000\N3088.cs" />
-    <Compile Include="BridgeIssues\3000\N3092.cs" />
     <Compile Include="BridgeIssues\3000\N3089.cs" />
     <Compile Include="BridgeIssues\3100\N3107.cs" />
     <Compile Include="BridgeIssues\3100\N3111.cs" />
