@@ -394,7 +394,7 @@ declare module System {
     }
 
     export interface IEquatable$1<T> {
-        equals(other: T): boolean;
+        equalsT(other: T): boolean;
     }
     export function IEquatable$1<T>(t: Bridge.TypeRef<T>): {
         prototype: IEquatable$1<T>;
@@ -486,7 +486,7 @@ declare module System {
         duration(): TimeSpan;
         negate(): TimeSpan;
         compareTo(other: TimeSpan): number;
-        equals(other: TimeSpan): boolean;
+        equalsT(other: TimeSpan): boolean;
         format(str: string, provider?: System.Globalization.DateTimeFormatInfo): string;
         toString(str: string, provider?: System.Globalization.DateTimeFormatInfo): string;
     }
