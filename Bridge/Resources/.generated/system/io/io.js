@@ -1213,7 +1213,7 @@
                 InternalReadAllLines: function (path, encoding) {
 
                     var line;
-                    var lines = new (System.Collections.Generic.List$1(System.String))();
+                    var lines = new (System.Collections.Generic.List$1(System.String)).ctor();
 
                     var sr = new System.IO.StreamReader.$ctor9(path, encoding);
                     try {

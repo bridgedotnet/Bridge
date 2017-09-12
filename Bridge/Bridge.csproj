@@ -477,11 +477,14 @@
     <Content Include="Resources\.generated\system\collections\generic\hashSet\elementCount.js" />
     <Content Include="Resources\.generated\system\collections\generic\hashSet\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\hashSet\slot.js" />
+    <Content Include="Resources\.generated\system\collections\generic\list.js" />
+    <Content Include="Resources\.generated\system\collections\generic\list\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\queue.js" />
     <Content Include="Resources\.generated\system\collections\generic\queue\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\stack.js" />
     <Content Include="Resources\.generated\system\collections\generic\stack\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
+    <Content Include="Resources\.generated\system\collections\objectModel\readOnlyCollection.js" />
     <Content Include="Resources\.generated\system\console.js" />
     <Content Include="Resources\.generated\system\dateTimeKind.js" />
     <Content Include="Resources\.generated\system\dayOfWeek.js" />

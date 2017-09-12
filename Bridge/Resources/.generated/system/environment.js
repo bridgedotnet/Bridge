@@ -133,7 +133,7 @@
                     var l = System.Environment.Location;
 
                     if (l) {
-                        var args = new (System.Collections.Generic.List$1(System.String))();
+                        var args = new (System.Collections.Generic.List$1(System.String)).ctor();
 
                         var path = l.pathname;
 

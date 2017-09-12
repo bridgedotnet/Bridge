@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +27,99 @@ namespace Bridge.ClientTest.Collections.Generic
             public override int GetHashCode()
             {
                 return i;
+            }
+        }
+
+        private class TestData
+        {
+            public List<string> Dinosaurs
+            {
+                get
+                {
+                    List<string> dinosaurs = new List<string>();
+
+                    dinosaurs.Add("Compsognathus");
+                    dinosaurs.Add("Amargasaurus");
+                    dinosaurs.Add("Oviraptor");
+                    dinosaurs.Add("Velociraptor");
+                    dinosaurs.Add("Deinonychus");
+                    dinosaurs.Add("Dilophosaurus");
+                    dinosaurs.Add("Gallimimus");
+                    dinosaurs.Add("Triceratops");
+
+                    return dinosaurs;
+                }
+            }
+
+            public List<int> Numbers3
+            {
+                get
+                {
+                    return new List<int>(new int[] { 1, 2, 3});
+                }
+            }
+
+            public Predicate<string> EndsWithSaurus
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().EndsWith("saurus");
+                    return p;
+                }
+            }
+
+            public Predicate<string> HasLettersAorO
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().Any(x => x == 'a' || x == 'o');
+                    return p;
+                }
+            }
+
+            public Predicate<string> StartsWithLetter5
+            {
+                get
+                {
+                    Predicate<string> p = s => s.StartsWith("5");
+                    return p;
+                }
+            }
+
+            public Predicate<string> StartsWithLetterD
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().StartsWith("d");
+                    return p;
+                }
+            }
+
+            public Predicate<int> Equals2
+            {
+                get
+                {
+                    Predicate<int> p = i => i == 2;
+                    return p;
+                }
+            }
+
+            public Predicate<int> Equals7
+            {
+                get
+                {
+                    Predicate<int> p = i => i == 7;
+                    return p;
+                }
+            }
+
+            public Predicate<int> LessThan3
+            {
+                get
+                {
+                    Predicate<int> p = i => i < 3;
+                    return p;
+                }
             }
         }
 
@@ -98,6 +192,29 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void AsReadonlyWorks()
+        {
+            var data = new TestData();
+
+            var numbers = data.Numbers3;
+
+            var ro = numbers.AsReadOnly();
+            Assert.AreEqual("ReadOnlyCollection`1", ro.GetType().Name);
+            Assert.True(((IList)ro).IsReadOnly);
+            Assert.AreEqual(1, ro[0]);
+            Assert.AreEqual(2, ro[1]);
+            Assert.AreEqual(3, ro[2]);
+            Assert.AreEqual(3, ro.Count);
+            // TODO
+            //Assert.Throws<NotSupportedException>(() => { ((IList)ro)[0] = 7;  });
+
+            Assert.False(((IList)numbers).IsReadOnly);
+            numbers[0] = 7;
+            Assert.AreEqual(7, numbers[0]);
+            Assert.AreEqual(7, ro[0]);
+        }
+
+        [Test]
         public void CountWorks()
         {
             Assert.AreEqual(0, new List<string>().Count);
@@ -159,14 +276,15 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.True(arr.BinarySearch(6) < 0);
         }
 
-        [Test]
-        public void BinarySearch2Works()
-        {
-            var arr = new List<int> { 1, 2, 3, 3, 4, 5 };
+        // Not C# API
+        //[Test]
+        //public void BinarySearch2Works()
+        //{
+        //    var arr = new List<int> { 1, 2, 3, 3, 4, 5 };
 
-            Assert.AreEqual(3, arr.BinarySearch(3, 2, 3));
-            Assert.True(arr.BinarySearch(2, 2, 4) < 0);
-        }
+        //    Assert.AreEqual(3, arr.BinarySearch(3, 2, 3));
+        //    Assert.True(arr.BinarySearch(2, 2, 4) < 0);
+        //}
 
         private class TestReverseComparer : IComparer<int>
         {
@@ -313,17 +431,19 @@ namespace Bridge.ClientTest.Collections.Generic
         //    Assert.AreEqual(new List<string> { "a", "b", "c", "d" }.Extract(1, 2), new[] { "b", "c" });
         //}
 
-        [Test]
-        public void SliceWithoutEndWorks()
-        {
-            Assert.AreEqual(new[] { "c", "d" }, new List<string> { "a", "b", "c", "d" }.Slice(2).ToArray());
-        }
+        // Not C# API
+        //[Test]
+        //public void SliceWithoutEndWorks()
+        //{
+        //    Assert.AreEqual(new[] { "c", "d" }, new List<string> { "a", "b", "c", "d" }.Slice(2).ToArray());
+        //}
 
-        [Test]
-        public void SliceWithEndWorks()
-        {
-            Assert.AreEqual(new[] { "b", "c" }, new List<string> { "a", "b", "c", "d" }.Slice(1, 3).ToArray());
-        }
+        // Not C# API
+        //[Test]
+        //public void SliceWithEndWorks()
+        //{
+        //    Assert.AreEqual(new[] { "b", "c" }, new List<string> { "a", "b", "c", "d" }.Slice(1, 3).ToArray());
+        //}
 
         [Test]
         public void ForeachWithListItemCallbackWorks()
@@ -412,17 +532,19 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.AreEqual(new[] { "q", "q", "x", "a", "b", "y" }, l.ToArray());
         }
 
-        [Test]
-        public void JoinWithoutDelimiterWorks()
-        {
-            Assert.AreEqual("a,b,c,b", new List<string> { "a", "b", "c", "b" }.Join());
-        }
+        // Not C# API
+        //[Test]
+        //public void JoinWithoutDelimiterWorks()
+        //{
+        //    Assert.AreEqual("a,b,c,b", new List<string> { "a", "b", "c", "b" }.Join());
+        //}
 
-        [Test]
-        public void JoinWithDelimiterWorks()
-        {
-            Assert.AreEqual("a|b|c|b", new List<string> { "a", "b", "c", "b" }.Join("|"));
-        }
+        // Not C# API
+        //[Test]
+        //public void JoinWithDelimiterWorks()
+        //{
+        //    Assert.AreEqual("a|b|c|b", new List<string> { "a", "b", "c", "b" }.Join("|"));
+        //}
 
         // Not C# API
         //[Test]
@@ -478,6 +600,96 @@ namespace Bridge.ClientTest.Collections.Generic
             var list = new List<string> { "a", "b", "c", "a" };
             list.RemoveAt(1);
             Assert.AreEqual(new[] { "a", "c", "a" }, list.ToArray());
+        }
+
+        [Test]
+        public void TrueForAllWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.False(dinosaurs.TrueForAll(data.EndsWithSaurus));
+            Assert.True(dinosaurs.TrueForAll(data.HasLettersAorO));
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.TrueForAll(null); });
+        }
+
+        [Test]
+        public void FindWorks()
+        {
+            var data = new TestData();
+
+            var dinosaurs = data.Dinosaurs;
+            Assert.AreEqual("Amargasaurus", dinosaurs.Find(data.EndsWithSaurus));
+            Assert.AreEqual("Deinonychus", dinosaurs.Find(data.StartsWithLetterD));
+            Assert.AreEqual(null, dinosaurs.Find(data.StartsWithLetter5));
+
+            var numbers = data.Numbers3;
+            Assert.AreEqual(0, numbers.Find(data.Equals7));
+            Assert.AreEqual(2, numbers.Find(data.Equals2));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.Find(null); });
+        }
+
+        [Test]
+        public void FindLastWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.AreEqual("Dilophosaurus", dinosaurs.FindLast(data.EndsWithSaurus));
+            Assert.AreEqual("Triceratops", dinosaurs.FindLast(data.HasLettersAorO));
+            Assert.AreEqual(null, dinosaurs.FindLast(data.StartsWithLetter5));
+
+            var numbers = data.Numbers3;
+            Assert.AreEqual(0, numbers.FindLast(data.Equals7));
+            Assert.AreEqual(2, numbers.FindLast(data.LessThan3));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.FindLast(null); });
+        }
+
+        [Test]
+        public void FindAllWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            List<string> sublist = dinosaurs.FindAll(data.EndsWithSaurus);
+            Assert.AreEqual(2, sublist.Count);
+            Assert.AreEqual("Amargasaurus", sublist[0]);
+            Assert.AreEqual("Dilophosaurus", sublist[1]);
+
+            sublist = dinosaurs.FindAll(data.StartsWithLetter5);
+            Assert.AreEqual(0, sublist.Count);
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.FindAll(null); });
+        }
+
+        [Test]
+        public void ExistsWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.True(dinosaurs.Exists(data.EndsWithSaurus));
+            Assert.False(dinosaurs.Exists(data.StartsWithLetter5));
+            Assert.True(dinosaurs.Exists(data.StartsWithLetterD));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.Exists(null); });
+        }
+
+        [Test]
+        public void RemoveAllWorks_N3092()
+        {
+            // #3092
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.AreEqual(8, dinosaurs.Count);
+            Assert.AreEqual(2, dinosaurs.RemoveAll(data.EndsWithSaurus));
+            Assert.AreEqual(6, dinosaurs.Count);
+            Assert.False(dinosaurs.Exists(data.EndsWithSaurus));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.RemoveAll(null); });
         }
 
         [Test]
@@ -667,6 +879,17 @@ namespace Bridge.ClientTest.Collections.Generic
             IList<string> l = new List<string> { "x", "y", "z" };
             l.RemoveAt(1);
             Assert.AreEqual(new[] { "x", "z" }, l.ToArray());
+        }
+
+        [Test]
+        public void IListNonGenericAddWorks_N2925()
+        {
+            IList l = new List<string> { "x", "y", "z" };
+            // #2925
+            var index = l.Add("a");
+
+            Assert.AreEqual(new[] { "x", "y", "z", "a" }, ((List<string>)l).ToArray());
+            Assert.AreEqual(3, index);
         }
 
         [Test]

@@ -19,7 +19,7 @@ namespace System.Linq.Expressions
 
         public extern Expression Result
         {
-            [Template("{this}.expressions.get({this}.expressions.getCount() - 1)")]
+            [Template("{this}.expressions.getItem({this}.expressions.Count - 1)")]
             get;
             private set;
         }

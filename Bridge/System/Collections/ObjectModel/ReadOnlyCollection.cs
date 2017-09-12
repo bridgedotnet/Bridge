@@ -3,57 +3,228 @@ using System.Collections.Generic;
 
 namespace System.Collections.ObjectModel
 {
-    [External]
-    [Reflectable]
-    public class ReadOnlyCollection<T> : IList<T>, IReadOnlyList<T>
+    public class ReadOnlyCollection<T> : IList<T>, IList, IReadOnlyList<T>
     {
-        public extern ReadOnlyCollection(IList<T> list);
+        IList<T> list;
 
-        public extern int Count
+        public ReadOnlyCollection(IList<T> list)
         {
-            get;
+            if (list == null)
+            {
+                throw new System.ArgumentNullException("list");
+            }
+            this.list = list;
         }
 
-        /// <summary>
-        /// Gets a value indicating whether the ReadOnlyCollection is read-only.
-        /// </summary>
-        extern bool ICollection<T>.IsReadOnly
+        public int Count
         {
-            get;
+            get { return list.Count; }
         }
 
-        [AccessorsIndexer]
-        public extern T this[int index]
+        public T this[int index]
         {
-            [Name("get")]
-            get;
+            get { return list[index]; }
         }
 
-        public extern bool Contains(T value);
-
-        public extern IEnumerator<T> GetEnumerator();
-
-        public extern int IndexOf(T value);
-
-        extern T IList<T>.this[int index]
+        public bool Contains(T value)
         {
-            [Name("get")]
-            get;
-            set;
+            return list.Contains(value);
         }
 
-        extern void ICollection<T>.Add(T value);
+        public void CopyTo(T[] array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-        extern void ICollection<T>.Clear();
+        public IEnumerator<T> GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-        public extern void CopyTo(T[] array, int arrayIndex);
+        public int IndexOf(T value)
+        {
+            return list.IndexOf(value);
+        }
 
-        extern void IList<T>.Insert(int index, T value);
+        protected IList<T> Items
+        {
+            get
+            {
+                return list;
+            }
+        }
 
-        extern bool ICollection<T>.Remove(T value);
+        bool ICollection<T>.IsReadOnly
+        {
+            get { return true; }
+        }
 
-        extern void IList<T>.RemoveAt(int index);
+        T IList<T>.this[int index]
+        {
+            get { return list[index]; }
+            set
+            {
+                throw new System.NotSupportedException();
+            }
+        }
 
-        extern IEnumerator IEnumerable.GetEnumerator();
+        void ICollection<T>.Add(T value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void ICollection<T>.Clear()
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void IList<T>.Insert(int index, T value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        bool ICollection<T>.Remove(T value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void IList<T>.RemoveAt(int index)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)list).GetEnumerator();
+        }
+
+        void ICollection.CopyTo(Array array, int index)
+        {
+            if (array == null)
+            {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (array.Rank != 1)
+            {
+                throw new System.ArgumentException("array");
+            }
+
+            if (array.GetLowerBound(0) != 0)
+            {
+                throw new System.ArgumentException("array");
+            }
+
+            if (index < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("index");
+            }
+
+            if (array.Length - index < Count)
+            {
+                throw new System.ArgumentException();
+            }
+
+            T[] items = array as T[];
+            if (items != null)
+            {
+                list.CopyTo(items, index);
+            }
+            else
+            {
+                //
+                // Catch the obvious case assignment will fail.
+                // We can found all possible problems by doing the check though.
+                // For example, if the element type of the Array is derived from T,
+                // we can't figure out if we can successfully copy the element beforehand.
+                //
+                Type targetType = array.GetType().GetElementType();
+                Type sourceType = typeof(T);
+                if (!(targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType)))
+                {
+                    throw new System.ArgumentException();
+                }
+
+                //
+                // We can't cast array of value type to object[], so we don't support 
+                // widening of primitive types here.
+                //
+                object[] objects = array as object[];
+                if (objects == null)
+                {
+                    throw new System.ArgumentException();
+                }
+
+                int count = list.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    objects[index++] = list[i];
+                }
+            }
+        }
+
+        bool IList.IsReadOnly
+        {
+            get { return true; }
+        }
+
+        object IList.this[int index]
+        {
+            get { return list[index]; }
+            set
+            {
+                throw new System.NotSupportedException();
+            }
+        }
+
+        int IList.Add(object value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void IList.Clear()
+        {
+            throw new System.NotSupportedException();
+        }
+
+        private static bool IsCompatibleObject(object value)
+        {
+            // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
+            // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+            return ((value is T) || (value == null && default(T) == null));
+        }
+
+        bool IList.Contains(object value)
+        {
+            if (IsCompatibleObject(value))
+            {
+                return Contains((T)value);
+            }
+            return false;
+        }
+
+        int IList.IndexOf(object value)
+        {
+            if (IsCompatibleObject(value))
+            {
+                return IndexOf((T)value);
+            }
+            return -1;
+        }
+
+        void IList.Insert(int index, object value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void IList.Remove(object value)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        void IList.RemoveAt(int index)
+        {
+            throw new System.NotSupportedException();
+        }
     }
 }

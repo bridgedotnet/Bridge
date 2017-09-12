@@ -56,7 +56,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             },
             ShouldUnbox: function () {
                 var objectArray = System.Array.init([Bridge.box(1, System.Int32)], System.Object);
-                var objectList = new (System.Collections.Generic.List$1(System.Object))(System.Array.init([Bridge.box(1, System.Int32)], System.Object));
+                var objectList = new (System.Collections.Generic.List$1(System.Object)).$ctor1(System.Array.init([Bridge.box(1, System.Int32)], System.Object));
 
                 // The code below SHOULD contain box calls for standart primitives (except custim long, ulong, decimal) and enums #2318
                 var unboxArray1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.Int32));

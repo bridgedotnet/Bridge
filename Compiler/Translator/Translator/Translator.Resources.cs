@@ -10,24 +10,6 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
-        private class BridgeResourceInfo
-        {
-            public string FileName
-            {
-                get; set;
-            }
-
-            public string Name
-            {
-                get; set;
-            }
-
-            public string Path
-            {
-                get; set;
-            }
-        }
-
         private Dictionary<string, string> resourceHeaderInfo;
         private Dictionary<string, string> ResourceHeaderInfo
         {
@@ -153,15 +135,41 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing outputs for resources");
 
+                var nonMinifiedCombinedPartsDone = false;
+                var minifiedCombinedPartsDone = false;
+
                 foreach (var outputItem in this.Outputs.GetOutputs(true))
                 {
+                    BridgeResourceInfoPart[] parts = null;
+
                     this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
+
+                    var isCombined = outputItem.OutputKind.HasFlag(TranslatorOutputKind.Combined) && this.Outputs.Combined != null;
+                    var isMinified = outputItem.OutputKind.HasFlag(TranslatorOutputKind.Minified);
+
+                    if (isCombined)
+                    {
+                        this.Log.Trace("The resource item is combined. Setting up its parts.");
+
+                        if (!isMinified)
+                        {
+                            this.Log.Trace("Choosing non-minified parts.");
+                            parts = this.Outputs.CombinedResourcePartsNonMinified.Select(x => x.Key).ToArray();
+                        }
+
+                        if (isMinified)
+                        {
+                            this.Log.Trace("Choosing minified parts.");
+                            parts = this.Outputs.CombinedResourcePartsMinified.Select(x => x.Key).ToArray();
+                        }
+                    }
 
                     var info = new BridgeResourceInfo
                     {
                         Name = outputItem.Name,
                         FileName = outputItem.Name,
-                        Path = null
+                        Path = null,
+                        Parts = parts
                     };
 
                     byte[] content;
@@ -180,6 +188,78 @@ namespace Bridge.Translator
                     }
 
                     yield return Tuple.Create(info, content);
+
+                    if (isCombined)
+                    {
+                        Dictionary<BridgeResourceInfoPart, string> partSource = null;
+
+                        if (!isMinified && !nonMinifiedCombinedPartsDone)
+                        {
+                            this.Log.Trace("Preparing non-minified combined resource parts");
+
+                            partSource = this.Outputs.CombinedResourcePartsNonMinified;
+                        }
+
+                        if (isMinified && !minifiedCombinedPartsDone)
+                        {
+                            this.Log.Trace("Preparing minified combined resource parts");
+
+                            partSource = this.Outputs.CombinedResourcePartsMinified;
+                        }
+
+                        if (partSource != null)
+                        {
+                            foreach (var part in partSource)
+                            {
+                                //if (part.Key.Assembly != null)
+                                //{
+                                //    this.Log.Trace("Resource part " + part.Key.ResourceName + " is not embedded into resources as it is from another assembly " + part.Key.Assembly);
+                                //    continue;
+                                //}
+
+                                if (part.Value == null)
+                                {
+                                    this.Log.Trace("Resource part " + part.Key.ResourceName + " from " + part.Key.Assembly + " is not embedded into resources as it is empty");
+                                    continue;
+                                }
+
+                                var partResource = new BridgeResourceInfo
+                                {
+                                    Name = null,
+                                    FileName = part.Key.ResourceName,
+                                    Path = null,
+                                    Parts = null
+                                };
+
+                                var partContent = new byte[0];
+
+                                if (!string.IsNullOrEmpty(part.Value))
+                                {
+                                    if (CheckIfRequiresSourceMap(part.Key))
+                                    {
+                                        var partSourceMap = this.GenerateSourceMap(part.Key.Name, part.Value);
+                                        partContent = OutputEncoding.GetBytes(partSourceMap);
+                                    }
+                                    else
+                                    {
+                                        partContent = OutputEncoding.GetBytes(part.Value);
+                                    }
+                                }
+
+                                yield return Tuple.Create(partResource, partContent);
+                            }
+
+                            if (!isMinified)
+                            {
+                                nonMinifiedCombinedPartsDone = true;
+                            }
+
+                            if (isMinified)
+                            {
+                                minifiedCombinedPartsDone = true;
+                            }
+                        }
+                    }
                 }
 
                 this.Log.Trace("Done preparing output files for resources");
@@ -280,20 +360,16 @@ namespace Bridge.Translator
             {
                 var r = item.Item1;
                 var name = r.Name;
+                var fileName = r.FileName;
 
-                this.Log.Trace("Embedding resource " + name);
-
-                // No resource name normalization
-                //var name = this.NormalizePath(r.Name);
-                //this.Log.Trace("Normalized resource name " + name);
-
+                this.Log.Trace("Embedding resource " + name + " (fileName: " + fileName + ")");
 
                 // Normalize resourse output path to always have '/' as a directory separator
                 r.Path = configHelper.ConvertPath(r.Path, '/');
 
-                var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Item2);
+                var newResource = new EmbeddedResource(name ?? fileName, ManifestResourceAttributes.Private, item.Item2);
 
-                var existingResource = resources.FirstOrDefault(x => x.Name == name);
+                var existingResource = resources.FirstOrDefault(x => x.Name == (name ?? fileName));
 
                 if (existingResource != null)
                 {
@@ -302,11 +378,15 @@ namespace Bridge.Translator
                 }
 
                 resources.Add(newResource);
-                resourceList.Add(r);
+
+                if (name != null)
+                {
+                    resourceList.Add(r);
+                }
 
                 var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "0.000 KB");
 
-                var resourceLocation = name;
+                var resourceLocation = name ?? fileName;
                 if (!string.IsNullOrEmpty(r.Path) && !string.IsNullOrEmpty(resourceLocation))
                 {
                     resourceLocation = Path.Combine(
@@ -316,9 +396,9 @@ namespace Bridge.Translator
                     resourceLocation = configHelper.ConvertPath(resourceLocation, '/');
                 }
 
-                reportResources.Add(Tuple.Create(name, resourceLocation, sizeInBytes));
+                reportResources.Add(Tuple.Create(name ?? fileName, resourceLocation, sizeInBytes));
 
-                this.Log.Trace("Added resource " + name);
+                this.Log.Trace("Added resource " + name + " (fileName: " + fileName + ")");
             }
 
             BuildReportForResources(reportResources);
@@ -829,6 +909,40 @@ namespace Bridge.Translator
             return needSourceMap;
         }
 
+        private System.Reflection.AssemblyName GetAssemblyNameFromResource(string assemblyName)
+        {
+            System.Reflection.AssemblyName name = null;
+
+            try
+            {
+                name = new System.Reflection.AssemblyName(assemblyName);
+            }
+            catch (Exception ex)
+            {
+                this.Log.Warn("Could not get assembly name: " + ex.ToString());
+            }
+
+            return name;
+        }
+
+        private string GetAssemblyNameForResource(AssemblyDefinition assembly)
+        {
+            //return assembly.Name.Name + " v." + assembly.Name.Version.ToString(3);
+            return assembly.FullName;
+        }
+
+        private string GetExtractedResourceName(string assemblyName, string resourceName)
+        {
+            var assembly = GetAssemblyNameFromResource(assemblyName);
+
+            if (assembly != null && !string.IsNullOrEmpty(assembly.Name))
+            {
+                return assembly.Name + " | " + resourceName;
+            }
+
+            return assemblyName + " | " + resourceName;
+        }
+
         private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file, bool oneFileResource)
         {
             byte[] content;
@@ -1034,7 +1148,7 @@ namespace Bridge.Translator
         {
             this.Log.Trace("CheckConsoleConfigSetting...");
 
-            var consoleResourceName = "bridge.console.js";
+            var consoleResourceName = BridgeConsoleName;
             var consoleResourceMinifiedName = FileHelper.GetMinifiedJSFileName(consoleResourceName);
 
             var consoleFormatted = resources.Where(x => x.Name == consoleResourceName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();

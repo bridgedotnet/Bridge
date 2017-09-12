@@ -658,8 +658,8 @@ declare module System {
     }
 
     export interface IList$1<T> extends ICollection$1<T> {
-        get(index: number): T;
-        set(index: number, value: T): void;
+        getItem(index: number): T;
+        setItem(index: number, value: T): void;
         indexOf(item: T): number;
         insert(index: number, item: T): void;
         removeAt(index: number): void;
@@ -723,40 +723,88 @@ declare module System {
         new (obj: any, comparer?: IEqualityComparer$1<TKey>): Dictionary$2<TKey, TValue>;
     }
 
-    export interface List$1<T> extends ICollection$1<T>, IList$1<T> {
-        getCount(): number;
-        get(index: number): T;
-        set(index: number, value: T): void;
-        add(value: T): void;
-        addRange(items: T[]): void;
-        addRange(items: IEnumerable$1<T>): void;
+    export interface List$1<T> extends System.Collections.Generic.IList$1<T> {
+        Capacity: number;
+        Count: number;
+        System$Collections$IList$IsReadOnly: boolean;
+        getItem(index: number): T;
+        setItem(index: number, value: T): void;
+        System$Collections$IList$getItem(index: number): System.Object;
+        System$Collections$IList$setItem(index: number, value: System.Object): void;
+        add(item: T): void;
+        System$Collections$IList$add(item: System.Object): number;
+        addRange(collection: System.Collections.Generic.IEnumerable$1<T>): void;
+        asReadOnly(): System.Collections.ObjectModel.ReadOnlyCollection$1<T>;
+        binarySearch$2(index: number, count: number, item: T, comparer: System.Collections.Generic.IComparer$1<T>): number;
+        binarySearch(item: T): number;
+        binarySearch$1(item: T, comparer: System.Collections.Generic.IComparer$1<T>): number;
         clear(): void;
-        indexOf(item: T, startIndex?: number): number;
-        insertRange(index: number, items: IEnumerable$1<T>): void;
         contains(item: T): boolean;
+        System$Collections$IList$contains(item: System.Object): boolean;
+        convertAll<TOutput>(TOutput: {prototype: TOutput}, converter: {(input: T): TOutput}): System.Collections.Generic.List$1<TOutput>;
+        copyTo$1(array: T[]): void;
+        System$Collections$ICollection$copyTo(array: System.Object[], arrayIndex: number): void;
+        copyTo$2(index: number, array: T[], arrayIndex: number, count: number): void;
+        copyTo(array: T[], arrayIndex: number): void;
+        ensureCapacity(min: number): void;
+        exists(match: {(obj: T): boolean}): boolean;
+        find(match: {(obj: T): boolean}): T;
+        findAll(match: {(obj: T): boolean}): System.Collections.Generic.List$1<T>;
+        findIndex$2(match: {(obj: T): boolean}): number;
+        findIndex$1(startIndex: number, match: {(obj: T): boolean}): number;
+        findIndex(startIndex: number, count: number, match: {(obj: T): boolean}): number;
+        findLast(match: {(obj: T): boolean}): T;
+        findLastIndex$2(match: {(obj: T): boolean}): number;
+        findLastIndex$1(startIndex: number, match: {(obj: T): boolean}): number;
+        findLastIndex(startIndex: number, count: number, match: {(obj: T): boolean}): number;
+        forEach(action: {(arg: T): void}): void;
         getEnumerator(): IEnumerator$1<T>;
-        getRange(index: number, count?: number): List$1<T>;
-        getRange(): List$1<T>;
+        System$Collections$IEnumerable$getEnumerator(): System.Collections.IEnumerator;
+        getRange(index: number, count: number): System.Collections.Generic.List$1<T>;
+        indexOf(item: T): number;
+        System$Collections$IList$indexOf(item: System.Object): number;
+        indexOf$1(item: T, index: number): number;
+        indexOf$2(item: T, index: number, count: number): number;
         insert(index: number, item: T): void;
-        join(delimeter?: string): string;
-        lastIndexOf(item: T, fromIndex?: number): number;
+        System$Collections$IList$insert(index: number, item: System.Object): void;
+        insertRange(index: number, collection: System.Collections.Generic.IEnumerable$1<T>): void;
+        lastIndexOf(item: T): number;
+        lastIndexOf$1(item: T, index: number): number;
+        lastIndexOf$2(item: T, index: number, count: number): number;
         remove(item: T): boolean;
+        System$Collections$IList$remove(item: System.Object): void;
+        removeAll(match: {(obj: T): boolean}): number;
         removeAt(index: number): void;
         removeRange(index: number, count: number): void;
         reverse(): void;
-        slice(start: number, end: number): void;
-        sort(comparison?: { (x: T, y: T): number }): void;
-        splice(start: number, deleteCount: number, itemsToInsert?: IEnumerable$1<T>): void;
-        splice(start: number, deleteCount: number, itemsToInsert?: T[]): void;
-        unshift(): void;
+        reverse$1(index: number, count: number): void;
+        sort(): void;
+        sort$1(comparer: System.Collections.Generic.IComparer$1<T>): void;
+        sort$3(index: number, count: number, comparer: System.Collections.Generic.IComparer$1<T>): void;
+        sort$2(comparison: {(x: T, y: T): number}): void;
         toArray(): T[];
+        trimExcess(): void;
+        trueForAll(match: {(obj: T): boolean}): boolean;
+        toJSON(): System.Object;
     }
-    export function List$1<T>(t: Bridge.TypeRef<T>): {
-        prototype: List$1<T>;
-        new (): List$1<T>;
-        new (obj: T[]): List$1<T>;
-        new (obj: IEnumerable$1<T>): List$1<T>;
+    export interface List$1Func extends Function {
+        <T>($T: Bridge.TypeRef<T>): {
+            prototype: List$1<T>;
+            new (): List$1<T>;
+            ctor: {
+                new (): List$1<T>
+            };
+            $ctor2: {
+                new (capacity: number): List$1<T>
+            };
+            $ctor1: {
+                new (collection: System.Collections.Generic.IEnumerable$1<T>): List$1<T>
+                new (collection: T[]): List$1<T>
+            };
+            isCompatibleObject(value: System.Object): boolean;
+        }
     }
+    var List$1: List$1Func;
 
     export interface BitHelper {
         markBit(bitPosition: number): void;
