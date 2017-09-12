@@ -210,7 +210,7 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.False(((IList)numbers).IsReadOnly);
             numbers[0] = 7;
             Assert.AreEqual(7, numbers[0]);
-            Assert.AreEqual(1, ro[0]);
+            Assert.AreEqual(7, ro[0]);
         }
 
         [Test]
