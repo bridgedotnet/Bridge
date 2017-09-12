@@ -30,6 +30,99 @@ namespace Bridge.ClientTest.Collections.Generic
             }
         }
 
+        private class TestData
+        {
+            public List<string> Dinosaurs
+            {
+                get
+                {
+                    List<string> dinosaurs = new List<string>();
+
+                    dinosaurs.Add("Compsognathus");
+                    dinosaurs.Add("Amargasaurus");
+                    dinosaurs.Add("Oviraptor");
+                    dinosaurs.Add("Velociraptor");
+                    dinosaurs.Add("Deinonychus");
+                    dinosaurs.Add("Dilophosaurus");
+                    dinosaurs.Add("Gallimimus");
+                    dinosaurs.Add("Triceratops");
+
+                    return dinosaurs;
+                }
+            }
+
+            public List<int> Numbers3
+            {
+                get
+                {
+                    return new List<int>(new int[] { 1, 2, 3});
+                }
+            }
+
+            public Predicate<string> EndsWithSaurus
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().EndsWith("saurus");
+                    return p;
+                }
+            }
+
+            public Predicate<string> HasLettersAorO
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().Any(x => x == 'a' || x == 'o');
+                    return p;
+                }
+            }
+
+            public Predicate<string> StartsWithLetter5
+            {
+                get
+                {
+                    Predicate<string> p = s => s.StartsWith("5");
+                    return p;
+                }
+            }
+
+            public Predicate<string> StartsWithLetterD
+            {
+                get
+                {
+                    Predicate<string> p = s => s.ToLower().StartsWith("d");
+                    return p;
+                }
+            }
+
+            public Predicate<int> Equals2
+            {
+                get
+                {
+                    Predicate<int> p = i => i == 2;
+                    return p;
+                }
+            }
+
+            public Predicate<int> Equals7
+            {
+                get
+                {
+                    Predicate<int> p = i => i == 7;
+                    return p;
+                }
+            }
+
+            public Predicate<int> LessThan3
+            {
+                get
+                {
+                    Predicate<int> p = i => i < 3;
+                    return p;
+                }
+            }
+        }
+
         [Test]
         public void TypePropertiesAreCorrect()
         {
@@ -487,39 +580,93 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void RemoveAllWorks_N3092()
+        public void TrueForAllWorks()
         {
-            // #3092
-            List<string> dinosaurs = new List<string>();
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
 
-            dinosaurs.Add("Compsognathus");
-            dinosaurs.Add("Amargasaurus");
-            dinosaurs.Add("Oviraptor");
-            dinosaurs.Add("Velociraptor");
-            dinosaurs.Add("Deinonychus");
-            dinosaurs.Add("Dilophosaurus");
-            dinosaurs.Add("Gallimimus");
-            dinosaurs.Add("Triceratops");
+            Assert.False(dinosaurs.TrueForAll(data.EndsWithSaurus));
+            Assert.True(dinosaurs.TrueForAll(data.HasLettersAorO));
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.TrueForAll(null); });
+        }
 
-            foreach (string dinosaur in dinosaurs)
-            {
-                Console.WriteLine(dinosaur);
-            }
+        [Test]
+        public void FindWorks()
+        {
+            var data = new TestData();
 
-            Predicate<string> EndsWithSaurus = s => s.ToLower().EndsWith("saurus");
+            var dinosaurs = data.Dinosaurs;
+            Assert.AreEqual("Amargasaurus", dinosaurs.Find(data.EndsWithSaurus));
+            Assert.AreEqual("Deinonychus", dinosaurs.Find(data.StartsWithLetterD));
+            Assert.AreEqual(null, dinosaurs.Find(data.StartsWithLetter5));
 
-            Assert.False(dinosaurs.TrueForAll(EndsWithSaurus));
-            Assert.AreEqual("Amargasaurus", dinosaurs.Find(EndsWithSaurus));
-            Assert.AreEqual("Dilophosaurus", dinosaurs.FindLast(EndsWithSaurus));
+            var numbers = data.Numbers3;
+            Assert.AreEqual(0, numbers.Find(data.Equals7));
+            Assert.AreEqual(2, numbers.Find(data.Equals2));
 
-            List<string> sublist = dinosaurs.FindAll(EndsWithSaurus);
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.Find(null); });
+        }
+
+        [Test]
+        public void FindLastWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.AreEqual("Dilophosaurus", dinosaurs.FindLast(data.EndsWithSaurus));
+            Assert.AreEqual("Triceratops", dinosaurs.FindLast(data.HasLettersAorO));
+            Assert.AreEqual(null, dinosaurs.FindLast(data.StartsWithLetter5));
+
+            var numbers = data.Numbers3;
+            Assert.AreEqual(0, numbers.FindLast(data.Equals7));
+            Assert.AreEqual(2, numbers.FindLast(data.LessThan3));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.FindLast(null); });
+        }
+
+        [Test]
+        public void FindAllWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            List<string> sublist = dinosaurs.FindAll(data.EndsWithSaurus);
             Assert.AreEqual(2, sublist.Count);
             Assert.AreEqual("Amargasaurus", sublist[0]);
             Assert.AreEqual("Dilophosaurus", sublist[1]);
-            Assert.AreEqual(2, dinosaurs.RemoveAll(EndsWithSaurus));
 
+            sublist = dinosaurs.FindAll(data.StartsWithLetter5);
+            Assert.AreEqual(0, sublist.Count);
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.FindAll(null); });
+        }
+
+        [Test]
+        public void ExistsWorks()
+        {
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.True(dinosaurs.Exists(data.EndsWithSaurus));
+            Assert.False(dinosaurs.Exists(data.StartsWithLetter5));
+            Assert.True(dinosaurs.Exists(data.StartsWithLetterD));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.Exists(null); });
+        }
+
+        [Test]
+        public void RemoveAllWorks_N3092()
+        {
+            // #3092
+            var data = new TestData();
+            var dinosaurs = data.Dinosaurs;
+
+            Assert.AreEqual(8, dinosaurs.Count);
+            Assert.AreEqual(2, dinosaurs.RemoveAll(data.EndsWithSaurus));
             Assert.AreEqual(6, dinosaurs.Count);
-            Assert.False(dinosaurs.Exists(EndsWithSaurus));
+            Assert.False(dinosaurs.Exists(data.EndsWithSaurus));
+
+            Assert.Throws<ArgumentNullException>(() => { dinosaurs.RemoveAll(null); });
         }
 
         [Test]
