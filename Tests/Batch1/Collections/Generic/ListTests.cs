@@ -192,6 +192,28 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void AsReadonlyWorks()
+        {
+            var data = new TestData();
+
+            var numbers = data.Numbers3;
+
+            var ro = numbers.AsReadOnly();
+            Assert.AreEqual("ReadOnlyCollection`1", ro.GetType().Name);
+            Assert.True(((IList)ro).IsReadOnly);
+            Assert.AreEqual(1, ro[0]);
+            Assert.AreEqual(2, ro[1]);
+            Assert.AreEqual(3, ro[2]);
+            Assert.AreEqual(3, ro.Count);
+            Assert.Throws<NotSupportedException>(() => { ((IList)ro)[0] = 7;  });
+
+            Assert.False(((IList)numbers).IsReadOnly);
+            numbers[0] = 7;
+            Assert.AreEqual(7, numbers[0]);
+            Assert.AreEqual(1, ro[0]);
+        }
+
+        [Test]
         public void CountWorks()
         {
             Assert.AreEqual(0, new List<string>().Count);
