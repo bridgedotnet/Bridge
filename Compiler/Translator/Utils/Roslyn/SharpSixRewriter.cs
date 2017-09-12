@@ -31,6 +31,13 @@ namespace Bridge.Translator
             this.compilation = this.CreateCompilation();
         }
 
+        public SharpSixRewriter(SharpSixRewriter rewriter)
+        {
+            this.translator = rewriter.translator;
+            this.logger = rewriter.logger;
+            this.compilation = rewriter.compilation;
+        }
+
         public string Rewrite(int index)
         {
             var syntaxTree = this.compilation.SyntaxTrees[index];
@@ -604,7 +611,7 @@ namespace Bridge.Translator
                         SyntaxFactory.Token(SyntaxKind.SemicolonToken)
                     );
 
-                    
+
                     fields.Add(field);
                     newNode = newNode.ReplaceNode(newNode.Initializer, (SyntaxNode)null);
                     var trivias = node.Initializer.GetLeadingTrivia().AddRange(node.Initializer.GetTrailingTrivia());
@@ -644,6 +651,8 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
             var old = this.fields;
             this.fields = new List<MemberDeclarationSyntax>();
 
@@ -662,19 +671,35 @@ namespace Bridge.Translator
             }
 
             this.fields = old;
+            this.IndexInstance = oldIndex;
 
             return c;
         }
 
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
+
             node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
             if (node.ExpressionBody != null)
             {
                 return SyntaxHelper.ToStatementBody(node);
             }
 
+            this.IndexInstance = oldIndex;
+
             return node;
+        }
+
+        public override SyntaxNode VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+        {
+            var oldIndex = this.IndexInstance;
+            this.IndexInstance = 0;
+            var result = base.VisitAccessorDeclaration(node);
+
+            this.IndexInstance = oldIndex;
+            return result;
         }
 
         public override SyntaxNode VisitOperatorDeclaration(OperatorDeclarationSyntax node)
@@ -750,7 +775,12 @@ namespace Bridge.Translator
         {
             get; set;
         }
-        private int indexInstance;
+
+        private int IndexInstance
+        {
+            get;
+            set;
+        }
 
         private class InitializerInfo
         {
@@ -856,13 +886,13 @@ namespace Bridge.Translator
                     parent = parent.Parent;
                 }
 
-                string instance = "_o" + ++indexInstance;
+                string instance = "_o" + ++IndexInstance;
                 if (parent != null)
                 {
                     var info = LocalUsageGatherer.GatherInfo(this.semanticModel, parent);
                     while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                     {
-                        instance = "_o" + ++indexInstance;
+                        instance = "_o" + ++IndexInstance;
                     }
                 }
 
@@ -877,7 +907,7 @@ namespace Bridge.Translator
                 {
                     lambda = lambda.WithAsyncKeyword(SyntaxFactory.Token(SyntaxKind.AsyncKeyword));
                 }
-                
+
                 args[1] = lambda;
 
                 var methodIdentifier = isAsync ? SyntaxFactory.IdentifierName("global::Bridge.Script.AsyncCallFor") : SyntaxFactory.IdentifierName("global::Bridge.Script.CallFor");
@@ -1010,13 +1040,13 @@ namespace Bridge.Translator
 
             if (replace)
             {
-                string instance = "_e" + ++indexInstance;
+                string instance = "_e" + ++IndexInstance;
                 if (parent != null)
                 {
                     var info = LocalUsageGatherer.GatherInfo(this.semanticModel, parent);
                     while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                     {
-                        instance = "_e" + ++indexInstance;
+                        instance = "_e" + ++IndexInstance;
                     }
                 }
 
@@ -1040,7 +1070,7 @@ namespace Bridge.Translator
             {
                 var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.SafeFunc");
                 var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(), catchItem.Declaration.Identifier.Kind() != SyntaxKind.None ? new IdentifierReplacer(catchItem.Declaration.Identifier.Value.ToString(), SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName))).Replace(catchItem.Filter.FilterExpression) : catchItem.Filter.FilterExpression);
-                var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new [] { SyntaxFactory.Argument(
+                var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(
                     lambda
                     ) })));
 
@@ -1052,7 +1082,7 @@ namespace Bridge.Translator
             if (catchItem.Declaration.Identifier.Kind() != SyntaxKind.None)
             {
                 var variableStatement = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(catchItem.Declaration.Type,
-                    SyntaxFactory.SeparatedList<VariableDeclaratorSyntax>(new [] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(catchItem.Declaration.Identifier.Text)).WithInitializer(
+                    SyntaxFactory.SeparatedList<VariableDeclaratorSyntax>(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(catchItem.Declaration.Identifier.Text)).WithInitializer(
                         SyntaxFactory.EqualsValueClause(SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName)))
                     ) })));
 
@@ -1193,7 +1223,7 @@ namespace Bridge.Translator
 
             var newNode = needParenthesized ? SyntaxFactory.ParenthesizedExpression(SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse)) :
                                        (SyntaxNode)SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse);
- 
+
             return newNode.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
         }
     }

@@ -9,7 +9,7 @@ namespace System.Collections
     {
         [Template("System.Array.add({this}, {item})")]
         [Unbox(false)]
-        void Add(object item);
+        int Add(object item);
 
         [Template("System.Array.clear({this})")]
         void Clear();
@@ -37,7 +37,7 @@ namespace System.Collections
         void RemoveAt(int index);
 
         [Template("System.Array.remove({this}, {item})")]
-        bool Remove(object item);
+        void Remove(object item);
 
         /// <summary>
         /// Gets a value indicating whether the IList is read-only.

@@ -2272,7 +2272,7 @@
     Enumerable.prototype.toList = function (T) {
         var array = [];
         this.forEach(function (x) { array.push(x); });
-        return new (System.Collections.Generic.List$1(T || System.Object))(array);
+        return new (System.Collections.Generic.List$1(T || System.Object).$ctor1)(array);
     };
 
     // Overload:function (keySelector)

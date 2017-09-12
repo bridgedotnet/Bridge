@@ -300,7 +300,7 @@ namespace System
             get;
         }
 
-        extern void IList.Add(object item);
+        extern int IList.Add(object item);
 
         extern void IList.Clear();
 
@@ -312,7 +312,7 @@ namespace System
 
         extern void IList.RemoveAt(int index);
 
-        extern bool IList.Remove(object item);
+        extern void IList.Remove(object item);
 
         extern bool IList.IsReadOnly
         {

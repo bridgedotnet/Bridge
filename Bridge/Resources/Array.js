@@ -313,12 +313,14 @@
             }
 
             if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
-                obj[name](item);
+                return obj[name](item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
-                obj[name](item);
+                return obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
-                obj.add(item);
+                return obj.add(item);
             }
+
+            return -1;
         },
 
         checkNewElementType: function (v, type) {

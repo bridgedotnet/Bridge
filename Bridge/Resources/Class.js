@@ -370,8 +370,8 @@
             }
 
             if (prop.$literal) {
-                if ((!statics || !statics.getDefaultValue)) {
-                    Class.getDefaultValue = function() {
+                if ((!statics || !statics.createInstance)) {
+                    Class.createInstance = function () {
                         var obj = {};
                         obj.$getType = function() { return Class };
                         return obj;

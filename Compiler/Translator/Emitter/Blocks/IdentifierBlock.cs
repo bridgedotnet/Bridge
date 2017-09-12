@@ -146,7 +146,7 @@ namespace Bridge.Translator
 
                 if (memberResult.Member.IsStatic)
                 {
-                    this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
+                    this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter, ignoreLiteralName: false));
                     /*if (!this.Emitter.Validator.IsExternalType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
                     {
                         this.Write("(Bridge.get(" + BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter) + "))");
@@ -524,7 +524,7 @@ namespace Bridge.Translator
 
                     if (memberResult.Member.IsStatic)
                     {
-                        trg = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter);
+                        trg = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter, ignoreLiteralName: false);
                     }
                     else
                     {
@@ -645,7 +645,7 @@ namespace Bridge.Translator
             bool noTarget = false;
             if (memberResult.Member.IsStatic)
             {
-                var target = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter);
+                var target = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter, ignoreLiteralName: false);
                 noTarget = string.IsNullOrWhiteSpace(target);
                 this.Write(target);
             }

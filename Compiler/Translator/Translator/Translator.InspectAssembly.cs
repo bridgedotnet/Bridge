@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace Bridge.Translator
 {
@@ -294,11 +295,19 @@ namespace Bridge.Translator
             return new Inspector();
         }
 
-        protected void BuildSyntaxTree()
+        private string[] Rewrite()
+        {
+            var rewriter = new SharpSixRewriter(this);
+            var result = new string[this.SourceFiles.Count];
+            Task.WaitAll(this.SourceFiles.Select((file, index) => Task.Run(() => result[index] = new SharpSixRewriter(rewriter).Rewrite(index))).ToArray());
+            return result;
+        }
+
+    protected void BuildSyntaxTree()
         {
             this.Log.Info("Building syntax tree...");
 
-            var rewriter = new SharpSixRewriter(this);
+            var rewriten = Rewrite();
 
             for (int i = 0; i < this.SourceFiles.Count; i++)
             {
@@ -316,7 +325,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
+                var syntaxTree = parser.Parse(rewriten[i], fileName);
                 syntaxTree.FileName = fileName;
                 //var syntaxTree = parser.Parse(reader, fileName);
                 this.Log.Trace("\tParsing syntax tree done");

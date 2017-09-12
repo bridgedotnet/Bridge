@@ -446,7 +446,7 @@ Bridge.define("System.Exception", {
         ctor: function (message, innerExceptions) {
             this.$initialize();
             this.innerExceptions = new(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception))(Bridge.hasValue(innerExceptions) ? Bridge.toArray(innerExceptions) : []);
-            System.Exception.ctor.call(this, message || 'One or more errors occurred.', this.innerExceptions.items.length ? this.innerExceptions.items[0] : null);
+            System.Exception.ctor.call(this, message || 'One or more errors occurred.', this.innerExceptions.Count > 0 ? this.innerExceptions.getItem(0) : null);
         },
 
         handle: function (predicate) {
@@ -454,12 +454,12 @@ Bridge.define("System.Exception", {
                 throw new System.ArgumentNullException("predicate");
             }
 
-            var count = this.innerExceptions.getCount(),
+            var count = this.innerExceptions.Count,
                 unhandledExceptions = [];
 
             for (var i = 0; i < count; i++) {
                 if (!predicate(this.innerExceptions.get(i))) {
-                    unhandledExceptions.push(this.innerExceptions.get(i));
+                    unhandledExceptions.push(this.innerExceptions.getItem(i));
                 }
             }
 
@@ -471,7 +471,7 @@ Bridge.define("System.Exception", {
         getBaseException: function() {
             var back = this;
             var backAsAggregate = this;
-            while (backAsAggregate != null && backAsAggregate.innerExceptions.getCount() === 1)
+            while (backAsAggregate != null && backAsAggregate.innerExceptions.Count === 1)
             {
                 back = back.InnerException;
                 backAsAggregate = Bridge.as(back, System.AggregateException);
@@ -489,12 +489,13 @@ Bridge.define("System.Exception", {
             var nDequeueIndex = 0;
 
             // Continue removing and recursively flattening exceptions, until there are no more.
-            while (exceptionsToFlatten.getCount() > nDequeueIndex) {
+            while (exceptionsToFlatten.Count > nDequeueIndex) {
                 // dequeue one from exceptionsToFlatten
-                var currentInnerExceptions = exceptionsToFlatten.getItem(nDequeueIndex++).innerExceptions;
+                var currentInnerExceptions = exceptionsToFlatten.getItem(nDequeueIndex++).innerExceptions,
+                    count = currentInnerExceptions.Count;
 
-                for (var i = 0; i < currentInnerExceptions.getCount(); i++) {
-                    var currentInnerException = currentInnerExceptions.get(i);
+                for (var i = 0; i < count; i++) {
+                    var currentInnerException = currentInnerExceptions.getItem(i);
 
                     if (!Bridge.hasValue(currentInnerException)) {
                         continue;
