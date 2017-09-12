@@ -37,7 +37,7 @@ namespace Bridge.Translator
                     if (bridgeType != null)
                     {
                         bool isCustomName;
-                        BridgeTypes.AddModule(null, bridgeType, false, out isCustomName);
+                        BridgeTypes.AddModule(null, bridgeType, false, false, out isCustomName);
                     }
                 }
             }

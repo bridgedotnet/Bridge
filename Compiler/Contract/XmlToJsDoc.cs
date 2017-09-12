@@ -774,12 +774,14 @@ namespace Bridge.Contract
             var name = type.Namespace;
 
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
+            bool isNested = false;
             if (hasTypeDef)
             {
                 var typeDef = bridgeType.TypeDefinition;
                 if (typeDef.IsNested)
                 {
                     name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, typeDef);
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
@@ -794,6 +796,7 @@ namespace Bridge.Contract
                     {
                         name += Helpers.PrefixDollar(type.TypeArguments.Count);
                     }
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
@@ -802,7 +805,7 @@ namespace Bridge.Contract
             bool isCustomName = false;
             if (bridgeType != null)
             {
-                name = BridgeTypes.AddModule(name, bridgeType, false, out isCustomName);
+                name = BridgeTypes.AddModule(name, bridgeType, false, isNested, out isCustomName);
             }
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)

@@ -320,7 +320,7 @@ namespace Bridge.Contract
                     if (bridgeType != null && !nomodule)
                     {
                         bool customName;
-                        globalTarget = BridgeTypes.AddModule(globalTarget, bridgeType, excludens, out customName);
+                        globalTarget = BridgeTypes.AddModule(globalTarget, bridgeType, excludens, false, out customName);
                     }
                     return globalTarget;
                 }
@@ -405,6 +405,7 @@ namespace Bridge.Contract
             var name = excludens ? "" : type.Namespace;
 
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
+            var isNested = false;
             if (hasTypeDef)
             {
                 var typeDef = bridgeType.TypeDefinition;
@@ -412,6 +413,7 @@ namespace Bridge.Contract
                 if (typeDef.IsNested && !excludens)
                 {
                     name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true, ignoreVirtual: true);
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(itypeDef, typeDef));
@@ -421,6 +423,7 @@ namespace Bridge.Contract
                 if (type.DeclaringType != null && !excludens)
                 {
                     name = BridgeTypes.ToJsName(type.DeclaringType, emitter, true, ignoreVirtual: true);
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
@@ -429,7 +432,7 @@ namespace Bridge.Contract
             bool isCustomName = false;
             if (bridgeType != null && !nomodule)
             {
-                name = BridgeTypes.AddModule(name, bridgeType, excludens, out isCustomName);
+                name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
             }
 
             var tDef = type.GetDefinition();
@@ -720,7 +723,7 @@ namespace Bridge.Contract
             type.Module = module;
         }
 
-        public static string AddModule(string name, BridgeType type, bool excludeNs, out bool isCustomName)
+        public static string AddModule(string name, BridgeType type, bool excludeNs, bool isNested, out bool isCustomName)
         {
             isCustomName = false;
             var emitter = type.Emitter;
@@ -756,7 +759,7 @@ namespace Bridge.Contract
                 name = customName;
             }
 
-            if (!String.IsNullOrEmpty(moduleName))
+            if (!String.IsNullOrEmpty(moduleName) && (!isNested || isCustomName))
             {
                 name = string.IsNullOrWhiteSpace(name) ? moduleName : (moduleName + "." + name);
             }
@@ -1006,12 +1009,14 @@ namespace Bridge.Contract
             var name = excludens ? "" : type.Namespace;
 
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
+            bool isNested = false;
             if (hasTypeDef)
             {
                 var typeDef = bridgeType.TypeDefinition;
                 if (typeDef.IsNested && !excludens)
                 {
                     name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, typeDef);
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(bridgeType.Type.GetDefinition(), typeDef));
@@ -1026,6 +1031,7 @@ namespace Bridge.Contract
                     {
                         name += Helpers.PrefixDollar(type.TypeArguments.Count);
                     }
+                    isNested = true;
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
@@ -1050,7 +1056,7 @@ namespace Bridge.Contract
                     }
                 }
 
-                name = BridgeTypes.AddModule(name, bridgeType, excludens, out isCustomName);
+                name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
             }
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
