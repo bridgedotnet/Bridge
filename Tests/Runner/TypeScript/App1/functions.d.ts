@@ -1,6 +1,16 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module Functions {
+    export interface Parameters {
+        GetSomething(i?: number): number;
+        Join(numbers: number[]): string;
+    }
+    export interface ParametersFunc extends Function {
+        prototype: Parameters;
+        new (): Parameters;
+    }
+    var Parameters: ParametersFunc;
+
     export interface Delegates {
     }
     export interface DelegatesFunc extends Function {
@@ -8,15 +18,6 @@ declare module Functions {
         new (): Delegates;
     }
     var Delegates: DelegatesFunc;
-
-    export interface MiddleBit {
-        fn: {(x: Functions.MiddleBit): Function};
-    }
-    export interface MiddleBitFunc extends Function {
-        prototype: MiddleBit;
-        new (): MiddleBit;
-    }
-    var MiddleBit: MiddleBitFunc;
 
     export interface DelegateInterface {
         Functions$DelegateInterface$addMethodVoidDelegate(value: {(): void}): void;
@@ -44,14 +45,13 @@ declare module Functions {
     }
     var DelegateClass: DelegateClassFunc;
 
-    export interface Parameters {
-        GetSomething(i?: number): number;
-        Join(numbers: number[]): string;
+    export interface MiddleBit {
+        fn: {(x: Functions.MiddleBit): Function};
     }
-    export interface ParametersFunc extends Function {
-        prototype: Parameters;
-        new (): Parameters;
+    export interface MiddleBitFunc extends Function {
+        prototype: MiddleBit;
+        new (): MiddleBit;
     }
-    var Parameters: ParametersFunc;
+    var MiddleBit: MiddleBitFunc;
 
 }

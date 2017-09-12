@@ -154,3 +154,14 @@ QUnit.test("#2984 Encoding", function (assert) {
     var returnText = System.Text.Encoding.UTF8.GetString(bytes);
     assert.equal(returnText, "Hello!");
 });
+QUnit.test("#3061 IEquatable", function (assert) {
+    var t1 = new TypeScript.Issues.N3061.Truck();
+    t1.Horses = 500;
+    var t2 = new TypeScript.Issues.N3061.Tractor();
+    t2.Horses = 500;
+    assert.ok(t1.equalsT(t2));
+    assert.ok(t1.equalsT$1(t2));
+    t2.Horses = 501;
+    assert.notOk(t1.equalsT(t2));
+    assert.notOk(t1.equalsT$1(t2));
+});

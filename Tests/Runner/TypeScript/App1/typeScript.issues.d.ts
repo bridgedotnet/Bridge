@@ -1,14 +1,35 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module TypeScript.Issues {
-    export interface N2911 {
+    export interface N1640 {
     }
-    export interface N2911Func extends Function {
-        prototype: N2911;
-        new (): N2911;
-        initButton_Clicked(arg: MouseEvent): void;
+    export interface N1640Func extends Function {
+        prototype: N1640;
+        GamePlay: TypeScript.Issues.N1640.GamePlayFunc;
+        new (): N1640;
     }
-    var N2911: N2911Func;
+    var N1640: N1640Func;
+    module N1640 {
+        export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
+            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            StartGame(s: string): void;
+            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
+        }
+        export interface GamePlayFunc extends Function {
+            prototype: GamePlay;
+            new (): GamePlay;
+        }
+
+        export interface IGamePlay {
+            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
+            StartGame(s: string): void;
+        }
+    }
 
     export interface N1060 {
     }
@@ -92,61 +113,70 @@ declare module TypeScript.Issues {
     }
     var N2653Zig: N2653ZigFunc;
 
-    export interface N2661C {
-        fn: {(x: TypeScript.Issues.N2661C): Function};
+    export interface N3061 {
     }
-    export interface N2661CFunc extends Function {
-        prototype: N2661C;
-        new (): N2661C;
+    export interface N3061Func extends Function {
+        prototype: N3061;
+        Car: TypeScript.Issues.N3061.CarFunc;
+        Tractor: TypeScript.Issues.N3061.TractorFunc;
+        Truck: TypeScript.Issues.N3061.TruckFunc;
+        new (): N3061;
     }
-    var N2661C: N2661CFunc;
+    var N3061: N3061Func;
+    module N3061 {
+        export interface IVehicle extends System.IEquatable$1<TypeScript.Issues.N3061.IVehicle> {
+            TypeScript$Issues$N3061$IVehicle$Horses: number;
+            Horses: number;
+        }
+
+        export interface Car extends TypeScript.Issues.N3061.IVehicle,System.IEquatable$1<TypeScript.Issues.N3061.Car> {
+            Horses: number;
+            equalsT$1(vehicle: TypeScript.Issues.N3061.IVehicle): boolean;
+            equalsT(car: TypeScript.Issues.N3061.Car): boolean;
+        }
+        export interface CarFunc extends Function {
+            prototype: Car;
+            new (): Car;
+        }
+
+        export interface Tractor extends TypeScript.Issues.N3061.Car {
+            equalsT(car: TypeScript.Issues.N3061.Car): boolean;
+        }
+        export interface TractorFunc extends Function {
+            prototype: Tractor;
+            new (): Tractor;
+        }
+
+        export interface Truck extends TypeScript.Issues.N3061.Car {
+            equalsT(car: TypeScript.Issues.N3061.Car): boolean;
+        }
+        export interface TruckFunc extends Function {
+            prototype: Truck;
+            new (): Truck;
+        }
+    }
+
+    export interface N2030Attribute extends System.Attribute {
+        IsUnspecified: boolean;
+    }
+    export interface N2030AttributeFunc extends Function {
+        prototype: N2030Attribute;
+        new (IsUnspecified: boolean): N2030Attribute;
+    }
+    var N2030Attribute: N2030AttributeFunc;
+
+    export interface N2911 {
+    }
+    export interface N2911Func extends Function {
+        prototype: N2911;
+        new (): N2911;
+        initButton_Clicked(arg: MouseEvent): void;
+    }
+    var N2911: N2911Func;
 
     export interface N2653IZig {
         TypeScript$Issues$N2653IZig$zag(): number;
         zag(): number;
-    }
-
-    export interface N2493Operation3 {
-        Add(n: number): number;
-    }
-    export interface N2493Operation3Func extends Function {
-        prototype: N2493Operation3;
-        new (): N2493Operation3;
-    }
-    var N2493Operation3: N2493Operation3Func;
-
-    export interface N1640 {
-    }
-    export interface N1640Func extends Function {
-        prototype: N1640;
-        GamePlay: TypeScript.Issues.N1640.GamePlayFunc;
-        new (): N1640;
-    }
-    var N1640: N1640Func;
-    module N1640 {
-        export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            StartGame(s: string): void;
-            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
-        }
-        export interface GamePlayFunc extends Function {
-            prototype: GamePlay;
-            new (): GamePlay;
-        }
-
-        export interface IGamePlay {
-            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
-            StartGame(s: string): void;
-        }
-    }
-
-    export interface N2029Interface$1<T> {
-        Value1: number;
     }
 
     export interface N2264 {
@@ -173,17 +203,6 @@ declare module TypeScript.Issues {
         };
     }
     var N2438: N2438Func;
-
-    export interface N2463 {
-    }
-    export interface N2463Func extends Function {
-        prototype: N2463;
-        new (): N2463;
-        Do(dummy: {Nothing: number}): {Nothing: number};
-    }
-    var N2463: N2463Func;
-    module N2463 {
-    }
 
     export interface N2474 {
     }
@@ -274,13 +293,36 @@ declare module TypeScript.Issues {
         }
     }
 
-    export interface N2030Attribute extends System.Attribute {
-        IsUnspecified: boolean;
+    export interface N2029Interface$1<T> {
+        Value1: number;
     }
-    export interface N2030AttributeFunc extends Function {
-        prototype: N2030Attribute;
-        new (IsUnspecified: boolean): N2030Attribute;
-    }
-    var N2030Attribute: N2030AttributeFunc;
 
+    export interface N2493Operation3 {
+        Add(n: number): number;
+    }
+    export interface N2493Operation3Func extends Function {
+        prototype: N2493Operation3;
+        new (): N2493Operation3;
+    }
+    var N2493Operation3: N2493Operation3Func;
+
+    export interface N2661C {
+        fn: {(x: TypeScript.Issues.N2661C): Function};
+    }
+    export interface N2661CFunc extends Function {
+        prototype: N2661C;
+        new (): N2661C;
+    }
+    var N2661C: N2661CFunc;
+
+    export interface N2463 {
+    }
+    export interface N2463Func extends Function {
+        prototype: N2463;
+        new (): N2463;
+        Do(dummy: {Nothing: number}): {Nothing: number};
+    }
+    var N2463: N2463Func;
+    module N2463 {
+    }
 }
