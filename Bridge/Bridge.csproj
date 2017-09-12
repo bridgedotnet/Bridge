@@ -478,6 +478,7 @@
     <Content Include="Resources\.generated\system\collections\generic\hashSet\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\hashSet\slot.js" />
     <Content Include="Resources\.generated\system\collections\generic\list.js" />
+    <Content Include="Resources\.generated\system\collections\generic\list\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\queue.js" />
     <Content Include="Resources\.generated\system\collections\generic\queue\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\generic\stack.js" />
