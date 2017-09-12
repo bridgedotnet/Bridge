@@ -86,6 +86,11 @@ namespace Bridge.Translator
                 fileName = this.Emitter.AssemblyInfo.FileName;
             }
 
+            if (fileName.IsEmpty() && this.Emitter.Translator.ProjectProperties.AssemblyName != null)
+            {
+                fileName = this.Emitter.Translator.ProjectProperties.AssemblyName;
+            }
+
             if (fileName.IsEmpty())
             {
                 fileName = AssemblyInfo.DEFAULT_FILENAME;
