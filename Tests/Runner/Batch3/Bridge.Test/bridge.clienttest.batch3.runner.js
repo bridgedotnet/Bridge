@@ -647,6 +647,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3086 - TestAccessorsOverride", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3086.TestAccessorsOverride);
             QUnit.test("#3088 - TestBaseProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3088.TestBaseProperty);
             QUnit.test("#3089 - TestOperatorTemplate", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3089.TestOperatorTemplate);
+            QUnit.test("#3103 - TestLiteralStaticMember", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3103.TestLiteralStaticMember);
+            QUnit.test("#3103 - TestLiteralDefaultValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3103.TestLiteralDefaultValue);
             QUnit.test("#3107 - TestEventHandlersInvocation", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3107.TestEventHandlersInvocation);
             QUnit.test("#3107 - TestEventHandlersInvocation2", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3107.TestEventHandlersInvocation2);
             QUnit.test("#3107 - TestEventHandlersInvocation3", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3107.TestEventHandlersInvocation3);
@@ -13463,6 +13465,36 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089", $t.File = "Batch3\\BridgeIssues\\3000\\N3089.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3103", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103)],
+        statics: {
+            methods: {
+                TestLiteralStaticMember: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3103, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLiteralStaticMember()", $t.Line = "43", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.TestLiteralStaticMember();
+                },
+                TestLiteralDefaultValue: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3103, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLiteralDefaultValue()", $t.Line = "57", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.TestLiteralDefaultValue();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103", $t.File = "Batch3\\BridgeIssues\\3100\\N3103.cs", $t);
                 }
                 return this.context;
             }

@@ -1,6 +1,11 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module Interfaces {
+    export interface Interface3 extends Interfaces.Interface2 {
+        Interfaces$Interface3$Method5(i: Interfaces.Interface3): Interfaces.Interface2;
+        Method5(i: Interfaces.Interface3): Interfaces.Interface2;
+    }
+
     export interface Class2 extends Interfaces.Class1,Interfaces.Interface2 {
         Method1(): void;
         Method2(s: string): void;
@@ -60,11 +65,6 @@ declare module Interfaces {
     }
     var Class1: Class1Func;
 
-    export interface Interface3 extends Interfaces.Interface2 {
-        Interfaces$Interface3$Method5(i: Interfaces.Interface3): Interfaces.Interface2;
-        Method5(i: Interfaces.Interface3): Interfaces.Interface2;
-    }
-
     export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
         Method5(i: Interfaces.Interface3): Interfaces.Interface2;
     }
@@ -74,13 +74,9 @@ declare module Interfaces {
     }
     var Class3: Class3Func;
 
-    export interface Interface62 {
-        Interfaces$Interface62$GetProperty(): number;
-        GetProperty(): number;
-        Interfaces$Interface62$SetProperty$1(s: string): void;
-        SetProperty$1(s: string): void;
-        Interfaces$Interface62$SetProperty(i: number): void;
-        SetProperty(i: number): void;
+    export interface Interface61 {
+        Interfaces$Interface61$Property: number;
+        Property: number;
     }
 
     export interface Interface1 {
@@ -112,9 +108,13 @@ declare module Interfaces {
         SetProperty(i: number): void;
     }
 
-    export interface Interface61 {
-        Interfaces$Interface61$Property: number;
-        Property: number;
+    export interface Interface62 {
+        Interfaces$Interface62$GetProperty(): number;
+        GetProperty(): number;
+        Interfaces$Interface62$SetProperty$1(s: string): void;
+        SetProperty$1(s: string): void;
+        Interfaces$Interface62$SetProperty(i: number): void;
+        SetProperty(i: number): void;
     }
 
 }
