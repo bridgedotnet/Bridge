@@ -570,26 +570,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(4, Bridge272.Test(4), "Casted MyEnum.Abc");
         }
 
-        // Bridge[#273]
-        [Test(Name = "#273", ExpectedCount = 4)]
-        public static void N273()
-        {
-            // TEST
-            var items = new List<int>() { 0, 1, 2, 3, 4 };
-
-            var r = items.Slice(-1).ToArray();
-            Assert.AreEqual(new[] { 4 }, r, "Slices start = -1");
-
-            r = items.Slice(1).ToArray();
-            Assert.AreEqual(new[] { 1, 2, 3, 4 }, r, "Slices start = 1");
-
-            r = items.Slice(-3, 4).ToArray();
-            Assert.AreEqual(new[] { 2, 3 }, r, "Slices start = -3, end = 3");
-
-            r = items.Slice(1, 3).ToArray();
-            Assert.AreEqual(new[] { 1, 2 }, r, "Slices start = 1, end = 2");
-        }
-
         // Bridge[#277]
         [Test(Name = "#277", ExpectedCount = 1)]
         public static void N277()

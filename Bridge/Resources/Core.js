@@ -1079,7 +1079,7 @@
         },
 
         toList: function (ienumerable, T) {
-            return new (System.Collections.Generic.List$1(T || System.Object))(ienumerable);
+            return new (System.Collections.Generic.List$1(T || System.Object).$ctor1)(ienumerable);
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],

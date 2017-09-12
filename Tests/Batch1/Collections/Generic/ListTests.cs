@@ -159,15 +159,6 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.True(arr.BinarySearch(6) < 0);
         }
 
-        [Test]
-        public void BinarySearch2Works()
-        {
-            var arr = new List<int> { 1, 2, 3, 3, 4, 5 };
-
-            Assert.AreEqual(3, arr.BinarySearch(3, 2, 3));
-            Assert.True(arr.BinarySearch(2, 2, 4) < 0);
-        }
-
         private class TestReverseComparer : IComparer<int>
         {
             public int Compare(int x, int y)
@@ -313,17 +304,19 @@ namespace Bridge.ClientTest.Collections.Generic
         //    Assert.AreEqual(new List<string> { "a", "b", "c", "d" }.Extract(1, 2), new[] { "b", "c" });
         //}
 
-        [Test]
-        public void SliceWithoutEndWorks()
-        {
-            Assert.AreEqual(new[] { "c", "d" }, new List<string> { "a", "b", "c", "d" }.Slice(2).ToArray());
-        }
+        // Not C# API
+        //[Test]
+        //public void SliceWithoutEndWorks()
+        //{
+        //    Assert.AreEqual(new[] { "c", "d" }, new List<string> { "a", "b", "c", "d" }.Slice(2).ToArray());
+        //}
 
-        [Test]
-        public void SliceWithEndWorks()
-        {
-            Assert.AreEqual(new[] { "b", "c" }, new List<string> { "a", "b", "c", "d" }.Slice(1, 3).ToArray());
-        }
+        // Not C# API
+        //[Test]
+        //public void SliceWithEndWorks()
+        //{
+        //    Assert.AreEqual(new[] { "b", "c" }, new List<string> { "a", "b", "c", "d" }.Slice(1, 3).ToArray());
+        //}
 
         [Test]
         public void ForeachWithListItemCallbackWorks()
@@ -412,17 +405,19 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.AreEqual(new[] { "q", "q", "x", "a", "b", "y" }, l.ToArray());
         }
 
-        [Test]
-        public void JoinWithoutDelimiterWorks()
-        {
-            Assert.AreEqual("a,b,c,b", new List<string> { "a", "b", "c", "b" }.Join());
-        }
+        // Not C# API
+        //[Test]
+        //public void JoinWithoutDelimiterWorks()
+        //{
+        //    Assert.AreEqual("a,b,c,b", new List<string> { "a", "b", "c", "b" }.Join());
+        //}
 
-        [Test]
-        public void JoinWithDelimiterWorks()
-        {
-            Assert.AreEqual("a|b|c|b", new List<string> { "a", "b", "c", "b" }.Join("|"));
-        }
+        // Not C# API
+        //[Test]
+        //public void JoinWithDelimiterWorks()
+        //{
+        //    Assert.AreEqual("a|b|c|b", new List<string> { "a", "b", "c", "b" }.Join("|"));
+        //}
 
         // Not C# API
         //[Test]

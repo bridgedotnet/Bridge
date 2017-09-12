@@ -1098,7 +1098,7 @@
         },
 
         toList: function (ienumerable, T) {
-            return new (System.Collections.Generic.List$1(T || System.Object))(ienumerable);
+            return new (System.Collections.Generic.List$1(T || System.Object).$ctor1)(ienumerable);
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
@@ -5476,7 +5476,7 @@ Bridge.define("System.Exception", {
         ctor: function (message, innerExceptions) {
             this.$initialize();
             this.innerExceptions = new(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception))(Bridge.hasValue(innerExceptions) ? Bridge.toArray(innerExceptions) : []);
-            System.Exception.ctor.call(this, message || 'One or more errors occurred.', this.innerExceptions.items.length ? this.innerExceptions.items[0] : null);
+            System.Exception.ctor.call(this, message || 'One or more errors occurred.', this.innerExceptions.Count > 0 ? this.innerExceptions.getItem(0) : null);
         },
 
         handle: function (predicate) {
@@ -5484,12 +5484,12 @@ Bridge.define("System.Exception", {
                 throw new System.ArgumentNullException("predicate");
             }
 
-            var count = this.innerExceptions.getCount(),
+            var count = this.innerExceptions.Count,
                 unhandledExceptions = [];
 
             for (var i = 0; i < count; i++) {
                 if (!predicate(this.innerExceptions.get(i))) {
-                    unhandledExceptions.push(this.innerExceptions.get(i));
+                    unhandledExceptions.push(this.innerExceptions.getItem(i));
                 }
             }
 
@@ -5501,7 +5501,7 @@ Bridge.define("System.Exception", {
         getBaseException: function() {
             var back = this;
             var backAsAggregate = this;
-            while (backAsAggregate != null && backAsAggregate.innerExceptions.getCount() === 1)
+            while (backAsAggregate != null && backAsAggregate.innerExceptions.Count === 1)
             {
                 back = back.InnerException;
                 backAsAggregate = Bridge.as(back, System.AggregateException);
@@ -5519,12 +5519,13 @@ Bridge.define("System.Exception", {
             var nDequeueIndex = 0;
 
             // Continue removing and recursively flattening exceptions, until there are no more.
-            while (exceptionsToFlatten.getCount() > nDequeueIndex) {
+            while (exceptionsToFlatten.Count > nDequeueIndex) {
                 // dequeue one from exceptionsToFlatten
-                var currentInnerExceptions = exceptionsToFlatten.getItem(nDequeueIndex++).innerExceptions;
+                var currentInnerExceptions = exceptionsToFlatten.getItem(nDequeueIndex++).innerExceptions,
+                    count = currentInnerExceptions.Count;
 
-                for (var i = 0; i < currentInnerExceptions.getCount(); i++) {
-                    var currentInnerException = currentInnerExceptions.get(i);
+                for (var i = 0; i < count; i++) {
+                    var currentInnerException = currentInnerExceptions.getItem(i);
 
                     if (!Bridge.hasValue(currentInnerException)) {
                         continue;
@@ -10912,12 +10913,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
-                obj[name](item);
+                return obj[name](item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
-                obj[name](item);
+                return obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
-                obj.add(item);
+                return obj.add(item);
             }
+
+            return -1;
         },
 
         checkNewElementType: function (v, type) {
@@ -12617,412 +12620,880 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         };
     });
 
-    // @source List.js
+    // @source enumerator.js
 
-    Bridge.define('System.Collections.Generic.List$1', function (T) {
-        return {
-            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList,
-                System.Collections.Generic.IReadOnlyCollection$1(T), System.Collections.Generic.IReadOnlyList$1(T)],
-
-            config: {
-                properties: {
-                  Count: {
-                      get: function() {
-                          return this.getCount();
-                      }
-                  },
-
-                  IsReadOnly: {
-                      get: function () {
-                          return this.getIsReadOnly();
-                      }
-                  },
-
-                  Capacity: {
-                      get: function() {
-                          return this._capacity;
-                      },
-
-                      set: function (value) {
-                          if (value < this.items.length) {
-                              throw new System.ArgumentOutOfRangeException("Capacity is set to a value that is less than Count.");
-                          }
-
-                          this._capacity = value;
-                      }
-                  }
-                },
-                alias: [
-                "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
-                "getItem", "System$Collections$IList$getItem",
-                "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
-                "setItem", "System$Collections$IList$setItem",
-                "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
-                "getCount", "System$Collections$ICollection$getCount",
-                "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
-                "Count", "System$Collections$ICollection$Count",
-                "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
-                "getIsReadOnly", "System$Collections$IList$getIsReadOnly",
-                "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
-                "IsReadOnly", "System$Collections$IList$IsReadOnly",
-                "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-                "add", "System$Collections$IList$add",
-                "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-                "clear", "System$Collections$IList$clear",
-                "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-                "contains", "System$Collections$IList$contains",
-                "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
-                "copyTo", "System$Collections$ICollection$copyTo",
-                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
-                "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
-                "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
-                "indexOf", "System$Collections$IList$indexOf",
-                "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
-                "insert", "System$Collections$IList$insert",
-                "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-                "remove", "System$Collections$IList$remove",
-                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt",
-                "removeAt", "System$Collections$IList$removeAt"
-                ]
+    Bridge.define("System.Collections.Generic.List$1.Enumerator", function (T) { return {
+        inherits: [System.Collections.Generic.IEnumerator$1(T),System.Collections.IEnumerator],
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new (System.Collections.Generic.List$1.Enumerator(T))(); }
+            }
+        },
+        fields: {
+            list: null,
+            index: 0,
+            version: 0,
+            current: Bridge.getDefaultValue(T)
+        },
+        props: {
+            Current: {
+                get: function () {
+                    return this.current;
+                }
             },
-
-            toJSON: function() {
-                return this.items;
-            },
-
-            ctor: function (obj) {
+            System$Collections$IEnumerator$Current: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.list._size + 1) | 0)) {
+                        throw new System.InvalidOperationException();
+                    }
+                    return this.Current;
+                }
+            }
+        },
+        alias: [
+            "dispose", "System$IDisposable$dispose",
+            "moveNext", "System$Collections$IEnumerator$moveNext",
+            "Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"]
+        ],
+        ctors: {
+            $ctor1: function (list) {
                 this.$initialize();
+                this.list = list;
+                this.index = 0;
+                this.version = list._version;
+                this.current = Bridge.getDefaultValue(T);
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            dispose: function () { },
+            moveNext: function () {
 
-                if (!Bridge.isDefined(obj)) {
-                    this.items = [];
-                } else if (Object.prototype.toString.call(obj) === '[object Array]') {
-                    this.items = System.Array.clone(obj);
-                } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
-                    this.items = Bridge.toArray(obj);
+                var localList = this.list;
+
+                if (this.version === localList._version && ((this.index >>> 0) < (localList._size >>> 0))) {
+                    this.current = localList._items[System.Array.index(this.index, localList._items)];
+                    this.index = (this.index + 1) | 0;
+                    return true;
+                }
+                return this.moveNextRare();
+            },
+            moveNextRare: function () {
+                if (this.version !== this.list._version) {
+                    throw new System.InvalidOperationException();
+                }
+
+                this.index = (this.list._size + 1) | 0;
+                this.current = Bridge.getDefaultValue(T);
+                return false;
+            },
+            System$Collections$IEnumerator$reset: function () {
+                if (this.version !== this.list._version) {
+                    throw new System.InvalidOperationException();
+                }
+
+                this.index = 0;
+                this.current = Bridge.getDefaultValue(T);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([3788985113, this.list, this.index, this.version, this.current]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, System.Collections.Generic.List$1.Enumerator(T))) {
+                    return false;
+                }
+                return Bridge.equals(this.list, o.list) && Bridge.equals(this.index, o.index) && Bridge.equals(this.version, o.version) && Bridge.equals(this.current, o.current);
+            },
+            $clone: function (to) {
+                var s = to || new (System.Collections.Generic.List$1.Enumerator(T))();
+                s.list = this.list;
+                s.index = this.index;
+                s.version = this.version;
+                s.current = this.current;
+                return s;
+            }
+        }
+    }; });
+
+    // @source list.js
+
+    Bridge.define("System.Collections.Generic.List$1", function (T) { return {
+        inherits: [System.Collections.Generic.IList$1(T),System.Collections.IList,System.Collections.Generic.IReadOnlyList$1(T)],
+        statics: {
+            fields: {
+                _defaultCapacity: 0,
+                _emptyArray: null
+            },
+            ctors: {
+                init: function () {
+                    this._defaultCapacity = 4;
+                    this._emptyArray = System.Array.init(0, function (){
+                        return Bridge.getDefaultValue(T);
+                    }, T);
+                }
+            },
+            methods: {
+                isCompatibleObject: function (value) {
+                    // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
+                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+                    return ((Bridge.is(value, T)) || (value == null && Bridge.getDefaultValue(T) == null));
+                }
+            }
+        },
+        fields: {
+            _items: null,
+            _size: 0,
+            _version: 0
+        },
+        props: {
+            Capacity: {
+                get: function () {
+                    return this._items.length;
+                },
+                set: function (value) {
+                    if (value < this._size) {
+                        throw new System.ArgumentOutOfRangeException("value");
+                    }
+
+                    if (value !== this._items.length) {
+                        if (value > 0) {
+                            var newItems = System.Array.init(value, function (){
+                                return Bridge.getDefaultValue(T);
+                            }, T);
+                            if (this._size > 0) {
+                                System.Array.copy(this._items, 0, newItems, 0, this._size);
+                            }
+                            this._items = newItems;
+                        } else {
+                            this._items = System.Collections.Generic.List$1(T)._emptyArray;
+                        }
+                    }
+                }
+            },
+            Count: {
+                get: function () {
+                    return this._size;
+                }
+            },
+            System$Collections$Generic$ICollection$1$IsReadOnly: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$IList$IsReadOnly: {
+                get: function () {
+                    return false;
+                }
+            }
+        },
+        alias: [
+            "Count", "System$Collections$Generic$IReadOnlyCollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "Count", "System$Collections$ICollection$Count",
+            "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "System$Collections$Generic$ICollection$1$IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
+            "getItem", "System$Collections$Generic$IReadOnlyList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "System$Collections$Generic$IReadOnlyList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "clear", "System$Collections$IList$clear",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "System$Collections$Generic$IEnumerable$1$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "removeAt", "System$Collections$IList$removeAt",
+            "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+        ],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                this._items = System.Collections.Generic.List$1(T)._emptyArray;
+            },
+            $ctor2: function (capacity) {
+                this.$initialize();
+                if (capacity < 0) {
+                    throw new System.ArgumentOutOfRangeException("capacity");
+                }
+
+                if (capacity === 0) {
+                    this._items = System.Collections.Generic.List$1(T)._emptyArray;
                 } else {
-                    this.items = [];
+                    this._items = System.Array.init(capacity, function (){
+                        return Bridge.getDefaultValue(T);
+                    }, T);
+                }
+            },
+            $ctor1: function (collection) {
+                this.$initialize();
+                if (collection == null) {
+                    throw new System.ArgumentNullException("collection");
                 }
 
-                if (Bridge.isNumber(obj)) {
-                    this._capacity = obj;
+                var c = Bridge.as(collection, System.Collections.Generic.ICollection$1(T));
+                if (c != null) {
+                    var count = System.Array.getCount(c, T);
+                    if (count === 0) {
+                        this._items = System.Collections.Generic.List$1(T)._emptyArray;
+                    } else {
+                        this._items = System.Array.init(count, function (){
+                            return Bridge.getDefaultValue(T);
+                        }, T);
+                        System.Array.copyTo(c, this._items, 0, T);
+                        this._size = count;
+                    }
                 } else {
-                    this._capacity = this.items.length;
+                    this._size = 0;
+                    this._items = System.Collections.Generic.List$1(T)._emptyArray;
+                    // This enumerable could be empty.  Let Add allocate a new array, if needed.
+                    // Note it will also go to _defaultCapacity first, not 1, then 2, etc.
+
+                    var en = Bridge.getEnumerator(collection, T);
+                    try {
+                        while (en.System$Collections$IEnumerator$moveNext()) {
+                            this.add(en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
+                        }
+                    }
+                    finally {
+                        if (Bridge.hasValue(en)) {
+                            en.System$IDisposable$dispose();
+                        }
+                    }
                 }
-                
-                this.clear.$clearCallbacks = [];
-            },
-
-            checkIndex: function (index, message) {
-                if (isNaN(index) || index < 0 || index >= this.items.length) {
-                    throw new System.ArgumentOutOfRangeException(message || 'Index out of range');
-                }
-            },
-
-            getCount: function () {
-                return this.items.length;
-            },
-
-            getIsReadOnly: function () {
-                return !!this.readOnly;
-            },
-
-            get: function (index) {
-                this.checkIndex(index);
-
-                return this.items[index];
-            },
-
+            }
+        },
+        methods: {
             getItem: function (index) {
-                return this.get(index);
+                // Following trick can reduce the range check by one
+                if ((index >>> 0) >= (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException();
+                }
+                return this._items[System.Array.index(index, this._items)];
             },
-
-            set: function (index, value) {
-                this.checkReadOnly();
-                this.checkIndex(index);
-                this.items[index] = value;
-            },
-
             setItem: function (index, value) {
-                this.set(index, value);
+                if ((index >>> 0) >= (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException();
+                }
+                this._items[System.Array.index(index, this._items)] = value;
+                this._version = (this._version + 1) | 0;
             },
+            System$Collections$IList$getItem: function (index) {
+                return this.getItem(index);
+            },
+            System$Collections$IList$setItem: function (index, value) {
+                if (value == null && !(Bridge.getDefaultValue(T) == null)) {
+                    throw new System.ArgumentNullException("value");
+                }
 
-            ensureCapacity: function(min) {
-                if (this.items.length < min) {
-                    var newCapacity = this.items.length == 0 ? 4 : this.items.length * 2;
+                try {
+                    this.setItem(index, Bridge.cast(Bridge.unbox(value), T));
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    if (Bridge.is($e1, System.InvalidCastException)) {
+                        throw new System.ArgumentException("value");
+                    } else {
+                        throw $e1;
+                    }
+                }
+            },
+            add: function (item) {
+                if (this._size === this._items.length) {
+                    this.ensureCapacity(((this._size + 1) | 0));
+                }
+                this._items[System.Array.index(Bridge.identity(this._size, (this._size = (this._size + 1) | 0)), this._items)] = item;
+                this._version = (this._version + 1) | 0;
+            },
+            System$Collections$IList$add: function (item) {
+                if (item == null && !(Bridge.getDefaultValue(T) == null)) {
+                    throw new System.ArgumentNullException("item");
+                }
+
+                try {
+                    this.add(Bridge.cast(Bridge.unbox(item), T));
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    if (Bridge.is($e1, System.InvalidCastException)) {
+                        throw new System.ArgumentException("item");
+                    } else {
+                        throw $e1;
+                    }
+                }
+
+                return ((this.Count - 1) | 0);
+            },
+            addRange: function (collection) {
+                this.insertRange(this._size, collection);
+            },
+            asReadOnly: function () {
+                return new (System.Collections.ObjectModel.ReadOnlyCollection$1(T))(this);
+            },
+            binarySearch$2: function (index, count, item, comparer) {
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+
+                return System.Array.binarySearch(this._items, index, count, item, comparer);
+            },
+            binarySearch: function (item) {
+                return this.binarySearch$2(0, this.Count, item, null);
+            },
+            binarySearch$1: function (item, comparer) {
+                return this.binarySearch$2(0, this.Count, item, comparer);
+            },
+            clear: function () {
+                if (this._size > 0) {
+                    System.Array.fill(this._items, Bridge.getDefaultValue(T), 0, this._size); // Don't need to doc this but we clear the elements so that the gc can reclaim the references.
+                    this._size = 0;
+                }
+                this._version = (this._version + 1) | 0;
+            },
+            contains: function (item) {
+                if (item == null) {
+                    for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                        if (this._items[System.Array.index(i, this._items)] == null) {
+                            return true;
+                        }
+                    }
+                    return false;
+                } else {
+                    var c = System.Collections.Generic.EqualityComparer$1(T).def;
+                    for (var i1 = 0; i1 < this._size; i1 = (i1 + 1) | 0) {
+                        if (c.equals2(this._items[System.Array.index(i1, this._items)], item)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            },
+            System$Collections$IList$contains: function (item) {
+                if (System.Collections.Generic.List$1(T).isCompatibleObject(item)) {
+                    return this.contains(Bridge.cast(Bridge.unbox(item), T));
+                }
+                return false;
+            },
+            convertAll: function (TOutput, converter) {
+                if (Bridge.staticEquals(converter, null)) {
+                    throw new System.ArgumentNullException("converter");
+                }
+
+                var list = new (System.Collections.Generic.List$1(TOutput)).$ctor2(this._size);
+                for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                    list._items[System.Array.index(i, list._items)] = converter(this._items[System.Array.index(i, this._items)]);
+                }
+                list._size = this._size;
+                return list;
+            },
+            copyTo$1: function (array) {
+                this.copyTo(array, 0);
+            },
+            System$Collections$ICollection$copyTo: function (array, arrayIndex) {
+                if ((array != null) && (System.Array.getRank(array) !== 1)) {
+                    throw new System.ArgumentException("array");
+                }
+
+                System.Array.copy(this._items, 0, array, arrayIndex, this._size);
+            },
+            copyTo$2: function (index, array, arrayIndex, count) {
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+
+                // Delegate rest of error checking to Array.Copy.
+                System.Array.copy(this._items, index, array, arrayIndex, count);
+            },
+            copyTo: function (array, arrayIndex) {
+                // Delegate rest of error checking to Array.Copy.
+                System.Array.copy(this._items, 0, array, arrayIndex, this._size);
+            },
+            ensureCapacity: function (min) {
+                if (this._items.length < min) {
+                    var newCapacity = this._items.length === 0 ? System.Collections.Generic.List$1(T)._defaultCapacity : Bridge.Int.mul(this._items.length, 2);
+                    // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
+                    // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
+                    if ((newCapacity >>> 0) > 2146435071) {
+                        newCapacity = 2146435071;
+                    }
+                    if (newCapacity < min) {
+                        newCapacity = min;
+                    }
                     this.Capacity = newCapacity;
                 }
             },
-
-            trimExcess: function () {
-                var threshold = Bridge.Int.clip32(this.Capacity * 0.9);
-                if (this.items.length < threshold) {
-                    this.Capacity = this.items.length;                
-                }
-            }, 
-
-            add: function (value) {
-                this.checkReadOnly();
-                this.ensureCapacity(this.items.length + 1);
-                this.items.push(value);
+            exists: function (match) {
+                return this.findIndex$2(match) !== -1;
             },
-
-            addRange: function (items) {
-                this.checkReadOnly();
-
-                var array = Bridge.toArray(items),
-                    i,
-                    len;
-
-                this.ensureCapacity(this.items.length + array.length);
-
-                for (i = 0, len = array.length; i < len; ++i) {
-                    this.items.push(array[i]);
+            find: function (match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
                 }
+
+                for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                    if (match(this._items[System.Array.index(i, this._items)])) {
+                        return this._items[System.Array.index(i, this._items)];
+                    }
+                }
+                return Bridge.getDefaultValue(T);
             },
-
-            clear: function () {
-                this.checkReadOnly();
-                this.items = [];
-
-                for (var i = 0; i < this.clear.$clearCallbacks.length; i++) {
-                    this.clear.$clearCallbacks[i](this);
+            findAll: function (match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
                 }
+
+                var list = new (System.Collections.Generic.List$1(T)).ctor();
+                for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                    if (match(this._items[System.Array.index(i, this._items)])) {
+                        list.add(this._items[System.Array.index(i, this._items)]);
+                    }
+                }
+                return list;
             },
-
-            onClear: function(callback) {
-                this.clear.$clearCallbacks.push(callback);
+            findIndex$2: function (match) {
+                return this.findIndex(0, this._size, match);
             },
-
-            indexOf: function (item, startIndex) {
-                var i, el;
-
-                if (!Bridge.isDefined(startIndex)) {
-                    startIndex = 0;
+            findIndex$1: function (startIndex, match) {
+                return this.findIndex(startIndex, ((this._size - startIndex) | 0), match);
+            },
+            findIndex: function (startIndex, count, match) {
+                if ((startIndex >>> 0) > (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException("startIndex");
                 }
 
-                if (startIndex !== 0) {
-                    this.checkIndex(startIndex);
+                if (count < 0 || startIndex > ((this._size - count) | 0)) {
+                    throw new System.ArgumentOutOfRangeException("count");
                 }
 
-                for (i = startIndex; i < this.items.length; i++) {
-                    el = this.items[i];
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
+                }
 
-                    if (System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                var endIndex = (startIndex + count) | 0;
+                for (var i = startIndex; i < endIndex; i = (i + 1) | 0) {
+                    if (match(this._items[System.Array.index(i, this._items)])) {
                         return i;
                     }
                 }
-
                 return -1;
             },
-
-            insertRange: function (index, items) {
-                this.checkReadOnly();
-
-                if (index !== this.items.length) {
-                    this.checkIndex(index);
+            findLast: function (match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
                 }
 
-                var array = Bridge.toArray(items);
-                this.ensureCapacity(this.items.length + array.length);
-                for (var i = 0; i < array.length; i++) {
-                    this.insert(index++, array[i]);
+                for (var i = (this._size - 1) | 0; i >= 0; i = (i - 1) | 0) {
+                    if (match(this._items[System.Array.index(i, this._items)])) {
+                        return this._items[System.Array.index(i, this._items)];
+                    }
                 }
+                return Bridge.getDefaultValue(T);
             },
-
-            contains: function (item) {
-                return this.indexOf(item) > -1;
+            findLastIndex$2: function (match) {
+                return this.findLastIndex(((this._size - 1) | 0), this._size, match);
             },
-
-            copyTo: function (array, arrayIndex) {
-                System.Array.copy(this.items, 0, array, arrayIndex, this.items.length);
+            findLastIndex$1: function (startIndex, match) {
+                return this.findLastIndex(startIndex, ((startIndex + 1) | 0), match);
             },
-
-            getEnumerator: function () {
-                return new Bridge.ArrayEnumerator(this.items, T);
-            },
-
-            getRange: function (index, count) {
-                if (isNaN(index) || index < 0) {
-                    throw new System.ArgumentOutOfRangeException("index out of range");
+            findLastIndex: function (startIndex, count, match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
                 }
 
-                if (isNaN(count) || count < 0) {
-                    throw new System.ArgumentOutOfRangeException("count out of range");
-                }
-
-                if (this.items.length - index < count) {
-                    throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
-                }
-
-                var items = [];
-
-                for (var i = 0; i < count; i++) {
-                    items[i] = this.items[index + i];
-                }
-
-                var list = new (System.Collections.Generic.List$1(T))();
-                list.items = items;
-
-                return list;
-            },
-
-            insert: function (index, item) {
-                this.checkReadOnly();
-
-                if (index !== this.items.length) {
-                    this.checkIndex(index);
-                }
-
-                if (Bridge.isArray(item)) {
-                    this.ensureCapacity(this.items.length + item.length);
-                    for (var i = 0; i < item.length; i++) {
-                        this.insert(index++, item[i]);
+                if (this._size === 0) {
+                    // Special case for 0 length List
+                    if (startIndex !== -1) {
+                        throw new System.ArgumentOutOfRangeException("startIndex");
                     }
                 } else {
-                    this.ensureCapacity(this.items.length + 1);
-                    this.items.splice(index, 0, item);
-                }
-            },
-
-            join: function (delimeter) {
-                return this.items.join(delimeter);
-            },
-
-            lastIndexOf: function (item, fromIndex) {
-                if (!Bridge.isDefined(fromIndex)) {
-                    fromIndex = this.items.length - 1;
-                }
-
-                if (fromIndex !== 0) {
-                    this.checkIndex(fromIndex);
-                }
-
-                for (var i = fromIndex; i >= 0; i--) {
-                    if (item === this.items[i]) {
-                        return i;
+                    // Make sure we're not out of range            
+                    if ((startIndex >>> 0) >= (this._size >>> 0)) {
+                        throw new System.ArgumentOutOfRangeException("startIndex");
                     }
                 }
 
+                // 2nd have of this also catches when startIndex == MAXINT, so MAXINT - 0 + 1 == -1, which is < 0.
+                if (count < 0 || ((((startIndex - count) | 0) + 1) | 0) < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                var endIndex = (startIndex - count) | 0;
+                for (var i = startIndex; i > endIndex; i = (i - 1) | 0) {
+                    if (match(this._items[System.Array.index(i, this._items)])) {
+                        return i;
+                    }
+                }
                 return -1;
             },
-
-            remove: function (item) {
-                this.checkReadOnly();
-
-                var index = this.indexOf(item);
-
-                if (index < 0) {
-                    return false;
+            forEach: function (action) {
+                if (Bridge.staticEquals(action, null)) {
+                    throw new System.ArgumentNullException("match");
                 }
 
-                this.checkIndex(index);
-                this.items.splice(index, 1);
+                var version = this._version;
+
+                for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                    if (version !== this._version) {
+                        break;
+                    }
+                    action(this._items[System.Array.index(i, this._items)]);
+                }
+
+                if (version !== this._version) {
+                    throw new System.InvalidOperationException();
+                }
+            },
+            getEnumerator: function () {
+                return new (System.Collections.Generic.List$1.Enumerator(T)).$ctor1(this);
+            },
+            System$Collections$Generic$IEnumerable$1$getEnumerator: function () {
+                return new (System.Collections.Generic.List$1.Enumerator(T)).$ctor1(this).$clone();
+            },
+            System$Collections$IEnumerable$getEnumerator: function () {
+                return new (System.Collections.Generic.List$1.Enumerator(T)).$ctor1(this).$clone();
+            },
+            getRange: function (index, count) {
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+
+                var list = new (System.Collections.Generic.List$1(T)).$ctor2(count);
+                System.Array.copy(this._items, index, list._items, 0, count);
+                list._size = count;
+                return list;
+            },
+            indexOf: function (item) {
+                return System.Array.indexOfT(this._items, item, 0, this._size);
+            },
+            System$Collections$IList$indexOf: function (item) {
+                if (System.Collections.Generic.List$1(T).isCompatibleObject(item)) {
+                    return this.indexOf(Bridge.cast(Bridge.unbox(item), T));
+                }
+                return -1;
+            },
+            indexOf$1: function (item, index) {
+                if (index > this._size) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                return System.Array.indexOfT(this._items, item, index, ((this._size - index) | 0));
+            },
+            indexOf$2: function (item, index, count) {
+                if (index > this._size) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count < 0 || index > ((this._size - count) | 0)) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                return System.Array.indexOfT(this._items, item, index, count);
+            },
+            insert: function (index, item) {
+                // Note that insertions at the end are legal.
+                if ((index >>> 0) > (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                if (this._size === this._items.length) {
+                    this.ensureCapacity(((this._size + 1) | 0));
+                }
+                if (index < this._size) {
+                    System.Array.copy(this._items, index, this._items, ((index + 1) | 0), ((this._size - index) | 0));
+                }
+                this._items[System.Array.index(index, this._items)] = item;
+                this._size = (this._size + 1) | 0;
+                this._version = (this._version + 1) | 0;
+            },
+            System$Collections$IList$insert: function (index, item) {
+                if (item == null && !(Bridge.getDefaultValue(T) == null)) {
+                    throw new System.ArgumentNullException("item");
+                }
+
+                try {
+                    this.insert(index, Bridge.cast(Bridge.unbox(item), T));
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    if (Bridge.is($e1, System.InvalidCastException)) {
+                        throw new System.ArgumentException("item");
+                    } else {
+                        throw $e1;
+                    }
+                }
+            },
+            insertRange: function (index, collection) {
+                if (collection == null) {
+                    throw new System.ArgumentNullException("collection");
+                }
+
+                if ((index >>> 0) > (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                var c = Bridge.as(collection, System.Collections.Generic.ICollection$1(T));
+                if (c != null) { // if collection is ICollection<T>
+                    var count = System.Array.getCount(c, T);
+                    if (count > 0) {
+                        this.ensureCapacity(((this._size + count) | 0));
+                        if (index < this._size) {
+                            System.Array.copy(this._items, index, this._items, ((index + count) | 0), ((this._size - index) | 0));
+                        }
+
+                        // If we're inserting a List into itself, we want to be able to deal with that.
+                        if (Bridge.referenceEquals(this, c)) {
+                            // Copy first part of _items to insert location
+                            System.Array.copy(this._items, 0, this._items, index, index);
+                            // Copy last part of _items back to inserted location
+                            System.Array.copy(this._items, ((index + count) | 0), this._items, Bridge.Int.mul(index, 2), ((this._size - index) | 0));
+                        } else {
+                            var itemsToInsert = System.Array.init(count, function (){
+                                return Bridge.getDefaultValue(T);
+                            }, T);
+                            System.Array.copyTo(c, itemsToInsert, 0, T);
+                            System.Array.copy(itemsToInsert, 0, this._items, index, itemsToInsert.length);
+                        }
+                        this._size = (this._size + count) | 0;
+                    }
+                } else {
+                    var en = Bridge.getEnumerator(collection, T);
+                    try {
+                        while (en.System$Collections$IEnumerator$moveNext()) {
+                            this.insert(Bridge.identity(index, (index = (index + 1) | 0)), en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
+                        }
+                    }
+                    finally {
+                        if (Bridge.hasValue(en)) {
+                            en.System$IDisposable$dispose();
+                        }
+                    }
+                }
+                this._version = (this._version + 1) | 0;
+            },
+            lastIndexOf: function (item) {
+                if (this._size === 0) { // Special case for empty list
+                    return -1;
+                } else {
+                    return this.lastIndexOf$2(item, ((this._size - 1) | 0), this._size);
+                }
+            },
+            lastIndexOf$1: function (item, index) {
+                if (index >= this._size) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                return this.lastIndexOf$2(item, index, ((index + 1) | 0));
+            },
+            lastIndexOf$2: function (item, index, count) {
+                if ((this.Count !== 0) && (index < 0)) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if ((this.Count !== 0) && (count < 0)) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                if (this._size === 0) { // Special case for empty list
+                    return -1;
+                }
+
+                if (index >= this._size) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count > ((index + 1) | 0)) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                return System.Array.lastIndexOfT(this._items, item, index, count);
+            },
+            remove: function (item) {
+                var index = this.indexOf(item);
+                if (index >= 0) {
+                    this.removeAt(index);
+                    return true;
+                }
+
+                return false;
+            },
+            System$Collections$IList$remove: function (item) {
+                if (System.Collections.Generic.List$1(T).isCompatibleObject(item)) {
+                    this.remove(Bridge.cast(Bridge.unbox(item), T));
+                }
+            },
+            removeAll: function (match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
+                }
+
+                var freeIndex = 0; // the first free slot in items array
+
+                // Find the first item which needs to be removed.
+                while (freeIndex < this._size && !match(this._items[System.Array.index(freeIndex, this._items)])) {
+                    freeIndex = (freeIndex + 1) | 0;
+                }
+                if (freeIndex >= this._size) {
+                    return 0;
+                }
+
+                var current = (freeIndex + 1) | 0;
+                while (current < this._size) {
+                    // Find the first item which needs to be kept.
+                    while (current < this._size && match(this._items[System.Array.index(current, this._items)])) {
+                        current = (current + 1) | 0;
+                    }
+
+                    if (current < this._size) {
+                        // copy item to the free slot.
+                        this._items[System.Array.index(Bridge.identity(freeIndex, (freeIndex = (freeIndex + 1) | 0)), this._items)] = this._items[System.Array.index(Bridge.identity(current, (current = (current + 1) | 0)), this._items)];
+                    }
+                }
+
+                System.Array.fill(this._items, Bridge.getDefaultValue(T), freeIndex, ((this._size - freeIndex) | 0));
+                var result = (this._size - freeIndex) | 0;
+                this._size = freeIndex;
+                this._version = (this._version + 1) | 0;
+                return result;
+            },
+            removeAt: function (index) {
+                if ((index >>> 0) >= (this._size >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException();
+                }
+                this._size = (this._size - 1) | 0;
+                if (index < this._size) {
+                    System.Array.copy(this._items, ((index + 1) | 0), this._items, index, ((this._size - index) | 0));
+                }
+                this._items[System.Array.index(this._size, this._items)] = Bridge.getDefaultValue(T);
+                this._version = (this._version + 1) | 0;
+            },
+            removeRange: function (index, count) {
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+
+                if (count > 0) {
+                    var i = this._size;
+                    this._size = (this._size - count) | 0;
+                    if (index < this._size) {
+                        System.Array.copy(this._items, ((index + count) | 0), this._items, index, ((this._size - index) | 0));
+                    }
+                    System.Array.fill(this._items, Bridge.getDefaultValue(T), this._size, count);
+                    this._version = (this._version + 1) | 0;
+                }
+            },
+            reverse: function () {
+                this.reverse$1(0, this.Count);
+            },
+            reverse$1: function (index, count) {
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+                System.Array.reverse(this._items, index, count);
+                this._version = (this._version + 1) | 0;
+            },
+            sort: function () {
+                this.sort$3(0, this.Count, null);
+            },
+            sort$1: function (comparer) {
+                this.sort$3(0, this.Count, comparer);
+            },
+            sort$3: function (index, count, comparer) {
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+
+                if (((this._size - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+
+                System.Array.sort(this._items, index, count, comparer);
+                this._version = (this._version + 1) | 0;
+            },
+            sort$2: function (comparison) {
+                if (Bridge.staticEquals(comparison, null)) {
+                    throw new System.ArgumentNullException("comparison");
+                }
+
+                if (this._size > 0) {
+                    System.Array.sort(this._items, comparison);
+                }
+            },
+            toArray: function () {
+
+                var array = System.Array.init(this._size, function (){
+                    return Bridge.getDefaultValue(T);
+                }, T);
+                System.Array.copy(this._items, 0, array, 0, this._size);
+                return array;
+            },
+            trimExcess: function () {
+                var threshold = Bridge.Int.clip32(this._items.length * 0.9);
+                if (this._size < threshold) {
+                    this.Capacity = this._size;
+                }
+            },
+            trueForAll: function (match) {
+                if (Bridge.staticEquals(match, null)) {
+                    throw new System.ArgumentNullException("match");
+                }
+
+                for (var i = 0; i < this._size; i = (i + 1) | 0) {
+                    if (!match(this._items[System.Array.index(i, this._items)])) {
+                        return false;
+                    }
+                }
                 return true;
             },
-
-            removeAt: function (index) {
-                this.checkReadOnly();
-                this.checkIndex(index);
-                this.items.splice(index, 1);
-            },
-
-            removeRange: function (index, count) {
-                this.checkReadOnly();
-                this.checkIndex(index);
-                this.items.splice(index, count);
-            },
-
-            reverse: function () {
-                this.checkReadOnly();
-                this.items.reverse();
-            },
-
-            slice: function (start, end) {
-                this.checkReadOnly();
-
-                var list = new (System.Collections.Generic.List$1(T))();
-                list.items = this.items.slice(start, end);
-
-                return list;
-            },
-
-            sort: function (comparison) {
-                this.checkReadOnly();
-                this.items.sort(comparison || System.Collections.Generic.Comparer$1.$default.compare);
-            },
-
-            splice: function (start, count, items) {
-                this.checkReadOnly();
-                this.items.splice(start, count, items);
-            },
-
-            unshift: function () {
-                this.checkReadOnly();
-                this.items.unshift();
-            },
-
-            toArray: function () {
-                return Bridge.toArray(this);
-            },
-
-            checkReadOnly: function () {
-                if (this.readOnly) {
-                    throw new System.NotSupportedException();
-                }
-            },
-
-            binarySearch: function (index, length, value, comparer) {
-                if (arguments.length === 1) {
-                    value = index;
-                    index = null;
+            toJSON: function () {
+                var newItems = System.Array.init(this._size, function (){
+                    return Bridge.getDefaultValue(T);
+                }, T);
+                if (this._size > 0) {
+                    System.Array.copy(this._items, 0, newItems, 0, this._size);
                 }
 
-                if (arguments.length === 2) {
-                    value = index;
-                    comparer = length;
-                    index = null;
-                    length = null;
-                }
-
-                if (!Bridge.isNumber(index)) {
-                    index = 0;
-                }
-
-                if (!Bridge.isNumber(length)) {
-                    length = this.items.length;
-                }
-
-                if (!comparer) {
-                    comparer = System.Collections.Generic.Comparer$1.$default;
-                }
-
-                return System.Array.binarySearch(this.items, index, length, value, comparer);
-            },
-
-            convertAll: function (TOutput, converter) {
-                if (!Bridge.hasValue(converter)) {
-                    throw new System.ArgumentNullException("converter is null.");
-                }
-
-                var list = new (System.Collections.Generic.List$1(TOutput))();
-                for (var i = 0; i < this.items.length; i++) {
-                    list.items[i] = converter(this.items[i]);
-                }
-
-                return list;
-            },
-
-            forEach: function(action) {
-                if (action == null) {
-                    throw new System.ArgumentNullException("action");
-                }
- 
-                for (var i = 0; i < this.items.length; i++) {
-                    action(this.items[i]);
-                }
+                return newItems;
             }
-        };
-    });
+        }
+    }; });
+
+    // @source List.js
 
     System.Collections.Generic.List$1.getElementType = function (type) {
         var interfaceType;
@@ -13042,32 +13513,198 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         return interfaceType ? Bridge.Reflection.getGenericArguments(interfaceType)[0] : null;
     };
 
-    Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
-        return {
-            inherits: [System.Collections.Generic.List$1(T), System.Collections.Generic.IReadOnlyList$1(T)],
+    // @source readOnlyCollection.js
+
+    Bridge.define("System.Collections.ObjectModel.ReadOnlyCollection$1", function (T) { return {
+        inherits: [System.Collections.Generic.IList$1(T),System.Collections.IList,System.Collections.Generic.IReadOnlyList$1(T)],
+        statics: {
+            methods: {
+                isCompatibleObject: function (value) {
+                    // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
+                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+                    return ((Bridge.is(value, T)) || (value == null && Bridge.getDefaultValue(T) == null));
+                }
+            }
+        },
+        fields: {
+            list: null
+        },
+        props: {
+            Count: {
+                get: function () {
+                    return System.Array.getCount(this.list, T);
+                }
+            },
+            Items: {
+                get: function () {
+                    return this.list;
+                }
+            },
+            System$Collections$Generic$ICollection$1$IsReadOnly: {
+                get: function () {
+                    return true;
+                }
+            },
+            System$Collections$IList$IsReadOnly: {
+                get: function () {
+                    return true;
+                }
+            }
+        },
+        alias: [
+            "Count", "System$Collections$Generic$IReadOnlyCollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "Count", "System$Collections$ICollection$Count",
+            "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "getItem", "System$Collections$Generic$IReadOnlyList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
+            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "System$Collections$Generic$ICollection$1$IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
+            "System$Collections$Generic$IList$1$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "System$Collections$Generic$IList$1$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "System$Collections$Generic$ICollection$1$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "System$Collections$Generic$ICollection$1$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "System$Collections$Generic$IList$1$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "System$Collections$Generic$ICollection$1$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "System$Collections$Generic$IList$1$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+        ],
+        ctors: {
             ctor: function (list) {
                 this.$initialize();
                 if (list == null) {
                     throw new System.ArgumentNullException("list");
                 }
-
-                System.Collections.Generic.List$1(T).ctor.call(this, []);
-                this.readOnly = true;
-
-                if (Object.prototype.toString.call(list) === '[object Array]') {
-                    this.items = list;
-                } else if (Bridge.is(list, System.Collections.Generic.List$1(T))) {
-                    var me = this;
-                    this.items = list.items;
-                    list.onClear(function(l) {
-                        me.items = l.items;
-                    });
-                } else if (Bridge.is(list, System.Collections.IEnumerable)) {
-                    this.items = Bridge.toArray(list);
-                }
+                this.list = list;
             }
-        };
-    });
+        },
+        methods: {
+            getItem: function (index) {
+                return System.Array.getItem(this.list, index, T);
+            },
+            System$Collections$Generic$IList$1$getItem: function (index) {
+                return System.Array.getItem(this.list, index, T);
+            },
+            System$Collections$Generic$IList$1$setItem: function (index, value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$getItem: function (index) {
+                return System.Array.getItem(this.list, index, T);
+            },
+            System$Collections$IList$setItem: function (index, value) {
+                throw new System.NotSupportedException();
+            },
+            contains: function (value) {
+                return System.Array.contains(this.list, value, T);
+            },
+            System$Collections$IList$contains: function (value) {
+                if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).isCompatibleObject(value)) {
+                    return this.contains(Bridge.cast(Bridge.unbox(value), T));
+                }
+                return false;
+            },
+            copyTo: function (array, index) {
+                System.Array.copyTo(this.list, array, index, T);
+            },
+            System$Collections$ICollection$copyTo: function (array, index) {
+                if (array == null) {
+                    throw new System.ArgumentNullException("array");
+                }
+
+                if (System.Array.getRank(array) !== 1) {
+                    throw new System.ArgumentException("array");
+                }
+
+                if (System.Array.getLower(array, 0) !== 0) {
+                    throw new System.ArgumentException("array");
+                }
+
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                if (((array.length - index) | 0) < this.Count) {
+                    throw new System.ArgumentException();
+                }
+
+                var items = Bridge.as(array, System.Array.type(T));
+                if (items != null) {
+                    System.Array.copyTo(this.list, items, index, T);
+                } else {
+                    //
+                    // Catch the obvious case assignment will fail.
+                    // We can found all possible problems by doing the check though.
+                    // For example, if the element type of the Array is derived from T,
+                    // we can't figure out if we can successfully copy the element beforehand.
+                    //
+                    var targetType = (Bridge.getType(array).$elementType || null);
+                    var sourceType = T;
+                    if (!(Bridge.Reflection.isAssignableFrom(targetType, sourceType) || Bridge.Reflection.isAssignableFrom(sourceType, targetType))) {
+                        throw new System.ArgumentException();
+                    }
+
+                    //
+                    // We can't cast array of value type to object[], so we don't support 
+                    // widening of primitive types here.
+                    //
+                    var objects = Bridge.as(array, System.Array.type(System.Object));
+                    if (objects == null) {
+                        throw new System.ArgumentException();
+                    }
+
+                    var count = System.Array.getCount(this.list, T);
+                    for (var i = 0; i < count; i = (i + 1) | 0) {
+                        objects[System.Array.index(Bridge.identity(index, (index = (index + 1) | 0)), objects)] = System.Array.getItem(this.list, i, T);
+                    }
+                }
+            },
+            getEnumerator: function () {
+                return Bridge.getEnumerator(this.list, T);
+            },
+            System$Collections$IEnumerable$getEnumerator: function () {
+                return Bridge.getEnumerator(Bridge.cast(this.list, System.Collections.IEnumerable));
+            },
+            indexOf: function (value) {
+                return System.Array.indexOf(this.list, value, 0, null, T);
+            },
+            System$Collections$IList$indexOf: function (value) {
+                if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).isCompatibleObject(value)) {
+                    return this.indexOf(Bridge.cast(Bridge.unbox(value), T));
+                }
+                return -1;
+            },
+            System$Collections$Generic$ICollection$1$add: function (value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$add: function (value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$Generic$ICollection$1$clear: function () {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$clear: function () {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$Generic$IList$1$insert: function (index, value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$insert: function (index, value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$Generic$ICollection$1$remove: function (value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$remove: function (value) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$Generic$IList$1$removeAt: function (index) {
+                throw new System.NotSupportedException();
+            },
+            System$Collections$IList$removeAt: function (index) {
+                throw new System.NotSupportedException();
+            }
+        }
+    }; });
 
     // @source String.js
 
@@ -13994,7 +14631,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
                     throw awaiting ? ex : new System.AggregateException(null, [ex]);
                 case System.Threading.Tasks.TaskStatus.faulted:
-                    throw awaiting ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
+                    throw awaiting ? (this.exception.innerExceptions.Count > 0 ? this.exception.innerExceptions.getItem(0) : null) : this.exception;
                 default:
                     throw new System.InvalidOperationException("Task is not yet completed.");
             }
@@ -19287,7 +19924,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
     Enumerable.prototype.toList = function (T) {
         var array = [];
         this.forEach(function (x) { array.push(x); });
-        return new (System.Collections.Generic.List$1(T || System.Object))(array);
+        return new (System.Collections.Generic.List$1(T || System.Object).$ctor1)(array);
     };
 
     // Overload:function (keySelector)
@@ -20224,7 +20861,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     var m = System.Guid.nonFormat.match(input);
 
                     if (m.getSuccess()) {
-                        var list = new (System.Collections.Generic.List$1(System.String))();
+                        var list = new (System.Collections.Generic.List$1(System.String)).ctor();
                         for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
                             if (m.getGroups().get(i).getSuccess()) {
                                 list.add(m.getGroups().get(i).getValue());
@@ -20242,7 +20879,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                         var m1 = System.Guid.split.match(input);
 
                         if (m1.getSuccess()) {
-                            var list1 = new (System.Collections.Generic.List$1(System.String))();
+                            var list1 = new (System.Collections.Generic.List$1(System.String)).ctor();
                             for (var i1 = 1; i1 <= m1.getGroups().getCount(); i1 = (i1 + 1) | 0) {
                                 if (m1.getGroups().get(i1).getSuccess()) {
                                     list1.add(m1.getGroups().get(i1).getValue());
@@ -20284,7 +20921,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 s = System.String.concat(s, (System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join(""));
 
                 var m = System.Guid.split.match(s);
-                var list = new (System.Collections.Generic.List$1(System.String))();
+                var list = new (System.Collections.Generic.List$1(System.String)).ctor();
                 for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
                     if (m.getGroups().get(i).getSuccess()) {
                         list.add(m.getGroups().get(i).getValue());
@@ -20475,7 +21112,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     var l = System.Environment.Location;
 
                     if (l) {
-                        var args = new (System.Collections.Generic.List$1(System.String))();
+                        var args = new (System.Collections.Generic.List$1(System.String)).ctor();
 
                         var path = l.pathname;
 
@@ -28761,7 +29398,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 InternalReadAllLines: function (path, encoding) {
 
                     var line;
-                    var lines = new (System.Collections.Generic.List$1(System.String))();
+                    var lines = new (System.Collections.Generic.List$1(System.String)).ctor();
 
                     var sr = new System.IO.StreamReader.$ctor9(path, encoding);
                     try {

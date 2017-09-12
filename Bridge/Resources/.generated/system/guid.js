@@ -228,7 +228,7 @@
                     var m = System.Guid.nonFormat.match(input);
 
                     if (m.getSuccess()) {
-                        var list = new (System.Collections.Generic.List$1(System.String))();
+                        var list = new (System.Collections.Generic.List$1(System.String)).ctor();
                         for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
                             if (m.getGroups().get(i).getSuccess()) {
                                 list.add(m.getGroups().get(i).getValue());
@@ -246,7 +246,7 @@
                         var m1 = System.Guid.split.match(input);
 
                         if (m1.getSuccess()) {
-                            var list1 = new (System.Collections.Generic.List$1(System.String))();
+                            var list1 = new (System.Collections.Generic.List$1(System.String)).ctor();
                             for (var i1 = 1; i1 <= m1.getGroups().getCount(); i1 = (i1 + 1) | 0) {
                                 if (m1.getGroups().get(i1).getSuccess()) {
                                     list1.add(m1.getGroups().get(i1).getValue());
@@ -288,7 +288,7 @@
                 s = System.String.concat(s, (System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join(""));
 
                 var m = System.Guid.split.match(s);
-                var list = new (System.Collections.Generic.List$1(System.String))();
+                var list = new (System.Collections.Generic.List$1(System.String)).ctor();
                 for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
                     if (m.getGroups().get(i).getSuccess()) {
                         list.add(m.getGroups().get(i).getValue());
