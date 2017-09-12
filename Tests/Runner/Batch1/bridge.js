@@ -12739,7 +12739,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             methods: {
                 isCompatibleObject: function (value) {
                     // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
-                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
                     return ((Bridge.is(value, T)) || (value == null && Bridge.getDefaultValue(T) == null));
                 }
             }
@@ -13117,7 +13117,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                         throw new System.ArgumentOutOfRangeException("startIndex");
                     }
                 } else {
-                    // Make sure we're not out of range            
+                    // Make sure we're not out of range
                     if ((startIndex >>> 0) >= (this._size >>> 0)) {
                         throw new System.ArgumentOutOfRangeException("startIndex");
                     }

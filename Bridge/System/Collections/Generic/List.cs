@@ -8,6 +8,10 @@ using System.Security.Permissions;
 
 namespace System.Collections.Generic
 {
+    /// <summary>
+    /// Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class List<T> : IList<T>, System.Collections.IList, IReadOnlyList<T>
     {
         private const int _defaultCapacity = 4;
@@ -18,11 +22,18 @@ namespace System.Collections.Generic
 
         static readonly T[] _emptyArray = new T[0];
 
+        /// <summary>
+        /// Initializes a new instance of the List&lt;T&gt; class that is empty and has the default initial capacity.
+        /// </summary>
         public List()
         {
             _items = _emptyArray;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the List&lt;T&gt; class that is empty and has the specified initial capacity.
+        /// </summary>
+        /// <param name="capacity">The number of elements that the new list can initially store.</param>
         public List(int capacity)
         {
             if (capacity < 0) throw new System.ArgumentOutOfRangeException("capacity");
@@ -36,7 +47,11 @@ namespace System.Collections.Generic
         // Constructs a List, copying the contents of the given collection. The
         // size and capacity of the new list will both be equal to the size of the
         // given collection.
-        // 
+        //
+        /// <summary>
+        /// Initializes a new instance of the List&lt;T&gt; class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied.
+        /// </summary>
+        /// <param name="collection">The collection whose elements are copied to the new list.</param>
         public List(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -75,9 +90,11 @@ namespace System.Collections.Generic
         }
 
         // Gets and sets the capacity of this list.  The capacity is the size of
-        // the internal array used to hold items.  When set, the internal 
+        // the internal array used to hold items.  When set, the internal
         // array of the list is reallocated to the given capacity.
-        // 
+        /// <summary>
+        /// Gets or sets the total number of elements the internal data structure can hold without resizing.
+        /// </summary>
         public int Capacity
         {
             get
@@ -111,6 +128,9 @@ namespace System.Collections.Generic
         }
 
         // Read-only property describing how many elements are in the List.
+        /// <summary>
+        /// Gets the number of elements contained in the List&lt;T&gt;.
+        /// </summary>
         public int Count
         {
             get
@@ -119,19 +139,33 @@ namespace System.Collections.Generic
             }
         }
 
-        // Is this List read-only?
+        /// <summary>
+        /// Gets a value indicating whether the ICollection&lt;T&gt; is read-only.
+        /// </summary>
         bool ICollection<T>.IsReadOnly
         {
-            get { return false; }
+            get
+            {
+                return false;
+            }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the IList is read-only.
+        /// </summary>
         bool System.Collections.IList.IsReadOnly
         {
-            get { return false; }
+            get
+            {
+                return false;
+            }
         }
 
-        // Sets or Gets the element at the given index.
-        // 
+        /// <summary>
+        /// Gets or sets the element at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
+        /// <returns>The element at the specified index.</returns>
         public T this[int index]
         {
             get
@@ -158,10 +192,15 @@ namespace System.Collections.Generic
         private static bool IsCompatibleObject(object value)
         {
             // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
-            // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+            // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
             return ((value is T) || (value == null && default(T) == null));
         }
 
+        /// <summary>
+        /// Gets or sets the element at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
+        /// <returns>The element at the specified index.</returns>
         Object System.Collections.IList.this[int index]
         {
             get
@@ -189,7 +228,10 @@ namespace System.Collections.Generic
         // Adds the given object to the end of this list. The size of the list is
         // increased by one. If required, the capacity of the list is doubled
         // before adding the new element.
-        //
+        /// <summary>
+        /// Adds an object to the end of the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="item">The object to be added to the end of the List&lt;T&gt;. The value can be null for reference types.</param>
         public void Add(T item)
         {
             if (_size == _items.Length) EnsureCapacity(_size + 1);
@@ -197,6 +239,11 @@ namespace System.Collections.Generic
             _version++;
         }
 
+        /// <summary>
+        /// Adds an item to the IList.
+        /// </summary>
+        /// <param name="item">The Object to add to the IList.</param>
+        /// <returns>The position into which the new element was inserted.</returns>
         int System.Collections.IList.Add(Object item)
         {
             if (item == null && !(default(T) == null))
@@ -216,16 +263,22 @@ namespace System.Collections.Generic
             return Count - 1;
         }
 
-
         // Adds the elements of the given collection to the end of this list. If
         // required, the capacity of the list is increased to twice the previous
         // capacity or the new size, whichever is larger.
-        //
+        /// <summary>
+        /// Adds the elements of the specified collection to the end of the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="collection">The collection whose elements should be added to the end of the List&lt;T&gt;. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         public void AddRange(IEnumerable<T> collection)
         {
             InsertRange(_size, collection);
         }
 
+        /// <summary>
+        /// Returns a read-only ReadOnlyCollection&lt;T&gt; wrapper for the current collection.
+        /// </summary>
+        /// <returns>An object that acts as a read-only wrapper around the current List&lt;T&gt;.</returns>
         public ReadOnlyCollection<T> AsReadOnly()
         {
             return new ReadOnlyCollection<T>(this);
@@ -247,10 +300,17 @@ namespace System.Collections.Generic
         // is larger than the given search value. This is also the index at which
         // the search value should be inserted into the list in order for the list
         // to remain sorted.
-        // 
+        //
         // The method uses the Array.BinarySearch method to perform the
         // search.
-        // 
+        /// <summary>
+        /// Searches a range of elements in the sorted List&lt;T&gt; for an element using the specified comparer and returns the zero-based index of the element.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the range to search.</param>
+        /// <param name="count">The length of the range to search.</param>
+        /// <param name="item">The object to locate. The value can be null for reference types.</param>
+        /// <param name="comparer">The IComparer&lt;T&gt; implementation to use when comparing elements, or null to use the default comparer Comparer&lt;T&gt;.Default.</param>
+        /// <returns>The zero-based index of item in the sorted List&lt;T&gt;, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of Count.</returns>
         public int BinarySearch(int index, int count, T item, IComparer<T> comparer)
         {
             if (index < 0)
@@ -263,18 +323,30 @@ namespace System.Collections.Generic
             return Array.BinarySearch<T>(_items, index, count, item, comparer);
         }
 
+        /// <summary>
+        /// Searches the entire sorted List&lt;T&gt; for an element using the default comparer and returns the zero-based index of the element.
+        /// </summary>
+        /// <param name="item">The object to locate. The value can be null for reference types.</param>
+        /// <returns>The zero-based index of item in the sorted List&lt;T&gt;, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of Count.</returns>
         public int BinarySearch(T item)
         {
             return BinarySearch(0, Count, item, null);
         }
 
+        /// <summary>
+        /// Searches the entire sorted List&lt;T&gt; for an element using the specified comparer and returns the zero-based index of the element.
+        /// </summary>
+        /// <param name="item">The object to locate. The value can be null for reference types.</param>
+        /// <param name="comparer">The IComparer&lt;T&gt; implementation to use when comparing elements. -or- null to use the default comparer Comparer&lt;T&gt;.Default.</param>
+        /// <returns>The zero-based index of item in the sorted List&lt;T&gt;, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of Count.</returns>
         public int BinarySearch(T item, IComparer<T> comparer)
         {
             return BinarySearch(0, Count, item, comparer);
         }
 
-
-        // Clears the contents of List.
+        /// <summary>
+        /// Removes all elements from the List&lt;T&gt;.
+        /// </summary>
         public void Clear()
         {
             if (_size > 0)
@@ -285,10 +357,12 @@ namespace System.Collections.Generic
             _version++;
         }
 
-        // Contains returns true if the specified element is in the List.
-        // It does a linear, O(n) search.  Equality is determined by calling
-        // item.Equals().
-        //
+        /// <summary>
+        /// Determines whether an element is in the List&lt;T&gt;. It does a linear, O(n) search.
+        /// Equality is determined by calling item.Equals().
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <returns>true if item is found in the List&lt;T&gt;; otherwise, false.</returns>
         public bool Contains(T item)
         {
             if (item == null)
@@ -309,6 +383,11 @@ namespace System.Collections.Generic
             }
         }
 
+        /// <summary>
+        /// Determines whether the IList contains a specific value.
+        /// </summary>
+        /// <param name="item">The Object to locate in the IList.</param>
+        /// <returns>true if item is found in the IList; otherwise, false.</returns>
         bool System.Collections.IList.Contains(Object item)
         {
             if (IsCompatibleObject(item))
@@ -318,6 +397,12 @@ namespace System.Collections.Generic
             return false;
         }
 
+        /// <summary>
+        /// Converts the elements in the current List&lt;T&gt; to another type, and returns a list containing the converted elements.
+        /// </summary>
+        /// <typeparam name="TOutput">The type of the elements of the target array.</typeparam>
+        /// <param name="converter">A Converter&lt;TInput,?TOutput&gt; delegate that converts each element from one type to another type.</param>
+        /// <returns>A List&lt;T&gt; of the target type containing the converted elements from the current List&lt;T&gt;.</returns>
         public List<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
         {
             if (converter == null)
@@ -334,17 +419,25 @@ namespace System.Collections.Generic
             return list;
         }
 
-        // Copies this List into array, which must be of a 
-        // compatible array type.  
-        //
+        // Copies this List into array, which must be of a
+        // compatible array type.
+        /// <summary>
+        /// Copies the entire List&lt;T&gt; to a compatible one-dimensional array, starting at the beginning of the target array.
+        /// </summary>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from List&lt;T&gt;. The Array must have zero-based indexing.</param>
         public void CopyTo(T[] array)
         {
             CopyTo(array, 0);
         }
 
-        // Copies this List into array, which must be of a 
-        // compatible array type.  
+        // Copies this List into array, which must be of a
+        // compatible array type.
         //
+        /// <summary>
+        /// Copies the elements of the ICollection to an Array, starting at a particular Array index.
+        /// </summary>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         void System.Collections.ICollection.CopyTo(Array array, int arrayIndex)
         {
             if ((array != null) && (array.Rank != 1))
@@ -356,9 +449,16 @@ namespace System.Collections.Generic
         }
 
         // Copies a section of this list to the given array at the given index.
-        // 
+        //
         // The method uses the Array.Copy method to copy the elements.
-        // 
+        //
+        /// <summary>
+        /// Copies a range of elements from the List&lt;T&gt; to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// </summary>
+        /// <param name="index">The zero-based index in the source List&lt;T&gt; at which copying begins.</param>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from List&lt;T&gt;. The Array must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        /// <param name="count">The number of elements to copy.</param>
         public void CopyTo(int index, T[] array, int arrayIndex, int count)
         {
             if (_size - index < count)
@@ -370,6 +470,11 @@ namespace System.Collections.Generic
             Array.Copy(_items, index, array, arrayIndex, count);
         }
 
+        /// <summary>
+        /// Copies the entire List&lt;T&gt; to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// </summary>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from List&lt;T&gt;. The Array must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         public void CopyTo(T[] array, int arrayIndex)
         {
             // Delegate rest of error checking to Array.Copy.
@@ -393,11 +498,21 @@ namespace System.Collections.Generic
             }
         }
 
+        /// <summary>
+        /// Determines whether the List&lt;T&gt; contains elements that match the conditions defined by the specified predicate.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the elements to search for.</param>
+        /// <returns>true if the List&lt;T&gt; contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.</returns>
         public bool Exists(Predicate<T> match)
         {
             return FindIndex(match) != -1;
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.</returns>
         public T Find(Predicate<T> match)
         {
             if (match == null)
@@ -415,6 +530,11 @@ namespace System.Collections.Generic
             return default(T);
         }
 
+        /// <summary>
+        /// Retrieves all the elements that match the conditions defined by the specified predicate.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the elements to search for.</param>
+        /// <returns>A List&lt;T&gt; containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty List&lt;T&gt;.</returns>
         public List<T> FindAll(Predicate<T> match)
         {
             if (match == null)
@@ -433,16 +553,34 @@ namespace System.Collections.Generic
             return list;
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindIndex(Predicate<T> match)
         {
             return FindIndex(0, _size, match);
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the List&lt;T&gt; that extends from the specified index to the last element.
+        /// </summary>
+        /// <param name="startIndex">The zero-based starting index of the search.</param>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindIndex(int startIndex, Predicate<T> match)
         {
             return FindIndex(startIndex, _size - startIndex, match);
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the List&lt;T&gt; that starts at the specified index and contains the specified number of elements.
+        /// </summary>
+        /// <param name="startIndex">The zero-based starting index of the search.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
             if ((uint)startIndex > (uint)_size)
@@ -468,6 +606,11 @@ namespace System.Collections.Generic
             return -1;
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.</returns>
         public T FindLast(Predicate<T> match)
         {
             if (match == null)
@@ -485,16 +628,34 @@ namespace System.Collections.Generic
             return default(T);
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindLastIndex(Predicate<T> match)
         {
             return FindLastIndex(_size - 1, _size, match);
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the List&lt;T&gt; that extends from the first element to the specified index.
+        /// </summary>
+        /// <param name="startIndex">The zero-based starting index of the backward search.</param>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindLastIndex(int startIndex, Predicate<T> match)
         {
             return FindLastIndex(startIndex, startIndex + 1, match);
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the List&lt;T&gt; that contains the specified number of elements and ends at the specified index.
+        /// </summary>
+        /// <param name="startIndex">The zero-based starting index of the backward search.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the element to search for.</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
         public int FindLastIndex(int startIndex, int count, Predicate<T> match)
         {
             if (match == null)
@@ -512,7 +673,7 @@ namespace System.Collections.Generic
             }
             else
             {
-                // Make sure we're not out of range            
+                // Make sure we're not out of range
                 if ((uint)startIndex >= (uint)_size)
                 {
                     throw new System.ArgumentOutOfRangeException("startIndex");
@@ -536,6 +697,10 @@ namespace System.Collections.Generic
             return -1;
         }
 
+        /// <summary>
+        /// Performs the specified action on each element of the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="action">The Action&lt;T&gt; delegate to perform on each element of the List&lt;T&gt;.</param>
         public void ForEach(Action<T> action)
         {
             if (action == null)
@@ -558,27 +723,42 @@ namespace System.Collections.Generic
                 throw new System.InvalidOperationException();
         }
 
-        // Returns an enumerator for this list with the given
-        // permission for removal of elements. If modifications made to the list 
-        // while an enumeration is in progress, the MoveNext and 
-        // GetObject methods of the enumerator will throw an exception.
-        //
+        /// <summary>
+        /// Returns an enumerator for this list with the given
+        /// permission for removal of elements. If modifications made to the list
+        /// while an enumeration is in progress, the MoveNext and
+        /// GetObject methods of the enumerator will throw an exception.
+        /// </summary>
+        /// <returns>A List&lt;T&gt;.Enumerator for the List&lt;T&gt;.</returns>
         public Enumerator GetEnumerator()
         {
             return new Enumerator(this);
         }
 
-        /// <internalonly/>
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>An IEnumerator&lt;T&gt; that can be used to iterate through the collection.</returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             return new Enumerator(this);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>An IEnumerator that can be used to iterate through the collection.</returns>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return new Enumerator(this);
         }
 
+        /// <summary>
+        /// Creates a shallow copy of a range of elements in the source List&lt;T&gt;.
+        /// </summary>
+        /// <param name="index">The zero-based List&lt;T&gt; index at which the range starts.</param>
+        /// <param name="count">The number of elements in the range.</param>
+        /// <returns>A shallow copy of a range of elements in the source List&lt;T&gt;.</returns>
         public List<T> GetRange(int index, int count)
         {
             if (index < 0)
@@ -607,15 +787,24 @@ namespace System.Collections.Generic
         // this list. The list is searched forwards from beginning to end.
         // The elements of the list are compared to the given value using the
         // Object.Equals method.
-        // 
+        //
         // This method uses the Array.IndexOf method to perform the
         // search.
-        // 
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <returns>The zero-based index of the first occurrence of item within the entire List&lt;T&gt;, if found; otherwise, –1.</returns>
         public int IndexOf(T item)
         {
             return Array.IndexOf(_items, item, 0, _size);
         }
 
+        /// <summary>
+        /// Determines the index of a specific item in the IList.
+        /// </summary>
+        /// <param name="item">The object to locate in the IList.</param>
+        /// <returns>The index of item if found in the list; otherwise, –1.</returns>
         int System.Collections.IList.IndexOf(Object item)
         {
             if (IsCompatibleObject(item))
@@ -630,10 +819,15 @@ namespace System.Collections.Generic
         // index and ending at count number of elements. The
         // elements of the list are compared to the given value using the
         // Object.Equals method.
-        // 
+        //
         // This method uses the Array.IndexOf method to perform the
         // search.
-        // 
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the range of elements in the List&lt;T&gt; that extends from the specified index to the last element.
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <param name="index">The zero-based starting index of the search. 0 (zero) is valid in an empty list.</param>
+        /// <returns>The zero-based index of the first occurrence of item within the range of elements in the List&lt;T&gt; that extends from index to the last element, if found; otherwise, –1.</returns>
         public int IndexOf(T item, int index)
         {
             if (index > _size)
@@ -646,10 +840,17 @@ namespace System.Collections.Generic
         // index and upto count number of elements. The
         // elements of the list are compared to the given value using the
         // Object.Equals method.
-        // 
+        //
         // This method uses the Array.IndexOf method to perform the
         // search.
-        // 
+        //
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the range of elements in the List&lt;T&gt; that starts at the specified index and contains the specified number of elements.
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <param name="index">The zero-based starting index of the search. 0 (zero) is valid in an empty list.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The zero-based index of the first occurrence of item within the range of elements in the List&lt;T&gt; that starts at index and contains count number of elements, if found; otherwise, –1.</returns>
         public int IndexOf(T item, int index, int count)
         {
             if (index > _size)
@@ -663,7 +864,12 @@ namespace System.Collections.Generic
         // Inserts an element into this list at a given index. The size of the list
         // is increased by one. If required, the capacity of the list is doubled
         // before inserting the new element.
-        // 
+        //
+        /// <summary>
+        /// Inserts an element into the List&lt;T&gt; at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index at which item should be inserted.</param>
+        /// <param name="item">The object to insert. The value can be null for reference types.</param>
         public void Insert(int index, T item)
         {
             // Note that insertions at the end are legal.
@@ -681,6 +887,11 @@ namespace System.Collections.Generic
             _version++;
         }
 
+        /// <summary>
+        /// Inserts an item to the IList at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index at which item should be inserted.</param>
+        /// <param name="item">The object to insert into the IList.</param>
         void System.Collections.IList.Insert(int index, Object item)
         {
             if (item == null && !(default(T) == null))
@@ -703,6 +914,11 @@ namespace System.Collections.Generic
         // capacity or the new size, whichever is larger.  Ranges may be added
         // to the end of the list by setting index to the List's size.
         //
+        /// <summary>
+        /// Inserts the elements of a collection into the List&lt;T&gt; at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
+        /// <param name="collection">The collection whose elements should be inserted into the List&lt;T&gt;. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         public void InsertRange(int index, IEnumerable<T> collection)
         {
             if (collection == null)
@@ -758,13 +974,18 @@ namespace System.Collections.Generic
         }
 
         // Returns the index of the last occurrence of a given value in a range of
-        // this list. The list is searched backwards, starting at the end 
-        // and ending at the first element in the list. The elements of the list 
+        // this list. The list is searched backwards, starting at the end
+        // and ending at the first element in the list. The elements of the list
         // are compared to the given value using the Object.Equals method.
-        // 
+        //
         // This method uses the Array.LastIndexOf method to perform the
         // search.
-        // 
+        //
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the last occurrence within the entire List&lt;T&gt;.
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <returns>The zero-based index of the last occurrence of item within the entire the List&lt;T&gt;, if found; otherwise, –1.</returns>
         public int LastIndexOf(T item)
         {
             if (_size == 0)
@@ -779,13 +1000,19 @@ namespace System.Collections.Generic
 
         // Returns the index of the last occurrence of a given value in a range of
         // this list. The list is searched backwards, starting at index
-        // index and ending at the first element in the list. The 
-        // elements of the list are compared to the given value using the 
+        // index and ending at the first element in the list. The
+        // elements of the list are compared to the given value using the
         // Object.Equals method.
-        // 
+        //
         // This method uses the Array.LastIndexOf method to perform the
         // search.
-        // 
+        //
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the last occurrence within the range of elements in the List&lt;T&gt; that extends from the first element to the specified index.
+        /// </summary>
+        /// <param name="item">The object to locate in the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <param name="index">The zero-based starting index of the backward search.</param>
+        /// <returns>The zero-based index of the last occurrence of item within the range of elements in the List&lt;T&gt; that extends from the first element to index, if found; otherwise, –1.</returns>
         public int LastIndexOf(T item, int index)
         {
             if (index >= _size)
@@ -798,10 +1025,17 @@ namespace System.Collections.Generic
         // index and upto count elements. The elements of
         // the list are compared to the given value using the Object.Equals
         // method.
-        // 
+        //
         // This method uses the Array.LastIndexOf method to perform the
         // search.
-        // 
+        //
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the last occurrence within the range of elements in the List&lt;T&gt; that contains the specified number of elements and ends at the specified index.
+        /// </summary>
+        /// <param name="item">Searches for the specified object and returns the zero-based index of the last occurrence within the range of elements in the List&lt;T&gt; that contains the specified number of elements and ends at the specified index.</param>
+        /// <param name="index">The zero-based starting index of the backward search.</param>
+        /// <param name="count">The number of elements in the section to search</param>
+        /// <returns>The zero-based index of the last occurrence of item within the range of elements in the List&lt;T&gt; that contains count number of elements and ends at index, if found; otherwise, –1.</returns>
         public int LastIndexOf(T item, int index, int count)
         {
             if ((Count != 0) && (index < 0))
@@ -834,7 +1068,12 @@ namespace System.Collections.Generic
 
         // Removes the element at the given index. The size of the list is
         // decreased by one.
-        // 
+        //
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="item">The object to remove from the List&lt;T&gt;. The value can be null for reference types.</param>
+        /// <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the List&lt;T&gt;.</returns>
         public bool Remove(T item)
         {
             int index = IndexOf(item);
@@ -847,6 +1086,10 @@ namespace System.Collections.Generic
             return false;
         }
 
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the IList.
+        /// </summary>
+        /// <param name="item">The object to remove from the IList.</param>
         void System.Collections.IList.Remove(Object item)
         {
             if (IsCompatibleObject(item))
@@ -856,7 +1099,12 @@ namespace System.Collections.Generic
         }
 
         // This method removes all items which matches the predicate.
-        // The complexity is O(n).   
+        // The complexity is O(n).
+        /// <summary>
+        /// Removes all the elements that match the conditions defined by the specified predicate.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions of the elements to remove.</param>
+        /// <returns>The number of elements removed from the List&lt;T&gt;.</returns>
         public int RemoveAll(Predicate<T> match)
         {
             if (match == null)
@@ -892,7 +1140,11 @@ namespace System.Collections.Generic
 
         // Removes the element at the given index. The size of the list is
         // decreased by one.
-        // 
+        //
+        /// <summary>
+        /// Removes the element at the specified index of the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to remove.</param>
         public void RemoveAt(int index)
         {
             if ((uint)index >= (uint)_size)
@@ -909,7 +1161,12 @@ namespace System.Collections.Generic
         }
 
         // Removes a range of elements from this list.
-        // 
+        //
+        /// <summary>
+        /// Removes a range of elements from the List&lt;T&gt;.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the range of elements to remove.</param>
+        /// <param name="count">The number of elements to remove.</param>
         public void RemoveRange(int index, int count)
         {
             if (index < 0)
@@ -938,7 +1195,9 @@ namespace System.Collections.Generic
             }
         }
 
-        // Reverses the elements in this list.
+        /// <summary>
+        /// Reverses the order of the elements in the entire List&lt;T&gt;.
+        /// </summary>
         public void Reverse()
         {
             Reverse(0, Count);
@@ -948,10 +1207,15 @@ namespace System.Collections.Generic
         // method, an element in the range given by index and count
         // which was previously located at index i will now be located at
         // index index + (index + count - i - 1).
-        // 
+        //
         // This method uses the Array.Reverse method to reverse the
         // elements.
-        // 
+        //
+        /// <summary>
+        /// Reverses the order of the elements in the specified range.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the range to reverse.</param>
+        /// <param name="count">The number of elements in the range to reverse.</param>
         public void Reverse(int index, int count)
         {
             if (index < 0)
@@ -970,8 +1234,11 @@ namespace System.Collections.Generic
             _version++;
         }
 
-        // Sorts the elements in this list.  Uses the default comparer and 
+        // Sorts the elements in this list.  Uses the default comparer and
         // Array.Sort.
+        /// <summary>
+        /// Sorts the elements in the entire List&lt;T&gt; using the default comparer.
+        /// </summary>
         public void Sort()
         {
             Sort(0, Count, null);
@@ -979,6 +1246,10 @@ namespace System.Collections.Generic
 
         // Sorts the elements in this list.  Uses Array.Sort with the
         // provided comparer.
+        /// <summary>
+        /// Sorts the elements in the entire List&lt;T&gt; using the specified comparer.
+        /// </summary>
+        /// <param name="comparer">The IComparer&lt;T&gt; implementation to use when comparing elements, or null to use the default comparer Comparer&lt;T&gt;.Default.</param>
         public void Sort(IComparer<T> comparer)
         {
             Sort(0, Count, comparer);
@@ -989,9 +1260,15 @@ namespace System.Collections.Generic
         // comparer is null, the elements are compared to each other using
         // the IComparable interface, which in that case must be implemented by all
         // elements of the list.
-        // 
+        //
         // This method uses the Array.Sort method to sort the elements.
-        // 
+        //
+        /// <summary>
+        /// Sorts the elements in a range of elements in List&lt;T&gt; using the specified comparer.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the range to sort.</param>
+        /// <param name="count">The length of the range to sort.</param>
+        /// <param name="comparer">The IComparer&lt;T&gt; implementation to use when comparing elements, or null to use the default comparer Comparer&lt;T&gt;.Default.</param>
         public void Sort(int index, int count, IComparer<T> comparer)
         {
             if (index < 0)
@@ -1011,6 +1288,10 @@ namespace System.Collections.Generic
             _version++;
         }
 
+        /// <summary>
+        /// Sorts the elements in the entire List&lt;T&gt; using the specified System.Comparison&lt;T&gt;.
+        /// </summary>
+        /// <param name="comparison">The System.Comparison&lt;T&gt; to use when comparing elements.</param>
         public void Sort(Comparison<T> comparison)
         {
             if (comparison == null)
@@ -1026,6 +1307,10 @@ namespace System.Collections.Generic
 
         // ToArray returns a new Object array containing the contents of the List.
         // This requires copying the List, which is an O(n) operation.
+        /// <summary>
+        /// Copies the elements of the List&lt;T&gt; to a new array.
+        /// </summary>
+        /// <returns>An array containing copies of the elements of the List&lt;T&gt;.</returns>
         public T[] ToArray()
         {
             Contract.Ensures(Contract.Result<T[]>() != null);
@@ -1041,10 +1326,12 @@ namespace System.Collections.Generic
         // new elements will be added to the list. To completely clear a list and
         // release all memory referenced by the list, execute the following
         // statements:
-        // 
+        //
         // list.Clear();
         // list.TrimExcess();
-        // 
+        /// <summary>
+        /// Sets the capacity to the actual number of elements in the List&lt;T&gt;, if that number is less than a threshold value.
+        /// </summary>
         public void TrimExcess()
         {
             int threshold = (int)(((double)_items.Length) * 0.9);
@@ -1054,6 +1341,11 @@ namespace System.Collections.Generic
             }
         }
 
+        /// <summary>
+        /// Determines whether every element in the List&lt;T&gt; matches the conditions defined by the specified predicate.
+        /// </summary>
+        /// <param name="match">The Predicate&lt;T&gt; delegate that defines the conditions to check against the elements.</param>
+        /// <returns>true if every element in the List&lt;T&gt; matches the conditions defined by the specified predicate; otherwise, false. If the list has no elements, the return value is true.</returns>
         public bool TrueForAll(Predicate<T> match)
         {
             if (match == null)
@@ -1083,6 +1375,9 @@ namespace System.Collections.Generic
             return newItems;
         }
 
+        /// <summary>
+        /// Enumerates the elements of a List&lt;T&gt;.
+        /// </summary>
         [Serializable]
         public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator
         {
@@ -1099,10 +1394,17 @@ namespace System.Collections.Generic
                 current = default(T);
             }
 
+            /// <summary>
+            /// Releases all resources used by the List&lt;T&gt;.Enumerator.
+            /// </summary>
             public void Dispose()
             {
             }
 
+            /// <summary>
+            /// Advances the enumerator to the next element of the List&lt;T&gt;.
+            /// </summary>
+            /// <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
             public bool MoveNext()
             {
 
@@ -1129,6 +1431,9 @@ namespace System.Collections.Generic
                 return false;
             }
 
+            /// <summary>
+            /// Gets the element at the current position of the enumerator.
+            /// </summary>
             public T Current
             {
                 get
@@ -1137,6 +1442,9 @@ namespace System.Collections.Generic
                 }
             }
 
+            /// <summary>
+            /// Gets the element at the current position of the enumerator.
+            /// </summary>
             Object System.Collections.IEnumerator.Current
             {
                 get
@@ -1149,6 +1457,9 @@ namespace System.Collections.Generic
                 }
             }
 
+            /// <summary>
+            /// Sets the enumerator to its initial position, which is before the first element in the collection.
+            /// </summary>
             void System.Collections.IEnumerator.Reset()
             {
                 if (version != list._version)
@@ -1159,7 +1470,6 @@ namespace System.Collections.Generic
                 index = 0;
                 current = default(T);
             }
-
         }
     }
 }
