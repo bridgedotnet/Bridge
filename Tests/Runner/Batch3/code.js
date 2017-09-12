@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25095,6 +25093,59 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103", {
+        statics: {
+            methods: {
+                CheckTypeDefault: function (T) {
+                    return Bridge.getDefaultValue(T);
+                },
+                TestLiteralStaticMember: function () {
+                    var a1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.m1;
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.Prop1 = "test";
+                    Bridge.Test.NUnit.Assert.AreEqual("test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.Prop1);
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.m1("1");
+                    Bridge.Test.NUnit.Assert.AreEqual("1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.Prop1);
+
+                    a1("3");
+                    Bridge.Test.NUnit.Assert.AreEqual("3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.Prop1);
+                },
+                TestLiteralDefaultValue: function () {
+                    Bridge.Test.NUnit.Assert.Null(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.CheckTypeDefault(System.Object));
+                    Bridge.Test.NUnit.Assert.Null(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.CheckTypeDefault(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.Person));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1", {
+        $literal: true,
+        statics: {
+            props: {
+                Prop1: null
+            },
+            methods: {
+                m1: function (p1) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.c1.Prop1 = p1;
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.Person", {
+        $literal: true,
+        ctors: {
+            ctor: function () {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103.Person; };
+                (function (){
+                    this.Name = null;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3107", {
         statics: {
