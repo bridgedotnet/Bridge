@@ -1301,7 +1301,7 @@ namespace System.Collections.Generic
 
             if (_size > 0)
             {
-                if(_items.Length == _size)
+                if (_items.Length == _size)
                 {
                     Array.Sort(_items, comparison);
                 }
@@ -1311,7 +1311,7 @@ namespace System.Collections.Generic
                     Array.Copy(_items, 0, newItems, 0, _size);
                     Array.Sort(newItems, comparison);
                     Array.Copy(newItems, 0, _items, 0, _size);
-                }                
+                }
             }
         }
 
