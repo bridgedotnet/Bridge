@@ -13450,7 +13450,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (this._size > 0) {
-                    System.Array.sort(this._items, comparison);
+                    if (this._items.length === this._size) {
+                        System.Array.sort(this._items, comparison);
+                    } else {
+                        var newItems = System.Array.init(this._size, function (){
+                            return Bridge.getDefaultValue(T);
+                        }, T);
+                        System.Array.copy(this._items, 0, newItems, 0, this._size);
+                        System.Array.sort(newItems, comparison);
+                        System.Array.copy(newItems, 0, this._items, 0, this._size);
+                    }
                 }
             },
             toArray: function () {
