@@ -24399,8 +24399,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -25274,41 +25276,6 @@ Bridge.$N1391Result =                     r;
         alias: ["dispose", "System$IDisposable$dispose"],
         methods: {
             dispose: function () { }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126", {
-        statics: {
-            methods: {
-                TestListSortComparison: function () {
-                    var $t;
-                    var list = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.Foo)).ctor();
-
-                    list.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.Foo(), $t.V = 3, $t));
-                    list.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.Foo(), $t.V = 1, $t));
-                    list.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.Foo(), $t.V = 2, $t));
-
-                    list.sort$2($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.f1);
-
-                    Bridge.Test.NUnit.Assert.AreEqual(1, list.getItem(0).V);
-                    Bridge.Test.NUnit.Assert.AreEqual(2, list.getItem(1).V);
-                    Bridge.Test.NUnit.Assert.AreEqual(3, list.getItem(2).V);
-                }
-            }
-        }
-    });
-
-    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126, {
-        f1: function (a, b) {
-            return Bridge.compare(a.V, b.V);
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3126.Foo", {
-        fields: {
-            V: 0
         }
     });
 
