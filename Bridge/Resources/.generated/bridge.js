@@ -27274,7 +27274,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return null;
                 }
 
-                return new Uint8Array(outputBytes);
+                return outputBytes;
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
@@ -27459,7 +27459,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return null;
                 }
 
-                return new Uint8Array(outputBytes);
+                return outputBytes;
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
@@ -27693,7 +27693,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return null;
                 }
 
-                return new Uint8Array(outputBytes);
+                return outputBytes;
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
                 var position = index;
@@ -27852,7 +27852,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 writtenBytes.v = arr.length;
 
-                return new Uint8Array(arr);
+                return arr;
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
                 var _base64ToArrayBuffer = $asm.$.System.Text.UTF7Encoding.f2;
@@ -28025,7 +28025,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return null;
                 }
 
-                return new Uint8Array(outputBytes);
+                return outputBytes;
             },
             Decode$2: function (bytes, index, count, chars, charIndex) {
                 this._hasError = false;

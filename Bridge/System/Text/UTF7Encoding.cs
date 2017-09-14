@@ -75,7 +75,7 @@ namespace System.Text
 
             writtenBytes = arr.Length;
 
-            return new Uint8Array(arr).As<byte[]>();
+            return arr.As<byte[]>();
         }
 
         protected override string Decode(byte[] bytes, int index, int count, char[] chars, int charIndex)

@@ -121,7 +121,7 @@ namespace System.Text
                 return null;
             }
 
-            return new Uint8Array(outputBytes).As<byte[]>();
+            return outputBytes;
         }
 
         protected override string Decode(byte[] bytes, int index, int count, char[] chars, int charIndex)
