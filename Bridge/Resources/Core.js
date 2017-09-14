@@ -1,7 +1,7 @@
     var core = {
         global: globals,
 
-        isNode: (new Function("try {return this===global;}catch(e){return false;}"))(),
+        isNode: Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]',
 
         emptyFn: function () { },
 
