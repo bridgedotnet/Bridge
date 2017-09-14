@@ -1301,7 +1301,17 @@ namespace System.Collections.Generic
 
             if (_size > 0)
             {
-                Array.Sort(_items, comparison);
+                if (_items.Length == _size)
+                {
+                    Array.Sort(_items, comparison);
+                }
+                else
+                {
+                    T[] newItems = new T[_size];
+                    Array.Copy(_items, 0, newItems, 0, _size);
+                    Array.Sort(newItems, comparison);
+                    Array.Copy(newItems, 0, _items, 0, _size);
+                }
             }
         }
 

@@ -30,6 +30,11 @@ namespace Bridge.ClientTest.Collections.Generic
             }
         }
 
+        private class Foo
+        {
+            public int V;
+        }
+
         private class TestData
         {
             public List<string> Dinosaurs
@@ -746,6 +751,34 @@ namespace Bridge.ClientTest.Collections.Generic
             var list = new List<int> { 1, 6, 6, 4, 2 };
             list.Sort(new TestReverseComparer());
             Assert.AreEqual(new[] { 6, 6, 4, 2, 1 }, list.ToArray());
+        }
+
+        [Test]
+        public static void SortWithComparisonWorks_N3126()
+        {
+            // #3126
+            var list = new List<Foo>();
+
+            list.Add(new Foo() { V = 3 });
+            list.Add(new Foo() { V = 1 });
+            list.Add(new Foo() { V = 2 });
+
+            list.Sort((a, b) =>
+            {
+                return a.V.CompareTo(b.V);
+            });
+
+            Assert.AreEqual(1, list[0].V);
+            Assert.AreEqual(2, list[1].V);
+            Assert.AreEqual(3, list[2].V);
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var l = new List<int>();
+
+                Comparison<int> c = null;
+                l.Sort(c);
+            });
         }
 
         [Test]

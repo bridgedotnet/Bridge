@@ -1,5 +1,5 @@
 /**
- * @version   : 16.3.0 - Bridge.NET
+ * @version   : 16.3.1 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -3099,8 +3099,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.3.0";
-        Bridge.SystemAssembly.compiler = "16.3.0";
+        Bridge.SystemAssembly.version = "16.3.1";
+        Bridge.SystemAssembly.compiler = "16.3.1";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -13450,7 +13450,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (this._size > 0) {
-                    System.Array.sort(this._items, comparison);
+                    if (this._items.length === this._size) {
+                        System.Array.sort(this._items, comparison);
+                    } else {
+                        var newItems = System.Array.init(this._size, function (){
+                            return Bridge.getDefaultValue(T);
+                        }, T);
+                        System.Array.copy(this._items, 0, newItems, 0, this._size);
+                        System.Array.sort(newItems, comparison);
+                        System.Array.copy(newItems, 0, this._items, 0, this._size);
+                    }
                 }
             },
             toArray: function () {
