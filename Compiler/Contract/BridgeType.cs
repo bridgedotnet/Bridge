@@ -966,6 +966,11 @@ namespace Bridge.Contract
                 return "void";
             }
 
+            if (type.IsKnownType(KnownTypeCode.Array))
+            {
+                return "any[]";
+            }
+
             if (type.IsKnownType(KnownTypeCode.Byte) ||
                 type.IsKnownType(KnownTypeCode.Char) ||
                 type.IsKnownType(KnownTypeCode.Decimal) ||
@@ -988,7 +993,7 @@ namespace Bridge.Contract
                 return BridgeTypes.ToTypeScriptName(arrayType.ElementType, emitter, asDefinition, excludens, guard: guard) + "[]";
             }
 
-            if (type.Kind == TypeKind.Dynamic)
+            if (type.Kind == TypeKind.Dynamic || type.IsKnownType(KnownTypeCode.Object))
             {
                 return "any";
             }

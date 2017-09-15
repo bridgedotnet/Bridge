@@ -533,6 +533,8 @@ declare module System {
 
     export interface ICollection extends IEnumerable {
         getCount(): number;
+        System$Collections$IList$Count: number;
+        Count: number;
     }
     var ICollection: Function;
 
@@ -551,7 +553,7 @@ declare module System {
         or(value: System.Collections.BitArray): System.Collections.BitArray;
         xor(value: System.Collections.BitArray): System.Collections.BitArray;
         not(): System.Collections.BitArray;
-        clone(): System.Object;
+        clone(): any;
         getEnumerator(): System.Collections.IEnumerator;
     }
     export interface BitArrayFunc extends Function {
@@ -581,7 +583,7 @@ declare module System {
 
     module BitArray {
         export interface BitArrayEnumeratorSimple extends System.Collections.IEnumerator {
-            Current: System.Object;
+            Current: any;
             moveNext(): boolean;
             reset(): void;
         }
@@ -603,6 +605,29 @@ declare module System {
         expandPrime(oldSize: number): number;
     }
     var HashHelpers: HashHelpersFunc;
+
+    export interface IList extends System.Collections.ICollection, System.Collections.IEnumerable {
+        System$Collections$IList$getItem(index: number): any;
+        getItem(index: number): any;
+        System$Collections$IList$setItem(index: number, value: any): void;
+        setItem(index: number, value: any): void;
+        System$Collections$IList$IsReadOnly: boolean;
+        IsReadOnly: boolean;
+        add(item: any): number;
+        System$Collections$IList$add(item: any): number;
+        clear(): void;
+        System$Collections$IList$clear(): void;
+        contains(item: any): boolean;
+        System$Collections$IList$contains(item: any): boolean;
+        indexOf(item: any): number;
+        System$Collections$IList$indexOf(item: any): number;
+        insert(index: number, item: any): void;
+        System$Collections$IList$insert(index: number, item: any): void;
+        removeAt(index: number): void;
+        System$Collections$IList$removeAt(index: number): void;
+        remove(item: any): void;
+        System$Collections$IList$remove(item: any): void;
+    }
 
     module Generic {
         export class KeyNotFoundException extends Exception {
@@ -729,10 +754,10 @@ declare module System {
         System$Collections$IList$IsReadOnly: boolean;
         getItem(index: number): T;
         setItem(index: number, value: T): void;
-        System$Collections$IList$getItem(index: number): System.Object;
-        System$Collections$IList$setItem(index: number, value: System.Object): void;
+        System$Collections$IList$getItem(index: number): any;
+        System$Collections$IList$setItem(index: number, value: any): void;
         add(item: T): void;
-        System$Collections$IList$add(item: System.Object): number;
+        System$Collections$IList$add(item: any): number;
         addRange(collection: System.Collections.Generic.IEnumerable$1<T>): void;
         asReadOnly(): System.Collections.ObjectModel.ReadOnlyCollection$1<T>;
         binarySearch$2(index: number, count: number, item: T, comparer: System.Collections.Generic.IComparer$1<T>): number;
@@ -740,10 +765,10 @@ declare module System {
         binarySearch$1(item: T, comparer: System.Collections.Generic.IComparer$1<T>): number;
         clear(): void;
         contains(item: T): boolean;
-        System$Collections$IList$contains(item: System.Object): boolean;
+        System$Collections$IList$contains(item: any): boolean;
         convertAll<TOutput>(TOutput: {prototype: TOutput}, converter: {(input: T): TOutput}): System.Collections.Generic.List$1<TOutput>;
         copyTo$1(array: T[]): void;
-        System$Collections$ICollection$copyTo(array: System.Object[], arrayIndex: number): void;
+        System$Collections$ICollection$copyTo(array: any[], arrayIndex: number): void;
         copyTo$2(index: number, array: T[], arrayIndex: number, count: number): void;
         copyTo(array: T[], arrayIndex: number): void;
         ensureCapacity(min: number): void;
@@ -762,17 +787,17 @@ declare module System {
         System$Collections$IEnumerable$getEnumerator(): System.Collections.IEnumerator;
         getRange(index: number, count: number): System.Collections.Generic.List$1<T>;
         indexOf(item: T): number;
-        System$Collections$IList$indexOf(item: System.Object): number;
+        System$Collections$IList$indexOf(item: any): number;
         indexOf$1(item: T, index: number): number;
         indexOf$2(item: T, index: number, count: number): number;
         insert(index: number, item: T): void;
-        System$Collections$IList$insert(index: number, item: System.Object): void;
+        System$Collections$IList$insert(index: number, item: any): void;
         insertRange(index: number, collection: System.Collections.Generic.IEnumerable$1<T>): void;
         lastIndexOf(item: T): number;
         lastIndexOf$1(item: T, index: number): number;
         lastIndexOf$2(item: T, index: number, count: number): number;
         remove(item: T): boolean;
-        System$Collections$IList$remove(item: System.Object): void;
+        System$Collections$IList$remove(item: any): void;
         removeAll(match: {(obj: T): boolean}): number;
         removeAt(index: number): void;
         removeRange(index: number, count: number): void;
@@ -785,7 +810,7 @@ declare module System {
         toArray(): T[];
         trimExcess(): void;
         trueForAll(match: {(obj: T): boolean}): boolean;
-        toJSON(): System.Object;
+        toJSON(): any;
     }
     export interface List$1Func extends Function {
         <T>($T: Bridge.TypeRef<T>): {
@@ -801,7 +826,7 @@ declare module System {
                 new (collection: System.Collections.Generic.IEnumerable$1<T>): List$1<T>
                 new (collection: T[]): List$1<T>
             };
-            isCompatibleObject(value: System.Object): boolean;
+            isCompatibleObject(value: any): boolean;
         }
     }
     var List$1: List$1Func;
@@ -914,7 +939,7 @@ declare module System {
 
         export interface Enumerator<T> extends System.Collections.Generic.IEnumerator$1<T> {
             Current: T;
-            System$Collections$IEnumerator$Current: System.Object;
+            System$Collections$IEnumerator$Current: any;
             dispose(): void;
             moveNext(): boolean;
             System$Collections$IEnumerator$reset(): void;
@@ -986,7 +1011,7 @@ declare module System {
     module Queue$1 {
         export interface Enumerator<T> extends System.Collections.Generic.IEnumerator$1<T> {
             Current: T;
-            System$Collections$IEnumerator$Current: System.Object;
+            System$Collections$IEnumerator$Current: any;
             dispose(): void;
             moveNext(): boolean;
             System$Collections$IEnumerator$reset(): void;
@@ -1042,7 +1067,7 @@ declare module System {
     module Stack$1 {
         export interface Enumerator<T> extends System.Collections.Generic.IEnumerator$1<T> {
             Current: T;
-            System$Collections$IEnumerator$Current: System.Object;
+            System$Collections$IEnumerator$Current: any;
             dispose(): void;
             moveNext(): boolean;
             System$Collections$IEnumerator$reset(): void;
@@ -1254,7 +1279,7 @@ module Text {
         DisplayName: string;
         GetEncoding(): System.Text.Encoding;
         GetHashCode(): number;
-        Equals(o: System.Object): boolean;
+        Equals(o: any): boolean;
     }
     export interface EncodingInfoFunc extends Function {
         prototype: EncodingInfo;

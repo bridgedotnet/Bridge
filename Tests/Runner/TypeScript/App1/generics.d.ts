@@ -141,7 +141,7 @@ declare module Generics {
         SimpleDoubleGenericIntString: Generics.SimpleDoubleGeneric$2<number,string>;
         GenericINamedEntity: Generics.GenericINamedEntity$1<Generics.INamedEntity>;
         GenericNamedEntity: Generics.GenericNamedEntity$1<Generics.NamedEntity>;
-        GenericClassObject: Generics.GenericClass$1<System.Object>;
+        GenericClassObject: Generics.GenericClass$1<any>;
         GenericClassNamedEntity: Generics.GenericClass$1<Generics.NamedEntity>;
         GenericNew: Generics.GenericNew$1<Generics.NewClass>;
         GenericNewAndClass: Generics.GenericNewAndClass$1<Generics.NewClass>;

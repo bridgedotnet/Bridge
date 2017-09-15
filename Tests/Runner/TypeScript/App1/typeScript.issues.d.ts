@@ -11,10 +11,10 @@ declare module TypeScript.Issues {
     var N1640: N1640Func;
     module N1640 {
         export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            addOnGameEvent(value: {(sender: any, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: any, e: string): void}): void;
             StartGame(s: string): void;
-            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
+            Subscribe(handler: {(sender: any, e: string): void}): void;
         }
         export interface GamePlayFunc extends Function {
             prototype: GamePlay;
@@ -22,10 +22,10 @@ declare module TypeScript.Issues {
         }
 
         export interface IGamePlay {
-            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: any, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: any, e: string): void}): void;
+            addOnGameEvent(value: {(sender: any, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: any, e: string): void}): void;
             TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
             StartGame(s: string): void;
         }

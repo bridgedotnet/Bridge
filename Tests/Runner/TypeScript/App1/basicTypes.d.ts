@@ -11,10 +11,10 @@ declare module BasicTypes {
         ColorArray: BasicTypes.Color[];
         TwoDimensionalArray: number[][];
         ColorValue: BasicTypes.Color;
-        AnyValueString: System.Object;
-        AnyValueInteger: System.Object;
+        AnyValueString: any;
+        AnyValueInteger: any;
         DynamicValueInteger: any;
-        UndefinedValue: System.Object;
+        UndefinedValue: any;
         VoidFunction(): void;
     }
     export interface BasicTypesFunc extends Function {
