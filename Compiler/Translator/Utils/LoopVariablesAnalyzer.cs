@@ -61,6 +61,18 @@ namespace Bridge.Translator
             node.AcceptVisitor(this);
         }
 
+        public override void VisitForeachStatement(ForeachStatement foreachStatement)
+        {
+            if (foreachStatement.VariableNameToken != null && !foreachStatement.VariableNameToken.IsNull)
+            {
+                this.VariableNames.Add(foreachStatement.VariableName);
+                var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
+                this.Variables.Add(rr.ElementVariable);
+            }
+
+            base.VisitForeachStatement(foreachStatement);
+        }
+
         public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
         {
             foreach (var variable in variableDeclarationStatement.Variables)

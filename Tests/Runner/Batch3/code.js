@@ -12380,14 +12380,14 @@ Bridge.$N1391Result =                     r;
                 $t = Bridge.getEnumerator(System.Array.init([new $asm.$AnonymousType$14()], System.Object));
                 try {
                     while ($t.moveNext()) {
-                        var item = $t.Current;
+                        var item = { v : $t.Current };
                         if (false) {
                             continue;
                         }
 
                         var newJObj1 = (function ($me, item) {
                                 return function (_o1) {
-                                    _o1.Add("name", item);
+                                    _o1.Add("name", item.v);
                                     return _o1;
                                 };
                             })(this, item)(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25276,6 +25274,107 @@ Bridge.$N1391Result =                     r;
         alias: ["dispose", "System$IDisposable$dispose"],
         methods: {
             dispose: function () { }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131", {
+        statics: {
+            fields: {
+                data: null,
+                actions: null
+            },
+            ctors: {
+                init: function () {
+                    this.data = System.Array.init([1, 2, 3], System.Int32);
+                    this.actions = new (System.Collections.Generic.List$1(Function)).ctor();
+                }
+            },
+            methods: {
+                TestCloseCaptureFoldedCycle: function () {
+                    var $t, $t1, $t2;
+                    var s = "";
+                    $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.data);
+                    try {
+                        while ($t.moveNext()) {
+                            var i2 = { v : $t.Current };
+                            $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.data);
+                            try {
+                                while ($t1.moveNext()) {
+                                    var i = { v : $t1.Current };
+                                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.actions.add((function ($me, i2, i) {
+                                        return function () {
+                                            s = System.String.concat(s, i2.v, i.v);
+                                        };
+                                    })(this, i2, i));
+                                }
+                            } finally {
+                                if (Bridge.is($t1, System.IDisposable)) {
+                                    $t1.System$IDisposable$dispose();
+                                }
+                            }
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.actions);
+                    try {
+                        while ($t2.moveNext()) {
+                            var action = $t2.Current;
+                            action();
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }
+                    Bridge.Test.NUnit.Assert.AreEqual("111213212223313233", s);
+                },
+                TestCloseCaptureFoldedCycle2: function () {
+                    var $t, $t1, $t2;
+                    var s = "";
+                    for (var idx = 0; idx < 2; idx = (idx + 1) | 0) {
+                        $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.data);
+                        try {
+                            while ($t.moveNext()) {
+                                var i2 = { v : $t.Current };
+                                $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.data);
+                                try {
+                                    while ($t1.moveNext()) {
+                                        var i = { v : $t1.Current };
+                                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.actions.add((function ($me, i2, i) {
+                                            return function () {
+                                                s = System.String.concat(s, idx, i2.v, i.v);
+                                            };
+                                        })(this, i2, i));
+                                    }
+                                } finally {
+                                    if (Bridge.is($t1, System.IDisposable)) {
+                                        $t1.System$IDisposable$dispose();
+                                    }
+                                }
+                            }
+                        } finally {
+                            if (Bridge.is($t, System.IDisposable)) {
+                                $t.System$IDisposable$dispose();
+                            }
+                        }}
+
+                    $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131.actions);
+                    try {
+                        while ($t2.moveNext()) {
+                            var action = $t2.Current;
+                            action();
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }
+                    Bridge.Test.NUnit.Assert.AreEqual("211212213221222223231232233211212213221222223231232233", s);
+                }
+            }
         }
     });
 
@@ -26947,10 +27046,10 @@ Bridge.$N1391Result =                     r;
                     $t = Bridge.getEnumerator(keys);
                     try {
                         while ($t.moveNext()) {
-                            var itm = $t.Current;
+                            var itm = { v : $t.Current };
                             handlers[System.Array.index(((i++) | 0), handlers)] = (function ($me, itm) {
                                 return function () {
-                                    result += itm;
+                                    result += itm.v;
                                 };
                             })(this, itm);
                         }
@@ -26978,10 +27077,10 @@ Bridge.$N1391Result =                     r;
                     $t2 = Bridge.getEnumerator(keys);
                     try {
                         while ($t2.moveNext()) {
-                            var itm1 = $t2.Current;
+                            var itm1 = { v : $t2.Current };
                             handlers[System.Array.index(((i++) | 0), handlers)] = (function ($me, itm1) {
                                 return function () {
-                                    result += itm1;
+                                    result += itm1.v;
                                 };
                             })(this, itm1);
                         }
