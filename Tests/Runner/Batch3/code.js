@@ -25385,12 +25385,24 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestInterfaceOptionalParams: function () {
                     var work = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3134.SomeWork();
+
                     var result = work.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3134$ISomeWork$Exec(System.Boolean, void 0);
 
                     Bridge.Test.NUnit.Assert.AreEqual("empty", result);
+
+                    var af = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3134.f1;
+                    var result1 = work.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3134$ISomeWork$Exec(System.Boolean, af);
+
+                    Bridge.Test.NUnit.Assert.AreEqual("not empty", result1);
                 }
             }
         }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3134", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3134, {
+        f1: function (f) { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3134.ISomeWork", {
