@@ -25380,6 +25380,27 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3138", {
+        statics: {
+            methods: {
+                DateTimeGreaterThanAndLessThanOperators: function () {
+                    var d1 = System.DateTime.getNow();
+                    var d2 = System.DateTime.addMilliseconds(System.DateTime.getNow(), 100);
+                    var d3 = System.DateTime.addMilliseconds(System.DateTime.getNow(), -100);
+
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.lt(d1, d2));
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.gt(d1, d2));
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.lte(d1, d2));
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.gte(d1, d2));
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.lt(d1, d3));
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.gt(d1, d3));
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.lte(d1, d3));
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.gte(d1, d3));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
