@@ -656,7 +656,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3112 - TestUsingScopeWitinLoopInLambda", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3112.TestUsingScopeWitinLoopInLambda);
             QUnit.test("#3131 - TestCloseCaptureFoldedCycle", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3131.TestCloseCaptureFoldedCycle);
             QUnit.test("#3131 - TestCloseCaptureFoldedCycle2", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3131.TestCloseCaptureFoldedCycle2);
-            QUnit.test("#3138 - DateTimeGreaterThanAndLessThanOperators", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3138.DateTimeGreaterThanAndLessThanOperators);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -13613,31 +13612,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3131", $t.File = "Batch3\\BridgeIssues\\3100\\N3131.cs", $t);
-                }
-                return this.context;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3138", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3138)],
-        statics: {
-            methods: {
-                DateTimeGreaterThanAndLessThanOperators: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3138).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3138, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeGreaterThanAndLessThanOperators()", $t.Line = "10", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3138.DateTimeGreaterThanAndLessThanOperators();
-                }
-            }
-        },
-        fields: {
-            context: null
-        },
-        methods: {
-            GetContext: function () {
-                var $t;
-                if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3138", $t.File = "Batch3\\BridgeIssues\\3100\\N3138.cs", $t);
                 }
                 return this.context;
             }

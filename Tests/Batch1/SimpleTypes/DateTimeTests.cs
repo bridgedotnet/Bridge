@@ -973,6 +973,66 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void DateTimeGreaterThanAndLessThanOperators_N3138()
+        {
+            // #3138
+            var d1 = DateTime.Now;
+            var d2 = DateTime.Now.AddMilliseconds(100);
+            var d3 = DateTime.Now.AddMilliseconds(-100);
+            var d4 = d1;
+
+            Assert.True(d2 > d1);
+            Assert.False(d1 > d2);
+            Assert.False(d1 > d4);
+            Assert.False(d4 > d1);
+
+            Assert.True(d2 >= d1);
+            Assert.False(d1 >= d2);
+            Assert.True(d1 >= d4);
+            Assert.True(d4 >= d1);
+
+            Assert.True(d3 < d1);
+            Assert.False(d1 < d3);
+            Assert.False(d1 < d4);
+            Assert.False(d4 < d1);
+
+            Assert.True(d3 <= d1);
+            Assert.False(d1 <= d3);
+            Assert.True(d1 <= d4);
+            Assert.True(d4 <= d1);
+        }
+
+        [Test]
+        public void DateTimeGreaterThanAndLessThanOperatorsForNullable_N3138()
+        {
+            // #3138
+            DateTime? d1 = DateTime.Now;
+            DateTime? d2 = DateTime.Now.AddMilliseconds(100);
+            DateTime? d3 = DateTime.Now.AddMilliseconds(-100);
+            DateTime? d4 = d1;
+
+            Assert.True(d2 > d1);
+            Assert.False(d1 > d2);
+            Assert.False(d1 > d4);
+            Assert.False(d4 > d1);
+
+            Assert.True(d2 >= d1);
+            Assert.False(d1 >= d2);
+            Assert.True(d1 >= d4);
+            Assert.True(d4 >= d1);
+
+            Assert.True(d3 < d1);
+            Assert.False(d1 < d3);
+            Assert.False(d1 < d4);
+            Assert.False(d4 < d1);
+
+            Assert.True(d3 <= d1);
+            Assert.False(d1 <= d3);
+            Assert.True(d1 <= d4);
+            Assert.True(d4 <= d1);
+        }
+
+        [Test]
         public void GetHashCodeWorks()
         {
             Assert.AreEqual(new DateTime(0).GetHashCode(), new DateTime(0).GetHashCode());
