@@ -1006,30 +1006,39 @@ namespace Bridge.ClientTest.SimpleTypes
         public void DateTimeGreaterThanAndLessThanOperatorsForNullable_N3138()
         {
             // #3138
-            DateTime? d1 = DateTime.Now;
-            DateTime? d2 = DateTime.Now.AddMilliseconds(100);
-            DateTime? d3 = DateTime.Now.AddMilliseconds(-100);
+            DateTime? d1 = new Nullable<DateTime>(DateTime.Now);
+            DateTime? d2 = new Nullable<DateTime>(d1.Value.AddMilliseconds(100));
+            DateTime? d3 = new Nullable<DateTime>(d1.Value.AddMilliseconds(-100));
             DateTime? d4 = d1;
+            DateTime? d5 = null;
 
             Assert.True(d2 > d1);
             Assert.False(d1 > d2);
             Assert.False(d1 > d4);
             Assert.False(d4 > d1);
+            Assert.False(d5 > d1);
+            Assert.False(d1 > d5);
 
             Assert.True(d2 >= d1);
             Assert.False(d1 >= d2);
             Assert.True(d1 >= d4);
             Assert.True(d4 >= d1);
+            Assert.False(d5 >= d1);
+            Assert.False(d1 >= d5);
 
             Assert.True(d3 < d1);
             Assert.False(d1 < d3);
             Assert.False(d1 < d4);
             Assert.False(d4 < d1);
+            Assert.False(d5 < d1);
+            Assert.False(d1 < d5);
 
             Assert.True(d3 <= d1);
             Assert.False(d1 <= d3);
             Assert.True(d1 <= d4);
             Assert.True(d4 <= d1);
+            Assert.False(d5 <= d1);
+            Assert.False(d1 <= d5);
         }
 
         [Test]
