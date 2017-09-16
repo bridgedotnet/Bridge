@@ -1151,19 +1151,19 @@
             },
 
             gt: function (a, b) {
-                return Bridge.hasValue$1(a, b) ? (a > b) : false;
+                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) > System.DateTime.getTicks(b)) : false;
             },
 
             gte: function (a, b) {
-                return Bridge.hasValue$1(a, b) ? (a >= b) : false;
+                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) >= System.DateTime.getTicks(b)) : false;
             },
 
             lt: function (a, b) {
-                return Bridge.hasValue$1(a, b) ? (a < b) : false;
+                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) < System.DateTime.getTicks(b)) : false;
             },
 
             lte: function (a, b) {
-                return Bridge.hasValue$1(a, b) ? (a <= b) : false;
+                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) <= System.DateTime.getTicks(b)) : false;
             }
         }
     });
