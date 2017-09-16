@@ -677,7 +677,7 @@ namespace Bridge.Translator
                             new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
                         }
 
-                        if (invocationExpression.Arguments.Count > 0)
+                        if (invocationExpression.Arguments.Count > 0 || argsExpressions.Length > 0)
                         {
                             this.EnsureComma(false);
                         }
