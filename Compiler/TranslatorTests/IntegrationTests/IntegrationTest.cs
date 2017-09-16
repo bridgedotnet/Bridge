@@ -56,7 +56,8 @@ namespace Bridge.Translator.Tests
             { "bridge.console.js", CompareMode.Presence },
             { "bridge.console.min.js", CompareMode.Presence },
             { "bridge.meta.js", CompareMode.Presence },
-            { "bridge.meta.min.js", CompareMode.Presence }
+            { "bridge.meta.min.js", CompareMode.Presence },
+            { "bridge.d.ts", CompareMode.Presence }
         };
 
         private void GetPaths(string folder)
