@@ -501,6 +501,8 @@ namespace Bridge.Translator
         public virtual string GetInline(IEntity entity)
         {
             string attrName = Bridge.Translator.Translator.Bridge_ASSEMBLY + ".TemplateAttribute";
+            // Moving these two `is` into the end of the methos (where it's actually used) leads
+            // to incorrect JavaScript being generated
             bool isProp = entity is IProperty;
             bool isEvent = entity is IEvent;
 
