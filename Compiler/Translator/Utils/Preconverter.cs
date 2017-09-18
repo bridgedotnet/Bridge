@@ -456,10 +456,21 @@ namespace Bridge.Translator
                 var map = rr.GetArgumentToParameterMap();
                 var orig = clonInvocationExpression.Arguments.ToArray();
                 var result = clonInvocationExpression.Arguments.ToArray();
-                for (int i = 0; i < map.Count; i++)
+
+                if (rr.IsExtensionMethodInvocation)
                 {
-                    result[i] = orig[map[i]];
+                    for (int i = 1; i < map.Count; i++)
+                    {
+                        result[i - 1] = orig[map[i] - 1];
+                    }
                 }
+                else
+                {
+                    for (int i = 0; i < map.Count; i++)
+                    {
+                        result[i] = orig[map[i]];
+                    }
+                }                
 
                 clonInvocationExpression.Arguments.ReplaceWith(result);
                 return clonInvocationExpression;
