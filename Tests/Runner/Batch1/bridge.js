@@ -17514,6 +17514,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
         getAbsoluteUri: function () {
             return this.absoluteUri;
+        },
+
+        toJSON: function () {
+            return this.absoluteUri;
         }
     });
 

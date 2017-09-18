@@ -6,5 +6,9 @@
 
         getAbsoluteUri: function () {
             return this.absoluteUri;
+        },
+
+        toJSON: function () {
+            return this.absoluteUri;
         }
     });
