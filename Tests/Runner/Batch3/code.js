@@ -24399,8 +24399,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -25096,20 +25098,39 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101", {
         statics: {
+            fields: {
+                counter: 0
+            },
             methods: {
-                ckEditor_OnChange: function () { },
+                ckEditor_OnChange: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter + 1) | 0;
+                },
                 TestEventTemplate: function () {
                     var editor = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.CKEditor();
+
+                    Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter);
+                    Bridge.Test.NUnit.Assert.False(editor.isSet);
+                    Bridge.Test.NUnit.Assert.Null(editor.name);
+                    Bridge.Test.NUnit.Assert.Null(editor.handler);
+
                     editor.on('change', Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange);
 
+                    Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter);
                     Bridge.Test.NUnit.Assert.True(editor.isSet);
                     Bridge.Test.NUnit.Assert.AreEqual("change", editor.name);
                     Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange, editor.handler);
+
+                    editor.handler();
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter);
+
+                    editor.handler();
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter);
 
                     editor.off('change', Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange);
                     Bridge.Test.NUnit.Assert.False(editor.isSet);
                     Bridge.Test.NUnit.Assert.Null(editor.name);
                     Bridge.Test.NUnit.Assert.Null(editor.handler);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.counter);
                 }
             }
         }

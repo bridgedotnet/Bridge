@@ -12,9 +12,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public event Action OnChange
             {
                 [Template("{this}.on('change', {value})")]
-                add { }
+                add
+                {
+                }
                 [Template("{this}.off('change', {value})")]
-                remove { }
+                remove
+                {
+                }
             }
 
             public string name;
@@ -36,24 +40,41 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        static int counter;
+
         static void ckEditor_OnChange()
-        {            
+        {
+            counter++;
         }
 
         [Test]
         public static void TestEventTemplate()
         {
             var editor = new CKEditor();
+
+            Assert.AreEqual(0, counter);
+            Assert.False(editor.isSet);
+            Assert.Null(editor.name);
+            Assert.Null(editor.handler);
+
             editor.OnChange += ckEditor_OnChange;
 
+            Assert.AreEqual(0, counter);
             Assert.True(editor.isSet);
             Assert.AreEqual("change", editor.name);
             Assert.AreStrictEqual((Action)ckEditor_OnChange, editor.handler);
+
+            editor.handler();
+            Assert.AreEqual(1, counter);
+
+            editor.handler();
+            Assert.AreEqual(2, counter);
 
             editor.OnChange -= ckEditor_OnChange;
             Assert.False(editor.isSet);
             Assert.Null(editor.name);
             Assert.Null(editor.handler);
+            Assert.AreEqual(2, counter);
         }
     }
 }
