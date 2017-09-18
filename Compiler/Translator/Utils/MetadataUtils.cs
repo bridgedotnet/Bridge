@@ -545,9 +545,15 @@ namespace Bridge.Translator
 
                 if (!string.IsNullOrEmpty(inline))
                 {
-                    if (inline.StartsWith("<self>"))
+                    var isSelf = inline.StartsWith("<self>");
+                    if (isSelf)
                     {
                         inline = inline.Substring(6);
+                    }
+
+                    if(!method.IsStatic && !isSelf && !inline.Contains("{this}"))
+                    {
+                        inline = "this." + inline;
                     }
 
                     var block = new InlineArgumentsBlock(emitter, new ArgumentsInfo(emitter, method), inline, method);
