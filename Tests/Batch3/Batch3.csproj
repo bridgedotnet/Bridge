@@ -642,10 +642,10 @@
     <Compile Include="BridgeIssues\3100\N3107.cs" />
     <Compile Include="BridgeIssues\3100\N3111.cs" />
     <Compile Include="BridgeIssues\3100\N3112.cs" />
-    <Compile Include="BridgeIssues\3100\N3145.cs" />
     <Compile Include="BridgeIssues\3100\N3131.cs" />
     <Compile Include="BridgeIssues\3100\N3134.cs" />
     <Compile Include="BridgeIssues\3100\N3142.cs" />
+    <Compile Include="BridgeIssues\3100\N3145.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
