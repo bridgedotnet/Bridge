@@ -677,7 +677,7 @@ namespace Bridge.Translator
                             new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
                         }
 
-                        if (invocationExpression.Arguments.Count > 0 || argsExpressions.Length > 0)
+                        if (invocationExpression.Arguments.Count > 0 || argsExpressions.Length > 0 && !argsExpressions.All(expr => expr == null))
                         {
                             this.EnsureComma(false);
                         }
@@ -694,7 +694,7 @@ namespace Bridge.Translator
             {
                 Helpers.CheckValueTypeClone(this.Emitter.Resolver.ResolveNode(invocationExpression, this.Emitter), invocationExpression, this, pos);
             }
-            
+
             this.Emitter.ReplaceAwaiterByVar = oldValue;
             this.Emitter.AsyncExpressionHandling = oldAsyncExpressionHandling;
         }

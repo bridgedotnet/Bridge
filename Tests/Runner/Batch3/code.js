@@ -15359,13 +15359,13 @@ Bridge.$N1391Result =                     r;
                     return input;
                 },
                 TestDefaultOptionalParam: function () {
-                    var first = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(System.String, );
+                    var first = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(System.String);
                     Bridge.Test.NUnit.Assert.Null(first);
 
-                    var second = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(System.Int32, );
+                    var second = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(System.Int32);
                     Bridge.Test.NUnit.Assert.AreEqual(0, second);
 
-                    var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct, ).$clone();
+                    var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct).$clone();
                     Bridge.Test.NUnit.Assert.True(third.IsDefault());
                 }
             }
@@ -31416,16 +31416,16 @@ Bridge.$N1391Result =                     r;
                     }, arguments));
                 },
                 TestMakeEnumerable: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object, )).count(), "MakeEnumerable object 0");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object)).count(), "MakeEnumerable object 0");
                     Bridge.Test.NUnit.Assert.AreEqual(2, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object, [Bridge.box(1, System.Int32), Bridge.box(2.0, System.Double, System.Double.format, System.Double.getHashCode)])).count(), "MakeEnumerable object 2");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.String, )).count(), "MakeEnumerable string 0");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.String)).count(), "MakeEnumerable string 0");
                     Bridge.Test.NUnit.Assert.AreEqual(3, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.String, ["a", "b", "c"])).count(), "MakeEnumerable string 3");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.IEnumerable$1(System.Object), )).count(), "MakeEnumerable IEnumerable<object> 0");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.IEnumerable$1(System.Object))).count(), "MakeEnumerable IEnumerable<object> 0");
                     Bridge.Test.NUnit.Assert.AreEqual(1, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.IEnumerable$1(System.Object), [System.Array.init([Bridge.box(1, System.Int32), Bridge.box(2, System.Int32)], System.Object)])).count(), "MakeEnumerable IEnumerable<object> 1");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.List$1(System.Collections.Generic.List$1(System.Object)), )).count(), "MakeEnumerable List<List<object>> 0");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.List$1(System.Collections.Generic.List$1(System.Object)))).count(), "MakeEnumerable List<List<object>> 0");
                     Bridge.Test.NUnit.Assert.AreEqual(2, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Collections.Generic.List$1(System.Collections.Generic.List$1(System.Int32)), [new (System.Collections.Generic.List$1(System.Collections.Generic.List$1(System.Int32))).ctor(), new (System.Collections.Generic.List$1(System.Collections.Generic.List$1(System.Int32))).ctor()])).count(), "MakeEnumerable List<List<object>> 2");
                 }
             }
