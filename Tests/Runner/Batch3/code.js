@@ -25639,6 +25639,17 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3147", {
+        statics: {
+            methods: {
+                TestUriJSON: function () {
+                    var uri = new System.Uri("http://myurl.com");
+                    Bridge.Test.NUnit.Assert.AreEqual("\"http://myurl.com\"", JSON.stringify(uri));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
