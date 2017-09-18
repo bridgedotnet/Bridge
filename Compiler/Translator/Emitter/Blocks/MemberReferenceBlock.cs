@@ -557,6 +557,14 @@ namespace Bridge.Translator
                     inline = this.Emitter.Output.ToString();
                     inline = inline.Replace("[[0]]", "{0}");
                 }
+                else if (member != null && member.Member is IEvent)
+                {
+                    this.Emitter.Output = new StringBuilder();
+                    inline = inline.Replace("{0}", "[[0]]");
+                    new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, memberReferenceExpression, resolveResult), inline).Emit();
+                    inline = this.Emitter.Output.ToString();
+                    inline = inline.Replace("[[0]]", "{0}");
+                }
 
                 this.Emitter.IsAssignment = oldIsAssignment;
                 this.Emitter.IsUnaryAccessor = oldUnary;

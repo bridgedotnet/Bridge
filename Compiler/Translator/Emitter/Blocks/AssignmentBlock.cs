@@ -731,6 +731,7 @@ namespace Bridge.Translator
                 for (int i = initCount; i < writerCount; i++)
                 {
                     this.PopWriter();
+                    delegateAssigment = false;
                 }
             }
 

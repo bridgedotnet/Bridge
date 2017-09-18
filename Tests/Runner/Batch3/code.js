@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25095,6 +25093,49 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3089.C");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101", {
+        statics: {
+            methods: {
+                ckEditor_OnChange: function () { },
+                TestEventTemplate: function () {
+                    var editor = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.CKEditor();
+                    editor.on('change', Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange);
+
+                    Bridge.Test.NUnit.Assert.True(editor.isSet);
+                    Bridge.Test.NUnit.Assert.AreEqual("change", editor.name);
+                    Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange, editor.handler);
+
+                    editor.off('change', Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.ckEditor_OnChange);
+                    Bridge.Test.NUnit.Assert.False(editor.isSet);
+                    Bridge.Test.NUnit.Assert.Null(editor.name);
+                    Bridge.Test.NUnit.Assert.Null(editor.handler);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3101.CKEditor", {
+        fields: {
+            name: null,
+            handler: null,
+            isSet: false
+        },
+        methods: {
+            addOnChange: function (value) { },
+            removeOnChange: function (value) { },
+            on: function (eventName, handler) {
+                this.isSet = true;
+                this.name = eventName;
+                this.handler = handler;
+            },
+            off: function (eventName, handler) {
+                this.isSet = false;
+                this.name = null;
+                this.handler = null;
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3103", {
         statics: {

@@ -502,11 +502,17 @@ namespace Bridge.Translator
         {
             string attrName = Bridge.Translator.Translator.Bridge_ASSEMBLY + ".TemplateAttribute";
             bool isProp = entity is IProperty;
+            bool isEvent = entity is IEvent;
 
             if (entity.SymbolKind == SymbolKind.Property)
             {
                 var prop = (IProperty)entity;
                 entity = this.IsAssignment ? prop.Setter : prop.Getter;
+            }
+            else if (entity.SymbolKind == SymbolKind.Event)
+            {
+                var ev = (IEvent)entity;
+                entity = this.IsAssignment ? (this.AssignmentType == AssignmentOperatorType.Add ? ev.AddAccessor : ev.RemoveAccessor) : ev.InvokeAccessor;
             }
 
             if (entity != null)
@@ -537,7 +543,7 @@ namespace Bridge.Translator
                     inlineCode = attr != null && attr.PositionalArguments.Count > 0 ? attr.PositionalArguments[0].ConstantValue.ToString() : null;
                 }
 
-                if (!string.IsNullOrEmpty(inlineCode) && isProp)
+                if (!string.IsNullOrEmpty(inlineCode) && (isProp || isEvent))
                 {
                     inlineCode = inlineCode.Replace("{value}", "{0}");
                 }
