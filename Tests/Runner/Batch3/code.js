@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25646,6 +25644,36 @@ Bridge.$N1391Result =                     r;
                     var uri = new System.Uri("http://myurl.com");
                     Bridge.Test.NUnit.Assert.AreEqual("\"http://myurl.com\"", JSON.stringify(uri));
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3151", {
+        statics: {
+            methods: {
+                TestUriJSON: function () {
+                    var msg = null;
+                    var ht = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3151.SomeClass();
+                    ht.setItem("", Bridge.fn.combine(ht.getItem(""), function () {
+                        msg = "test";
+                    }));
+                    ht.getItem("")();
+                    Bridge.Test.NUnit.Assert.AreEqual("test", msg);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3151.SomeClass", {
+        fields: {
+            action: null
+        },
+        methods: {
+            getItem: function (key) {
+                return this.action;
+            },
+            setItem: function (key, value) {
+                this.action = value;
             }
         }
     });

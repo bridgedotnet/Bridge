@@ -356,6 +356,7 @@ namespace Bridge.Translator
                 return;
             }
 
+            bool templateDelegateAssigment = false;
             if (assignmentExpression.Operator == AssignmentOperatorType.Add ||
                 assignmentExpression.Operator == AssignmentOperatorType.Subtract)
             {
@@ -369,7 +370,11 @@ namespace Bridge.Translator
                     if (leftMemberResolveResult != null)
                     {
                         isEvent = leftMemberResolveResult.Member is IEvent;
-                    }
+                        this.Emitter.IsAssignment = true;
+                        this.Emitter.AssignmentType = assignmentExpression.Operator;
+                        templateDelegateAssigment = !string.IsNullOrWhiteSpace(this.Emitter.GetInline(leftMemberResolveResult.Member));
+                        this.Emitter.IsAssignment = false;
+                    }                    
 
                     if (!isEvent)
                     {
@@ -731,11 +736,10 @@ namespace Bridge.Translator
                 for (int i = initCount; i < writerCount; i++)
                 {
                     this.PopWriter();
-                    delegateAssigment = false;
                 }
             }
 
-            if (delegateAssigment)
+            if (delegateAssigment && !templateDelegateAssigment)
             {
                 this.WriteCloseParentheses();
             }
