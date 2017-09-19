@@ -437,7 +437,7 @@
                     endIndex;
 
                 startIndex = startIndex || 0;
-                count = count || arr.length;
+                count = Bridge.isNumber(count) ? count : arr.length;
                 endIndex = startIndex + count;
 
                 for (i = startIndex; i < endIndex; i++) {

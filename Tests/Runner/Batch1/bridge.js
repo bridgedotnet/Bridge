@@ -11036,7 +11036,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     endIndex;
 
                 startIndex = startIndex || 0;
-                count = count || arr.length;
+                count = Bridge.isNumber(count) ? count : arr.length;
                 endIndex = startIndex + count;
 
                 for (i = startIndex; i < endIndex; i++) {
