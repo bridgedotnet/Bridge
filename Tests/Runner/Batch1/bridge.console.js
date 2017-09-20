@@ -95,10 +95,10 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     }
 
                     if (self.bufferedOutput != null) {
-                        self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
+                        self.bufferedOutput = (self.bufferedOutput || "") + (v || "");
 
                         if (newLine) {
-                            self.bufferedOutput = System.String.concat(self.bufferedOutput, "\n");
+                            self.bufferedOutput = (self.bufferedOutput || "") + ("\n" || "");
                         }
 
                         return;
@@ -112,7 +112,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         self.currentMessageElement = m;
                     } else {
                         var m1 = Bridge.unbox(self.currentMessageElement);
-                        m1.lastChild.innerHTML = System.String.concat(m1.lastChild.innerHTML, v);
+                        m1.lastChild.innerHTML = (m1.lastChild.innerHTML || "") + (v || "");
                     }
 
                     self.isNewLine = newLine;
@@ -375,7 +375,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
 
                 var div = document.createElement("div");
                 div.id = Bridge.Console.BODY_WRAPPER_ID;
-                div.setAttribute("style", System.String.concat("height: calc(100vh - ", this.consoleHeight, " - ", this.consoleHeaderHeight, ");", "margin-top: calc(-1 * ", "(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), "));", "margin-right: calc(-1 * ", "(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), "));", "margin-left: calc(-1 * ", "(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), "));", "padding-top: calc(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), ");", "padding-right: calc(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), ");", "padding-bottom: calc(", (System.String.concat(bodyMarginBottom, " + ", bodyPaddingBottom)), ");", "padding-left: calc(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), ");", "overflow-x: auto;", "box-sizing: border-box !important;"));
+                div.setAttribute("style", "height: calc(100vh - " + (this.consoleHeight || "") + " - " + (this.consoleHeaderHeight || "") + ");" + "margin-top: calc(-1 * " + "(" + (((bodyMarginTop || "") + " + " + (bodyPaddingTop || "")) || "") + "));" + "margin-right: calc(-1 * " + "(" + (((bodyMarginRight || "") + " + " + (bodyPaddingRight || "")) || "") + "));" + "margin-left: calc(-1 * " + "(" + (((bodyMarginLeft || "") + " + " + (bodyPaddingLeft || "")) || "") + "));" + "padding-top: calc(" + (((bodyMarginTop || "") + " + " + (bodyPaddingTop || "")) || "") + ");" + "padding-right: calc(" + (((bodyMarginRight || "") + " + " + (bodyPaddingRight || "")) || "") + ");" + "padding-bottom: calc(" + (((bodyMarginBottom || "") + " + " + (bodyPaddingBottom || "")) || "") + ");" + "padding-left: calc(" + (((bodyMarginLeft || "") + " + " + (bodyPaddingLeft || "")) || "") + ");" + "overflow-x: auto;" + "box-sizing: border-box !important;");
 
                 while (document.body.firstChild != null) {
                     div.appendChild(document.body.firstChild);
@@ -427,7 +427,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
 
                 var messageContainer = document.createElement("div");
                 messageContainer.innerText = message;
-                messageContainer.setAttribute("style", System.String.concat("color:", color, ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;"));
+                messageContainer.setAttribute("style", "color:" + (color || "") + ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;");
 
                 messageItem.appendChild(messageIcon);
                 messageItem.appendChild(messageContainer);
@@ -455,7 +455,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                 try {
                     while ($t.moveNext()) {
                         var item = $t.Current;
-                        str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+                        str = (str || "") + (((item.key.toLowerCase() || "") + ":" + (item.value || "") + ";") || "");
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {

@@ -26,7 +26,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     }
                     catch (ex) {
                         ex = System.Exception.create(ex);
-                        Bridge.Test.NUnit.Assert.Fail(System.String.concat(failMessage, ex.toString()));
+                        Bridge.Test.NUnit.Assert.Fail((failMessage || "") + (ex.toString() || ""));
                     }
                 }
             }
@@ -45,49 +45,49 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     if (second === void 0) { second = null; }
                     if (ms === void 0) { ms = null; }
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual(kind, System.DateTime.getKind(dt), System.String.concat(message, "Kind"));
-                    Bridge.Test.NUnit.Assert.AreEqual(ticks.toString(), System.DateTime.getTicks(dt).toString(), System.String.concat(message, "Ticks"));
+                    Bridge.Test.NUnit.Assert.AreEqual(kind, System.DateTime.getKind(dt), (message || "") + "Kind");
+                    Bridge.Test.NUnit.Assert.AreEqual(ticks.toString(), System.DateTime.getTicks(dt).toString(), (message || "") + "Ticks");
 
                     if (System.Nullable.hasValue(year)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(year), System.DateTime.getYear(dt), System.String.concat(message, "Year"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(year), System.DateTime.getYear(dt), (message || "") + "Year");
                     }
 
                     if (System.Nullable.hasValue(month)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(month), System.DateTime.getMonth(dt), System.String.concat(message, "Month"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(month), System.DateTime.getMonth(dt), (message || "") + "Month");
                     }
 
                     if (System.Nullable.hasValue(day)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(day), System.DateTime.getDay(dt), System.String.concat(message, "Day"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(day), System.DateTime.getDay(dt), (message || "") + "Day");
                     }
 
                     if (System.Nullable.hasValue(hour)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(hour), System.DateTime.getHour(dt), System.String.concat(message, "Hour"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(hour), System.DateTime.getHour(dt), (message || "") + "Hour");
                     }
 
                     if (System.Nullable.hasValue(minute)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(minute), System.DateTime.getMinute(dt), System.String.concat(message, "Minute"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(minute), System.DateTime.getMinute(dt), (message || "") + "Minute");
                     }
 
                     if (System.Nullable.hasValue(second)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(second), System.DateTime.getSecond(dt), System.String.concat(message, "Second"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(second), System.DateTime.getSecond(dt), (message || "") + "Second");
                     }
 
                     if (System.Nullable.hasValue(ms)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), System.DateTime.getMillisecond(dt), System.String.concat(message, "Millisecond"));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), System.DateTime.getMillisecond(dt), (message || "") + "Millisecond");
                     }
                 },
                 AssertDate: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getKind(expected), System.DateTime.getKind(actual), System.String.concat(message, "Kind"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getTicks(expected).toString(), System.DateTime.getTicks(actual).toString(), System.String.concat(message, "Ticks"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getKind(expected), System.DateTime.getKind(actual), (message || "") + "Kind");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getTicks(expected).toString(), System.DateTime.getTicks(actual).toString(), (message || "") + "Ticks");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(expected), System.DateTime.getYear(actual), System.String.concat(message, "Year"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(expected), System.DateTime.getMonth(actual), System.String.concat(message, "Month"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(expected), System.DateTime.getDay(actual), System.String.concat(message, "Day"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getHour(expected), System.DateTime.getHour(actual), System.String.concat(message, "Hour"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), System.String.concat(message, "Minute"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), System.String.concat(message, "Second"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), System.String.concat(message, "Millisecond"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(expected), System.DateTime.getYear(actual), (message || "") + "Year");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(expected), System.DateTime.getMonth(actual), (message || "") + "Month");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(expected), System.DateTime.getDay(actual), (message || "") + "Day");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getHour(expected), System.DateTime.getHour(actual), (message || "") + "Hour");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), (message || "") + "Minute");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), (message || "") + "Second");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), (message || "") + "Millisecond");
                 },
                 GetOffsetString: function (adjustment) {
                     if (adjustment === void 0) { adjustment = 0; }
@@ -96,7 +96,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     var b = minutes < 0 ? "+" : "-";
                     minutes = Math.abs(minutes);
 
-                    var offset = minutes !== 0 ? (System.String.concat(b, System.Int32.format((((Bridge.Int.div(minutes, 60)) | 0)), "00"), ":", System.Int32.format((minutes % 60), "00"))) : "Z";
+                    var offset = minutes !== 0 ? ((b || "") + (System.Int32.format((((Bridge.Int.div(minutes, 60)) | 0)), "00") || "") + ":" + (System.Int32.format((minutes % 60), "00") || "")) : "Z";
 
                     return offset;
                 },
@@ -163,12 +163,12 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     var a = actual != null ? actual.toString() : "[null]";
                     var e = expected != null ? expected.toString() : "[null]";
 
-                    Bridge.Test.NUnit.Assert.AreEqual(e, a, System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual(e, a, (message || "") + " representation");
                 },
                 AssertNumber: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.getType(expected)), Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.getType(expected)), Bridge.Reflection.getTypeName(Bridge.getType(actual)), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), (message || "") + " representation");
                 },
                 AssertNumberWithEpsilon1: function (T, expected, actual, message) {
                     var useEpsilon = Bridge.referenceEquals(T, System.Double) || Bridge.referenceEquals(T, System.Single);
@@ -184,9 +184,9 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                             }
 
                             if (diff < epsilon) {
-                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(message, expected, " vs ", actual));
+                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(System.String.concat(message, expected) + " vs ", actual));
                             } else {
-                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon)));
+                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), (message || "") + "Counted with epsilon: " + System.Double.format(epsilon));
                             }
                         } else {
                             var diff1 = expected - actual;
@@ -196,9 +196,9 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                             }
 
                             if (diff1 < epsilon) {
-                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(message, expected, " vs ", actual));
+                                Bridge.Test.NUnit.Assert.True(true, System.String.concat(System.String.concat(message, expected) + " vs ", actual));
                             } else {
-                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon)));
+                                Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), (message || "") + "Counted with epsilon: " + System.Double.format(epsilon));
                             }
                         }
                     } else {
@@ -207,13 +207,13 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                 },
                 AssertDouble$1: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), (message || "") + " representation");
                 },
                 AssertDouble: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Double.format(actual), (message || "") + " representation");
                 },
                 AssertDoubleWithEpsilon8: function (expected, actual) {
                     var se = System.Double.format(expected);
@@ -235,38 +235,38 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     var actual = { };
                     var b = System.Double.tryParse(s, null, actual);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(r, b, System.String.concat(message, " result"));
-                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), System.Double.format(actual.v), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual(r, b, (message || "") + " result");
+                    Bridge.Test.NUnit.Assert.AreEqual("Double", Bridge.Reflection.getTypeName(System.Double), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), System.Double.format(actual.v), (message || "") + " representation");
                 },
                 AssertFloat: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Single", Bridge.Reflection.getTypeName(System.Single), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Single.format(actual), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Single", Bridge.Reflection.getTypeName(System.Single), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), System.Single.format(actual), (message || "") + " representation");
                 },
                 AssertDecimal$1: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(Bridge.getType(actual)), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), (message || "") + " representation");
                 },
                 AssertDecimal$2: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), (message || "") + " representation");
                 },
                 AssertDecimal: function (expected, actual, message) {
                     if (message === void 0) { message = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), System.String.concat(message, " type"));
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), actual.toString(), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual("Decimal", Bridge.Reflection.getTypeName(System.Decimal), (message || "") + " type");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.format(expected), actual.toString(), (message || "") + " representation");
                 },
                 AssertLong: function (expected, actual, message) {
                     if (message === void 0) { message = ""; }
-                    Bridge.Test.NUnit.Assert.AreEqual("System.Int64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Int64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), (message || "") + " type");
                     Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
                 },
                 AssertULong: function (expected, actual, message) {
                     if (message === void 0) { message = ""; }
-                    Bridge.Test.NUnit.Assert.AreEqual("System.UInt64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                    Bridge.Test.NUnit.Assert.AreEqual("System.UInt64", Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), (message || "") + " type");
                     Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
                 }
             }
@@ -286,10 +286,10 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
                     for (var i = 0; i < lines.length; i = (i + 1) | 0) {
                         if (i !== 0) {
-                            s = System.String.concat(s, "\n");
+                            s = (s || "") + ("\n" || "");
                         }
 
-                        s = System.String.concat(s, lines[System.Array.index(i, lines)]);
+                        s = (s || "") + (lines[System.Array.index(i, lines)] || "");
                     }
 
                     return s;
@@ -302,7 +302,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                         return null;
                     }
 
-                    return System.String.concat(s, "\n");
+                    return (s || "") + ("\n" || "");
                 }
             }
         }

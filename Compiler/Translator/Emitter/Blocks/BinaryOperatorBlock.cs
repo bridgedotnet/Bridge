@@ -32,6 +32,7 @@ namespace Bridge.Translator
             get;
             set;
         }
+        public bool NullStringCheck { get; private set; }
 
         protected override Expression GetExpression()
         {
@@ -303,10 +304,10 @@ namespace Bridge.Translator
         {
             var leftResolverResult = emitter.Resolver.ResolveNode(binaryOperatorExpression.Left, emitter);
             var rightResolverResult = emitter.Resolver.ResolveNode(binaryOperatorExpression.Right, emitter);
-            bool leftIsSimple = binaryOperatorExpression.Left is PrimitiveExpression ||
+            bool leftIsSimple = binaryOperatorExpression.Left is PrimitiveExpression || leftResolverResult.Type.IsKnownType(KnownTypeCode.String) ||
                                  leftResolverResult.Type.IsReferenceType != null && !leftResolverResult.Type.IsReferenceType.Value;
 
-            bool rightIsSimple = binaryOperatorExpression.Right is PrimitiveExpression ||
+            bool rightIsSimple = binaryOperatorExpression.Right is PrimitiveExpression || rightResolverResult.Type.IsKnownType(KnownTypeCode.String) ||
                                  rightResolverResult.Type.IsReferenceType != null && !rightResolverResult.Type.IsReferenceType.Value;
 
             bool isSimpleConcat = leftIsSimple && rightIsSimple;
@@ -401,7 +402,7 @@ namespace Bridge.Translator
             {
                 var parentResolveOperator = this.Emitter.Resolver.ResolveNode(binaryOperatorExpression.Parent, this.Emitter) as OperatorResolveResult;
 
-                if (parentResolveOperator != null && parentResolveOperator.UserDefinedOperatorMethod != null)
+                if (parentResolveOperator != null && parentResolveOperator.UserDefinedOperatorMethod != null || BinaryOperatorBlock.IsOperatorSimple(parentBinary, this.Emitter))
                 {
                     parentIsString = false;
                 }
@@ -548,6 +549,7 @@ namespace Bridge.Translator
                 }
             }
 
+            this.NullStringCheck = isStringConcat && !parentIsString && isSimpleConcat;
             if (isStringConcat && !parentIsString && !isSimpleConcat)
             {
                 this.Write(JS.Types.System.String.CONCAT);
@@ -1042,6 +1044,12 @@ namespace Bridge.Translator
                 ConversionBlock.expressionInWork.Add(expression);
             }
 
+            bool wrapString = false;
+            if(this.NullStringCheck && rr.Type.IsKnownType(KnownTypeCode.String))
+            {
+                wrapString = !(expression is BinaryOperatorExpression) && !(expression is PrimitiveExpression || rr.Type.IsReferenceType != null && !rr.Type.IsReferenceType.Value);
+            }
+
             if (toString)
             {
                 var toStringMethod = rr.Type.GetMembers().FirstOrDefault(m =>
@@ -1088,12 +1096,18 @@ namespace Bridge.Translator
                         return;
                     }
                 }
-
-                expression.AcceptVisitor(this.Emitter);
             }
-            else
+
+            if(wrapString)
             {
-                expression.AcceptVisitor(this.Emitter);
+                this.Write("(");
+            }
+
+            expression.AcceptVisitor(this.Emitter);
+
+            if (wrapString)
+            {
+                this.Write(" || \"\")");
             }
 
             if (isCoalescing)

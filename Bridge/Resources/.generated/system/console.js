@@ -42,7 +42,7 @@
                         }
 
                         for (var i = index; i < ((index + count) | 0); i = (i + 1) | 0) {
-                            s = System.String.concat(s, String.fromCharCode(buffer[System.Array.index(i, buffer)]));
+                            s = (s || "") + String.fromCharCode(buffer[System.Array.index(i, buffer)]);
                         }
                     }
 

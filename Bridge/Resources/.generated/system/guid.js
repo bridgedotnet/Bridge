@@ -284,8 +284,8 @@
                 return false;
             },
             format$1: function (format) {
-                var s = System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4"), System.UInt16.format((this._c & 65535), "x4"));
-                s = System.String.concat(s, (System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join(""));
+                var s = (System.UInt32.format((this._a >>> 0), "x8") || "") + (System.UInt16.format((this._b & 65535), "x4") || "") + (System.UInt16.format((this._c & 65535), "x4") || "");
+                s = (s || "") + ((System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join("") || "");
 
                 var m = System.Guid.split.match(s);
                 var list = new (System.Collections.Generic.List$1(System.String)).ctor();
@@ -302,10 +302,10 @@
                         return System.Guid.replace.replace(s, "");
                     case "b": 
                     case "B": 
-                        return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
+                        return String.fromCharCode(123) + (s || "") + String.fromCharCode(125);
                     case "p": 
                     case "P": 
-                        return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
+                        return String.fromCharCode(40) + (s || "") + String.fromCharCode(41);
                     default: 
                         return s;
                 }

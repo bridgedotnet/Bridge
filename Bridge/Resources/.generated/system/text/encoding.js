@@ -284,9 +284,9 @@
                     var byteCode = bytes[System.Array.index(position, bytes)];
 
                     if (byteCode > 127) {
-                        result = System.String.concat(result, String.fromCharCode(this.fallbackCharacter));
+                        result = (result || "") + String.fromCharCode(this.fallbackCharacter);
                     } else {
-                        result = System.String.concat(result, (String.fromCharCode(byteCode)));
+                        result = (result || "") + ((String.fromCharCode(byteCode)) || "");
                     }
                 }
 
@@ -471,7 +471,7 @@
                         throw new System.Exception("Invalid character in UTF16 text");
                     }
 
-                    result = System.String.concat(result, String.fromCharCode(this.fallbackCharacter));
+                    result = (result || "") + String.fromCharCode(this.fallbackCharacter);
                 });
 
                 var swap = $asm.$.System.Text.UnicodeEncoding.f2;
@@ -500,7 +500,7 @@
                         fallback();
                         this._hasError = true;
                     } else if ((System.Nullable.lt(firstWord, 55296)) || (System.Nullable.gt(firstWord, 57343))) {
-                        result = System.String.concat(result, (System.String.fromCharCode(System.Nullable.getValue(firstWord))));
+                        result = (result || "") + ((System.String.fromCharCode(System.Nullable.getValue(firstWord))) || "");
                     } else if ((System.Nullable.gte(firstWord, 55296)) && (System.Nullable.lte(firstWord, 56319))) {
                         var end = position >= endpoint;
                         var secondWord = readPair();
@@ -516,7 +516,7 @@
 
                             var charCode = Bridge.Int.clip32(System.Nullable.add((System.Nullable.bor((System.Nullable.sl(highBits, 10)), lowBits)), 65536));
 
-                            result = System.String.concat(result, (System.String.fromCharCode(System.Nullable.getValue(charCode))));
+                            result = (result || "") + ((System.String.fromCharCode(System.Nullable.getValue(charCode))) || "");
                         } else {
                             fallback();
                             position = (position - 2) | 0;
@@ -705,7 +705,7 @@
                         throw new System.Exception("Invalid character in UTF32 text");
                     }
 
-                    result = System.String.concat(result, (String.fromCharCode(this.fallbackCharacter)));
+                    result = (result || "") + ((String.fromCharCode(this.fallbackCharacter)) || "");
                 });
 
                 var read32 = Bridge.fn.bind(this, function () {
@@ -745,11 +745,11 @@
                         if (System.Nullable.lt(unicode_code, 0) || System.Nullable.gt(unicode_code, 1114111) || (System.Nullable.gte(unicode_code, 55296) && System.Nullable.lte(unicode_code, 57343))) {
                             fallback();
                         } else {
-                            result = System.String.concat(result, (String.fromCharCode(unicode_code)));
+                            result = (result || "") + ((String.fromCharCode(unicode_code)) || "");
                         }
                     } else {
-                        result = System.String.concat(result, (String.fromCharCode((Bridge.Int.clipu32(System.Nullable.add((Bridge.Int.clipu32(Bridge.Int.div((Bridge.Int.clipu32(System.Nullable.sub(unicode_code, (65536)))), (1024)))), 55296))))));
-                        result = System.String.concat(result, (String.fromCharCode((Bridge.Int.clipu32(System.Nullable.add((System.Nullable.mod(unicode_code, (1024))), 56320))))));
+                        result = (result || "") + ((String.fromCharCode((Bridge.Int.clipu32(System.Nullable.add((Bridge.Int.clipu32(Bridge.Int.div((Bridge.Int.clipu32(System.Nullable.sub(unicode_code, (65536)))), (1024)))), 55296))))) || "");
+                        result = (result || "") + ((String.fromCharCode((Bridge.Int.clipu32(System.Nullable.add((System.Nullable.mod(unicode_code, (1024))), 56320))))) || "");
                     }
                 }
 
@@ -822,7 +822,7 @@
         },
         methods: {
             Encode$3: function (s, outputBytes, outputIndex, writtenBytes) {
-                var setD = System.String.concat("A-Za-z0-9", System.Text.UTF7Encoding.Escape("'(),-./:?"));
+                var setD = "A-Za-z0-9" + (System.Text.UTF7Encoding.Escape("'(),-./:?") || "");
 
                 var encode = $asm.$.System.Text.UTF7Encoding.f1;
 
@@ -1113,10 +1113,10 @@
                             throw new System.Exception("Invalid character in UTF8 text");
                         }
 
-                        result = System.String.concat(result, String.fromCharCode(this.fallbackCharacter));
+                        result = (result || "") + String.fromCharCode(this.fallbackCharacter);
                         this._hasError = true;
                     } else if (surrogate1 === 0) {
-                        result = System.String.concat(result, characters);
+                        result = (result || "") + (characters || "");
                     }
                 }
 
@@ -1126,9 +1126,9 @@
                     }
 
                     if (result.length > 0 && result.charCodeAt(((result.length - 1) | 0)) === this.fallbackCharacter) {
-                        result = System.String.concat(result, String.fromCharCode(this.fallbackCharacter));
+                        result = (result || "") + String.fromCharCode(this.fallbackCharacter);
                     } else {
-                        result = System.String.concat(result, (((this.fallbackCharacter + this.fallbackCharacter) | 0)));
+                        result = (result || "") + (((this.fallbackCharacter + this.fallbackCharacter) | 0));
                     }
 
                     this._hasError = true;

@@ -123,7 +123,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                         return null;
                     }
 
-                    return document.getElementById(System.String.concat("qunit-test-output-", testId));
+                    return document.getElementById("qunit-test-output-" + (testId || ""));
                 },
                 GetQUnitSource: function (output) {
                     if (output == null) {
@@ -164,7 +164,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                         }
 
                         if (tc.Method != null) {
-                            method = System.String.concat((($t = method, $t != null ? $t : "")), ".", tc.Method);
+                            method = ((($t = method, $t != null ? $t : "")) || "") + "." + (tc.Method || "");
                         }
 
                         line = tc.Line;
@@ -180,25 +180,25 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                         var html = "";
 
                         if (project != null) {
-                            html = System.String.concat(html, (System.String.concat(" <strong>Project: </strong>", project)));
+                            html = (html || "") + ((" <strong>Project: </strong>" + (project || "")) || "");
                         }
 
                         if (method != null) {
-                            html = System.String.concat(html, (System.String.concat(" at ", Bridge.Test.Runtime.ContextHelper.AdjustTags(method))));
+                            html = (html || "") + ((" at " + (Bridge.Test.Runtime.ContextHelper.AdjustTags(method) || "")) || "");
                         }
 
                         if (file != null) {
-                            html = System.String.concat(html, " in ");
+                            html = (html || "") + " in ";
 
                             if (System.String.startsWith(file, "file:")) {
-                                html = System.String.concat(html, (System.String.format("<a href = \"{0}\" target = \"_blank\">{0}</a>", file)));
+                                html = (html || "") + ((System.String.format("<a href = \"{0}\" target = \"_blank\">{0}</a>", file)) || "");
                             } else {
-                                html = System.String.concat(html, file);
+                                html = (html || "") + (file || "");
                             }
                         }
 
                         if (line != null) {
-                            html = System.String.concat(html, (System.String.concat(": line ", line)));
+                            html = (html || "") + ((": line " + (line || "")) || "");
                         }
 
                         var assertList = null;
@@ -210,7 +210,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                         var testTitle = testItem.firstChild;
 
-                        qunitSourceName.insertAdjacentHTML("afterbegin", System.String.concat(html, "<br/>"));
+                        qunitSourceName.insertAdjacentHTML("afterbegin", (html || "") + "<br/>");
                         //testItem.InsertBefore(csSourceName, qunitSourceName);
 
                         if (assertList != null) {
@@ -245,7 +245,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 UpdateTestSource: function (testSource, stack) {
                     if (testSource != null) {
-                        testSource.innerHTML = System.String.concat("<th>Source: </th><td><pre> ", stack, "  </pre></td>");
+                        testSource.innerHTML = "<th>Source: </th><td><pre> " + (stack || "") + "  </pre></td>";
                     }
                 },
                 AdjustTags: function (s) {
@@ -256,18 +256,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     return System.String.replaceAll(System.String.replaceAll(s, "<", "&lt;"), ">", "&gt;");
                 },
                 HasClass: function (el, name) {
-                    return System.String.indexOf((System.String.concat(" ", el.className, " ")), System.String.concat(" ", name, " ")) >= 0;
+                    return System.String.indexOf((" " + (el.className || "") + " "), " " + (name || "") + " ") >= 0;
                 },
                 AddClass: function (el, name) {
                     if (!Bridge.Test.Runtime.ContextHelper.HasClass(el, name)) {
-                        el.className = System.String.concat(el.className, (System.String.concat((el.className != null ? " " : ""), name)));
+                        el.className = (el.className || "") + ((((el.className != null ? " " : "") || "") + (name || "")) || "");
                     }
                 },
                 RemoveClass: function (el, name) {
-                    var set = System.String.concat(" ", el.className, " ");
+                    var set = " " + (el.className || "") + " ";
 
-                    while (System.String.indexOf(set, System.String.concat(" ", name, " ")) >= 0) {
-                        set = System.String.replaceAll(set, System.String.concat(" ", name, " "), " ");
+                    while (System.String.indexOf(set, " " + (name || "") + " ") >= 0) {
+                        set = System.String.replaceAll(set, " " + (name || "") + " ", " ");
                     }
 
                     el.className = set.trim();

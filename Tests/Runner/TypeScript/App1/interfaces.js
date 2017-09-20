@@ -68,14 +68,14 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 b.v = true;
             },
             Method8: function (s) {
-                s.v = System.String.concat(s.v, "Method8");
+                s.v = (s.v || "") + "Method8";
             },
             Method9: function (i, s) {
-                s.v = System.String.concat(s.v, i);
+                s.v = (s.v || "") + i;
             },
             Method10: function (i, b, s) {
                 b.v = true;
-                s.v = System.String.concat(s.v, i);
+                s.v = (s.v || "") + i;
             }
         }
     });

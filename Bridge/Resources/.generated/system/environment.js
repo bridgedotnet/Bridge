@@ -114,7 +114,7 @@
                     try {
                         while ($t.moveNext()) {
                             var pair = $t.Current;
-                            name = System.String.replaceAll(name, System.String.concat("%", pair.key, "%"), pair.value);
+                            name = System.String.replaceAll(name, "%" + (pair.key || "") + "%", pair.value);
                         }
                     } finally {
                         if (Bridge.is($t, System.IDisposable)) {

@@ -299,7 +299,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         alias: ["format", "System$IFormattable$format"],
         methods: {
             format: function (format, formatProvider) {
-                return System.String.concat("Formatted: ", (!System.String.isNullOrEmpty(format) ? System.String.concat(format, ", ") : ""), Bridge.Reflection.getTypeName(Bridge.getType(formatProvider)));
+                return "Formatted: " + ((!System.String.isNullOrEmpty(format) ? (format || "") + ", " : "") || "") + (Bridge.Reflection.getTypeName(Bridge.getType(formatProvider)) || "");
             }
         }
     });
@@ -776,7 +776,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         alias: ["format", "System$IFormattable$format"],
         methods: {
             format: function (format, formatProvider) {
-                return System.String.concat("Formatted: ", format, ", ", (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
+                return "Formatted: " + (format || "") + ", " + ((formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))) || "");
             }
         }
     });
