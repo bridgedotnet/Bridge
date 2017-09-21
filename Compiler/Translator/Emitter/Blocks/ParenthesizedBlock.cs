@@ -33,6 +33,8 @@ namespace Bridge.Translator
                 this.WriteOpenParentheses();
             }
 
+            int startPos = this.Emitter.Output.Length;
+
             this.ParenthesizedExpression.Expression.AcceptVisitor(this.Emitter);
 
             if (!ignoreParentheses)
@@ -54,19 +56,21 @@ namespace Bridge.Translator
                 }
             }
 
-            if (expression is CastExpression)
+            var castExpr = expression as CastExpression;
+            if (castExpr != null)
             {
+                var orr = this.Emitter.Resolver.ResolveNode(castExpr.Expression, this.Emitter) as OperatorResolveResult;
+
+                if (orr != null)
+                {
+                    return false;
+                }
+
                 var rr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
                 if (rr is ConstantResolveResult)
                 {
                     return false;
                 }
-                /*var simpleType = ((CastExpression)expression).Type as SimpleType;
-
-                if (simpleType != null && simpleType.Identifier == "dynamic")
-                {
-                    return true;
-                }*/
                 return true;
             }
             return false;
