@@ -27,12 +27,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public static void TestUriJSON()
+        public static void TestLeftAssigmentForDelegates()
         {
             string msg = null;
             var ht = new SomeClass();
+
             ht[""] += () => { msg = "test"; };
             ht[""]();
+
             Assert.AreEqual("test", msg);
         }
     }

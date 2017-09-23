@@ -357,8 +357,9 @@ namespace Bridge.Translator
             }
 
             bool templateDelegateAssigment = false;
-            if (assignmentExpression.Operator == AssignmentOperatorType.Add ||
-                assignmentExpression.Operator == AssignmentOperatorType.Subtract)
+
+            if (assignmentExpression.Operator == AssignmentOperatorType.Add
+                || assignmentExpression.Operator == AssignmentOperatorType.Subtract)
             {
                 var add = assignmentExpression.Operator == AssignmentOperatorType.Add;
 
@@ -374,7 +375,7 @@ namespace Bridge.Translator
                         this.Emitter.AssignmentType = assignmentExpression.Operator;
                         templateDelegateAssigment = !string.IsNullOrWhiteSpace(this.Emitter.GetInline(leftMemberResolveResult.Member));
                         this.Emitter.IsAssignment = false;
-                    }                    
+                    }
 
                     if (!isEvent)
                     {
