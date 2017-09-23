@@ -50,14 +50,14 @@ namespace Bridge.Translator
 
             string globalTarget = BridgeTypes.GetGlobalTarget(this.TypeInfo.Type.GetDefinition(), this.TypeInfo.TypeDeclaration);
 
-            if(globalTarget == null)
+            if (globalTarget == null)
             {
                 this.EnsureComma();
                 this.Write(JS.Fields.METHODS);
                 this.WriteColon();
                 this.BeginBlock();
             }
-            
+
             int checkPos = this.Emitter.Output.Length;
 
             var names = new List<string>(properties.Keys);
@@ -120,7 +120,7 @@ namespace Bridge.Translator
                     this.Emitter.Comma = true;
                 }
             }
-            else if(this.StaticBlock)
+            else if (this.StaticBlock)
             {
                 var ctor = this.TypeInfo.Type.GetConstructors().FirstOrDefault(c => c.Parameters.Count == 0 && this.Emitter.GetInline(c) != null);
 
@@ -140,7 +140,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if(globalTarget == null)
+            if (globalTarget == null)
             {
                 if (checkPos == this.Emitter.Output.Length)
                 {
@@ -154,7 +154,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.EndBlock();
                 }
-            }            
+            }
         }
 
         protected virtual void EmitStructMethods()

@@ -36,5 +36,41 @@ namespace Bridge.ClientTest
         {
             Assert.AreEqual(3, MixinWrapper.Parse("3"));
         }
+
+        [Mixin("_$$.fn")]
+        public static class MyStaticMethods1
+        {
+            public static int GetTen()
+            {
+                return 10;
+            }
+        }
+
+        [Mixin("_$$.fn")]
+        public static class MyStaticMethods2
+        {
+            public static int GetTwenty()
+            {
+                return 20;
+            }
+        }
+
+        [Init(InitPosition.Top)]
+        private static void GlobalInit()
+        {
+            Script.Write("var _$$ = { fn: { } };");
+        }
+
+        [Test]
+        public void TestMixin_N3156()
+        {
+            // #3156
+
+            Assert.AreEqual(10, MyStaticMethods1.GetTen());
+            Assert.AreEqual(10, Script.Write<int>("_$$.fn.GetTen()"));
+
+            Assert.AreEqual(20, MyStaticMethods2.GetTwenty());
+            Assert.AreEqual(20, Script.Write<int>("_$$.fn.GetTwenty()"));
+        }
     }
 }
