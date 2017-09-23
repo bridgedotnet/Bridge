@@ -128,6 +128,10 @@ namespace Bridge.ClientTest.Collections.Generic
             }
         }
 
+        private class Entity
+        {
+        }
+
         [Test]
         public void TypePropertiesAreCorrect()
         {
@@ -587,6 +591,29 @@ namespace Bridge.ClientTest.Collections.Generic
             var list = new List<string> { "a", null, "c", null };
             Assert.True(list.Remove(null));
             Assert.AreEqual(new[] { "a", "c", null }, list.ToArray());
+        }
+
+        [Test]
+        public void RemoveCanRemoveNullItemFromEmptyList_N3149()
+        {
+            // #3149
+            var listOfInts = new List<Entity>();
+
+            var removed = listOfInts.Remove(null);
+            Assert.AreEqual(0, listOfInts.Count);
+            Assert.False(removed);
+
+            var ent = new Entity();
+            listOfInts.Add(ent);
+            Assert.AreEqual(1, listOfInts.Count);
+
+            removed = listOfInts.Remove(ent);
+            Assert.AreEqual(0, listOfInts.Count);
+            Assert.True(removed);
+
+            removed = listOfInts.Remove(null);
+            Assert.AreEqual(0, listOfInts.Count);
+            Assert.False(removed);
         }
 
         [Test]
