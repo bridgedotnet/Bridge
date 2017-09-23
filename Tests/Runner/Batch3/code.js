@@ -7816,7 +7816,7 @@ Bridge.$N1391Result =                     r;
             TestAssignDecimalToInt: function () {
                 var x = 0;
                 var y = System.Decimal(2);
-                x = (x + System.Decimal.toInt(System.Nullable.getValue(y).mul(System.Decimal(60.0)), System.Int32)) | 0;
+                x = (x + (System.Decimal.toInt(System.Nullable.getValue(y).mul(System.Decimal(60.0)), System.Int32))) | 0;
                 Bridge.Test.NUnit.Assert.AreEqual(120, x);
             }
         }
@@ -18422,7 +18422,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 MakeArgb: function (alpha, red, green, blue) {
-                    return System.Int64.clip64(Bridge.Int.clipu64((((red << 16) | (green << 8)) | blue) | (alpha << 24)).and(System.UInt64(System.Int64([-1,0]))));
+                    return System.Int64.clip64((Bridge.Int.clipu64((((red << 16) | (green << 8)) | blue) | (alpha << 24))).and(System.UInt64(System.Int64([-1,0]))));
                 },
                 TestNegativeNumberToULong: function () {
                     Bridge.Test.NUnit.Assert.AreEqual("4281808695", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2505.MakeArgb(255, 55, 55, 55).toString());
@@ -25678,6 +25678,18 @@ Bridge.$N1391Result =                     r;
             },
             setItem: function (key, value) {
                 this.action = value;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3158", {
+        methods: {
+            TestParenthesizedBlock: function () {
+                var CurrentLeft = 40;
+
+                var x = System.String.alignString((CurrentLeft % 60).toString(), 2, 48);
+
+                Bridge.Test.NUnit.Assert.AreEqual("40", x);
             }
         }
     });

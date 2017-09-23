@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3158
     {
         [Test]
-        public static void TestParenthesizedBlock()
+        public void TestParenthesizedBlock()
         {
             var CurrentLeft = 40;
 
