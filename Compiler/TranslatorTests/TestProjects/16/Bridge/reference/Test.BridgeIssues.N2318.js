@@ -51,8 +51,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
                 // The code below should NOT contain box calls for string concatenation #2318
                 var s1 = "";
-                var s2 = System.String.concat(s1, s1);
-                var s3 = System.String.concat(s1, 2);
+                var s2 = (s1 || "") + (s1 || "");
+                var s3 = (s1 || "") + 2;
             },
             ShouldUnbox: function () {
                 var objectArray = System.Array.init([Bridge.box(1, System.Int32)], System.Object);

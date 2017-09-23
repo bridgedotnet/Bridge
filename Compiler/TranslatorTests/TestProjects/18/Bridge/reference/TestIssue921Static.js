@@ -25,7 +25,7 @@
                     var localValue = "What a name";
 
                     return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f6).select($asm.$.TestIssue921Static.Issue921Static.f7).select($asm.$.TestIssue921Static.Issue921Static.f8).select(function (value) {
-                        return System.String.concat(value, localValue);
+                        return (value || "") + (localValue || "");
                     });
                 },
                 LambaLiftingWithInstanceMethod: function LambaLiftingWithInstanceMethod () {
@@ -68,9 +68,9 @@
                     }).select(function (value, index) {
                         return $toString(((value.length + index) | 0));
                     }).select(function (value) {
-                        return System.String.concat($toString(value.length), TestIssue921Static.Issue921Static._offset);
+                        return ($toString(value.length) || "") + TestIssue921Static.Issue921Static._offset;
                     }).select(function (value, index) {
-                        return System.String.concat($toString(value.length), index, TestIssue921Static.Issue921Static._offset);
+                        return ($toString(value.length) || "") + index + TestIssue921Static.Issue921Static._offset;
                     }).select(function (value) {
                         return $toString(((value.length + $toString(localValue).length) | 0));
                     });
@@ -95,16 +95,16 @@
             return ((((value + index) | 0) + TestIssue921Static.Issue921Static._offset) | 0);
         },
         f5: function (value) {
-            return System.String.concat(value, 1);
+            return (value || "") + 1;
         },
         f6: function (value, index) {
-            return System.String.concat(value, index);
+            return (value || "") + index;
         },
         f7: function (value) {
-            return System.String.concat(value, TestIssue921Static.Issue921Static.Name);
+            return (value || "") + (TestIssue921Static.Issue921Static.Name || "");
         },
         f8: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Static.Issue921Static.Name);
+            return (value || "") + index + (TestIssue921Static.Issue921Static.Name || "");
         },
         f9: function (value) {
             return value.add(System.Decimal(1));

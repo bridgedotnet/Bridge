@@ -21,10 +21,10 @@
 
     Bridge.apply($asm.$.TestIssue958.Issue958, {
         f1: function (action) {
-            System.Console.WriteLine(System.String.concat("Name: ", action.Name));
+            System.Console.WriteLine("Name: " + (action.Name || ""));
         },
         f2: function (action) {
-            System.Console.WriteLine(System.String.concat("Value: ", action.Value));
+            System.Console.WriteLine("Value: " + (action.Value || ""));
         }
     });
 

@@ -8,7 +8,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                     return ((a + b) | 0);
                 },
                 GetSum$2: function (a, b) {
-                    return System.String.concat(a, b);
+                    return (a || "") + (b || "");
                 },
                 GetSum: function (a, b) {
                     return a.add(b);

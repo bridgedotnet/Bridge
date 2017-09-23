@@ -31,14 +31,14 @@
                 var localValue = "What a name";
 
                 return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
-                    return System.String.concat(value, localValue);
+                    return (value || "") + (localValue || "");
                 });
             },
             LambaLiftingWithStaticProperty: function LambaLiftingWithStaticProperty () {
                 var localValue = "What a name";
 
                 return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select($asm.$.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
-                    return System.String.concat(value, localValue);
+                    return (value || "") + (localValue || "");
                 });
             },
             LambaLiftingWithInstanceMethod: function LambaLiftingWithInstanceMethod () {
@@ -81,9 +81,9 @@
                 }).select(function (value, index) {
                     return $toString(((value.length + index) | 0));
                 }).select(Bridge.fn.bind(this, function (value) {
-                    return System.String.concat($toString(value.length), this._offset);
+                    return ($toString(value.length) || "") + this._offset;
                 })).select(Bridge.fn.bind(this, function (value, index) {
-                    return System.String.concat($toString(value.length), index, this._offset);
+                    return ($toString(value.length) || "") + index + this._offset;
                 })).select(function (value) {
                     return $toString(((value.length + $toString(localValue).length) | 0));
                 });
@@ -107,19 +107,19 @@
             return ((((value + index) | 0) + this._offset) | 0);
         },
         f5: function (value) {
-            return System.String.concat(value, 1);
+            return (value || "") + 1;
         },
         f6: function (value, index) {
-            return System.String.concat(value, index);
+            return (value || "") + index;
         },
         f7: function (value) {
-            return System.String.concat(value, this.Name);
+            return (value || "") + (this.Name || "");
         },
         f8: function (value, index) {
-            return System.String.concat(value, index, this.Name);
+            return (value || "") + index + (this.Name || "");
         },
         f9: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Instance.Issue921Instance.NameStatic);
+            return (value || "") + index + (TestIssue921Instance.Issue921Instance.NameStatic || "");
         },
         f10: function (value) {
             return value.add(System.Decimal(1));

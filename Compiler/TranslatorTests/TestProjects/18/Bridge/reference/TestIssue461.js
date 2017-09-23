@@ -28,13 +28,13 @@
     Bridge.apply($asm.$.TestIssue461.Issue461, {
         f1: function (ev) {
             // Tests if ev.CurrentTarget.Value compiles
-            System.Console.WriteLine(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
+            System.Console.WriteLine("ev.CurrentTarget.Value: " + (ev.currentTarget.value || ""));
 
             // Tests if ev.IsMouseEvent() compiles
             System.Console.WriteLine("IsMouseEvent: " + System.Boolean.toString(Bridge.is(ev, MouseEvent)));
         },
         f2: function (ev) {
             // Tests if ev.CurrentTarget.Href compiles
-            System.Console.WriteLine(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
+            System.Console.WriteLine("ev.CurrentTarget.Href: " + (ev.currentTarget.href || ""));
         }
     });
