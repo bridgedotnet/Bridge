@@ -32,7 +32,10 @@ namespace Bridge.Translator
             get;
             set;
         }
-        public bool NullStringCheck { get; private set; }
+        public bool NullStringCheck
+        {
+            get; private set;
+        }
 
         protected override Expression GetExpression()
         {
@@ -1045,7 +1048,7 @@ namespace Bridge.Translator
             }
 
             bool wrapString = false;
-            if(this.NullStringCheck && rr.Type.IsKnownType(KnownTypeCode.String))
+            if (this.NullStringCheck && rr.Type.IsKnownType(KnownTypeCode.String))
             {
                 wrapString = !(expression is BinaryOperatorExpression) && !(expression is PrimitiveExpression || rr.Type.IsReferenceType != null && !rr.Type.IsReferenceType.Value);
             }
@@ -1098,7 +1101,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if(wrapString)
+            if (wrapString)
             {
                 this.Write("(");
             }
