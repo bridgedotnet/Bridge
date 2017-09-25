@@ -24399,8 +24399,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -25697,6 +25699,7 @@ Bridge.$N1391Result =                     r;
             TestSetValueWithIndex: function () {
                 var $t;
                 var ns1 = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3165.NinjaScript(), $t.Name = "Test", $t);
+
                 var pi = Bridge.Reflection.getMembers(Bridge.getType(ns1), 16, 284, "Name");
                 var val = Bridge.cast(Bridge.Reflection.midel(pi.g, ns1).apply(null, null), System.String);
                 Bridge.Reflection.midel(pi.s, ns1).apply(null, (null || []).concat((val || "") + "1"));

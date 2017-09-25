@@ -13,13 +13,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Reflectable]
         public class NinjaScript
         {
-            public string Name { get; set; }
+            public string Name
+            {
+                get; set;
+            }
         }
 
         [Test]
         public void TestSetValueWithIndex()
         {
             NinjaScript ns1 = new NinjaScript { Name = "Test" };
+
             var pi = ns1.GetType().GetProperty("Name");
             string val = (string)pi.GetValue(ns1, null);
             pi.SetValue(ns1, val + "1", null);
