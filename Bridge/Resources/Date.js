@@ -38,11 +38,8 @@
             },
 
             toLocalTime: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime()).mul(10000);
-
                 var d1,
-                    ticks = d.ticks;
+                    ticks = System.DateTime.getTicks(d);
 
                 if (d.kind !== 2) {
                     ticks = d.ticks.sub(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
