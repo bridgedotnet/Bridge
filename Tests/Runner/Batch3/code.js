@@ -24399,8 +24399,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -25716,13 +25718,21 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3168", {
         methods: {
             TestToLocalTime: function () {
-                var now = System.DateTime.create(2017, 6, 8, 12, 59, 0);
-                now = System.DateTime.addMinutes(now, -1);
-                now = System.DateTime.toLocalTime(now);
+                var now1 = System.DateTime.create(2017, 6, 8, 12, 59, 0);
+                now1 = System.DateTime.addMinutes(now1, -1);
+                now1 = System.DateTime.toLocalTime(now1);
 
-                Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(now));
-                Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getMonth(now));
-                Bridge.Test.NUnit.Assert.AreEqual(8, System.DateTime.getDay(now));
+                Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(now1));
+                Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getMonth(now1));
+                Bridge.Test.NUnit.Assert.AreEqual(8, System.DateTime.getDay(now1));
+
+                var now2 = System.DateTime.create(2017, 6, 8, 12, 59, 0);
+                now2 = System.DateTime.toLocalTime(now2);
+                now2 = System.DateTime.addMinutes(now2, -1);
+
+                Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(now2));
+                Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getMonth(now2));
+                Bridge.Test.NUnit.Assert.AreEqual(8, System.DateTime.getDay(now2));
             }
         }
     });
