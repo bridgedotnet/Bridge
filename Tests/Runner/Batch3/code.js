@@ -25737,6 +25737,23 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3170", {
+        methods: {
+            TestDateTimeParseExactZ: function () {
+                var dateString = "2017-08-31T22:00:00Z";
+                var dateTime = System.DateTime.parseExact(dateString, "yyyy-MM-ddTHH:mm:ssZ", System.Globalization.CultureInfo.invariantCulture);
+                var utc_date = System.DateTime.toUniversalTime(dateTime);
+
+                Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(utc_date));
+                Bridge.Test.NUnit.Assert.AreEqual(8, System.DateTime.getMonth(utc_date));
+                Bridge.Test.NUnit.Assert.AreEqual(31, System.DateTime.getDay(utc_date));
+                Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getHour(utc_date));
+                Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(utc_date));
+                Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getSecond(utc_date));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null

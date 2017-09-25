@@ -9359,7 +9359,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                             else {
                                 invalid = true;
                             }
-                            
+
                             break;
 
                         } else if (token === "zzz" || token === "K") {

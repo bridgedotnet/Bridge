@@ -775,7 +775,7 @@
                             else {
                                 invalid = true;
                             }
-                            
+
                             break;
 
                         } else if (token === "zzz" || token === "K") {

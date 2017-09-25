@@ -665,6 +665,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3158 - TestParenthesizedBlock", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3158.TestParenthesizedBlock);
             QUnit.test("#3165 - TestSetValueWithIndex", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3165.TestSetValueWithIndex);
             QUnit.test("#3168 - TestToLocalTime", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3168.TestToLocalTime);
+            QUnit.test("#3170 - TestDateTimeParseExactZ", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3170.TestDateTimeParseExactZ);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -13846,6 +13847,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3168", $t.File = "Batch3\\BridgeIssues\\3100\\N3168.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3170", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3170)],
+        statics: {
+            methods: {
+                TestDateTimeParseExactZ: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3170).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3170, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDateTimeParseExactZ()", $t.Line = "11", $t));
+                    t.Fixture.TestDateTimeParseExactZ();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3170", $t.File = "Batch3\\BridgeIssues\\3100\\N3170.cs", $t);
                 }
                 return this.context;
             }
