@@ -765,6 +765,19 @@
                             if (neg) {
                                 offset = -offset;
                             }
+                        } else if (token === "Z") {
+                            var ch = str.substring(idx, idx + 1);
+                            if (ch === "Z" || ch === "z") {
+                                kind = 2;
+                                adjust = true;
+                                idx += 1;
+                            }
+                            else {
+                                invalid = true;
+                            }
+                            
+                            break;
+
                         } else if (token === "zzz" || token === "K") {
                             if (str.substring(idx, idx + 1) === "Z") {
                                 kind = 2;
