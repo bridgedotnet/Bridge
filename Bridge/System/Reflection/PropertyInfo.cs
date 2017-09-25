@@ -61,7 +61,7 @@ namespace System.Reflection
         [Template("Bridge.Reflection.midel({this}.s, {obj})({value})")]
         public extern void SetValue(object obj, object value);
 
-        [Template("Bridge.Reflection.midel({this}.s, {obj}).apply(null, {index}.concat({value}))")]
+        [Template("Bridge.Reflection.midel({this}.s, {obj}).apply(null, ({index} || []).concat({value}))")]
         public extern void SetValue(object obj, object value, object[] index);
 
         /// <summary>
