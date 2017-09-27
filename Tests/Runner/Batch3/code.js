@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25750,6 +25748,99 @@ Bridge.$N1391Result =                     r;
                 Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getHour(utc_date));
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(utc_date));
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getSecond(utc_date));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3173", {
+        methods: {
+            TestSyncReadToEnd: function () {
+                var str = null;
+                var sr = new System.IO.StreamReader.$ctor7("/resources/test.js");
+                try {
+                    str = sr.ReadToEnd();
+                }
+                finally {
+                    if (Bridge.hasValue(sr)) {
+                        sr.System$IDisposable$dispose();
+                    }
+                }
+
+                Bridge.Test.NUnit.Assert.AreEqual("TEST", str);
+            },
+            TestAsyncReadToEnd: function () {
+                var $step = 0,
+                    $task1, 
+                    $taskResult1, 
+                    $jumpFromFinally, 
+                    $returnValue, 
+                    done, 
+                    str, 
+                    sr, 
+                    $async_e, 
+                    $async_e1, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+                                        str = null;
+                                        sr = new System.IO.StreamReader.$ctor7("/resources/test.js");
+                                        $step = 1;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task1 = sr.ReadToEndAsync();
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        str = $taskResult1;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        if (Bridge.hasValue(sr)) sr.System$IDisposable$dispose();
+
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        Bridge.Test.NUnit.Assert.AreEqual("TEST", str);
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            if ($step >= 1 && $step <= 2) {
+                                $step = 3;
+                                $asyncBody();
+                                return;
+                            }
+                            throw $async_e;
+                        }
+                    }, arguments);
+
+                $asyncBody();
             }
         }
     });
