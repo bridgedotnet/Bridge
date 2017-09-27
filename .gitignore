@@ -195,3 +195,7 @@ Tests/**/App_Readme/
 /Bridge.Sandbox.sln
 /.build/packages/*.nupkg
 /.build/packages/*.exe
+
+# MonoDEvelop addin
+.build/templates/packages/*
+

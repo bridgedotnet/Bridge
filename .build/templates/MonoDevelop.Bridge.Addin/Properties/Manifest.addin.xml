@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionModel>
+  <Dependencies>
+    <Addin id="MonoDevelop.Ide" version="7.1" />
+    <Addin id="MonoDevelop.Core" version="7.1" />
+  </Dependencies>
+  <Runtime>
+    <Import file="Templates/Projects/BridgeClassLibrary.xpt.xml" />
+    <Import file="Templates/Projects/Data/App.cs" />
+    <Import file="Packages/Bridge.nupkg" />
+    <Import file="Packages/Bridge.Core.nupkg" />
+    <Import file="Packages/Bridge.Html5.nupkg" />
+    <Import file="Packages/Bridge.Min.nupkg" />
+    <Import file="Packages/Bridge.Newtonsoft.Json.nupkg" />
+  </Runtime>
+  <Extension path="/MonoDevelop/Ide/ProjectTemplatePackageRepositories">
+    <PackageRepository path="Packages" />
+  </Extension>
+  <Extension path="/MonoDevelop/Core/StockIcons">
+    <StockIcon stockid="bridgenet-group" resource="MonoDevelop.Bridge.Addin.Images.bridgenet-group.png" />
+    <StockIcon stockid="bridgenet-library" resource="MonoDevelop.Bridge.Addin.Images.bridgenet-library.png" />
+  </Extension>
+  <Extension path="/MonoDevelop/Ide/TemplateImages">
+    <Image id="bridgenet-library-preview" resource="MonoDevelop.Bridge.Addin.Images.bridgenet-library-preview.png" />
+  </Extension>
+  <Extension path="/MonoDevelop/Ide/ProjectTemplateCategories">
+    <Category id="bridgenet" name="Bridge.net" icon="bridgenet-group" insertbefore="other">
+      <Category id="library" name="Library">
+        <Category id="general" name="General" />
+      </Category>
+    </Category>
+  </Extension>
+  <Extension path="/MonoDevelop/Ide/ProjectTemplates">
+    <ProjectTemplate id="bridgenet-library-cs" file="Templates/Projects/BridgeClassLibrary.xpt.xml" />
+  </Extension>
+</ExtensionModel>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0"?>
+<Template>
+  <TemplateConfiguration>
+    <_Name>Class Library</_Name>
+    <Icon>bridgenet-library</Icon>
+    <_Category>bridgenet/library/general</_Category>
+    <LanguageName>C#</LanguageName>
+    <Image id="bridgenet-library-preview" />
+    <_Description>A basic Bridge.NET Class Library project.</_Description>
+  </TemplateConfiguration>
+  <Actions>
+    <Open filename="App.cs" />
+  </Actions>
+  <Combine name="${ProjectName}" directory=".">
+    <Project name="${ProjectName}" directory=".">
+      <Options Target="Library" />
+      <Packages>
+        <package id="Bridge" />
+        <package id="Bridge.Core" />
+        <package id="Bridge.Html5" />
+        <package id="Bridge.Min" />
+        <package id="Bridge.Newtonsoft.Json" />
+      </Packages>
+      <Files>
+        <File name="App.cs" src="Data/App.cs" />
+        <FileTemplateReference TemplateID="CSharpAssemblyInfo" name="AssemblyInfo.cs" />
+      </Files>
+    </Project>
+  </Combine>
+</Template>
