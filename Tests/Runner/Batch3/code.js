@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25752,6 +25750,39 @@ Bridge.$N1391Result =                     r;
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getSecond(utc_date));
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178", {
+        methods: {
+            TestObjectLiteralIs: function () {
+                var myAction = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction.ctor("test");
+                Bridge.Test.NUnit.Assert.True(Bridge.hasValue(myAction));
+                Bridge.Test.NUnit.Assert.NotNull(myAction);
+                Bridge.Test.NUnit.Assert.True(Bridge.is(myAction, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction));
+                Bridge.Test.NUnit.Assert.NotNull(myAction);
+            },
+            TestObjectLiteralCastAttr: function () {
+                var o = "string";
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { };
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { };
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null))); // no Foo
+
+                o = { Foo: 1 };
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { Foo: 2 };
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction", {
+        $kind: "interface",
+        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
@@ -35787,6 +35818,22 @@ Bridge.$N1391Result =                     r;
             Exec: function (T, progress) {
                 if (progress === void 0) { progress = null; }
                 return (!Bridge.staticEquals(progress, null)) ? "not empty" : "empty";
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction],
+        $literal: true,
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction; };
+                (function (){
+                    this.Value = null;
+                    this.Value = value;
+                }).call($this);
+                return $this;
             }
         }
     });

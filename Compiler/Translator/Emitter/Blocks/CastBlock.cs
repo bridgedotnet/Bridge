@@ -266,6 +266,12 @@ namespace Bridge.Translator
                 this.Write("System.Nullable.getValue(");
             }
 
+            var typeDef = itype.Kind == TypeKind.TypeParameter ? null : this.Emitter.GetTypeDefinition(type, true);
+            if (typeDef != null && method == CS.Ops.IS && itype.Kind != TypeKind.Interface && this.Emitter.Validator.IsObjectLiteral(typeDef) && this.Emitter.Validator.GetObjectCreateMode(typeDef) == 0)
+            {
+                throw new EmitterException(type, $"ObjectLiteral type ({itype.FullName}) with Plain mode cannot be used in 'is' operator. Please define cast logic in Cast attribute or use Constructor mode.");
+            }
+
             this.Write(JS.NS.BRIDGE);
             this.WriteDot();
             this.Write(method);
