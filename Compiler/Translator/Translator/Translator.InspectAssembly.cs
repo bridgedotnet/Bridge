@@ -125,6 +125,14 @@ namespace Bridge.Translator
                 }
 
                 var path = Path.Combine(Path.GetDirectoryName(location), name) + ".dll";
+
+                var updateBridgeLocation = name.ToLowerInvariant() == "bridge" && (string.IsNullOrWhiteSpace(this.BridgeLocation) || !File.Exists(this.BridgeLocation));
+
+                if (updateBridgeLocation)
+                {
+                    this.BridgeLocation = path;
+                }
+
                 var reference = this.LoadAssembly(path, references);
 
                 if (reference != null && !references.Any(a => a.Name.FullName == reference.Name.FullName))

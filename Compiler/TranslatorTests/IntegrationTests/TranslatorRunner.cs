@@ -113,7 +113,7 @@ namespace Bridge.Translator.Tests
                 Folder = null,
                 Recursive = false,
                 Lib = null,
-                Help = false,
+                NoCompilation = false,
                 NoTimeStamp = null,
                 FromTask = false,
                 NoLoggerSetUp = true

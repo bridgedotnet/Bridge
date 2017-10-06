@@ -208,7 +208,7 @@ namespace Bridge.Build
                 Folder = null,
                 Recursive = false,
                 Lib = null,
-                Help = false,
+                NoCompilation = false,
                 NoTimeStamp = null,
                 FromTask = true,
                 Name = "",

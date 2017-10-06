@@ -20,11 +20,13 @@ namespace Bridge.Translator
         public string Folder { get; set; }
         public bool Recursive { get; set; }
         public string Lib { get; set; }
-        public bool Help { get; set; }
+        public bool NoCompilation { get; set; }
+        public bool Run { get; set; }
         public bool? NoTimeStamp { get; set; }
         public bool FromTask { get; set; }
         public bool NoLoggerSetUp { get; set; }
         public string Sources { get; set; }
+        public string ReferencesPath { get; set; }
 
         public bool IsFolderMode { get { return string.IsNullOrWhiteSpace(this.ProjectLocation); } }
 
@@ -54,11 +56,13 @@ namespace Bridge.Translator
                 { WrapProperty("Folder"), GetString(this.Folder) },
                 { WrapProperty("Recursive"), GetString(this.Recursive) },
                 { WrapProperty("Lib"), GetString(this.Lib) },
-                { WrapProperty("Help"), GetString(this.Help) },
+                { WrapProperty("Help"), GetString(this.NoCompilation) },
                 { WrapProperty("NoTimeStamp"), GetString(this.NoTimeStamp) },
+                { WrapProperty("Run"), GetString(this.Run) },
                 { WrapProperty("FromTask"), GetString(this.FromTask) },
                 { WrapProperty("NoLoggerSetUp"), GetString(this.NoLoggerSetUp) },
                 { WrapProperty("Sources"), GetString(this.Sources) },
+                { WrapProperty("ReferencesPath"), GetString(this.ReferencesPath) }
             };
 
             return r;

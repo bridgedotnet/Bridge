@@ -327,5 +327,17 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        public string ReferencesPath
+        {
+            get;
+            set;
+        }
+
+        public string[] References
+        {
+            get;
+            set;
+        }
     }
 }
