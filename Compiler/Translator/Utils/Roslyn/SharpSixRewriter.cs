@@ -806,7 +806,14 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
+                    var symbolInfo = this.semanticModel.GetCollectionInitializerSymbolInfo(init);
+                    var collectionInitializer = symbolInfo.Symbol;
+
+                    if(symbolInfo.Symbol == null && symbolInfo.CandidateSymbols.Length > 0)
+                    {
+                        collectionInitializer = symbolInfo.CandidateSymbols[0];
+                    }
+
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
                     if (mInfo != null)
                     {
