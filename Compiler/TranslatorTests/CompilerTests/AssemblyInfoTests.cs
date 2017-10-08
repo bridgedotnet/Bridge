@@ -40,7 +40,7 @@ namespace Bridge.Translator.Tests
             Assert.False(config.GenerateTypeScript, "GenerateTypeScript");
             Assert.AreEqual(DocumentationMode.Basic, config.GenerateDocumentation, "GenerateDocumentation");
             Assert.Null(config.BuildArguments, "BuildArguments");
-            Assert.False(config.CleanOutputFolderBeforeBuild, "CleanOutputFolderBeforeBuild");
+            Assert.Null(config.CleanOutputFolderBeforeBuild, "CleanOutputFolderBeforeBuild");
             Assert.Null(config.CleanOutputFolderBeforeBuildPattern, "CleanOutputFolderBeforeBuildPattern");
             Assert.Null(config.Configuration, "Configuration");
             Assert.Null(config.Locales, "Locales");

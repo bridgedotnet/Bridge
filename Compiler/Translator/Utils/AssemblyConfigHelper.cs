@@ -93,6 +93,7 @@ namespace Bridge.Translator.Utils
             config.BeforeBuild = helper.ApplyPathTokens(tokens, config.BeforeBuild);
             config.AfterBuild = helper.ApplyPathTokens(tokens, config.AfterBuild);
             config.PluginsPath = helper.ApplyPathTokens(tokens, config.PluginsPath);
+            config.CleanOutputFolderBeforeBuild = helper.ApplyTokens(tokens, config.CleanOutputFolderBeforeBuild);
             config.CleanOutputFolderBeforeBuildPattern = helper.ApplyTokens(tokens, config.CleanOutputFolderBeforeBuildPattern);
             config.Locales = helper.ApplyTokens(tokens, config.Locales);
             config.LocalesOutput = helper.ApplyTokens(tokens, config.LocalesOutput);
