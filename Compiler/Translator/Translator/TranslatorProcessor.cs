@@ -204,18 +204,18 @@ namespace Bridge.Translator
                 return;
             }
 
-            logger.Info("Applying logger configuration parameters...");
+            logger.Trace("Applying logger configuration parameters...");
 
             logger.Name = bridgeOptions.Name;
 
             if (!string.IsNullOrEmpty(logger.Name))
             {
-                logger.Info("Logger name: " + logger.Name);
+                logger.Trace("Logger name: " + logger.Name);
             }
 
             var loggerLevel = assemblyConfig.Logging.Level ?? LoggerLevel.None;
 
-            logger.Info("Logger level: " + loggerLevel);
+            logger.Trace("Logger level: " + loggerLevel);
 
             if (loggerLevel <= LoggerLevel.None)
             {
@@ -224,7 +224,7 @@ namespace Bridge.Translator
 
             logger.LoggerLevel = loggerLevel;
 
-            logger.Info("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
+            logger.Trace("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
 
             logger.BufferedMode = false;
 
@@ -252,7 +252,7 @@ namespace Bridge.Translator
 
             logger.Flush();
 
-            logger.Info("Setting logger configuration parameters done");
+            logger.Trace("Setting logger configuration parameters done");
         }
 
         private string GetLoggerFolder(IAssemblyInfo assemblyConfig)
@@ -276,7 +276,7 @@ namespace Bridge.Translator
             var bridgeOptions = this.BridgeOptions;
             var assemblyConfig = this.TranslatorConfiguration;
 
-            logger.Info("Setting translator properties...");
+            logger.Trace("Setting translator properties...");
 
             Bridge.Translator.Translator translator = null;
 
@@ -289,7 +289,7 @@ namespace Bridge.Translator
             {
                 if (string.IsNullOrWhiteSpace(bridgeOptions.Lib))
                 {
-                    throw new Exception("Please define path to assembly using -lib option");
+                    throw new InvalidOperationException("Please define path to assembly using -lib option");
                 }
 
                 bridgeOptions.Lib = Path.Combine(bridgeOptions.Folder, bridgeOptions.Lib);
@@ -322,12 +322,12 @@ namespace Bridge.Translator
                 translator.DefineConstants = translator.DefineConstants.Distinct().ToList();
             }
 
-            translator.Log.Info("Translator properties:");
-            translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation);
-            translator.Log.Info("\tBuildArguments:" + translator.BuildArguments);
-            translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
-            translator.Log.Info("\tRebuild:" + translator.Rebuild);
-            translator.Log.Info("\tProjectProperties:" + translator.ProjectProperties);
+            translator.Log.Trace("Translator properties:");
+            translator.Log.Trace("\tBridgeLocation:" + translator.BridgeLocation);
+            translator.Log.Trace("\tBuildArguments:" + translator.BuildArguments);
+            translator.Log.Trace("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
+            translator.Log.Trace("\tRebuild:" + translator.Rebuild);
+            translator.Log.Trace("\tProjectProperties:" + translator.ProjectProperties);
 
             if (translator.FolderMode)
             {
@@ -349,7 +349,7 @@ namespace Bridge.Translator
 
             translator.ApplyProjectPropertiesToConfig();
 
-            logger.Info("Setting translator properties done");
+            logger.Trace("Setting translator properties done");
 
             return translator;
         }

@@ -31,7 +31,7 @@ namespace Bridge.Translator
 
         internal virtual void EnsureProjectProperties()
         {
-            this.Log.Info("EnsureProjectProperties at " + (Location ?? "") + " ...");
+            this.Log.Trace("EnsureProjectProperties at " + (Location ?? "") + " ...");
 
             ShouldReadProjectFile = !this.FromTask;
 
@@ -52,17 +52,17 @@ namespace Bridge.Translator
 
             this.EnsureDefineConstants(doc);
 
-            this.Log.Info("EnsureProjectProperties done");
+            this.Log.Trace("EnsureProjectProperties done");
         }
 
         internal virtual void ReadFolderFiles()
         {
-            this.Log.Info("Reading folder files...");
+            this.Log.Trace("Reading folder files...");
 
             this.SourceFiles = this.GetSourceFiles(this.Location);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
-            this.Log.Info("Reading folder files done");
+            this.Log.Trace("Reading folder files done");
         }
 
         /// <summary>
@@ -188,14 +188,14 @@ namespace Bridge.Translator
             {
                 var fullOutputPath = this.GetOutputPaths(doc);
 
-                this.Log.Info("    FullOutputPath:" + fullOutputPath);
+                this.Log.Trace("    FullOutputPath:" + fullOutputPath);
 
                 this.AssemblyLocation = Path.Combine(fullOutputPath, this.ProjectProperties.AssemblyName + ".dll");
             }
 
-            this.Log.Info("    OutDir:" + this.ProjectProperties.OutDir);
-            this.Log.Info("    OutputPath:" + this.ProjectProperties.OutputPath);
-            this.Log.Info("    AssemblyLocation:" + this.AssemblyLocation);
+            this.Log.Trace("    OutDir:" + this.ProjectProperties.OutDir);
+            this.Log.Trace("    OutputPath:" + this.ProjectProperties.OutputPath);
+            this.Log.Trace("    AssemblyLocation:" + this.AssemblyLocation);
 
             this.Log.Trace("BuildAssemblyLocation done");
         }
@@ -372,7 +372,7 @@ namespace Bridge.Translator
 
         protected virtual void EnsureDefineConstants(XDocument doc)
         {
-            this.Log.Info("EnsureDefineConstants...");
+            this.Log.Trace("EnsureDefineConstants...");
 
             if (this.DefineConstants == null)
             {
@@ -381,7 +381,7 @@ namespace Bridge.Translator
 
             if (this.ProjectProperties.DefineConstants == null && this.ShouldReadProjectFile)
             {
-                this.Log.Info("Reading define constants...");
+                this.Log.Trace("Reading define constants...");
 
                 var nodeList = doc.Descendants().Where(n =>
                 {
@@ -422,7 +422,7 @@ namespace Bridge.Translator
 
             this.DefineConstants = this.DefineConstants.Distinct().ToList();
 
-            this.Log.Info("EnsureDefineConstants done");
+            this.Log.Trace("EnsureDefineConstants done");
         }
 
         protected virtual void EnsureAssemblyName(XDocument doc)

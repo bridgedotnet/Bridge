@@ -152,7 +152,7 @@ namespace Bridge.Contract
             string configPath = null;
             string mergePath = null;
 
-            Logger.Info("Reading configuration file " + (configFileName ?? "") + " at " + (location ?? "") + " for configuration " + (configuration ?? "") + " ...");
+            Logger.Trace("Reading configuration file " + (configFileName ?? "") + " at " + (location ?? "") + " for configuration " + (configuration ?? "") + " ...");
 
             if (!string.IsNullOrWhiteSpace(configuration))
             {
@@ -182,19 +182,19 @@ namespace Bridge.Contract
 
             if (configPath == null)
             {
-                Logger.Info("Config path is not found. Returning default config");
+                Logger.Info("Bridge config file is not found. Returning default config");
                 return default(T);
             }
 
             try
             {
-                this.Logger.Info("Reading base configuration at " + (configPath ?? "") + " ...");
+                this.Logger.Trace("Reading base configuration at " + (configPath ?? "") + " ...");
                 var json = File.ReadAllText(configPath);
 
                 T config;
                 if (mergePath != null)
                 {
-                    this.Logger.Info("Reading merge configuration at " + (mergePath ?? "") + " ...");
+                    this.Logger.Trace("Reading merge configuration at " + (mergePath ?? "") + " ...");
                     var jsonMerge = File.ReadAllText(mergePath);
 
                     var cfgMain = JObject.Parse(json);
@@ -223,7 +223,7 @@ namespace Bridge.Contract
 
         public string GetConfigPath(string configFileName, bool folderMode, string location)
         {
-            this.Logger.Info("Getting configuration by file path " + (configFileName ?? "") + " at " + (location ?? "") + " ...");
+            this.Logger.Trace("Getting configuration by file path " + (configFileName ?? "") + " at " + (location ?? "") + " ...");
 
             var folder = folderMode ? location : Path.GetDirectoryName(location);
             var path = folder + Path.DirectorySeparatorChar + "Bridge" + Path.DirectorySeparatorChar + configFileName;
@@ -240,11 +240,11 @@ namespace Bridge.Contract
 
             if (!File.Exists(path))
             {
-                this.Logger.Info("Skipping " + configFileName + " (not found)");
+                this.Logger.Trace("Skipping " + configFileName + " (not found)");
                 return null;
             }
 
-            this.Logger.Info("Found configuration file " + (path ?? ""));
+            this.Logger.Trace("Found configuration file " + (path ?? ""));
 
             return path;
         }
