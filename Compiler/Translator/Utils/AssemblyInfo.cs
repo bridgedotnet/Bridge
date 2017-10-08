@@ -189,8 +189,9 @@ namespace Bridge.Translator
         /// <summary>
         /// Deletes files from output directory using pattern "*.js|*.d.ts" before build (before extracting scripts after translation).
         /// It is useful to replace BeforeBuild event if it just contain commands to clean the output folder.
+        /// Default value is null. It can be used either as string or bool value. True means "*.js|*.d.ts"
         /// </summary>
-        public bool CleanOutputFolderBeforeBuild
+        public string CleanOutputFolderBeforeBuild
         {
             get; set;
         }

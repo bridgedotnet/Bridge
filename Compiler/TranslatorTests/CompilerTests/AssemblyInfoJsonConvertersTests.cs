@@ -218,6 +218,64 @@ namespace Bridge.Translator.Tests
                 "7");
         }
 
+        [Test]
+        public void AssemblyInfoJsonConverters_StringBoolJsonConverterSerialization()
+        {
+            AssertJsonSerialization(
+                new StringBoolInfo(),
+                "{\"Value\":null}",
+                "1");
+
+            AssertJsonSerialization(
+                new StringBoolInfo { Value = "" },
+                "{\"Value\":\"\"}",
+                "2");
+
+            AssertJsonSerialization(
+                new StringBoolInfo { Value = "usemeiftrue" },
+                "{\"Value\":true}",
+                "3");
+
+            AssertJsonSerialization(
+                new StringBoolInfo { Value = "usemeiffalse" },
+                "{\"Value\":false}",
+                "4");
+
+            AssertJsonSerialization(
+                new StringBoolInfo { Value = "some text" },
+                "{\"Value\":\"some text\"}",
+                "5");
+        }
+
+        [Test]
+        public void AssemblyInfoJsonConverters_StringBoolJsonConverterDeserialization()
+        {
+            AssertJsonDeserialization(
+                "{\"Value\":null}",
+                new StringBoolInfo(),
+                "1");
+
+            AssertJsonDeserialization(
+                "{\"Value\":false}",
+                new StringBoolInfo { Value = "usemeiffalse" },
+                "2");
+
+            AssertJsonDeserialization(
+                "{\"Value\":true}",
+                new StringBoolInfo { Value = "usemeiftrue" },
+                "3");
+
+            AssertJsonDeserialization(
+                "{\"Value\":\"Folder1/\"}",
+                new StringBoolInfo { Value = "Folder1/" },
+                "4");
+
+            AssertJsonDeserialization(
+                "{\"Value\":\"\"}",
+                new StringBoolInfo { Value = "" },
+                "5");
+        }
+
         private static void AssertJsonSerialization(object value, string expected, string message = null)
         {
             var actual = JsonConvert.SerializeObject(value, Formatting.None);
@@ -360,6 +418,40 @@ namespace Bridge.Translator.Tests
                 return c1.Enabled == c2.Enabled
                     && c1.Path == c2.Path
                     && c1.FileName == c2.FileName;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+        }
+
+        class StringBoolInfo
+        {
+            [JsonConverter(typeof(StringBoolJsonConverter), "usemeiftrue", "usemeiffalse")]
+            public string Value
+            {
+                get; set;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null)
+                {
+                    return false;
+                }
+
+                var ci = obj as StringBoolInfo;
+
+                if (ci == null)
+                {
+                    return false;
+                }
+
+                var c1 = this.Value;
+                var c2 = ci.Value;
+
+                return c1 == c2;
             }
 
             public override int GetHashCode()

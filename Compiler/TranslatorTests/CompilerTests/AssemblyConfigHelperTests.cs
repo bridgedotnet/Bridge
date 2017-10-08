@@ -39,6 +39,7 @@ namespace Bridge.Translator.Tests
                 Assert.AreEqual("true", config.BeforeBuild);
                 Assert.AreEqual("TestConfiguration", config.AfterBuild);
                 Assert.AreEqual("TestDefineConstants", config.PluginsPath);
+                Assert.AreEqual("TestOutputType", config.CleanOutputFolderBeforeBuild);
                 Assert.AreEqual("TestOutDir", config.CleanOutputFolderBeforeBuildPattern);
                 Assert.AreEqual("TestOutputPath", config.Locales);
                 Assert.AreEqual("TestOutputType", config.LocalesOutput);
@@ -107,6 +108,7 @@ namespace Bridge.Translator.Tests
                     BeforeBuild = "$(CheckForOverflowUnderflow)",
                     AfterBuild = "$(Configuration)",
                     PluginsPath = "$(DefineConstants)",
+                    CleanOutputFolderBeforeBuild= "$(OutputType)",
                     CleanOutputFolderBeforeBuildPattern = "$(OutDir)",
                     Locales = "$(OutputPath)",
                     LocalesOutput = "$(OutputType)",

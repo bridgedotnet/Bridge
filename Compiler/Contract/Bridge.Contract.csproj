@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="BridgeType.cs" />
+    <Compile Include="Config\StringBoolJsonConverter.cs" />
     <Compile Include="Config\NamedFunctionMode.cs" />
     <Compile Include="Config\HtmlConfig.cs" />
     <Compile Include="Config\ConsoleConfig.cs" />

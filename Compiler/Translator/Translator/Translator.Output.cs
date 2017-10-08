@@ -222,10 +222,10 @@ namespace Bridge.Translator
         public void CleanOutputFolderIfRequired(string outputPath)
         {
             if (this.AssemblyInfo != null
-                && (this.AssemblyInfo.CleanOutputFolderBeforeBuild || !string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)))
+                && (!string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuild) || !string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)))
             {
                 var searchPattern = string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)
-                    ? "*" + Files.Extensions.JS + "|*" + Files.Extensions.DTS
+                    ? this.AssemblyInfo.CleanOutputFolderBeforeBuild
                     : this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern;
 
                 string logFileFullPath = null;
