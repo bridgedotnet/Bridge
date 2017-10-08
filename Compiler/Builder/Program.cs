@@ -36,22 +36,17 @@ namespace Bridge.Builder
 
             var processor = new TranslatorProcessor(bridgeOptions, logger);
 
-            var result = processor.PreProcess();
-
-            if (result != null)
-            {
-                return 1;
-            }
-
             try
             {
+                processor.PreProcess();
+
                 processor.Process();
 
                 processor.PostProcess();
             }
             catch (EmitterException ex)
             {
-                logger.Error(string.Format("Bridge.NET Compiler error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ex.FileName, ex.StartLine, ex.StartColumn, ex.EndLine, ex.EndColumn));
+                logger.Error(string.Format("Bridge.NET Compiler error: {1} ({2}, {3}) {0}", ex.ToString(), ex.FileName, ex.StartLine, ex.StartColumn));
                 return 1;
             }
             catch (Exception ex)
@@ -60,19 +55,13 @@ namespace Bridge.Builder
 
                 if (ee != null)
                 {
-                    logger.Error(string.Format("Bridge.NET Compiler error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ee.FileName, ee.StartLine, ee.StartColumn, ee.EndLine, ee.EndColumn));
+                    logger.Error(string.Format("Bridge.NET Compiler error: {1} ({2}, {3}) {0}", ee.ToString(), ee.FileName, ee.StartLine, ee.StartColumn));
                 }
                 else
                 {
-                    // Iteractively print inner exceptions
-                    var ine = ex;
-                    var elvl = 0;
-                    while (ine != null)
-                    {
-                        logger.Error(string.Format("Bridge.NET Compiler error: exception level: {0} - {1}\nStack trace:\n{2}", elvl++, ine.Message, ine.StackTrace));
-                        ine = ine.InnerException;
-                    }
+                    logger.Error(string.Format("Bridge.NET Compiler error: {0}", ex.ToString()));
                 }
+
                 return 1;
             }
 

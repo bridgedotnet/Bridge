@@ -23,30 +23,15 @@ namespace Bridge.Translator
             this.Logger = logger;
         }
 
-        public string PreProcess()
+        public void PreProcess()
         {
             this.AdjustBridgeOptions();
 
             this.TranslatorConfiguration = this.ReadConfiguration();
 
-            if (this.TranslatorConfiguration == null)
-            {
-                return "Could not get configuration";
-            }
-
             this.Translator = this.SetTranslatorProperties();
 
-            if (this.Translator == null)
-            {
-                return "Could not get Translator";
-            }
-
-            if (!this.SetLoggerConfigurationParameters())
-            {
-                return "Could not set logger configuration";
-            }
-
-            return null;
+            this.SetLoggerConfigurationParameters();
         }
 
         private void AdjustBridgeOptions()
@@ -203,21 +188,12 @@ namespace Bridge.Translator
 
             var location = bridgeOptions.IsFolderMode ? bridgeOptions.Folder : bridgeOptions.ProjectLocation;
 
-            try
-            {
-                var configReader = new AssemblyConfigHelper(logger);
+            var configReader = new AssemblyConfigHelper(logger);
 
-                return configReader.ReadConfig(bridgeOptions.IsFolderMode, location, bridgeOptions.ProjectProperties.Configuration);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Could not read configuration: " + ex.ToString());
-            }
-
-            return null;
+            return configReader.ReadConfig(bridgeOptions.IsFolderMode, location, bridgeOptions.ProjectProperties.Configuration);
         }
 
-        private bool SetLoggerConfigurationParameters()
+        private void SetLoggerConfigurationParameters()
         {
             var logger = this.Logger;
             var bridgeOptions = this.BridgeOptions;
@@ -225,7 +201,7 @@ namespace Bridge.Translator
 
             if (bridgeOptions.NoLoggerSetUp)
             {
-                return true;
+                return;
             }
 
             logger.Info("Applying logger configuration parameters...");
@@ -246,48 +222,37 @@ namespace Bridge.Translator
                 logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging");
             }
 
-            try
+            logger.LoggerLevel = loggerLevel;
+
+            logger.Info("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
+
+            logger.BufferedMode = false;
+
+            if (bridgeOptions.NoTimeStamp.HasValue)
             {
-                logger.LoggerLevel = loggerLevel;
-
-                logger.Info("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
-
-                logger.BufferedMode = false;
-
-                if (bridgeOptions.NoTimeStamp.HasValue)
-                {
-                    logger.UseTimeStamp = !bridgeOptions.NoTimeStamp.Value;
-                }
-                else if (assemblyConfig.Logging.TimeStamps.HasValue)
-                {
-                    logger.UseTimeStamp = assemblyConfig.Logging.TimeStamps.Value;
-                }
-                else
-                {
-                    logger.UseTimeStamp = true;
-                }
-
-                var fileLoggerWriter = logger.GetFileLogger();
-
-                if (fileLoggerWriter != null)
-                {
-                    string logFileFolder = GetLoggerFolder(assemblyConfig);
-
-                    fileLoggerWriter.SetParameters(logFileFolder, assemblyConfig.Logging.FileName, assemblyConfig.Logging.MaxSize);
-                }
-
-                logger.Flush();
-
-                logger.Info("Setting logger configuration parameters done");
-
-                return true;
+                logger.UseTimeStamp = !bridgeOptions.NoTimeStamp.Value;
             }
-            catch (Exception ex)
+            else if (assemblyConfig.Logging.TimeStamps.HasValue)
             {
-                Console.WriteLine("Could not read configuration: " + ex.ToString());
+                logger.UseTimeStamp = assemblyConfig.Logging.TimeStamps.Value;
+            }
+            else
+            {
+                logger.UseTimeStamp = true;
             }
 
-            return false;
+            var fileLoggerWriter = logger.GetFileLogger();
+
+            if (fileLoggerWriter != null)
+            {
+                string logFileFolder = GetLoggerFolder(assemblyConfig);
+
+                fileLoggerWriter.SetParameters(logFileFolder, assemblyConfig.Logging.FileName, assemblyConfig.Logging.MaxSize);
+            }
+
+            logger.Flush();
+
+            logger.Info("Setting logger configuration parameters done");
         }
 
         private string GetLoggerFolder(IAssemblyInfo assemblyConfig)
@@ -313,89 +278,80 @@ namespace Bridge.Translator
 
             logger.Info("Setting translator properties...");
 
-            try
+            Bridge.Translator.Translator translator = null;
+
+            // FIXME: detect by extension whether first argument is a project or DLL
+            if (!bridgeOptions.IsFolderMode)
             {
-                Bridge.Translator.Translator translator = null;
-
-                // FIXME: detect by extension whether first argument is a project or DLL
-                if (!bridgeOptions.IsFolderMode)
+                translator = new Bridge.Translator.Translator(bridgeOptions.ProjectLocation, bridgeOptions.Sources, bridgeOptions.FromTask);
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(bridgeOptions.Lib))
                 {
-                    translator = new Bridge.Translator.Translator(bridgeOptions.ProjectLocation, bridgeOptions.Sources, bridgeOptions.FromTask);
-                }
-                else
-                {
-                    if (string.IsNullOrWhiteSpace(bridgeOptions.Lib))
-                    {
-                        throw new Exception("Please define path to assembly using -lib option");
-                    }
-
-                    bridgeOptions.Lib = Path.Combine(bridgeOptions.Folder, bridgeOptions.Lib);
-                    translator = new Bridge.Translator.Translator(bridgeOptions.Folder, bridgeOptions.Sources, bridgeOptions.Recursive, bridgeOptions.Lib);
+                    throw new Exception("Please define path to assembly using -lib option");
                 }
 
-                translator.ProjectProperties = bridgeOptions.ProjectProperties;
+                bridgeOptions.Lib = Path.Combine(bridgeOptions.Folder, bridgeOptions.Lib);
+                translator = new Bridge.Translator.Translator(bridgeOptions.Folder, bridgeOptions.Sources, bridgeOptions.Recursive, bridgeOptions.Lib);
+            }
 
-                translator.AssemblyInfo = assemblyConfig;
-                if (this.BridgeOptions.ReferencesPath != null)
-                {
-                    translator.AssemblyInfo.ReferencesPath = this.BridgeOptions.ReferencesPath;
-                }
+            translator.ProjectProperties = bridgeOptions.ProjectProperties;
+
+            translator.AssemblyInfo = assemblyConfig;
+            if (this.BridgeOptions.ReferencesPath != null)
+            {
+                translator.AssemblyInfo.ReferencesPath = this.BridgeOptions.ReferencesPath;
+            }
                 
-                translator.OverflowMode = bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.HasValue ?
-                    (bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.Value ? OverflowMode.Checked : OverflowMode.Unchecked) : (OverflowMode?)null;
+            translator.OverflowMode = bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.HasValue ?
+                (bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.Value ? OverflowMode.Checked : OverflowMode.Unchecked) : (OverflowMode?)null;
 
-                if (string.IsNullOrEmpty(bridgeOptions.BridgeLocation))
+            if (string.IsNullOrEmpty(bridgeOptions.BridgeLocation))
+            {
+                bridgeOptions.BridgeLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Bridge.dll");
+            }
+
+            translator.BridgeLocation = bridgeOptions.BridgeLocation;
+            translator.Rebuild = bridgeOptions.Rebuild;
+            translator.Log = logger;
+
+            if (bridgeOptions.ProjectProperties.DefineConstants != null)
+            {
+                translator.DefineConstants.AddRange(bridgeOptions.ProjectProperties.DefineConstants.Split(';').Select(s => s.Trim()).Where(s => s != ""));
+                translator.DefineConstants = translator.DefineConstants.Distinct().ToList();
+            }
+
+            translator.Log.Info("Translator properties:");
+            translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation);
+            translator.Log.Info("\tBuildArguments:" + translator.BuildArguments);
+            translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
+            translator.Log.Info("\tRebuild:" + translator.Rebuild);
+            translator.Log.Info("\tProjectProperties:" + translator.ProjectProperties);
+
+            if (translator.FolderMode)
+            {
+                translator.ReadFolderFiles();
+
+                if (!string.IsNullOrEmpty(assemblyConfig.FileName))
                 {
-                    bridgeOptions.BridgeLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Bridge.dll");
-                }
-
-                translator.BridgeLocation = bridgeOptions.BridgeLocation;
-                translator.Rebuild = bridgeOptions.Rebuild;
-                translator.Log = logger;
-
-                if (bridgeOptions.ProjectProperties.DefineConstants != null)
-                {
-                    translator.DefineConstants.AddRange(bridgeOptions.ProjectProperties.DefineConstants.Split(';').Select(s => s.Trim()).Where(s => s != ""));
-                    translator.DefineConstants = translator.DefineConstants.Distinct().ToList();
-                }
-
-                translator.Log.Info("Translator properties:");
-                translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation);
-                translator.Log.Info("\tBuildArguments:" + translator.BuildArguments);
-                translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
-                translator.Log.Info("\tRebuild:" + translator.Rebuild);
-                translator.Log.Info("\tProjectProperties:" + translator.ProjectProperties);
-
-                if (translator.FolderMode)
-                {
-                    translator.ReadFolderFiles();
-
-                    if (!string.IsNullOrEmpty(assemblyConfig.FileName))
-                    {
-                        translator.DefaultNamespace = Path.GetFileNameWithoutExtension(assemblyConfig.FileName);
-                    }
-                    else
-                    {
-                        translator.DefaultNamespace = bridgeOptions.DefaultFileName;
-                    }
+                    translator.DefaultNamespace = Path.GetFileNameWithoutExtension(assemblyConfig.FileName);
                 }
                 else
                 {
-                    translator.EnsureProjectProperties();
+                    translator.DefaultNamespace = bridgeOptions.DefaultFileName;
                 }
-
-                translator.ApplyProjectPropertiesToConfig();
-
-                logger.Info("Setting translator properties done");
-
-                return translator;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("Could not read configuration: " + ex.ToString());
+                translator.EnsureProjectProperties();
             }
 
-            return null;
+            translator.ApplyProjectPropertiesToConfig();
+
+            logger.Info("Setting translator properties done");
+
+            return translator;
         }
     }
 }
