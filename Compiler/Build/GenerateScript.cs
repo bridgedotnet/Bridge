@@ -135,34 +135,28 @@ namespace Bridge.Build
 
             var processor = new TranslatorProcessor(bridgeOptions, logger);
 
-            var result = processor.PreProcess();
-
-            if (result != null)
-            {
-                processor = null;
-                return false;
-            }
-
             try
             {
+                processor.PreProcess();
+
                 processor.Process();
 
                 processor.PostProcess();
             }
-            catch (EmitterException e)
+            catch (EmitterException ex)
             {
                 if (logger != null)
                 {
-                    logger.Error(e.ToString());
+                    logger.Error(ex.ToString());
                 }
                 else
                 {
-                    this.Log.LogError(null, null, null, e.FileName, e.StartLine + 1, e.StartColumn + 1, e.EndLine + 1, e.EndColumn + 1, "Error: {0} {1}", e.Message, e.StackTrace);
+                    this.Log.LogError(null, null, null, ex.FileName, ex.StartLine + 1, ex.StartColumn + 1, ex.EndLine + 1, ex.EndColumn + 1, ex.ToString());
                 }
 
                 success = false;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 var ee = processor.Translator != null ? processor.Translator.CreateExceptionFromLastNode() : null;
 
@@ -170,20 +164,20 @@ namespace Bridge.Build
                 {
                     if (logger != null)
                     {
-                        logger.Error(e.ToString());
+                        logger.Error(ee.ToString());
                     }
 
-                    this.Log.LogError(null, null, null, ee.FileName, ee.StartLine + 1, ee.StartColumn + 1, ee.EndLine + 1, ee.EndColumn + 1, "Error: {0} {1}", e.Message, e.StackTrace);
+                    this.Log.LogError(null, null, null, ee.FileName, ee.StartLine + 1, ee.StartColumn + 1, ee.EndLine + 1, ee.EndColumn + 1, ee.ToString());
                 }
                 else
                 {
                     if (logger != null)
                     {
-                        logger.Error(e.ToString());
+                        logger.Error(ex.ToString());
                     }
                     else
                     {
-                        this.Log.LogError("Bridge.NET Compiler error: {0} {1}", e.Message, e.StackTrace);
+                        this.Log.LogError(ex.ToString());
                     }
                 }
 

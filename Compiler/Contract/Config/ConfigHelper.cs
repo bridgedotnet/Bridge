@@ -217,7 +217,7 @@ namespace Bridge.Contract
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException("Cannot read " + configFileName, e);
+                throw new InvalidOperationException("Cannot read configuration file " + configFileName, e);
             }
         }
 

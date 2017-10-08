@@ -128,12 +128,7 @@ namespace Bridge.Translator.Tests
 
             var processor = new TranslatorProcessor(bridgeOptions, this.Logger as Bridge.Translator.Logging.Logger);
 
-            var result = processor.PreProcess();
-
-            if (result != null)
-            {
-                Bridge.Translator.TranslatorException.Throw("Unable to preprocess: " + result);
-            }
+            processor.PreProcess();
 
             var translator = processor.Translator;
 
