@@ -31,8 +31,8 @@ namespace Bridge.Builder
                 return 0;
             }
 
-            logger.Info("Command line arguments:");
-            logger.Info("\t" + (string.Join(" ", args) ?? ""));
+            logger.Trace("Command line arguments:");
+            logger.Trace("\t" + (string.Join(" ", args) ?? ""));
 
             var processor = new TranslatorProcessor(bridgeOptions, logger);
 
