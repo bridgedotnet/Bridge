@@ -191,7 +191,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                             html = (html || "") + " in ";
 
                             if (System.String.startsWith(file, "file:")) {
-                                html = (html || "") + ((System.String.format("<a href = \"{0}\" target = \"_blank\">{0}</a>", file)) || "");
+                                html = (html || "") + ((System.String.format("<a href = \"{0}\" target = \"_blank\">{0}</a>", [file])) || "");
                             } else {
                                 html = (html || "") + (file || "");
                             }

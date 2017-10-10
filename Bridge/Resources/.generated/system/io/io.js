@@ -1673,7 +1673,7 @@
                 }
             },
             Write$11: function (format, arg0) {
-                this.Write$10(System.String.formatProvider(this.FormatProvider, format, arg0));
+                this.Write$10(System.String.formatProvider(this.FormatProvider, format, [arg0]));
             },
             Write$12: function (format, arg0, arg1) {
                 this.Write$10(System.String.formatProvider(this.FormatProvider, format, arg0, arg1));
@@ -1780,7 +1780,7 @@
                 }
             },
             WriteLine$12: function (format, arg0) {
-                this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, arg0));
+                this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, [arg0]));
             },
             WriteLine$13: function (format, arg0, arg1) {
                 this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, arg0, arg1));

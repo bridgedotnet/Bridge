@@ -22833,7 +22833,7 @@ Bridge.$N1391Result =                     r;
                     var culture = new System.Globalization.CultureInfo("nb-NO");
                     culture.dateTimeFormat.timeSeparator = ".";
                     var testValue = { };
-                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", [culture.dateTimeFormat.timeSeparator]), culture, testValue)) {
                         var now = System.DateTime.getNow();
                         Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(now), System.DateTime.getYear(testValue.v));
                         Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(now), System.DateTime.getMonth(testValue.v));
@@ -22846,7 +22846,7 @@ Bridge.$N1391Result =                     r;
 
                     culture = new System.Globalization.CultureInfo("ru-RU");
                     culture.dateTimeFormat.timeSeparator = ".";
-                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", [culture.dateTimeFormat.timeSeparator]), culture, testValue)) {
                         var now1 = System.DateTime.getNow();
                         Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(now1), System.DateTime.getYear(testValue.v));
                         Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(now1), System.DateTime.getMonth(testValue.v));
@@ -23634,7 +23634,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 M2: function (s) {
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer = System.String.format("M2,{0}", s);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer = System.String.format("M2,{0}", [s]);
                 }
             }
         },
@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -24977,7 +24975,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("\"" + (guid.toString() || "") + "\"", JSON.stringify(guid));
 
                     var obj = { guid: guid };
-                    Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", guid.toString()), JSON.stringify(obj));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.String.format("{{\"guid\":\"{0}\"}}", [guid.toString()]), JSON.stringify(obj));
                 }
             }
         }
@@ -25754,6 +25752,22 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3192", {
+        methods: {
+            TestStringFormat: function () {
+                var i = System.Array.init([1], System.Int32);
+                var j = System.Array.init([2], System.Int32);
+
+                Bridge.Test.NUnit.Assert.AreEqual("1", System.String.format("{0}", i, j));
+
+                var cpy = i;
+                Bridge.Test.NUnit.Assert.AreEqual("1", System.String.format("{0}", [cpy]));
+
+                Bridge.Test.NUnit.Assert.AreEqual("12test", System.String.format("{0}{1}{2}", i, j, "test"));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -25907,7 +25921,7 @@ Bridge.$N1391Result =                     r;
 
                     var sArr = System.Array.init(10, null, System.String);
                     for (var i = 0; i < 10; i = (i + 1) | 0) {
-                        sArr[System.Array.index(i, sArr)] = System.String.format("{0,-3}", Bridge.box(Bridge.Int.mul(i, 5), System.Int32));
+                        sArr[System.Array.index(i, sArr)] = System.String.format("{0,-3}", [Bridge.box(Bridge.Int.mul(i, 5), System.Int32)]);
                     }
 
                     var s4 = sArr.join(":");
@@ -26487,7 +26501,7 @@ Bridge.$N1391Result =                     r;
                                             continue;
                                         }
                                         case 3: {
-                                            result = (result || "") + ((System.String.format("A({0})", Bridge.box(Bridge.identity(i, (i = (i + 1) | 0)), System.Int32))) || "");
+                                            result = (result || "") + ((System.String.format("A({0})", [Bridge.box(Bridge.identity(i, (i = (i + 1) | 0)), System.Int32)])) || "");
                                         }
                                         case 4: {
                                             $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.NextPage();
@@ -26524,7 +26538,7 @@ Bridge.$N1391Result =                     r;
                                             continue;
                                         }
                                         case 9: {
-                                            result = (result || "") + ((System.String.format("B({0})", Bridge.box(Bridge.identity(i, (i = (i + 1) | 0)), System.Int32))) || "");
+                                            result = (result || "") + ((System.String.format("B({0})", [Bridge.box(Bridge.identity(i, (i = (i + 1) | 0)), System.Int32)])) || "");
                                         }
                                         case 10: {
                                             np1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.NextPage1();
@@ -27222,7 +27236,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestMethod: function (array, name) {
-                    Bridge.Test.NUnit.Assert.True(array != null, System.String.format("ArrayBufferView is an alias of {0}", name));
+                    Bridge.Test.NUnit.Assert.True(array != null, System.String.format("ArrayBufferView is an alias of {0}", [name]));
                 },
                 TestUseCase: function () {
                     var array1 = new Int8Array(1);
@@ -34944,7 +34958,7 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             Introduce: function () {
-                return System.String.format("This is {0}", this.Name);
+                return System.String.format("This is {0}", [this.Name]);
             }
         }
     });

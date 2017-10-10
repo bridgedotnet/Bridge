@@ -13853,11 +13853,11 @@ Bridge.define("System.String", {
         },
 
         format: function (format, args) {
-            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 1) : args);
+            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.isArray(args) && arguments.length == 2 ? args : Array.prototype.slice.call(arguments, 1));
         },
 
         formatProvider: function (provider, format, args) {
-            return System.String._format(provider, format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 2) : args);
+            return System.String._format(provider, format, Array.isArray(args) && arguments.length == 3 ? args : Array.prototype.slice.call(arguments, 2));
         },
 
         _format: function (provider, format, args) {
@@ -20751,7 +20751,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 }
 
                 if (b.length !== 16) {
-                    throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
+                    throw new System.ArgumentException(System.String.format(System.Guid.error1, [Bridge.box(16, System.Int32)]));
                 }
 
                 this._a = (b[System.Array.index(3, b)] << 24) | (b[System.Array.index(2, b)] << 16) | (b[System.Array.index(1, b)] << 8) | b[System.Array.index(0, b)];
@@ -20787,7 +20787,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 }
 
                 if (d.length !== 8) {
-                    throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(8, System.Int32)));
+                    throw new System.ArgumentException(System.String.format(System.Guid.error1, [Bridge.box(8, System.Int32)]));
                 }
 
                 this._a = a;
@@ -29880,7 +29880,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
             },
             Write$11: function (format, arg0) {
-                this.Write$10(System.String.formatProvider(this.FormatProvider, format, arg0));
+                this.Write$10(System.String.formatProvider(this.FormatProvider, format, [arg0]));
             },
             Write$12: function (format, arg0, arg1) {
                 this.Write$10(System.String.formatProvider(this.FormatProvider, format, arg0, arg1));
@@ -29987,7 +29987,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
             },
             WriteLine$12: function (format, arg0) {
-                this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, arg0));
+                this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, [arg0]));
             },
             WriteLine$13: function (format, arg0, arg1) {
                 this.WriteLine$11(System.String.formatProvider(this.FormatProvider, format, arg0, arg1));
@@ -33288,7 +33288,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 // m_length is of type int32 and is exposed as a property, so
                 // type of m_length can't be changed to accommodate.
                 if (bytes.length > 268435455) {
-                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", Bridge.box(System.Collections.BitArray.BitsPerByte, System.Int32)), "bytes");
+                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", [Bridge.box(System.Collections.BitArray.BitsPerByte, System.Int32)]), "bytes");
                 }
 
                 this.m_array = System.Array.init(System.Collections.BitArray.getArrayLength(bytes.length, System.Collections.BitArray.BytesPerInt32), 0, System.Int32);
@@ -33343,7 +33343,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
                 // this value is chosen to prevent overflow when computing m_length
                 if (values.length > 67108863) {
-                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", Bridge.box(System.Collections.BitArray.BitsPerInt32, System.Int32)), "values");
+                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", [Bridge.box(System.Collections.BitArray.BitsPerInt32, System.Int32)]), "values");
                 }
 
                 this.m_array = System.Array.init(values.length, 0, System.Int32);

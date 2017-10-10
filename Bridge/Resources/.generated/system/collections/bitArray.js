@@ -111,7 +111,7 @@
                 // m_length is of type int32 and is exposed as a property, so
                 // type of m_length can't be changed to accommodate.
                 if (bytes.length > 268435455) {
-                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", Bridge.box(System.Collections.BitArray.BitsPerByte, System.Int32)), "bytes");
+                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", [Bridge.box(System.Collections.BitArray.BitsPerByte, System.Int32)]), "bytes");
                 }
 
                 this.m_array = System.Array.init(System.Collections.BitArray.getArrayLength(bytes.length, System.Collections.BitArray.BytesPerInt32), 0, System.Int32);
@@ -166,7 +166,7 @@
                 }
                 // this value is chosen to prevent overflow when computing m_length
                 if (values.length > 67108863) {
-                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", Bridge.box(System.Collections.BitArray.BitsPerInt32, System.Int32)), "values");
+                    throw new System.ArgumentException(System.String.format("The input array length must not exceed Int32.MaxValue / {0}. Otherwise BitArray.Length would exceed Int32.MaxValue.", [Bridge.box(System.Collections.BitArray.BitsPerInt32, System.Int32)]), "values");
                 }
 
                 this.m_array = System.Array.init(values.length, 0, System.Int32);
