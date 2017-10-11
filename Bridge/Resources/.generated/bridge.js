@@ -20876,7 +20876,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 var r = null;
 
                 if (System.String.isNullOrEmpty(input)) {
-                    throw new System.ArgumentNullException("input");
+                    if (check) {
+                        throw new System.ArgumentNullException("input");
+                    }
+                    return false;
                 }
 
                 if (System.String.isNullOrEmpty(format)) {
