@@ -24399,10 +24399,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -25750,6 +25748,15 @@ Bridge.$N1391Result =                     r;
                 Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getHour(utc_date));
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(utc_date));
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getSecond(utc_date));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197", {
+        methods: {
+            TestUsingStatic: function () {
+                var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
+                Bridge.Test.NUnit.Assert.NotNull(bunny);
             }
         }
     });
@@ -34073,6 +34080,20 @@ Bridge.$N1391Result =                     r;
         methods: {
             Test: function () {
                 this.b.Test(Problem2723.Classes2723.A2723.Mode.Value2);
+            }
+        }
+    });
+
+    Bridge.define("IssueBridge3197.pixi_js");
+
+    Bridge.define("IssueBridge3197.pixi_js.PIXI");
+
+    Bridge.define("IssueBridge3197.pixi_js.PIXI.Sprite", {
+        statics: {
+            methods: {
+                fromImage: function (url) {
+                    return new IssueBridge3197.pixi_js.PIXI.Sprite();
+                }
             }
         }
     });
