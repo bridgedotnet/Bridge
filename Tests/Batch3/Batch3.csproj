@@ -653,6 +653,7 @@
     <Compile Include="BridgeIssues\3100\N3168.cs" />
     <Compile Include="BridgeIssues\3100\N3173.cs" />
     <Compile Include="BridgeIssues\3100\N3170.cs" />
+    <Compile Include="BridgeIssues\3200\N3200.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
