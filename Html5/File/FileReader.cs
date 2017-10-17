@@ -20,7 +20,7 @@ namespace Bridge.Html5
 
         public readonly ushort ReadyState;
         public readonly Union<string, ArrayBuffer> Result;
-        public readonly Error error;
+        public readonly Error Error;
 
         [Convention(Notation.LowerCase)]
         public Action<Event> OnLoadStart;
