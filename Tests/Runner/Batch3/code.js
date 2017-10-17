@@ -25752,6 +25752,132 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3173", {
+        methods: {
+            TestSyncReadToEnd: function () {
+                var str = null;
+                var sr = new System.IO.StreamReader.$ctor7("/resources/test.js");
+                try {
+                    str = sr.ReadToEnd();
+                }
+                finally {
+                    if (Bridge.hasValue(sr)) {
+                        sr.System$IDisposable$dispose();
+                    }
+                }
+
+                Bridge.Test.NUnit.Assert.AreEqual("TEST", str);
+            },
+            TestAsyncReadToEnd: function () {
+                var $step = 0,
+                    $task1, 
+                    $taskResult1, 
+                    $jumpFromFinally, 
+                    $returnValue, 
+                    done, 
+                    str, 
+                    sr, 
+                    $async_e, 
+                    $async_e1, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+                                        str = null;
+                                        sr = new System.IO.StreamReader.$ctor7("/resources/test.js");
+                                        $step = 1;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task1 = sr.ReadToEndAsync();
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        str = $taskResult1;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        if (Bridge.hasValue(sr)) sr.System$IDisposable$dispose();
+
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        Bridge.Test.NUnit.Assert.AreEqual("TEST", str);
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            if ($step >= 1 && $step <= 2) {
+                                $step = 3;
+                                $asyncBody();
+                                return;
+                            }
+                            throw $async_e;
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178", {
+        methods: {
+            TestObjectLiteralIs: function () {
+                var myAction = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction.ctor("test");
+                Bridge.Test.NUnit.Assert.True(Bridge.hasValue(myAction));
+                Bridge.Test.NUnit.Assert.NotNull(myAction);
+                Bridge.Test.NUnit.Assert.True(Bridge.is(myAction, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction));
+                Bridge.Test.NUnit.Assert.NotNull(myAction);
+            },
+            TestObjectLiteralCastAttr: function () {
+                var o = "string";
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { };
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { };
+                Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null))); // no Foo
+
+                o = { Foo: 1 };
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+
+                o = { Foo: 2 };
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, Bridge.hasValue(o) && (o.Foo != null)));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction", {
+        $kind: "interface",
+        $literal: true
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3192", {
         methods: {
             TestStringFormat: function () {
@@ -25765,6 +25891,63 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual("12test", System.String.format("{0}{1}{2}", i, j, "test"));
             }
+        }
+    });
+
+    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
+
+    /**
+     * This issue involves getting whether the intersection results in an
+     object with Type1 and Type2 properties, so we just check if the
+     resulting intersection is that.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200", {
+        statics: {
+            methods: {
+                /**
+                 * The test itself.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200
+                 * @return  {void}
+                 */
+                TestEventTemplate: function () {
+                    var person = { };
+
+                    person.EmployeeId = 5;
+                    person.CustomerId = 3;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(person.EmployeeId, 5);
+                    Bridge.Test.NUnit.Assert.AreEqual(person.CustomerId, 3);
+                }
+            }
+        }
+    });
+
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200.Customer
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200.Customer", {
+        props: {
+            CustomerId: 0,
+            Name: null
+        }
+    });
+
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200.Employee
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200.Employee", {
+        props: {
+            EmployeeId: 0,
+            Name: null
         }
     });
 
@@ -26840,8 +27023,6 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
-
-    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
      * This test will check whether TypedArray types are emitted to JavaScript
@@ -35801,6 +35982,22 @@ Bridge.$N1391Result =                     r;
             Exec: function (T, progress) {
                 if (progress === void 0) { progress = null; }
                 return (!Bridge.staticEquals(progress, null)) ? "not empty" : "empty";
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.IDispatcherAction],
+        $literal: true,
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3178.MyAction; };
+                (function (){
+                    this.Value = null;
+                    this.Value = value;
+                }).call($this);
+                return $this;
             }
         }
     });

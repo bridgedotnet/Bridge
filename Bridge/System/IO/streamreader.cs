@@ -24,6 +24,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Security.Permissions;
 using Bridge;
+using System.Threading.Tasks;
 
 namespace System.IO
 {
@@ -364,6 +365,16 @@ namespace System.IO
             }
 
             return charsRead;
+        }
+
+        public override async Task<String> ReadToEndAsync()
+        {
+            if (this.stream is FileStream)
+            {
+                await this.stream.As<FileStream>().EnsureBufferAsync();
+            }
+
+            return await base.ReadToEndAsync();
         }
 
         public override String ReadToEnd()

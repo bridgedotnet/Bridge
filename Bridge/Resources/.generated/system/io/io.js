@@ -1496,6 +1496,9 @@
                 } while (n < count);
                 return n;
             },
+            ReadToEndAsync: function () {
+                return System.Threading.Tasks.Task.fromResult(this.ReadToEnd());
+            },
             ReadToEnd: function () {
 
                 var chars = System.Array.init(4096, 0, System.Char);
@@ -2472,6 +2475,45 @@
                             });
                         return resultArray.buffer;
                     }
+                },
+                ReadBytesAsync: function (path) {
+                    var tcs = new System.Threading.Tasks.TaskCompletionSource();
+
+                    if (Bridge.isNode) {
+                        var fs = require("fs");
+                        fs.readFile(path, function (err, data) {
+                            if (err != null) {
+                                throw new System.IO.IOException.ctor();
+                            }
+
+                            tcs.setResult(data);
+                        });
+                    } else {
+                        var req = new XMLHttpRequest();
+                        req.open("GET", path, true);
+                        req.overrideMimeType("text/plain; charset=binary-data");
+                        req.send(null);
+
+                        req.onreadystatechange = function () {
+                            if (req.readyState !== 4) {
+                                return;
+                            }
+
+                            if (req.status !== 200) {
+                                throw new System.IO.IOException.$ctor1(System.String.format("Status of request to {0} returned status: {1}", path, Bridge.box(req.status, System.UInt16)));
+                            }
+
+                            var text = req.responseText;
+                            var resultArray = new Uint8Array(text.length);
+                            System.String.toCharArray(text, 0, text.length).forEach(function (v, index, array) {
+                                    var $t;
+                                    return ($t = (v & 255) & 255, resultArray[index] = $t, $t);
+                                });
+                            tcs.setResult(resultArray.buffer);
+                        };
+                    }
+
+                    return tcs.task;
                 }
             }
         },
@@ -2507,7 +2549,7 @@
             },
             Length: {
                 get: function () {
-                    return System.Int64(this._buffer.byteLength);
+                    return System.Int64(this.GetInternalBuffer().byteLength);
                 }
             },
             Position: System.Int64(0)
@@ -2516,7 +2558,6 @@
             $ctor1: function (path, mode) {
                 this.$initialize();
                 System.IO.Stream.ctor.call(this);
-                this._buffer = System.IO.FileStream.ReadBytes(path);
                 this.name = path;
             },
             ctor: function (buffer, name) {
@@ -2537,6 +2578,66 @@
             Write: function (buffer, offset, count) {
                 throw new System.NotImplementedException();
             },
+            GetInternalBuffer: function () {
+                if (this._buffer == null) {
+                    this._buffer = System.IO.FileStream.ReadBytes(this.name);
+
+                }
+
+                return this._buffer;
+            },
+            EnsureBufferAsync: function () {
+                var $step = 0,
+                    $task1, 
+                    $taskResult1, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        if (this._buffer == null) {
+                                            $step = 1;
+                                            continue;
+                                        } 
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task1 = System.IO.FileStream.ReadBytesAsync(this.name);
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        this._buffer = $taskResult1;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
+            },
             Read: function (buffer, offset, count) {
                 if (buffer == null) {
                     throw new System.ArgumentNullException("buffer");
@@ -2550,7 +2651,7 @@
                     throw new System.ArgumentOutOfRangeException("count");
                 }
 
-                if ((this.Length.sub(System.Int64(offset))).lt(System.Int64(count))) {
+                if ((((buffer.length - offset) | 0)) < count) {
                     throw new System.ArgumentException();
                 }
 
@@ -2563,7 +2664,7 @@
                     return 0;
                 }
 
-                var byteBuffer = new Uint8Array(this._buffer);
+                var byteBuffer = new Uint8Array(this.GetInternalBuffer());
                 if (num.gt(System.Int64(8))) {
                     for (var n = 0; System.Int64(n).lt(num); n = (n + 1) | 0) {
                         buffer[System.Array.index(((n + offset) | 0), buffer)] = byteBuffer[this.Position.add(System.Int64(n))];
@@ -3474,6 +3575,65 @@
                 }
 
                 return charsRead;
+            },
+            ReadToEndAsync: function () {
+                var $step = 0,
+                    $task1, 
+                    $task2, 
+                    $taskResult2, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        if (Bridge.is(this.stream, System.IO.FileStream)) {
+                                            $step = 1;
+                                            continue;
+                                        } 
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task1 = this.stream.EnsureBufferAsync();
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $task1.getAwaitedResult();
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $task2 = System.IO.TextReader.prototype.ReadToEndAsync.call(this);
+                                        $step = 4;
+                                        $task2.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $tcs.setResult($taskResult2);
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
             },
             ReadToEnd: function () {
                 if (this.stream == null) {
