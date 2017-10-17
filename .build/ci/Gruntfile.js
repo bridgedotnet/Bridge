@@ -61,7 +61,8 @@ module.exports = function(grunt) {
                     throttled: 4,
                     sauceConfig: {
                         // https://wiki.saucelabs.com/display/DOCS/Test+Configuration+Options
-                        'video-upload-on-pass': false
+                        'video-upload-on-pass': false,
+                        'maxDuration': 3600
                     },
                     tags: [process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ]
                 }
