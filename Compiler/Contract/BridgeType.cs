@@ -751,6 +751,12 @@ namespace Bridge.Contract
                 EnsureDependencies(type, emitter, currentTypeInfo, module);
             }
 
+            return GetCustomName(name, type, excludeNs, isNested, ref isCustomName, moduleName);
+        }
+
+        private static string GetCustomName(string name, BridgeType type, bool excludeNs, bool isNested, ref bool isCustomName, string moduleName)
+        {
+            var emitter = type.Emitter;
             var customName = emitter.Validator.GetCustomTypeName(type.TypeDefinition, emitter, excludeNs);
 
             if (!String.IsNullOrEmpty(customName))
@@ -1061,7 +1067,7 @@ namespace Bridge.Contract
                     }
                 }
 
-                name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
+                name = BridgeTypes.GetCustomName(name, bridgeType, excludens, isNested, ref isCustomName, null);
             }
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
@@ -1129,6 +1135,21 @@ namespace Bridge.Contract
         {
             var ns = typeInfo.GetNamespace(emitter, true);
             var fileName = ns ?? typeInfo.GetNamespace(emitter);
+            var module = typeInfo.Module;
+            string moduleName = null;
+
+            if (module != null)
+            {
+                if (!module.PreventModuleName)
+                {
+                    moduleName = module.ExportAsNamespace;
+                }
+
+                if (!String.IsNullOrEmpty(moduleName))
+                {
+                    ns = string.IsNullOrWhiteSpace(ns) ? moduleName : (moduleName + "." + ns);
+                }
+            }
 
             switch (emitter.AssemblyInfo.FileNameCasing)
             {

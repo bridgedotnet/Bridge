@@ -743,7 +743,7 @@
                 obj = Bridge.unbox(obj, true);
             }
 
-            var ctor = Bridge.Reflection.convertType(obj.constructor);
+            var ctor = obj.constructor === Object && obj.$getType ? obj.$getType() : Bridge.Reflection.convertType(obj.constructor);
             if (type.constructor === Function && obj instanceof type || ctor === type || Bridge.isObject(type)) {
                 return true;
             }

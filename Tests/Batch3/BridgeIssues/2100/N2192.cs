@@ -49,9 +49,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestIntersection()
         {
             var person = GetLoggablePerson("John Doe #1", 5);
-            Assert.AreEqual("John Doe #1", person.Item1.Name);
-            Assert.AreEqual(5, person.Item2.Log());
-            Assert.AreEqual(5, person.Item2.id);
+            Assert.AreEqual("John Doe #1", person.Type1.Name);
+            Assert.AreEqual(5, person.Type2.Log());
+            Assert.AreEqual(5, person.Type2.id);
         }
     }
 }
