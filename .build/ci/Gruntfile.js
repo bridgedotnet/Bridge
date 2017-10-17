@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     }
     , {
         browserName: "googlechrome",
-        platform: "XP"
+        platform: "Windows 8.1"
     }
     , {
         browserName: "googlechrome",
