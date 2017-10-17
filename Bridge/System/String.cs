@@ -651,7 +651,7 @@ namespace System
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The object to format.</param>
         /// <returns>A copy of format in which the format item or items have been replaced by the string representation of arg0.</returns>
-        [Template("System.String.formatProvider({provider}, {format}, {arg0})")]
+        [Template("System.String.formatProvider({provider}, {format}, [{arg0}])")]
         [Unbox(false)]
         public static extern String Format(IFormatProvider provider, String format, object arg0);
 
@@ -697,7 +697,7 @@ namespace System
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The object to format.</param>
         /// <returns>A copy of format in which any format items are replaced by the string representation of arg0.</returns>
-        [Template("System.String.format({format}, {arg0})")]
+        [Template("System.String.format({format}, [{arg0}])")]
         [Unbox(false)]
         public static extern String Format(String format, object arg0);
 

@@ -85,8 +85,7 @@ namespace System.IO
         ArrayBuffer _buffer;
 
         public FileStream(string path, FileMode mode)
-        {
-            this._buffer = FileStream.ReadBytes(path);
+        {            
             this.name = path;
         }
 
@@ -157,7 +156,7 @@ namespace System.IO
         {
             get
             {
-                return _buffer.ByteLength;
+                return this.GetInternalBuffer().ByteLength;
             }
         }
 
@@ -186,6 +185,25 @@ namespace System.IO
             throw new NotImplementedException();
         }
 
+        private ArrayBuffer GetInternalBuffer()
+        {
+            if(this._buffer == null)
+            {
+                this._buffer = FileStream.ReadBytes(this.name);
+                
+            }
+
+            return this._buffer;
+        }
+
+        internal async Task EnsureBufferAsync()
+        {
+            if (this._buffer == null)
+            {
+                this._buffer = await FileStream.ReadBytesAsync(this.name);
+            }
+        }
+
         public override int Read([In, Out] byte[] buffer, int offset, int count)
         {
             if (buffer == null)
@@ -203,7 +221,7 @@ namespace System.IO
                 throw new System.ArgumentOutOfRangeException("count");
             }
 
-            if ((this.Length - offset) < count)
+            if ((buffer.Length - offset) < count)
             {
                 throw new System.ArgumentException();
             }
@@ -219,7 +237,7 @@ namespace System.IO
                 return 0;
             }
 
-            var byteBuffer = new Uint8Array(this._buffer);
+            var byteBuffer = new Uint8Array(this.GetInternalBuffer());
             if (num > 8)
             {
                 for (var n = 0; n < num; n++)
@@ -267,6 +285,50 @@ namespace System.IO
                 text.ToCharArray().ForEach((v, index, array) => resultArray[index] = (byte)(v & byte.MaxValue));
                 return resultArray.Buffer;
             }
+        }
+
+        internal static Task<ArrayBuffer> ReadBytesAsync(string path)
+        {
+            var tcs = new TaskCompletionSource<ArrayBuffer>();
+
+            if (Script.IsNode)
+            {
+                var fs = Script.Write<dynamic>(@"require(""fs"")");
+                fs.readFile(path, new Action<object, ArrayBuffer>((err, data) => {
+                    if(err != null)
+                    {
+                        throw new IOException();
+                    }
+
+                    tcs.SetResult(data);
+                }));
+            }
+            else
+            {
+                var req = new XMLHttpRequest();
+                req.Open("GET", path, true);
+                req.OverrideMimeType("text/plain; charset=binary-data");
+                req.Send(null);
+
+                req.OnReadyStateChange = () => {
+                    if (req.ReadyState != 4)
+                    {
+                        return;
+                    }
+
+                    if (req.Status != 200)
+                    {
+                        throw new IOException($"Status of request to {path} returned status: {req.Status}");
+                    }
+
+                    string text = req.ResponseText;
+                    var resultArray = new Uint8Array(text.Length);
+                    text.ToCharArray().ForEach((v, index, array) => resultArray[index] = (byte)(v & byte.MaxValue));
+                    tcs.SetResult(resultArray.Buffer);
+                };                
+            }
+
+            return tcs.Task;
         }
     }
 }

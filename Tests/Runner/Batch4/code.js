@@ -752,11 +752,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         methods: {
             FormatWorksWithIFormattable_SPI_1598: function () {
                 // #1598
-                Bridge.Test.NUnit.Assert.AreEqual("Formatted: FMT, null formatProvider", System.String.format("{0:FMT}", new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable()));
+                Bridge.Test.NUnit.Assert.AreEqual("Formatted: FMT, null formatProvider", System.String.format("{0:FMT}", [new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable()]));
             },
             FormatWorksWithIFormattableAndFormatProvider_SPI_1598: function () {
                 // #1598
-                Bridge.Test.NUnit.Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", System.String.formatProvider(new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider(), "{0:FMT}", new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable()));
+                Bridge.Test.NUnit.Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", System.String.formatProvider(new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider(), "{0:FMT}", [new Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable()]));
             }
         }
     });

@@ -125,11 +125,11 @@ Bridge.define("System.String", {
         },
 
         format: function (format, args) {
-            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 1) : args);
+            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.isArray(args) && arguments.length == 2 ? args : Array.prototype.slice.call(arguments, 1));
         },
 
         formatProvider: function (provider, format, args) {
-            return System.String._format(provider, format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 2) : args);
+            return System.String._format(provider, format, Array.isArray(args) && arguments.length == 3 ? args : Array.prototype.slice.call(arguments, 2));
         },
 
         _format: function (provider, format, args) {
