@@ -25904,6 +25904,15 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197", {
+        methods: {
+            TestUsingStatic: function () {
+                var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
+                Bridge.Test.NUnit.Assert.NotNull(bunny);
+            }
+        }
+    });
+
     /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
@@ -34278,6 +34287,20 @@ Bridge.$N1391Result =                     r;
         methods: {
             Test: function () {
                 this.b.Test(Problem2723.Classes2723.A2723.Mode.Value2);
+            }
+        }
+    });
+
+    Bridge.define("IssueBridge3197.pixi_js");
+
+    Bridge.define("IssueBridge3197.pixi_js.PIXI");
+
+    Bridge.define("IssueBridge3197.pixi_js.PIXI.Sprite", {
+        statics: {
+            methods: {
+                fromImage: function (url) {
+                    return new IssueBridge3197.pixi_js.PIXI.Sprite();
+                }
             }
         }
     });

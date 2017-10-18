@@ -78,6 +78,18 @@ namespace Bridge
             set;
         }
 
+        public
+#if BRIDGE_COMPILER
+            AutoPropertyRule?
+#else
+            AutoPropertyRule
+#endif
+        AutoProperty
+        {
+            get;
+            set;
+        }
+
 #if BRIDGE_COMPILER
         public CompilerRuleLevel Level
         {
@@ -127,6 +139,15 @@ namespace Bridge
     [NonScriptable]
 #endif
     public enum AnonymousTypeRule
+    {
+        Managed = 0,
+        Plain = 1
+    }
+
+#if !BRIDGE_COMPILER
+    [NonScriptable]
+#endif
+    public enum AutoPropertyRule
     {
         Managed = 0,
         Plain = 1

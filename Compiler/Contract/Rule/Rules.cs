@@ -17,7 +17,8 @@ namespace Bridge.Contract
             AnonymousType = AnonymousTypeRule.Managed,
             Integer = IntegerRule.Managed,
             Boxing = BoxingRule.Managed,
-            ArrayIndex = ArrayIndexRule.Managed
+            ArrayIndex = ArrayIndexRule.Managed,
+            AutoProperty = null
         };
 
         public static CompilerRule Get(IEmitter emitter, IEntity entity)
@@ -52,7 +53,7 @@ namespace Bridge.Contract
 
             var assembly = entity.ParentAssembly;
 
-            if (emitter.AssemblyCompilerRuleCache.ContainsKey(assembly))
+            if (emitter != null && emitter.AssemblyCompilerRuleCache.ContainsKey(assembly))
             {
                 assemblyRules = emitter.AssemblyCompilerRuleCache[assembly];
             }
@@ -65,7 +66,10 @@ namespace Bridge.Contract
                     assemblyRules[i] = Rules.ToRule(assemblyAttrs[i], CompilerRuleLevel.Assembly);
                 }
 
-                emitter.AssemblyCompilerRuleCache.Add(assembly, assemblyRules);
+                if(emitter != null)
+                {
+                    emitter.AssemblyCompilerRuleCache.Add(assembly, assemblyRules);
+                }                
             }
 
             var rules = new List<CompilerRule>();
@@ -85,7 +89,10 @@ namespace Bridge.Contract
                 rules.AddRange(interfaceRules);
             }
 
-            rules.Add(emitter.AssemblyInfo.Rules);
+            if(emitter != null)
+            {
+                rules.Add(emitter.AssemblyInfo.Rules);
+            }            
 
             if (assemblyRules != null && assemblyRules.Length > 0)
             {
@@ -103,7 +110,8 @@ namespace Bridge.Contract
                 AnonymousType = AnonymousTypeRule.Managed,
                 Integer = IntegerRule.Managed,
                 Boxing = BoxingRule.Managed,
-                ArrayIndex = ArrayIndexRule.Managed
+                ArrayIndex = ArrayIndexRule.Managed,
+                AutoProperty = null
             };
 
             for (int i = rules.Count - 1; i >= 0; i--)
@@ -113,6 +121,11 @@ namespace Bridge.Contract
                 if (rule.Lambda.HasValue)
                 {
                     resultRule.Lambda = rule.Lambda;
+                }
+
+                if (rule.AutoProperty.HasValue)
+                {
+                    resultRule.AutoProperty = rule.AutoProperty;
                 }
 
                 if (rule.AnonymousType.HasValue)
@@ -170,6 +183,10 @@ namespace Bridge.Contract
                         rule.AnonymousType = (AnonymousTypeRule)(int)value.ConstantValue;
                         break;
 
+                    case nameof(CompilerRule.AutoProperty):
+                        rule.AutoProperty = (AutoPropertyRule)(int)value.ConstantValue;
+                        break;
+
                     default:
                         throw new NotSupportedException($"Property {member.Name} is not supported in {attribute.AttributeType.FullName}");
                 }
@@ -203,7 +220,7 @@ namespace Bridge.Contract
 
         private static CompilerRule[] GetClassRules(IEmitter emitter, ITypeDefinition typeDef)
         {
-            if (emitter.ClassCompilerRuleCache.ContainsKey(typeDef))
+            if (emitter != null && emitter.ClassCompilerRuleCache.ContainsKey(typeDef))
             {
                 return emitter.ClassCompilerRuleCache[typeDef];
             }
@@ -222,7 +239,11 @@ namespace Bridge.Contract
             }
 
             var classRules = rules.ToArray();
-            emitter.ClassCompilerRuleCache.Add(typeDef, classRules);
+            if (emitter != null)
+            {
+                emitter.ClassCompilerRuleCache.Add(typeDef, classRules);
+            }
+            
             return classRules;
         }
     }

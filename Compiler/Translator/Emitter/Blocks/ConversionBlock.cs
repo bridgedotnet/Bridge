@@ -353,7 +353,7 @@ namespace Bridge.Translator
                 if (!isArgument)
                 {
                     var ae = expression.Parent as AssignmentExpression;
-                    isArgument = ae != null && ae.Left is IndexerExpression && ae.Right == expression;
+                    isArgument = ae != null && ae.Right == expression;
                 }
 
                 if (isArgument)
@@ -364,7 +364,11 @@ namespace Bridge.Translator
                     if (parent_rr == null && inv_rr is OperatorResolveResult)
                     {
                         var orr = (OperatorResolveResult)inv_rr;
-                        if (orr.Operands[0] is ArrayAccessResolveResult)
+                        if (orr.Operands[0] is LocalResolveResult)
+                        {
+                            isArgument = false;
+                        }
+                        else if (orr.Operands[0] is ArrayAccessResolveResult)
                         {
                             isArgument = false;
                         }
