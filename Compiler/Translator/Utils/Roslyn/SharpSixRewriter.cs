@@ -506,6 +506,7 @@ namespace Bridge.Translator
             if (symbol != null && symbol.IsStatic && symbol.ContainingType != null
                 && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType)
                 && !(node.Parent is MemberAccessExpressionSyntax)
+                && !(node.Parent is QualifiedNameSyntax)
                 && (
                     (methodSymbol = symbol as IMethodSymbol) != null
                     || symbol is IPropertySymbol
