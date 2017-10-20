@@ -1,8 +1,6 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using Object.Net.Utilities;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +11,17 @@ namespace Bridge.Translator
 {
     public class FileHelper
     {
+        public string GetRelativePath(string filespec, string folder)
+        {
+            Uri pathUri = new Uri(filespec);
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                folder += Path.DirectorySeparatorChar;
+            }
+            Uri folderUri = new Uri(folder);
+            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+        }
+
         public string GetMinifiedJSFileName(string fileName)
         {
             if (string.IsNullOrEmpty(fileName) || IsMinJS(fileName))
