@@ -232,11 +232,6 @@ namespace Bridge.Translator
 
                     level = this.AddDependencies(level, output, tmp, endOutput);
                 }
-                else
-                {
-                    string newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR.ToString();
-                    tmp.Insert(0, @"/// <reference path=""./bridge.d.ts"" />" + newLine + newLine);
-                }
 
                 var code = output.NonModuletOutput.ToString();
 
