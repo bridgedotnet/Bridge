@@ -490,7 +490,7 @@ namespace Bridge.Translator
                 bool autoPropertyToField = false;
                 if (rr != null && rr.Member != null && Helpers.IsAutoProperty((IProperty)rr.Member))
                 {
-                    var rules = Rules.Get(null, rr.Member);
+                    var rules = Rules.Get(this.Emitter, rr.Member);
 
                     if (rules.AutoProperty.HasValue)
                     {
