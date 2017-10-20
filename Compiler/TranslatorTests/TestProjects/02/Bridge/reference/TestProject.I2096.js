@@ -35653,7 +35653,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 })(this);
 
 /**
- * @version   : 16.4.0 - Bridge.NET
+ * @version   : 16.4.1 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
