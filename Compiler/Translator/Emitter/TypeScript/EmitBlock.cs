@@ -72,7 +72,7 @@ namespace Bridge.Translator.TypeScript
 
         protected virtual void InsertDependencies(StringBuilder sb)
         {
-            /*if (this.Emitter.CurrentDependencies != null && this.Emitter.CurrentDependencies.Count > 0)
+            if (this.Emitter.CurrentDependencies != null && this.Emitter.CurrentDependencies.Count > 0)
             {
                 StringBuilder depSb = new StringBuilder();
                 foreach (var d in this.Emitter.CurrentDependencies)
@@ -83,7 +83,7 @@ namespace Bridge.Translator.TypeScript
 
                 sb.Insert(0, depSb.ToString() + newLine);
                 this.Emitter.CurrentDependencies.Clear();
-            }*/
+            }
         }
 
         private void TransformOutputs()

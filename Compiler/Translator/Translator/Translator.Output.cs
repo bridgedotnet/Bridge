@@ -75,7 +75,7 @@ namespace Bridge.Translator
                         sb.AppendLine();
                     }
 
-                    if(sb.Length > 0)
+                    if(sb.Length > 0 && !content.StartsWith("/// <reference path="))
                     {
                         sb.AppendLine();
                     }
