@@ -247,6 +247,11 @@ namespace Bridge.Translator
 
                 var assemblyReference = asm.MainModule.AssemblyResolver.Resolve(assemblyReferenceName);
 
+                if(assemblyReference.MainModule.Kind != ModuleKind.Dll)
+                {
+                    continue;
+                }
+
                 if (list.All(r => r.FullName != assemblyReference.FullName))
                 {
                     list.Add(assemblyReference);
