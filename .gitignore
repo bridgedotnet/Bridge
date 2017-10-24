@@ -47,10 +47,15 @@ x64/
 *.tli
 *.tlh
 *.tmp
-*.log
 *.vspscc
 *.vssscc
 .builds
+
+# NUnit test cases requires the log files
+*.log
+!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/*.log
+!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/reports/*.log
+
 
 # Visual C++ cache files
 ipch/

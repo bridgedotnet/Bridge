@@ -1,0 +1,11 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "logging": {
+    "level":  "None"
+  },
+  "rules": {
+    "autoProperty": "Plain"
+  },
+  "report": "reports/"
+}

@@ -17,8 +17,30 @@ namespace Bridge.Translator
         {
             var logger = this.Log;
             logger.Info("Starts Save with projectOutputPath = " + projectOutputPath);
+            var outputs = this.Outputs.GetOutputs().ToList();
+            var dtsReferences = new List<string>();
+            bool addNoLibReference = false;
 
-            foreach (var item in this.Outputs.GetOutputs())
+            foreach (var item in outputs)
+            {
+                if (item.OutputType == TranslatorOutputType.TypeScript && item.OutputKind == TranslatorOutputKind.Reference)
+                {
+                    string filePath = DefineOutputItemFullPath(item, projectOutputPath, defaultFileName);
+                    string path = "./" + FileHelper.GetRelativePath(filePath, projectOutputPath).Replace(Path.DirectorySeparatorChar, '/');
+
+                    if(!dtsReferences.Contains(path))
+                    {
+                        dtsReferences.Add(path);
+                    }                    
+
+                    if(!addNoLibReference && item.Assembly.StartsWith("Retyped."))
+                    {
+                        addNoLibReference = true;
+                    }
+                }
+            }
+
+            foreach (var item in outputs)
             {
                 logger.Trace("Output " + item.Name);
 
@@ -36,7 +58,30 @@ namespace Bridge.Translator
                 byte[] buffer = null;
                 string content = null;
 
-                if (CheckIfRequiresSourceMap(item))
+                if(item.OutputType == TranslatorOutputType.TypeScript && item.OutputKind == TranslatorOutputKind.ProjectOutput)
+                {
+                    content = item.Content.GetContentAsString();
+                    StringBuilder sb = new StringBuilder();
+                    var nl = Emitter.NEW_LINE;
+
+                    if (addNoLibReference)
+                    {
+                        sb.Append("/// <reference no-default-lib=\"true\"/>" + nl);
+                    }
+
+                    foreach (var reference in dtsReferences)
+                    {
+                        sb.Append($"/// <reference path=\"{reference}\" />" + nl);
+                    }
+
+                    if(sb.Length > 0 && !content.StartsWith("/// <reference path="))
+                    {
+                        sb.Append(nl);
+                    }
+
+                    this.SaveToFile(file.FullName, sb.ToString() + content);
+                }
+                else if (CheckIfRequiresSourceMap(item))
                 {
                     content = item.Content.GetContentAsString();
                     content = this.GenerateSourceMap(file.FullName, content);

@@ -39,7 +39,7 @@
   "rules": {
     "anonymousType": "Plain",
     "arrayIndex": "Managed",
-    "autoProperty": "Managed",
+    "autoProperty": "Plain",
     "boxing": "Managed",
     "integer": "Managed",
     "lambda": "Plain"
