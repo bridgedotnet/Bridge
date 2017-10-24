@@ -62,22 +62,21 @@ namespace Bridge.Translator
                 {
                     content = item.Content.GetContentAsString();
                     StringBuilder sb = new StringBuilder();
+                    var nl = Emitter.NEW_LINE;
 
                     if (addNoLibReference)
                     {
-                        sb.Append("/// <reference no-default-lib=\"true\"/>");
-                        sb.AppendLine();
+                        sb.Append("/// <reference no-default-lib=\"true\"/>" + nl);
                     }
 
                     foreach (var reference in dtsReferences)
                     {
-                        sb.Append($"/// <reference path=\"{reference}\" />");
-                        sb.AppendLine();
+                        sb.Append($"/// <reference path=\"{reference}\" />" + nl);
                     }
 
                     if(sb.Length > 0 && !content.StartsWith("/// <reference path="))
                     {
-                        sb.AppendLine();
+                        sb.Append(nl);
                     }
 
                     this.SaveToFile(file.FullName, sb.ToString() + content);
