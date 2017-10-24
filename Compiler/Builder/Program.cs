@@ -26,7 +26,7 @@ namespace Bridge.Builder
                 return 1;
             }
 
-            if (bridgeOptions.Help)
+            if (bridgeOptions.NoCompilation)
             {
                 return 0;
             }
@@ -262,7 +262,7 @@ namespace Bridge.Builder
                     case "-h":
                     case "--help":
                         ShowHelp(logger);
-                        bridgeOptions.Help = true;
+                        bridgeOptions.NoCompilation = true;
                         return bridgeOptions; // success. Asked for help. Help provided.
 
                     case "-notimestamp":
