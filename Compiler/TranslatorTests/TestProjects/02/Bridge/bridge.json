@@ -1,5 +1,6 @@
 {
   "output": "Bridge\\output",
+  "fileName": "TestProject.I2096.js",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
   "locales": "en-US",

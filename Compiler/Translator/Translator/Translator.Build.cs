@@ -12,6 +12,7 @@ using System.Collections.Immutable;
 using ICSharpCode.NRefactory.Documentation;
 using System.Text;
 using System.Globalization;
+using Mono.Cecil;
 
 namespace Bridge.Translator
 {
@@ -31,14 +32,16 @@ namespace Bridge.Translator
             {
                 XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
                 XDocument projDefinition = XDocument.Load(this.Location);
+                var helper = new ConfigHelper<AssemblyInfo>(this.Log);
+                var tokens = this.ProjectProperties.GetValues();                
 
                 referencesPathes = projDefinition
                     .Element(msbuild + "Project")
                     .Elements(msbuild + "ItemGroup")
                     .Elements(msbuild + "Reference")
-                    .Where(el => el.Attribute("Condition") == null || el.Attribute("Condition").Value.ToLowerInvariant() != "false")
+                    .Where(el => (el.Attribute("Include")?.Value != "System") && (el.Attribute("Condition") == null || el.Attribute("Condition").Value.ToLowerInvariant() != "false"))
                     .Select(refElem => (refElem.Element(msbuild + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(msbuild + "HintPath").Value))
-                    .Select(path => Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath))
+                    .Select(path => helper.ApplyPathTokens(tokens, Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath)))
                     .ToList();
 
                 var projectReferences = projDefinition
@@ -47,7 +50,7 @@ namespace Bridge.Translator
                     .Elements(msbuild + "ProjectReference")
                     .Where(el => el.Attribute("Condition") == null || el.Attribute("Condition").Value.ToLowerInvariant() != "false")
                     .Select(refElem => (refElem.Element(msbuild + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(msbuild + "HintPath").Value))
-                    .Select(path => Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath))
+                    .Select(path => helper.ApplyPathTokens(tokens, Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath)))
                     .ToArray();
 
                 if (projectReferences.Length > 0)
@@ -119,29 +122,47 @@ namespace Bridge.Translator
                 }
 
                 var packagesPath = Path.GetFullPath((new Uri(Path.Combine(this.Location, "packages"))).LocalPath);
-                if (Directory.Exists(packagesPath))
+                if (!Directory.Exists(packagesPath))
+                {
+                    packagesPath = Path.Combine(Directory.GetParent(this.Location).ToString(), "packages");
+                }
+
+                var packagesConfigPath = Path.Combine(this.Location, "packages.config");
+
+                if(File.Exists(packagesConfigPath))
+                {
+                    var doc = new System.Xml.XmlDocument();
+                    doc.LoadXml(File.ReadAllText(packagesConfigPath));
+                    var nodes = doc.DocumentElement.SelectNodes($"descendant::package");
+
+                    if (nodes.Count > 0)
+                    {
+                        foreach (System.Xml.XmlNode node in nodes)
+                        {
+                            string id = node.Attributes["id"].Value;
+                            string version = node.Attributes["version"].Value;
+
+                            string packageDir = Path.Combine(packagesPath, id + "." + version);
+
+                            AddPackageAssembly(list, packageDir);
+                        }
+                    }
+                }
+                else if (Directory.Exists(packagesPath))
                 {
                     var packagesFolders = Directory.GetDirectories(packagesPath, "*", SearchOption.TopDirectoryOnly);
                     foreach (var packageFolder in packagesFolders)
                     {
                         var packageLib = Path.Combine(packageFolder, "lib");
-                        if (Directory.Exists(packageLib))
-                        {
-                            var libsFolders = Directory.GetDirectories(packageLib, "net*", SearchOption.TopDirectoryOnly);
-                            var libFolder = libsFolders.Length > 0 ? (libsFolders.Contains("net40") ? "net40" : libsFolders[0]) : null;
-
-                            if(libFolder != null)
-                            {
-                                var assemblies = Directory.GetFiles(libFolder, "*.dll", SearchOption.TopDirectoryOnly);
-
-                                foreach (var assembly in assemblies)
-                                {
-                                    list.Add(assembly);
-                                }
-                            }                            
-                        }
+                        AddPackageAssembly(list, packageLib);
                     }
-                }
+                }                
+            }
+
+            var arr = referencesPathes.ToArray();
+            foreach (var refPath in arr)
+            {
+                AddNestedReferences(referencesPathes, refPath);
             }
 
             IList<SyntaxTree> trees = new List<SyntaxTree>(files.Count);
@@ -204,6 +225,60 @@ namespace Bridge.Translator
             }
 
             this.Log.Info("Building assembly done");
+        }
+
+        private static void AddPackageAssembly(List<string> list, string packageDir)
+        {
+            if (Directory.Exists(packageDir))
+            {
+                var packageLib = Path.Combine(packageDir, "lib");
+
+                if (Directory.Exists(packageLib))
+                {
+                    var libsFolders = Directory.GetDirectories(packageLib, "net*", SearchOption.TopDirectoryOnly);
+                    var libFolder = libsFolders.Length > 0 ? (libsFolders.Contains("net40") ? "net40" : libsFolders[0]) : null;
+
+                    if (libFolder != null)
+                    {
+                        var assemblies = Directory.GetFiles(libFolder, "*.dll", SearchOption.TopDirectoryOnly);
+
+                        foreach (var assembly in assemblies)
+                        {
+                            list.Add(assembly);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddNestedReferences(IList<string> referencesPathes, string refPath)
+        {
+            var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, new ReaderParameters()
+            {
+                ReadingMode = ReadingMode.Deferred,
+                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+            });
+
+            foreach (AssemblyNameReference r in asm.MainModule.AssemblyReferences)
+            {
+                var name = r.Name;
+
+                if (name == SystemAssemblyName || name == "System.Core")
+                {
+                    continue;
+                }
+
+                var path = Path.Combine(Path.GetDirectoryName(refPath), name) + ".dll";
+
+                if (referencesPathes.Any(rp => Path.GetFileNameWithoutExtension(rp).Equals(name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    continue;
+                }
+
+                referencesPathes.Add(path);
+
+                AddNestedReferences(referencesPathes, path);
+            }
         }
     }
 }
