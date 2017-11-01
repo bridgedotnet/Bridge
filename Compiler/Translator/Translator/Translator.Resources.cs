@@ -384,7 +384,7 @@ namespace Bridge.Translator
                     resourceList.Add(r);
                 }
 
-                var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "0.000 KB");
+                var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "0.000 KB", true);
 
                 var resourceLocation = name ?? fileName;
                 if (!string.IsNullOrEmpty(r.Path) && !string.IsNullOrEmpty(resourceLocation))
