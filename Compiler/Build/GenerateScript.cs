@@ -129,7 +129,7 @@ namespace Bridge.Build
 #endif
             var logger = new Translator.Logging.Logger(null, false, LoggerLevel.Info, true, new VSLoggerWriter(this.Log), new FileLoggerWriter());
 
-            logger.Info("Executing Bridge.Build.Task...");
+            logger.Error("Executing Bridge.Build.Task...");
 
             var bridgeOptions = this.GetBridgeOptions();
 
