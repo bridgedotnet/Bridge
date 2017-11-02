@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <Target Name="BridgeNetCompilerTask">
-    <Message Text="BridgeNetCompilerTask started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath)" Importance="high" />
+    <Message Text="Bridge started: OutputPath: $(OutputPath)" Importance="high" />
 
     <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
@@ -34,7 +34,7 @@
       RootNamespace="$(RootNamespace)"
       Sources="@(Compile)" />
 
-    <Message Text="BridgeNetCompilerTask done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath)" Importance="high" />
+    <Message Text="Bridge done" Importance="high" />
   </Target>
 
   <Target Name="BridgeNetCompilerUtil">
@@ -50,7 +50,7 @@
     <Message Text="   BridgePath:                  $(BridgePath)" Importance="high" />
     <Message Text="   Command:                     $(BridgeUtilCommand)" Importance="high" />
 
-    <Exec Command="$(BridgeUtilCommand)" LogStandardErrorAsError="true" WorkingDirectory="$(BridgeUtilWorkDir)"/>
+    <Exec Command="$(BridgeUtilCommand)" LogStandardErrorAsError="true" WorkingDirectory="$(BridgeUtilWorkDir)" />
 
     <Message Text="BridgeNetCompilerUtil done: Project: $(MSBuildProjectName)" Importance="high" />
   </Target>

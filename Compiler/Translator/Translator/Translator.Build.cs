@@ -33,7 +33,7 @@ namespace Bridge.Translator
                 XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
                 XDocument projDefinition = XDocument.Load(this.Location);
                 var helper = new ConfigHelper<AssemblyInfo>(this.Log);
-                var tokens = this.ProjectProperties.GetValues();                
+                var tokens = this.ProjectProperties.GetValues();
 
                 referencesPathes = projDefinition
                     .Element(msbuild + "Project")
@@ -64,16 +64,18 @@ namespace Bridge.Translator
                     {
                         var isBuilt = this.ProjectProperties.BuildProjects.Contains(projectRef);
 
-                        if(!isBuilt)
+                        if (!isBuilt)
                         {
                             this.ProjectProperties.BuildProjects.Add(projectRef);
                         }
 
-                        var processor = new TranslatorProcessor(new BridgeOptions {
+                        var processor = new TranslatorProcessor(new BridgeOptions
+                        {
                             Rebuild = this.Rebuild,
                             ProjectLocation = projectRef,
                             BridgeLocation = this.BridgeLocation,
-                            ProjectProperties = new Contract.ProjectProperties {
+                            ProjectProperties = new Contract.ProjectProperties
+                            {
                                 BuildProjects = this.ProjectProperties.BuildProjects,
                                 Configuration = this.ProjectProperties.Configuration,
                                 Platform = this.ProjectProperties.Platform
@@ -84,7 +86,7 @@ namespace Bridge.Translator
 
                         var projectAssembly = processor.Translator.AssemblyLocation;
 
-                        if(!File.Exists(projectAssembly) || this.Rebuild && !isBuilt)
+                        if (!File.Exists(projectAssembly) || this.Rebuild && !isBuilt)
                         {
                             processor.Process();
                             processor.PostProcess();
@@ -129,7 +131,7 @@ namespace Bridge.Translator
 
                 var packagesConfigPath = Path.Combine(this.Location, "packages.config");
 
-                if(File.Exists(packagesConfigPath))
+                if (File.Exists(packagesConfigPath))
                 {
                     var doc = new System.Xml.XmlDocument();
                     doc.LoadXml(File.ReadAllText(packagesConfigPath));
@@ -156,7 +158,7 @@ namespace Bridge.Translator
                         var packageLib = Path.Combine(packageFolder, "lib");
                         AddPackageAssembly(list, packageLib);
                     }
-                }                
+                }
             }
 
             var arr = referencesPathes.ToArray();
@@ -175,7 +177,7 @@ namespace Bridge.Translator
             var references = new List<MetadataReference>();
             var outputDir = Path.GetDirectoryName(this.AssemblyLocation);
             var di = new DirectoryInfo(outputDir);
-            if(!di.Exists)
+            if (!di.Exists)
             {
                 di.Create();
             }
@@ -194,7 +196,7 @@ namespace Bridge.Translator
                 {
                     this.BridgeLocation = path;
                 }
-                
+
                 references.Add(MetadataReference.CreateFromFile(path, new MetadataReferenceProperties(MetadataImageKind.Assembly, ImmutableArray.Create("global"))));
             }
 
@@ -204,7 +206,7 @@ namespace Bridge.Translator
             using (var outputStream = new FileStream(this.AssemblyLocation, FileMode.Create))
             {
                 emitResult = compilation.Emit(outputStream, options: new Microsoft.CodeAnalysis.Emit.EmitOptions(false, Microsoft.CodeAnalysis.Emit.DebugInformationFormat.Embedded, runtimeMetadataVersion: "v4.0.30319", includePrivateMembers: true));
-            }                
+            }
 
             if (!emitResult.Success)
             {

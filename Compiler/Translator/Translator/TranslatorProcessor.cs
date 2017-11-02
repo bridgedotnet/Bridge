@@ -219,7 +219,8 @@ namespace Bridge.Translator
 
             if (loggerLevel <= LoggerLevel.None)
             {
-                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging");
+                logger.Info("    To enable further logging use config setting \"logging\" in bridge.json.");
+                logger.Info("    https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging");
             }
 
             logger.LoggerLevel = loggerLevel;
@@ -299,6 +300,7 @@ namespace Bridge.Translator
             translator.ProjectProperties = bridgeOptions.ProjectProperties;
 
             translator.AssemblyInfo = assemblyConfig;
+
             if (this.BridgeOptions.ReferencesPath != null)
             {
                 translator.AssemblyInfo.ReferencesPath = this.BridgeOptions.ReferencesPath;
