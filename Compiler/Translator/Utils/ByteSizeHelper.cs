@@ -82,7 +82,7 @@ namespace Bridge.Translator.Utils
             return bits;
         }
 
-        public static string ToSizeInBytes(double number, string format = null)
+        public static string ToSizeInBytes(double number, string format = null, bool invariantCulture = false)
         {
             // Get ceiling because bis are whole units
             var bits = (long)Math.Ceiling(number * BitsInByte);
@@ -101,10 +101,10 @@ namespace Bridge.Translator.Utils
                 return string.Format("{0} {1}", n, s);
             }
 
-            return ToSizeInBytesFormatted(format, n, s, bits, bytes, kilobytes, megabytes, gigabytes, terabytes);
+            return ToSizeInBytesFormatted(format, n, s, bits, bytes, kilobytes, megabytes, gigabytes, terabytes, invariantCulture);
         }
 
-        private static string ToSizeInBytesFormatted(string format, double largestNumber, string largestSymbol, long bits = 0, double bytes = 0, double kilobytes = 0, double megabytes = 0, double gigabytes = 0, double terabytes = 0)
+        private static string ToSizeInBytesFormatted(string format, double largestNumber, string largestSymbol, long bits = 0, double bytes = 0, double kilobytes = 0, double megabytes = 0, double gigabytes = 0, double terabytes = 0, bool invariantCulture = false)
         {
             if (!format.Contains("#") && !format.Contains("0"))
             {
@@ -112,7 +112,16 @@ namespace Bridge.Translator.Utils
             }
 
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format);
+            Func<double, string> output;
+
+            if (invariantCulture)
+            {
+                output = n => n.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                output = n => n.ToString(format);
+            }
 
             if (has(TerabyteSymbol))
                 return output(terabytes);
@@ -133,7 +142,16 @@ namespace Bridge.Translator.Utils
                 return output(bits);
             }
 
-            var formattedLargeWholeNumberValue = largestNumber.ToString(format);
+            string formattedLargeWholeNumberValue;
+
+            if (invariantCulture)
+            {
+                formattedLargeWholeNumberValue = largestNumber.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                formattedLargeWholeNumberValue = largestNumber.ToString(format);
+            }
 
             formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
                                               ? "0"

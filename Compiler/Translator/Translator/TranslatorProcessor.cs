@@ -299,6 +299,12 @@ namespace Bridge.Translator
             translator.ProjectProperties = bridgeOptions.ProjectProperties;
 
             translator.AssemblyInfo = assemblyConfig;
+          
+            if (this.BridgeOptions.ReferencesPath != null)
+            {
+                translator.AssemblyInfo.ReferencesPath = this.BridgeOptions.ReferencesPath;
+            }
+
             translator.OverflowMode = bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.HasValue ?
                 (bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.Value ? OverflowMode.Checked : OverflowMode.Unchecked) : (OverflowMode?)null;
 

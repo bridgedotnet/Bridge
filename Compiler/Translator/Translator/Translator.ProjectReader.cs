@@ -247,7 +247,7 @@ namespace Bridge.Translator
         {
             var nodes = from n in doc.Descendants()
                         where string.Compare(n.Name.LocalName, name, true) == 0 &&
-                              EvaluateCondition(n.Parent.Attribute("Condition").Value)
+                              EvaluateCondition(n.Parent.Attribute("Condition")?.Value)
                         select n;
 
             if (nodes.Count() != 1)
@@ -295,6 +295,11 @@ namespace Bridge.Translator
 
         private bool EvaluateCondition(string condition)
         {
+            if (condition == null)
+            {
+                return true;
+            }
+
             var properties = GetEvaluationConditions();
 
             return MsBuildConditionEvaluator.EvaluateCondition(condition, properties);

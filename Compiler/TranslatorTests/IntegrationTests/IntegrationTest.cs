@@ -76,7 +76,7 @@ namespace Bridge.Translator.Tests
         {
             var currentFolder = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
 
-            Directory.SetCurrentDirectory(currentFolder);
+            //Directory.SetCurrentDirectory(currentFolder);
 
             var logFiles = Directory.GetFiles(currentFolder, LogFileNameWithoutExtention + ".*", SearchOption.AllDirectories);
 
@@ -86,29 +86,30 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        [TestCase("02", true, true, "TestProject.I2096.js", TestName = "IntegrationTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, combineScripts and locales")]
-        [TestCase("03", true, true, TestName = "IntegrationTest 03 - Bridge.json outputFormatting Minified")]
-        [TestCase("04", true, true, TestName = "IntegrationTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
-        [TestCase("05", true, true, TestName = "IntegrationTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
-        [TestCase("06", true, true, TestName = "IntegrationTest 06 - Attribute outputBy Project Bridge.json useTypedArrays CheckForOverflowUnderflow ")]
-        [TestCase("07", true, true, TestName = "IntegrationTest 07 - Bridge.json module generateDocumentation Full")]
-        [TestCase("08", true, true, TestName = "IntegrationTest 08 - Bridge.json combineScripts fileName typeScript")]
-        [TestCase("10", true, true, TestName = "IntegrationTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
-        [TestCase("11", true, true, TestName = "IntegrationTest 11 - Bridge.json generateTypeScript")]
-        [TestCase("15", true, true, TestName = "IntegrationTest 15 - Bridge.json filename Define project constant #375")]
-        [TestCase("16", true, true, TestName = "IntegrationTest 16 - Issues")]
-        [TestCase("18", true, true, TestName = "IntegrationTest 18 - Features")]
+        [TestCase("02", false, true, "TestProject.I2096.js", TestName = "IntegrationTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, combineScripts and locales")]
+        [TestCase("03", false, true, TestName = "IntegrationTest 03 - Bridge.json outputFormatting Minified")]
+        [TestCase("04", false, true, TestName = "IntegrationTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
+        [TestCase("05", false, true, TestName = "IntegrationTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
+        [TestCase("06", false, true, TestName = "IntegrationTest 06 - Attribute outputBy Project Bridge.json useTypedArrays CheckForOverflowUnderflow ")]
+        [TestCase("07", false, true, TestName = "IntegrationTest 07 - Bridge.json module generateDocumentation Full")]
+        [TestCase("08", false, true, TestName = "IntegrationTest 08 - Bridge.json combineScripts fileName typeScript")]
+        [TestCase("10", false, true, TestName = "IntegrationTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
+        [TestCase("11", false, true, TestName = "IntegrationTest 11 - Bridge.json generateTypeScript")]
+        [TestCase("15", false, true, TestName = "IntegrationTest 15 - Bridge.json filename Define project constant #375")]
+        [TestCase("16", false, true, TestName = "IntegrationTest 16 - Issues")]
+        [TestCase("18", false, true, TestName = "IntegrationTest 18 - Features")]
 #if UNIX
-        [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
+        [TestCase("19", false, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
 #else
-        [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
+        [TestCase("19", false, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
 #endif
-        [TestCase("20", true, true, TestName = "IntegrationTest 20 - Auto property rule")]
+        [TestCase("20", false, true, TestName = "IntegrationTest 20 - Auto property rule")]
+        [TestCase("22", false, true, TestName = "IntegrationTest 22 - Global Methods with nested classes")]
         public void Test(string folder, bool isToBuild, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
 
-            Directory.SetCurrentDirectory(logDir);
+            //Directory.SetCurrentDirectory(logDir);
 
             var logger = new Logger(null, true, Contract.LoggerLevel.Warning, false, new FileLoggerWriter(logDir), new ConsoleLoggerWriter());
 

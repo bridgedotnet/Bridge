@@ -56,6 +56,11 @@ namespace Bridge.Contract
             return string.Join(", ", GetValues().Select(x => x.Key + ":" + x.Value));
         }
 
+        public List<string> BuildProjects
+        {
+            get; set;
+        }
+
         public Dictionary<string, string> GetValues()
         {
             var r = new Dictionary<string, string>()

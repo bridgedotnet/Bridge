@@ -1021,12 +1021,14 @@ namespace Bridge.Contract
 
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
             bool isNested = false;
+
             if (hasTypeDef)
             {
                 var typeDef = bridgeType.TypeDefinition;
                 if (typeDef.IsNested && !excludens)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, typeDef);
+                    //name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, typeDef);
+                    name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true, ignoreVirtual: true);
                     isNested = true;
                 }
 
@@ -1036,7 +1038,8 @@ namespace Bridge.Contract
             {
                 if (type.DeclaringType != null && !excludens)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, type);
+                    //name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, type);
+                    name = BridgeTypes.ToJsName(type.DeclaringType, emitter, true, ignoreVirtual: true);
 
                     if (type.DeclaringType.TypeArguments.Count > 0)
                     {

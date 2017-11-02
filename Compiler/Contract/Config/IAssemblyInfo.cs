@@ -215,5 +215,17 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        string ReferencesPath
+        {
+            get;
+            set;
+        }
+
+        string[] References
+        {
+            get;
+            set;
+        }
     }
  }
