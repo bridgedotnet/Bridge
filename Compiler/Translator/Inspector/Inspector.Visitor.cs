@@ -490,20 +490,29 @@ namespace Bridge.Translator
                 bool autoPropertyToField = false;
                 if (rr != null && rr.Member != null && Helpers.IsAutoProperty((IProperty)rr.Member))
                 {
-                    autoPropertyToField = this.HasFieldAttribute(rr.Member);
+                    var rules = Rules.Get(this.Emitter, rr.Member);
 
-                    if (!autoPropertyToField && rr.Member.ImplementedInterfaceMembers.Count > 0)
+                    if (rules.AutoProperty.HasValue)
                     {
-                        foreach (var interfaceMember in rr.Member.ImplementedInterfaceMembers)
-                        {
-                            autoPropertyToField = this.HasFieldAttribute(interfaceMember, false);
+                        autoPropertyToField = rules.AutoProperty.Value == AutoPropertyRule.Plain;
+                    }
+                    else
+                    {
+                        autoPropertyToField = this.HasFieldAttribute(rr.Member);
 
-                            if (autoPropertyToField)
+                        if (!autoPropertyToField && rr.Member.ImplementedInterfaceMembers.Count > 0)
+                        {
+                            foreach (var interfaceMember in rr.Member.ImplementedInterfaceMembers)
                             {
-                                break;
+                                autoPropertyToField = this.HasFieldAttribute(interfaceMember, false);
+
+                                if (autoPropertyToField)
+                                {
+                                    break;
+                                }
                             }
                         }
-                    }
+                    }                    
                 }
 
                 var autoInitializer = info.AutoPropertyInitializers.FirstOrDefault(f => f.Name == key);
@@ -537,6 +546,8 @@ namespace Bridge.Translator
 
         private bool HasFieldAttribute(IMember member, bool checkAssembly = true)
         {
+
+
             var fieldAttributeName = "Bridge.FieldAttribute";
             var autoPropertyToField = member.Attributes.Any(a => a.AttributeType.FullName == fieldAttributeName);
 

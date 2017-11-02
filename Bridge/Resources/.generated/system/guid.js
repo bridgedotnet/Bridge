@@ -96,7 +96,7 @@
                 }
 
                 if (b.length !== 16) {
-                    throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
+                    throw new System.ArgumentException(System.String.format(System.Guid.error1, [Bridge.box(16, System.Int32)]));
                 }
 
                 this._a = (b[System.Array.index(3, b)] << 24) | (b[System.Array.index(2, b)] << 16) | (b[System.Array.index(1, b)] << 8) | b[System.Array.index(0, b)];
@@ -132,7 +132,7 @@
                 }
 
                 if (d.length !== 8) {
-                    throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(8, System.Int32)));
+                    throw new System.ArgumentException(System.String.format(System.Guid.error1, [Bridge.box(8, System.Int32)]));
                 }
 
                 this._a = a;
@@ -221,7 +221,10 @@
                 var r = null;
 
                 if (System.String.isNullOrEmpty(input)) {
-                    throw new System.ArgumentNullException("input");
+                    if (check) {
+                        throw new System.ArgumentNullException("input");
+                    }
+                    return false;
                 }
 
                 if (System.String.isNullOrEmpty(format)) {

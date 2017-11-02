@@ -28,6 +28,7 @@ using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using Bridge;
+using System.Threading.Tasks;
 
 namespace System.IO
 {
@@ -122,6 +123,11 @@ namespace System.IO
                 buffer[index + n++] = (char)ch;
             } while (n < count);
             return n;
+        }
+
+        public virtual Task<String> ReadToEndAsync()
+        {
+            return Task.FromResult(ReadToEnd());
         }
 
         // Reads all characters from the current position to the end of the

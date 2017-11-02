@@ -371,7 +371,11 @@ namespace System
 
             if (string.IsNullOrEmpty(input))
             {
-                throw new System.ArgumentNullException("input");
+                if (check)
+                {
+                    throw new System.ArgumentNullException("input");
+                }
+                return false;
             }
 
             if (string.IsNullOrEmpty(format))

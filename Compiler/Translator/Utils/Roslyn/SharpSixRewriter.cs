@@ -506,11 +506,13 @@ namespace Bridge.Translator
             if (symbol != null && symbol.IsStatic && symbol.ContainingType != null
                 && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType)
                 && !(node.Parent is MemberAccessExpressionSyntax)
+                && !(node.Parent is QualifiedNameSyntax)
                 && (
                     (methodSymbol = symbol as IMethodSymbol) != null
                     || symbol is IPropertySymbol
                     || symbol is IFieldSymbol
-                    || symbol is IEventSymbol)
+                    || symbol is IEventSymbol
+                    || symbol is INamedTypeSymbol)
                 )
             {
                 if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
@@ -545,13 +547,13 @@ namespace Bridge.Translator
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
 
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol))
+            if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol || symbol is INamedTypeSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
             var usingType = symbol as INamedTypeSymbol;
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol))
+            if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol || symbol is INamedTypeSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
@@ -806,7 +808,14 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
+                    var symbolInfo = this.semanticModel.GetCollectionInitializerSymbolInfo(init);
+                    var collectionInitializer = symbolInfo.Symbol;
+
+                    if(symbolInfo.Symbol == null && symbolInfo.CandidateSymbols.Length > 0)
+                    {
+                        collectionInitializer = symbolInfo.CandidateSymbols[0];
+                    }
+
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
                     if (mInfo != null)
                     {

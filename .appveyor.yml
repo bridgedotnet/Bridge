@@ -9,7 +9,7 @@
 #---------------------------------#
 
 # version format
-version: 16.3.2.{build}-{branch}
+version: 16.4.1.{build}-{branch}
 
 # branches to build
 #branches:
@@ -209,7 +209,7 @@ notifications:
 
   - provider: Slack
     auth_token:
-      secure: zSdvelf8KpJg8tlCgYGPNygKefpXDGYETPAy5LX/xNTKcvcyt0V0hU4ISNUIEEKE
+      secure: 2g1as+FdSYJM0dzLEBkosu66Q/9U8ncGWUd7IcAfWXViqG9X7eKMkOt3ai4JRcb+9k+2BW8Aewdt6tp3dOD27SB+rJZzoNeUjA1SCk8nbaM=
     channel: 'bridge-github'
     on_build_status_changed: true
     on_build_success: true

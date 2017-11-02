@@ -37,10 +37,11 @@
   // Rules to manage generated JavaScript syntax.
   // Default is "Managed"
   "rules": {
-    "integer": "Managed",
     "anonymousType": "Plain",
     "arrayIndex": "Managed",
+    "autoProperty": "Plain",
     "boxing": "Managed",
+    "integer": "Managed",
     "lambda": "Plain"
   }
 

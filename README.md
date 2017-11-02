@@ -47,6 +47,7 @@ Run the sample above at [Deck.NET](https://deck.net/helloworld).
   * [Download](http://bridge.net/download/) the Visual Studio Code starter project
 * The [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) is important
 * The [Global Configuration](https://github.com/bridgedotnet/Bridge/wiki/global-configuration) is important
+* Check out [Retyped](https://retyped.com/) for 2200+ supported libraries
 * Licensed under [Apache License, Version 2.0](https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md)
 * Need Help? Bridge.NET [Forums](http://forums.bridge.net/) or GitHub [Issues](https://github.com/bridgedotnet/Bridge/issues)
 * [@bridgedotnet](https://twitter.com/bridgedotnet) on Twitter

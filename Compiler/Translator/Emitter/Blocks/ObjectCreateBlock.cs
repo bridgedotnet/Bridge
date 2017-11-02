@@ -292,7 +292,7 @@ namespace Bridge.Translator
 
                 foreach (var el in arrayInitializer.Elements)
                 {
-                    this.WriteInitializerExpression(el, tempVar + "." + this.Emitter.GetEntityName(rr.Member));
+                    this.WriteInitializerExpression(el, tempVar + "." + OverloadsCollection.Create(this.Emitter, rr.Member).GetOverloadName());
                 }
             }
             else
@@ -300,7 +300,7 @@ namespace Bridge.Translator
                 this.WriteComma();
                 this.Write(tempVar);
                 this.WriteDot();
-                this.WriteIdentifier(this.Emitter.GetEntityName(rr.Member));
+                this.WriteIdentifier(OverloadsCollection.Create(this.Emitter, rr.Member).GetOverloadName());
                 this.Write(" = ");
                 expression.AcceptVisitor(this.Emitter);
             }

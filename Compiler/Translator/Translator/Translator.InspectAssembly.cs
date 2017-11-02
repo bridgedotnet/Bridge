@@ -272,7 +272,7 @@ namespace Bridge.Translator
         {
             this.Log.Info("Inspecting types...");
 
-            Inspector inspector = this.CreateInspector();
+            Inspector inspector = this.CreateInspector(config);
             inspector.AssemblyInfo = config;
             inspector.Resolver = resolver;
 
@@ -290,9 +290,9 @@ namespace Bridge.Translator
             this.Log.Info("Inspecting types done");
         }
 
-        protected virtual Inspector CreateInspector()
+        protected virtual Inspector CreateInspector(IAssemblyInfo config = null)
         {
-            return new Inspector();
+            return new Inspector(config);
         }
 
         private string[] Rewrite()

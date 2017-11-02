@@ -11,11 +11,15 @@ namespace Bridge.Translator
 {
     public partial class Inspector : Visitor
     {
-        public Inspector()
+        internal IEmitter Emitter { get; private set; }
+
+        public Inspector(IAssemblyInfo config = null)
         {
             this.Types = new List<ITypeInfo>();
             this.IgnoredTypes = new List<string>();
-            this.AssemblyInfo = new AssemblyInfo();
+            this.AssemblyInfo = config ?? new AssemblyInfo();
+
+            this.Emitter = new TempEmitter { AssemblyInfo = this.AssemblyInfo };
         }
 
         protected virtual bool HasAttribute(EntityDeclaration type, string name)
@@ -323,7 +327,7 @@ namespace Bridge.Translator
                 {
                     throw new EmitterException(nsAt, "Custom attribute '[" + nsAt.ToString() +
                         "]' uses reserved namespace name 'Bridge'."
-                        + Emitter.NEW_LINE
+                        + Bridge.Translator.Emitter.NEW_LINE
                         + "This name is reserved for Bridge.NET core.");
                 }
             }
@@ -339,7 +343,7 @@ namespace Bridge.Translator
             {
                 throw new EmitterException(nsDecl, "Namespace '" + nsDecl.FullName +
                     "' uses reserved name 'Bridge'."
-                    + Emitter.NEW_LINE
+                    + Bridge.Translator.Emitter.NEW_LINE
                     + "This name is reserved for Bridge.NET core.");
             }
         }
