@@ -402,7 +402,7 @@ namespace Bridge.Translator
                     string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
                     if (name.IsEmpty())
                     {
-                        name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
+                        name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter);
                     }
 
                     this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function () { return " + name + "; };");
