@@ -129,7 +129,8 @@ namespace Bridge.Build
 #endif
             var logger = new Translator.Logging.Logger(null, false, LoggerLevel.Info, true, new VSLoggerWriter(this.Log), new FileLoggerWriter());
 
-            logger.Error("Executing Bridge.Build.Task...");
+            logger.Trace("123 ABC");
+            logger.Trace("Executing Bridge.Build.Task...");
 
             var bridgeOptions = this.GetBridgeOptions();
 
@@ -245,6 +246,7 @@ namespace Bridge.Build
             }
 
             bool b;
+
             if (bool.TryParse(this.CheckForOverflowUnderflow, out b))
             {
                 return b;

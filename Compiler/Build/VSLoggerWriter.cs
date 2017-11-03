@@ -1,8 +1,6 @@
 ﻿using Bridge.Contract;
 using Microsoft.Build.Utilities;
-
 using System;
-using System.Diagnostics;
 
 namespace Bridge.Build
 {
