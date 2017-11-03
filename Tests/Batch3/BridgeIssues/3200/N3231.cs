@@ -4,15 +4,16 @@ using Bridge.Test.NUnit;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     /// <summary>
-    /// This issue involves getting whether the intersection results in an
-    /// object with Type1 and Type2 properties, so we just check if the
-    /// resulting intersection is that.
+    /// This test involves checking whether an object literal correctly emits its
+    /// $getType function.
     /// </summary>
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#3231 - {0}")]
     public class Bridge3231
     {
-
+        /// <summary>
+        /// The Person object literal class for the wrapper class.
+        /// </summary>
         [ObjectLiteral(ObjectCreateMode.Constructor)]
         public class Person
         {
@@ -23,6 +24,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public string Name { get; }
         }
 
+        /// <summary>
+        /// Wrapper class which should get checked against its output.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         [ObjectLiteral(ObjectCreateMode.Constructor)]
         public class Wrapper<T>
         {
@@ -33,6 +38,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public T Value { get; }
         }
 
+        /// <summary>
+        /// Asserts Wrapper&lt;Person&gt; output format in client-side.
+        /// </summary>
         [Test]
         public static void TestGenericObjectLiteral()
         {
