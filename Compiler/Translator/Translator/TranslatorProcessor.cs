@@ -12,7 +12,9 @@ namespace Bridge.Translator
     public class TranslatorProcessor
     {
         public BridgeOptions BridgeOptions { get; private set; }
+
         public Logger Logger { get; private set; }
+
         public IAssemblyInfo TranslatorConfiguration { get; private set; }
 
         public Translator Translator { get; private set; }
@@ -219,7 +221,7 @@ namespace Bridge.Translator
 
             if (loggerLevel <= LoggerLevel.None)
             {
-                logger.Info("    To enable further logging use config setting \"logging\" in bridge.json.");
+                logger.Info("    To enable detailed logging, configure \"logging\" in bridge.json.");
                 logger.Info("    https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging");
             }
 
@@ -259,6 +261,7 @@ namespace Bridge.Translator
         private string GetLoggerFolder(IAssemblyInfo assemblyConfig)
         {
             var logFileFolder = assemblyConfig.Logging.Folder;
+
             if (string.IsNullOrWhiteSpace(logFileFolder))
             {
                 logFileFolder = this.GetOutputFolder(false, false);
@@ -305,7 +308,7 @@ namespace Bridge.Translator
             {
                 translator.AssemblyInfo.ReferencesPath = this.BridgeOptions.ReferencesPath;
             }
-                
+
             translator.OverflowMode = bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.HasValue ?
                 (bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.Value ? OverflowMode.Checked : OverflowMode.Unchecked) : (OverflowMode?)null;
 
