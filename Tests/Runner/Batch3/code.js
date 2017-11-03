@@ -25971,9 +25971,8 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
-     * This issue involves getting whether the intersection results in an
-     object with Type1 and Type2 properties, so we just check if the
-     resulting intersection is that.
+     * This test involves checking whether an object literal correctly emits its
+     $getType function.
      *
      * @public
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
@@ -25981,6 +25980,15 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231", {
         statics: {
             methods: {
+                /**
+                 * Asserts Wrapper&lt;Person&gt; output format in client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+                 * @return  {void}
+                 */
                 TestGenericObjectLiteral: function () {
                     var x = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person)).ctor(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person.ctor("test"));
 
@@ -25990,6 +25998,12 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The Person object literal class for the wrapper class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person", {
         $literal: true,
         ctors: {
@@ -26005,6 +26019,13 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Wrapper class which should get checked against its output.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1
+     * @param   {Function}    [name]
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1", function (T) { return {
         $literal: true,
         ctors: {
