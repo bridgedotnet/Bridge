@@ -27,10 +27,10 @@ var Bridge3001_SomeLib = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.4.2
+ * @version 16.5.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.4.2
+ * @compiler Bridge.NET 16.5.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -25970,6 +25970,34 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235", {
+        statics: {
+            methods: {
+                TestObjectLiteralBaseCtor: function () {
+                    var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Employee("Test", "R123");
+
+                    Bridge.Test.NUnit.Assert.AreEqual("Test", x.Name);
+                    Bridge.Test.NUnit.Assert.AreEqual("R123", x.Role);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person", {
+        $literal: true,
+        ctors: {
+            ctor: function (name) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person; };
+                (function (){
+                    this.Name = null;
+                    this.Name = name;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -36031,6 +36059,20 @@ Bridge.$N1391Result =                     r;
                     this.Value = value;
                 }).call($this);
                 return $this;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Employee", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person],
+        props: {
+            Role: null
+        },
+        ctors: {
+            ctor: function (name, role) {
+                this.$initialize();
+                Bridge.copyProperties(this, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person.ctor.call(this, name));
+                this.Role = role;
             }
         }
     });

@@ -710,11 +710,14 @@ namespace Bridge.Translator
             };
 
             bool appendScope = false;
+            bool isBaseObjectLiteral = false;
 
             if (initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
             {
                 var baseType = this.Emitter.GetBaseTypeDefinition();
                 var baseName = JS.Funcs.CONSTRUCTOR;
+                isBaseObjectLiteral = this.Emitter.Validator.IsObjectLiteral(baseType);
+
                 if (ctor.Initializer != null && !ctor.Initializer.IsNull)
                 {
                     var member = ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(ctor.Initializer, this.Emitter)).Member;
@@ -734,6 +737,14 @@ namespace Bridge.Translator
                 else
                 {
                     name = BridgeTypes.ToJsName(baseType, this.Emitter);
+                }
+
+                if(!isObjectLiteral && isBaseObjectLiteral)
+                {
+                    this.Write(JS.Types.Bridge.COPY_PROPERTIES);
+                    this.WriteOpenParentheses();
+
+                    this.Write("this, ");
                 }
 
                 this.Write(name, ".");
@@ -788,6 +799,11 @@ namespace Bridge.Translator
                 var paramsArg = argsInfo.ParamsExpression;
 
                 new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, ctor.Initializer, openPos).Emit();
+            }
+
+            if (!isObjectLiteral && isBaseObjectLiteral)
+            {
+                this.WriteCloseParentheses();
             }
 
             this.WriteCloseParentheses();

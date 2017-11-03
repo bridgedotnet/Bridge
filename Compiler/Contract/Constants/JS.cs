@@ -274,6 +274,7 @@
                 private const string DOTNAME = NS.BRIDGE + ".";
 
                 public const string APPLY = DOTNAME + "apply";
+                public const string COPY_PROPERTIES = DOTNAME + "copyProperties";
                 public const string ASSEMBLY = DOTNAME + "assembly";
                 public const string ENSURE_BASE_PROPERTY = DOTNAME + "ensureBaseProperty";
                 public const string IS = DOTNAME + "is";

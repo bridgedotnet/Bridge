@@ -1,5 +1,5 @@
 /**
- * @version   : 16.4.2 - Bridge.NET
+ * @version   : 16.5.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -872,6 +872,24 @@
 
             return obj;
         },
+
+        copyProperties: function (to, from) {
+            var names = Bridge.getPropertyNames(from, false),
+                i;
+
+            for (i = 0; i < names.length; i++) {
+                var name = names[i],
+                    own = from.hasOwnProperty(name),
+                    dcount = name.split("$").length;
+
+                if (own && (dcount === 1 || dcount === 2 && name.match("\$\d+$"))) {
+                    to[name] = from[name];
+                }
+                
+            }
+
+            return to;
+        }, 
 
         merge: function (to, from, callback, elemFactory) {
             if (to == null) {
@@ -3099,8 +3117,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.4.2";
-        Bridge.SystemAssembly.compiler = "16.4.2";
+        Bridge.SystemAssembly.version = "16.5.0";
+        Bridge.SystemAssembly.compiler = "16.5.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
