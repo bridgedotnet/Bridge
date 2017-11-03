@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <Target Name="BridgeNetCompilerTask">
-    <Message Text="Bridge started: OutputPath: $(OutputPath)" Importance="high" />
+    <Message Text="Bridge started" Importance="high" />
 
     <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
