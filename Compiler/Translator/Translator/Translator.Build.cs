@@ -80,7 +80,7 @@ namespace Bridge.Translator
                             }
                         }, new Logger(null, false, LoggerLevel.Info, true, new ConsoleLoggerWriter(), new FileLoggerWriter()));
 
-                        var result = processor.PreProcess();
+                        processor.PreProcess();
 
                         var projectAssembly = processor.Translator.AssemblyLocation;
 
