@@ -129,7 +129,6 @@ namespace Bridge.Build
 #endif
             var logger = new Translator.Logging.Logger(null, false, LoggerLevel.Info, true, new VSLoggerWriter(this.Log), new FileLoggerWriter());
 
-            logger.Trace("123 ABC");
             logger.Trace("Executing Bridge.Build.Task...");
 
             var bridgeOptions = this.GetBridgeOptions();
