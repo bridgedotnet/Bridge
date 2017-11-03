@@ -27,10 +27,10 @@ var Bridge3001_SomeLib = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.4.2
+ * @version 16.5.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.4.2
+ * @compiler Bridge.NET 16.5.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -25969,6 +25969,56 @@ Bridge.$N1391Result =                     r;
             Name: null
         }
     });
+
+    /**
+     * This issue involves getting whether the intersection results in an
+     object with Type1 and Type2 properties, so we just check if the
+     resulting intersection is that.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231", {
+        statics: {
+            methods: {
+                TestGenericObjectLiteral: function () {
+                    var x = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person)).ctor(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person.ctor("test"));
+
+                    Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231+Wrapper`1[[Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231+Person, Bridge.ClientTest.Batch3]]", Bridge.Reflection.getTypeFullName(Bridge.getType(x)));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person", {
+        $literal: true,
+        ctors: {
+            ctor: function (name) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person; };
+                (function (){
+                    this.Name = null;
+                    this.Name = name;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1", function (T) { return {
+        $literal: true,
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1(T); };
+                (function (){
+                    this.Value = Bridge.getDefaultValue(T);
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
