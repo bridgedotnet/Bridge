@@ -25970,6 +25970,77 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This test involves checking whether an object literal correctly emits its
+     $getType function.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231", {
+        statics: {
+            methods: {
+                /**
+                 * Asserts Wrapper&lt;Person&gt; output format in client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231
+                 * @return  {void}
+                 */
+                TestGenericObjectLiteral: function () {
+                    var x = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person)).ctor(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person.ctor("test"));
+
+                    Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231+Wrapper`1[[Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231+Person, Bridge.ClientTest.Batch3]]", Bridge.Reflection.getTypeFullName(Bridge.getType(x)));
+                }
+            }
+        }
+    });
+
+    /**
+     * The Person object literal class for the wrapper class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person", {
+        $literal: true,
+        ctors: {
+            ctor: function (name) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Person; };
+                (function (){
+                    this.Name = null;
+                    this.Name = name;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
+    /**
+     * Wrapper class which should get checked against its output.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1", function (T) { return {
+        $literal: true,
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3231.Wrapper$1(T); };
+                (function (){
+                    this.Value = Bridge.getDefaultValue(T);
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235", {
         statics: {
             methods: {
