@@ -4021,6 +4021,10 @@
             } else if (ci.sm) {
                 return ci.td[ci.sn].apply(null, args);
             } else {
+                if (ci.td.$literal) {
+                    return (ci.sn ? ci.td[ci.sn] : ci.td).apply(ci.td, args);
+                }
+
                 return Bridge.Reflection.applyConstructor(ci.sn ? ci.td[ci.sn] : ci.td, args);
             }
         },
