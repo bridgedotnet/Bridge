@@ -26069,9 +26069,28 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This tests whether the constructor is correctly invoked
+     when an ObjectLiteral is instantiated by reflection.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240", {
         statics: {
             methods: {
+                /**
+                 * This checks if a directly instantiated DateTime matches the passed
+                 (same) DateTime to the class constructor by reflection.
+                 The Instantiated class's date in Value should be equal to the
+                 passed one.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240
+                 * @return  {void}
+                 */
                 TestObjectLiteralReflectionCtor: function () {
                     var date = System.DateTime.getNow();
                     var p = Bridge.Reflection.invokeCI(System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.Person, 1, 28)).first(), [date]);
@@ -26082,6 +26101,12 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * ObjectLiteral test calss with a constructor
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.Person
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.Person", {
         $literal: true,
         ctors: {

@@ -14105,7 +14105,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestObjectLiteralReflectionCtor: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3240, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestObjectLiteralReflectionCtor()", $t.Line = "23", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3240, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestObjectLiteralReflectionCtor()", $t.Line = "36", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.TestObjectLiteralReflectionCtor();
                 }
             }
