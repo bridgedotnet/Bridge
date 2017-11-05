@@ -26122,6 +26122,31 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244", {
+        statics: {
+            methods: {
+                TestIEnumerbaleTVariance: function () {
+                    var listB = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B)).ctor());
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(System.Object)));
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A)));
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244, {
+        f1: function (_o1) {
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B());
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B());
+            return _o1;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -36199,6 +36224,10 @@ Bridge.$N1391Result =                     r;
                 this.Role = role;
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {

@@ -11898,14 +11898,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
     Bridge.define('System.Collections.Generic.IEnumerator$1', function (T) {
         return {
             inherits: [System.Collections.IEnumerator],
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [1]
         };
     });
 
     Bridge.define('System.Collections.Generic.IEnumerable$1', function (T) {
         return {
             inherits: [System.Collections.IEnumerable],
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [1]
         };
     });
 
@@ -11918,7 +11920,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.IEqualityComparer$1', function (T) {
         return {
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [2]
         };
     });
 
@@ -11938,7 +11941,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.IComparer$1', function (T) {
         return {
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [2]
         };
     });
 
