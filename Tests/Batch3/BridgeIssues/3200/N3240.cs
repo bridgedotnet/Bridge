@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3240
     {
         /// <summary>
-        /// ObjectLiteral test calss with a constructor
+        /// ObjectLiteral test class with a constructor
         /// </summary>
         [Reflectable]
         [ObjectLiteral(ObjectCreateMode.Constructor)]

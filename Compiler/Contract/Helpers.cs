@@ -311,8 +311,7 @@ namespace Bridge.Contract
                 }
             }
 
-            return emitter.Validator.HasAttribute(typeDef.Attributes, "Bridge.IgnoreCastAttribute") ||
-                   emitter.Validator.HasAttribute(typeDef.Attributes, "Bridge.ObjectLiteralAttribute");
+            return emitter.Validator.HasAttribute(typeDef.Attributes, "Bridge.IgnoreCastAttribute");
         }
 
         public static bool IsIntegerType(IType type, IMemberResolver resolver)

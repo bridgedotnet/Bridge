@@ -26102,7 +26102,7 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
-     * ObjectLiteral test calss with a constructor
+     * ObjectLiteral test class with a constructor
      *
      * @public
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.Person
@@ -26113,6 +26113,191 @@ Bridge.$N1391Result =                     r;
             ctor: function (value) {
                 var $this = { };
                 $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3240.Person; };
+                (function (){
+                    this.Value = null;
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
+    /**
+     * This tests whether the conversion of the ObjectLiteral type into
+     a string works when there's an implicit operator for comparing
+     the class instance with a string.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242", {
+        statics: {
+            methods: {
+                /**
+                 * The test will then just check whether
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242
+                 * @return  {void}
+                 */
+                TestObjectLiteralOperator: function () {
+                    // Base variable values to check against:
+                    var str = "Hello, World!";
+                    var str2 = "Different hello, world!";
+                    var int_base = 5;
+                    var float_base = 5.2;
+                    var dbl_base = 5.2;
+
+                    // String test
+                    // Binding the class instance to a specified type variable is
+                    // important to trigger the actual implicit operator.
+                    var msg = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyString.op_Implicit(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyString.ctor(str));
+                    Bridge.Test.NUnit.Assert.AreEqual(str, msg, "String");
+
+                    // Integer
+                    var int_instance = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyInt.op_Implicit(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyInt.ctor(int_base));
+                    Bridge.Test.NUnit.Assert.AreEqual(int_base, int_instance, "Integer");
+
+                    // Double
+                    var dbl_instance = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyDbl.op_Implicit(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyDbl.ctor(dbl_base));
+                    Bridge.Test.NUnit.Assert.AreEqual(dbl_base, dbl_instance, "Double");
+
+                    // Generic as String
+                    var msg2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.String).op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.String)).ctor(str));
+                    Bridge.Test.NUnit.Assert.AreEqual(str, msg2, "Generic as String");
+
+                    // Generic as String, replacing the 'msg' variable from assertion 1 above
+                    msg = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.String).op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.String)).ctor(str2));
+                    Bridge.Test.NUnit.Assert.AreEqual(str2, msg, "Generic as String, replacing the 'msg' variable from assertion 1 above");
+
+                    // Generic as Int
+                    var int_instance2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Int32).op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Int32)).ctor(int_base));
+                    Bridge.Test.NUnit.Assert.AreEqual(int_base, int_instance2, "Generic as Int");
+
+                    // Generic as Float
+                    var float_gval = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Single).op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Single)).ctor(float_base));
+                    Bridge.Test.NUnit.Assert.AreEqual(float_base, float_gval, "Generic as Float");
+
+                    // Generic as Double
+                    var dbl_gval = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Double).op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(System.Double)).ctor(dbl_base));
+                    Bridge.Test.NUnit.Assert.AreEqual(dbl_base, dbl_gval, "Generic as Double");
+                }
+            }
+        }
+    });
+
+    /**
+     * Test class, that implements the implicit double operator.
+     It also is an ObjectLiteral class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyDbl
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyDbl", {
+        $literal: true,
+        statics: {
+            methods: {
+                op_Implicit: function (value) {
+                    return (value == null) ? Number.NaN : value.Value;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyDbl; };
+                (function (){
+                    this.Value = 0;
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
+    /**
+     * Test class, that implements a generic type operator.
+     It also is an ObjectLiteral class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1", function (T) { return {
+        $literal: true,
+        statics: {
+            methods: {
+                op_Implicit: function (value) {
+                    if (value == null) {
+                        throw new System.NullReferenceException();
+                    }
+                    return value.Value;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyGeneric$1(T); };
+                (function (){
+                    this.Value = Bridge.getDefaultValue(T);
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    }; });
+
+    /**
+     * Test class, that implements the implicit int operator.
+     It also is an ObjectLiteral class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyInt
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyInt", {
+        $literal: true,
+        statics: {
+            methods: {
+                op_Implicit: function (value) {
+                    return (value == null) ? -2147483648 : value.Value;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyInt; };
+                (function (){
+                    this.Value = 0;
+                    this.Value = value;
+                }).call($this);
+                return $this;
+            }
+        }
+    });
+
+    /**
+     * Test class, that implements the implicit string operator.
+     It also is an ObjectLiteral class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyString
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyString", {
+        $literal: true,
+        statics: {
+            methods: {
+                op_Implicit: function (value) {
+                    return (value == null) ? null : value.Value;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (value) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3242.MyString; };
                 (function (){
                     this.Value = null;
                     this.Value = value;
