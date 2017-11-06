@@ -26504,12 +26504,77 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A");
 
+    /**
+     * This test consists in checking whether TimeSpan() supports checking if
+     it equals to different types of input.
+     True, false, null, and objects used to make this fail.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249", {
         statics: {
             methods: {
+                /**
+                 * Checks a TimeSpan instance's Equal() method against different
+                 types of values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+                 * @return  {void}
+                 */
                 TestTimeSpanEquals: function () {
-                    Bridge.Test.NUnit.Assert.False(Bridge.equals(new System.TimeSpan(), Bridge.box(true, System.Boolean, System.Boolean.toString)));
+                    // Calling 'new TimeSpan()' directly in the call or setting a
+                    // single common instance does not affect the issue at all.
+                    var ts = new System.TimeSpan();
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(true, System.Boolean, System.Boolean.toString)), "TimeSpan not equal to 'true' constant");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(false, System.Boolean, System.Boolean.toString)), "TimeSpan not equal to 'false' constant");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, null), "TimeSpan not equal to null");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(3.2, System.Double, System.Double.format, System.Double.getHashCode)), "TimeSpan not equal to double constant");
+
+                    // Non-anonymous objects should follow the rule here and no
+                    // additional checks will be made.
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, new $asm.$AnonymousType$19(0)), "TimeSpan not equal to anonymous object");
+
+                    // Try with explicitly typed nullable variables
+                    var nint = 0;
+                    var nint2 = null;
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(nint, System.Int32, System.Nullable.toString, System.Nullable.getHashCode)), "TimeSpan not equal to nullable int with value");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(nint2, System.Int32, System.Nullable.toString, System.Nullable.getHashCode)), "TimeSpan not equal to nullable int without value (null)");
                 }
+            }
+        }
+    });
+
+    Bridge.define("$AnonymousType$19", $asm, {
+        $kind: "anonymous",
+        ctors: {
+            ctor: function (value) {
+                this.Value = value;
+            }
+        },
+        methods: {
+            equals: function (o) {
+                if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([7550210778, this.Value]);
+                return h;
+            },
+            toJSON: function () {
+                return {
+                    Value : this.Value
+                };
+            }
+        },
+        statics : {
+            methods: {
+                $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":System.Int32,"fg":"Value","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"Value"}]}; }
             }
         }
     });
@@ -26967,11 +27032,11 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$19("", "")], $asm.$AnonymousType$19)).skip(1).toList(System.Object);
-                    list.add(new $asm.$AnonymousType$19("Ruth", "Babe"));
-                    list.add(new $asm.$AnonymousType$19("Johnson", "Walter"));
-                    list.add(new $asm.$AnonymousType$19("Cobb", "Ty"));
-                    list.add(new $asm.$AnonymousType$19("Schmidt", "Mike"));
+                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$20("", "")], $asm.$AnonymousType$20)).skip(1).toList(System.Object);
+                    list.add(new $asm.$AnonymousType$20("Ruth", "Babe"));
+                    list.add(new $asm.$AnonymousType$20("Johnson", "Walter"));
+                    list.add(new $asm.$AnonymousType$20("Cobb", "Ty"));
+                    list.add(new $asm.$AnonymousType$20("Schmidt", "Mike"));
 
                     var query = System.Linq.Enumerable.from(list).where($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f1).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f2);
 
@@ -26983,7 +27048,7 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("$AnonymousType$19", $asm, {
+    Bridge.define("$AnonymousType$20", $asm, {
         $kind: "anonymous",
         ctors: {
             ctor: function (lastName, firstName) {
@@ -26993,13 +27058,13 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             equals: function (o) {
-                if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+                if (!Bridge.is(o, $asm.$AnonymousType$20)) {
                     return false;
                 }
                 return Bridge.equals(this.LastName, o.LastName) && Bridge.equals(this.FirstName, o.FirstName);
             },
             getHashCode: function () {
-                var h = Bridge.addHash([7550210778, this.LastName, this.FirstName]);
+                var h = Bridge.addHash([7550208475, this.LastName, this.FirstName]);
                 return h;
             },
             toJSON: function () {
@@ -27023,7 +27088,7 @@ Bridge.$N1391Result =                     r;
             return p.LastName.length === 4;
         },
         f2: function (p) {
-            return new $asm.$AnonymousType$19(p.LastName, p.FirstName);
+            return new $asm.$AnonymousType$20(p.LastName, p.FirstName);
         }
     });
 
@@ -32686,7 +32751,7 @@ Bridge.$N1391Result =                     r;
                                     case 0: {
                                         asyncComplete = Bridge.Test.NUnit.Assert.Async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$20(1), new $asm.$AnonymousType$20(2)], $asm.$AnonymousType$20);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(1), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -32746,7 +32811,7 @@ Bridge.$N1391Result =                     r;
                                     case 0: {
                                         asyncComplete = Bridge.Test.NUnit.Assert.Async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$20(-3), new $asm.$AnonymousType$20(2)], $asm.$AnonymousType$20);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(-3), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -32794,37 +32859,6 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
-
-    Bridge.define("$AnonymousType$20", $asm, {
-    $kind: "anonymous",
-    ctors: {
-        ctor: function (value) {
-            this.Value = value;
-        }
-    },
-    methods: {
-        equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$20)) {
-                return false;
-            }
-            return Bridge.equals(this.Value, o.Value);
-        },
-        getHashCode: function () {
-            var h = Bridge.addHash([7550208475, this.Value]);
-            return h;
-        },
-        toJSON: function () {
-            return {
-                Value : this.Value
-            };
-        }
-    },
-    statics : {
-        methods: {
-            $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":System.Int32,"fg":"Value","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"Value"}]}; }
-        }
-    }
-});
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge907", {
         statics: {
