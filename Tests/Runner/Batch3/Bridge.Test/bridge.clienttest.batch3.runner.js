@@ -678,7 +678,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3235 - TestObjectLiteralBaseCtor", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3235.TestObjectLiteralBaseCtor);
             QUnit.test("#3240 - TestObjectLiteralReflectionCtor", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3240.TestObjectLiteralReflectionCtor);
             QUnit.test("#3242 - Test ObjectLiteral with implicit attribution operator - TestObjectLiteralOperator", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3242.TestObjectLiteralOperator);
-            QUnit.test("#3244 - TestIEnumerbaleTVariance", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3244.TestIEnumerbaleTVariance);
+            QUnit.test("#3244 - List instances are also instances of IEnumerable and inheritance - TestIEnumerbaleTVariance", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3244.TestIEnumerbaleTVariance);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -14157,7 +14157,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestIEnumerbaleTVariance: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3244, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIEnumerbaleTVariance()", $t.Line = "16", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3244, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIEnumerbaleTVariance()", $t.Line = "31", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.TestIEnumerbaleTVariance();
                 }
             }

@@ -26307,14 +26307,39 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This will check whether List instances are also instances of
+     IEnumerable and its inherited generics' types.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244", {
         statics: {
             methods: {
+                /**
+                 * The test consists in instantiating a List&lt;B&gt; and checking if
+                 it is an instance of the respective IENumerable&lt;B&gt; and also,
+                 IENumerable&lt;A&gt;, by inheritance.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244
+                 * @return  {void}
+                 */
                 TestIEnumerbaleTVariance: function () {
+                    // Make a list of B with two B instances
                     var listB = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B)).ctor());
 
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(System.Object)));
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A)));
+                    // List<B> is an IEnumerable<B> (of itself)
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B)), "List<B> is an IEnumerable<B> (of itself)");
+
+                    // List<B> is an IEnumerable<object> (B inherits from object)
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(System.Object)), "List<B> is an IEnumerable<object> (B inherits from object)");
+
+                    // List<B> is an IEnumerable<A> (B inherits from A)
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A)), "List<B> is an IEnumerable<A> (B inherits from A)");
                 }
             }
         }
@@ -26330,6 +26355,12 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Simple class to act as a base type.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
@@ -36411,6 +36442,13 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Simple class to just extend the A class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B
+     * @augments Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
