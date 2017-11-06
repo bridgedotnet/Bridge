@@ -25970,41 +25970,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226", {
-        statics: {
-            methods: {
-                TestAssignAddMultiDimArray: function () {
-                    var $t, $t1, $t2;
-                    var a = System.Array.create(0, null, System.Int32, 3, 3);
-
-                    a.set([0, 0], 1);
-
-                    for (var y = 0; y < (((System.Array.getLength(a, 1) - 1) | 0)); y = (y + 1) | 0) {
-                        for (var x = 0; x < (((System.Array.getLength(a, 0) - 1) | 0)); x = (x + 1) | 0) {
-                            a.set([($t = ((x + 1) | 0)), ($t1 = ((y + 1) | 0))], (a.get([$t, $t1]) + a.get([x, y])) | 0);
-                        }
-                    }
-
-                    var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
-                    var s = "";
-
-                    $t2 = Bridge.getEnumerator(a);
-                    try {
-                        while ($t2.moveNext()) {
-                            var i = $t2.Current;
-                            s = (s || "") + i;
-                        }
-                    } finally {
-                        if (Bridge.is($t2, System.IDisposable)) {
-                            $t2.System$IDisposable$dispose();
-                        }
-                    }
-                    Bridge.Test.NUnit.Assert.AreEqual("100010001", s);
-                }
-            }
-        }
-    });
-
     /**
      * This test consists in checking whether binding a dynamic array to
      a class and casting it to its interface taints the resulting array.
@@ -26084,6 +26049,60 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo", {
         $kind: "interface"
+    });
+
+    /**
+     * This test consists in checking whether the append operator works with
+     multi dimensional arrays in Bridge the same way it does in .NET.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226", {
+        statics: {
+            methods: {
+                /**
+                 * Build a simple, static integer two-dimensional array and iterate
+                 throught it incrementing a cell with a previous one's value.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+                 * @return  {void}
+                 */
+                TestAssignAddMultiDimArray: function () {
+                    var $t, $t1, $t2;
+                    var a = System.Array.create(0, null, System.Int32, 3, 3);
+
+                    a.set([0, 0], 1);
+
+                    for (var y = 0; y < (((System.Array.getLength(a, 1) - 1) | 0)); y = (y + 1) | 0) {
+                        for (var x = 0; x < (((System.Array.getLength(a, 0) - 1) | 0)); x = (x + 1) | 0) {
+                            a.set([($t = ((x + 1) | 0)), ($t1 = ((y + 1) | 0))], (a.get([$t, $t1]) + a.get([x, y])) | 0);
+                        }
+                    }
+
+                    var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
+                    var s = "";
+
+                    $t2 = Bridge.getEnumerator(a);
+                    try {
+                        while ($t2.moveNext()) {
+                            var i = $t2.Current;
+                            s = (s || "") + i;
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }
+                    // By the time it was broken, (bridgedotnet/Bridge#3226) the result
+                    // was wrong: 100010011
+                    Bridge.Test.NUnit.Assert.AreEqual("100010001", s, "Result matches '100010001'");
+                }
+            }
+        }
     });
 
     /**
