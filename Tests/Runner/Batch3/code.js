@@ -26340,6 +26340,12 @@ Bridge.$N1391Result =                     r;
 
                     // List<B> is an IEnumerable<A> (B inherits from A)
                     Bridge.Test.NUnit.Assert.True(Bridge.is(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A)), "List<B> is an IEnumerable<A> (B inherits from A)");
+
+                    // This was a slightly different test case reported on issue
+                    // bridgedotnet /Bridge#3245
+                    // Check if, once binding with a valid cast, the list remains.
+                    var bAsEnumerableA = Bridge.cast(listB, System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A));
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.Linq.Enumerable.from(bAsEnumerableA).count(), "List supports casting to parent types (#3245)");
                 }
             }
         }

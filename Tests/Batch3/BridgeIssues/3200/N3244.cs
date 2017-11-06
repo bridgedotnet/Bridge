@@ -45,6 +45,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             // List<B> is an IEnumerable<A> (B inherits from A)
             Assert.True(listB is IEnumerable<A>, "List<B> is an IEnumerable<A> (B inherits from A)");
+
+            // This was a slightly different test case reported on issue
+            // bridgedotnet /Bridge#3245
+            // Check if, once binding with a valid cast, the list remains.
+            var bAsEnumerableA = (IEnumerable<A>)listB;
+            Assert.AreEqual(2, bAsEnumerableA.Count(), "List supports casting to parent types (#3245)");
         }
     }
 }
