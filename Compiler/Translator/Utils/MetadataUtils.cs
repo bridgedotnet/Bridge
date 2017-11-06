@@ -641,7 +641,19 @@ namespace Bridge.Translator
             }
             else if (m is IProperty)
             {
+                var typeDef = m.DeclaringTypeDefinition;
+                var monoProp = typeDef != null ? emitter.BridgeTypes.Get(typeDef).TypeDefinition.Properties.FirstOrDefault(p => p.Name == m.Name) : null;
+
                 var prop = (IProperty)m;
+                var canGet = prop.CanGet;
+                var canSet = prop.CanSet;
+
+                if (monoProp != null)
+                {
+                    canGet = monoProp.GetMethod != null;
+                    canSet = monoProp.SetMethod != null;
+                }
+
                 properties.Add("t", (int)MemberTypes.Property);
                 properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(prop.ReturnType, emitter, isGenericSpecialization)));
                 if (prop.Parameters.Count > 0)
@@ -674,17 +686,17 @@ namespace Bridge.Translator
                     }
                 }
 
-                var inlineGetter = prop.CanGet && (emitter.GetInline(prop.Getter) != null || Helpers.IsScript(prop.Getter));
-                var inlineSetter = prop.CanSet && (emitter.GetInline(prop.Setter) != null || Helpers.IsScript(prop.Setter));
+                var inlineGetter = canGet && (emitter.GetInline(prop.Getter) != null || Helpers.IsScript(prop.Getter));
+                var inlineSetter = canSet && (emitter.GetInline(prop.Setter) != null || Helpers.IsScript(prop.Setter));
 
                 if (inlineGetter || inlineSetter || prop.IsIndexer)
                 {
-                    if (prop.CanGet)
+                    if (canGet)
                     {
                         properties.Add("g", MetadataUtils.ConstructMemberInfo(prop.Getter, emitter, includeDeclaringType, isGenericSpecialization, tree));
                     }
 
-                    if (prop.CanSet)
+                    if (canSet)
                     {
                         properties.Add("s", MetadataUtils.ConstructMemberInfo(prop.Setter, emitter, includeDeclaringType, isGenericSpecialization, tree));
                     }
@@ -692,11 +704,11 @@ namespace Bridge.Translator
                 else
                 {
                     var fieldName = OverloadsCollection.Create(emitter, prop).GetOverloadName();
-                    if (prop.CanGet)
+                    if (canGet)
                     {
                         properties.Add("g", MetadataUtils.ConstructFieldPropertyAccessor(prop.Getter, emitter, fieldName, true, includeDeclaringType, isGenericSpecialization, tree));
                     }
-                    if (prop.CanSet)
+                    if (canSet)
                     {
                         properties.Add("s", MetadataUtils.ConstructFieldPropertyAccessor(prop.Setter, emitter, fieldName, false, includeDeclaringType, isGenericSpecialization, tree));
                     }

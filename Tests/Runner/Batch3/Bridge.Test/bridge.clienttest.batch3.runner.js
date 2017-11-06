@@ -680,6 +680,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3240 - TestObjectLiteralReflectionCtor", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3240.TestObjectLiteralReflectionCtor);
             QUnit.test("#3242 - Test ObjectLiteral with implicit attribution operator - TestObjectLiteralOperator", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3242.TestObjectLiteralOperator);
             QUnit.test("#3244 - List instances are also instances of IEnumerable and inheritance - TestIEnumerbaleTVariance", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3244.TestIEnumerbaleTVariance);
+            QUnit.test("#3253 - TestCanSetForReadonlyProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3253.TestCanSetForReadonlyProperty);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -14196,6 +14197,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244", $t.File = "Batch3\\BridgeIssues\\3200\\N3244.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3253", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253)],
+        statics: {
+            methods: {
+                TestCanSetForReadonlyProperty: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3253, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanSetForReadonlyProperty()", $t.Line = "24", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253.TestCanSetForReadonlyProperty();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253", $t.File = "Batch3\\BridgeIssues\\3200\\N3253.cs", $t);
                 }
                 return this.context;
             }
