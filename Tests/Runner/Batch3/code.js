@@ -25970,6 +25970,24 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222", {
+        statics: {
+            methods: {
+                TestArrayUnbox: function () {
+                    var array = System.Array.init(["abc", "def"], System.String);
+                    var p1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1(System.Array.type(System.String)))();
+                    p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value = array;
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(array, p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty", {
+        $kind: "interface"
+    });
+
     /**
      * This test involves checking whether an object literal correctly emits its
      $getType function.
@@ -36434,6 +36452,11 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty],
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Employee", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person],
         props: {
@@ -36864,6 +36887,32 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1(T)],
+        fields: {
+            value: Bridge.getDefaultValue(T)
+        },
+        props: {
+            Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = value;
+                }
+            },
+            Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = Bridge.cast(Bridge.unbox(value), T);
+                }
+            }
+        },
+        alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],
