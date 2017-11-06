@@ -168,7 +168,7 @@
         },
 
         equals: function (other) {
-            return other.ticks.eq(this.ticks);
+            return Bridge.is(other, System.TimeSpan) ? other.ticks.eq(this.ticks) : false;
         },
 
         equalsT: function (other) {

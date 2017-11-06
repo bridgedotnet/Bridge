@@ -26450,6 +26450,16 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A");
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249", {
+        statics: {
+            methods: {
+                TestTimeSpanEquals: function () {
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(new System.TimeSpan(), Bridge.box(true, System.Boolean, System.Boolean.toString)));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
