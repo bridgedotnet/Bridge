@@ -761,7 +761,9 @@ namespace Bridge.Translator
                                 throw new EmitterException(exprs[0], "Primitive expression is required");
                             }
 
-                            Emitter.NamedTempVariables[nameExpr.LiteralValue] = tmpVarName;
+                            var keyExpr = string.IsNullOrWhiteSpace(nameExpr.LiteralValue) ? nameExpr.Value.ToString() : nameExpr.LiteralValue;
+
+                            Emitter.NamedTempVariables[keyExpr] = tmpVarName;
                             Write(tmpVarName);
                             isSimple = true;
                         }
@@ -812,12 +814,14 @@ namespace Bridge.Translator
                                 throw new EmitterException(exprs[0], "Primitive expression is required");
                             }
 
-                            if (!Emitter.NamedTempVariables.ContainsKey(nameExpr.LiteralValue))
+                            var keyExpr = string.IsNullOrWhiteSpace(nameExpr.LiteralValue) ? nameExpr.Value.ToString() : nameExpr.LiteralValue;
+
+                            if (!Emitter.NamedTempVariables.ContainsKey(keyExpr))
                             {
                                 throw new EmitterException(exprs[0], "Primitive expression is required");
                             }
 
-                            var tmpVarName = Emitter.NamedTempVariables[nameExpr.LiteralValue];
+                            var tmpVarName = Emitter.NamedTempVariables[keyExpr];
                             Write(tmpVarName);
                             isSimple = true;
                         }
