@@ -657,6 +657,7 @@
     <Compile Include="BridgeIssues\3100\N3192.cs" />
     <Compile Include="BridgeIssues\3100\N3195.cs" />
     <Compile Include="BridgeIssues\3100\N3197.cs" />
+    <Compile Include="BridgeIssues\3200\N3224.cs" />
     <Compile Include="BridgeIssues\3200\N3200.cs" />
     <Compile Include="BridgeIssues\3200\N3231.cs" />
     <Compile Include="BridgeIssues\3200\N3235.cs" />

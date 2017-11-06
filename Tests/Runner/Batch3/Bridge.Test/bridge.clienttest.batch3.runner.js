@@ -674,6 +674,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3195 - TestGuidTryParse", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3195.TestGuidTryParse);
             QUnit.test("#3197 - TestUsingStatic", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3197.TestUsingStatic);
             QUnit.test("#3200 - TestEventTemplate", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3200.TestEventTemplate);
+            QUnit.test("#3224 - TestAutoPlainInterfaceProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3224.TestAutoPlainInterfaceProperty);
             QUnit.test("#3231 - TestGenericObjectLiteral", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3231.TestGenericObjectLiteral);
             QUnit.test("#3235 - TestObjectLiteralBaseCtor", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3235.TestObjectLiteralBaseCtor);
             QUnit.test("#3240 - TestObjectLiteralReflectionCtor", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3240.TestObjectLiteralReflectionCtor);
@@ -14045,6 +14046,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3200", $t.File = "Batch3\\BridgeIssues\\3200\\N3200.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3224", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224)],
+        statics: {
+            methods: {
+                TestAutoPlainInterfaceProperty: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3224, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAutoPlainInterfaceProperty()", $t.Line = "27", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.TestAutoPlainInterfaceProperty();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224", $t.File = "Batch3\\BridgeIssues\\3200\\N3224.cs", $t);
                 }
                 return this.context;
             }

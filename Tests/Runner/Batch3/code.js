@@ -25970,6 +25970,21 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224", {
+        statics: {
+            methods: {
+                TestAutoPlainInterfaceProperty: function () {
+                    var foo = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.Foo(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo);
+                    Bridge.Test.NUnit.Assert.AreEqual(5, foo.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3224$IFoo$Value);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo", {
+        $kind: "interface"
+    });
+
     /**
      * This test involves checking whether an object literal correctly emits its
      $getType function.
@@ -36430,6 +36445,20 @@ Bridge.$N1391Result =                     r;
                     this.Value = value;
                 }).call($this);
                 return $this;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.Foo", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo],
+        fields: {
+            Value: 0
+        },
+        alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3224$IFoo$Value"],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                this.Value = 5;
             }
         }
     });
