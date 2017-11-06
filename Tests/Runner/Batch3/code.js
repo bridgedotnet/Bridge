@@ -26006,6 +26006,87 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * This test consists in checking whether binding a dynamic array to
+     a class and casting it to its interface taints the resulting array.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222", {
+        statics: {
+            methods: {
+                /**
+                 * Check whether the array is maintained when assigned to the
+                 interface-cast property.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+                 * @return  {void}
+                 */
+                TestArrayUnbox: function () {
+                    var array = System.Array.init(["abc", "def"], System.String);
+                    var p1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1(System.Array.type(System.String)))();
+                    p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value = array;
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(array, p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value), "Array not tainted when assigned to interface's property");
+                }
+            }
+        }
+    });
+
+    /**
+     * An initial property with just the individual entry.
+     *
+     * @abstract
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty", {
+        $kind: "interface"
+    });
+
+    /**
+     * This test consists in checking whether a interface cast of a class
+     instance allows accessing the class' properties.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224", {
+        statics: {
+            methods: {
+                /**
+                 * Create an instance of the class, casting it back to its interface,
+                 and then from that, access the value.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224
+                 * @return  {void}
+                 */
+                TestAutoPlainInterfaceProperty: function () {
+                    var foo = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.Foo(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo);
+                    Bridge.Test.NUnit.Assert.AreEqual(5, foo.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3224$IFoo$Value, "Can access properties from instances cast into their interfaces");
+                }
+            }
+        }
+    });
+
+    /**
+     * Interface with the property we want to access after the cast.
+     *
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo", {
+        $kind: "interface"
+    });
+
+    /**
      * This test involves checking whether an object literal correctly emits its
      $getType function.
      *
@@ -36469,6 +36550,42 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * An interface implementing a generic spacialization to the interface
+     above
+     *
+     * @abstract
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty
+     * @param   {Function}    [name]
+     */
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty],
+        $kind: "interface"
+    }; });
+
+    /**
+     * Class that will implement the interface above.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.Foo
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.Foo", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo],
+        fields: {
+            Value: 0
+        },
+        alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3224$IFoo$Value"],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                this.Value = 5;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Employee", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3235.Person],
         props: {
@@ -36899,6 +37016,40 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
+
+    /**
+     * A generic class defining the interface above.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1(T)],
+        fields: {
+            value: Bridge.getDefaultValue(T)
+        },
+        props: {
+            Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = value;
+                }
+            },
+            Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = Bridge.cast(Bridge.unbox(value), T);
+                }
+            }
+        },
+        alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],

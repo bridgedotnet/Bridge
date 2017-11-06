@@ -98,7 +98,6 @@
             }
 
             if (Bridge.isArray(o)) {
-                var arr = [];
                 for (var i = 0; i < o.length; i++) {
                     var item = o[i];
 
@@ -113,9 +112,8 @@
                         item = item.$clone();
                     }
 
-                    arr[i] = item;
+                    o[i] = item;
                 }
-                o = arr;
             }
 
             if (o && !noclone && o.$clone) {
@@ -2093,8 +2091,22 @@
                                     m = prototype[name];
                                 }
 
-                                scope[alias] = m;
-                                aliases.push({ fn: name, alias: alias });
+                                if (!Bridge.isFunction(m)) {
+                                    descriptor = {
+                                        get: function () {
+                                            return this[name];
+                                        },
+
+                                        set: function (value) {
+                                            this[name] = value;
+                                        }
+                                    };
+                                    Object.defineProperty(obj, alias, descriptor);
+                                    aliases.push({ alias: alias, descriptor: descriptor });
+                                } else {
+                                    scope[alias] = m;
+                                    aliases.push({ fn: name, alias: alias });
+                                }                                
                             }
                         }
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
