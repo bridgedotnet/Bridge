@@ -3,8 +3,9 @@ using Bridge.Test.NUnit;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     /// <summary>
-    /// This test consists in checking whether class properties' CanWrite()
+    /// This test consists in checking whether class properties' CanWrite
     /// method returns a value congruent to C# and the class definition.
+    /// In addition, checks also for the CanRead state.
     /// </summary>
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#3253 - {0}")]
@@ -16,37 +17,35 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Reflectable]
         public class Person
         {
-            public Person(int id, string name)
-            {
-                Id = id;
-                RWId = id;
-                Name = name;
-                RWName = name;
-            }
-            public int Id { get; }
-            public string Name { get; }
-            public int RWId { get; }
-            public string RWName { get; }
+            // CanRead, !CanWrite
+            public int RyWn { get; }
+
+            // CanRead, CanWrite
+            public int RyWy { get; set; }
+
+            // !CanRead, CanWrite
+            public int RnWy { set { } }
         }
 
         /// <summary>
         /// Check each class' property whether they have the expected
-        /// CanWrite() state
+        /// CanWrite and CanRead states
         /// </summary>
         [Test]
         public static void TestCanSetForReadonlyProperty()
         {
-            var idProperty = typeof(Person).GetProperty("Id");
-            Assert.False(idProperty.CanWrite, "Readonly Id property has CanWrite() == false");
+            var p1 = typeof(Person).GetProperty("RyWn");
+            var p2 = typeof(Person).GetProperty("RyWy");
+            var p3 = typeof(Person).GetProperty("RnWy");
 
-            var nameProperty = typeof(Person).GetProperty("Name");
-            Assert.False(nameProperty.CanWrite, "Readonly Name property has CanWrite() == false");
+            Assert.False(p1.CanWrite, "Readonly RyWn property has CanWrite() == false");
+            Assert.True(p1.CanRead, "Readonly RyWn property has CanRead() == true");
 
-            var rwidProperty = typeof(Person).GetProperty("RWId");
-            Assert.True(idProperty.CanWrite, "Read-write RWId property has CanWrite() == true");
+            Assert.True(p2.CanWrite, "Read-write RyWy property has CanWrite() == true");
+            Assert.True(p2.CanRead, "Read-write RyWy property has CanRead() == true");
 
-            var rwnameProperty = typeof(Person).GetProperty("RWName");
-            Assert.True(idProperty.CanWrite, "Read-write RWName property has CanWrite() == true");
+            Assert.True(p3.CanWrite, "Write-only RnWy property has CanWrite() == true");
+            Assert.False(p3.CanRead, "Write-only RnWy property has CanRead() == false");
         }
     }
 }
