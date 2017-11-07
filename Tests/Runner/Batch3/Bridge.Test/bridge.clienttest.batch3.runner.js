@@ -14313,7 +14313,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestCanSetForReadonlyProperty: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3253, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanSetForReadonlyProperty()", $t.Line = "24", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3253, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCanSetForReadonlyProperty()", $t.Line = "36", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253.TestCanSetForReadonlyProperty();
                 }
             }
