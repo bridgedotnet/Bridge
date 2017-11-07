@@ -118,7 +118,7 @@ namespace Bridge.Translator
 
                 }
 
-                if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
+                if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && baseType.FullName != "System.ValueType" && this.GetObjectCreateMode(baseType) == 0)
                 {
                     TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE, type);
                 }

@@ -98,7 +98,6 @@
             }
 
             if (Bridge.isArray(o)) {
-                var arr = [];
                 for (var i = 0; i < o.length; i++) {
                     var item = o[i];
 
@@ -113,9 +112,8 @@
                         item = item.$clone();
                     }
 
-                    arr[i] = item;
+                    o[i] = item;
                 }
-                o = arr;
             }
 
             if (o && !noclone && o.$clone) {
@@ -9969,7 +9967,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         equals: function (other) {
-            return other.ticks.eq(this.ticks);
+            return Bridge.is(other, System.TimeSpan) ? other.ticks.eq(this.ticks) : false;
         },
 
         equalsT: function (other) {

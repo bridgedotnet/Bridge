@@ -25971,6 +25971,48 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * This test consists in checking whether binding a dynamic array to
+     a class and casting it to its interface taints the resulting array.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222", {
+        statics: {
+            methods: {
+                /**
+                 * Check whether the array is maintained when assigned to the
+                 interface-cast property.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222
+                 * @return  {void}
+                 */
+                TestArrayUnbox: function () {
+                    var array = System.Array.init(["abc", "def"], System.String);
+                    var p1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1(System.Array.type(System.String)))();
+                    p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value = array;
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(array, p1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value), "Array not tainted when assigned to interface's property");
+                }
+            }
+        }
+    });
+
+    /**
+     * An initial property with just the individual entry.
+     *
+     * @abstract
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty", {
+        $kind: "interface"
+    });
+
+    /**
      * This test consists in checking whether a interface cast of a class
      instance allows accessing the class' properties.
      *
@@ -26007,6 +26049,60 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3224.IFoo", {
         $kind: "interface"
+    });
+
+    /**
+     * This test consists in checking whether the append operator works with
+     multi dimensional arrays in Bridge the same way it does in .NET.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226", {
+        statics: {
+            methods: {
+                /**
+                 * Build a simple, static integer two-dimensional array and iterate
+                 throught it incrementing a cell with a previous one's value.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3226
+                 * @return  {void}
+                 */
+                TestAssignAddMultiDimArray: function () {
+                    var $t, $t1, $t2;
+                    var a = System.Array.create(0, null, System.Int32, 3, 3);
+
+                    a.set([0, 0], 1);
+
+                    for (var y = 0; y < (((System.Array.getLength(a, 1) - 1) | 0)); y = (y + 1) | 0) {
+                        for (var x = 0; x < (((System.Array.getLength(a, 0) - 1) | 0)); x = (x + 1) | 0) {
+                            a.set([($t = ((x + 1) | 0)), ($t1 = ((y + 1) | 0))], (a.get([$t, $t1]) + a.get([x, y])) | 0);
+                        }
+                    }
+
+                    var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
+                    var s = "";
+
+                    $t2 = Bridge.getEnumerator(a);
+                    try {
+                        while ($t2.moveNext()) {
+                            var i = $t2.Current;
+                            s = (s || "") + i;
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }
+                    // By the time it was broken, (bridgedotnet/Bridge#3226) the result
+                    // was wrong: 100010011
+                    Bridge.Test.NUnit.Assert.AreEqual("100010001", s, "Result matches '100010001'");
+                }
+            }
+        }
     });
 
     /**
@@ -26407,6 +26503,145 @@ Bridge.$N1391Result =                     r;
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A");
+
+    /**
+     * This test consists in checking whether TimeSpan() supports checking if
+     it equals to different types of input.
+     True, false, null, and objects used to make this fail.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249", {
+        statics: {
+            methods: {
+                /**
+                 * Checks a TimeSpan instance's Equal() method against different
+                 types of values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3249
+                 * @return  {void}
+                 */
+                TestTimeSpanEquals: function () {
+                    // Calling 'new TimeSpan()' directly in the call or setting a
+                    // single common instance does not affect the issue at all.
+                    var ts = new System.TimeSpan();
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(true, System.Boolean, System.Boolean.toString)), "TimeSpan not equal to 'true' constant");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(false, System.Boolean, System.Boolean.toString)), "TimeSpan not equal to 'false' constant");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, null), "TimeSpan not equal to null");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(3.2, System.Double, System.Double.format, System.Double.getHashCode)), "TimeSpan not equal to double constant");
+
+                    // Non-anonymous objects should follow the rule here and no
+                    // additional checks will be made.
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, new $asm.$AnonymousType$19(0)), "TimeSpan not equal to anonymous object");
+
+                    // Try with explicitly typed nullable variables
+                    var nint = 0;
+                    var nint2 = null;
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(nint, System.Int32, System.Nullable.toString, System.Nullable.getHashCode)), "TimeSpan not equal to nullable int with value");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(ts, Bridge.box(nint2, System.Int32, System.Nullable.toString, System.Nullable.getHashCode)), "TimeSpan not equal to nullable int without value (null)");
+                }
+            }
+        }
+    });
+
+    Bridge.define("$AnonymousType$19", $asm, {
+        $kind: "anonymous",
+        ctors: {
+            ctor: function (value) {
+                this.Value = value;
+            }
+        },
+        methods: {
+            equals: function (o) {
+                if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([7550210778, this.Value]);
+                return h;
+            },
+            toJSON: function () {
+                return {
+                    Value : this.Value
+                };
+            }
+        },
+        statics : {
+            methods: {
+                $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":System.Int32,"fg":"Value","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"Value"}]}; }
+            }
+        }
+    });
+
+    /**
+     * This tests consists in just creating an instance of an object with
+     the ObjectLiteral's CreateMode.Constructor setting and ensure it
+     outputs functional JavaScript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251", {
+        statics: {
+            methods: {
+                /**
+                 * Create an instance of the subject struct and ensure it exists and
+                 is not null.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251
+                 * @return  {void}
+                 */
+                TestStructObjectLiteral: function () {
+                    var key = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey.$ctor1(0);
+                    Bridge.Test.NUnit.Assert.NotNull(key, "Instance of CreateMode.Constructor ObjectLiteral class generated and not null.");
+                }
+            }
+        }
+    });
+
+    /**
+     * Subject struct using Constructor create mode of ObjectLiteral
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey", {
+        $kind: "struct",
+        $literal: true,
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey(); }
+            }
+        },
+        ctors: {
+            $ctor1: function (i) {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey; };
+                (function (){
+                }).call($this);
+                return $this;
+            },
+            ctor: function () {
+                var $this = { };
+                $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3251.PlaceKey; };
+                (function (){
+                }).call($this);
+                return $this;
+            }
+        },
+        methods: {
+            $clone: function (to) { return this; }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3253", {
         statics: {
@@ -26886,11 +27121,11 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$19("", "")], $asm.$AnonymousType$19)).skip(1).toList(System.Object);
-                    list.add(new $asm.$AnonymousType$19("Ruth", "Babe"));
-                    list.add(new $asm.$AnonymousType$19("Johnson", "Walter"));
-                    list.add(new $asm.$AnonymousType$19("Cobb", "Ty"));
-                    list.add(new $asm.$AnonymousType$19("Schmidt", "Mike"));
+                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$20("", "")], $asm.$AnonymousType$20)).skip(1).toList(System.Object);
+                    list.add(new $asm.$AnonymousType$20("Ruth", "Babe"));
+                    list.add(new $asm.$AnonymousType$20("Johnson", "Walter"));
+                    list.add(new $asm.$AnonymousType$20("Cobb", "Ty"));
+                    list.add(new $asm.$AnonymousType$20("Schmidt", "Mike"));
 
                     var query = System.Linq.Enumerable.from(list).where($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f1).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f2);
 
@@ -26902,7 +27137,7 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("$AnonymousType$19", $asm, {
+    Bridge.define("$AnonymousType$20", $asm, {
         $kind: "anonymous",
         ctors: {
             ctor: function (lastName, firstName) {
@@ -26912,13 +27147,13 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             equals: function (o) {
-                if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+                if (!Bridge.is(o, $asm.$AnonymousType$20)) {
                     return false;
                 }
                 return Bridge.equals(this.LastName, o.LastName) && Bridge.equals(this.FirstName, o.FirstName);
             },
             getHashCode: function () {
-                var h = Bridge.addHash([7550210778, this.LastName, this.FirstName]);
+                var h = Bridge.addHash([7550208475, this.LastName, this.FirstName]);
                 return h;
             },
             toJSON: function () {
@@ -26942,7 +27177,7 @@ Bridge.$N1391Result =                     r;
             return p.LastName.length === 4;
         },
         f2: function (p) {
-            return new $asm.$AnonymousType$19(p.LastName, p.FirstName);
+            return new $asm.$AnonymousType$20(p.LastName, p.FirstName);
         }
     });
 
@@ -32605,7 +32840,7 @@ Bridge.$N1391Result =                     r;
                                     case 0: {
                                         asyncComplete = Bridge.Test.NUnit.Assert.Async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$20(1), new $asm.$AnonymousType$20(2)], $asm.$AnonymousType$20);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(1), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -32665,7 +32900,7 @@ Bridge.$N1391Result =                     r;
                                     case 0: {
                                         asyncComplete = Bridge.Test.NUnit.Assert.Async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$20(-3), new $asm.$AnonymousType$20(2)], $asm.$AnonymousType$20);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(-3), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -32713,37 +32948,6 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
-
-    Bridge.define("$AnonymousType$20", $asm, {
-    $kind: "anonymous",
-    ctors: {
-        ctor: function (value) {
-            this.Value = value;
-        }
-    },
-    methods: {
-        equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$20)) {
-                return false;
-            }
-            return Bridge.equals(this.Value, o.Value);
-        },
-        getHashCode: function () {
-            var h = Bridge.addHash([7550208475, this.Value]);
-            return h;
-        },
-        toJSON: function () {
-            return {
-                Value : this.Value
-            };
-        }
-    },
-    statics : {
-        methods: {
-            $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":System.Int32,"fg":"Value","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"Value"}]}; }
-        }
-    }
-});
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge907", {
         statics: {
@@ -36499,6 +36703,21 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * An interface implementing a generic spacialization to the interface
+     above
+     *
+     * @abstract
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty
+     * @param   {Function}    [name]
+     */
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty],
+        $kind: "interface"
+    }; });
+
+    /**
      * Class that will implement the interface above.
      *
      * @public
@@ -36949,6 +37168,40 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
+
+    /**
+     * A generic class defining the interface above.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.Property$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3222.IProperty$1(T)],
+        fields: {
+            value: Bridge.getDefaultValue(T)
+        },
+        props: {
+            Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = value;
+                }
+            },
+            Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$Value: {
+                get: function () {
+                    return this.value;
+                },
+                set: function (value) {
+                    this.value = Bridge.cast(Bridge.unbox(value), T);
+                }
+            }
+        },
+        alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],
