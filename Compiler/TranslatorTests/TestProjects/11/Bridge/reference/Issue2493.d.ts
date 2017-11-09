@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Issue2493 {
+declare namespace Issue2493 {
     export interface Operation3 {
         Add(a: number, b: number): number;
     }

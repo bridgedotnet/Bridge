@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module BasicTypes {
+declare namespace BasicTypes {
     export interface BasicTypes {
         BoolValue: boolean;
         IntegerValue: number;

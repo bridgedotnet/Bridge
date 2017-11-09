@@ -1134,14 +1134,14 @@ namespace Bridge.Contract
             return null;
         }
 
-        public static Tuple<string, string> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
+        public static Tuple<string, string, Module> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
         {
             var ns = typeInfo.GetNamespace(emitter, true);
             var fileName = ns ?? typeInfo.GetNamespace(emitter);
             var module = typeInfo.Module;
             string moduleName = null;
 
-            if (module != null)
+            if (module != null && module.Type == ModuleType.UMD)
             {
                 if (!module.PreventModuleName)
                 {
@@ -1151,6 +1151,10 @@ namespace Bridge.Contract
                 if (!String.IsNullOrEmpty(moduleName))
                 {
                     ns = string.IsNullOrWhiteSpace(ns) ? moduleName : (moduleName + "." + ns);
+                }
+                else
+                {
+                    module = null;
                 }
             }
 
@@ -1196,7 +1200,7 @@ namespace Bridge.Contract
                     break;
             }
 
-            return new Tuple<string, string>(ns, fileName);
+            return new Tuple<string, string, Module>(ns, fileName, module);
         }
     }
 }

@@ -363,7 +363,7 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                if (isGlobal || reflectedTypes.Any(t => t == type.Type))
+                if (isGlobal || this.Emitter.TypeInfo.Module != null || reflectedTypes.Any(t => t == type.Type))
                 {
                     continue;
                 }
@@ -389,6 +389,12 @@ namespace Bridge.Translator
                     {
                         tree = tInfo.TypeDeclaration.GetParent<SyntaxTree>();
                     }
+
+                    if (tInfo != null && tInfo.Module != null)
+                    {
+                        continue;
+                    }
+
                     meta = MetadataUtils.ConstructTypeMetadata(reflectedType.GetDefinition(), this.Emitter, false, tree);
                 }
                 else
