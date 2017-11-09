@@ -696,7 +696,7 @@ namespace Bridge.Translator
                     {
                         new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, (ObjectCreateExpression)expression, method), inline).Emit();
                     }
-                    else if (expression is UnaryOperatorExpression)
+                    /*else if (expression is UnaryOperatorExpression)
                     {
                         var unaryExpression = (UnaryOperatorExpression)expression;
                         var resolveOperator = block.Emitter.Resolver.ResolveNode(unaryExpression, block.Emitter);
@@ -710,7 +710,7 @@ namespace Bridge.Translator
                         {
                             new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, expression, method), inline, method).Emit();
                         }
-                    }
+                    }*/
                     else
                     {
                         new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, expression, method), inline, method).Emit();

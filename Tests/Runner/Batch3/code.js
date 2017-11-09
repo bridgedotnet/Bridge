@@ -26698,6 +26698,23 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258", {
+        statics: {
+            methods: {
+                TestUnaryImplicitOperator: function () {
+                    var i = 1;
+                    var a = -(i);
+                    var b = (-(i));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, a);
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, b);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
