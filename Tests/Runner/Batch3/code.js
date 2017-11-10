@@ -26698,21 +26698,55 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here checks whether a '-(i)' expression is correctly output
+     to JavaScript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258", {
         statics: {
             methods: {
+                /**
+                 * Tests different alternations of -i, whether they produce a negative
+                 i value on client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+                 * @return  {void}
+                 */
                 TestUnaryImplicitOperator: function () {
                     var i = 1;
-                    var a = -(i);
-                    var b = (-(i));
+                    var a = -i;
+                    var b = -(i);
+                    var c = (-(i));
 
-                    Bridge.Test.NUnit.Assert.AreEqual(-1, a);
-                    Bridge.Test.NUnit.Assert.AreEqual(-1, b);
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, a, "C# double '-i' evals on JS as '-i'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, b, "C# double '-(i)' evals on JS as '-i'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, c, "C# double '(-(i))' evals on JS as '-i'");
+
+                    var j = 1;
+                    var x = (-j) | 0;
+                    var y = (-(j)) | 0;
+                    var z = (((-(j)) | 0));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, x, "C# integer '-j' evals on JS as '-j'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, y, "C# integer '-(j)' evals on JS as '-j'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, z, "C# integer '(-(j))' evals on JS as '-j'");
                 }
             }
         }
     });
 
+    /**
+     * Simple class implementing the implicit operator
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
