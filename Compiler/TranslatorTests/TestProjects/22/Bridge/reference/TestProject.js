@@ -35,7 +35,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         });
 
-        Bridge.define("m2.TestProject1.Root2.A", {
+        Bridge.define("TestProject1.Root2.A", {
             $scope: m2,
             statics: {
                 methods: {

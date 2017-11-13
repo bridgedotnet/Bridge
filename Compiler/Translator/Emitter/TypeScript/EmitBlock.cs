@@ -49,7 +49,7 @@ namespace Bridge.Translator.TypeScript
             {
                 var other = obj as OutputKey;
 
-                return other == null ? false : this.Key == other.Key && (this.Module == null && other.Module == null || this.Module.Equals(other.Module));
+                return other == null ? false : this.Key == other.Key && (this.Module == null && other.Module == null || this.Module != null && this.Module.Equals(other.Module));
             }
         }
 
@@ -63,6 +63,7 @@ namespace Bridge.Translator.TypeScript
         }
 
         private string ns = null;
+        private OutputKey outputKey = null;
 
         public EmitBlock(IEmitter emitter)
             : base(emitter, null)
@@ -77,16 +78,17 @@ namespace Bridge.Translator.TypeScript
             var fileName = info.Item2;
             var module = info.Item3;
 
-            if (this.ns != null && this.ns != ns)
+            StringBuilder output = null;
+            OutputKey key = new OutputKey(fileName, module, ns);
+
+            if (this.ns != null && (this.ns != ns || this.outputKey != null && !this.outputKey.Equals(key)))
             {
                 this.EndBlock();
                 this.WriteNewLine();
             }
 
             this.ns = ns;
-
-            StringBuilder output = null;
-            OutputKey key = new OutputKey(fileName, module, ns);
+            this.outputKey = key;
 
             if (this.Outputs.ContainsKey(key))
             {
@@ -297,7 +299,7 @@ namespace Bridge.Translator.TypeScript
             }
 
             this.InsertDependencies(this.Emitter.Output);
-            if (this.ns != null)
+            if (this.outputKey != null)
             {
                 this.EndBlock();
             }
