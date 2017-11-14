@@ -26749,6 +26749,30 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264", {
+        statics: {
+            methods: {
+                TestGenericAlias: function () {
+                    var test = new (Bridge3264_Ext.Root.MyTest$1(System.String))();
+                    Bridge.Test.NUnit.Assert.NotNull(test);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265", {
+        statics: {
+            methods: {
+                TestGenericAlias: function () {
+                    var test = {};
+                    test.val = "Hello world!";
+                    var val = test.val;
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -34871,6 +34895,24 @@ Bridge.$N1391Result =                     r;
             methods: {
                 Pass: function () {
                     return 9;
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge3264_Ext.Root");
+
+    Bridge.define("Bridge3264_Ext.Root.MyTest$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge3265_Ext.Root");
+
+    Bridge.define("Bridge3265_Ext.Root.MyTest$1", {
+        statics: {
+            methods: {
+                getDefaultValue: function () {
+                    return {};
                 }
             }
         }
