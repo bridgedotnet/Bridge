@@ -25909,6 +25909,7 @@ Bridge.$N1391Result =                     r;
             TestUsingStatic: function () {
                 var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
                 Bridge.Test.NUnit.Assert.NotNull(bunny);
+                Bridge.Test.NUnit.Assert.AreEqual(1, IssueBridge3197_1.phaser.Phaser.Physics.ARCADE);
             }
         }
     });
@@ -35048,6 +35049,23 @@ Bridge.$N1391Result =                     r;
             methods: {
                 fromImage: function (url) {
                     return new IssueBridge3197.pixi_js.PIXI.Sprite();
+                }
+            }
+        }
+    });
+
+    Bridge.define("IssueBridge3197_1.phaser");
+
+    Bridge.define("IssueBridge3197_1.phaser.Phaser");
+
+    Bridge.define("IssueBridge3197_1.phaser.Phaser.Physics", {
+        statics: {
+            props: {
+                ARCADE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.ARCADE = 1;
                 }
             }
         }
