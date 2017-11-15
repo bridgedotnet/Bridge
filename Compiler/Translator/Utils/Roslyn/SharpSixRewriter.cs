@@ -250,7 +250,7 @@ namespace Bridge.Translator
             }
             else
             {
-                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(ta => SyntaxHelper.IsAnonymous(ta) || ta.Kind == SymbolKind.TypeParameter && (ta as ITypeParameterSymbol)?.ContainingSymbol == method))
                 {
                     var expr = node.Expression;
                     var ma = expr as MemberAccessExpressionSyntax;

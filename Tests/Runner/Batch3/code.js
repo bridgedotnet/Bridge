@@ -26749,6 +26749,22 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269", {
+        statics: {
+            methods: {
+                RegisterFactory: function (T, factory, registry) {
+                    return Bridge.Reflection.getTypeFullName(T);
+                },
+                TestTypeParameterInference: function () {
+                    var registry = {};
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.RegisterFactory(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory(), registry));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -36844,6 +36860,14 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal]
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1", function (P) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],
         methods: {
@@ -37283,6 +37307,34 @@ Bridge.$N1391Result =                     r;
         },
         alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy)],
+        props: {
+            FactoryName: {
+                get: function () {
+                    return "Guinea Pig Factory";
+                }
+            }
+        },
+        alias: [
+            "FactoryName", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$FactoryName",
+            "Builder", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$Builder"
+        ],
+        methods: {
+            Builder: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory.f1;
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory, {
+        f1: function () {
+            return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy();
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],
