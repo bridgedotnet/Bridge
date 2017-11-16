@@ -976,19 +976,16 @@ namespace Bridge.Contract
             {
                 return "any[]";
             }
-
+            
             if (type.IsKnownType(KnownTypeCode.Byte) ||
                 type.IsKnownType(KnownTypeCode.Char) ||
-                type.IsKnownType(KnownTypeCode.Decimal) ||
                 type.IsKnownType(KnownTypeCode.Double) ||
                 type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
-                type.IsKnownType(KnownTypeCode.Int64) ||
                 type.IsKnownType(KnownTypeCode.SByte) ||
                 type.IsKnownType(KnownTypeCode.Single) ||
                 type.IsKnownType(KnownTypeCode.UInt16) ||
-                type.IsKnownType(KnownTypeCode.UInt32) ||
-                type.IsKnownType(KnownTypeCode.UInt64))
+                type.IsKnownType(KnownTypeCode.UInt32))
             {
                 return "number";
             }
@@ -1115,18 +1112,15 @@ namespace Bridge.Contract
                     case KnownTypeCode.String:
                         return "string";
 
-                    case KnownTypeCode.Decimal:
                     case KnownTypeCode.Double:
                     case KnownTypeCode.Byte:
                     case KnownTypeCode.Char:
                     case KnownTypeCode.Int16:
                     case KnownTypeCode.Int32:
-                    case KnownTypeCode.Int64:
                     case KnownTypeCode.SByte:
                     case KnownTypeCode.Single:
                     case KnownTypeCode.UInt16:
                     case KnownTypeCode.UInt32:
-                    case KnownTypeCode.UInt64:
                         return "number";
                 }
             }
