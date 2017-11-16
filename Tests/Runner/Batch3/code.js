@@ -26749,25 +26749,58 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
 
+    /**
+     * This test consists in checking whether Bridge can handle type aliases
+     for types implementing generic template support (C# generics).
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264", {
         statics: {
             methods: {
+                /**
+                 * Just check whether bridge could output the type instantiation.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @return  {void}
+                 */
                 TestGenericAlias: function () {
                     var test = new (Bridge3264_Ext.Root.MyTest$1(System.String))();
-                    Bridge.Test.NUnit.Assert.NotNull(test);
+                    Bridge.Test.NUnit.Assert.NotNull(test, "Instantiate type aliased to a generic type.");
                 }
             }
         }
     });
 
+    /**
+     * The test here consists in cheching whether member templates for generic
+     types are considered during Bridge translation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265", {
         statics: {
             methods: {
+                /**
+                 * Creates an instance of the aliased class and checks if the value
+                 set can be fetched afterwards from client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @return  {void}
+                 */
                 TestGenericAlias: function () {
                     var test = {};
                     test.val = "Hello world!";
                     var val = test.val;
-                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val);
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val, "Generics by alias, member value set, is correctly fetched.");
                 }
             }
         }
@@ -34900,14 +34933,43 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge3264_Ext */
+
+    /**
+     * Defines a "pseudo-external" type to be addressed by the corresponding
+     test via one alias specializing of it.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3264_Ext.Root
+     */
     Bridge.define("Bridge3264_Ext.Root");
 
     Bridge.define("Bridge3264_Ext.Root.MyTest$1", function (T) { return {
 
     }; });
 
+    /** @namespace Bridge3265_Ext */
+
+    /**
+     * This class denotes an external class to the application, from an
+     external namespace.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3265_Ext.Root
+     */
     Bridge.define("Bridge3265_Ext.Root");
 
+    /**
+     * Class with generics, defining templates for its members.
+     *
+     * @public
+     * @class Bridge3265_Ext.Root.MyTest$1
+     * @param   {Function}    [name]
+     */
     Bridge.define("Bridge3265_Ext.Root.MyTest$1", {
         statics: {
             methods: {
