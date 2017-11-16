@@ -26698,6 +26698,114 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here checks whether a '-(i)' expression is correctly output
+     to JavaScript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258", {
+        statics: {
+            methods: {
+                /**
+                 * Tests different alternations of -i, whether they produce a negative
+                 i value on client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258
+                 * @return  {void}
+                 */
+                TestUnaryImplicitOperator: function () {
+                    var i = 1;
+                    var a = -i;
+                    var b = -(i);
+                    var c = (-(i));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, a, "C# double '-i' evals on JS as '-i'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, b, "C# double '-(i)' evals on JS as '-i'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, c, "C# double '(-(i))' evals on JS as '-i'");
+
+                    var j = 1;
+                    var x = (-j) | 0;
+                    var y = (-(j)) | 0;
+                    var z = (((-(j)) | 0));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, x, "C# integer '-j' evals on JS as '-j'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, y, "C# integer '-(j)' evals on JS as '-j'");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, z, "C# integer '(-(j))' evals on JS as '-j'");
+                }
+            }
+        }
+    });
+
+    /**
+     * Simple class implementing the implicit operator
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
+
+    /**
+     * This test consists in checking whether Bridge can handle type aliases
+     for types implementing generic template support (C# generics).
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264", {
+        statics: {
+            methods: {
+                /**
+                 * Just check whether bridge could output the type instantiation.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = new (Bridge3264_Ext.Root.MyTest$1(System.String))();
+                    Bridge.Test.NUnit.Assert.NotNull(test, "Instantiate type aliased to a generic type.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in cheching whether member templates for generic
+     types are considered during Bridge translation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265", {
+        statics: {
+            methods: {
+                /**
+                 * Creates an instance of the aliased class and checks if the value
+                 set can be fetched afterwards from client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = {};
+                    test.val = "Hello world!";
+                    var val = test.val;
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val, "Generics by alias, member value set, is correctly fetched.");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -34820,6 +34928,53 @@ Bridge.$N1391Result =                     r;
             methods: {
                 Pass: function () {
                     return 9;
+                }
+            }
+        }
+    });
+
+    /** @namespace Bridge3264_Ext */
+
+    /**
+     * Defines a "pseudo-external" type to be addressed by the corresponding
+     test via one alias specializing of it.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3264_Ext.Root
+     */
+    Bridge.define("Bridge3264_Ext.Root");
+
+    Bridge.define("Bridge3264_Ext.Root.MyTest$1", function (T) { return {
+
+    }; });
+
+    /** @namespace Bridge3265_Ext */
+
+    /**
+     * This class denotes an external class to the application, from an
+     external namespace.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3265_Ext.Root
+     */
+    Bridge.define("Bridge3265_Ext.Root");
+
+    /**
+     * Class with generics, defining templates for its members.
+     *
+     * @public
+     * @class Bridge3265_Ext.Root.MyTest$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge3265_Ext.Root.MyTest$1", {
+        statics: {
+            methods: {
+                getDefaultValue: function () {
+                    return {};
                 }
             }
         }
