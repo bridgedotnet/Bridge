@@ -366,7 +366,7 @@ namespace Bridge.Translator.TypeScript
 
                         nestedType.Module = typeInfo.Module;
                         nestedType.FileName = typeInfo.FileName;
-                        nestedType.Dependencies = nestedType.Dependencies;
+                        nestedType.Dependencies = typeInfo.Dependencies;
                         typeInfo = nestedType;
                     }
                     else

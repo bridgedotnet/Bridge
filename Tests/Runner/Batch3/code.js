@@ -26749,6 +26749,36 @@ Bridge.$N1391Result =                     r;
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273", {
+        statics: {
+            methods: {
+                TestAssemblyGetCustomAttributes: function () {
+                    var $t;
+                    var assemblies = System.AppDomain.getAssemblies();
+                    $t = Bridge.getEnumerator(assemblies);
+                    try {
+                        while ($t.moveNext()) {
+                            var assembly = $t.Current;
+                            var myAssemblyAttr = assembly.getCustomAttributes(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute, false);
+                            Bridge.Test.NUnit.Assert.AreEqual(0, myAssemblyAttr.length);
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssembly2Attribute", {
+        inherits: [System.Attribute]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute", {
+        inherits: [System.Attribute]
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null

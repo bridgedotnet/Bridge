@@ -3101,13 +3101,13 @@
         },
 
         getCustomAttributes: function (attributeType) {
-            if (attributeType && !Bridge.isBoolean(attributeType)) {
+            if (this.attr && attributeType && !Bridge.isBoolean(attributeType)) {
                 return this.attr.filter(function (a) {
                     return Bridge.is(a, attributeType);
                 });
             }
 
-            return this.attr;
+            return this.attr || [];
         }
     });
 
