@@ -750,12 +750,15 @@ namespace Bridge.Contract
 
             if (currentTypeInfo != null && module != null)
             {
-                if (!module.PreventModuleName || type.TypeInfo != null)
+                if(emitter.Tag != "TS" || currentTypeInfo.Module == null || !currentTypeInfo.Module.Equals(module))
                 {
-                    moduleName = module.ExportAsNamespace;
-                }
+                    if (!module.PreventModuleName || type.TypeInfo != null)
+                    {
+                        moduleName = module.ExportAsNamespace;
+                    }
 
-                EnsureDependencies(type, emitter, currentTypeInfo, module);
+                    EnsureDependencies(type, emitter, currentTypeInfo, module);
+                }                
             }
 
             return GetCustomName(name, type, excludeNs, isNested, ref isCustomName, moduleName);

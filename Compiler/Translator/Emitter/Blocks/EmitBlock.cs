@@ -243,6 +243,7 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
+            this.Emitter.Tag = "JS";
             this.Emitter.Writers = new Stack<IWriter>();
             this.Emitter.Outputs = new EmitterOutputs();
             var metas = new Dictionary<IType, JObject>();

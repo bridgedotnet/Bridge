@@ -222,6 +222,7 @@ namespace Bridge.Translator.TypeScript
 
         protected override void DoEmit()
         {
+            this.Emitter.Tag = "TS";
             this.Emitter.Writers = new Stack<IWriter>();
             this.Outputs = new Dictionary<OutputKey, StringBuilder>();
 
