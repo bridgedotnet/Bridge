@@ -450,6 +450,7 @@ namespace Bridge.Translator
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            var isAlias = semanticModel.GetAliasInfo(node) != null;
 
             var parent = node.Parent;
             while (parent != null && !(parent is TypeDeclarationSyntax))
@@ -463,7 +464,8 @@ namespace Bridge.Translator
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }
 
-            bool needHandle = !node.IsVar &&
+            bool needHandle = !isAlias &&
+                              !node.IsVar &&
                               symbol is ITypeSymbol &&
                               symbol.ContainingType != null &&
                               thisType != null &&

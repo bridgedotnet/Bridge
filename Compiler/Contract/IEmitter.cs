@@ -8,6 +8,12 @@ namespace Bridge.Contract
 {
     public interface IEmitter : ILog, IAstVisitor
     {
+        string Tag
+        {
+            get;
+            set;
+        }
+
         IAssemblyInfo AssemblyInfo
         {
             get;

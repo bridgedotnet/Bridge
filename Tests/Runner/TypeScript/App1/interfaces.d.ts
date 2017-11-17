@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Interfaces {
+declare namespace Interfaces {
     export interface Interface3 extends Interfaces.Interface2 {
         Interfaces$Interface3$Method5(i: Interfaces.Interface3): Interfaces.Interface2;
         Method5(i: Interfaces.Interface3): Interfaces.Interface2;

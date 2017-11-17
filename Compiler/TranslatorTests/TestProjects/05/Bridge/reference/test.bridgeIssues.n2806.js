@@ -22,6 +22,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         var Module2806 = { };
         Bridge.define("Test.BridgeIssues.N2806.N2806", {
             $scope: Module2806,
+            statics: {
+                methods: {
+                    $metadata : function () { return {"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"DoSomething","t":8,"sn":"DoSomething","rt":System.Void}]}; }
+                }
+            },
             methods: {
                 DoSomething: function () { }
             }

@@ -243,6 +243,7 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
+            this.Emitter.Tag = "JS";
             this.Emitter.Writers = new Stack<IWriter>();
             this.Emitter.Outputs = new EmitterOutputs();
             var metas = new Dictionary<IType, JObject>();
@@ -363,7 +364,7 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                if (isGlobal || reflectedTypes.Any(t => t == type.Type))
+                if (isGlobal || this.Emitter.TypeInfo.Module != null || reflectedTypes.Any(t => t == type.Type))
                 {
                     continue;
                 }
@@ -389,6 +390,12 @@ namespace Bridge.Translator
                     {
                         tree = tInfo.TypeDeclaration.GetParent<SyntaxTree>();
                     }
+
+                    if (tInfo != null && tInfo.Module != null)
+                    {
+                        continue;
+                    }
+
                     meta = MetadataUtils.ConstructTypeMetadata(reflectedType.GetDefinition(), this.Emitter, false, tree);
                 }
                 else
