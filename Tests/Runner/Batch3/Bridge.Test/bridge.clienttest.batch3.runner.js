@@ -14417,7 +14417,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestTypeParameterInference: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3269, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTypeParameterInference()", $t.Line = "50", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3269, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTypeParameterInference()", $t.Line = "99", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.TestTypeParameterInference();
                 }
             }

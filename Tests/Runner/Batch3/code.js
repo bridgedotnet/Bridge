@@ -26824,20 +26824,73 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists on checking whether type inference for generic
+     classes works when feeding dynamic parameters to the class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269", {
         statics: {
             methods: {
+                /**
+                 * For the elaborate test, this will follow several levels and
+                 concepts of inheritance.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}                                                       T           
+                 * @param   {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1}    factory     
+                 * @param   {object}                                                         registry
+                 * @return  {string}
+                 */
                 RegisterFactory: function (T, factory, registry) {
                     return Bridge.Reflection.getTypeFullName(T);
                 },
+                /**
+                 * Minimal test case required to reproduce the issue (this is a test
+                 isolated from the rest)
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}    T         
+                 * @param   {T}           simple
+                 * @return  {boolean}
+                 */
+                Simplistic: function (T, simple) {
+                    return true;
+                },
+                /**
+                 * Checks whether both the simplistic and elaborate implementations works.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @return  {void}
+                 */
                 TestTypeParameterInference: function () {
                     var registry = {};
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.RegisterFactory(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory(), registry));
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.RegisterFactory(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory(), registry), "Elaborate dynamic-typed static generic emits correctly.");
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Simplistic(System.Object, (1)), "Simple dynamic-typed static generic emits correctly.");
+
                 }
             }
         }
     });
 
+    /**
+     * A base class from which the parameter will be based.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
@@ -37054,10 +37107,26 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
 
+    /**
+     * Generic type to base the parameter class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy
+     * @augments Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal]
     });
 
+    /**
+     * Base interface that will be both the static method parameter and
+     the actual passed parameter class' base.
+     *
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     * @param   {Function}    [name]
+     */
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1", function (P) { return {
         $kind: "interface"
     }; });
@@ -37502,9 +37571,35 @@ Bridge.$N1391Result =                     r;
         alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
     }; });
 
+    /** @namespace System */
+
+    /**
+     * @memberof System
+     * @callback System.Func
+     * @return  {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy}
+     */
+
+    /**
+     * Parameter class, that implements the base interface above
+     specifying it as the generic type 'Cavy'.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy)],
         props: {
+            /**
+             * Just a string to check value against in the assertion.
+             *
+             * @instance
+             * @public
+             * @readonly
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @function FactoryName
+             * @type string
+             */
             FactoryName: {
                 get: function () {
                     return "Guinea Pig Factory";
@@ -37516,6 +37611,15 @@ Bridge.$N1391Result =                     r;
             "Builder", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$Builder"
         ],
         methods: {
+            /**
+             * Just to implement the interface's
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @return  {System.Func}
+             */
             Builder: function () {
                 return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory.f1;
             }
