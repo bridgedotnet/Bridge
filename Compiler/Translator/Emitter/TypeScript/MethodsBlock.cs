@@ -44,11 +44,17 @@ namespace Bridge.Translator.TypeScript
         protected virtual void EmitMethods(Dictionary<string, List<MethodDeclaration>> methods, Dictionary<string, List<EntityDeclaration>> properties, Dictionary<OperatorType, List<OperatorDeclaration>> operators)
         {
             var names = new List<string>(properties.Keys);
+            var fields = this.StaticBlock ? this.TypeInfo.StaticConfig.Fields : this.TypeInfo.InstanceConfig.Fields;
 
             foreach (var name in names)
             {
-                var props = properties[name];
+                if (fields.Any(f => f.Name == name))
+                {
+                    continue;
+                }
 
+                var props = properties[name];
+                
                 foreach (var prop in props)
                 {
                     if (prop is PropertyDeclaration)
