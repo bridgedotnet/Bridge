@@ -25904,17 +25904,34 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
+
+    /**
+     * This tests consists in ensuring static references from 'using static'
+     are handled correctly by Bridge to nested references.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197", {
         methods: {
+            /**
+             * Will check whether an instance of an external, nested, class,
+             and also static properties' access works.
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @return  {void}
+             */
             TestUsingStatic: function () {
                 var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
-                Bridge.Test.NUnit.Assert.NotNull(bunny);
-                Bridge.Test.NUnit.Assert.AreEqual(1, IssueBridge3197_1.phaser.Phaser.Physics.ARCADE);
+                Bridge.Test.NUnit.Assert.NotNull(bunny, "Returned instance from external and nested class is not null.");
+                Bridge.Test.NUnit.Assert.AreEqual(1, IssueBridge3197_1.phaser.Phaser.Physics.ARCADE, "Using static reference to static double is valid.");
             }
         }
     });
-
-    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
      * This issue involves getting whether the intersection results in an
@@ -35144,13 +35161,43 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace IssueBridge3197 */
+
+    /**
+     * Test, static and external (other namespace) class with nested subclasses.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js
+     */
     Bridge.define("IssueBridge3197.pixi_js");
 
+    /**
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI");
 
+    /**
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI.Sprite
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI.Sprite", {
         statics: {
             methods: {
+                /**
+                 * Stub method
+                 *
+                 * @static
+                 * @public
+                 * @this IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @memberof IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @param   {string}                                 url
+                 * @return  {IssueBridge3197.pixi_js.PIXI.Sprite}
+                 */
                 fromImage: function (url) {
                     return new IssueBridge3197.pixi_js.PIXI.Sprite();
                 }
@@ -35158,13 +35205,38 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace IssueBridge3197_1 */
+
+    /**
+     * Remote, static, external and nested property to check against access.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197_1.phaser
+     */
     Bridge.define("IssueBridge3197_1.phaser");
 
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser
+     */
     Bridge.define("IssueBridge3197_1.phaser.Phaser");
 
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser.Physics
+     */
     Bridge.define("IssueBridge3197_1.phaser.Phaser.Physics", {
         statics: {
             props: {
+                /**
+                 * @static
+                 * @public
+                 * @memberof IssueBridge3197_1.phaser.Phaser.Physics
+                 * @function ARCADE
+                 * @type number
+                 */
                 ARCADE: 0
             },
             ctors: {
