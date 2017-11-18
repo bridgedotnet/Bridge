@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Classes {
+declare namespace Classes {
     export interface Animal {
         GetName(): string;
         Move(): number;

@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Functions {
+declare namespace Functions {
     export interface Parameters {
         GetSomething(i?: number): number;
         Join(numbers: number[]): string;

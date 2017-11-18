@@ -210,7 +210,7 @@ notifications:
   - provider: Slack
     auth_token:
       secure: 2g1as+FdSYJM0dzLEBkosu66Q/9U8ncGWUd7IcAfWXViqG9X7eKMkOt3ai4JRcb+9k+2BW8Aewdt6tp3dOD27SB+rJZzoNeUjA1SCk8nbaM=
-    channel: 'bridge-github'
+    channel: '#bridge-github'
     on_build_status_changed: true
     on_build_success: true
     on_build_failure: true

@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module IntegrationTest08 {
+declare namespace IntegrationTest08 {
     export interface Class1 {
         GetName(): string;
     }

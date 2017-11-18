@@ -115,6 +115,10 @@ namespace Bridge.Contract
 
         protected bool Equals(Module other)
         {
+            if(other == null)
+            {
+                return false;
+            }
             return string.Equals(this.Name, other.Name) && this.Type == other.Type;
         }
 
