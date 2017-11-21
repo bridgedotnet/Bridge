@@ -103,7 +103,7 @@ namespace Bridge.Translator.Tests
 #else
         [TestCase("19", false, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
 #endif
-        [TestCase("20", false, true, TestName = "IntegrationTest 20 - Auto property rule")]
+        [TestCase("20", false, true, TestName = "IntegrationTest 20 - Bridge.json autoProperty:plain")]
         [TestCase("22", false, true, TestName = "IntegrationTest 22 - Global Methods with nested classes")]
         public void Test(string folder, bool isToBuild, bool useSpecialFileCompare, string markedContentFiles = null)
         {
