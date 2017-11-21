@@ -14365,7 +14365,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestAssemblyGetCustomAttributes: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3273, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAssemblyGetCustomAttributes()", $t.Line = "20", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3273, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAssemblyGetCustomAttributes()", $t.Line = "34", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.TestAssemblyGetCustomAttributes();
                 }
             }
