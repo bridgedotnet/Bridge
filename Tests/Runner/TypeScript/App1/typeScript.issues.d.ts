@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module TypeScript.Issues {
+declare namespace TypeScript.Issues {
     export interface N1640 {
     }
     export interface N1640Func extends Function {

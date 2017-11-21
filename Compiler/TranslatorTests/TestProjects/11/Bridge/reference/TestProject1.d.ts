@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module TestProject1 {
+declare namespace TestProject1 {
     export interface TestClassA {
         Value1: number;
     }

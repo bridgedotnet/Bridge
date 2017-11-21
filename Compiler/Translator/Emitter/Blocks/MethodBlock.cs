@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ICSharpCode.NRefactory.Semantics;
+using Newtonsoft.Json;
 
 namespace Bridge.Translator
 {
@@ -140,6 +141,11 @@ namespace Bridge.Translator
                 }
             }
 
+            if (this.StaticBlock)
+            {
+                this.EmitMetadata();
+            }            
+
             if (globalTarget == null)
             {
                 if (checkPos == this.Emitter.Output.Length)
@@ -154,6 +160,26 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.EndBlock();
                 }
+            }
+        }
+
+
+        protected virtual void EmitMetadata()
+        {
+            if (this.TypeInfo.Module == null || !this.Emitter.ReflectableTypes.Any(t => t == this.Emitter.TypeInfo.Type))
+            {
+                return;
+            }
+
+            var meta = MetadataUtils.ConstructTypeMetadata(this.TypeInfo.Type.GetDefinition(), this.Emitter, false, this.TypeInfo.TypeDeclaration.GetParent<SyntaxTree>());
+
+            if (meta != null)
+            {
+                this.EnsureComma();
+                this.Write("$metadata : function () { return ");
+                this.Write(meta.ToString(Formatting.None));
+                this.Write("; }");
+                this.Emitter.Comma = true;
             }
         }
 

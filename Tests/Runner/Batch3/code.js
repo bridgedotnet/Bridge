@@ -25904,16 +25904,34 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
+
+    /**
+     * This tests consists in ensuring static references from 'using static'
+     are handled correctly by Bridge to nested references.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197", {
         methods: {
+            /**
+             * Will check whether an instance of an external, nested, class,
+             and also static properties' access works.
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @return  {void}
+             */
             TestUsingStatic: function () {
                 var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
-                Bridge.Test.NUnit.Assert.NotNull(bunny);
+                Bridge.Test.NUnit.Assert.NotNull(bunny, "Returned instance from external and nested class is not null.");
+                Bridge.Test.NUnit.Assert.AreEqual(1, IssueBridge3197_1.phaser.Phaser.Physics.ARCADE, "Using static reference to static double is valid.");
             }
         }
     });
-
-    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
      * This issue involves getting whether the intersection results in an
@@ -26748,6 +26766,132 @@ Bridge.$N1391Result =                     r;
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
+
+    /**
+     * This test consists in checking whether Bridge can handle type aliases
+     for types implementing generic template support (C# generics).
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264", {
+        statics: {
+            methods: {
+                /**
+                 * Just check whether bridge could output the type instantiation.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = new (Bridge3264_Ext.Root.MyTest$1(System.String))();
+                    Bridge.Test.NUnit.Assert.NotNull(test, "Instantiate type aliased to a generic type.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in cheching whether member templates for generic
+     types are considered during Bridge translation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265", {
+        statics: {
+            methods: {
+                /**
+                 * Creates an instance of the aliased class and checks if the value
+                 set can be fetched afterwards from client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = {};
+                    test.val = "Hello world!";
+                    var val = test.val;
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val, "Generics by alias, member value set, is correctly fetched.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists on checking whether type inference for generic
+     classes works when feeding dynamic parameters to the class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269", {
+        statics: {
+            methods: {
+                /**
+                 * For the elaborate test, this will follow several levels and
+                 concepts of inheritance.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}                                                       T           
+                 * @param   {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1}    factory     
+                 * @param   {object}                                                         registry
+                 * @return  {string}
+                 */
+                RegisterFactory: function (T, factory, registry) {
+                    return Bridge.Reflection.getTypeFullName(T);
+                },
+                /**
+                 * Minimal test case required to reproduce the issue (this is a test
+                 isolated from the rest)
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}    T         
+                 * @param   {T}           simple
+                 * @return  {boolean}
+                 */
+                Simplistic: function (T, simple) {
+                    return true;
+                },
+                /**
+                 * Checks whether both the simplistic and elaborate implementations works.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @return  {void}
+                 */
+                TestTypeParameterInference: function () {
+                    var registry = {};
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.RegisterFactory(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory(), registry), "Elaborate dynamic-typed static generic emits correctly.");
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Simplistic(System.Object, (1)), "Simple dynamic-typed static generic emits correctly.");
+
+                }
+            }
+        }
+    });
+
+    /**
+     * A base class from which the parameter will be based.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal");
 
     /**
      * The test here consists in loading current domain's assemblies and
@@ -34951,6 +35095,53 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge3264_Ext */
+
+    /**
+     * Defines a "pseudo-external" type to be addressed by the corresponding
+     test via one alias specializing of it.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3264_Ext.Root
+     */
+    Bridge.define("Bridge3264_Ext.Root");
+
+    Bridge.define("Bridge3264_Ext.Root.MyTest$1", function (T) { return {
+
+    }; });
+
+    /** @namespace Bridge3265_Ext */
+
+    /**
+     * This class denotes an external class to the application, from an
+     external namespace.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3265_Ext.Root
+     */
+    Bridge.define("Bridge3265_Ext.Root");
+
+    /**
+     * Class with generics, defining templates for its members.
+     *
+     * @public
+     * @class Bridge3265_Ext.Root.MyTest$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge3265_Ext.Root.MyTest$1", {
+        statics: {
+            methods: {
+                getDefaultValue: function () {
+                    return {};
+                }
+            }
+        }
+    });
+
     Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.ApiResponse$1", function (T) { return {
         props: {
             ResultIfSuccessful: Bridge.getDefaultValue(T)
@@ -35114,15 +35305,87 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace IssueBridge3197 */
+
+    /**
+     * Test, static and external (other namespace) class with nested subclasses.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js
+     */
     Bridge.define("IssueBridge3197.pixi_js");
 
+    /**
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI");
 
+    /**
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI.Sprite
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI.Sprite", {
         statics: {
             methods: {
+                /**
+                 * Stub method
+                 *
+                 * @static
+                 * @public
+                 * @this IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @memberof IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @param   {string}                                 url
+                 * @return  {IssueBridge3197.pixi_js.PIXI.Sprite}
+                 */
                 fromImage: function (url) {
                     return new IssueBridge3197.pixi_js.PIXI.Sprite();
+                }
+            }
+        }
+    });
+
+    /** @namespace IssueBridge3197_1 */
+
+    /**
+     * Remote, static, external and nested property to check against access.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197_1.phaser
+     */
+    Bridge.define("IssueBridge3197_1.phaser");
+
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser
+     */
+    Bridge.define("IssueBridge3197_1.phaser.Phaser");
+
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser.Physics
+     */
+    Bridge.define("IssueBridge3197_1.phaser.Phaser.Physics", {
+        statics: {
+            props: {
+                /**
+                 * @static
+                 * @public
+                 * @memberof IssueBridge3197_1.phaser.Phaser.Physics
+                 * @function ARCADE
+                 * @type number
+                 */
+                ARCADE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.ARCADE = 1;
                 }
             }
         }
@@ -36919,6 +37182,30 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
 
+    /**
+     * Generic type to base the parameter class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy
+     * @augments Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal]
+    });
+
+    /**
+     * Base interface that will be both the static method parameter and
+     the actual passed parameter class' base.
+     *
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     * @param   {Function}    [name]
+     */
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1", function (P) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],
         methods: {
@@ -37358,6 +37645,69 @@ Bridge.$N1391Result =                     r;
         },
         alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
     }; });
+
+    /** @namespace System */
+
+    /**
+     * @memberof System
+     * @callback System.Func
+     * @return  {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy}
+     */
+
+    /**
+     * Parameter class, that implements the base interface above
+     specifying it as the generic type 'Cavy'.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy)],
+        props: {
+            /**
+             * Just a string to check value against in the assertion.
+             *
+             * @instance
+             * @public
+             * @readonly
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @function FactoryName
+             * @type string
+             */
+            FactoryName: {
+                get: function () {
+                    return "Guinea Pig Factory";
+                }
+            }
+        },
+        alias: [
+            "FactoryName", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$FactoryName",
+            "Builder", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$Builder"
+        ],
+        methods: {
+            /**
+             * Just to implement the interface's
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @return  {System.Func}
+             */
+            Builder: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory.f1;
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory, {
+        f1: function () {
+            return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy();
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],

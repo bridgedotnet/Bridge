@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Misc.A {
+declare namespace Misc.A {
     export interface Class1 {
         GetInt(i: number): number;
     }

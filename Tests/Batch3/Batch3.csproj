@@ -665,12 +665,15 @@
     <Compile Include="BridgeIssues\3200\N3235.cs" />
     <Compile Include="BridgeIssues\3200\N3240.cs" />
     <Compile Include="BridgeIssues\3200\N3242.cs" />
-    <Compile Include="BridgeIssues\3200\N3273.cs" />
-    <Compile Include="BridgeIssues\3200\N3258.cs" />
-    <Compile Include="BridgeIssues\3200\N3253.cs" />
     <Compile Include="BridgeIssues\3200\N3244.cs" />
     <Compile Include="BridgeIssues\3200\N3249.cs" />
     <Compile Include="BridgeIssues\3200\N3251.cs" />
+    <Compile Include="BridgeIssues\3200\N3253.cs" />
+    <Compile Include="BridgeIssues\3200\N3258.cs" />
+    <Compile Include="BridgeIssues\3200\N3264.cs" />
+    <Compile Include="BridgeIssues\3200\N3265.cs" />
+    <Compile Include="BridgeIssues\3200\N3269.cs" />
+    <Compile Include="BridgeIssues\3200\N3273.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
