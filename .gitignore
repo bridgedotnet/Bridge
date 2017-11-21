@@ -51,12 +51,6 @@ x64/
 *.vssscc
 .builds
 
-# NUnit test cases requires the log files
-*.log
-!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/*.log
-!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/reports/*.log
-
-
 # Visual C++ cache files
 ipch/
 *.aps
@@ -200,3 +194,8 @@ Tests/**/App_Readme/
 /Bridge.Sandbox.sln
 /.build/packages/*.nupkg
 /.build/packages/*.exe
+
+# NUnit test cases requires all the reference files
+*.log
+!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/*
+!Compiler/TranslatorTests/TestProjects/*/Bridge/reference/reports/*

@@ -250,7 +250,7 @@ namespace Bridge.Translator
             }
             else
             {
-                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(ta => SyntaxHelper.IsAnonymous(ta) || ta.Kind == SymbolKind.TypeParameter && (ta as ITypeParameterSymbol)?.ContainingSymbol == method))
                 {
                     var expr = node.Expression;
                     var ma = expr as MemberAccessExpressionSyntax;
@@ -450,6 +450,7 @@ namespace Bridge.Translator
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            var isAlias = semanticModel.GetAliasInfo(node) != null;
 
             var parent = node.Parent;
             while (parent != null && !(parent is TypeDeclarationSyntax))
@@ -463,7 +464,8 @@ namespace Bridge.Translator
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }
 
-            bool needHandle = !node.IsVar &&
+            bool needHandle = !isAlias &&
+                              !node.IsVar &&
                               symbol is ITypeSymbol &&
                               symbol.ContainingType != null &&
                               thisType != null &&
@@ -544,15 +546,15 @@ namespace Bridge.Translator
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }
 
+            var usingType = symbol as INamedTypeSymbol;
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
 
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol || symbol is INamedTypeSymbol))
+            if (node.Expression is IdentifierNameSyntax && symbol != null && (symbol.IsStatic || usingType != null) && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol || symbol is INamedTypeSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
-            var usingType = symbol as INamedTypeSymbol;
             if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol || symbol is INamedTypeSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);

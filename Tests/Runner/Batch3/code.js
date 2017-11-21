@@ -25904,16 +25904,34 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
+
+    /**
+     * This tests consists in ensuring static references from 'using static'
+     are handled correctly by Bridge to nested references.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197", {
         methods: {
+            /**
+             * Will check whether an instance of an external, nested, class,
+             and also static properties' access works.
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3197
+             * @return  {void}
+             */
             TestUsingStatic: function () {
                 var bunny = IssueBridge3197.pixi_js.PIXI.Sprite.fromImage("bunny.png");
-                Bridge.Test.NUnit.Assert.NotNull(bunny);
+                Bridge.Test.NUnit.Assert.NotNull(bunny, "Returned instance from external and nested class is not null.");
+                Bridge.Test.NUnit.Assert.AreEqual(1, IssueBridge3197_1.phaser.Phaser.Physics.ARCADE, "Using static reference to static double is valid.");
             }
         }
     });
-
-    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
      * This issue involves getting whether the intersection results in an
@@ -26748,6 +26766,207 @@ Bridge.$N1391Result =                     r;
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3258.O");
+
+    /**
+     * This test consists in checking whether Bridge can handle type aliases
+     for types implementing generic template support (C# generics).
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264", {
+        statics: {
+            methods: {
+                /**
+                 * Just check whether bridge could output the type instantiation.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3264
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = new (Bridge3264_Ext.Root.MyTest$1(System.String))();
+                    Bridge.Test.NUnit.Assert.NotNull(test, "Instantiate type aliased to a generic type.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in cheching whether member templates for generic
+     types are considered during Bridge translation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265", {
+        statics: {
+            methods: {
+                /**
+                 * Creates an instance of the aliased class and checks if the value
+                 set can be fetched afterwards from client-side.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3265
+                 * @return  {void}
+                 */
+                TestGenericAlias: function () {
+                    var test = {};
+                    test.val = "Hello world!";
+                    var val = test.val;
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello world!", val, "Generics by alias, member value set, is correctly fetched.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists on checking whether type inference for generic
+     classes works when feeding dynamic parameters to the class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269", {
+        statics: {
+            methods: {
+                /**
+                 * For the elaborate test, this will follow several levels and
+                 concepts of inheritance.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}                                                       T           
+                 * @param   {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1}    factory     
+                 * @param   {object}                                                         registry
+                 * @return  {string}
+                 */
+                RegisterFactory: function (T, factory, registry) {
+                    return Bridge.Reflection.getTypeFullName(T);
+                },
+                /**
+                 * Minimal test case required to reproduce the issue (this is a test
+                 isolated from the rest)
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @param   {Function}    T         
+                 * @param   {T}           simple
+                 * @return  {boolean}
+                 */
+                Simplistic: function (T, simple) {
+                    return true;
+                },
+                /**
+                 * Checks whether both the simplistic and elaborate implementations works.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269
+                 * @return  {void}
+                 */
+                TestTypeParameterInference: function () {
+                    var registry = {};
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.RegisterFactory(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory(), registry), "Elaborate dynamic-typed static generic emits correctly.");
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Simplistic(System.Object, (1)), "Simple dynamic-typed static generic emits correctly.");
+
+                }
+            }
+        }
+    });
+
+    /**
+     * A base class from which the parameter will be based.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal");
+
+    /**
+     * The test here consists in loading current domain's assemblies and
+     traversing them searching for a specific custom attribute.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273", {
+        statics: {
+            methods: {
+                /**
+                 * Test whether we can query for the attribute if cycling thru all assemblies.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273
+                 * @return  {void}
+                 */
+                TestAssemblyGetCustomAttributes: function () {
+                    var $t;
+                    var assemblies = System.AppDomain.getAssemblies();
+                    var atLeastOnce = false;
+                    $t = Bridge.getEnumerator(assemblies);
+                    try {
+                        while ($t.moveNext()) {
+                            var assembly = $t.Current;
+                            var myAssemblyAttr = assembly.getCustomAttributes(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute, false);
+
+                            if (myAssemblyAttr.length === 0) {
+                                Bridge.Test.NUnit.Assert.True(true, "Assembly attribute sought but not found in '" + (assembly.name || "") + "'.");
+                            } else if (myAssemblyAttr.length === 1) {
+                                Bridge.Test.NUnit.Assert.True(true, "Assembly attribute sought and found in '" + (assembly.name || "") + "'.");
+                                atLeastOnce = true;
+                            } else {
+                                Bridge.Test.NUnit.Assert.True(false, "Assembly attribute sought in '" + (assembly.name || "") + "' but returned an unexpected amount of matches. Match count: " + myAssemblyAttr.length + ".");
+                            }
+
+                            var myUnusedAssemblyAttr = assembly.getCustomAttributes(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyUnusedAssemblyAttribute, false);
+                            Bridge.Test.NUnit.Assert.AreEqual(0, myUnusedAssemblyAttr.length, "Unused assembly attribute sought and not found in '" + (assembly.name || "") + "'.");
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    Bridge.Test.NUnit.Assert.True(atLeastOnce, "Assembly attribute has been found at least once among the assemblies searched.");
+                }
+            }
+        }
+    });
+
+    /**
+     * An example of assembly attribute that should be used at least once
+     (in this project).
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute
+     * @augments System.Attribute
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute", {
+        inherits: [System.Attribute]
+    });
+
+    /**
+     * This should not be used anywhere (thus return zero matches)
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyUnusedAssemblyAttribute
+     * @augments System.Attribute
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyUnusedAssemblyAttribute", {
+        inherits: [System.Attribute]
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
@@ -34876,6 +35095,53 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge3264_Ext */
+
+    /**
+     * Defines a "pseudo-external" type to be addressed by the corresponding
+     test via one alias specializing of it.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3264_Ext.Root
+     */
+    Bridge.define("Bridge3264_Ext.Root");
+
+    Bridge.define("Bridge3264_Ext.Root.MyTest$1", function (T) { return {
+
+    }; });
+
+    /** @namespace Bridge3265_Ext */
+
+    /**
+     * This class denotes an external class to the application, from an
+     external namespace.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge3265_Ext.Root
+     */
+    Bridge.define("Bridge3265_Ext.Root");
+
+    /**
+     * Class with generics, defining templates for its members.
+     *
+     * @public
+     * @class Bridge3265_Ext.Root.MyTest$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge3265_Ext.Root.MyTest$1", {
+        statics: {
+            methods: {
+                getDefaultValue: function () {
+                    return {};
+                }
+            }
+        }
+    });
+
     Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.ApiResponse$1", function (T) { return {
         props: {
             ResultIfSuccessful: Bridge.getDefaultValue(T)
@@ -35039,15 +35305,87 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace IssueBridge3197 */
+
+    /**
+     * Test, static and external (other namespace) class with nested subclasses.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js
+     */
     Bridge.define("IssueBridge3197.pixi_js");
 
+    /**
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI");
 
+    /**
+     * @public
+     * @class IssueBridge3197.pixi_js.PIXI.Sprite
+     */
     Bridge.define("IssueBridge3197.pixi_js.PIXI.Sprite", {
         statics: {
             methods: {
+                /**
+                 * Stub method
+                 *
+                 * @static
+                 * @public
+                 * @this IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @memberof IssueBridge3197.pixi_js.PIXI.Sprite
+                 * @param   {string}                                 url
+                 * @return  {IssueBridge3197.pixi_js.PIXI.Sprite}
+                 */
                 fromImage: function (url) {
                     return new IssueBridge3197.pixi_js.PIXI.Sprite();
+                }
+            }
+        }
+    });
+
+    /** @namespace IssueBridge3197_1 */
+
+    /**
+     * Remote, static, external and nested property to check against access.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class IssueBridge3197_1.phaser
+     */
+    Bridge.define("IssueBridge3197_1.phaser");
+
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser
+     */
+    Bridge.define("IssueBridge3197_1.phaser.Phaser");
+
+    /**
+     * @public
+     * @class IssueBridge3197_1.phaser.Phaser.Physics
+     */
+    Bridge.define("IssueBridge3197_1.phaser.Phaser.Physics", {
+        statics: {
+            props: {
+                /**
+                 * @static
+                 * @public
+                 * @memberof IssueBridge3197_1.phaser.Phaser.Physics
+                 * @function ARCADE
+                 * @type number
+                 */
+                ARCADE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.ARCADE = 1;
                 }
             }
         }
@@ -36844,6 +37182,30 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3244.A]
     });
 
+    /**
+     * Generic type to base the parameter class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy
+     * @augments Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Animal]
+    });
+
+    /**
+     * Base interface that will be both the static method parameter and
+     the actual passed parameter class' base.
+     *
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     * @param   {Function}    [name]
+     */
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1", function (P) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],
         methods: {
@@ -37284,6 +37646,69 @@ Bridge.$N1391Result =                     r;
         alias: ["Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3222$IProperty$1$" + Bridge.getTypeAlias(T) + "$Value$1"]
     }; });
 
+    /** @namespace System */
+
+    /**
+     * @memberof System
+     * @callback System.Func
+     * @return  {Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy}
+     */
+
+    /**
+     * Parameter class, that implements the base interface above
+     specifying it as the generic type 'Cavy'.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy)],
+        props: {
+            /**
+             * Just a string to check value against in the assertion.
+             *
+             * @instance
+             * @public
+             * @readonly
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @function FactoryName
+             * @type string
+             */
+            FactoryName: {
+                get: function () {
+                    return "Guinea Pig Factory";
+                }
+            }
+        },
+        alias: [
+            "FactoryName", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$FactoryName",
+            "Builder", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$IFactory$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3269$Cavy$Builder"
+        ],
+        methods: {
+            /**
+             * Just to implement the interface's
+             *
+             * @instance
+             * @public
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory
+             * @return  {System.Func}
+             */
+            Builder: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory.f1;
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.CavyFactory, {
+        f1: function () {
+            return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.Cavy();
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],
         methods: {
@@ -37478,4 +37903,5 @@ Bridge.$N1391Result =                     r;
     $m($n[2].Bridge3240.Person, function () { return {"td":$n[2].Bridge3240,"att":1048578,"a":2,"m":[{"a":2,"n":".ctor","t":1,"p":[$n[1].DateTime],"pi":[{"n":"value","pt":$n[1].DateTime,"ps":0}],"sn":"ctor"},{"a":2,"n":"Value","t":16,"rt":$n[1].DateTime,"g":{"a":2,"n":"get_Value","t":8,"rt":$n[1].DateTime,"fg":"Value","box":function ($v) { return Bridge.box($v, System.DateTime, System.DateTime.format);}},"fn":"Value"}]}; });
     $m($n[2].Bridge3253.Person, function () { return {"td":$n[2].Bridge3253,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"RnWy","t":16,"rt":$n[1].Int32,"s":{"a":2,"n":"set_RnWy","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"RnWy"},"fn":"RnWy"},{"a":2,"n":"RyWn","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_RyWn","t":8,"rt":$n[1].Int32,"fg":"RyWn","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"RyWn"},{"a":2,"n":"RyWy","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_RyWy","t":8,"rt":$n[1].Int32,"fg":"RyWy","box":function ($v) { return Bridge.box($v, System.Int32);}},"s":{"a":2,"n":"set_RyWy","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"RyWy"},"fn":"RyWy"}]}; });
     $m($n[1].Console, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Clear","is":true,"t":8,"sn":"Clear","rt":$n[1].Void},{"a":2,"n":"Read","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (text) { return prompt(text); },"rt":$n[1].String,"p":[$n[1].String]},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0},{"n":"value","pt":$n[1].String,"ps":1}],"tpc":0,"def":function (text, value) { return prompt(text, value); },"rt":$n[1].String,"p":[$n[1].String,$n[1].String]},{"a":1,"n":"TransformChars","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"all","pt":$n[1].Int32,"ps":1},{"n":"index","pt":$n[1].Int32,"ps":2},{"n":"count","pt":$n[1].Int32,"ps":3}],"sn":"TransformChars","rt":$n[1].String,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32,$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(System.Boolean.toString(value)); },"rt":$n[1].Void,"p":[$n[1].Boolean]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(String.fromCharCode(value)); },"rt":$n[1].Void,"p":[$n[1].Char]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (buffer) { return System.Console.Write(System.Console.TransformChars(buffer, 1)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(value.toString("G")); },"rt":$n[1].Void,"p":[$n[1].Decimal]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(System.Double.format(value)); },"rt":$n[1].Void,"p":[$n[1].Double]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Int64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Single]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].UInt32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].UInt64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.Console.Write(System.String.format(format, arg0)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return System.Console.Write(System.String.format(format, arg)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"index","pt":$n[1].Int32,"ps":1},{"n":"count","pt":$n[1].Int32,"ps":2}],"tpc":0,"def":function (buffer, index, count) { return System.Console.Write(System.Console.TransformChars(buffer, 0, index, count)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.Console.Write(System.String.format(format, arg0, arg1)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.Console.Write(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return System.Console.Write(System.String.format(format, [arg0, arg1, arg2, arg3])); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"sn":"WriteLine","rt":$n[1].Void},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Boolean.toString(value)); },"rt":$n[1].Void,"p":[$n[1].Boolean]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(String.fromCharCode(value)); },"rt":$n[1].Void,"p":[$n[1].Char]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (buffer) { return System.Console.WriteLine(System.Console.TransformChars(buffer, 1)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(value.toString("G")); },"rt":$n[1].Void,"p":[$n[1].Decimal]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Double.format(value)); },"rt":$n[1].Void,"p":[$n[1].Double]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Int64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Decimal),"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(value && value.toString("G")); },"rt":$n[1].Void,"p":[$n[1].Nullable$1(System.Decimal)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Single.format(value)); },"rt":$n[1].Void,"p":[$n[1].Single]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].String]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(Bridge.getTypeName(value)); },"rt":$n[1].Void,"p":[Function]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].UInt32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].UInt64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.Console.WriteLine(System.String.format(format, arg0)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return System.Console.WriteLine(System.String.format(format, arg)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"index","pt":$n[1].Int32,"ps":1},{"n":"count","pt":$n[1].Int32,"ps":2}],"tpc":0,"def":function (buffer, index, count) { return System.Console.WriteLine(System.Console.TransformChars(buffer, 0, index, count)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.Console.WriteLine(System.String.format(format, arg0, arg1)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.Console.WriteLine(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return System.Console.WriteLine(System.String.format(format, [arg0, arg1, arg2, arg3])); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]}]}; });
+    $asm.attr= [new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3273.MyAssemblyAttribute()];
 });
