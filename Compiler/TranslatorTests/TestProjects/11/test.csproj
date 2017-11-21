@@ -43,6 +43,7 @@
     <Compile Include="Issues\N2493.cs" />
     <Compile Include="Issues\N3208_0_originalReport.cs" />
     <Compile Include="Issues\N3208_1_AndreyReview1.cs" />
+    <Compile Include="Issues\N3276.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClassB.cs" />
     <Compile Include="TestClassA.cs" />
