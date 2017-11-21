@@ -1,6 +1,8 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Bridge.ClientTest.Batch3.BridgeIssues;
 
+[assembly: Bridge3273.MyAssembly]
 [assembly: AssemblyTitle("Bridge client tests")]
 [assembly: AssemblyProduct("Bridge client tests")]
 [assembly: AssemblyDescription("Bridge Test library - test github issues up to #1999")]
