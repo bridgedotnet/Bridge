@@ -1,7 +1,7 @@
 Resources:
     TestProject.js                     0.418 KB
     Issue2493.js                       0.243 KB
-    Issue3276.js                       1.147 KB
+    Issue3276.js                       1.233 KB
     N3208_0_originalReport.js          1.223 KB
     N3208_1_AndreyReview1.js           1.830 KB
     TestProject1.js                    0.181 KB
@@ -9,7 +9,7 @@ Resources:
     TestProject.meta.js                2.898 KB
     TestProject.d.ts                   0.342 KB
     Issue2493.d.ts                     0.266 KB
-    Issue3276.d.ts                     1.046 KB
+    Issue3276.d.ts                     1.132 KB
     N3208_1_AndreyReview1.d.ts         0.216 KB
     TestProject1.d.ts                  0.250 KB
     TestProject2.d.ts                  0.248 KB

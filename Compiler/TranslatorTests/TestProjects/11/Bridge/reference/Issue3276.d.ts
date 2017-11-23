@@ -14,17 +14,17 @@ declare namespace Issue3276 {
          * @public
          * @this Issue3276.Program
          * @memberof Issue3276.Program
-         * @param   {number}    a    
-         * @param   {number}    b    
+         * @param   {number}            a    
+         * @param   {number}            b    
          * @param   {System.Decimal}    c    
-         * @param   {number}    d    
-         * @param   {number}    e    
-         * @param   {number}    f    
-         * @param   {System.Int64}    g    
-         * @param   {number}    h    
-         * @param   {number}    i    
-         * @param   {number}    j    
-         * @param   {System.UInt64}    k
+         * @param   {number}            d    
+         * @param   {number}            e    
+         * @param   {number}            f    
+         * @param   {System.Int64}      g    
+         * @param   {number}            h    
+         * @param   {number}            i    
+         * @param   {number}            j    
+         * @param   {System.UInt64}     k
          * @return  {void}
          */
         Demo(a: number, b: number, c: System.Decimal, d: number, e: number, f: number, g: System.Int64, h: number, i: number, j: number, k: System.UInt64): void;

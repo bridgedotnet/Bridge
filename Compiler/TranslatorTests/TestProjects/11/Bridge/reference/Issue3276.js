@@ -12,17 +12,17 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                  * @public
                  * @this Issue3276.Program
                  * @memberof Issue3276.Program
-                 * @param   {number}    a    
-                 * @param   {number}    b    
+                 * @param   {number}            a    
+                 * @param   {number}            b    
                  * @param   {System.Decimal}    c    
-                 * @param   {number}    d    
-                 * @param   {number}    e    
-                 * @param   {number}    f    
-                 * @param   {System.Int64}    g    
-                 * @param   {number}    h    
-                 * @param   {number}    i    
-                 * @param   {number}    j    
-                 * @param   {System.UInt64}    k
+                 * @param   {number}            d    
+                 * @param   {number}            e    
+                 * @param   {number}            f    
+                 * @param   {System.Int64}      g    
+                 * @param   {number}            h    
+                 * @param   {number}            i    
+                 * @param   {number}            j    
+                 * @param   {System.UInt64}     k
                  * @return  {void}
                  */
                 Demo: function (a, b, c, d, e, f, g, h, i, j, k) {
