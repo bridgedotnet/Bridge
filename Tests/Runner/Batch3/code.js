@@ -28635,9 +28635,9 @@ Bridge.$N1391Result =                     r;
                     try {
                         while ($t.moveNext()) {
                             var itm = { v : $t.Current };
-                            handlers[System.Array.index(((i++) | 0), handlers)] = (function ($me, itm) {
+                            handlers[System.Array.index(Bridge.identity(i, (i = (i + 1) | 0)), handlers)] = (function ($me, itm) {
                                 return function () {
-                                    result += itm.v;
+                                    result = (result || "") + (itm.v || "");
                                 };
                             })(this, itm);
                         }
@@ -28666,9 +28666,9 @@ Bridge.$N1391Result =                     r;
                     try {
                         while ($t2.moveNext()) {
                             var itm1 = { v : $t2.Current };
-                            handlers[System.Array.index(((i++) | 0), handlers)] = (function ($me, itm1) {
+                            handlers[System.Array.index(Bridge.identity(i, (i = (i + 1) | 0)), handlers)] = (function ($me, itm1) {
                                 return function () {
-                                    result += itm1.v;
+                                    result = (result || "") + (itm1.v || "");
                                 };
                             })(this, itm1);
                         }
@@ -28697,11 +28697,11 @@ Bridge.$N1391Result =                     r;
                     var i = 0;
                     var result = "";
 
-                    for (var j = 0; j < keys.length; ((j++) | 0)) {
+                    for (var j = 0; j < keys.length; j = (j + 1) | 0) {
                         var itm = { v : keys[System.Array.index(j, keys)] };
-                        handlers[System.Array.index(((i++) | 0), handlers)] = (function ($me, itm) {
+                        handlers[System.Array.index(Bridge.identity(i, (i = (i + 1) | 0)), handlers)] = (function ($me, itm) {
                             return function () {
-                                result += itm.v;
+                                result = (result || "") + (itm.v || "");
                             };
                         })(this, itm);
                     }
