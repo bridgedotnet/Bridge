@@ -49,6 +49,11 @@ namespace Bridge.Translator
 
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             if (this.Rules.Integer == IntegerRule.Managed && (unaryOperatorExpression.Operator == UnaryOperatorType.Increment ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
@@ -76,6 +81,11 @@ namespace Bridge.Translator
 
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             if (assignmentExpression.Operator != AssignmentOperatorType.Any && assignmentExpression.Operator != AssignmentOperatorType.Assign)
             {
                 var rr = this.Resolver.ResolveNode(assignmentExpression, null);
@@ -106,6 +116,11 @@ namespace Bridge.Translator
 
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(methodDeclaration, null) as MemberResolveResult;
             if (rr != null)
             {
@@ -121,6 +136,11 @@ namespace Bridge.Translator
 
         public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
             if (rr != null)
             {
@@ -136,6 +156,11 @@ namespace Bridge.Translator
 
         public override void VisitIndexerDeclaration(IndexerDeclaration indexerDeclaration)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(indexerDeclaration, null) as MemberResolveResult;
             if (rr != null)
             {
@@ -151,6 +176,11 @@ namespace Bridge.Translator
 
         public override void VisitCustomEventDeclaration(CustomEventDeclaration eventDeclaration)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(eventDeclaration, null) as MemberResolveResult;
             if (rr != null)
             {
@@ -166,6 +196,11 @@ namespace Bridge.Translator
 
         public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(typeDeclaration, null) as TypeResolveResult;
             if (rr != null)
             {
@@ -181,6 +216,11 @@ namespace Bridge.Translator
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var rr = this.Resolver.ResolveNode(invocationExpression, null) as InvocationResolveResult;
 
             if (rr != null && rr.IsError)
@@ -193,6 +233,11 @@ namespace Bridge.Translator
 
         public override void VisitUsingStatement(UsingStatement usingStatement)
         {
+            if (this.Found)
+            {
+                return;
+            }
+
             var awaitSearch = new AwaitSearchVisitor(null);
             usingStatement.AcceptVisitor(awaitSearch);
 
@@ -215,6 +260,11 @@ namespace Bridge.Translator
             this.Emitter = emitter;
         }
 
+        public PreconverterFixer(MemberResolver resolver, IEmitter emitter, ILogger log) : this(resolver, emitter)
+        {
+            this.log = log;
+        }
+
         public MemberResolver Resolver
         {
             get;
@@ -229,6 +279,8 @@ namespace Bridge.Translator
         {
             get; private set;
         }
+
+        private ILogger log;
 
         public override AstNode VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
@@ -443,38 +495,47 @@ namespace Bridge.Translator
 
         public override AstNode VisitInvocationExpression(InvocationExpression invocationExpression)
         {
-            var rr = this.Resolver.ResolveNode(invocationExpression, null) as CSharpInvocationResolveResult;
-
-            if (rr != null && rr.IsError)
+            try
             {
-                InvocationExpression clonInvocationExpression = (InvocationExpression)base.VisitInvocationExpression(invocationExpression);
-                if (clonInvocationExpression == null)
-                {
-                    clonInvocationExpression = (InvocationExpression)invocationExpression.Clone();
-                }
+                var rr = this.Resolver.ResolveNode(invocationExpression, null) as CSharpInvocationResolveResult;
 
-                var map = rr.GetArgumentToParameterMap();
-                var orig = clonInvocationExpression.Arguments.ToArray();
-                var result = clonInvocationExpression.Arguments.ToArray();
-
-                if (rr.IsExtensionMethodInvocation)
+                if (rr != null && rr.IsError)
                 {
-                    for (int i = 1; i < map.Count; i++)
+                    InvocationExpression clonInvocationExpression = (InvocationExpression)base.VisitInvocationExpression(invocationExpression);
+                    if (clonInvocationExpression == null)
                     {
-                        result[i - 1] = orig[map[i] - 1];
+                        clonInvocationExpression = (InvocationExpression)invocationExpression.Clone();
                     }
-                }
-                else
-                {
-                    for (int i = 0; i < map.Count; i++)
-                    {
-                        result[i] = orig[map[i]];
-                    }
-                }                
 
-                clonInvocationExpression.Arguments.ReplaceWith(result);
-                return clonInvocationExpression;
+                    var map = rr.GetArgumentToParameterMap();
+                    var orig = clonInvocationExpression.Arguments.ToArray();
+                    var result = clonInvocationExpression.Arguments.ToArray();
+
+                    if (rr.IsExtensionMethodInvocation)
+                    {
+                        for (int i = 1; i < map.Count; i++)
+                        {
+                            result[i - 1] = orig[map[i] - 1];
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < map.Count; i++)
+                        {
+                            result[i] = orig[map[i]];
+                        }
+                    }
+
+                    clonInvocationExpression.Arguments.ReplaceWith(result);
+                    return clonInvocationExpression;
+                }
             }
+            catch(Exception e)
+            {
+                var fileName = invocationExpression.GetParent<SyntaxTree>()?.FileName;
+                
+                this.log.Warn(string.Format("VisitInvocationExpression fails in {0} ({1}): {2}", fileName, invocationExpression.StartLocation.ToString(), e.Message));
+            }            
 
             return base.VisitInvocationExpression(invocationExpression);
         }
@@ -571,6 +632,7 @@ namespace Bridge.Translator
         }
 
         private int tempKey = 1;
+
         public override AstNode VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
             var rr = this.Resolver.ResolveNode(assignmentExpression, null);

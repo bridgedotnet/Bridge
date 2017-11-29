@@ -197,6 +197,7 @@ namespace Bridge.Translator
             bool needRecompile = false;
             foreach (var sourceFile in this.ParsedSourceFiles)
             {
+                this.Log.Trace("Preconvert " + sourceFile.ParsedFile.FileName);
                 var syntaxTree = sourceFile.SyntaxTree;
                 var tempEmitter = new TempEmitter { AssemblyInfo = config };
                 var detecter = new PreconverterDetecter(resolver, tempEmitter);
@@ -204,7 +205,7 @@ namespace Bridge.Translator
 
                 if (detecter.Found)
                 {
-                    var fixer = new PreconverterFixer(resolver, tempEmitter);
+                    var fixer = new PreconverterFixer(resolver, tempEmitter, this.Log);
                     var astNode = syntaxTree.AcceptVisitor(fixer);
                     syntaxTree = astNode != null ? (SyntaxTree)astNode : syntaxTree;
                     sourceFile.SyntaxTree = syntaxTree;
