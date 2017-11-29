@@ -3019,7 +3019,7 @@
 
     // @source ReflectionAssembly.js
 
-    Bridge.assembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback, restore) {
         if (!callback) {
             callback = res;
             res = {};
@@ -3035,6 +3035,7 @@
             Bridge.apply(asm.res, res || {});
         }
 
+        var oldAssembly = Bridge.$currentAssembly;
         Bridge.$currentAssembly = asm;
 
         if (callback) {
@@ -3047,6 +3048,10 @@
         }
 
         Bridge.init();
+
+        if (restore) {
+            Bridge.$currentAssembly = oldAssembly;
+        }
     };
 
     Bridge.define("System.Reflection.Assembly", {
@@ -17554,20 +17559,24 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
     // @source Uri.js
 
-    Bridge.define("System.Uri", {
-        ctor: function (uriString) {
-            this.$initialize();
-            this.absoluteUri = uriString;
-        },
+Bridge.assembly("System", {}, function ($asm, globals) {
+        "use strict";
 
-        getAbsoluteUri: function () {
-            return this.absoluteUri;
-        },
+        Bridge.define("System.Uri", {
+            ctor: function (uriString) {
+                this.$initialize();
+                this.absoluteUri = uriString;
+            },
 
-        toJSON: function () {
-            return this.absoluteUri;
-        }
-    });
+            getAbsoluteUri: function () {
+                return this.absoluteUri;
+            },
+
+            toJSON: function () {
+                return this.absoluteUri;
+            }
+        });
+    }, true);
 
     // @source Generator.js
 

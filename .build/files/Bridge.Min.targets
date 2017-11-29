@@ -44,6 +44,7 @@
       <BridgeUtilWorkDir>$(MSBuildThisFileDirectory)\..\tools\</BridgeUtilWorkDir>
       <BridgePath>$(MSBuildProjectDirectory)\$(OutDir)\Bridge.dll</BridgePath>
       <BridgeUtilCommand>&quot;$(BridgeUtilWorkDir)bridge.exe&quot; -p &quot;$(MSBuildProjectFullPath)&quot; -b &quot;$(BridgePath)&quot; --settings AssemblyName:&quot;$(AssemblyName)&quot;,Configuration:&quot;$(Configuration)&quot;,DefineConstants:&quot;$(DefineConstants)&quot;,OutputPath:&quot;$(OutputPath)&quot;,OutDir:&quot;$(OutDir)&quot;,OutputType:&quot;$(OutputType)&quot;,Platform:&quot;$(Platform)&quot;,RootNamespace:&quot;$(RootNamespace)&quot;</BridgeUtilCommand>
+      <BridgeUtilCommand Condition="$(OnWin) != true">mono $(BridgeUtilCommand)</BridgeUtilCommand>
     </PropertyGroup>
 
     <Message Text="   Working Directory:           $(BridgeUtilWorkDir)" Importance="high" />

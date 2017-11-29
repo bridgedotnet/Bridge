@@ -1,14 +1,18 @@
-    Bridge.define("System.Uri", {
-        ctor: function (uriString) {
-            this.$initialize();
-            this.absoluteUri = uriString;
-        },
+Bridge.assembly("System", {}, function ($asm, globals) {
+        "use strict";
 
-        getAbsoluteUri: function () {
-            return this.absoluteUri;
-        },
+        Bridge.define("System.Uri", {
+            ctor: function (uriString) {
+                this.$initialize();
+                this.absoluteUri = uriString;
+            },
 
-        toJSON: function () {
-            return this.absoluteUri;
-        }
-    });
+            getAbsoluteUri: function () {
+                return this.absoluteUri;
+            },
+
+            toJSON: function () {
+                return this.absoluteUri;
+            }
+        });
+    }, true);
