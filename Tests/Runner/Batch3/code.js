@@ -26968,6 +26968,139 @@ Bridge.$N1391Result =                     r;
         inherits: [System.Attribute]
     });
 
+    /**
+     * The test here consists in instantiating a class using an interface
+     reference and ensure it is, client-side, reaching the type it
+     refers to.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292", {
+        statics: {
+            methods: {
+                /**
+                 * Tests whether instantiating the driver classes sets their
+                 'consistent' state to true.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292
+                 * @return  {void}
+                 */
+                TestImplicitOpCallForInterfaces: function () {
+                    Bridge.Test.NUnit.Assert.True(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassDriver(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe).op_Implicit(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe())).Consistent, "Implicit generics operator works with class referencing.");
+                    Bridge.Test.NUnit.Assert.True(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.InterfaceDriver(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe).op_Implicit(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe())).Consistent, "Implicit generics operator works with interface referencing.");
+                }
+            }
+        }
+    });
+
+    /**
+     * Driver class that works by referencing the actual class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassDriver
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassDriver", {
+        props: {
+            Consistent: false
+        },
+        ctors: {
+            ctor: function (errorIfFailed) {
+                this.$initialize();
+                var probe = errorIfFailed;
+
+                // We check here whether the object initializing it is of
+                // ClassProbe. We don't check against IInterfaceProbe here
+                // even though it inherits due to covariance-related
+                // limitations
+                this.Consistent = Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe));
+            }
+        }
+    });
+
+    /**
+     * Basic interface used as base of all.
+     *
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe", {
+        $kind: "interface"
+    });
+
+    /**
+     * A class implementing generics that will use the class samples
+     above in order to trigger the issue.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1
+     * @param   {Function}    [name]
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1", function (T) { return {
+        $kind: "struct",
+        statics: {
+            methods: {
+                op_Implicit: function (source) {
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(T)).$ctor1(source);
+                },
+                getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(T))(); }
+            }
+        },
+        props: {
+            Value: Bridge.getDefaultValue(T)
+        },
+        ctors: {
+            $ctor1: function (value) {
+                this.$initialize();
+                this.Value = value;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([5573393263, this.Value]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(T))) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            $clone: function (to) { return this; }
+        }
+    }; });
+
+    /**
+     * Driver class that breaks by referencing the interface.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.InterfaceDriver
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.InterfaceDriver", {
+        props: {
+            Consistent: false
+        },
+        ctors: {
+            ctor: function (errorIfFailed) {
+                this.$initialize();
+                var probe = errorIfFailed;
+
+                // We check here whether the object initializing it is of
+                // ClassProbe. We don't check against ClassProbe here
+                // even though it inherits due to covariance-related
+                // limitations
+                this.Consistent = Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.GenericsClass$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
@@ -37205,6 +37338,17 @@ Bridge.$N1391Result =                     r;
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3269.IFactory$1", function (P) { return {
         $kind: "interface"
     }; });
+
+    /**
+     * A class to use the interface
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe
+     * @implements  Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.ClassProbe", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3292.IInterfaceProbe]
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],
