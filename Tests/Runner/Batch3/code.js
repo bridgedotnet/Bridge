@@ -19068,14 +19068,33 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
+
+    /**
+     * This test consists in checking whether Bridge can translate
+     instantiation of the System.ComponentModel.BrowsableAttribute.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600", {
         statics: {
             methods: {
+                /**
+                 * Checks whether it is possible to fetch the BrowsableAttribute from
+                 a class using it.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600
+                 * @return  {void}
+                 */
                 TestBrowsableAttribute: function () {
                     var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600.Properties, 16, 28)).where($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600.f1);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(1, props.count());
-                    Bridge.Test.NUnit.Assert.AreEqual("Prop1", props.first().n);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, props.count(), "Found one match of the BrowsableAttribute in the checked class.");
+                    Bridge.Test.NUnit.Assert.AreEqual("Prop1", props.first().n, "Matching property with BrowsableAttribute is the 'Prop1' one.");
                 }
             }
         }
@@ -19089,6 +19108,12 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Class using the Browsable attribute in one of its properties.
+     *
+     * @private
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600.Properties
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2600.Properties", {
         props: {
             Prop1: 0,
@@ -25931,8 +25956,6 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
-
-    /** @namespace Bridge.ClientTest.Batch3.BridgeIssues */
 
     /**
      * This tests consists in ensuring static references from 'using static'
