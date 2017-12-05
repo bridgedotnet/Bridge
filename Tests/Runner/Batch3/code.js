@@ -27101,6 +27101,51 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether System.DateTime tests works
+     with current date and max/min values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3293
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3293", {
+        statics: {
+            methods: {
+                /**
+                 * Tests the comparison variations between datetime values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3293
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3293
+                 * @return  {void}
+                 */
+                TestDateTimeComparisons: function () {
+                    var minTim = System.DateTime.getMinValue();
+                    var now = System.DateTime.getNow();
+                    var maxTim = System.DateTime.getMaxValue();
+
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.gt(now, minTim), "Now is greater than minTime.");
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.lt(now, minTim), "Now is not greater than minimum time.");
+
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.lt(now, maxTim), "Now is smaller than maxTime.");
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.gt(now, maxTim), "Now is not smaller than maxTime.");
+
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.gte(now, minTim), "Now is greater than or equal minTime.");
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.lte(now, minTim), "Now is not greater than or equal minimum time.");
+
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.lte(now, maxTim), "Now is smaller than or equal maxTime.");
+                    Bridge.Test.NUnit.Assert.False(System.DateTime.gte(now, maxTim), "Now is not smaller than or equal maxTime.");
+
+                    Bridge.Test.NUnit.Assert.True(!Bridge.equals(now, minTim), "Now is different than minimum time.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(now, minTim), "Now is not equal to minimum time.");
+                    Bridge.Test.NUnit.Assert.True(!Bridge.equals(now, maxTim), "Now is different than maximum time.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(now, maxTim), "Now is not equal to maximum time.");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
