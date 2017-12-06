@@ -13,6 +13,7 @@
   <PropertyGroup>
     <BridgeNetCompilerTarget Condition="$(OnWin) == true">BridgeNetCompilerTask</BridgeNetCompilerTarget>
     <BridgeNetCompilerTarget Condition="$(OnWin) != true">BridgeNetCompilerUtil</BridgeNetCompilerTarget>
+    <BridgeNetCompilerTarget Condition="$(OnWin) != true And $(MSBuildToolsPath.Contains('msbuild'))">BridgeNetCompilerTask</BridgeNetCompilerTarget>
     <PrepareForRunDependsOn>$(PrepareForRunDependsOn);$(BridgeNetCompilerTarget)</PrepareForRunDependsOn>
   </PropertyGroup>
 
