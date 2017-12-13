@@ -216,6 +216,11 @@ namespace Bridge.Translator.Logging
             WriteOrBufferLine(LoggerLevel.Error, message);
         }
 
+        public void Error(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+        {
+            Error(message);
+        }
+
         public void Warn(string message)
         {
             WriteOrBufferLine(LoggerLevel.Warning, message);
