@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.5.0
+ * @compiler Bridge.NET 16.5.1
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
@@ -1812,6 +1812,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Reflection - Assembly GetManifestResourceDataAsBase64WithTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests.GetManifestResourceDataAsBase64WithTypeWorks);
             QUnit.test("Reflection - Assembly GetManifestResourceDataWithoutTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests.GetManifestResourceDataWithoutTypeWorks);
             QUnit.test("Reflection - Assembly GetManifestResourceDataWithTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests.GetManifestResourceDataWithTypeWorks);
+            QUnit.test("Reflection - Assembly UriBelongsSystem", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests.UriBelongsSystem);
             QUnit.test("Reflection - Attribute GetCustomAttributesForAssemblyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForAssemblyWorks);
             QUnit.test("Reflection - Attribute GetCustomAttributesForMemberInfoWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForMemberInfoWorks);
             QUnit.test("Reflection - Attribute GetCustomAttributesForMemberInfoInheritTrueWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForMemberInfoInheritTrueWorks);
@@ -4577,6 +4578,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetManifestResourceDataWithTypeWorks()", $t.Line = "318", $t));
                     t.Fixture.GetManifestResourceDataWithTypeWorks();
+                },
+                UriBelongsSystem: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UriBelongsSystem()", $t.Line = "326", $t));
+                    t.Fixture.UriBelongsSystem();
                 }
             }
         },

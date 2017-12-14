@@ -322,5 +322,11 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.AreEqual(new[] { 0x10, 0x11, 0x12, 0x13, 0x14, 0x15 }, Assembly.GetExecutingAssembly().GetManifestResourceData(typeof(AssemblyTests), "Resource2.bin"), "#2");
             Assert.Null(Assembly.GetExecutingAssembly().GetManifestResourceData(typeof(AssemblyTests), "NonExistent"), "#3");
         }
+
+        [Test]
+        public void UriBelongsSystem()
+        {
+            Assert.AreEqual(typeof(System.Uri).Assembly.FullName, "System");
+        }
     }
 }

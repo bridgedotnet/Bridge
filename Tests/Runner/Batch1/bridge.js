@@ -1,5 +1,5 @@
 /**
- * @version   : 16.5.0 - Bridge.NET
+ * @version   : 16.5.1 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -1133,7 +1133,7 @@
         },
 
         isDate: function (obj) {
-            return Object.prototype.toString.call(obj) === "[object Date]";
+            return obj instanceof Date;
         },
 
         isNull: function (value) {
@@ -3019,7 +3019,7 @@
 
     // @source ReflectionAssembly.js
 
-    Bridge.assembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback, restore) {
         if (!callback) {
             callback = res;
             res = {};
@@ -3035,6 +3035,7 @@
             Bridge.apply(asm.res, res || {});
         }
 
+        var oldAssembly = Bridge.$currentAssembly;
         Bridge.$currentAssembly = asm;
 
         if (callback) {
@@ -3047,6 +3048,10 @@
         }
 
         Bridge.init();
+
+        if (restore) {
+            Bridge.$currentAssembly = oldAssembly;
+        }
     };
 
     Bridge.define("System.Reflection.Assembly", {
@@ -3101,13 +3106,13 @@
         },
 
         getCustomAttributes: function (attributeType) {
-            if (attributeType && !Bridge.isBoolean(attributeType)) {
+            if (this.attr && attributeType && !Bridge.isBoolean(attributeType)) {
                 return this.attr.filter(function (a) {
                     return Bridge.is(a, attributeType);
                 });
             }
 
-            return this.attr;
+            return this.attr || [];
         }
     });
 
@@ -3129,8 +3134,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.5.0";
-        Bridge.SystemAssembly.compiler = "16.5.0";
+        Bridge.SystemAssembly.version = "16.5.1";
+        Bridge.SystemAssembly.compiler = "16.5.1";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -9779,22 +9784,23 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             gt: function (a, b) {
-                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) > System.DateTime.getTicks(b)) : false;
+                return (a != null && b != null) ? (System.DateTime.getTicks(a).gt(System.DateTime.getTicks(b))) : false;
             },
 
             gte: function (a, b) {
-                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) >= System.DateTime.getTicks(b)) : false;
+                return (a != null && b != null) ? (System.DateTime.getTicks(a).gte(System.DateTime.getTicks(b))) : false;
             },
 
             lt: function (a, b) {
-                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) < System.DateTime.getTicks(b)) : false;
+                return (a != null && b != null) ? (System.DateTime.getTicks(a).lt(System.DateTime.getTicks(b))) : false;
             },
 
             lte: function (a, b) {
-                return (System.DateTime.$is(a) && System.DateTime.$is(b)) ? (System.DateTime.getTicks(a) <= System.DateTime.getTicks(b)) : false;
+                return (a != null && b != null) ? (System.DateTime.getTicks(a).lte(System.DateTime.getTicks(b))) : false;
             }
         }
     });
+
     // @source TimeSpan.js
 
     Bridge.define("System.TimeSpan", {
@@ -17554,20 +17560,24 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
     // @source Uri.js
 
-    Bridge.define("System.Uri", {
-        ctor: function (uriString) {
-            this.$initialize();
-            this.absoluteUri = uriString;
-        },
+Bridge.assembly("System", {}, function ($asm, globals) {
+        "use strict";
 
-        getAbsoluteUri: function () {
-            return this.absoluteUri;
-        },
+        Bridge.define("System.Uri", {
+            ctor: function (uriString) {
+                this.$initialize();
+                this.absoluteUri = uriString;
+            },
 
-        toJSON: function () {
-            return this.absoluteUri;
-        }
-    });
+            getAbsoluteUri: function () {
+                return this.absoluteUri;
+            },
+
+            toJSON: function () {
+                return this.absoluteUri;
+            }
+        });
+    }, true);
 
     // @source Generator.js
 
@@ -22684,7 +22694,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 Bridge.define("System.Text.RegularExpressions.RegexParser", {
     statics: {
         _Q: 5, // quantifier
-        _S: 4, // ordinary stoppper
+        _S: 4, // ordinary stopper
         _Z: 3, // ScanBlank stopper
         _X: 2, // whitespace
         _E: 1, // should be escaped
@@ -35671,6 +35681,60 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                     return System.Collections.HashHelpers.getPrime(newSize);
                 }
+            }
+        }
+    });
+
+    // @source browsableAttribute.js
+
+    Bridge.define("System.ComponentModel.BrowsableAttribute", {
+        inherits: [System.Attribute],
+        statics: {
+            fields: {
+                yes: null,
+                no: null,
+                default: null
+            },
+            ctors: {
+                init: function () {
+                    this.yes = new System.ComponentModel.BrowsableAttribute(true);
+                    this.no = new System.ComponentModel.BrowsableAttribute(false);
+                    this.default = System.ComponentModel.BrowsableAttribute.yes;
+                }
+            }
+        },
+        fields: {
+            browsable: false
+        },
+        props: {
+            Browsable: {
+                get: function () {
+                    return this.browsable;
+                }
+            }
+        },
+        ctors: {
+            init: function () {
+                this.browsable = true;
+            },
+            ctor: function (browsable) {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+                this.browsable = browsable;
+            }
+        },
+        methods: {
+            equals: function (obj) {
+                if (Bridge.referenceEquals(obj, this)) {
+                    return true;
+                }
+
+                var other = Bridge.as(obj, System.ComponentModel.BrowsableAttribute);
+
+                return (other != null) && other.Browsable === this.browsable;
+            },
+            getHashCode: function () {
+                return Bridge.getHashCode(this.browsable);
             }
         }
     });

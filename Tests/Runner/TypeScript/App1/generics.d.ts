@@ -1,6 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
-declare module Generics {
+declare namespace Generics {
     export interface GenericINamedEntity$1<T> {
         Instance: T;
         GetSomething(input: T): T;

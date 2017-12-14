@@ -3,6 +3,7 @@ using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
+using Newtonsoft.Json;
 using Object.Net.Utilities;
 using System;
 using System.Collections.Generic;
@@ -408,7 +409,7 @@ namespace Bridge.Translator
         }
 
         protected virtual void EmitClassEnd()
-        {
+        {            
             this.WriteNewLine();
             this.EndBlock();
 

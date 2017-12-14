@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -465,7 +464,7 @@ namespace Bridge.Translator
                 method = type.GetMethods(m => m.Name == name, GetMemberOptions.IgnoreInheritedMembers).FirstOrDefault();
             }
 
-            if (orr.IsLiftedOperator)
+            if (orr != null && orr.IsLiftedOperator)
             {
                 if (!isOneOp)
                 {

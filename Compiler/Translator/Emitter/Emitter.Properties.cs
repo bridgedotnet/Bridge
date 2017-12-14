@@ -10,6 +10,12 @@ namespace Bridge.Translator
 {
     public partial class Emitter : Visitor
     {
+        public string Tag
+        {
+            get;
+            set;
+        }
+
         public EmitterCache Cache
         {
             get;

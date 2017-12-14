@@ -412,7 +412,7 @@ namespace Bridge.Contract
 
                 if (typeDef.IsNested && !excludens)
                 {
-                    name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true, ignoreVirtual: true);
+                    name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true, ignoreVirtual: true, nomodule: nomodule);
                     isNested = true;
                 }
 
@@ -430,9 +430,16 @@ namespace Bridge.Contract
             }
 
             bool isCustomName = false;
-            if (bridgeType != null && !nomodule)
+            if (bridgeType != null)
             {
-                name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
+                if (nomodule)
+                {
+                    name = GetCustomName(name, bridgeType, excludens, isNested, ref isCustomName, null);
+                }
+                else
+                {
+                    name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
+                }                
             }
 
             var tDef = type.GetDefinition();
@@ -570,9 +577,9 @@ namespace Bridge.Contract
             return name;
         }
 
-        public static string ToJsName(TypeDefinition type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool ignoreVirtual = false)
+        public static string ToJsName(TypeDefinition type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool ignoreVirtual = false, bool nomodule = false)
         {
-            return BridgeTypes.ToJsName(ReflectionHelper.ParseReflectionName(BridgeTypes.GetTypeDefinitionKey(type)).Resolve(emitter.Resolver.Resolver.TypeResolveContext), emitter, asDefinition, excludens, ignoreVirtual:ignoreVirtual);
+            return BridgeTypes.ToJsName(ReflectionHelper.ParseReflectionName(BridgeTypes.GetTypeDefinitionKey(type)).Resolve(emitter.Resolver.Resolver.TypeResolveContext), emitter, asDefinition, excludens, ignoreVirtual:ignoreVirtual, nomodule: nomodule);
         }
 
         public static string DefinitionToJsName(IType type, IEmitter emitter, bool ignoreLiteralName = true)
@@ -743,12 +750,15 @@ namespace Bridge.Contract
 
             if (currentTypeInfo != null && module != null)
             {
-                if (!module.PreventModuleName || type.TypeInfo != null)
+                if(emitter.Tag != "TS" || currentTypeInfo.Module == null || !currentTypeInfo.Module.Equals(module))
                 {
-                    moduleName = module.ExportAsNamespace;
-                }
+                    if (!module.PreventModuleName || type.TypeInfo != null)
+                    {
+                        moduleName = module.ExportAsNamespace;
+                    }
 
-                EnsureDependencies(type, emitter, currentTypeInfo, module);
+                    EnsureDependencies(type, emitter, currentTypeInfo, module);
+                }                
             }
 
             return GetCustomName(name, type, excludeNs, isNested, ref isCustomName, moduleName);
@@ -976,19 +986,16 @@ namespace Bridge.Contract
             {
                 return "any[]";
             }
-
+            
             if (type.IsKnownType(KnownTypeCode.Byte) ||
                 type.IsKnownType(KnownTypeCode.Char) ||
-                type.IsKnownType(KnownTypeCode.Decimal) ||
                 type.IsKnownType(KnownTypeCode.Double) ||
                 type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
-                type.IsKnownType(KnownTypeCode.Int64) ||
                 type.IsKnownType(KnownTypeCode.SByte) ||
                 type.IsKnownType(KnownTypeCode.Single) ||
                 type.IsKnownType(KnownTypeCode.UInt16) ||
-                type.IsKnownType(KnownTypeCode.UInt32) ||
-                type.IsKnownType(KnownTypeCode.UInt64))
+                type.IsKnownType(KnownTypeCode.UInt32))
             {
                 return "number";
             }
@@ -1115,18 +1122,15 @@ namespace Bridge.Contract
                     case KnownTypeCode.String:
                         return "string";
 
-                    case KnownTypeCode.Decimal:
                     case KnownTypeCode.Double:
                     case KnownTypeCode.Byte:
                     case KnownTypeCode.Char:
                     case KnownTypeCode.Int16:
                     case KnownTypeCode.Int32:
-                    case KnownTypeCode.Int64:
                     case KnownTypeCode.SByte:
                     case KnownTypeCode.Single:
                     case KnownTypeCode.UInt16:
                     case KnownTypeCode.UInt32:
-                    case KnownTypeCode.UInt64:
                         return "number";
                 }
             }
@@ -1134,14 +1138,14 @@ namespace Bridge.Contract
             return null;
         }
 
-        public static Tuple<string, string> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
+        public static Tuple<string, string, Module> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
         {
             var ns = typeInfo.GetNamespace(emitter, true);
             var fileName = ns ?? typeInfo.GetNamespace(emitter);
             var module = typeInfo.Module;
             string moduleName = null;
 
-            if (module != null)
+            if (module != null && module.Type == ModuleType.UMD)
             {
                 if (!module.PreventModuleName)
                 {
@@ -1151,6 +1155,10 @@ namespace Bridge.Contract
                 if (!String.IsNullOrEmpty(moduleName))
                 {
                     ns = string.IsNullOrWhiteSpace(ns) ? moduleName : (moduleName + "." + ns);
+                }
+                else
+                {
+                    module = null;
                 }
             }
 
@@ -1196,7 +1204,7 @@ namespace Bridge.Contract
                     break;
             }
 
-            return new Tuple<string, string>(ns, fileName);
+            return new Tuple<string, string, Module>(ns, fileName, module);
         }
     }
 }

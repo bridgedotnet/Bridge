@@ -34,8 +34,8 @@ Resources:
     Test.BridgeIssues.N475B.js    0.880 KB
     Test.BridgeIssues.N477.js     2.373 KB
     Test.BridgeIssues.N524.js     0.412 KB
-    Test.BridgeIssues.N527.js     0.731 KB
-    Test.BridgeIssues.N528.js     0.747 KB
+    Test.BridgeIssues.N527.js     1.229 KB
+    Test.BridgeIssues.N528.js     1.403 KB
     Test.BridgeIssues.N534.js     0.812 KB
     Test.BridgeIssues.N542.js     0.584 KB
     Test.BridgeIssues.N557.js     0.440 KB
@@ -46,4 +46,4 @@ Resources:
     Test.BridgeIssues.N883.js     0.392 KB
     Test.BridgeIssues.N883A.js    0.793 KB
     Test.BridgeIssues.N963.js     0.493 KB
-    TestProject.meta.js          26.918 KB
+    TestProject.meta.js          26.048 KB

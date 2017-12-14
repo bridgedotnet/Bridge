@@ -1,6 +1,14 @@
+// See all bridge.json configuration options at:
+// https://github.com/bridgedotnet/Bridge/wiki/global-configuration
+
 {
   // The folder to output JavaScript (.js) files.
   "output": "$(OutDir)/bridge/",
+
+  // Set to "Minified" to generate .min.js files.
+  // Set to "Both" to generate both minified and non-minified .js files.
+  // "Formatted" generates non-minified .js files.
+  "outputFormatting": "Formatted",
 
   // Enable the Bridge Console.
   // Default is false.
@@ -28,10 +36,10 @@
   // Default is false
   "cleanOutputFolderBeforeBuild": false,
 
-  // Set to false to disable Report generation.
+  // Set to true to enable bridge.report.log generation.
   // Default is false.
   "report": {
-    "enabled": true
+    "enabled": false
   },
 
   // Rules to manage generated JavaScript syntax.
@@ -44,7 +52,4 @@
     "integer": "Managed",
     "lambda": "Plain"
   }
-
-  // More config options available at
-  // https://github.com/bridgedotnet/Bridge/wiki/global-configuration
 }

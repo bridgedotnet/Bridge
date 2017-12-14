@@ -864,6 +864,19 @@ namespace Bridge.Translator
             }
         }
 
+        public string Tag
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public Dictionary<string, bool> TempVariables
         {
             get
