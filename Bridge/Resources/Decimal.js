@@ -220,7 +220,7 @@
     };
 
     System.Decimal.prototype.equals = function (v) {
-        if (v instanceof System.Decimal) {
+        if (v instanceof System.Decimal || typeof v === "number") {
             return !this.compareTo(v);
         }
 

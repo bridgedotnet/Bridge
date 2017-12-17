@@ -120,6 +120,7 @@
         "Resources/.generated/system/collections/generic/stack/enumerator.js",
         "Resources/.generated/system/collections/hashHelpers.js",
         "Resources/.generated/system/componentModel/browsableAttribute.js",
+        "Resources/.generated/system/componentModel/defaultValueAttribute.js",
         "Resources/.auxiliary/End.js",
         "Resources/.auxiliary/Finally.js"
       ]
