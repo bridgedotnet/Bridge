@@ -225,6 +225,7 @@ namespace Bridge.Translator
         private IList<AssemblyDefinition> GetParentAssemblies(AssemblyDefinition asm, List<AssemblyDefinition> list = null)
         {
             bool endPoint = list == null;
+            bool needed_resolve;
 
             if (endPoint)
             {
@@ -246,16 +247,29 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                var assemblyReference = asm.MainModule.AssemblyResolver.Resolve(assemblyReferenceName);
+                AssemblyDefinition assemblyReference = References.Where(r => r.Name.Name == assemblyReferenceName.Name).FirstOrDefault();
 
-                if(assemblyReference.MainModule.Kind != ModuleKind.Dll)
+                needed_resolve = assemblyReference == default(AssemblyDefinition);
+
+                if (needed_resolve)
                 {
+                    throw new InvalidOperationException(assemblyReferenceName.Name + " should be already resolved at this point.");
+                }
+
+                if (assemblyReference.MainModule.Kind != ModuleKind.Dll)
+                {
+                    Log.Trace("GetParentAssemblies(): Assembly '" + assemblyReference.FullName + "' is not a DLL assembly.");
                     continue;
                 }
 
                 if (list.All(r => r.FullName != assemblyReference.FullName))
                 {
                     list.Add(assemblyReference);
+                    Log.Trace("GetParentAssemblies(): Assembly '" + assemblyReference.FullName + "' added.");
+                }
+                else
+                {
+                    Log.Trace("GetParentAssemblies(): Assembly '" + assemblyReference.FullName + "' already present.");
                 }
 
                 GetParentAssemblies(assemblyReference, list);
