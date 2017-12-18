@@ -20,6 +20,11 @@ namespace Bridge.Translator.Logging
             OutputMessage(message, ConsoleColor.Red, LoggerLevel.Error);
         }
 
+        public void Error(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+        {
+            Error(message);
+        }
+
         public void Warn(string message)
         {
             OutputMessage(message, ConsoleColor.DarkYellow, LoggerLevel.Warning);

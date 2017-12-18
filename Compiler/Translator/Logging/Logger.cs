@@ -84,6 +84,21 @@ namespace Bridge.Translator.Logging
 
         }
 
+        public void Error(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+        {
+            string wrappedMessage;
+
+            foreach (var logger in this.LoggerWriters)
+            {
+                var alwaysLogErrors = logger.AlwaysLogErrors;
+
+                if ((wrappedMessage = CheckIfCanLog(message, LoggerLevel.Error, alwaysLogErrors)) != null)
+                {
+                    logger.Error(wrappedMessage, file, lineNumber, columnNumber, endLineNumber, endColumnNumber);
+                }
+            }
+        }
+
         public void Warn(string message)
         {
             string wrappedMessage;

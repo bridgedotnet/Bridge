@@ -145,40 +145,25 @@ namespace Bridge.Build
             }
             catch (EmitterException ex)
             {
-                if (logger != null)
-                {
-                    logger.Error(ex.ToString());
-                }
-                else
-                {
-                    this.Log.LogError(null, null, null, ex.FileName, ex.StartLine + 1, ex.StartColumn + 1, ex.EndLine + 1, ex.EndColumn + 1, ex.ToString());
-                }
+                var errMsg = $"{ex.Message} {ex.StackTrace}";
+
+                logger.Error(errMsg, ex.FileName, ex.StartLine + 1, ex.StartColumn + 1, ex.EndLine + 1, ex.EndColumn + 1);
 
                 success = false;
             }
             catch (Exception ex)
             {
+                var errMsg = $"{ex.Message} {ex.StackTrace}";
+
                 var ee = processor.Translator != null ? processor.Translator.CreateExceptionFromLastNode() : null;
 
                 if (ee != null)
                 {
-                    if (logger != null)
-                    {
-                        logger.Error(ee.ToString());
-                    }
-
-                    this.Log.LogError(null, null, null, ee.FileName, ee.StartLine + 1, ee.StartColumn + 1, ee.EndLine + 1, ee.EndColumn + 1, ee.ToString());
+                    logger.Error(errMsg, ee.FileName, ee.StartLine + 1, ee.StartColumn + 1, ee.EndLine + 1, ee.EndColumn + 1);
                 }
                 else
                 {
-                    if (logger != null)
-                    {
-                        logger.Error(ex.ToString());
-                    }
-                    else
-                    {
-                        this.Log.LogError(ex.ToString());
-                    }
+                    logger.Error(errMsg);
                 }
 
                 success = false;

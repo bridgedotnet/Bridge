@@ -14,6 +14,8 @@ namespace Bridge.Contract
 
         void Error(string message);
 
+        void Error(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber);
+
         void Info(string message);
 
         void Trace(string message);
