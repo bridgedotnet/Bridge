@@ -39,6 +39,17 @@ namespace Bridge.Build
             this.Log.LogError(message);
         }
 
+        public void Error(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+        {
+            if (!this.CheckLoggerLevel(LoggerLevel.Error))
+            {
+                return;
+            }
+
+            DebugMessage(message);
+            this.Log.LogError(null, null, null, file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message);
+        }
+
         public void Warn(string message)
         {
             if (!this.CheckLoggerLevel(LoggerLevel.Warning))

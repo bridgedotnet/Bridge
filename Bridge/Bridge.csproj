@@ -115,6 +115,7 @@
     <Compile Include="System\Collections\Generic\Queue.cs" />
     <Compile Include="System\Collections\Generic\Stack.cs" />
     <Compile Include="System\Collections\HashHelpers.cs" />
+    <Compile Include="System\ComponentModel\DefaultValueAttribute.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociationAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\CompareAttribute.cs" />
@@ -486,6 +487,7 @@
     <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
     <Content Include="Resources\.generated\system\collections\objectModel\readOnlyCollection.js" />
     <Content Include="Resources\.generated\system\componentModel\browsableAttribute.js" />
+    <Content Include="Resources\.generated\system\componentModel\defaultValueAttribute.js" />
     <Content Include="Resources\.generated\system\console.js" />
     <Content Include="Resources\.generated\system\dateTimeKind.js" />
     <Content Include="Resources\.generated\system\dayOfWeek.js" />
