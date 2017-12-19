@@ -27197,6 +27197,54 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308", {
+        statics: {
+            methods: {
+                TestArrayUnbox: function () {
+                    var a1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(10);
+                    var a2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(10);
+                    var a3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(-10);
+
+                    Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(a1, a2));
+                    Bridge.Test.NUnit.Assert.True(a1.equals(a2));
+                    Bridge.Test.NUnit.Assert.False(a1.equals(a3));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A", {
+        fields: {
+            val: 0
+        },
+        props: {
+            Val: {
+                get: function () {
+                    return this.val;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (v) {
+                this.$initialize();
+                this.val = v;
+            }
+        },
+        methods: {
+            equals: function (o) {
+                var a = Bridge.cast(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A);
+                if (a.Val < 0) {
+                    return Bridge.equals(this, o);
+                } else {
+                    return this.Val === a.Val;
+                }
+            },
+            getHashCode: function () {
+                return Bridge.getHashCode(this);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
