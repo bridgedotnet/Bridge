@@ -35,15 +35,20 @@ namespace Bridge.Translator.TypeScript
             var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
             var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
-            this.WriteSignature(methodDeclaration, overloads, ignoreInterface);
+            this.WriteSignature(methodDeclaration, overloads, ignoreInterface, isInterface);
             if (!ignoreInterface && isInterface)
             {
-                this.WriteSignature(methodDeclaration, overloads, true);
+                this.WriteSignature(methodDeclaration, overloads, true, isInterface);
             }
         }
 
-        private void WriteSignature(MethodDeclaration methodDeclaration, OverloadsCollection overloads, bool ignoreInterface)
+        private void WriteSignature(MethodDeclaration methodDeclaration, OverloadsCollection overloads, bool ignoreInterface, bool isInterface)
         {
+            if (!isInterface && !methodDeclaration.HasModifier(Modifiers.Public))
+            {
+                return;
+            }
+
             string name = overloads.GetOverloadName(ignoreInterface);
             this.Write(name);
 

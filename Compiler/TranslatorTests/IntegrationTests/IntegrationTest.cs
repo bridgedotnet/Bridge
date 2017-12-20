@@ -165,6 +165,11 @@ namespace Bridge.Translator.Tests
                 {
                     specialFiles.Add(item.Key, item.Value);
                 }
+
+                if (folder == "11")
+                {
+                    specialFiles.Add("TestProject.meta.js", CompareMode.Presence);
+                }
             }
 
             if (markedContentFiles != null)

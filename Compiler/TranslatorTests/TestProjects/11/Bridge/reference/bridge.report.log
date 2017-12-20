@@ -3,15 +3,17 @@ Resources:
     Issue2493.js                       0.243 KB
     Issue3276.js                       1.233 KB
     Issue3278.js                       0.459 KB
+    Issue3309.js                       0.963 KB
     N3208_0_originalReport.js          1.223 KB
     N3208_1_AndreyReview1.js           1.830 KB
     TestProject1.js                    0.181 KB
     TestProject2.js                    0.181 KB
-    TestProject.meta.js                3.170 KB
+    TestProject.meta.js                4.172 KB
     TestProject.d.ts                   0.342 KB
     Issue2493.d.ts                     0.266 KB
     Issue3276.d.ts                     1.132 KB
     Issue3278.d.ts                     0.510 KB
+    Issue3309.d.ts                     0.517 KB
     N3208_1_AndreyReview1.d.ts         0.216 KB
     TestProject1.d.ts                  0.250 KB
     TestProject2.d.ts                  0.248 KB

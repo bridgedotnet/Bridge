@@ -29,6 +29,12 @@ namespace Bridge.Translator.TypeScript
         protected virtual void EmitPropertyMethod(PropertyDeclaration propertyDeclaration)
         {
             var memberResult = this.Emitter.Resolver.ResolveNode(propertyDeclaration, this.Emitter) as MemberResolveResult;
+            var isInterface = memberResult != null && memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
+
+            if (!isInterface && !propertyDeclaration.HasModifier(Modifiers.Public))
+            {
+                return;
+            }
 
             if (memberResult != null &&
                 propertyDeclaration.Getter.IsNull && propertyDeclaration.Setter.IsNull)
@@ -39,7 +45,7 @@ namespace Bridge.Translator.TypeScript
             if (!propertyDeclaration.Getter.IsNull && this.Emitter.GetInline(propertyDeclaration.Getter) == null)
             {
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
-                var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
+                
                 var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
                 this.WriteAccessor(propertyDeclaration, memberResult, ignoreInterface);

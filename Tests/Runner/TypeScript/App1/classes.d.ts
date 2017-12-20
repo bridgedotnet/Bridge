@@ -24,7 +24,6 @@ declare namespace Classes {
     export interface MovePointFunc extends Function {
         prototype: MovePoint;
         new (): MovePoint;
-        Move(p: Classes.Point, dx: number, dy: number): Classes.Point;
     }
     var MovePoint: MovePointFunc;
 

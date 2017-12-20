@@ -4,7 +4,7 @@ namespace TypeScript.Issues
 
     public class N2911
     {
-        private static void initButton_Clicked(MouseEvent<HTMLButtonElement> arg)
+        public static void initButton_Clicked(MouseEvent<HTMLButtonElement> arg)
         {
             // Should build non generic TS initButton_Clicked(arg: MouseEvent): void;
         }

@@ -100,7 +100,6 @@ declare namespace Generics {
     var GenericNew$1: GenericNew$1Func;
 
     export interface INamedEntity {
-        Name: string;
     }
     export interface INamedEntityFunc extends Function {
         prototype: INamedEntity;
