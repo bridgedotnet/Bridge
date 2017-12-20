@@ -483,7 +483,10 @@
             if (typeof Bridge.global.jQuery !== "undefined") {
                 Bridge.global.jQuery(delayfn);
             } else {
-                if (typeof Bridge.global.document === "undefined" || Bridge.global.document.readyState === "complete" || Bridge.global.document.readyState === "loaded") {
+                if (typeof Bridge.global.document === "undefined" ||
+                    Bridge.global.document.readyState === "complete" ||
+                    Bridge.global.document.readyState === "loaded" ||
+                    Bridge.global.document.readyState === "interactive") {
                     delayfn();
                 } else {
                     Bridge.on("DOMContentLoaded", Bridge.global.document, delayfn);
