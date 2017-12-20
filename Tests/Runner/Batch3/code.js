@@ -27197,17 +27197,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in ensuring that overriding the Equals
+     method for classes does not result in infinite recursion in
+     generated JavaScript code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308", {
         statics: {
             methods: {
-                TestArrayUnbox: function () {
+                /**
+                 * The test just checks results in situations where the recursion loop
+                 would otherwise happen.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308
+                 * @return  {void}
+                 */
+                TestEqualsOverride: function () {
                     var a1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(10);
                     var a2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(10);
                     var a3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.A(-10);
 
-                    Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(a1, a2));
-                    Bridge.Test.NUnit.Assert.True(a1.equals(a2));
-                    Bridge.Test.NUnit.Assert.False(a1.equals(a3));
+                    Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(a1, a2), "Could compare (==) two variables that are different instances of the same class with same value.");
+                    Bridge.Test.NUnit.Assert.True(a1.equals(a2), "Different instances of same class with same value .Equals() to true.");
+                    Bridge.Test.NUnit.Assert.False(a1.equals(a3), "Different instances of same class with different value .Equals() to false.");
                 }
             }
         }

@@ -693,7 +693,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3273 - TestAssemblyGetCustomAttributes", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3273.TestAssemblyGetCustomAttributes);
             QUnit.test("#3292 - TestImplicitOpCallForInterfaces", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3292.TestImplicitOpCallForInterfaces);
             QUnit.test("#3293 - TestDateTimeComparisons", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3293.TestDateTimeComparisons);
-            QUnit.test("#3308 - TestArrayUnbox", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3308.TestArrayUnbox);
+            QUnit.test("#3308 - TestEqualsOverride", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3308.TestEqualsOverride);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -14545,10 +14545,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308)],
         statics: {
             methods: {
-                TestArrayUnbox: function (assert) {
+                TestEqualsOverride: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3308, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayUnbox()", $t.Line = "39", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.TestArrayUnbox();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3308, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEqualsOverride()", $t.Line = "48", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3308.TestEqualsOverride();
                 }
             }
         },
