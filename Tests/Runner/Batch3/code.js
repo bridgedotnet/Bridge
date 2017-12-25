@@ -24452,8 +24452,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -27259,6 +27261,113 @@ Bridge.$N1391Result =                     r;
             },
             getHashCode: function () {
                 return Bridge.getHashCode(this);
+            }
+        }
+    });
+
+    /**
+     * The tests here should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
+     Ensures that HTML attributes are being processed correctly 
+     even if incorrect names of properties are being requested.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331", {
+        statics: {
+            fields: {
+                NameAttr: null,
+                ValueAttr: null
+            },
+            ctors: {
+                init: function () {
+                    this.NameAttr = "name";
+                    this.ValueAttr = "value";
+                }
+            },
+            methods: {
+                /**
+                 * Should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
+                 Checks that "Bridge.getEnumerator()" is able to processs HTML attribute collection represented by {@link }.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @return  {void}
+                 */
+                TestHtmlAttributesIteration: function () {
+                    var $t;
+                    var el = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.InitElementWithAttributes();
+
+                    var index = 0;
+
+                    $t = Bridge.getEnumerator(el.attributes);
+                    try {
+                        while ($t.moveNext()) {
+                            var attr = $t.Current;
+                            Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.VerifyAttributeNode(Bridge.identity(index, (index = (index + 1) | 0)), attr);
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }},
+                /**
+                 * Should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
+                 Checks that "Bridge.equals()" is able to process HTML attributes.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @return  {void}
+                 */
+                TestHtmlAttributesEquality: function () {
+                    var el = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.InitElementWithAttributes();
+
+                    var attr0 = el.attributes[0];
+                    var attr1 = el.attributes[1];
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(attr0, attr0), "Attribute #1 equals to itself.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(attr0, attr1), "Attribute #1 does not equal to Attribute #2.");
+                },
+                /**
+                 * Should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
+                 Checks that "Bridge.equals()" is able to process HTML attributes.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331
+                 * @return  {void}
+                 */
+                TestHtmlAttributeCollectionsEquality: function () {
+                    var el1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.InitElementWithAttributes();
+                    var el2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.InitElementWithAttributes();
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(el1, el1), "Attributes Collection #1 equals to itself.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.equals(el1, el2), "Attributes Collection #1 does not equal to Attribute Collection #2.");
+                },
+                InitElementWithAttributes: function () {
+                    var el = document.createElement("input");
+
+                    el.setAttribute(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.NameAttr, "test name");
+                    el.setAttribute(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.ValueAttr, "test val");
+
+                    return el;
+                },
+                VerifyAttributeNode: function (index, node) {
+                    var attrName = node.nodeName;
+
+                    if (index === 0) {
+                        Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.NameAttr, attrName, "Attribute 'name' could be processed.");
+                    } else if (index === 1) {
+                        Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3331.ValueAttr, attrName, "Attribute 'value' could be processed.");
+                    } else {
+                        throw new System.IndexOutOfRangeException("Unexpected attribute index.");
+                    }
+                }
             }
         }
     });

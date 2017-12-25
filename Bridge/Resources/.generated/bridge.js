@@ -409,7 +409,7 @@
 
             var name;
 
-            if (Bridge.isFunction(obj[name = "System$ICloneable$clone"])) {
+            if (Bridge.isFunction(Bridge.getProperty(obj, name = "System$ICloneable$clone"))) {
                 return obj[name]();
             }
 
@@ -1048,15 +1048,15 @@
 
             var name;
 
-            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(obj, name = "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"))) {
                 return obj[name]();
             }
 
-            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$getEnumerator"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(obj, name = "System$Collections$Generic$IEnumerable$1$getEnumerator"))) {
                 return obj[name]();
             }
 
-            if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
+            if (Bridge.isFunction(Bridge.getProperty(obj, name = "System$Collections$IEnumerable$getEnumerator"))) {
                 return obj[name]();
             }
 
@@ -1083,6 +1083,29 @@
             }
 
             return names;
+        },
+
+        getProperty: function (obj, propertyName) {
+            if(Bridge.isHtmlAttributeCollection(obj) && !this.isValidHtmlAttributeName(propertyName)) {
+                return undefined;
+            }
+
+            return obj[propertyName];
+        },
+
+        isValidHtmlAttributeName : function(name) {
+            // https://html.spec.whatwg.org/multipage/syntax.html#attributes-2
+
+            if (!name || !name.length) {
+                return false;
+            }
+
+            var r = /^[a-zA-Z_][\w\-]*$/;
+            return r.test(name);
+        },
+
+        isHtmlAttributeCollection: function (obj) {
+            return typeof obj !== "undefined" && (Object.prototype.toString.call(obj) === "[object NamedNodeMap]");
         },
 
         isDefined: function (value, noNull) {
@@ -1360,15 +1383,15 @@
 
             var name;
 
-            if (T && Bridge.isFunction(a[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(a, name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"))) {
                 return a[name](b);
             }
 
-            if (T && Bridge.isFunction(a[name = "System$IComparable$1$compareTo"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(a, name = "System$IComparable$1$compareTo"))) {
                 return a[name](b);
             }
 
-            if (Bridge.isFunction(a[name = "System$IComparable$compareTo"])) {
+            if (Bridge.isFunction(Bridge.getProperty(a, name = "System$IComparable$compareTo"))) {
                 return a[name](b);
             }
 
@@ -1376,15 +1399,15 @@
                 return a.compareTo(b);
             }
 
-            if (T && Bridge.isFunction(b[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(b, name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"))) {
                 return -b[name](a);
             }
 
-            if (T && Bridge.isFunction(b[name = "System$IComparable$1$compareTo"])) {
+            if (T && Bridge.isFunction(Bridge.getProperty(b, name = "System$IComparable$1$compareTo"))) {
                 return -b[name](a);
             }
 
-            if (Bridge.isFunction(b[name = "System$IComparable$compareTo"])) {
+            if (Bridge.isFunction(Bridge.getProperty(b, name = "System$IComparable$compareTo"))) {
                 return -b[name](a);
             }
 
@@ -1422,11 +1445,11 @@
 
             var name;
 
-            if (T && a != null && Bridge.isFunction(a[name = "System$IEquatable$1$" + Bridge.getTypeAlias(T) + "$equalsT"])) {
+            if (T && a != null && Bridge.isFunction(Bridge.getProperty(a, name = "System$IEquatable$1$" + Bridge.getTypeAlias(T) + "$equalsT"))) {
                 return a[name](b);
             }
 
-            if (T && b != null && Bridge.isFunction(b[name = "System$IEquatable$1$" + Bridge.getTypeAlias(T) + "$equalsT"])) {
+            if (T && b != null && Bridge.isFunction(Bridge.getProperty(b, name = "System$IEquatable$1$" + Bridge.getTypeAlias(T) + "$equalsT"))) {
                 return b[name](a);
             }
 
@@ -1456,7 +1479,7 @@
 
             var name;
 
-            if (Bridge.isFunction(obj[name = "System$IFormattable$format"])) {
+            if (Bridge.isFunction(Bridge.getProperty(obj, name = "System$IFormattable$format"))) {
                 return obj[name](formatString, provider);
             }
 
