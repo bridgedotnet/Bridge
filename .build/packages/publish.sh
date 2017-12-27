@@ -8,6 +8,7 @@ otherpkgs=(
  "Bridge.Clean:Bridge"
  "Bridge.Newtonsoft.Json:"
  "Bridge.Test:"
+ "Bridge.Test.Core:Test"
  "Bridge.Aspect:"
 )
 #otherpkgs=("Bridge.Test:")

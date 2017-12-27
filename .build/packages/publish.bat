@@ -49,6 +49,9 @@ IF "%proceed2%"=="y" (
     ..\..\.nuget\NuGet.exe push Bridge.WebGL.1.10.0.nupkg  %apikey%
     ECHO Bridge.WebGL has been published
 
+    ..\..\.nuget\NuGet.exe push Bridge.Test.Core.1.1.0.nupkg  %apikey%
+    ECHO Bridge.Test has been published
+
     ..\..\.nuget\NuGet.exe push Bridge.Test.1.1.0.nupkg  %apikey%
     ECHO Bridge.Test has been published
 
