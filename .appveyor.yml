@@ -29,7 +29,7 @@ skip_tags: true
 #---------------------------------#
 
 # Operating system (build VM template)
-os: Visual Studio 2015 RC
+image: Visual Studio 2017
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -57,7 +57,7 @@ cache:
 # scripts that run after cloning repository
 install:
 #  - ps: (New-Object Net.WebClient).DownloadFile('https://dist.nuget.org/win-x86-commandline/v3.5.0/nuget.exe', 'c:\projects\Bridge\nuget\nuget.exe')
-  - cmd: nuget sources add -Name NuGetV3 -Source  https://api.nuget.org/v3/index.json
+#  - cmd: nuget sources add -Name NuGetV3 -Source  https://api.nuget.org/v3/index.json
 #  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Frameworks" "c:\projects\Frameworks"
 #  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Testing" "c:\projects\Testing"
 

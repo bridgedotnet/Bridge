@@ -30,26 +30,26 @@ namespace Bridge.Translator
 
             if (!this.FolderMode)
             {
-                XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
                 XDocument projDefinition = XDocument.Load(this.Location);
+                XNamespace rootNs = projDefinition.Root.Name.Namespace;
                 var helper = new ConfigHelper<AssemblyInfo>(this.Log);
                 var tokens = this.ProjectProperties.GetValues();
 
                 referencesPathes = projDefinition
-                    .Element(msbuild + "Project")
-                    .Elements(msbuild + "ItemGroup")
-                    .Elements(msbuild + "Reference")
+                    .Element(rootNs + "Project")
+                    .Elements(rootNs + "ItemGroup")
+                    .Elements(rootNs + "Reference")
                     .Where(el => (el.Attribute("Include")?.Value != "System") && (el.Attribute("Condition") == null || el.Attribute("Condition").Value.ToLowerInvariant() != "false"))
-                    .Select(refElem => (refElem.Element(msbuild + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(msbuild + "HintPath").Value))
+                    .Select(refElem => (refElem.Element(rootNs + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(rootNs + "HintPath").Value))
                     .Select(path => helper.ApplyPathTokens(tokens, Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath)))
                     .ToList();
 
                 var projectReferences = projDefinition
-                    .Element(msbuild + "Project")
-                    .Elements(msbuild + "ItemGroup")
-                    .Elements(msbuild + "ProjectReference")
+                    .Element(rootNs + "Project")
+                    .Elements(rootNs + "ItemGroup")
+                    .Elements(rootNs + "ProjectReference")
                     .Where(el => el.Attribute("Condition") == null || el.Attribute("Condition").Value.ToLowerInvariant() != "false")
-                    .Select(refElem => (refElem.Element(msbuild + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(msbuild + "HintPath").Value))
+                    .Select(refElem => (refElem.Element(rootNs + "HintPath") == null ? (refElem.Attribute("Include") == null ? "" : refElem.Attribute("Include").Value) : refElem.Element(rootNs + "HintPath").Value))
                     .Select(path => helper.ApplyPathTokens(tokens, Path.IsPathRooted(path) ? path : Path.GetFullPath((new Uri(Path.Combine(baseDir, path))).LocalPath)))
                     .ToArray();
 

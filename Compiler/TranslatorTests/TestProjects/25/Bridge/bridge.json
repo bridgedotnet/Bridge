@@ -1,0 +1,7 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "outputBy": "namespace",
+  "outputFormatting": "Formatted",
+  "generateDocumentation": "Full"
+}
