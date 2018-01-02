@@ -87,7 +87,7 @@ namespace Bridge.Translator
             protected set;
         }
 
-        public IList<ParsedSourceFile> ParsedSourceFiles
+        public ParsedSourceFile[] ParsedSourceFiles
         {
             get;
             protected set;

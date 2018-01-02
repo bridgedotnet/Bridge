@@ -284,7 +284,7 @@ namespace Bridge.Translator
             inspector.AssemblyInfo = config;
             inspector.Resolver = resolver;
 
-            for (int i = 0; i < this.ParsedSourceFiles.Count; i++)
+            for (int i = 0; i < this.ParsedSourceFiles.Length; i++)
             {
                 var sourceFile = this.ParsedSourceFiles[i];
                 this.Log.Trace("Visiting syntax tree " + (sourceFile != null && sourceFile.ParsedFile != null && sourceFile.ParsedFile.FileName != null ? sourceFile.ParsedFile.FileName : ""));
@@ -311,16 +311,14 @@ namespace Bridge.Translator
             return result;
         }
 
-    protected void BuildSyntaxTree()
+        protected void BuildSyntaxTree()
         {
             this.Log.Info("Building syntax tree...");
 
             var rewriten = Rewrite();
 
-            for (int i = 0; i < this.SourceFiles.Count; i++)
+            Task.WaitAll(this.SourceFiles.Select((fileName, index) => Task.Run(() =>
             {
-                var fileName = this.SourceFiles[i];
-
                 this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
 
                 var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
@@ -333,7 +331,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                var syntaxTree = parser.Parse(rewriten[i], fileName);
+                var syntaxTree = parser.Parse(rewriten[index], fileName);
                 syntaxTree.FileName = fileName;
                 //var syntaxTree = parser.Parse(reader, fileName);
                 this.Log.Trace("\tParsing syntax tree done");
@@ -368,14 +366,14 @@ namespace Bridge.Translator
                 {
                     FileName = fileName
                 });
-                this.ParsedSourceFiles.Add(f);
+                this.ParsedSourceFiles[index] = f;
 
                 var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
                 f.SyntaxTree.AcceptVisitor(tcv);
                 this.Log.Trace("\tAccepting type system convert visitor done");
 
                 this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
-            }
+            })).ToArray());
 
             this.Log.Info("Building syntax tree done");
         }

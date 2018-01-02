@@ -23,7 +23,8 @@ namespace Bridge.Translator
         private SemanticModel semanticModel;
         private List<MemberDeclarationSyntax> fields;
         private int tempKey = 1;
-
+        private Stack<ITypeSymbol> currentType;
+        private bool hasStaticUsingOrAliases;
         public SharpSixRewriter(ITranslator translator)
         {
             this.translator = translator;
@@ -40,6 +41,8 @@ namespace Bridge.Translator
 
         public string Rewrite(int index)
         {
+            this.currentType = new Stack<ITypeSymbol>();
+
             var syntaxTree = this.compilation.SyntaxTrees[index];
             this.semanticModel = this.compilation.GetSemanticModel(syntaxTree, true);
             var result = this.Visit(syntaxTree.GetRoot());
@@ -366,26 +369,27 @@ namespace Bridge.Translator
         {
             if (node.StaticKeyword.RawKind == (int)SyntaxKind.StaticKeyword)
             {
+                this.hasStaticUsingOrAliases = true;
                 return null;
+            }
+            if (node.Alias != null)
+            {
+                this.hasStaticUsingOrAliases = true;
             }
             return base.VisitUsingDirective(node);
         }
 
         public override SyntaxNode VisitGenericName(GenericNameSyntax node)
         {
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-            var nodeParent = node.Parent;
-            var parent = nodeParent;
-            while (parent != null && !(parent is TypeDeclarationSyntax))
+            if (!this.hasStaticUsingOrAliases)
             {
-                parent = parent.Parent;
+                return base.VisitGenericName(node);
             }
 
-            ITypeSymbol thisType = null;
-            if (parent is TypeDeclarationSyntax)
-            {
-                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
-            }
+            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            var nodeParent = node.Parent;
+
+            ITypeSymbol thisType = this.currentType.Count == 0 ? null : this.currentType.Peek();
 
             bool needHandle = !node.IsVar &&
                               symbol is ITypeSymbol &&
@@ -449,20 +453,15 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
         {
+            if (!this.hasStaticUsingOrAliases)
+            {
+                return base.VisitIdentifierName(node);
+            }
+
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             var isAlias = semanticModel.GetAliasInfo(node) != null;
 
-            var parent = node.Parent;
-            while (parent != null && !(parent is TypeDeclarationSyntax))
-            {
-                parent = parent.Parent;
-            }
-
-            ITypeSymbol thisType = null;
-            if (parent is TypeDeclarationSyntax)
-            {
-                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
-            }
+            ITypeSymbol thisType = this.currentType.Count == 0 ? null : this.currentType.Peek();
 
             bool needHandle = !isAlias &&
                               !node.IsVar &&
@@ -531,33 +530,43 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
-            var symbol = semanticModel.GetSymbolInfo(node.Expression).Symbol;
-            var symbolNode = semanticModel.GetSymbolInfo(node).Symbol;
+            var oldNode = node;
+            var symbol = new Lazy<ISymbol>(() => semanticModel.GetSymbolInfo(oldNode.Expression).Symbol);
+            var symbolNode = new Lazy<ISymbol>(() => semanticModel.GetSymbolInfo(oldNode).Symbol);
 
-            var parent = node.Parent;
-            while (parent != null && !(parent is TypeDeclarationSyntax))
-            {
-                parent = parent.Parent;
-            }
+            ITypeSymbol thisType = this.currentType.Count == 0 ? null : this.currentType.Peek();
 
-            ITypeSymbol thisType = null;
-            if (parent is TypeDeclarationSyntax)
-            {
-                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
-            }
-
-            var usingType = symbol as INamedTypeSymbol;
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
 
-            if (node.Expression is IdentifierNameSyntax && symbol != null && (symbol.IsStatic || usingType != null) && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol || symbol is INamedTypeSymbol))
+            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+                && symbol.Value != null
+                && (symbol.Value.IsStatic || symbol.Value.Kind == SymbolKind.NamedType)
+                && symbol.Value.ContainingType != null
+                && thisType != null
+                && !thisType.InheritsFromOrEquals(symbol.Value.ContainingType)
+                && (symbol.Value.Kind == SymbolKind.Method || symbol.Value.Kind == SymbolKind.Property || symbol.Value.Kind == SymbolKind.Field || symbol.Value.Kind == SymbolKind.Event || symbol.Value.Kind == SymbolKind.NamedType))
             {
-                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                    SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(),
+                        symbol.Value.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart),
+                        node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol || symbol is INamedTypeSymbol))
+            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+                && symbol.Value != null 
+                && symbolNode.Value != null 
+                && symbol.Value.Kind == SymbolKind.NamedType
+                && symbolNode.Value.IsStatic 
+                && symbol.Value.ContainingType != null 
+                && thisType != null && !thisType.InheritsFromOrEquals((ITypeSymbol)symbol.Value) 
+                && !((ITypeSymbol)symbol.Value).IsAccessibleIn(thisType)
+                && (symbol.Value.Kind == SymbolKind.Method || symbol.Value.Kind == SymbolKind.Property || symbol.Value.Kind == SymbolKind.Field || symbol.Value.Kind == SymbolKind.Event || symbol.Value.Kind == SymbolKind.NamedType))
             {
-                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                    SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(),
+                        symbol.Value.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart),
+                        node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
             return node;
@@ -631,6 +640,8 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
         {
+            this.currentType.Push(this.semanticModel.GetDeclaredSymbol(node));
+
             var old = this.fields;
             this.fields = new List<MemberDeclarationSyntax>();
 
@@ -649,12 +660,14 @@ namespace Bridge.Translator
             }
 
             this.fields = old;
+            this.currentType.Pop();
 
             return c;
         }
 
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
+            this.currentType.Push(this.semanticModel.GetDeclaredSymbol(node));
             var oldIndex = this.IndexInstance;
             this.IndexInstance = 0;
             var old = this.fields;
@@ -676,8 +689,17 @@ namespace Bridge.Translator
 
             this.fields = old;
             this.IndexInstance = oldIndex;
+            this.currentType.Pop();
 
             return c;
+        }
+
+        public override SyntaxNode VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
+        {
+            this.currentType.Push(this.semanticModel.GetDeclaredSymbol(node));
+            var newNode = base.VisitInterfaceDeclaration(node);
+            this.currentType.Pop();
+            return node;
         }
 
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -813,7 +835,7 @@ namespace Bridge.Translator
                     var symbolInfo = this.semanticModel.GetCollectionInitializerSymbolInfo(init);
                     var collectionInitializer = symbolInfo.Symbol;
 
-                    if(symbolInfo.Symbol == null && symbolInfo.CandidateSymbols.Length > 0)
+                    if (symbolInfo.Symbol == null && symbolInfo.CandidateSymbols.Length > 0)
                     {
                         collectionInitializer = symbolInfo.CandidateSymbols[0];
                     }
