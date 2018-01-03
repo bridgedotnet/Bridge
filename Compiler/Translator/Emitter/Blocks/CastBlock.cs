@@ -121,7 +121,7 @@ namespace Bridge.Translator
         {
             var itype = this.Emitter.BridgeTypes.ToType(type);
             bool isCastAttr;
-            string castCode = this.GetCastCode(expression, type, out isCastAttr);
+            string castCode = this.GetCastCode(expression, type, method, out isCastAttr);
 
             var enumType = itype;
             if (NullableType.IsNullable(enumType))
@@ -382,7 +382,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual string GetCastCode(Expression expression, AstType astType, out bool isCastAttr)
+        protected virtual string GetCastCode(Expression expression, AstType astType, string op, out bool isCastAttr)
         {
             var resolveResult = this.Emitter.Resolver.ResolveNode(astType, this.Emitter) as TypeResolveResult;
             isCastAttr = false;
@@ -394,10 +394,11 @@ namespace Bridge.Translator
 
             var exprResolveResult = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
             string inline = null;
+            bool isOp = op == CS.Ops.IS;
 
-            var method = this.GetCastMethod(exprResolveResult.Type, resolveResult.Type, out inline);
+            var method = isOp ? null : this.GetCastMethod(exprResolveResult.Type, resolveResult.Type, out inline);
 
-            if (method == null && (NullableType.IsNullable(exprResolveResult.Type) || NullableType.IsNullable(resolveResult.Type)))
+            if (method == null && !isOp && (NullableType.IsNullable(exprResolveResult.Type) || NullableType.IsNullable(resolveResult.Type)))
             {
                 method = this.GetCastMethod(NullableType.IsNullable(exprResolveResult.Type) ? NullableType.GetUnderlyingType(exprResolveResult.Type) : exprResolveResult.Type,
                                             NullableType.IsNullable(resolveResult.Type) ? NullableType.GetUnderlyingType(resolveResult.Type) : resolveResult.Type, out inline);

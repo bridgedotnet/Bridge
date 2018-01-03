@@ -27263,6 +27263,22 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323", {
+        statics: {
+            methods: {
+                TestIsForNullable: function () {
+                    var val = null;
+                    Bridge.Test.NUnit.Assert.False(Bridge.is(val, System.Int32));
+                    Bridge.Test.NUnit.Assert.False(Bridge.hasValue(val));
+
+                    val = 1;
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(val, System.Int32));
+                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(val));
+                }
+            }
+        }
+    });
+
     /**
      * The tests here should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
      Ensures that HTML attributes are being processed correctly 
