@@ -27263,6 +27263,56 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329", {
+        statics: {
+            methods: {
+                TestIsValueType: function () {
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyEnum));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Byte));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.SByte));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int16));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt16));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int32));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt32));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int64));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt64));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Decimal));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Single));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Double));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Boolean));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.DateTime));
+
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.String));
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Enum));
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Object));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyEnum", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                One: 0,
+                Two: 1
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct", {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct(); }
+            }
+        },
+        methods: {
+            $clone: function (to) { return this; }
+        }
+    });
+
     /**
      * The tests here should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
      Ensures that HTML attributes are being processed correctly 
