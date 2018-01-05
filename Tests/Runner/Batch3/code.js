@@ -27296,25 +27296,42 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestIsValueType: function () {
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyEnum));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Byte));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.SByte));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int16));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt16));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int32));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt32));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int64));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt64));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Decimal));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Single));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Double));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Boolean));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.DateTime));
+                    // All these are supposed to be value types
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyEnum), "MyEnum.One is value type.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Byte), "'byte' ('" + (Bridge.Reflection.getTypeFullName(System.Byte) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Boolean), "'bool' ('" + (Bridge.Reflection.getTypeFullName(System.Boolean) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int16), "'short' ('" + (Bridge.Reflection.getTypeFullName(System.Int16) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int32), "'int' ('" + (Bridge.Reflection.getTypeFullName(System.Int32) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int64), "'long' ('" + (Bridge.Reflection.getTypeFullName(System.Int64) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Single), "'float' ('" + (Bridge.Reflection.getTypeFullName(System.Single) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Double), "'double' ('" + (Bridge.Reflection.getTypeFullName(System.Double) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Byte)), "'byte?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Byte)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Boolean)), "'bool?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Boolean)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Int16)), "'short?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int16)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Int32)), "'int?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int32)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Int64)), "'long?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int64)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Single)), "'float?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Single)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Nullable$1(System.Double)), "'double?' ('" + (Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Double)) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct), "'MyStruct' ('" + (Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3329.MyStruct) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Byte), "'System.Byte' ('" + (Bridge.Reflection.getTypeFullName(System.Byte) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.SByte), "'System.SByte' ('" + (Bridge.Reflection.getTypeFullName(System.SByte) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int16), "'System.Int16' ('" + (Bridge.Reflection.getTypeFullName(System.Int16) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt16), "'System.UInt16' ('" + (Bridge.Reflection.getTypeFullName(System.UInt16) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int32), "'System.Int32' ('" + (Bridge.Reflection.getTypeFullName(System.Int32) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt32), "'System.UInt32' ('" + (Bridge.Reflection.getTypeFullName(System.UInt32) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Int64), "'System.Int64' ('" + (Bridge.Reflection.getTypeFullName(System.Int64) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.UInt64), "'System.UInt64' ('" + (Bridge.Reflection.getTypeFullName(System.UInt64) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Decimal), "'System.Decimal' ('" + (Bridge.Reflection.getTypeFullName(System.Decimal) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Single), "'System.Single' ('" + (Bridge.Reflection.getTypeFullName(System.Single) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Double), "'System.Double' ('" + (Bridge.Reflection.getTypeFullName(System.Double) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.Boolean), "'System.Boolean' ('" + (Bridge.Reflection.getTypeFullName(System.Boolean) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isValueType(System.DateTime), "'System.DateTime' ('" + (Bridge.Reflection.getTypeFullName(System.DateTime) || "") + "') is value type");
 
-                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.String));
-                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Enum));
-                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Object));
+                    // These are not supposed to be value types.
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.String), "'string' ('" + (Bridge.Reflection.getTypeFullName(System.String) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.String), "'System.String' ('" + (Bridge.Reflection.getTypeFullName(System.String) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Enum), "'System.Enum' ('" + (Bridge.Reflection.getTypeFullName(System.Enum) || "") + "') is value type");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isValueType(System.Object), "'System.Object' ('" + (Bridge.Reflection.getTypeFullName(System.Object) || "") + "') is value type");
                 }
             }
         }
