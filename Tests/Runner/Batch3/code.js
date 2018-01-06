@@ -27263,22 +27263,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323", {
-        statics: {
-            methods: {
-                TestIsForNullable: function () {
-                    var val = null;
-                    Bridge.Test.NUnit.Assert.False(Bridge.is(val, System.Int32));
-                    Bridge.Test.NUnit.Assert.False(Bridge.hasValue(val));
-
-                    val = 1;
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(val, System.Int32));
-                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(val));
-                }
-            }
-        }
-    });
-
     /**
      * The test here consists in checking whether an array's type name has the
      expected brackets when fetched using reflection.
@@ -27307,6 +27291,38 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3318.Foo");
+
+    /**
+     * The tests here consists in checking whether nullable variables do
+     support the "is" check and results the same as .NET does.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323", {
+        statics: {
+            methods: {
+                /**
+                 * Do the tests against a int nullable variable.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3323
+                 * @return  {void}
+                 */
+                TestIsForNullable: function () {
+                    var val = null;
+                    Bridge.Test.NUnit.Assert.False(Bridge.is(val, System.Int32), "Null nullable int is not int.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.hasValue(val), "Null nullable int is not 'int?'.");
+
+                    val = 1;
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(val, System.Int32), "Nullable int with value is int.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(val), "Nullable int with value is 'int?'.");
+                }
+            }
+        }
+    });
 
     /**
      * The test here consists in checking whether the IsValueType boolean
