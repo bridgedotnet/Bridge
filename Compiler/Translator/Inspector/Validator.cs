@@ -745,6 +745,15 @@ namespace Bridge.Translator
                     this.ReadModuleFromAttribute(type, translator, attr);
                 }
             }
+
+            if (translator.AssemblyInfo.Module != null && type.Module.Assembly.Equals(translator.AssemblyDefinition))
+            {
+                var typeInfo = this.EnsureTypeInfo(type, translator);
+                if (typeInfo.Module == null)
+                {
+                    typeInfo.Module = translator.AssemblyInfo.Module;
+                }
+            }
         }
 
         private void ReadModuleFromAttribute(TypeDefinition type, ITranslator translator, CustomAttribute attr)

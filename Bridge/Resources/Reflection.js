@@ -226,7 +226,9 @@
                 pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
                 nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+            var name = nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+
+            return type.$isArray ? name + "[]" : name;
         },
 
         getTypeNamespace: function (type, name) {

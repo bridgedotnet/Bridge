@@ -1,7 +1,7 @@
 /**
  * @version   : 16.6.1 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -3410,7 +3410,9 @@
                 pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
                 nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+            var name = nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+
+            return type.$isArray ? name + "[]" : name;
         },
 
         getTypeNamespace: function (type, name) {
@@ -8697,8 +8699,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 if (d.ticks === undefined) {
-                    // js getTime() already returns UTC-based counter, so there's no timezone offset to apply.
-                    d.ticks = System.Int64(d.getTime()).mul(10000).add(System.DateTime.minOffset);
+                    if (d.kind === 1) {
+                        d.ticks = System.Int64(d.getTime()).mul(10000).add(System.DateTime.minOffset);
+                    }
+                    else {
+                        d.ticks = System.Int64(d.getTime() - d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
+                    }
                 }
 
                 return d.ticks;
@@ -8757,15 +8763,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 millisecond = (millisecond !== undefined) ? millisecond : 0;
                 kind = (kind !== undefined) ? kind : 0;
 
-                var d = new Date(year, month - 1, day, hour, minute, second, millisecond);
+                var d,
+                    ticks;
+                
+                d = new Date(year, month - 1, day, hour, minute, second, millisecond);
                 d.setFullYear(year);
+
+                ticks = System.DateTime.getTicks(d);
 
                 if (kind === 1) {
                     d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000)
                 }
 
                 d.kind = kind;
-                d.ticks = System.DateTime.getTicks(d);
+                d.ticks = ticks;
                 
                 return d;
             },
@@ -9813,8 +9824,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     d1.setUTCMilliseconds(0);
                 }
 
-                d1.ticks = System.DateTime.getTicks(d1);
                 d1.kind = d.kind;
+                d1.ticks = System.DateTime.getTicks(d1);
 
                 return d1;
             },

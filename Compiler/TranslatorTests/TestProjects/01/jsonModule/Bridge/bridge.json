@@ -1,0 +1,12 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "module": {
+    "name": "Module3335"
+  },
+  "outputFormatting": "Formatted",
+  "report": {
+    "enabled": true,
+    "fileName": "report.log"
+  }
+}

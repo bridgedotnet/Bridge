@@ -1,0 +1,10 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "outputBy": "namespace",
+  "module": {
+    "name": "MyModule"
+  },
+  "outputFormatting": "Formatted",
+  "generateDocumentation": "Full"
+}
