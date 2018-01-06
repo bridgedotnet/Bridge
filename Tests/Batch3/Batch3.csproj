@@ -677,9 +677,11 @@
     <Compile Include="BridgeIssues\3200\N3273.cs" />
     <Compile Include="BridgeIssues\3200\N3292.cs" />
     <Compile Include="BridgeIssues\3200\N3293.cs" />
-    <Compile Include="BridgeIssues\3300\N3323.cs" />
-    <Compile Include="BridgeIssues\3300\N3331.cs" />
     <Compile Include="BridgeIssues\3300\N3308.cs" />
+    <Compile Include="BridgeIssues\3300\N3318.cs" />
+    <Compile Include="BridgeIssues\3300\N3323.cs" />
+    <Compile Include="BridgeIssues\3300\N3329.cs" />
+    <Compile Include="BridgeIssues\3300\N3331.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
@@ -718,8 +720,8 @@
     <Folder Include="BridgeIssues\0200\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bridge.Test, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.1.0\lib\net40\Bridge.Test.dll</HintPath>
+    <Reference Include="Bridge.Test, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Test.Core.1.2.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

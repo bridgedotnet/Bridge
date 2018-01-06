@@ -1,5 +1,5 @@
 /**
- * @version   : 16.6.1 - Bridge.NET
+ * @version   : 16.7.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -3174,8 +3174,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.6.1";
-        Bridge.SystemAssembly.compiler = "16.6.1";
+        Bridge.SystemAssembly.version = "16.7.0";
+        Bridge.SystemAssembly.compiler = "16.7.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -3410,7 +3410,9 @@
                 pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
                 nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+            var name = nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+
+            return type.$isArray ? name + "[]" : name;
         },
 
         getTypeNamespace: function (type, name) {
@@ -3773,6 +3775,7 @@
 
         canAcceptNull: function (type) {
             if (type.$kind === "struct" ||
+                type.$kind === "enum" ||
                 type === System.Decimal ||
                 type === System.Int64 ||
                 type === System.UInt64 ||
@@ -3785,6 +3788,8 @@
                 type === System.Int32 ||
                 type === System.UInt32 ||
                 type === Bridge.Int ||
+                type === System.Boolean ||
+                type === System.DateTime ||
                 type === Boolean ||
                 type === Date ||
                 type === Number) {
@@ -4121,6 +4126,10 @@
             }
 
             return false;
+        },
+
+        isValueType: function (type) {
+            return !Bridge.Reflection.canAcceptNull(type);
         }
     };
 
