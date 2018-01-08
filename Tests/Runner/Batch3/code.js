@@ -27593,6 +27593,29 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346", {
+        statics: {
+            methods: {
+                TestEnumTryParseFail: function () {
+                    var i = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum() };
+                    var result = System.Enum.tryParse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum, "FF", i);
+
+                    Bridge.Test.NUnit.Assert.False(result);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum.One, i.v);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                One: 0
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null

@@ -4591,10 +4591,10 @@
         },
 
         tryParse: function (enumType, value, result, ignoreCase) {
-            result.v = 0;
             result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true), true);
 
             if (result.v == null) {
+                result.v = 0;
                 return false;
             }
 
