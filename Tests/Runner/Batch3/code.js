@@ -27593,6 +27593,19 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3352", {
+        statics: {
+            methods: {
+                TestTimeSpanEqualsNull: function () {
+                    var result = null;
+
+                    Bridge.Test.NUnit.Assert.True(System.TimeSpan.eq(result, null));
+                    Bridge.Test.NUnit.Assert.False(System.TimeSpan.neq(result, null));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null

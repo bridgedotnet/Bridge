@@ -9939,11 +9939,19 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             eq: function (t1, t2) {
-                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.eq(t2.ticks)) : null;
+                if (t1 === null && t2 === null) {
+                    return true;
+                }
+
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.eq(t2.ticks)) : false;
             },
 
             neq: function (t1, t2) {
-                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.ne(t2.ticks)) : null;
+                if (t1 === null && t2 === null) {
+                    return false;
+                }
+
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.ne(t2.ticks)) : true;
             },
 
             plus: function (t) {
