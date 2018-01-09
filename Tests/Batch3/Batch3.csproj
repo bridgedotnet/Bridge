@@ -681,10 +681,12 @@
     <Compile Include="BridgeIssues\3300\N3307.cs" />
     <Compile Include="BridgeIssues\3300\N3308.cs" />
     <Compile Include="BridgeIssues\3300\N3318.cs" />
+    <Compile Include="BridgeIssues\3300\N3321.cs" />
     <Compile Include="BridgeIssues\3300\N3323.cs" />
     <Compile Include="BridgeIssues\3300\N3329.cs" />
-    <Compile Include="BridgeIssues\3300\N3352.cs" />
     <Compile Include="BridgeIssues\3300\N3331.cs" />
+    <Compile Include="BridgeIssues\3300\N3346.cs" />
+    <Compile Include="BridgeIssues\3300\N3352.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
