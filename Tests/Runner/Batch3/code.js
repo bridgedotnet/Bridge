@@ -27637,15 +27637,38 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether Bridge's TryParse
+     implementation does not touch the output variable if the parsing fails.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346", {
         statics: {
             methods: {
+                /**
+                 * Check if whenever parsing fails, the target variable won't be
+                 changed.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346
+                 * @return  {void}
+                 */
                 TestEnumTryParseFail: function () {
                     var i = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum() };
                     var result = System.Enum.tryParse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum, "FF", i);
 
-                    Bridge.Test.NUnit.Assert.False(result);
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum.One, i.v);
+                    Bridge.Test.NUnit.Assert.False(result, "TryParse() 'FF' into an enum returned 'false'.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnum.One, i.v, "Failed TryParse() call initialized value with enum's 0 (\"One\").");
+
+                    var j = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestOtherEnum() };
+                    var result_j = System.Enum.tryParse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestOtherEnum, "FF", j);
+
+                    Bridge.Test.NUnit.Assert.False(result_j, "TryParse() 'FF' into another enum returned 'false'.");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, j.v, "Failed TryParse() call initialized value with enum's 0 (no match in enum).");
                 }
             }
         }
@@ -27656,6 +27679,16 @@ Bridge.$N1391Result =                     r;
         statics: {
             fields: {
                 One: 0
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestOtherEnum", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Two: 2,
+                One: 1
             }
         }
     });

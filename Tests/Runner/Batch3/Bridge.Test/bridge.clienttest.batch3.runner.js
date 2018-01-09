@@ -14767,7 +14767,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestEnumTryParseFail: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3346, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumTryParseFail()", $t.Line = "16", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3346, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumTryParseFail()", $t.Line = "30", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3346.TestEnumTryParseFail();
                 }
             }
