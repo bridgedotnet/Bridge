@@ -74,7 +74,7 @@
         },
 
         getRank: function (arr) {
-            return arr.$s ? arr.$s.length : 1;
+            return arr.$type ? arr.$type.$rank : (arr.$s ? arr.$s.length : 1);
         },
 
         getLower: function (arr, d) {
@@ -248,7 +248,13 @@
             } else {
                 newArr = arr.slice(0);
             }
+
             newArr.$type = arr.$type;
+            newArr.$v = arr.$v;
+            newArr.$s = arr.$s;
+            newArr.get = System.Array.$get;
+            newArr.set = System.Array.$set;
+
             return newArr;
         },
 

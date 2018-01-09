@@ -27372,6 +27372,50 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3318.Foo");
 
     /**
+     * The test here consists in checking whether the back-casting of an
+     array results in the same type.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3321
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3321", {
+        statics: {
+            methods: {
+                /**
+                 * Test casting and then verifying if the returned type is the expected.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3321
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3321
+                 * @return  {void}
+                 */
+                Test2DArrayClone: function () {
+                    var a = Bridge.cast(System.Array.clone(System.Array.init(0, 0, System.Int32)), System.Array.type(System.Int32));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.getRank(a), "One dimensional array casted back to an one-dimensional array.");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Int32, (Bridge.getType(a).$elementType || null), "Array element's type is the expected one.");
+
+                    var n = Bridge.cast(System.Array.clone(System.Array.create(0, null, System.Int32, 0, 0)), System.Array.type(System.Int32, 2));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getRank(n), "Two dimensional array casted back to a two-dimensional array.");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Int32, (Bridge.getType(n).$elementType || null), "2d Array element's type is the expected one.");
+
+                    var x = Bridge.cast(System.Array.clone(System.Array.create(0, null, System.Int32, 0, 0, 0)), System.Array.type(System.Int32, 3));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Array.getRank(x), "Three dimensional array casted back to a three-dimensional array.");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Int32, (Bridge.getType(x).$elementType || null), "3d Array element's type is the expected one.");
+
+                    var f = Bridge.cast(System.Array.clone(System.Array.create(0, null, System.Single, 0, 0, 0)), System.Array.type(System.Single, 3));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Array.getRank(f), "Three dimensional float array casted back to a three-dimensional array.");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Single, (Bridge.getType(f).$elementType || null), "3d float Array element's type is the expected one.");
+                }
+            }
+        }
+    });
+
+    /**
      * The tests here consists in checking whether nullable variables do
      support the "is" check and results the same as .NET does.
      *
