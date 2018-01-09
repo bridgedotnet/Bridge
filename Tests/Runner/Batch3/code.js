@@ -27693,14 +27693,31 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether TimeSpan can be checked
+     against null when it actually is null.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3352
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3352", {
         statics: {
             methods: {
+                /**
+                 * Check both whether when result is null, conditions can be evaluated
+                 for both equals and different than null.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3352
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3352
+                 * @return  {void}
+                 */
                 TestTimeSpanEqualsNull: function () {
                     var result = null;
 
-                    Bridge.Test.NUnit.Assert.True(System.TimeSpan.eq(result, null));
-                    Bridge.Test.NUnit.Assert.False(System.TimeSpan.neq(result, null));
+                    Bridge.Test.NUnit.Assert.True(System.TimeSpan.eq(result, null), "Null TimeSpan? can be evaluated about being null and results in true.");
+                    Bridge.Test.NUnit.Assert.False(System.TimeSpan.neq(result, null), "Null TimeSpan? can be evaluated about not being null and results in false.");
                 }
             }
         }
