@@ -4089,7 +4089,7 @@ Bridge.Reflection = {
 
                     method = function () { return _m2.apply(null, [this].concat(Array.prototype.slice.call(arguments))); };
                 }
-            }            
+            }
 
             var orig = method;
             method = function () {
