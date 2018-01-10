@@ -1160,9 +1160,9 @@
             return typeof value === "string";
         },
 
-        unroll: function (value) {
+        unroll: function (value, scope) {
             var d = value.split("."),
-                o = Bridge.global[d[0]],
+                o = (scope || Bridge.global)[d[0]],
                 i = 1;
 
             for (i; i < d.length; i++) {

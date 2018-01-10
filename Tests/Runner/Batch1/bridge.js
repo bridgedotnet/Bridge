@@ -1178,9 +1178,9 @@
             return typeof value === "string";
         },
 
-        unroll: function (value) {
+        unroll: function (value, scope) {
             var d = value.split("."),
-                o = Bridge.global[d[0]],
+                o = (scope || Bridge.global)[d[0]],
                 i = 1;
 
             for (i; i < d.length; i++) {
@@ -2447,6 +2447,10 @@
 
             Class.$$name = className;
             Class.$kind = prop.$kind;
+            
+            if (prop.$metadata) {
+                Class.$metadata = prop.$metadata;
+            }
 
             if (gCfg && isGenericInstance) {
                 Class.$genericTypeDefinition = gCfg.fn;
@@ -3016,6 +3020,19 @@
         },
 
         init: function (fn) {
+            if (Bridge.Reflection) {
+                var metas = Bridge.Reflection.deferredMeta,
+                len = metas.length;
+
+                if (len > 0) {
+                    Bridge.Reflection.deferredMeta = [];
+                    for (var i = 0; i < len; i++) {
+                        var item = metas[i];
+                        Bridge.setMetadata(item.typeName, item.metadata);
+                    }
+                }
+            }            
+
             if (fn) {
                 var old = Bridge.Class.staticInitAllow;
                 Bridge.Class.staticInitAllow = true;
@@ -3182,8 +3199,20 @@
 
     // @source Reflection.js
 
-    Bridge.Reflection = {
+Bridge.Reflection = {
+        deferredMeta: [],
+
         setMetadata: function (type, metadata) {
+            if (Bridge.isString(type)) {
+                var typeName = type;
+                type = Bridge.unroll(typeName);
+
+                if (type == null) {
+                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata });
+                    return;
+                }
+            }
+
             type.$getMetadata = Bridge.Reflection.getMetadata;
             type.$metadata = metadata;
         },

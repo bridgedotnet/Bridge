@@ -406,6 +406,10 @@
 
             Class.$$name = className;
             Class.$kind = prop.$kind;
+            
+            if (prop.$metadata) {
+                Class.$metadata = prop.$metadata;
+            }
 
             if (gCfg && isGenericInstance) {
                 Class.$genericTypeDefinition = gCfg.fn;
@@ -975,6 +979,19 @@
         },
 
         init: function (fn) {
+            if (Bridge.Reflection) {
+                var metas = Bridge.Reflection.deferredMeta,
+                len = metas.length;
+
+                if (len > 0) {
+                    Bridge.Reflection.deferredMeta = [];
+                    for (var i = 0; i < len; i++) {
+                        var item = metas[i];
+                        Bridge.setMetadata(item.typeName, item.metadata);
+                    }
+                }
+            }            
+
             if (fn) {
                 var old = Bridge.Class.staticInitAllow;
                 Bridge.Class.staticInitAllow = true;

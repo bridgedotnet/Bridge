@@ -2,6 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N783.App", {
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main1","is":true,"t":8,"sn":"Main1","rt":System.Void}]}; },
         statics: {
             methods: {
                 Main1: function () {
@@ -18,15 +19,19 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Test.BridgeIssues.N783.Base");
+    Bridge.define("Test.BridgeIssues.N783.Base", {
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
+    });
 
     Bridge.define("Test.BridgeIssues.N783.DontIgnore", {
-        inherits: [Test.BridgeIssues.N783.Base]
+        inherits: [Test.BridgeIssues.N783.Base],
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
     });
 
     Bridge.define("Test.BridgeIssues.N783.Ignore", {
-        inherits: [Test.BridgeIssues.N783.Base]
+        inherits: [Test.BridgeIssues.N783.Base],
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
     });
 });
 
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICJ0ZXN0LmJyaWRnZUlzc3Vlcy5uNzgzLmpzIiwKICAic291cmNlUm9vdCI6ICIiLAogICJzb3VyY2VzIjogWyJCcmlkZ2VJc3N1ZXMvTjc4My5jcyJdLAogICJuYW1lcyI6IFsiIl0sCiAgIm1hcHBpbmdzIjogIjs7Ozs7OztvQkFRWUEsWUFBWUEsSUFBSUE7b0JBQ2hCQSxZQUFZQSxJQUFJQTs7O29CQUdoQkEsYUFBYUEsQUFBUUE7OztvQkFHckJBLGlCQUFpQkEsWUFBWUEiLAogICJzb3VyY2VzQ29udGVudCI6IFsidXNpbmcgQnJpZGdlO1xyXG5cclxubmFtZXNwYWNlIFRlc3QuQnJpZGdlSXNzdWVzLk43ODNcclxue1xyXG4gICAgcHVibGljIGNsYXNzIEFwcFxyXG4gICAge1xyXG4gICAgICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBNYWluMSgpXHJcbiAgICAgICAge1xyXG4gICAgICAgICAgICB2YXIgYmFzZTEgPSBuZXcgQmFzZSgpO1xyXG4gICAgICAgICAgICB2YXIgYmFzZTIgPSBuZXcgQmFzZSgpO1xyXG5cclxuICAgICAgICAgICAgLy8gQ2FzdGluZyB3aWxsIGJlIGlnbm9yZWRcclxuICAgICAgICAgICAgdmFyIGlnbm9yZSA9IChJZ25vcmUpYmFzZTE7XHJcblxyXG4gICAgICAgICAgICAvLyBEZWZhdWx0IGNhc3Rpbmcgb3BlcmF0aW9uXHJcbiAgICAgICAgICAgIHZhciBkb250SWdub3JlID0gKERvbnRJZ25vcmUpYmFzZTI7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIHB1YmxpYyBjbGFzcyBCYXNlIHsgfVxyXG5cclxuICAgIFtJZ25vcmVDYXN0XVxyXG4gICAgcHVibGljIGNsYXNzIElnbm9yZSA6IEJhc2UgeyB9XHJcblxyXG4gICAgcHVibGljIGNsYXNzIERvbnRJZ25vcmUgOiBCYXNlIHsgfVxyXG59Il0KfQo=
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICJ0ZXN0LmJyaWRnZUlzc3Vlcy5uNzgzLmpzIiwKICAic291cmNlUm9vdCI6ICIiLAogICJzb3VyY2VzIjogWyJCcmlkZ2VJc3N1ZXMvTjc4My5jcyJdLAogICJuYW1lcyI6IFsiIl0sCiAgIm1hcHBpbmdzIjogIjs7Ozs7Ozs7b0JBUVlBLFlBQVlBLElBQUlBO29CQUNoQkEsWUFBWUEsSUFBSUE7OztvQkFHaEJBLGFBQWFBLEFBQVFBOzs7b0JBR3JCQSxpQkFBaUJBLFlBQVlBIiwKICAic291cmNlc0NvbnRlbnQiOiBbInVzaW5nIEJyaWRnZTtcclxuXHJcbm5hbWVzcGFjZSBUZXN0LkJyaWRnZUlzc3Vlcy5ONzgzXHJcbntcclxuICAgIHB1YmxpYyBjbGFzcyBBcHBcclxuICAgIHtcclxuICAgICAgICBwdWJsaWMgc3RhdGljIHZvaWQgTWFpbjEoKVxyXG4gICAgICAgIHtcclxuICAgICAgICAgICAgdmFyIGJhc2UxID0gbmV3IEJhc2UoKTtcclxuICAgICAgICAgICAgdmFyIGJhc2UyID0gbmV3IEJhc2UoKTtcclxuXHJcbiAgICAgICAgICAgIC8vIENhc3Rpbmcgd2lsbCBiZSBpZ25vcmVkXHJcbiAgICAgICAgICAgIHZhciBpZ25vcmUgPSAoSWdub3JlKWJhc2UxO1xyXG5cclxuICAgICAgICAgICAgLy8gRGVmYXVsdCBjYXN0aW5nIG9wZXJhdGlvblxyXG4gICAgICAgICAgICB2YXIgZG9udElnbm9yZSA9IChEb250SWdub3JlKWJhc2UyO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBwdWJsaWMgY2xhc3MgQmFzZSB7IH1cclxuXHJcbiAgICBbSWdub3JlQ2FzdF1cclxuICAgIHB1YmxpYyBjbGFzcyBJZ25vcmUgOiBCYXNlIHsgfVxyXG5cclxuICAgIHB1YmxpYyBjbGFzcyBEb250SWdub3JlIDogQmFzZSB7IH1cclxufSJdCn0K
