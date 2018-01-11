@@ -7417,7 +7417,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
     };
 
     System.Int64.prototype.toJSON = function () {
-        return this.toNumber();
+        var safe = Math.pow(2, 53) - 1;
+        return this.gt(safe) || this.lt(-safe) ? this.toString() : this.toNumber();
     };
 
     System.Int64.prototype.toString = function (format, provider) {
@@ -7927,7 +7928,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         return System.UInt64.create(l);
     };
 
-    System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
     System.UInt64.prototype.toString = System.Int64.prototype.toString;
     System.UInt64.prototype.format = System.Int64.prototype.format;
     System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
@@ -8049,6 +8049,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         var remainder = a.mod(b);
         result.v = remainder;
         return a.sub(remainder).div(b);
+    };
+
+    System.UInt64.prototype.toJSON = function () {
+        var safe = Math.pow(2, 53) - 1;
+        return this.gt(safe) ? this.toString() : this.toNumber();
     };
 
     System.UInt64.prototype.and = System.Int64.prototype.and;
