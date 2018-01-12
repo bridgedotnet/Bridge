@@ -1178,9 +1178,9 @@
             return typeof value === "string";
         },
 
-        unroll: function (value) {
+        unroll: function (value, scope) {
             var d = value.split("."),
-                o = Bridge.global[d[0]],
+                o = (scope || Bridge.global)[d[0]],
                 i = 1;
 
             for (i; i < d.length; i++) {
@@ -2448,6 +2448,10 @@
             Class.$$name = className;
             Class.$kind = prop.$kind;
 
+            if (prop.$metadata) {
+                Class.$metadata = prop.$metadata;
+            }
+
             if (gCfg && isGenericInstance) {
                 Class.$genericTypeDefinition = gCfg.fn;
                 Class.$typeArguments = gCfg.args;
@@ -3016,6 +3020,19 @@
         },
 
         init: function (fn) {
+            if (Bridge.Reflection) {
+                var metas = Bridge.Reflection.deferredMeta,
+                len = metas.length;
+
+                if (len > 0) {
+                    Bridge.Reflection.deferredMeta = [];
+                    for (var i = 0; i < len; i++) {
+                        var item = metas[i];
+                        Bridge.setMetadata(item.typeName, item.metadata);
+                    }
+                }
+            }
+
             if (fn) {
                 var old = Bridge.Class.staticInitAllow;
                 Bridge.Class.staticInitAllow = true;
@@ -3182,8 +3199,20 @@
 
     // @source Reflection.js
 
-    Bridge.Reflection = {
+Bridge.Reflection = {
+        deferredMeta: [],
+
         setMetadata: function (type, metadata) {
+            if (Bridge.isString(type)) {
+                var typeName = type;
+                type = Bridge.unroll(typeName);
+
+                if (type == null) {
+                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata });
+                    return;
+                }
+            }
+
             type.$getMetadata = Bridge.Reflection.getMetadata;
             type.$metadata = metadata;
         },
@@ -4062,13 +4091,20 @@
                 }
             }
 
-            if (mi.box) {
-                var unboxed = method;
-                method = function() {
-                    var v = unboxed.apply(this, arguments);
-                    return v != null ? mi.box(v) : v;
-                };
-            }
+            var orig = method;
+            method = function () {
+                var args = [],
+                    params = mi.pi || [],
+                    p;
+
+                for (var i = 0; i < arguments.length; i++) {
+                    p = params[i] || params[params.length - 1];
+                    args[i] = p && p.pt === System.Object ? arguments[i] : Bridge.unbox(arguments[i]);
+                }
+
+                var v = orig.apply(this, args);
+                return v != null && mi.box ? mi.box(v) : v;
+            };
 
             return bind !== false ? Bridge.fn.bind(target, method) : method;
         },
@@ -21504,7 +21540,7 @@ Bridge.assembly("System", {}, function ($asm, globals) {
             if (!Bridge.isDefined(useCache)) {
                 useCache = false;
             }
-            
+
             var scope = System.Text.RegularExpressions;
 
             if (pattern == null) {
@@ -21833,7 +21869,7 @@ Bridge.assembly("System", {}, function ($asm, globals) {
                     get: function() {
                         return this._capcount;
                     }
-                }    
+                }
             },
 
             alias: [
