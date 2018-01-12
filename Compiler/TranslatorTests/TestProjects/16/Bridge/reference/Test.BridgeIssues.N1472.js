@@ -2,6 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1472.UseDoSomething", {
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Method","t":8,"sn":"Method","rt":System.Object},{"a":2,"n":"UseWithField","t":8,"sn":"UseWithField","rt":System.Void},{"a":2,"n":"UseWithMethod","t":8,"sn":"UseWithMethod","rt":System.Void},{"a":2,"n":"UseWithProperty","t":8,"sn":"UseWithProperty","rt":System.Void},{"a":2,"n":"UseWithSimpleCall","t":8,"sn":"UseWithSimpleCall","rt":System.Void},{"a":2,"n":"Property","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Property","t":8,"rt":System.Int32,"fg":"Property","box":function ($v) { return Bridge.box($v, System.Int32);}},"s":{"a":2,"n":"set_Property","t":8,"p":[System.Int32],"rt":System.Void,"fs":"Property"},"fn":"Property"},{"a":1,"n":"Field","t":4,"rt":System.Int32,"sn":"Field","box":function ($v) { return Bridge.box($v, System.Int32);}}]}; },
         fields: {
             Field: 0
         },

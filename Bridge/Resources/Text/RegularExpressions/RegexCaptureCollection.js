@@ -9,7 +9,7 @@
                     get: function() {
                         return this._capcount;
                     }
-                }    
+                }
             },
 
             alias: [

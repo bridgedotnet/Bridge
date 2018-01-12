@@ -10,6 +10,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module1.TestProject.Issues.N2198.N2198
          */
         Bridge.define("TestProject.Issues.N2198.N2198", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main","is":true,"t":8,"sn":"Main","rt":System.Void}]}; },
             $scope: Module1,
             /**
              * @static
@@ -20,11 +21,6 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              */
             main: function Main () {
                 System.Console.WriteLine("Hello World!");
-            },
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main","is":true,"t":8,"sn":"Main","rt":System.Void}]}; }
-                }
             }
         });
 
