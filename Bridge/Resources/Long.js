@@ -163,8 +163,7 @@
     };
 
     System.Int64.prototype.toJSON = function () {
-        var safe = Math.pow(2, 53) - 1;
-        return this.gt(safe) || this.lt(-safe) ? this.toString() : this.toNumber();
+        return this.gt(Bridge.Int.MAX_SAFE_INTEGER) || this.lt(Bridge.Int.MIN_SAFE_INTEGER) ? this.toString() : this.toNumber();
     };
 
     System.Int64.prototype.toString = function (format, provider) {
@@ -798,8 +797,7 @@
     };
 
     System.UInt64.prototype.toJSON = function () {
-        var safe = Math.pow(2, 53) - 1;
-        return this.gt(safe) ? this.toString() : this.toNumber();
+        return this.gt(Bridge.Int.MAX_SAFE_INTEGER) ? this.toString() : this.toNumber();
     };
 
     System.UInt64.prototype.and = System.Int64.prototype.and;
