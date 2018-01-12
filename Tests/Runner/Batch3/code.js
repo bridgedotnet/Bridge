@@ -27771,6 +27771,47 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This test consists in ensuring types that can't be represented in
+     JavaScript are converted to string when their .ToJson() method is
+     called.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3361
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3361", {
+        statics: {
+            methods: {
+                Test64bitSerialize: function () {
+                    var small = System.Int64([-1,2097151]);
+                    var big = System.Int64([0,2097152]);
+                    var negSmall = System.Int64([1,-2097152]);
+                    var negBig = System.Int64([0,-2097152]);
+
+                    var usmall = System.UInt64(System.Int64([-1,2097151]));
+                    var ubig = System.UInt64(System.Int64([0,2097152]));
+
+                    var smallStr = JSON.stringify(small);
+                    var bigStr = JSON.stringify(big);
+                    var smallNegStr = JSON.stringify(negSmall);
+                    var bigNegStr = JSON.stringify(negBig);
+
+                    var usmallStr = JSON.stringify(usmall);
+                    var ubigStr = JSON.stringify(ubig);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(smallStr, "9007199254740991", "Smaller long number is serialized as a JavaScript number/integer.");
+                    Bridge.Test.NUnit.Assert.AreEqual(bigStr, "\"9007199254740992\"", "Big long number is serialized as a JavaScript string.");
+
+                    Bridge.Test.NUnit.Assert.AreEqual(smallNegStr, "-9007199254740991", "Smaller negative long number is serialized as a JavaScript number/integer.");
+                    Bridge.Test.NUnit.Assert.AreEqual(bigNegStr, "\"-9007199254740992\"", "Big negative long number is serialized as a JavaScript string.");
+
+                    Bridge.Test.NUnit.Assert.AreEqual(usmallStr, "9007199254740991", "Smaller unsigned long number is serialized as a JavaScript number/integer.");
+                    Bridge.Test.NUnit.Assert.AreEqual(ubigStr, "\"9007199254740992\"", "Big unsigned long number is serialized as a JavaScript string.");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
