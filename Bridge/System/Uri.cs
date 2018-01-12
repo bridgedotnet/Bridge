@@ -16,5 +16,11 @@ namespace System
             [Template("getAbsoluteUri()")]
             get;
         }
+
+        [Template("System.Uri.equals({uri1}, {uri2})")]
+        public static extern bool operator ==(Uri uri1, Uri uri2);
+
+        [Template("System.Uri.notEquals({uri1}, {uri2})")]
+        public static extern bool operator !=(Uri uri1, Uri uri2);
     }
 }

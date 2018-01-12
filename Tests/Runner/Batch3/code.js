@@ -27197,6 +27197,18 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301", {
+        statics: {
+            methods: {
+                TestUriToString: function () {
+                    var uriStr = "https://deck.net/";
+                    var uri = new System.Uri(uriStr);
+                    Bridge.Test.NUnit.Assert.AreEqual(uriStr, uri.toString());
+                }
+            }
+        }
+    });
+
     /**
      * The test here consists in ensuring that a new datetime instance,
      provided an UtcNow datetime + 1 minute, is exactly equal to the
@@ -27718,6 +27730,17 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.True(System.TimeSpan.eq(result, null), "Null TimeSpan? can be evaluated about being null and results in true.");
                     Bridge.Test.NUnit.Assert.False(System.TimeSpan.neq(result, null), "Null TimeSpan? can be evaluated about not being null and results in false.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3357", {
+        statics: {
+            methods: {
+                TestUriEquals: function () {
+                    var uriStr = "https://deck.net/";
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri(uriStr), new System.Uri(uriStr)));
                 }
             }
         }
