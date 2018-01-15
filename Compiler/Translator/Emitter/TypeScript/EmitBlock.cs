@@ -254,9 +254,20 @@ namespace Bridge.Translator.TypeScript
             });
             this.Emitter.InitEmitter();
 
+            bool nsExists = false;
             var last = types.LastOrDefault();
             foreach (var type in types)
             {
+                if (!nsExists)
+                {
+                    var tns = BridgeTypes.GetNamespaceFilename(type, this.Emitter);
+
+                    if (tns.Item1 != null)
+                    {
+                        nsExists = true;
+                    }
+                }                
+
                 if (type.ParentType != null)
                 {
                     continue;
@@ -300,7 +311,7 @@ namespace Bridge.Translator.TypeScript
             }
 
             this.InsertDependencies(this.Emitter.Output);
-            if (this.outputKey != null)
+            if (this.outputKey != null && nsExists)
             {
                 this.EndBlock();
             }

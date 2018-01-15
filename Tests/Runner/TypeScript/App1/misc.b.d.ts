@@ -2,9 +2,9 @@
 /// <reference path="./misc.a.d.ts" />
 
 declare namespace Misc.B {
-    export interface Class2 extends Misc.A.Class1 {
+    interface Class2 extends Misc.A.Class1 {
     }
-    export interface Class2Func extends Function {
+    interface Class2Func extends Function {
         prototype: Class2;
         new (): Class2;
     }

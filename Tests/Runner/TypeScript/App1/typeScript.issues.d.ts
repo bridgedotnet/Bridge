@@ -1,27 +1,27 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace TypeScript.Issues {
-    export interface N1640 {
+    interface N1640 {
     }
-    export interface N1640Func extends Function {
+    interface N1640Func extends Function {
         prototype: N1640;
         GamePlay: TypeScript.Issues.N1640.GamePlayFunc;
         new (): N1640;
     }
     var N1640: N1640Func;
     module N1640 {
-        export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
+        interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
             addOnGameEvent(value: {(sender: any, e: string): void}): void;
             removeOnGameEvent(value: {(sender: any, e: string): void}): void;
             StartGame(s: string): void;
             Subscribe(handler: {(sender: any, e: string): void}): void;
         }
-        export interface GamePlayFunc extends Function {
+        interface GamePlayFunc extends Function {
             prototype: GamePlay;
             new (): GamePlay;
         }
 
-        export interface IGamePlay {
+        interface IGamePlay {
             TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: any, e: string): void}): void;
             TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: any, e: string): void}): void;
             addOnGameEvent(value: {(sender: any, e: string): void}): void;
@@ -31,19 +31,19 @@ declare namespace TypeScript.Issues {
         }
     }
 
-    export interface N1060 {
+    interface N1060 {
     }
-    export interface N1060Func extends Function {
+    interface N1060Func extends Function {
         prototype: N1060;
         B$1: TypeScript.Issues.N1060.B$1Func;
         new (): N1060;
     }
     var N1060: N1060Func;
     module N1060 {
-        export interface B$1<T> {
+        interface B$1<T> {
             GetC(): TypeScript.Issues.N1060.B$1.C<T>;
         }
-        export interface B$1Func extends Function {
+        interface B$1Func extends Function {
             <T>($T: Bridge.TypeRef<T>): {
                 prototype: B$1<T>;
                 C: TypeScript.Issues.N1060.B$1.CFunc;
@@ -51,9 +51,9 @@ declare namespace TypeScript.Issues {
             }
         }
         module B$1 {
-            export interface C<T> {
+            interface C<T> {
             }
-            export interface CFunc extends Function {
+            interface CFunc extends Function {
                 <T>($T: Bridge.TypeRef<T>): {
                     prototype: C<T>;
                     new (): C<T>;
@@ -62,12 +62,12 @@ declare namespace TypeScript.Issues {
         }
     }
 
-    export interface N2031DictionaryMap$2<T1,T2> {
+    interface N2031DictionaryMap$2<T1,T2> {
         Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
         Reverse: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
         Add(t1: T1, t2: T2): void;
     }
-    export interface N2031DictionaryMap$2Func extends Function {
+    interface N2031DictionaryMap$2Func extends Function {
         <T1, T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
             prototype: N2031DictionaryMap$2<T1,T2>;
             Indexer$2: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2Func;
@@ -82,12 +82,12 @@ declare namespace TypeScript.Issues {
     }
     var N2031DictionaryMap$2: N2031DictionaryMap$2Func;
     module N2031DictionaryMap$2 {
-        export interface Indexer$2<T1,T2,T3,T4> {
+        interface Indexer$2<T1,T2,T3,T4> {
             getItem(index: T3): T4;
             setItem(index: T3, value: T4): void;
             ContainsKey(index: T3): boolean;
         }
-        export interface Indexer$2Func extends Function {
+        interface Indexer$2Func extends Function {
             <T1, T2, T3, T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {
                 prototype: Indexer$2<T1,T2,T3,T4>;
                 new (dictionary: System.Collections.Generic.Dictionary$2<T3,T4>): Indexer$2<T1,T2,T3,T4>;
@@ -95,27 +95,27 @@ declare namespace TypeScript.Issues {
         }
     }
 
-    export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
+    interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
         Value1: number;
     }
-    export interface N2029Func extends Function {
+    interface N2029Func extends Function {
         prototype: N2029;
         new (): N2029;
     }
     var N2029: N2029Func;
 
-    export interface N2653Zig extends TypeScript.Issues.N2653IZig {
+    interface N2653Zig extends TypeScript.Issues.N2653IZig {
         zag(): number;
     }
-    export interface N2653ZigFunc extends Function {
+    interface N2653ZigFunc extends Function {
         prototype: N2653Zig;
         new (): N2653Zig;
     }
     var N2653Zig: N2653ZigFunc;
 
-    export interface N3061 {
+    interface N3061 {
     }
-    export interface N3061Func extends Function {
+    interface N3061Func extends Function {
         prototype: N3061;
         Car: TypeScript.Issues.N3061.CarFunc;
         Tractor: TypeScript.Issues.N3061.TractorFunc;
@@ -124,75 +124,75 @@ declare namespace TypeScript.Issues {
     }
     var N3061: N3061Func;
     module N3061 {
-        export interface IVehicle extends System.IEquatable$1<TypeScript.Issues.N3061.IVehicle> {
+        interface IVehicle extends System.IEquatable$1<TypeScript.Issues.N3061.IVehicle> {
             TypeScript$Issues$N3061$IVehicle$Horses: number;
             Horses: number;
         }
 
-        export interface Car extends TypeScript.Issues.N3061.IVehicle,System.IEquatable$1<TypeScript.Issues.N3061.Car> {
+        interface Car extends TypeScript.Issues.N3061.IVehicle,System.IEquatable$1<TypeScript.Issues.N3061.Car> {
             Horses: number;
             equalsT$1(vehicle: TypeScript.Issues.N3061.IVehicle): boolean;
             equalsT(car: TypeScript.Issues.N3061.Car): boolean;
         }
-        export interface CarFunc extends Function {
+        interface CarFunc extends Function {
             prototype: Car;
             new (): Car;
         }
 
-        export interface Tractor extends TypeScript.Issues.N3061.Car {
+        interface Tractor extends TypeScript.Issues.N3061.Car {
             equalsT(car: TypeScript.Issues.N3061.Car): boolean;
         }
-        export interface TractorFunc extends Function {
+        interface TractorFunc extends Function {
             prototype: Tractor;
             new (): Tractor;
         }
 
-        export interface Truck extends TypeScript.Issues.N3061.Car {
+        interface Truck extends TypeScript.Issues.N3061.Car {
             equalsT(car: TypeScript.Issues.N3061.Car): boolean;
         }
-        export interface TruckFunc extends Function {
+        interface TruckFunc extends Function {
             prototype: Truck;
             new (): Truck;
         }
     }
 
-    export interface N2030Attribute extends System.Attribute {
+    interface N2030Attribute extends System.Attribute {
         IsUnspecified: boolean;
     }
-    export interface N2030AttributeFunc extends Function {
+    interface N2030AttributeFunc extends Function {
         prototype: N2030Attribute;
         new (IsUnspecified: boolean): N2030Attribute;
     }
     var N2030Attribute: N2030AttributeFunc;
 
-    export interface N2911 {
+    interface N2911 {
     }
-    export interface N2911Func extends Function {
+    interface N2911Func extends Function {
         prototype: N2911;
         new (): N2911;
         initButton_Clicked(arg: MouseEvent): void;
     }
     var N2911: N2911Func;
 
-    export interface N2653IZig {
+    interface N2653IZig {
         TypeScript$Issues$N2653IZig$zag(): number;
         zag(): number;
     }
 
-    export interface N2264 {
+    interface N2264 {
         Values: System.Collections.Generic.IEnumerable$1<string>;
     }
-    export interface N2264Func extends Function {
+    interface N2264Func extends Function {
         prototype: N2264;
         new (queryParameters: System.Collections.Generic.IEnumerable$1<string>): N2264;
     }
     var N2264: N2264Func;
 
-    export interface N2438 {
+    interface N2438 {
         isDefaultCtor: boolean;
         Attribute: number;
     }
-    export interface N2438Func extends Function {
+    interface N2438Func extends Function {
         prototype: N2438;
         new (): N2438;
         ctor: {
@@ -204,9 +204,9 @@ declare namespace TypeScript.Issues {
     }
     var N2438: N2438Func;
 
-    export interface N2474 {
+    interface N2474 {
     }
-    export interface N2474Func extends Function {
+    interface N2474Func extends Function {
         prototype: N2474;
         Enum: N2474.EnumFunc;
         NameEnum: N2474.NameEnumFunc;
@@ -222,102 +222,102 @@ declare namespace TypeScript.Issues {
     }
     var N2474: N2474Func;
     module N2474 {
-        export interface Enum {
+        interface Enum {
         }
-        export interface EnumFunc extends Function {
+        interface EnumFunc extends Function {
             prototype: Enum;
             Value: number;
         }
 
-        export interface NameEnum {
+        interface NameEnum {
         }
-        export interface NameEnumFunc extends Function {
+        interface NameEnumFunc extends Function {
             prototype: NameEnum;
             value: number;
         }
 
-        export interface NameLowerCase {
+        interface NameLowerCase {
         }
-        export interface NameLowerCaseFunc extends Function {
+        interface NameLowerCaseFunc extends Function {
             prototype: NameLowerCase;
             value: number;
         }
 
-        export interface NamePreserveCase {
+        interface NamePreserveCase {
         }
-        export interface NamePreserveCaseFunc extends Function {
+        interface NamePreserveCaseFunc extends Function {
             prototype: NamePreserveCase;
             Value: number;
         }
 
-        export interface NameUpperCase {
+        interface NameUpperCase {
         }
-        export interface NameUpperCaseFunc extends Function {
+        interface NameUpperCaseFunc extends Function {
             prototype: NameUpperCase;
             VALUE: number;
         }
 
-        export interface StringName {
+        interface StringName {
         }
-        export interface StringNameFunc extends Function {
+        interface StringNameFunc extends Function {
             prototype: StringName;
             value: string;
         }
 
-        export interface StringNameLowerCase {
+        interface StringNameLowerCase {
         }
-        export interface StringNameLowerCaseFunc extends Function {
+        interface StringNameLowerCaseFunc extends Function {
             prototype: StringNameLowerCase;
             value: string;
         }
 
-        export interface StringNamePreserveCase {
+        interface StringNamePreserveCase {
         }
-        export interface StringNamePreserveCaseFunc extends Function {
+        interface StringNamePreserveCaseFunc extends Function {
             prototype: StringNamePreserveCase;
             Value: string;
         }
 
-        export interface StringNameUpperCase {
+        interface StringNameUpperCase {
         }
-        export interface StringNameUpperCaseFunc extends Function {
+        interface StringNameUpperCaseFunc extends Function {
             prototype: StringNameUpperCase;
             VALUE: string;
         }
 
-        export interface ValueEnum {
+        interface ValueEnum {
         }
-        export interface ValueEnumFunc extends Function {
+        interface ValueEnumFunc extends Function {
             prototype: ValueEnum;
             Value: number;
         }
     }
 
-    export interface N2029Interface$1<T> {
+    interface N2029Interface$1<T> {
         Value1: number;
     }
 
-    export interface N2493Operation3 {
+    interface N2493Operation3 {
         Add(n: number): number;
     }
-    export interface N2493Operation3Func extends Function {
+    interface N2493Operation3Func extends Function {
         prototype: N2493Operation3;
         new (): N2493Operation3;
     }
     var N2493Operation3: N2493Operation3Func;
 
-    export interface N2661C {
+    interface N2661C {
         fn: {(x: TypeScript.Issues.N2661C): Function};
     }
-    export interface N2661CFunc extends Function {
+    interface N2661CFunc extends Function {
         prototype: N2661C;
         new (): N2661C;
     }
     var N2661C: N2661CFunc;
 
-    export interface N2463 {
+    interface N2463 {
     }
-    export interface N2463Func extends Function {
+    interface N2463Func extends Function {
         prototype: N2463;
         new (): N2463;
         Do(dummy: {Nothing: number}): {Nothing: number};

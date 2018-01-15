@@ -1,25 +1,25 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace Functions {
-    export interface Parameters {
+    interface Parameters {
         GetSomething(i?: number): number;
         Join(numbers: number[]): string;
     }
-    export interface ParametersFunc extends Function {
+    interface ParametersFunc extends Function {
         prototype: Parameters;
         new (): Parameters;
     }
     var Parameters: ParametersFunc;
 
-    export interface Delegates {
+    interface Delegates {
     }
-    export interface DelegatesFunc extends Function {
+    interface DelegatesFunc extends Function {
         prototype: Delegates;
         new (): Delegates;
     }
     var Delegates: DelegatesFunc;
 
-    export interface DelegateInterface {
+    interface DelegateInterface {
         Functions$DelegateInterface$addMethodVoidDelegate(value: {(): void}): void;
         Functions$DelegateInterface$removeMethodVoidDelegate(value: {(): void}): void;
         addMethodVoidDelegate(value: {(): void}): void;
@@ -34,21 +34,21 @@ declare namespace Functions {
         removeMethodStringDelegateIntResult(value: {(s: string): number}): void;
     }
 
-    export interface DelegateClass {
+    interface DelegateClass {
         MethodVoidDelegate: {(): void};
         MethodStringDelegate: {(s: string): void};
         MethodStringDelegateIntResult: {(s: string): number};
     }
-    export interface DelegateClassFunc extends Function {
+    interface DelegateClassFunc extends Function {
         prototype: DelegateClass;
         new (): DelegateClass;
     }
     var DelegateClass: DelegateClassFunc;
 
-    export interface MiddleBit {
+    interface MiddleBit {
         fn: {(x: Functions.MiddleBit): Function};
     }
-    export interface MiddleBitFunc extends Function {
+    interface MiddleBitFunc extends Function {
         prototype: MiddleBit;
         new (): MiddleBit;
     }
