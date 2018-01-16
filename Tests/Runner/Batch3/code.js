@@ -27812,6 +27812,24 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3363", {
+        statics: {
+            methods: {
+                Test64bitKey: function () {
+                    var dic = new (System.Collections.Generic.Dictionary$2(System.UInt64,System.String))();
+
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(20), "Diez");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(10), "Diez");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(30), "Diez");
+
+                    Bridge.Test.NUnit.Assert.True(System.UInt64(10).equals(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()));
+                    Bridge.Test.NUnit.Assert.AreEqual("Diez", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.UInt64(10)));
+                    Bridge.Test.NUnit.Assert.AreEqual("Diez", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
