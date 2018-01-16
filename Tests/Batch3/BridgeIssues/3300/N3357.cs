@@ -18,6 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(new Uri("HTTPS://deck.net") == new Uri("https://deck.net"), "Protocol name matching is case-insensitive.");
             Assert.False(new Uri("https://deck.net/TEST") == new Uri("https://deck.net/test"), "Non-domain part of url is case-sensitive.");
             Assert.True(new Uri("https://deck.net/") == new Uri("https://deck.net/"), "URLs ending with slash are equal.");
+            Assert.True(new Uri("https://deck.net/") == new Uri("https://deck.net"), "Slash at the end of the URL does not matter.");
             Assert.True(new Uri("https://deck.net:880") == new Uri("https://deck.net:880"), "Port number allows matching.");
             Assert.False(new Uri("https://deck.net") == new Uri("http://deck.net"), "URI's protocol (http/https) matters.");
             Assert.False(new Uri("https://deck.net:80/test") == new Uri("https://deck.net/test"), "Port numbers in URLs matters.");
