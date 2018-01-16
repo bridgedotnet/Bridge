@@ -18,6 +18,11 @@ namespace Bridge.Translator
 
         }
 
+        public bool HasModules
+        {
+            get; set;
+        }
+
         public Dictionary<AnonymousType, IAnonymousTypeConfig> AnonymousTypes
         {
             get

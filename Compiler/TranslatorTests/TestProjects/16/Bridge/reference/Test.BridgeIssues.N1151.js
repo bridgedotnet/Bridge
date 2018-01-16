@@ -2,6 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1151.renderTarget", {
+        $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"n":".ctor","t":1,"p":[System.Object,System.Int32,System.Int32,System.Int32],"pi":[{"n":"gl","pt":System.Object,"ps":0},{"n":"w","pt":System.Int32,"ps":1},{"n":"h","pt":System.Int32,"ps":2},{"n":"nCmp","pt":System.Int32,"ps":3}],"sn":"ctor"}]}; },
         ctors: {
             ctor: function (gl, w, h, nCmp) {
                 this.$initialize();

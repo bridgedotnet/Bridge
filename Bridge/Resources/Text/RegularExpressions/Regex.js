@@ -135,7 +135,7 @@
             if (!Bridge.isDefined(useCache)) {
                 useCache = false;
             }
-            
+
             var scope = System.Text.RegularExpressions;
 
             if (pattern == null) {

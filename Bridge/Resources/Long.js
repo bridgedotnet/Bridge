@@ -163,7 +163,7 @@
     };
 
     System.Int64.prototype.toJSON = function () {
-        return this.toNumber();
+        return this.gt(Bridge.Int.MAX_SAFE_INTEGER) || this.lt(Bridge.Int.MIN_SAFE_INTEGER) ? this.toString() : this.toNumber();
     };
 
     System.Int64.prototype.toString = function (format, provider) {
@@ -673,7 +673,6 @@
         return System.UInt64.create(l);
     };
 
-    System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
     System.UInt64.prototype.toString = System.Int64.prototype.toString;
     System.UInt64.prototype.format = System.Int64.prototype.format;
     System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
@@ -795,6 +794,10 @@
         var remainder = a.mod(b);
         result.v = remainder;
         return a.sub(remainder).div(b);
+    };
+
+    System.UInt64.prototype.toJSON = function () {
+        return this.gt(Bridge.Int.MAX_SAFE_INTEGER) ? this.toString() : this.toNumber();
     };
 
     System.UInt64.prototype.and = System.Int64.prototype.and;
