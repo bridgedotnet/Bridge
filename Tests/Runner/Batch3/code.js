@@ -27788,7 +27788,16 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestUriEquals: function () {
                     var uriStr = "https://deck.net/";
-                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri(uriStr), new System.Uri(uriStr)));
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri(uriStr), new System.Uri(uriStr)), "Two URIs initiated from the same URI string are identical.");
+
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net"), new System.Uri("https://deck.net")), "Two identical URIs by static string are equal.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://DECK.net"), new System.Uri("https://deck.net")), "Domain name matching is case-insensitive.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("HTTPS://deck.net"), new System.Uri("https://deck.net")), "Protocol name matching is case-insensitive.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net/TEST"), new System.Uri("https://deck.net/test")), "Non-domain part of url is case-sensitive.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net/"), new System.Uri("https://deck.net/")), "URLs ending with slash are equal.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net:880"), new System.Uri("https://deck.net:880")), "Port number allows matching.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net"), new System.Uri("http://deck.net")), "URI's protocol (http/https) matters.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net:80/test"), new System.Uri("https://deck.net/test")), "Port numbers in URLs matters.");
                 }
             }
         }
