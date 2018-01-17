@@ -27859,19 +27859,41 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether dictionary keys are
+     correctly handled when they are unsigned long.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3363
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3363", {
         statics: {
             methods: {
+                /**
+                 * The test plays around with max and min dictionary keys after
+                 feeding it with some out-of-order values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3363
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3363
+                 * @return  {void}
+                 */
                 Test64bitKey: function () {
                     var dic = new (System.Collections.Generic.Dictionary$2(System.UInt64,System.String))();
 
-                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(20), "Diez");
-                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(10), "Diez");
-                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(30), "Diez");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(20), "Twenty");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(10), "Ten");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(40), "Forty");
+                    dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$add(System.UInt64(30), "Thirty");
 
-                    Bridge.Test.NUnit.Assert.True(System.UInt64(10).equals(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()));
-                    Bridge.Test.NUnit.Assert.AreEqual("Diez", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.UInt64(10)));
-                    Bridge.Test.NUnit.Assert.AreEqual("Diez", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()));
+                    Bridge.Test.NUnit.Assert.True(System.UInt64(10).equals(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()), "Min key is 10.");
+                    Bridge.Test.NUnit.Assert.AreEqual("Ten", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.UInt64(10)), "Key index 10 has the expected value, 'Ten'.");
+                    Bridge.Test.NUnit.Assert.AreEqual("Ten", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).min()), "Value from min key matches the expected 'Ten'.");
+
+                    Bridge.Test.NUnit.Assert.True(System.UInt64(40).equals(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).max()), "Max key is 40.");
+                    Bridge.Test.NUnit.Assert.AreEqual("Forty", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.UInt64(40)), "Key index 40 has the expected value, 'Forty'.");
+                    Bridge.Test.NUnit.Assert.AreEqual("Forty", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).max()), "Value from max key matches the expected 'Forty'.");
                 }
             }
         }
