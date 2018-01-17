@@ -27198,6 +27198,35 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * This tests consists in just checking whether URI's .ToString() does
+     not return "[Object object]" but the actual instantiated URL.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301", {
+        statics: {
+            methods: {
+                /**
+                 * Just checks whether an URI's ToString() matches its provided URL
+                 string.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+                 * @return  {void}
+                 */
+                TestUriToString: function () {
+                    var uriStr = "https://deck.net/";
+                    var uri = new System.Uri(uriStr);
+                    Bridge.Test.NUnit.Assert.AreEqual(uriStr, uri.toString(), "URI ToString() returns the same string used to initialize it.");
+                }
+            }
+        }
+    });
+
+    /**
      * The test here consists in ensuring that a new datetime instance,
      provided an UtcNow datetime + 1 minute, is exactly equal to the
      original datetime+1 minute.
@@ -27766,6 +27795,24 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(5, System.Nullable.getValue(Bridge.cast(Bridge.unbox(i), System.Int32)), "Provided object value is Integer and its value is 5.");
                 } else {
                     Bridge.Test.NUnit.Assert.Fail("Provided object is not an Integer.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3357", {
+        statics: {
+            methods: {
+                TestUriEquals: function () {
+                    var uriStr = "https://deck.net/";
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri(uriStr), new System.Uri(uriStr)), "Two URIs initialized with same string are equal.");
+
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net"), new System.Uri("https://deck.net")), "Two identical URIs by static string are equal.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net/TEST"), new System.Uri("https://deck.net/test")), "Non-domain part of url is case-sensitive.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net/"), new System.Uri("https://deck.net/")), "URLs ending with slash are equal.");
+                    Bridge.Test.NUnit.Assert.True(System.Uri.equals(new System.Uri("https://deck.net:880"), new System.Uri("https://deck.net:880")), "Port number allows matching.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net"), new System.Uri("http://deck.net")), "URI's protocol (http/https) matters.");
+                    Bridge.Test.NUnit.Assert.False(System.Uri.equals(new System.Uri("https://deck.net:80/test"), new System.Uri("https://deck.net/test")), "Port numbers in URLs matters.");
                 }
             }
         }
