@@ -27197,13 +27197,30 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This tests consists in just checking whether URI's .ToString() does
+     not return "[Object object]" but the actual instantiated URL.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301", {
         statics: {
             methods: {
+                /**
+                 * Just checks whether an URI's ToString() matches its provided URL
+                 string.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3301
+                 * @return  {void}
+                 */
                 TestUriToString: function () {
                     var uriStr = "https://deck.net/";
                     var uri = new System.Uri(uriStr);
-                    Bridge.Test.NUnit.Assert.AreEqual(uriStr, uri.toString());
+                    Bridge.Test.NUnit.Assert.AreEqual(uriStr, uri.toString(), "URI ToString() returns the same string used to initialize it.");
                 }
             }
         }
