@@ -1085,6 +1085,16 @@ namespace Bridge.Contract
                 name += Helpers.PrefixDollar(type.TypeArguments.Count);
             }
 
+            if (isCustomName && excludens && name != null)
+            {
+                var idx = name.LastIndexOf('.');
+
+                if (idx > -1)
+                {
+                    name = name.Substring(idx + 1);
+                }
+            }
+
             if (!asDefinition && type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter, true))
             {
                 StringBuilder sb = new StringBuilder(name);

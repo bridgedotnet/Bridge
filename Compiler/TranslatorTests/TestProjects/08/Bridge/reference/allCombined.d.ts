@@ -1,10 +1,10 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace IntegrationTest08 {
-    export interface Class1 {
+    interface Class1 {
         GetName(): string;
     }
-    export interface Class1Func extends Function {
+    interface Class1Func extends Function {
         prototype: Class1;
         new (): Class1;
     }

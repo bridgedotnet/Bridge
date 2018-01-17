@@ -35,7 +35,7 @@ namespace Bridge.Contract
 
         string GetCustomConstructor(Mono.Cecil.TypeDefinition type);
 
-        string GetCustomTypeName(Mono.Cecil.TypeDefinition type, IEmitter emitter, bool excludeNs);
+        string GetCustomTypeName(Mono.Cecil.TypeDefinition type, IEmitter emitter, bool excludeNs, bool asDefinition = true);
 
         System.Collections.Generic.HashSet<string> GetParentTypes(System.Collections.Generic.IDictionary<string, Mono.Cecil.TypeDefinition> allTypes);
 

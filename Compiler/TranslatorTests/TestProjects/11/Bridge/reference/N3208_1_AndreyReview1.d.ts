@@ -1,9 +1,9 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace N3208_1_AndreyReview1 {
-    export interface App {
+    interface App {
     }
-    export interface AppFunc extends Function {
+    interface AppFunc extends Function {
         prototype: App;
         new (): App;
         Main(): void;

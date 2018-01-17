@@ -1,10 +1,10 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace Issue2493 {
-    export interface Operation3 {
+    interface Operation3 {
         Add(a: number, b: number): number;
     }
-    export interface Operation3Func extends Function {
+    interface Operation3Func extends Function {
         prototype: Operation3;
         new (): Operation3;
     }
