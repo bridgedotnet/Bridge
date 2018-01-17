@@ -13,9 +13,9 @@ declare module "N3208_originalReport_module" {
          * @public
          * @class N3208_0_originalReport.Program
          */
-        export interface Program {
+        interface Program {
         }
-        export interface ProgramFunc extends Function {
+        interface ProgramFunc extends Function {
             prototype: Program;
             new (): Program;
             Main(): void;
