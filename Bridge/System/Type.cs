@@ -399,5 +399,11 @@ namespace System
 
         [Template("Bridge.getTypeName({this})")]
         public override extern string ToString();
+
+        public extern bool IsValueType
+        {
+            [Template("Bridge.Reflection.isValueType({this})")]
+            get;
+        }
     }
 }

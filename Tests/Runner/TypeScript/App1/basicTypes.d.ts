@@ -1,7 +1,7 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace BasicTypes {
-    export interface BasicTypes {
+    interface BasicTypes {
         BoolValue: boolean;
         IntegerValue: number;
         FloatValue: number;
@@ -17,19 +17,19 @@ declare namespace BasicTypes {
         UndefinedValue: any;
         VoidFunction(): void;
     }
-    export interface BasicTypesFunc extends Function {
+    interface BasicTypesFunc extends Function {
         prototype: BasicTypes;
         new (): BasicTypes;
     }
     var BasicTypes: BasicTypesFunc;
 
-    export enum Color {
+    enum Color {
         Red = 0,
         Green = 1,
         Blue = 2
     }
 
-    export interface Keywords {
+    interface Keywords {
         Break: string;
         Case: string;
         Catch: string;
@@ -92,7 +92,7 @@ declare namespace BasicTypes {
         From: string;
         Of: string;
     }
-    export interface KeywordsFunc extends Function {
+    interface KeywordsFunc extends Function {
         prototype: Keywords;
         new (): Keywords;
     }

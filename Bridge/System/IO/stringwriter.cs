@@ -30,7 +30,7 @@ namespace System.IO
     // the resulting sequence of characters to be presented as a string.
     //
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class StringWriter : TextWriter
     {

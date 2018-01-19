@@ -41,6 +41,7 @@ namespace Bridge.Contract
     public enum MetadataTarget
     {
         File,
-        Inline      
+        Inline,
+        Type      
     }
 }

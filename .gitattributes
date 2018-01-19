@@ -5,7 +5,7 @@
 *.asax text
 *.ashx text
 *.aspx text
-*.bat text
+*.bat text eol=crlf
 *.config text
 *.cs text
 *.cshtml text

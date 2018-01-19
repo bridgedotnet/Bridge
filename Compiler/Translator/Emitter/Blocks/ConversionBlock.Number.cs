@@ -46,16 +46,11 @@ namespace Bridge.Translator
             if (Helpers.Is64Type(toType, block.Emitter.Resolver) && expression.Parent is IndexerExpression &&
                 ((IndexerExpression)expression.Parent).Arguments.Contains(expression))
             {
-                var memberResolveResult = rr as MemberResolveResult;
+                var memberResolveResult = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as MemberResolveResult;
                 var isIgnore = true;
                 var isAccessorsIndexer = false;
                 IProperty member = null;
                 IndexerAccessor current = null;
-
-                if (memberResolveResult == null)
-                {
-                    memberResolveResult = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as MemberResolveResult;
-                }
 
                 if (memberResolveResult != null)
                 {

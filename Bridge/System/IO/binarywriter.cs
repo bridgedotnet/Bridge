@@ -33,7 +33,7 @@ namespace System.IO
     // give unique encodings.
     //
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class BinaryWriter : IDisposable
     {

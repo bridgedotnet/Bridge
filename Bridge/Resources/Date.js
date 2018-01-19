@@ -32,7 +32,14 @@
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
+
+                if (d.ticks === undefined) {
+                    if (d.kind === 1) {
+                        d.ticks = System.Int64(d.getTime()).mul(10000).add(System.DateTime.minOffset);
+                    } else {
+                        d.ticks = System.Int64(d.getTime() - d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
+                    }
+                }
 
                 return d.ticks;
             },
@@ -480,6 +487,12 @@
                     }
 
                     throw new System.FormatException("String does not contain a valid string representation of a date and time.");
+                } else {
+                    // TODO: The code below assumes that there are no quotation marks around the UTC/Z format token (the format patterns
+                    // used by Bridge appear to use quotation marks throughout (see universalSortableDateTimePattern), including
+                    // in the recent Newtonsoft.Json.JsonConvert release).
+                    // Until the above is sorted out, manually remove quotation marks to get UTC times parsed correctly.
+                    format = format.replace("'Z'", "Z");
                 }
 
                 var now = new Date(),
@@ -768,8 +781,7 @@
                         } else if (token === "Z") {
                             var ch = str.substring(idx, idx + 1);
                             if (ch === "Z" || ch === "z") {
-                                kind = 2;
-                                adjust = true;
+                                kind = 1;
                                 idx += 1;
                             }
                             else {
@@ -1067,6 +1079,7 @@
                 var d1 = new Date(d.getTime() + Math.round(v));
 
                 d1.kind = d.kind;
+                d1.ticks = System.DateTime.getTicks(d1);
 
                 return d1;
             },
@@ -1081,6 +1094,7 @@
                 var d1 = new Date(d.getTime() + value.ticks.div(10000).toNumber());
 
                 d1.kind = d.kind;
+                d1.ticks = System.DateTime.getTicks(d1);
 
                 return d1;
             },
@@ -1091,6 +1105,7 @@
                 var d1 = new Date(d.getTime() - value.ticks.div(10000).toNumber());
 
                 d1.kind = d.kind;
+                d1.ticks = System.DateTime.getTicks(d1);
 
                 return d1;
             },
@@ -1106,11 +1121,19 @@
             getDayOfYear: function (d) {
                 var ny = new Date(d.getTime());
 
-                ny.setMonth(0);
-                ny.setDate(1);
-                ny.setHours(0);
-                ny.setMinutes(0);
-                ny.setMilliseconds(0);
+                if (d.kind !== 1) {
+                    ny.setMonth(0);
+                    ny.setDate(1);
+                    ny.setHours(0);
+                    ny.setMinutes(0);
+                    ny.setMilliseconds(0);
+                } else {
+                    ny.setUTCMonth(0);
+                    ny.setUTCDate(1);
+                    ny.setUTCHours(0);
+                    ny.setUTCMinutes(0);
+                    ny.setUTCMilliseconds(0);
+                }
 
                 return Math.ceil((d - ny) / 864e5);
             },
@@ -1119,11 +1142,21 @@
                 d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime());
-                d1.setHours(0);
-                d1.setMinutes(0);
-                d1.setSeconds(0);
-                d1.setMilliseconds(0);
+
+                if (d.kind !== 1) {
+                    d1.setHours(0);
+                    d1.setMinutes(0);
+                    d1.setSeconds(0);
+                    d1.setMilliseconds(0);
+                } else {
+                    d1.setUTCHours(0);
+                    d1.setUTCMinutes(0);
+                    d1.setUTCSeconds(0);
+                    d1.setUTCMilliseconds(0);
+                }
+
                 d1.kind = d.kind;
+                d1.ticks = System.DateTime.getTicks(d1);
 
                 return d1;
             },

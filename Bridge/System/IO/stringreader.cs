@@ -27,7 +27,7 @@ namespace System.IO
     // This class implements a text reader that reads from a string.
     //
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class StringReader : TextReader
     {

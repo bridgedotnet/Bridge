@@ -1,6 +1,6 @@
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.6.1";
-        Bridge.SystemAssembly.compiler = "16.6.1";
+        Bridge.SystemAssembly.version = "16.7.0";
+        Bridge.SystemAssembly.compiler = "16.7.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");

@@ -1,9 +1,9 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace Issue3276 {
-    export interface Program {
+    interface Program {
     }
-    export interface ProgramFunc extends Function {
+    interface ProgramFunc extends Function {
         prototype: Program;
         new (): Program;
         /**

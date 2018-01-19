@@ -22,7 +22,7 @@
             }
 
             this.array = array;
-                
+
             if (Bridge.isNumber(offset)) {
                 if (offset < 0) {
                     throw new System.ArgumentOutOfRangeException("offset");
@@ -44,10 +44,10 @@
             else {
                 this.count = array.length;
             }
-            
+
             if (array.length - this.offset < this.count) {
                 throw new ArgumentException();
-            }                
+            }
         },
 
         getArray: function () {

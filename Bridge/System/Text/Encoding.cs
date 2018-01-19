@@ -6,7 +6,7 @@ namespace System.Text
     /// Represents a character encoding.
     /// </summary>
     [Reflectable]
-    [FileName("system\\text\\encoding.js")]
+    [FileName("system/text/encoding.js")]
     [Convention]
     public abstract class Encoding : IBridgeClass
     {

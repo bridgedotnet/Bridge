@@ -1,10 +1,11 @@
 /**
- * @compiler Bridge.NET 16.6.1
+ * @compiler Bridge.NET 16.7.0
  */
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N059.Class59", {
+        $metadata : function () { return {"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Method1","is":true,"t":8,"sn":"Method1","rt":System.Void},{"a":2,"n":"Method1","t":8,"pi":[{"n":"d","pt":Test.BridgeIssues.N059.Class59.Aux1,"ps":0}],"sn":"Method1","rt":System.Void,"p":[Test.BridgeIssues.N059.Class59.Aux1]}]}; },
         statics: {
             methods: {
                 Method1: function () { }
@@ -15,5 +16,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Test.BridgeIssues.N059.Class59.Aux1");
+    Bridge.define("Test.BridgeIssues.N059.Class59.Aux1", {
+        $metadata : function () { return {"td":Test.BridgeIssues.N059.Class59,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
+    });
 });

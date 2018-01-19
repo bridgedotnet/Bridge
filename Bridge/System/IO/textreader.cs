@@ -40,7 +40,7 @@ namespace System.IO
     // This class is intended for character input, not bytes.
     // There are methods on the Stream class for reading bytes.
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public abstract class TextReader : IDisposable
     {

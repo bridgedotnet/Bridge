@@ -41,19 +41,19 @@ Bridge.define("System.String", {
         fromCharArray: function (chars, startIndex, length) {
             if (chars == null) {
                 throw new System.ArgumentNullException("chars");
-            }                
+            }
 
             if (startIndex < 0) {
                 throw new System.ArgumentOutOfRangeException("startIndex");
             }
-                
+
             if (length < 0) {
                 throw new System.ArgumentOutOfRangeException("length");
             }
-                
+
             if (chars.length - startIndex < length) {
                 throw new System.ArgumentOutOfRangeException("startIndex");
-            }                
+            }
 
             var result = "";
 

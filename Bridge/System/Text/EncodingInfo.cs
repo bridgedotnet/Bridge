@@ -6,7 +6,7 @@ namespace System.Text
     /// Provides basic information about an encoding.
     /// </summary>
     [Reflectable]
-    [FileName("system\\text\\encoding.js")]
+    [FileName("system/text/encoding.js")]
     [Convention]
     public sealed class EncodingInfo
     {

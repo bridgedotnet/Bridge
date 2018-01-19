@@ -950,7 +950,7 @@ namespace Bridge.Translator
             return result;
         }
 
-        internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false)
+        internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false, bool cache = true)
         {
             var typeParam = type as ITypeParameter;
             if (typeParam != null && (typeParam.OwnerType == SymbolKind.Method || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter)))
@@ -966,7 +966,7 @@ namespace Bridge.Translator
 
             var name = BridgeTypes.ToJsName(type, emitter, asDefinition, skipMethodTypeParam: true);
 
-            if (emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
+            if (cache && emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
             {
                 int key;
                 if (emitter.NamespacesCache.ContainsKey(type.Namespace))
