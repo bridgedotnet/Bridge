@@ -28543,7 +28543,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 this.m_isMemoryStream = (Bridge.referenceEquals(Bridge.getType(this.m_stream), System.IO.MemoryStream));
                 this.m_leaveOpen = leaveOpen;
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.m_encoding != null; }, "[BinaryReader.ctor]m_encoding!=null");
             }
         },
         methods: {
@@ -28671,7 +28670,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                     // read directly from MemoryStream buffer
                     var mStream = Bridge.as(this.m_stream, System.IO.MemoryStream);
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return mStream != null; }, "m_stream as MemoryStream != null");
 
                     return mStream.InternalReadInt32();
                 } else {
@@ -28785,7 +28783,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return sb.toString();
             },
             InternalReadChars: function (buffer, index, count) {
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.m_stream != null; });
 
                 var charsRemaining = count;
 
@@ -28817,7 +28814,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 // this should never fail
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRemaining >= 0; }, "We read too many characters.");
 
                 // we may have read fewer than the number of characters requested if end of stream reached
                 // or if the encoding makes the char count too big for the buffer (e.g. fallback sequence)
@@ -28936,7 +28932,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
 
                     if (!allowSurrogate) {
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRead < 2; }, "InternalReadOneChar - assuming we only got 0 or 1 char, not 2!");
                     }
                 }
 
@@ -29165,7 +29160,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     throw new System.ArgumentException("Arg_SurrogatesNotAllowedAsSingleChar");
                 }
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._encoding.GetMaxByteCount(1) <= 16; }, "_encoding.GetMaxByteCount(1) <= 16)");
                 var numBytes = 0;
                 numBytes = this._encoding.GetBytes$3(System.Array.init([ch], System.Char), 0, 1, this._buffer, 0);
 
@@ -30296,7 +30290,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     this.EnsureNotClosed();
                     this.EnsureCanSeek();
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return !(this._writePos > 0 && this._readPos !== this._readLen); }, "Read and Write buffers cannot both have data in them at the same time.");
                     return this._stream.Position.add(System.Int64((((((this._readPos - this._readLen) | 0) + this._writePos) | 0))));
                 },
                 set: function (value) {
@@ -30378,8 +30371,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             EnsureShadowBufferAllocated: function () {
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._buffer != null; });
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._bufferSize > 0; });
 
                 // Already have shadow buffer?
                 if (this._buffer.length !== this._bufferSize || this._bufferSize >= System.IO.BufferedStream.MaxShadowBufferSize) {
@@ -30392,7 +30383,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             EnsureBufferAllocated: function () {
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._bufferSize > 0; });
 
                 // BufferedStream is not intended for multi-threaded use, so no worries about the get/set ---- on _buffer.
                 if (this._buffer == null) {
@@ -30427,7 +30417,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (this._writePos > 0) {
 
                     this.FlushWrite();
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos === 0 && this._readPos === 0 && this._readLen === 0; });
                     return;
                 }
 
@@ -30450,7 +30439,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         this._stream.Flush();
                     }
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos === 0 && this._readPos === 0 && this._readLen === 0; });
                     return;
                 }
 
@@ -30463,7 +30451,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             FlushRead: function () {
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos === 0; }, "BufferedStream: Write buffer must be empty in FlushRead!");
 
                 if (((this._readPos - this._readLen) | 0) !== 0) {
                     this._stream.Seek(System.Int64(this._readPos - this._readLen), System.IO.SeekOrigin.Current);
@@ -30476,7 +30463,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 // This is called by write methods to clear the read buffer.
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._readPos <= this._readLen; }, "_readPos <= _readLen [" + this._readPos + " <= " + this._readLen + "]");
 
                 // No READ data in the buffer:
                 if (this._readPos === this._readLen) {
@@ -30486,7 +30472,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 // Must have READ data.
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._readPos < this._readLen; });
 
                 // If the underlying stream cannot seek, FlushRead would end up throwing NotSupported.
                 // However, since the user did not call a method that is intuitively expected to seek, a better message is in order.
@@ -30499,8 +30484,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             FlushWrite: function () {
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._readPos === 0 && this._readLen === 0; }, "BufferedStream: Read buffer must be empty in FlushWrite!");
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._buffer != null && this._bufferSize >= this._writePos; }, "BufferedStream: Write buffer must be allocated and write position must be in the bounds of the buffer in FlushWrite!");
 
                 this._stream.Write(this._buffer, 0, this._writePos);
                 this._writePos = 0;
@@ -30509,13 +30492,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             ReadFromBuffer: function (array, offset, count) {
 
                 var readBytes = (this._readLen - this._readPos) | 0;
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return readBytes >= 0; });
 
                 if (readBytes === 0) {
                     return 0;
                 }
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return readBytes > 0; });
 
                 if (readBytes > count) {
                     readBytes = count;
@@ -30579,7 +30560,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 // So the READ buffer is empty.
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._readLen === this._readPos; });
                 this._readPos = (this._readLen = 0);
 
                 // If there was anything in the WRITE buffer, clear it.
@@ -30741,7 +30721,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 // A nice property (*) of this heuristic is that it will always succeed if the user data completely fits into the
                 // available buffer, i.e. if count < (_bufferSize - _writePos).
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos < this._bufferSize; });
 
                 var totalUserBytes;
                 var useBuffer; // We do not expect buffer sizes big enough for an overflow, but if it happens, lets fail early:
@@ -30754,29 +30733,21 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                     if (this._writePos < this._bufferSize) {
 
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return count.v === 0; });
                         return;
                     }
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return count.v >= 0; });
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos === this._bufferSize; });
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._buffer != null; });
 
                     this._stream.Write(this._buffer, 0, this._writePos);
                     this._writePos = 0;
 
                     this.WriteToBuffer(array, offset, count);
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return count.v === 0; });
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos < this._bufferSize; });
 
                 } else { // if (!useBuffer)
 
                     // Write out the buffer if necessary.
                     if (this._writePos > 0) {
 
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._buffer != null; });
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return totalUserBytes >= this._bufferSize; });
 
                         // Try avoiding extra write to underlying stream by combining previously buffered data with current user data:
                         if (totalUserBytes <= (((this._bufferSize + this._bufferSize) | 0)) && totalUserBytes <= System.IO.BufferedStream.MaxShadowBufferSize) {
@@ -30814,7 +30785,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 this._buffer[System.Array.index(Bridge.identity(this._writePos, (this._writePos = (this._writePos + 1) | 0)), this._buffer)] = value;
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._writePos < this._bufferSize; });
             },
             Seek: function (offset, origin) {
 
@@ -30840,7 +30810,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 var oldPos = this.Position;
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return oldPos.equals(this._stream.Position.add(System.Int64((((this._readPos - this._readLen) | 0))))); });
 
                 var newPos = this._stream.Seek(offset, origin);
 
@@ -30861,7 +30830,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     this._readPos = (this._readLen = 0);
                 }
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return newPos.equals(this.Position); }, "newPos (=" + newPos + ") == Position (=" + this.Position + ")");
                 return newPos;
             },
             SetLength: function (value) {
@@ -31411,9 +31379,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
                 if (n < 0) {
                     n = 0;
-                }
-
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return ((this._position + n) | 0) >= 0; }, "_position + n >= 0"); // len is less than 2^31 -1.
+                } // len is less than 2^31 -1.
                 this._position = (this._position + n) | 0;
                 return n;
             },
@@ -31441,9 +31407,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
                 if (n <= 0) {
                     return 0;
-                }
-
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return ((this._position + n) | 0) >= 0; }, "_position + n >= 0"); // len is less than 2^31 -1.
+                } // len is less than 2^31 -1.
 
                 if (n <= 8) {
                     var byteCount = n;
@@ -31508,7 +31472,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         throw new System.ArgumentException("Argument_InvalidSeekOrigin");
                 }
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this._position >= 0; }, "_position >= 0");
                 return System.Int64(this._position);
             },
             SetLength: function (value) {
@@ -31517,8 +31480,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
                 this.EnsureWriteable();
 
-                // Origin wasn't publicly exposed above.
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return true; }); // Check parameter validation logic in this method if this fails.
+                // Origin wasn't publicly exposed above. // Check parameter validation logic in this method if this fails.
                 if (value.gt(System.Int64((((2147483647 - this._origin) | 0))))) {
                     throw new System.ArgumentOutOfRangeException("value", "ArgumentOutOfRange_StreamLength");
                 }
@@ -32133,7 +32095,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return System.IO.TextReader.prototype.ReadBlock.call(this, buffer, index, count);
             },
             CompressBuffer: function (n) {
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= n; }, "CompressBuffer was called with a number of bytes greater than the current buffer length.  Are two threads using this StreamReader at the same time?");
                 System.Array.copy(this.byteBuffer, n, this.byteBuffer, 0, ((this.byteLen - n) | 0));
                 this.byteLen = (this.byteLen - n) | 0;
             },
@@ -32190,9 +32151,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 this.byteLen = 0;
                 do {
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.bytePos === 0; }, "bytePos can be non zero only when we are trying to _checkPreamble.  Are two threads using this StreamReader at the same time?");
                     this.byteLen = this.stream.Read(this.byteBuffer, 0, this.byteBuffer.length);
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= 0; }, "Stream.Read returned a negative number!  This is a bug in your stream class.");
 
                     if (this.byteLen === 0) {
                         return this.charLen;
@@ -32243,13 +32202,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 readToUserBuffer.v = desiredChars >= this._maxCharsPerBuffer;
 
                 do {
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRead === 0; });
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.bytePos === 0; }, "bytePos can be non zero only when we are trying to _checkPreamble.  Are two threads using this StreamReader at the same time?");
 
                     this.byteLen = this.stream.Read(this.byteBuffer, 0, this.byteBuffer.length);
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= 0; }, "Stream.Read returned a negative number!  This is a bug in your stream class.");
 
                     if (this.byteLen === 0) {
                         break;
@@ -32581,7 +32537,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     if (n > count) {
                         n = count;
                     }
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return n > 0; }, "StreamWriter::Write(char[]) isn't making progress!  This is most likely a ---- in user code.");
                     System.Array.copy(buffer, index, this.charBuffer, this.charPos, n);
                     this.charPos = (this.charPos + n) | 0;
                     index = (index + n) | 0;
@@ -32613,7 +32568,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     if (n > count) {
                         n = count;
                     }
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return n > 0; }, "StreamWriter::Write(char[], int, int) isn't making progress!  This is most likely a race condition in user code.");
                     System.Array.copy(buffer, index, this.charBuffer, this.charPos, n);
                     this.charPos = (this.charPos + n) | 0;
                     index = (index + n) | 0;
@@ -32635,7 +32589,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         if (n > count) {
                             n = count;
                         }
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return n > 0; }, "StreamWriter::Write(String) isn't making progress!  This is most likely a race condition in user code.");
                         System.String.copyTo(value, index, this.charBuffer, this.charPos, n);
                         this.charPos = (this.charPos + n) | 0;
                         index = (index + n) | 0;

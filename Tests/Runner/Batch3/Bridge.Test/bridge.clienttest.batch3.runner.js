@@ -5842,22 +5842,22 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestImplicitImplementation: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestImplicitImplementation()", $t.Line = "226", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestImplicitImplementation()", $t.Line = "225", $t));
                     t.Fixture.TestImplicitImplementation();
                 },
                 TestExplicitImplementation: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExplicitImplementation()", $t.Line = "235", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExplicitImplementation()", $t.Line = "234", $t));
                     t.Fixture.TestExplicitImplementation();
                 },
                 TestListImplicitImplementation: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestListImplicitImplementation()", $t.Line = "249", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestListImplicitImplementation()", $t.Line = "248", $t));
                     t.Fixture.TestListImplicitImplementation();
                 },
                 TestListExplicitImplementation: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestListExplicitImplementation()", $t.Line = "266", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1768, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestListExplicitImplementation()", $t.Line = "265", $t));
                     t.Fixture.TestListExplicitImplementation();
                 }
             }
@@ -6892,7 +6892,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestPropertyAndMethodNameConflict: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1899, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestPropertyAndMethodNameConflict()", $t.Line = "191", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1899, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestPropertyAndMethodNameConflict()", $t.Line = "190", $t));
                     t.Fixture.TestPropertyAndMethodNameConflict();
                 }
             }
