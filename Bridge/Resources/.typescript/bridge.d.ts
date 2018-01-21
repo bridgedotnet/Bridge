@@ -219,6 +219,141 @@ declare module Bridge {
 }
 
 declare module System {
+    export class Decimal
+    {
+        prototype: Decimal;
+        static readonly Zero: Decimal;
+        static readonly One: Decimal;
+        static readonly MinusOne: Decimal;
+        static readonly MaxValue: Decimal;
+        static readonly MinValue: Decimal;
+        constructor(value: any);
+        abs(): Decimal;
+        ceil(): Decimal;
+        floor(): Decimal;
+        comparedTo(d: Decimal): number;
+        clone(): Decimal;
+        neg(): Decimal;
+        add(d: Decimal): Decimal;
+        sub(d: Decimal): Decimal;
+        inc(): Decimal;
+        dec(): Decimal;
+        mul(d: Decimal): Decimal;
+        div(d: Decimal): Decimal;
+        mod(d: Decimal): Decimal;
+        equals(d: Decimal): boolean;
+        ne(d: Decimal): boolean;
+        gt(d: Decimal): boolean;
+        gte(d: Decimal): boolean;
+        lt(d: Decimal): boolean;
+        lte(d: Decimal): boolean;
+        trunc(): Decimal;
+        static exp(d: Decimal): Decimal;
+        static ln(d: Decimal): Decimal;
+        static log(d: Decimal, logBase: Decimal): Decimal;
+        static pow(d: Decimal, exponent: Decimal): Decimal;
+        static sqrt(d: Decimal): Decimal;
+        static tryParse(s: string, provider: System.Globalization.IFormatProvider, result: { v: Decimal }): boolean;
+        static round(d: Decimal, mode: number): Decimal;
+        static round(d: Decimal): Decimal;
+        static toInt(d: Decimal): number;
+        static toFloat(d: Decimal): number;
+    }
+
+    export class Single extends Number {
+        static readonly max: number;
+        static readonly min: number;
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class Double extends Number {
+        static readonly max: number;
+        static readonly min: number;
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class SByte extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class Byte extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class Int16 extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class UInt16 extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class UInt32 extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class Int32 extends Number {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class Int64 {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
+    export class UInt64 {
+        static parse(s: string): number;
+        static parse(s: string, radix: number): number;
+        static tryParse(s: string, result: { v: number }): number;
+        static tryParse(s: string, result: { v: number }, radix: number): number;
+        static format(v: number, format: string): number;
+        static format(v: number, format: string, provider: System.Globalization.IFormatProvider): number;
+    }
+
     export class Object {
     }
 
@@ -226,6 +361,7 @@ declare module System {
     }
 
     export interface Nullable {
+        prototype: Nullable;
         hasValue(obj: any): boolean;
         getValue<T>(obj: T): T;
         getValue(obj: any): any;
@@ -257,6 +393,7 @@ declare module System {
     var Nullable: Nullable;
 
     export interface Char {
+        prototype: Char;
         isWhiteSpace(value: string): boolean;
         isDigit(value: number): boolean;
         isLetter(value: number): boolean;
@@ -273,6 +410,7 @@ declare module System {
     var Char: Char;
 
     export interface String {
+        prototype: String;
         isNullOrWhiteSpace(value: string): boolean;
         isNullOrEmpty(value: string): boolean;
         fromCharCount(c: number, count: number): string;
@@ -299,7 +437,7 @@ declare module System {
         static create(error: string): Exception;
         static create(error: Error): Exception;
     }
-
+    
     export class SystemException extends Exception {
         constructor(message: string, innerException: Exception);
         constructor(message: string);
@@ -406,6 +544,7 @@ declare module System {
     var IDisposable: Function;
 
     export interface DateTime {
+        prototype: DateTime;
         utcNow(): Date;
         today(): Date;
         format(date: Date, format?: string, provider?: System.Globalization.DateTimeFormatInfo): string;
@@ -461,6 +600,7 @@ declare module System {
     var Guid: GuidFunc;
 
     export class TimeSpan implements IComparable, IComparable$1<TimeSpan>, IEquatable$1<TimeSpan> {
+        prototype: TimeSpan;
         static fromDays(value: number): TimeSpan;
         static fromHours(value: number): TimeSpan;
         static fromMilliseconds(value: number): TimeSpan;
@@ -1111,6 +1251,10 @@ module ComponentModel {
 }
 
 module Globalization {
+    export interface IFormatProvider {
+        getFormat(formatType: Function): any;
+    }
+
     export class CultureNotFoundException extends ArgumentException {
         constructor(paramName: string, invalidCultureName?: string, message?: string, innerException?: Exception);
         getInvalidCultureName(): string;
