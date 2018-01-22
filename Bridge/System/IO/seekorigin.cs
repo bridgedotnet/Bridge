@@ -11,7 +11,7 @@ namespace System.IO
     /// Provides seek reference points.  To seek to the end of a stream, call stream.Seek(0, SeekOrigin.End).
     /// </summary>
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public enum SeekOrigin
     {

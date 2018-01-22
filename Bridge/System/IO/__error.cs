@@ -26,7 +26,7 @@ using System.Diagnostics.Contracts;
 
 namespace System.IO
 {
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     internal static class __Error
     {

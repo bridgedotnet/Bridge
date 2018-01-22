@@ -475,7 +475,7 @@ namespace Bridge.Translator
                         typeArgs = arr_sb.ToString();
                     }
 
-                    this.Write(string.Format("$m('{0}', function ({2}) {{ return {1}; }});", MetadataUtils.GetTypeName(meta.Key, this.Emitter, false, true, false), metaData.ToString(Formatting.None), typeArgs));
+                    this.Write(string.Format("$m(\"{0}\", function ({2}) {{ return {1}; }});", MetadataUtils.GetTypeName(meta.Key, this.Emitter, false, true, false), metaData.ToString(Formatting.None), typeArgs));
                     this.WriteNewLine();
                 }
 

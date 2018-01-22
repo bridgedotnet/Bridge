@@ -77,7 +77,7 @@ namespace System.IO
     }
 
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class FileStream : Stream
     {

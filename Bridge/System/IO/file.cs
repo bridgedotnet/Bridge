@@ -34,7 +34,7 @@ namespace System.IO
     // Class for creating FileStream objects, and some basic file management
     // routines such as Delete, etc.
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public static class File
     {

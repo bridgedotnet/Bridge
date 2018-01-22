@@ -7,8 +7,20 @@
     <OnWin Condition="'$(OS)' == 'Unix' OR '$(OS)' == 'OSX'">false</OnWin>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
+    <!-- Enable the restore command to run before builds -->
+    <RestorePackages Condition=" '$(RestorePackages)' == '' ">false</RestorePackages>
+
+    <!-- Property that enables building a package from a project -->
+    <BuildPackage Condition=" '$(BuildPackage)' == '' ">false</BuildPackage>
+
+    <!-- Property that enables building a Bridge package from a project -->
+    <BuildBridgePackage Condition=" '$(BuildBridgePackage)' == '' ">false</BuildBridgePackage>
+
+    <!-- Determines if package restore consent is required to restore packages -->
+    <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
+
     <!-- Download nuget.exe if it does not already exist -->
-    <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+    <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">true</DownloadNuGetExe>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(OnWin) == true">
@@ -22,11 +34,24 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <PackagesProjectConfig Condition="$(OnWin) == true">>$(MSBuildProjectDirectory)\packages.$(MSBuildProjectName.Replace(' ', '_')).config</PackagesProjectConfig>
+    <PackagesProjectConfig Condition="$(OnWin) != true">>$(MSBuildProjectDirectory)\packages.$(MSBuildProjectName).config</PackagesProjectConfig>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackagesConfig Condition="Exists('$(MSBuildProjectDirectory)\packages.config')">$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+    <PackagesConfig Condition="Exists('$(PackagesProjectConfig)')">$(PackagesProjectConfig)</PackagesConfig>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!-- NuGet command -->
-    <NuGetExePath Condition=" '$(NuGetExePath)' == ''">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
+    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
+    <PackageSources Condition=" '$(PackageSources)' == '' ">@(PackageSource)</PackageSources>
 
     <NuGetCommand Condition="$(OnWin) == true">"$(NuGetExePath)"</NuGetCommand>
     <NuGetCommand Condition="$(OnWin) != true">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+
+    <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(TargetDir.Trim('\\'))</PackageOutputDir>
 
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
     <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND $(OnWin) == true ">-NonInteractive</NonInteractiveSwitch>
@@ -34,10 +59,26 @@
     <PaddedSolutionDir Condition="$(OnWin) == true">"$(SolutionDir) "</PaddedSolutionDir>
     <PaddedSolutionDir Condition="$(OnWin) != true">"$(SolutionDir)"</PaddedSolutionDir>
 
+    <!-- Commands -->
+    <RestoreCommand>$(NuGetCommand) restore "$(PackagesConfig)" $(NonInteractiveSwitch) $(RequireConsentSwitch) -PackagesDirectory "$(SolutionDir)packages"</RestoreCommand>
+    <BuildCommand>$(NuGetCommand) pack "$(ProjectPath)" -Properties "Configuration=$(Configuration);Platform=$(Platform)" $(NonInteractiveSwitch) -OutputDirectory "$(PackageOutputDir)" -symbols</BuildCommand>
+
+    <!-- We need to ensure packages are restored prior to assembly resolve -->
+    <BuildDependsOn Condition=" $(RestorePackages) == 'true' ">
+      RestorePackages;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+
     <!-- Make the build depend on restore packages -->
-    <BuildDependsOn Condition="$(NuGetBuildPackage) == 'true'">
+    <BuildDependsOn Condition=" $(BuildPackage) == 'true' ">
       $(BuildDependsOn);
       BuildPackage;
+    </BuildDependsOn>
+
+    <!-- Make the build depend on Bridge packages build -->
+    <BuildDependsOn Condition=" $(BuildBridgePackage) == 'true' ">
+      $(BuildDependsOn);
+      BuildBridgePackage;
     </BuildDependsOn>
   </PropertyGroup>
 
@@ -45,10 +86,10 @@
     <!-- Raise an error if we're unable to locate nuget.exe  -->
     <Error Condition="'$(DownloadNuGetExe)' != 'true' AND !Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
     <!--
-        Take advantage of MsBuild's build dependency tracking to make sure that we only ever download nuget.exe once.
-        This effectively acts as a lock that makes sure that the download operation will only happen once and all
-        parallel builds will have to wait for it to complete.
-        -->
+    Take advantage of MsBuild's build dependency tracking to make sure that we only ever download nuget.exe once.
+    This effectively acts as a lock that makes sure that the download operation will only happen once and all
+    parallel builds will have to wait for it to complete.
+    -->
     <MsBuild Targets="_DownloadNuGet" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT;DownloadNuGetExe=$(DownloadNuGetExe)" />
   </Target>
 
@@ -56,7 +97,25 @@
     <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
   </Target>
 
-  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites; AfterBuild">
+  <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
+    <Exec Command="$(RestoreCommand)"
+      Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
+
+    <Exec Command="$(RestoreCommand)"
+      LogStandardErrorAsError="true"
+      Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
+  </Target>
+
+  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
+    <Exec Command="$(BuildCommand)"
+        Condition=" '$(OS)' != 'Windows_NT' " />
+
+    <Exec Command="$(BuildCommand)"
+        LogStandardErrorAsError="true"
+        Condition=" '$(OS)' == 'Windows_NT' " />
+  </Target>
+
+  <Target Name="BuildBridgePackage" DependsOnTargets="CheckPrerequisites; AfterBuild">
     <Message Text="Starting nuget packaging:" Importance="high" />
     <Message Text="NuGetPackageSourcePath: %(NuGetPackageSourcePath.Path)" Importance="high" />
     <Message Text="OS: $(OS)" Importance="high" />
@@ -138,7 +197,7 @@
       <NuGetCommand Condition="$(OnWin) != true">$(NuGetCommand.Replace('\', '/'))</NuGetCommand>
     </PropertyGroup>
 
-    <Message Text="NuGetCommand  after trim: $(NuGetCommand)" Importance="high" />
+    <Message Text="NuGetCommand after trim: $(NuGetCommand)" Importance="high" />
 
     <!--The exec commands (bot for Win and Unix) should use %(NuGetPackageSourcePath.Path) inside the Command attribute
     It allows multiple packages created-->
@@ -173,20 +232,20 @@
       <Using Namespace="Microsoft.Build.Utilities" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-                try {
-                    OutputFilename = Path.GetFullPath(OutputFilename);
+        try {
+          OutputFilename = Path.GetFullPath(OutputFilename);
 
-                    Log.LogMessage("Downloading latest version of nuget.exe...");
-                    WebClient webClient = new WebClient();
-                    webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
+          Log.LogMessage("Downloading latest stable version of nuget.exe from dist.nuget.org.");
+          WebClient webClient = new WebClient();
+          webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", OutputFilename);
 
-                    return true;
-                }
-                catch (Exception ex) {
-                    Log.LogErrorFromException(ex);
-                    return false;
-                }
-            ]]>
+          return true;
+        }
+        catch (Exception ex) {
+          Log.LogErrorFromException(ex);
+          return false;
+        }
+        ]]>
       </Code>
     </Task>
   </UsingTask>

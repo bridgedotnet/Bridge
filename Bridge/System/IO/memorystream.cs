@@ -37,7 +37,7 @@ namespace System.IO
     // memory streams are resizable, while ones created with a byte array provide
     // a stream "view" of the data.
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class MemoryStream : Stream
     {

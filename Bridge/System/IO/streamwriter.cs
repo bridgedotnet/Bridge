@@ -32,7 +32,7 @@ namespace System.IO
     // whereas the Stream class is designed for byte input and output.
     //
     [Reflectable]
-    [FileName("system\\io\\io.js")]
+    [FileName("system/io/io.js")]
     [Convention]
     public class StreamWriter : TextWriter
     {

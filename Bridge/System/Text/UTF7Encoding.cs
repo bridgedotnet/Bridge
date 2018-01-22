@@ -5,7 +5,7 @@ using Bridge.Internal.Html5;
 namespace System.Text
 {
     [Reflectable]
-    [FileName("system\\text\\encoding.js")]
+    [FileName("system/text/encoding.js")]
     [Convention]
     public class UTF7Encoding : Encoding
     {
