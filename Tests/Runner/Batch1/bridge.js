@@ -72,6 +72,10 @@
                     return this.fn.getHashCode ? this.fn.getHashCode(this.v) : Bridge.getHashCode(this.v);
                 },
                 equals: function (o) {
+                    if (this === o) {
+                        return true;
+                    }
+
                     var eq = this.equals;
                     this.equals = null;
                     var r = Bridge.equals(this.v, o);
