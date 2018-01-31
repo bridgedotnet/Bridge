@@ -11491,7 +11491,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 i = lo + ((hi - lo) >> 1);
 
                 try {
-                    c = comparer.compare(array[i], value);
+                    c = System.Collections.Generic.Comparer$1.get(comparer)(array[i], value);
                 } catch (e) {
                     throw new System.InvalidOperationException("Failed to compare two elements in the array.", e);
                 }
@@ -11538,11 +11538,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             if (index === 0 && length === array.length) {
-                array.sort(Bridge.fn.bind(comparer, comparer.compare));
+                array.sort(Bridge.fn.bind(comparer, System.Collections.Generic.Comparer$1.get(comparer)));
             } else {
                 var newarray = array.slice(index, index + length);
 
-                newarray.sort(Bridge.fn.bind(comparer, comparer.compare));
+                newarray.sort(Bridge.fn.bind(comparer, System.Collections.Generic.Comparer$1.get(comparer)));
 
                 for (var i = index; i < (index + length) ; i++) {
                     array[i] = newarray[i - index];
@@ -12392,6 +12392,19 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         return Bridge.compare(x, y);
     });
+
+    System.Collections.Generic.Comparer$1.get = function (obj, T) {
+        var m;
+        if (T && (m = obj["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"])) {
+            return m;
+        }
+
+        if (m = obj["System$Collections$Generic$IComparer$1$compare"]) {
+            return m;
+        }
+
+        return obj.compare;
+    };
 
     // @source Dictionary.js
 

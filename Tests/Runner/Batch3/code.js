@@ -28012,6 +28012,47 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394", {
+        statics: {
+            methods: {
+                TestCustomComparer: function () {
+                    var arr = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
+
+                    arr.sort$1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer());
+
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(0), 25);
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(1), 20);
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(2), 15);
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(3), 10);
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(4), 5);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394, {
+        f1: function (_o1) {
+            _o1.add(5);
+            _o1.add(10);
+            _o1.add(15);
+            _o1.add(20);
+            _o1.add(25);
+            return _o1;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer", {
+        inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
+        alias: ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"],
+        methods: {
+            System$Collections$Generic$IComparer$1$System$Int32$compare: function (a, b) {
+                return ((-Bridge.compare(a, b)) | 0);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         props: {
             Str: null
