@@ -27969,15 +27969,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether the equals (==) operator's
+     result matches the Equals() method result with boxed enums.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391", {
         statics: {
             methods: {
+                /**
+                 * Box the enum then check equality.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+                 * @return  {void}
+                 */
                 TestBoxedEnumEquals: function () {
                     var a = Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst.Nulloid, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst));
                     var b = a;
 
-                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(a, b));
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(a, b));
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(a, b), "== operator works.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(a, b), "Equals() method works.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(a, b)) === Bridge.equals(a, b), "Nesting == and Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(a, b)) === Bridge.equals(b, a), "Nesting == and inverted order of Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(b, a)) === Bridge.equals(a, b), "Nesting inverted == and Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((!Bridge.referenceEquals(a, b)) === (!Bridge.equals(a, b)), "Nesting != and !Equals() is the same.");
                 }
             }
         }
