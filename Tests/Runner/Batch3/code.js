@@ -28012,19 +28012,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether a custom comparer can be
+     applied to an array of values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394", {
         statics: {
             methods: {
+                /**
+                 * Create a List of integers and apply the custom comparer.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+                 * @return  {void}
+                 */
                 TestCustomComparer: function () {
                     var arr = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
 
                     arr.sort$1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer());
 
-                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(0), 25);
-                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(1), 20);
-                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(2), 15);
-                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(3), 10);
-                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(4), 5);
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(0), 25, "First List entry is 25 (last, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(1), 20, "Second List entry is 20 (fourth, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(2), 15, "Third List entry is 15 (third, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(3), 10, "Fourth List entry is 10 (second, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(4), 5, "Last List entry is 20 (first, before sorting).");
                 }
             }
         }
@@ -28043,6 +28059,13 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The custom comparer implementation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer
+     * @implements  System.Collections.Generic.IComparer$1
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"],
