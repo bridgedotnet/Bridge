@@ -307,6 +307,8 @@
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Utils\ByteSizeHelper.cs" />
     <Compile Include="Utils\Roslyn\AwaitersCollector.cs" />
+    <Compile Include="Utils\Roslyn\ChainingAssigmentReplacer.cs" />
+    <Compile Include="Utils\Roslyn\ICSharpReplacer.cs" />
     <Compile Include="Utils\TextHelper.cs" />
     <Compile Include="Utils\LoopVariablesAnalyzer.cs" />
     <Compile Include="Utils\Loader.cs" />

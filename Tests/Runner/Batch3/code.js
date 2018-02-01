@@ -23393,6 +23393,33 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872", {
+        statics: {
+            methods: {
+                TestChainingAssignment: function () {
+                    var a;
+                    a = (a = "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(a, "test");
+
+                    var s;
+                    var s2;
+                    s2 = (s = "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(s2, "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(s, "test"); /// Variable is declared but never used
+
+
+                    var c;
+                    var c3;
+                    var c2;
+                    c2 = (c = "test");
+                    var c4;
+                    Bridge.Test.NUnit.Assert.AreEqual(c2, "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(c, "test");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874", {
         statics: {
             methods: {
@@ -27964,6 +27991,18 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNInf(), Number.NEGATIVE_INFINITY, "doubleNInf() with no parameter is double.NegativeInfinity.");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNInf(doubleVal), doubleVal, "doubleNInf() with parameter kept the parameter value.");
 
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3390", {
+        statics: {
+            methods: {
+                TestTernaryAssigmnment: function () {
+                    var msg;
+                    msg = (true) ? (msg = "left") : (msg = "right");
+                    Bridge.Test.NUnit.Assert.AreEqual("left", msg);
                 }
             }
         }

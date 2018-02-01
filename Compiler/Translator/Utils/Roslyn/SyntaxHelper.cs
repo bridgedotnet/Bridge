@@ -795,10 +795,10 @@ namespace Bridge.Translator
             return type.GetBaseTypesAndThis().Contains(baseType);
         }
 
-        public static T GetParent<T>(this SyntaxNode node) where T : SyntaxNode
+        public static T GetParent<T>(this SyntaxNode node, Type stop = null) where T : SyntaxNode
         {
             var p = node.Parent;
-            while (p != null && !(p is T))
+            while (p != null && !(p is T) && (stop == null || stop.IsAssignableFrom(p.GetType())))
             {
                 p = p.Parent;
             }
