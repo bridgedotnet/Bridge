@@ -23393,30 +23393,59 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consist in checking whether chained assingment of
+     variable values works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872", {
         statics: {
             methods: {
+                /**
+                 * From several scenarios, using the string type, check if the
+                 chained assingment results in the expected variable contents.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+                 * @return  {void}
+                 */
                 TestChainingAssignment: function () {
                     var a;
                     a = (a = "test");
-                    Bridge.Test.NUnit.Assert.AreEqual(a, "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(a, "test", "String chained assignment on same variable works.");
 
                     var s;
                     var s2;
                     s2 = (s = "test");
-                    Bridge.Test.NUnit.Assert.AreEqual(s2, "test");
-                    Bridge.Test.NUnit.Assert.AreEqual(s, "test"); /// Variable is declared but never used
-
-
+                    Bridge.Test.NUnit.Assert.AreEqual(s2, "test", "On more than one variable, works to the indirect variable.");
+                    Bridge.Test.NUnit.Assert.AreEqual(s, "test", "On more than one variable, works to the direct variable."); /// Variable is declared but never used
                     var c;
                     var c3;
                     var c2;
                     c2 = (c = "test");
-                    var c4;
-                    Bridge.Test.NUnit.Assert.AreEqual(c2, "test");
-                    Bridge.Test.NUnit.Assert.AreEqual(c, "test");
+                    var c4; /// Variable is declared but never used
+                    Bridge.Test.NUnit.Assert.AreEqual(c2, "test", "With unrelated variables, works on indirect variable.");
+                    Bridge.Test.NUnit.Assert.AreEqual(c, "test", "With unrelated variables, works on direct variable.");
+
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872.f1, "Unrelated variable to the left is untouched.");
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872.f2, "Unrelated variable to the right is untouched.");
                 }
             }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872, {
+        f1: function () {
+            var x = c3;
+        },
+        f2: function () {
+            var x = c4;
         }
     });
 
@@ -28002,7 +28031,19 @@ Bridge.$N1391Result =                     r;
                 TestTernaryAssigmnment: function () {
                     var msg;
                     msg = (true) ? (msg = "left") : (msg = "right");
-                    Bridge.Test.NUnit.Assert.AreEqual("left", msg);
+                    Bridge.Test.NUnit.Assert.AreEqual("left", msg, "true condition of inline if binds as expected.");
+
+                    var msg2;
+                    msg2 = (false) ? (msg2 = "left") : (msg2 = "right");
+                    Bridge.Test.NUnit.Assert.AreEqual("right", msg2, "false condition of inline if binds as expected.");
+
+                    var msg3;
+                    msg3 = (false) ? (msg3 = "left") : ((false) ? (msg3 = "middle") : (msg3 = "right"));
+                    Bridge.Test.NUnit.Assert.AreEqual("right", msg3, "false condition on chained inline if binds as expected.");
+
+                    var msg4;
+                    msg4 = (false) ? (msg4 = "left") : ((true) ? (msg4 = "middle") : (msg4 = "right"));
+                    Bridge.Test.NUnit.Assert.AreEqual("middle", msg4, "true condition of chained inline if binds as expected.");
                 }
             }
         }
