@@ -706,7 +706,7 @@
                 i = lo + ((hi - lo) >> 1);
 
                 try {
-                    c = comparer.compare(array[i], value);
+                    c = System.Collections.Generic.Comparer$1.get(comparer)(array[i], value);
                 } catch (e) {
                     throw new System.InvalidOperationException("Failed to compare two elements in the array.", e);
                 }
@@ -753,11 +753,11 @@
             }
 
             if (index === 0 && length === array.length) {
-                array.sort(Bridge.fn.bind(comparer, comparer.compare));
+                array.sort(Bridge.fn.bind(comparer, System.Collections.Generic.Comparer$1.get(comparer)));
             } else {
                 var newarray = array.slice(index, index + length);
 
-                newarray.sort(Bridge.fn.bind(comparer, comparer.compare));
+                newarray.sort(Bridge.fn.bind(comparer, System.Collections.Generic.Comparer$1.get(comparer)));
 
                 for (var i = index; i < (index + length) ; i++) {
                     array[i] = newarray[i - index];

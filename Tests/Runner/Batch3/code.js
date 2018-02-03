@@ -27,10 +27,10 @@ var Bridge3001_SomeLib = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.7.0
+ * @version 16.7.1
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 16.7.0
+ * @compiler Bridge.NET 16.7.1
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -23393,6 +23393,62 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consist in checking whether chained assingment of
+     variable values works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872", {
+        statics: {
+            methods: {
+                /**
+                 * From several scenarios, using the string type, check if the
+                 chained assingment results in the expected variable contents.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872
+                 * @return  {void}
+                 */
+                TestChainingAssignment: function () {
+                    var a;
+                    a = (a = "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(a, "test", "String chained assignment on same variable works.");
+
+                    var s;
+                    var s2;
+                    s2 = (s = "test");
+                    Bridge.Test.NUnit.Assert.AreEqual(s2, "test", "On more than one variable, works to the indirect variable.");
+                    Bridge.Test.NUnit.Assert.AreEqual(s, "test", "On more than one variable, works to the direct variable."); /// Variable is declared but never used
+                    var c;
+                    var c3;
+                    var c2;
+                    c2 = (c = "test");
+                    var c4; /// Variable is declared but never used
+                    Bridge.Test.NUnit.Assert.AreEqual(c2, "test", "With unrelated variables, works on indirect variable.");
+                    Bridge.Test.NUnit.Assert.AreEqual(c, "test", "With unrelated variables, works on direct variable.");
+
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872.f1, "Unrelated variable to the left is untouched.");
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872.f2, "Unrelated variable to the right is untouched.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2872, {
+        f1: function () {
+            var x = c3;
+        },
+        f2: function () {
+            var x = c4;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874", {
         statics: {
             methods: {
@@ -27895,6 +27951,207 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("Forty", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.UInt64(40)), "Key index 40 has the expected value, 'Forty'.");
                     Bridge.Test.NUnit.Assert.AreEqual("Forty", dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$getItem(System.Linq.Enumerable.from(dic.System$Collections$Generic$IDictionary$2$System$UInt64$System$String$Keys).max()), "Value from max key matches the expected 'Forty'.");
                 }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in checking whether the Single (float) and
+     Double (double) types' NaN and Infinity constants can be used as
+     function parameters' default values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386", {
+        statics: {
+            methods: {
+                floatNaN: function (f) {
+                    if (f === void 0) { f = NaN; }
+                    return f;
+                },
+                floatPInf: function (f) {
+                    if (f === void 0) { f = Infinity; }
+                    return f;
+                },
+                floatNInf: function (f) {
+                    if (f === void 0) { f = -Infinity; }
+                    return f;
+                },
+                doubleNaN: function (d) {
+                    if (d === void 0) { d = NaN; }
+                    return d;
+                },
+                doublePInf: function (d) {
+                    if (d === void 0) { d = Infinity; }
+                    return d;
+
+                },
+                doubleNInf: function (d) {
+                    if (d === void 0) { d = -Infinity; }
+                    return d;
+                },
+                /**
+                 * This test checks methods with float/double NaN and Infinity default
+                 values, whether they get the passed or the default ones.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386
+                 * @return  {void}
+                 */
+                Test64bitKey: function () {
+                    var probe = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386();
+                    var floatVal = 2.0;
+                    var doubleVal = 2.0;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatNaN(), Number.NaN, "floatNaN() with no parameter is float.NaN.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatNaN(floatVal), floatVal, "floatNaN() with parameter kept the parameter value.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatPInf(), Number.POSITIVE_INFINITY, "floatPInf() with no parameter is float.PositiveInfinity.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatPInf(floatVal), floatVal, "floatPInf() with parameter kept the parameter value.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatNInf(), Number.NEGATIVE_INFINITY, "floatNInf() with no parameter is float.NegativeInfinity.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.floatNInf(floatVal), floatVal, "floatNInf() with parameter kept the parameter value.");
+
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNaN(), Number.NaN, "doubleNaN() with no parameter is double.NaN.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNaN(doubleVal), doubleVal, "doubleNaN() with parameter kept the parameter value.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doublePInf(), Number.POSITIVE_INFINITY, "doublePInf() with no parameter is double.PositiveInfinity.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doublePInf(doubleVal), doubleVal, "doublePInf() with parameter kept the parameter value.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNInf(), Number.NEGATIVE_INFINITY, "doubleNInf() with no parameter is double.NegativeInfinity.");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3386.doubleNInf(doubleVal), doubleVal, "doubleNInf() with parameter kept the parameter value.");
+
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3390", {
+        statics: {
+            methods: {
+                TestTernaryAssigmnment: function () {
+                    var msg;
+                    msg = (true) ? (msg = "left") : (msg = "right");
+                    Bridge.Test.NUnit.Assert.AreEqual("left", msg, "true condition of inline if binds as expected.");
+
+                    var msg2;
+                    msg2 = (false) ? (msg2 = "left") : (msg2 = "right");
+                    Bridge.Test.NUnit.Assert.AreEqual("right", msg2, "false condition of inline if binds as expected.");
+
+                    var msg3;
+                    msg3 = (false) ? (msg3 = "left") : ((false) ? (msg3 = "middle") : (msg3 = "right"));
+                    Bridge.Test.NUnit.Assert.AreEqual("right", msg3, "false condition on chained inline if binds as expected.");
+
+                    var msg4;
+                    msg4 = (false) ? (msg4 = "left") : ((true) ? (msg4 = "middle") : (msg4 = "right"));
+                    Bridge.Test.NUnit.Assert.AreEqual("middle", msg4, "true condition of chained inline if binds as expected.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in checking whether the equals (==) operator's
+     result matches the Equals() method result with boxed enums.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391", {
+        statics: {
+            methods: {
+                /**
+                 * Box the enum then check equality.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391
+                 * @return  {void}
+                 */
+                TestBoxedEnumEquals: function () {
+                    var a = Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst.Nulloid, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst));
+                    var b = a;
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(a, b), "== operator works.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(a, b), "Equals() method works.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(a, b)) === Bridge.equals(a, b), "Nesting == and Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(a, b)) === Bridge.equals(b, a), "Nesting == and inverted order of Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((Bridge.referenceEquals(b, a)) === Bridge.equals(a, b), "Nesting inverted == and Equals() is the same.");
+                    Bridge.Test.NUnit.Assert.True((!Bridge.referenceEquals(a, b)) === (!Bridge.equals(a, b)), "Nesting != and !Equals() is the same.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3391.BindingConst", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Nulloid: 1
+            }
+        }
+    });
+
+    /**
+     * The test here consists in checking whether a custom comparer can be
+     applied to an array of values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394", {
+        statics: {
+            methods: {
+                /**
+                 * Create a List of integers and apply the custom comparer.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394
+                 * @return  {void}
+                 */
+                TestCustomComparer: function () {
+                    var arr = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
+
+                    arr.sort$1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer());
+
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(0), 25, "First List entry is 25 (last, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(1), 20, "Second List entry is 20 (fourth, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(2), 15, "Third List entry is 15 (third, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(3), 10, "Fourth List entry is 10 (second, before sorting).");
+                    Bridge.Test.NUnit.Assert.AreEqual(arr.getItem(4), 5, "Last List entry is 20 (first, before sorting).");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394, {
+        f1: function (_o1) {
+            _o1.add(5);
+            _o1.add(10);
+            _o1.add(15);
+            _o1.add(20);
+            _o1.add(25);
+            return _o1;
+        }
+    });
+
+    /**
+     * The custom comparer implementation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer
+     * @implements  System.Collections.Generic.IComparer$1
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3394.CustomComparer", {
+        inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
+        alias: ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"],
+        methods: {
+            System$Collections$Generic$IComparer$1$System$Int32$compare: function (a, b) {
+                return ((-Bridge.compare(a, b)) | 0);
             }
         }
     });

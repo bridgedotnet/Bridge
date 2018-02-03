@@ -21,3 +21,16 @@
 
         return Bridge.compare(x, y);
     });
+
+    System.Collections.Generic.Comparer$1.get = function (obj, T) {
+        var m;
+        if (T && (m = obj["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"])) {
+            return m;
+        }
+
+        if (m = obj["System$Collections$Generic$IComparer$1$compare"]) {
+            return m;
+        }
+
+        return obj.compare;
+    };

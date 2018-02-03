@@ -19,13 +19,13 @@ namespace System
         public const float Epsilon = (float)1.4e-45;
 
         [Template("Number.NaN")]
-        public static readonly float NaN = 0f / 0f;
+        public const float NaN = 0f / 0f;
 
         [Template("Number.NEGATIVE_INFINITY")]
-        public static readonly float NegativeInfinity = -1f / 0f;
+        public const float NegativeInfinity = -1f / 0f;
 
         [Template("Number.POSITIVE_INFINITY")]
-        public static readonly float PositiveInfinity = 1f / 0f;
+        public const float PositiveInfinity = 1f / 0f;
 
         [Template("System.Single.format({this}, {format})")]
         public extern string Format(string format);

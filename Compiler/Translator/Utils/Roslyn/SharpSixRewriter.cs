@@ -25,6 +25,8 @@ namespace Bridge.Translator
         private int tempKey = 1;
         private Stack<ITypeSymbol> currentType;
         private bool hasStaticUsingOrAliases;
+        private bool HasChainingAssigment;
+
         public SharpSixRewriter(ITranslator translator)
         {
             this.translator = translator;
@@ -46,6 +48,18 @@ namespace Bridge.Translator
             var syntaxTree = this.compilation.SyntaxTrees[index];
             this.semanticModel = this.compilation.GetSemanticModel(syntaxTree, true);
             var result = this.Visit(syntaxTree.GetRoot());
+
+            var replacers = new List<ICSharpReplacer>();
+            
+            if (this.HasChainingAssigment)
+            {
+                replacers.Add(new ChainingAssigmentReplacer());
+            }
+            
+            foreach (var replacer in replacers)
+            {
+                result = replacer.Replace(result, semanticModel);
+            }
 
             return result.ToFullString();
         }
@@ -136,6 +150,22 @@ namespace Bridge.Translator
                 return true;    // A param array needs to be created
 
             return false;
+        }
+
+        public override SyntaxNode VisitAssignmentExpression(AssignmentExpressionSyntax node)
+        {
+            var identifier = node.Left as IdentifierNameSyntax;
+            if (identifier != null)
+            {                
+                var local = node.GetParent<LocalDeclarationStatementSyntax>();
+                var name = identifier.Identifier.ValueText;
+
+                if (local != null && local.Declaration.Variables.Any(v => v.Identifier.ValueText == name))
+                {
+                    this.HasChainingAssigment = true;
+                }
+            }
+            return base.VisitAssignmentExpression(node);
         }
 
         public override SyntaxNode VisitArgument(ArgumentSyntax node)
