@@ -89,7 +89,9 @@ namespace Bridge.ClientTest.Collections.Generic
             {
                 get
                 {
-                    return this._backingDictionary.IsReadOnly;
+                    // This is private from dictionary and always false
+                    // http://referencesource.microsoft.com/#mscorlib/system/collections/generic/dictionary.cs,604
+                    return false;
                 }
             }
 

@@ -115,6 +115,8 @@
     <Compile Include="System\Collections\Generic\Queue.cs" />
     <Compile Include="System\Collections\Generic\Stack.cs" />
     <Compile Include="System\Collections\HashHelpers.cs" />
+    <Compile Include="System\Collections\DictionaryEntry.cs" />
+    <Compile Include="System\Collections\IDictionaryEnumerator.cs" />
     <Compile Include="System\ComponentModel\DefaultValueAttribute.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociationAttribute.cs" />

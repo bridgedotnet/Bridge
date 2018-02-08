@@ -7,7 +7,7 @@ namespace System.Collections
     [Unbox(true)]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     [Reflectable]
-    public interface IDictionary : ICollection, IEnumerable, IBridgeClass
+    public interface IDictionary : ICollection, IBridgeClass
     {
         [AccessorsIndexer]
         object this[object key]
@@ -28,15 +28,65 @@ namespace System.Collections
             get;
         }
 
-        bool ContainsKey(object key);
+        /// <summary>
+        /// Returns whether this dictionary contains a particular key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool Contains(Object key);
 
-        void Add(object key, object value);
+        /// <summary>
+        /// Returns an System.Collections.IDictionaryEnumerator object for the System.Collections.IDictionary
+        /// object.
+        /// </summary>
+        /// <returns>
+        /// An System.Collections.IDictionaryEnumerator object for the System.Collections.IDictionary
+        /// object.
+        /// </returns>
+        new IDictionaryEnumerator GetEnumerator();
 
-        bool Remove(object key);
+        /// <summary>
+        /// Adds a key-value pair to the dictionary.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        void Add(Object key, Object value);
 
+        /// <summary>
+        /// Removes all elements from the System.Collections.IDictionary object.
+        /// </summary>
+        /// <exception cref="System.NotSupportedException">
+        /// The System.Collections.IDictionary object is read-only.
+        /// </exception>
+        void Clear();
+
+        /// <summary>
+        /// Gets a value indicating whether the System.Collections.IDictionary object is
+        /// read-only.
+        /// </summary>
+        /// <returns>
+        /// true if the System.Collections.IDictionary object is read-only; otherwise, false.
+        /// </returns>
         bool IsReadOnly
         {
             get;
         }
+
+        /// <summary>
+        /// Gets a value indicating whether the System.Collections.IDictionary object has
+        /// a fixed size.
+        /// </summary>
+        /// <returns>
+        /// true if the System.Collections.IDictionary object has a fixed size; otherwise,
+        /// false.
+        /// </returns>
+        bool IsFixedSize { get; }
+
+        /// <summary>
+        /// Removes a particular key from the dictionary.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool Remove(Object key);
     }
 }

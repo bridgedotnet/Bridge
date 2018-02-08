@@ -56,6 +56,11 @@
                     return this._size;
                 }
             },
+            System$Collections$IList$IsFixedSize: {
+                get: function () {
+                    return false;
+                }
+            },
             System$Collections$Generic$ICollection$1$IsReadOnly: {
                 get: function () {
                     return false;
@@ -64,6 +69,16 @@
             System$Collections$IList$IsReadOnly: {
                 get: function () {
                     return false;
+                }
+            },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
                 }
             }
         },

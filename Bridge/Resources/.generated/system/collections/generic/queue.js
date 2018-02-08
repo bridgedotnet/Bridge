@@ -27,6 +27,16 @@
                     return this._size;
                 }
             },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            },
             IsReadOnly: {
                 get: function () {
                     return false;

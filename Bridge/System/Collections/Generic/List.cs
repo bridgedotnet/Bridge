@@ -139,6 +139,11 @@ namespace System.Collections.Generic
             }
         }
 
+        bool System.Collections.IList.IsFixedSize
+        {
+            get { return false; }
+        }
+
         /// <summary>
         /// Gets a value indicating whether the ICollection&lt;T&gt; is read-only.
         /// </summary>
@@ -160,6 +165,10 @@ namespace System.Collections.Generic
                 return false;
             }
         }
+
+        bool ICollection.IsSynchronized { get { return false; } }
+
+        object ICollection.SyncRoot { get { return this; } }
 
         /// <summary>
         /// Gets or sets the element at the specified index.

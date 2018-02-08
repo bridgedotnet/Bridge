@@ -65,12 +65,17 @@
                     return this.m_length;
                 }
             },
-            IsReadOnly: {
+            System$Collections$ICollection$IsSynchronized: {
                 get: function () {
                     return false;
                 }
             },
-            IsSynchronized: {
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            },
+            IsReadOnly: {
                 get: function () {
                     return false;
                 }

@@ -15,6 +15,18 @@ namespace System
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the System.Array has a fixed size.
+        /// </summary>
+        /// <returns>
+        /// This property is always true for all arrays.
+        /// </returns>
+        public bool IsFixedSize
+        {
+            [Template("System.Array.isFixedSize({this})")]
+            get { return true; }
+        }
+
         private extern Array();
 
         [Unbox(false)]
@@ -297,6 +309,32 @@ namespace System
 
         extern int ICollection.Count
         {
+            get;
+        }
+
+        /// <summary>
+        /// Gets an object that can be used to synchronize access to the System.Array.
+        /// </summary>
+        /// <returns>
+        /// An object that can be used to synchronize access to the System.Array.
+        /// </returns>
+        
+        public extern Object SyncRoot
+        {
+            [Template("System.Array.syncRoot({this})")]
+            get;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether access to the System.Array is synchronized (thread
+        /// safe).
+        /// </summary>
+        /// <returns>
+        /// This property is always false for all arrays.
+        /// </returns>
+        public extern bool IsSynchronized
+        {
+            [Template("System.Array.isSynchronized({this})")]
             get;
         }
 

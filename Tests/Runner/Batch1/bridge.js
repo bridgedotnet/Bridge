@@ -11781,6 +11781,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             return System.Array.indexOf(array, value, startIndex, count);
         },
 
+        isFixedSize: function (array) {
+            return true;
+        },
+
+        isSynchronized: function (array) {
+            return false;
+        },
+
         lastIndexOfT: function (array, value, startIndex, count) {
             if (!Bridge.hasValue(array)) {
                 throw new System.ArgumentNullException("array");
@@ -11812,6 +11820,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             return -1;
+        },
+
+        syncRoot: function (array) {
+            return array;
         },
 
         trueForAll: function (array, match) {
@@ -12987,6 +12999,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     return this._size;
                 }
             },
+            System$Collections$IList$IsFixedSize: {
+                get: function () {
+                    return false;
+                }
+            },
             System$Collections$Generic$ICollection$1$IsReadOnly: {
                 get: function () {
                     return false;
@@ -12995,6 +13012,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             System$Collections$IList$IsReadOnly: {
                 get: function () {
                     return false;
+                }
+            },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
                 }
             }
         },
@@ -13738,7 +13765,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             methods: {
                 isCompatibleObject: function (value) {
                     // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
-                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+                    // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
                     return ((Bridge.is(value, T)) || (value == null && Bridge.getDefaultValue(T) == null));
                 }
             }
@@ -13752,9 +13779,24 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     return System.Array.getCount(this.list, T);
                 }
             },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            },
             Items: {
                 get: function () {
                     return this.list;
+                }
+            },
+            System$Collections$IList$IsFixedSize: {
+                get: function () {
+                    return true;
                 }
             },
             System$Collections$Generic$ICollection$1$IsReadOnly: {
@@ -13861,7 +13903,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     }
 
                     //
-                    // We can't cast array of value type to object[], so we don't support 
+                    // We can't cast array of value type to object[], so we don't support
                     // widening of primitive types here.
                     //
                     var objects = Bridge.as(array, System.Array.type(System.Object));
@@ -33641,12 +33683,17 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return this.m_length;
                 }
             },
-            IsReadOnly: {
+            System$Collections$ICollection$IsSynchronized: {
                 get: function () {
                     return false;
                 }
             },
-            IsSynchronized: {
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            },
+            IsReadOnly: {
                 get: function () {
                     return false;
                 }
@@ -35092,6 +35139,16 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return this._size;
                 }
             },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            },
             IsReadOnly: {
                 get: function () {
                     return false;
@@ -35454,6 +35511,16 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             Count: {
                 get: function () {
                     return this._size;
+                }
+            },
+            System$Collections$ICollection$IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            System$Collections$ICollection$SyncRoot: {
+                get: function () {
+                    return this;
                 }
             },
             IsReadOnly: {

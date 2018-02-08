@@ -18,5 +18,23 @@ namespace System.Collections
 
         [Template("System.Array.copyTo({this}, {array}, {arrayIndex})")]
         void CopyTo(Array array, int arrayIndex);
+
+        /// <summary>
+        /// Gets an object that can be used to synchronize access to the System.Collections.ICollection.
+        /// </summary>
+        /// <returns>
+        /// An object that can be used to synchronize access to the System.Collections.ICollection.
+        /// </returns>
+        object SyncRoot { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether access to the System.Collections.ICollection
+        /// is synchronized (thread safe).
+        /// </summary>
+        /// <returns>
+        /// true if access to the System.Collections.ICollection is synchronized (thread
+        /// safe); otherwise, false.
+        /// </returns>
+        bool IsSynchronized { get; }
     }
 }

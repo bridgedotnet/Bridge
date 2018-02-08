@@ -73,6 +73,8 @@ namespace System.Collections.Generic
 
         public extern void Set(TKey key, TValue value);
 
+        private extern static bool IsCompatibleKey(object key);
+
         public extern void Add(TKey key, TValue value);
 
         public extern TValue Get(TKey key);
@@ -80,6 +82,16 @@ namespace System.Collections.Generic
         private extern TValue Items(TKey key);
 
         public extern void Clear();
+
+        // Stub just to fulfill IDictionary interface.
+        extern bool IDictionary.Contains(object key);
+
+        // Stub just to fulfill IDictionary interface.
+        extern IDictionaryEnumerator IDictionary.GetEnumerator();
+
+        bool ICollection.IsSynchronized { get { return false; } }
+
+        object ICollection.SyncRoot { get { return this; } }
 
         public extern bool ContainsKey(TKey key);
 
@@ -93,10 +105,31 @@ namespace System.Collections.Generic
 
         public extern bool TryGetValue(TKey key, out TValue value);
 
-        public extern bool IsReadOnly
+        bool IsFixedSize
+        {
+            [Template("false")]
+            get;
+        }
+
+        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
+        {
+            get { return false; }
+        }
+
+        bool IsReadOnly
         {
             [Template("getIsReadOnly()")]
             get;
+        }
+
+        bool IDictionary.IsReadOnly
+        {
+            get { return false; }
+        }
+
+        bool IDictionary.IsFixedSize
+        {
+            get { return false; }
         }
 
         extern void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item);
@@ -122,8 +155,6 @@ namespace System.Collections.Generic
         {
             get;
         }
-
-        extern bool IDictionary.ContainsKey(object key);
 
         extern void IDictionary.Add(object key, object value);
 

@@ -59,6 +59,10 @@ namespace System.Collections.Generic
             }
         }
 
+        bool ICollection.IsSynchronized { get { return false; } }
+
+        object ICollection.SyncRoot { get { return this; } }
+
         public bool IsReadOnly
         {
             get { return false; }

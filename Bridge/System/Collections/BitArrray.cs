@@ -468,15 +468,12 @@ namespace System.Collections
             return bitArray;
         }
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        bool ICollection.IsSynchronized { get { return false; } }
 
-        public bool IsSynchronized
+        object ICollection.SyncRoot { get { return this; } }
+
+
+        public bool IsReadOnly
         {
             get
             {
