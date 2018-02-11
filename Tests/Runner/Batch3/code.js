@@ -5958,7 +5958,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 TestVoidTypeOf: function () {
                     var value = System.Void;
                     Bridge.Test.NUnit.Assert.AreEqual("System.Void", Bridge.Reflection.getTypeFullName(value));
-                    Bridge.Test.NUnit.Assert.AreEqual("Function", Bridge.Reflection.getTypeFullName(Function));
+                    Bridge.Test.NUnit.Assert.AreEqual("Function", Bridge.Reflection.getTypeFullName(Bridge.getType(value, Function)));
                 }
             }
         }
@@ -27559,6 +27559,19 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3324", {
+        statics: {
+            methods: {
+                TestGetTypeForNull: function () {
+                    var v = null;
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NullReferenceException, function () {
+                        var name = Bridge.Reflection.getTypeFullName(Bridge.getType(v, System.Single));
+                    });
+                }
+            }
+        }
+    });
+
     /**
      * The test here consists in checking whether the IsValueType boolean
      has the expected result for different types' querying.
@@ -27857,7 +27870,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             PerformTest: function () {
                 var time = System.DateTime.getMinValue();
-                var type = Bridge.getType(this);
+                var type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3356.Box;
                 var method = Bridge.Reflection.getMembers(type, 8, 284, "CheckDateTime");
 
                 Bridge.Reflection.midel(method, this).apply(null, System.Array.init([Bridge.box(time, System.DateTime, System.DateTime.format)], System.Object));
@@ -36514,7 +36527,7 @@ Bridge.$N1391Result =                     r;
                 },
                 N499: function () {
                     var v1 = new System.Version.ctor();
-                    Bridge.Test.NUnit.Assert.AreEqual("System.Version", Bridge.Reflection.getTypeFullName(System.Version), "#499 Version type name");
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Version", Bridge.Reflection.getTypeFullName(Bridge.getType(v1, System.Version)), "#499 Version type name");
                 }
             }
         }
