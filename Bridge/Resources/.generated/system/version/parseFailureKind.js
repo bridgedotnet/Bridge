@@ -1,5 +1,5 @@
     Bridge.define("System.Version.ParseFailureKind", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 ArgumentNullException: 0,

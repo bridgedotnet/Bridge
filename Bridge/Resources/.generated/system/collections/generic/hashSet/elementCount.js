@@ -1,5 +1,5 @@
     Bridge.define("System.Collections.Generic.HashSet$1.ElementCount", function (T) { return {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new (System.Collections.Generic.HashSet$1.ElementCount(T))(); }

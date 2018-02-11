@@ -270,6 +270,14 @@
             }
 
             prop = prop || {};
+            prop.$kind = prop.$kind || "class";
+
+            var isNested = false;
+
+            if (prop.$kind.match("^nested ") !== null) {
+                isNested = true;
+                prop.$kind = prop.$kind.substr(7);
+            }
 
             if (prop.$kind === "enum" && !prop.inherits) {
                 prop.inherits = [System.IComparable, System.IFormattable];
@@ -323,8 +331,6 @@
                 ctorName,
                 name,
                 registerT = true;
-
-            prop.$kind = prop.$kind || "class";
 
             if (prop.$kind === "enum") {
                 extend = [System.Enum];
@@ -405,6 +411,12 @@
             }
 
             Class.$$name = className;
+
+            if (isNested) {
+                var lastIndex = Class.$$name.lastIndexOf('.');
+                Class.$$name = Class.$$name.substr(0, lastIndex) + '+' + Class.$$name.substr(lastIndex + 1)
+            }
+
             Class.$kind = prop.$kind;
 
             if (prop.$metadata) {

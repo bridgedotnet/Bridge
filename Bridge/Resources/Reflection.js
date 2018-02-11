@@ -212,7 +212,9 @@ Bridge.Reflection = {
             if (obj.constructor === Object) {
                 str = obj.toString();
                 var match = (/\[object (.{1,})\]/).exec(str);
-                return (match && match.length > 1) ? match[1] : "Object";
+                var name = (match && match.length > 1) ? match[1] : "Object";
+
+                return name == "Object" ? "System.Object" : name;
             } else if (obj.constructor === Function) {
                 str = obj.toString();
             } else {

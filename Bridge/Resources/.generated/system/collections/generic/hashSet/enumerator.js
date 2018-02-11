@@ -1,6 +1,6 @@
     Bridge.define("System.Collections.Generic.HashSet$1.Enumerator", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerator$1(T)],
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new (System.Collections.Generic.HashSet$1.Enumerator(T))(); }

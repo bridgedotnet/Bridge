@@ -156,7 +156,7 @@
 
                     if (length > (715827882)) {
                         // (Int32.MaxValue / 3) == 715,827,882 Bytes == 699 MB
-                        throw new System.ArgumentOutOfRangeException("length", (715827882).toString());
+                        throw new System.ArgumentOutOfRangeException("length", Bridge.toString((715827882)));
                     }
 
                     var chArrayLength = Bridge.Int.mul(length, 3);

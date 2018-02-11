@@ -1,5 +1,6 @@
     Bridge.define("System.Collections.BitArray.BitArrayEnumeratorSimple", {
         inherits: [System.Collections.IEnumerator],
+        $kind: "nested class",
         fields: {
             bitarray: null,
             index: 0,

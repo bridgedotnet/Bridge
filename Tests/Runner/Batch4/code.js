@@ -179,6 +179,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.DelegateTests.C", {
+        $kind: "nested class",
         methods: {
             F1: function () { },
             F2: function () { }
@@ -286,6 +287,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
+        $kind: "nested class",
         alias: ["getFormat", "System$IFormatProvider$getFormat"],
         methods: {
             getFormat: function (type) {
@@ -296,6 +298,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormattable", {
         inherits: [System.IFormattable],
+        $kind: "nested class",
         alias: ["format", "System$IFormattable$format"],
         methods: {
             format: function (format, formatProvider) {
@@ -323,6 +326,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests.C", {
+        $kind: "nested class",
         methods: {
             getHashCode: function () {
                 return 0;
@@ -412,6 +416,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Serialization.JsonTests.TestClass2", {
+        $kind: "nested class",
         fields: {
             i: 0,
             s: null
@@ -456,7 +461,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         methods: {
             AssertDecimal: function (expected, actual) {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(actual, System.Decimal));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(expected), actual.toString());
+                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(expected), Bridge.toString(actual));
             },
             ConversionsToDecimalWork_SPI_1580: function () {
                 var x = 0;
@@ -763,6 +768,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
+        $kind: "nested class",
         alias: ["getFormat", "System$IFormatProvider$getFormat"],
         methods: {
             getFormat: function (type) {
@@ -773,6 +779,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable", {
         inherits: [System.IFormattable],
+        $kind: "nested class",
         alias: ["format", "System$IFormattable$format"],
         methods: {
             format: function (format, formatProvider) {
@@ -850,7 +857,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(); }
@@ -901,7 +908,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2(); }
@@ -935,7 +942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS4", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS4(); }
@@ -972,7 +979,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S6(); }
@@ -1006,7 +1013,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1", function (TT) { return {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1(TT))(); }
@@ -1040,7 +1047,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S7", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 op_Addition: function (a, b) {

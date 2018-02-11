@@ -9,6 +9,26 @@
             return x;
         },
 
+        toString: function (instance) {
+            if (instance == null) {
+                throw new System.ArgumentNullException();
+            }
+
+            var guardItem = Bridge.$toStringGuard[Bridge.$toStringGuard.length - 1];           
+
+            if (instance.toString === Object.prototype.toString || guardItem && guardItem === instance) {
+                return Bridge.Reflection.getTypeFullName(instance);
+            }
+
+            Bridge.$toStringGuard.push(instance);
+
+            var result = instance.toString();
+
+            Bridge.$toStringGuard.pop();
+
+            return result;
+        },
+
         geti: function (scope, name1, name2) {
             if (Bridge.hasValue(scope[name1])) {
                 return name1;
@@ -677,7 +697,7 @@
 
             var name = obj.$$name || Bridge.getTypeName(obj);
 
-            alias = name.replace(/[\.\(\)\,]/g, "$");
+            alias = name.replace(/[\.\(\)\,\+]/g, "$");
             if (type.$$name) {
                 type.$$alias = alias;
             } else {
@@ -1889,6 +1909,7 @@
     globals.Bridge = core;
     globals.Bridge.caller = [];
     globals.Bridge.$equalsGuard = [];
+    globals.Bridge.$toStringGuard = [];
 
     if (globals.console) {
         globals.Bridge.Console = globals.console;

@@ -3453,6 +3453,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ActivatorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NonGenericCreateInstanceWithoutArgumentsWorks: function (assert) {
@@ -3533,6 +3534,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AggregateExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.AggregateExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3593,6 +3595,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AmbiguousMatchExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3633,6 +3636,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArgumentExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.ArgumentExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3683,6 +3687,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArgumentNullExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.ArgumentNullExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3728,6 +3733,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArgumentOutOfRangeExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.ArgumentOutOfRangeExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3778,6 +3784,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArgumentsTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ArgumentsTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthWorks: function (assert) {
@@ -3818,6 +3825,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArithmeticExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.ArithmeticExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3858,6 +3866,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArrayBufferTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.ArrayBufferTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -3893,6 +3902,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArrayTestsSet1", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -4233,6 +4243,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ArrayTestsSet2", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet2)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestArrayAsIListOfT: function (assert) {
@@ -4358,6 +4369,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Decode: function (assert) {
@@ -4388,6 +4400,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Encode: function (assert) {
@@ -4418,6 +4431,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMaxByteCount: function (assert) {
@@ -4448,6 +4462,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NotationTypeTest: function (assert) {
@@ -4488,6 +4503,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetExecutingAssemblyWorks: function (assert) {
@@ -4603,6 +4619,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AsyncTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Threading.AsyncTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 AsyncVoid: function (assert) {
@@ -4653,6 +4670,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetCustomAttributesForAssemblyWorks: function (assert) {
@@ -4743,6 +4761,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BaseStream", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BaseStream)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetBaseStream: function (assert) {
@@ -4768,6 +4787,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryReaderTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryReaderTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BinaryReader_DisposeTests: function (assert) {
@@ -4808,6 +4828,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriter_WriteByteCharTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriter_WriteByteCharTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BinaryWriter_WriteCharTest: function (assert) {
@@ -4888,6 +4909,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriter_WriteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriter_WriteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BinaryWriter_WriteBoolTest: function (assert) {
@@ -4963,6 +4985,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriterTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriterTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BinaryWriter_CtorAndWriteTests1: function (assert) {
@@ -5048,6 +5071,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriterWithBufferedStream_Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriterWithBufferedStream_Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BinaryWriter_FlushTests: function (assert) {
@@ -5073,6 +5097,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriterWithBufferedStream_WriteByteCharTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriterWithBufferedStream_WriteByteCharTests)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -5089,6 +5114,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BinaryWriterWithBufferedStream_WriteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BinaryWriterWithBufferedStream_WriteTests)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -5105,6 +5131,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ValueArgumentNull: function (assert) {
@@ -5215,6 +5242,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BooleanTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.BooleanTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1575: function (assert) {
@@ -5335,6 +5363,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Bridge_ClientTest_TypeSystemTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TypeSystemTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GettingBaseTypeWorks: function (assert) {
@@ -5365,6 +5394,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Bridge1529", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.Bridge1529)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestObjectLiteral: function (assert) {
@@ -5390,6 +5420,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestLogMessageObject: function (assert) {
@@ -5473,6 +5504,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.JavaScript.BridgeRegexTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -5548,6 +5580,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BufferedStream_InvalidParameters", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BufferedStream_InvalidParameters)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NullConstructor_Throws_ArgumentNullException: function (assert) {
@@ -5628,6 +5661,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BufferedStream_Stream", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BufferedStream_Stream)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CopyToTest: function (assert) {
@@ -5668,6 +5702,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BufferedStream_StreamMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BufferedStream_StreamMethods)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ReadByte_ThenRead_EndOfStreamCorrectlyFound: function (assert) {
@@ -5693,6 +5728,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BufferedStream_TestLeaveOpen", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BufferedStream_TestLeaveOpen)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -5709,6 +5745,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BufferedStreamFlushTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.BufferedStreamFlushTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ShouldNotFlushUnderlyingStreamIfReadOnly: function (assert) {
@@ -5739,6 +5776,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ByteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.ByteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -5854,6 +5892,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CancellationTokenTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Threading.CancellationTokenTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesForCancellationTokenSourceAreCorrect: function (assert) {
@@ -6014,6 +6053,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CharTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreInt32: function (assert) {
@@ -6174,6 +6214,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CheckedInsideUncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -6214,6 +6255,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CheckedUncheckedTests.CheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -6254,6 +6296,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 AllTest: function (assert) {
@@ -6344,6 +6387,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CloseTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CloseTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 AfterDisposeThrows: function (assert) {
@@ -6389,6 +6433,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CommonExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.CommonExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ThrowingAndCatchingExceptionsWorks: function (assert) {
@@ -6434,6 +6479,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ComparerTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ComparerTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1546: function (assert) {
@@ -6484,6 +6530,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ContractTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.Contracts.ContractTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Assume: function (assert) {
@@ -6564,6 +6611,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertFromBase64Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Roundtrip1: function (assert) {
@@ -6694,6 +6742,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToBase64CharArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ValidOffsetIn: function (assert) {
@@ -6754,6 +6803,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToBase64StringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToBase64StringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 KnownByteSequence: function (assert) {
@@ -6819,6 +6869,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToBooleanTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToBooleanTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -6909,6 +6960,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToByteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToByteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7004,6 +7056,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToCharTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToCharTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromByte: function (assert) {
@@ -7109,6 +7162,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromString: function (assert) {
@@ -7204,6 +7258,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDecimalTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDecimalTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7294,6 +7349,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDoubleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDoubleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7384,6 +7440,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToInt16Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToInt16Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7484,6 +7541,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToInt32Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToInt32Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7584,6 +7642,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToInt64Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToInt64Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7684,6 +7743,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToSByteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToSByteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7784,6 +7844,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToSingleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToSingleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -7874,6 +7935,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToStringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToStringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoxedObject: function (assert) {
@@ -8094,6 +8156,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToUInt16Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToUInt16Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -8194,6 +8257,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToUInt32Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToUInt32Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -8294,6 +8358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToUInt64Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToUInt64Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FromBoolean: function (assert) {
@@ -8394,6 +8459,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CreateAndInitializationModesTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -8419,6 +8485,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CreateModeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.CreateModeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -8444,6 +8511,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CtorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.CtorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CreateStreamWriter: function (assert) {
@@ -8489,6 +8557,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -8549,6 +8618,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CultureNotFoundExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.CultureNotFoundExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -8614,6 +8684,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DataViewTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -8734,6 +8805,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DateTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DateTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1608_1609: function (assert) {
@@ -9089,6 +9161,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.DateTimeFormatInfoTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -9124,6 +9197,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DecimalMathTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DecimalMathTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestSubtractOperator: function (assert) {
@@ -9204,6 +9278,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -9539,6 +9614,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DelegateTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DelegateTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -9649,6 +9725,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DivideByZeroExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.DivideByZeroExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -9689,6 +9766,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DOMParserTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DOMParserTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ConstructorWorks: function (assert) {
@@ -9724,6 +9802,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -10080,6 +10159,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -10225,6 +10305,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CommandLineNotEmpty: function (assert) {
@@ -10410,6 +10491,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.EqualityComparerTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.EqualityComparerTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1546: function (assert) {
@@ -10465,6 +10547,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.ExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -10515,6 +10598,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ExpressionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.Expressions.ExpressionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ExpressionProtectedConstructorWorks: function (assert) {
@@ -10760,6 +10844,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Float32ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -10920,6 +11005,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Float64ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -11080,6 +11166,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.FlushTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.FlushTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 AutoFlushSetTrue: function (assert) {
@@ -11110,6 +11197,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.FormatExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.FormatExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -11150,6 +11238,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.FormattableStringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.FormattableStringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -11210,6 +11299,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.FunctionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.FunctionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestConstructorArgumentsBodyInOneParameter: function (assert) {
@@ -11245,6 +11335,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestPerformance: function (assert) {
@@ -11410,6 +11501,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.GetMembersTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.GetMembersTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMembersWithoutBindingFlagsWorks: function (assert) {
@@ -11570,6 +11662,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.GuidTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.GuidTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -11720,6 +11813,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ICollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -11840,6 +11934,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IComparableTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IComparableTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CallingMethodThroughIComparableInterfaceInvokesImplementingMethod: function (assert) {
@@ -11865,6 +11960,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IDictionaryTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -11945,6 +12041,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IEnumerableTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IEnumerableTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ArrayImplementsIEnumerable: function (assert) {
@@ -11995,6 +12092,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IEquatableTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IEquatableTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CallingMethodThroughIComparableInterfaceInvokesImplementingMethod: function (assert) {
@@ -12020,6 +12118,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IListTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -12145,6 +12244,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IndexOutOfRangeExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.IndexOutOfRangeExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -12185,6 +12285,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.InitializationModeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -12210,6 +12311,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int16ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -12370,6 +12472,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int16Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.Int16Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -12485,6 +12588,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int32ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -12645,6 +12749,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int32Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.Int32Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -12795,6 +12900,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int64Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.Int64Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -12935,6 +13041,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Int8ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -13095,6 +13202,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.InvalidCastExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.InvalidCastExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -13135,6 +13243,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.InvalidOperationExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.InvalidOperationExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -13175,6 +13284,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyCollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IReadOnlyCollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -13230,6 +13340,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyDictionaryTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IReadOnlyDictionaryTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -13295,6 +13406,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyListTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IReadOnlyListTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -13345,6 +13457,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554: function (assert) {
@@ -13415,6 +13528,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1607_1608_1609: function (assert) {
@@ -13910,6 +14024,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.JsonTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.JsonTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NonGenericParseWorks: function (assert) {
@@ -14085,6 +14200,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.JsStringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsStringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CharAtWorks: function (assert) {
@@ -14175,6 +14291,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.KeyNotFoundExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.KeyNotFoundExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -14215,6 +14332,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.KeyValuePairTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.KeyValuePairTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TheConstructorWithParametersCanBeUsed: function (assert) {
@@ -14265,6 +14383,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ListTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -14635,6 +14754,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MathTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ConstantsWork: function (assert) {
@@ -14980,6 +15100,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MemoryStream_ConstructorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.MemoryStream_ConstructorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MemoryStream_Ctor_NegativeIndeces: function (assert) {
@@ -15020,6 +15141,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MemoryStream_GetBufferTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.MemoryStream_GetBufferTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MemoryStream_GetBuffer_Length: function (assert) {
@@ -15060,6 +15182,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MemoryStream_TryGetBufferTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.MemoryStream_TryGetBufferTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TryGetBuffer_Constructor_AlwaysReturnsTrue: function (assert) {
@@ -15230,6 +15353,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MemoryStreamTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.MemoryStreamTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MemoryStream_Write_BeyondCapacity: function (assert) {
@@ -15300,6 +15424,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MixinTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MixinTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestGlobalMethods: function (assert) {
@@ -15335,6 +15460,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MultidimArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MultidimArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -15430,6 +15556,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.MutationObserverTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MutationObserverTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestNewlyAttachedElements: function (assert) {
@@ -15455,6 +15582,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NotImplementedExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.NotImplementedExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -15495,6 +15623,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NotSupportedExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.NotSupportedExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -15535,6 +15664,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1567: function (assert) {
@@ -15785,6 +15915,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NullReferenceExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.NullReferenceExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -15830,6 +15961,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NullTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.NullTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestNullStream_Flush: function (assert) {
@@ -15900,6 +16032,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NumberFormatInfoTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.NumberFormatInfoTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -15935,6 +16068,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.NumberFormatSpecifiersTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.NumberFormatSpecifiersTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CurrencyFormatSpecifierWorks: function (assert) {
@@ -16040,6 +16174,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestExternalInterface: function (assert) {
@@ -16070,6 +16205,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.ObjectTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16130,6 +16266,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.OperationCanceledExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.OperationCanceledExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16185,6 +16322,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.OutOfMemoryExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.OutOfMemoryExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16225,6 +16363,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.OverflowExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.OverflowExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16265,6 +16404,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.PromiseExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.PromiseExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16305,6 +16445,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.PromiseTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Threading.PromiseTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TaskFromPromiseWithoutResultFactoryWorksWhenPromiseCompletes: function (assert) {
@@ -16355,6 +16496,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.PropertyAccessorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.PropertyAccessorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 AccessorsCanBeInvokedInstance: function (assert) {
@@ -16405,6 +16547,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16460,6 +16603,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RandomTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.RandomTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Unseeded: function (assert) {
@@ -16535,6 +16679,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RankExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.RankExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16570,6 +16715,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ReaderTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.ReaderTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 StringReaderWithNullString: function (assert) {
@@ -16665,6 +16811,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -16850,6 +16997,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ReflectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.ReflectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute: function (assert) {
@@ -17330,6 +17478,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.RefParameterTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CanUseReferenceToLocalVariables: function (assert) {
@@ -17375,6 +17524,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexAlternationTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexAlternationTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnSimpleAlternationTest1: function (assert) {
@@ -17610,6 +17760,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexAnchorsTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexAnchorsTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnStartOfStringOrLineTest: function (assert) {
@@ -17735,6 +17886,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexBackreferenceTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexBackreferenceTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnNumberedBackrefTest: function (assert) {
@@ -17830,6 +17982,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexBalancingGroupsTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexBalancingGroupsTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnBalancingGroupTest1: function (assert) {
@@ -17905,6 +18058,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexCaptureCollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CaseDataTest: function (assert) {
@@ -17950,6 +18104,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexCharClassesTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnCharGroupTest1: function (assert) {
@@ -18210,6 +18365,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexEntityTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CaseDataTest: function (assert) {
@@ -18295,6 +18451,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexEscapesTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnBellCharTest: function (assert) {
@@ -18415,6 +18572,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexEscapeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexEscapeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnEscapeTest: function (assert) {
@@ -18455,6 +18613,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexExamplesTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexExamplesTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 EmailParseTest: function (assert) {
@@ -18515,6 +18674,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexGroupCollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CaseDataTest: function (assert) {
@@ -18560,6 +18720,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexInlineOptionsTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexInlineOptionsTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnInlineOptionsTest: function (assert) {
@@ -18770,6 +18931,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexIsMatchTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexIsMatchTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 IsMatchTest: function (assert) {
@@ -18815,6 +18977,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexLookaheadTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexLookaheadTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnPositiveLookaheadTest: function (assert) {
@@ -18890,6 +19053,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexLookbehindTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexLookbehindTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnPositiveLookbehindTest: function (assert) {
@@ -18970,6 +19134,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchCollectionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CaseDataTest: function (assert) {
@@ -19025,6 +19190,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchEntityTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CaseDataTest: function (assert) {
@@ -19080,6 +19246,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchesTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchesTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MatchesTest: function (assert) {
@@ -19125,6 +19292,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchSparseTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchSparseTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GroupOrderingTest1: function (assert) {
@@ -19170,6 +19338,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexMatchTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MatchTest: function (assert) {
@@ -19220,6 +19389,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexMatchTimeoutExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.RegexMatchTimeoutExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -19265,6 +19435,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexNonbacktrackingTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexNonbacktrackingTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnNonBacktrackingTest1: function (assert) {
@@ -19325,6 +19496,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexOptionsTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexOptionsTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnIgnoreCaseOptionTest: function (assert) {
@@ -19430,6 +19602,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexQuantifiersTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexQuantifiersTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 MsdnZeroOrMoreTimesTest: function (assert) {
@@ -19570,6 +19743,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexReplaceTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ReplaceTest1: function (assert) {
@@ -19655,6 +19829,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexSplitTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.Methods.RegexSplitTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 SplitTest1: function (assert) {
@@ -19775,6 +19950,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RegexTimeoutTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 RegexTimeoutValidationWorks: function (assert) {
@@ -19860,6 +20036,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RuntimeHelpersTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Runtime.CompilerServices.RuntimeHelpersTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetHashCodeWoksForObject_SPI_1570: function (assert) {
@@ -19885,6 +20062,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.SByteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.SByteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -20000,6 +20178,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BooleanWorks_SPI_1619: function (assert) {
@@ -20080,6 +20259,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.SingleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.SingleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -20230,6 +20410,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StackTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -20330,6 +20511,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -20410,6 +20592,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamAPMTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamAPMTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 BeginEndReadTest: function (assert) {
@@ -20440,6 +20623,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamCopyToTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamCopyToTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 IfCanSeekIsFalseLengthAndPositionShouldNotBeCalled: function (assert) {
@@ -20495,6 +20679,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamMethods)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Synchronized_NewObject: function (assert) {
@@ -20540,6 +20725,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamReader_ctorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamReader_ctorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 StreamReaderNullPath: function (assert) {
@@ -20580,6 +20766,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamReader_StringCtorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamReader_StringCtorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NullArgs_ThrowsArgumentNullException: function (assert) {
@@ -20615,6 +20802,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamReaderTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamReaderTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ObjectClosedReadLine: function (assert) {
@@ -20765,6 +20953,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamReaderWithBufferedStream_Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamReaderWithBufferedStream_Tests)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -20781,6 +20970,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CopyToAsyncTest: function (assert) {
@@ -20806,6 +20996,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamWriter_StringCtorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamWriter_StringCtorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NullArgs_ThrowsArgumentNullException: function (assert) {
@@ -20841,6 +21032,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamWriterWithBufferedStream_CloseTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamWriterWithBufferedStream_CloseTests)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -20857,6 +21049,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamWriterWithBufferedStream_FlushTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamWriterWithBufferedStream_FlushTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 WriteAfterRead_NonSeekableStream_Throws: function (assert) {
@@ -20882,6 +21075,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StreamWriterWithBufferedStream_WriteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamWriterWithBufferedStream_WriteTests)],
+        $kind: "nested class",
         fields: {
             context: null
         },
@@ -20898,6 +21092,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -21053,6 +21248,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StringFormatTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.StringFormatTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FormatShouldThrow: function (assert) {
@@ -21123,6 +21319,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1597: function (assert) {
@@ -21563,6 +21760,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StringWriterTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StringWriterTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Ctor: function (assert) {
@@ -21733,6 +21931,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestClear: function (assert) {
@@ -22239,6 +22438,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.SystemExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.SystemExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -22279,6 +22479,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TaskCanceledExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.TaskCanceledExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -22324,6 +22525,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TaskTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Threading.TaskTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TaskCompletionSourceTypePropertiesAreCorrect: function (assert) {
@@ -22569,6 +22771,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestAbstractClass)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestB: function (assert) {
@@ -22604,6 +22807,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22629,6 +22833,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestAwaitInCatchFinally", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAwaitInCatchFinally)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22654,6 +22859,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestConditionAccess", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestConditionAccess)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22679,6 +22885,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestExceptionFilter", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestExceptionFilter)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestFalseFilter: function (assert) {
@@ -22724,6 +22931,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyFunction", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestExpressionBodyFunction)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22749,6 +22957,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestGoto)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestGotoCase: function (assert) {
@@ -22779,6 +22988,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestIndexInitializer", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestIndexInitializer)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22804,6 +23014,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestInheritance", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestInheritance)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestA: function (assert) {
@@ -22839,6 +23050,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestInterfaces", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestInterfaces)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInterfaceMethodAndProperty: function (assert) {
@@ -22874,6 +23086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -22899,6 +23112,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLeaveOpen", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TestLeaveOpen)],
+        $kind: "nested class",
         statics: {
             methods: {
                 StreamReaderTest: function (assert) {
@@ -22939,6 +23153,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqAggregateOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqAggregateOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -22969,6 +23184,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqConversionOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqConversionOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -22994,6 +23210,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqElementOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqElementOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23019,6 +23236,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqGenerationOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqGenerationOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23044,6 +23262,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqGroupingOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqGroupingOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23079,6 +23298,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqJoinOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqJoinOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23104,6 +23324,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqMiscellaneousOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23129,6 +23350,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqOrderingOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqOrderingOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23154,6 +23376,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqPartitioningOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqPartitioningOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23179,6 +23402,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqProjectionOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqProjectionOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23204,6 +23428,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqQuantifiers", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqQuantifiers)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23229,6 +23454,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqQueryExecution", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqQueryExecution)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23254,6 +23480,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqRestrictionOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqRestrictionOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23279,6 +23506,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestLinqSetOperators", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Linq.TestLinqSetOperators)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23304,6 +23532,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestMethodParametersClass", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestMethodParametersClass)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Test: function (assert) {
@@ -23329,6 +23558,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestNameOf)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -23354,6 +23584,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestOverloadInstanceMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestOverloadInstanceMethods)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInstance: function (assert) {
@@ -23379,6 +23610,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestOverloadStaticMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestOverloadStaticMethods)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestStatic: function (assert) {
@@ -23404,6 +23636,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestReferenceTypes", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestReferenceTypes)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInstanceConstructorsAndMethods: function (assert) {
@@ -23439,6 +23672,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestTryCatchBlocks", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks)],
+        $kind: "nested class",
         statics: {
             methods: {
                 SimpleTryCatch: function (assert) {
@@ -23484,6 +23718,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestTryCatchFinallyBlocks", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks)],
+        $kind: "nested class",
         statics: {
             methods: {
                 SimpleTryCatchFinally: function (assert) {
@@ -23519,6 +23754,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs)],
+        $kind: "nested class",
         statics: {
             methods: {
                 IsClassIsFalse: function (assert) {
@@ -23669,6 +23905,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestUsingStatic)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestBasic: function (assert) {
@@ -23694,6 +23931,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTypes", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestValueTypes)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInstanceConstructorsAndMethods: function (assert) {
@@ -23724,6 +23962,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestVersion", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.TestVersion)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestConstructors: function (assert) {
@@ -23774,6 +24013,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestVirtualMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestVirtualMethods)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestB: function (assert) {
@@ -23799,6 +24039,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Exceptions.TimeoutExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -23839,6 +24080,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TimeoutTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.TimeoutTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestReadTimeoutCustomStream: function (assert) {
@@ -23889,6 +24131,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TimerTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Threading.TimerTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestTimerThrows: function (assert) {
@@ -23939,6 +24182,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TimeSpanTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.TimeSpanTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -24074,6 +24318,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TupleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.TupleTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Tuple1Works: function (assert) {
@@ -24134,6 +24379,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CanGetCustomTypeAttributesForTypeWithNoAttributes: function (assert) {
@@ -24279,6 +24525,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TypedArray", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.TypedArray)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestConstantValues: function (assert) {
@@ -24304,6 +24551,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TypeSystemLanguageSupportTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypeIsWorksForReferenceTypes: function (assert) {
@@ -24359,6 +24607,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TypeSystemTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FullNamePropertyReturnsTheNameWithTheNamespace: function (assert) {
@@ -24729,6 +24978,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Uint16ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -24889,6 +25139,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UInt16Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt16Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -25004,6 +25255,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Uint32ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -25164,6 +25416,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UInt32Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt32Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -25279,6 +25532,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -25419,6 +25673,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Uint8ArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 LengthConstructorWorks: function (assert) {
@@ -25579,6 +25834,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.Uint8ClampedArrayTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1560: function (assert) {
@@ -25744,6 +26000,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UncheckedInsideCheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -25784,6 +26041,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CheckedUncheckedTests.UncheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -25824,6 +26082,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Decode: function (assert) {
@@ -25854,6 +26113,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Encode: function (assert) {
@@ -25884,6 +26144,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMaxByteCount: function (assert) {
@@ -25914,6 +26175,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Decode: function (assert) {
@@ -25944,6 +26206,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Encode: function (assert) {
@@ -25974,6 +26237,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMaxByteCount: function (assert) {
@@ -26004,6 +26268,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingDecodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Decode: function (assert) {
@@ -26029,6 +26294,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Encode: function (assert) {
@@ -26059,6 +26325,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMaxByteCount: function (assert) {
@@ -26089,6 +26356,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingDecodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Decode: function (assert) {
@@ -26114,6 +26382,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Encode: function (assert) {
@@ -26154,6 +26423,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetMaxByteCount: function (assert) {
@@ -26184,6 +26454,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.WeakMapTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.WeakMapTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GettingSettingAndDeletingWorks: function (assert) {
@@ -26209,6 +26480,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.WithNoUncheckedKeywordTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -26249,6 +26521,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.WriteTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.WriteTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 Synchronized_NewObject: function (assert) {

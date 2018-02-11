@@ -347,7 +347,7 @@ namespace Bridge.ClientTest.IO
         {
             var sw = new StringWriter();
             sw.Write(new Object());
-            Assert.AreEqual("[object Object]", sw.ToString());
+            Assert.AreEqual("System.Object", sw.ToString());
         }
 
         [Test]
@@ -381,7 +381,7 @@ namespace Bridge.ClientTest.IO
         {
             var sw = new StringWriter();
             sw.WriteLine(new Object());
-            Assert.AreEqual("[object Object]\r\n", sw.ToString());
+            Assert.AreEqual("System.Object\r\n", sw.ToString());
         }
 
         [Test]

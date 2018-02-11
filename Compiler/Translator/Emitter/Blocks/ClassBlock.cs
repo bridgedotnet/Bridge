@@ -317,14 +317,17 @@ namespace Bridge.Translator
 
         protected virtual void WriteKind()
         {
-            if (this.TypeInfo.Type.Kind != TypeKind.Class)
+            var isNested = this.TypeInfo.Type.DeclaringType != null;
+            if (this.TypeInfo.Type.Kind == TypeKind.Class && !isNested)
             {
-                this.EnsureComma();
-                this.Write(JS.Fields.KIND);
-                this.WriteColon();
-                this.WriteScript(this.TypeInfo.Type.Kind.ToString().ToLowerInvariant());
-                this.Emitter.Comma = true;
+                return;
             }
+
+            this.EnsureComma();
+            this.Write(JS.Fields.KIND);
+            this.WriteColon();
+            this.WriteScript( (isNested ? "nested " : "") + this.TypeInfo.Type.Kind.ToString().ToLowerInvariant());
+            this.Emitter.Comma = true;
         }
 
         protected virtual void WriteObjectLiteral()

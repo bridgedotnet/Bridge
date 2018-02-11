@@ -26,13 +26,13 @@
                 var s = "[";
 
                 if (this.key != null) {
-                    s += this.key.toString();
+                    s += Bridge.toString(this.key);
                 }
 
                 s += ", ";
 
                 if (this.value != null) {
-                    s += this.value.toString();
+                    s += Bridge.toString(this.value);
                 }
 
                 s += "]";

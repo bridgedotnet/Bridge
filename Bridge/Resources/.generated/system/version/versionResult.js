@@ -1,5 +1,5 @@
     Bridge.define("System.Version.VersionResult", {
-        $kind: "struct",
+        $kind: "nested struct",
         statics: {
             methods: {
                 getDefaultValue: function () { return new System.Version.VersionResult(); }

@@ -15,6 +15,7 @@ namespace System
             set;
         }
 
+        [Template("Bridge.toString({this})")]
         public virtual extern string ToString();
 
         public virtual extern string ToLocaleString();

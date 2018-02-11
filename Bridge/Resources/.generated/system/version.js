@@ -386,7 +386,7 @@
                     case 0: 
                         return ("");
                     case 1: 
-                        return (this._Major.toString());
+                        return (Bridge.toString(this._Major));
                     case 2: 
                         sb = new System.Text.StringBuilder();
                         System.Version.appendPositiveNumber(this._Major, sb);

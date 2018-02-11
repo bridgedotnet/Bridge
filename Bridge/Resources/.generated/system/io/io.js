@@ -1338,6 +1338,7 @@
 
     Bridge.define("System.IO.Stream.SynchronousAsyncResult", {
         inherits: [System.IAsyncResult],
+        $kind: "nested class",
         statics: {
             methods: {
                 EndRead: function (asyncResult) {
@@ -1671,7 +1672,7 @@
                     if (f != null) {
                         this.Write$10(Bridge.format(f, null, this.FormatProvider));
                     } else {
-                        this.Write$10(value.toString());
+                        this.Write$10(Bridge.toString(value));
                     }
                 }
             },
@@ -1778,7 +1779,7 @@
                     if (f != null) {
                         this.WriteLine$11(Bridge.format(f, null, this.FormatProvider));
                     } else {
-                        this.WriteLine$11(value.toString());
+                        this.WriteLine$11(Bridge.toString(value));
                     }
                 }
             },
@@ -3228,6 +3229,7 @@
 
     Bridge.define("System.IO.Stream.NullStream", {
         inherits: [System.IO.Stream],
+        $kind: "nested class",
         props: {
             CanRead: {
                 get: function () {
@@ -4375,7 +4377,7 @@
                     this._sb.append(value);
                 }
             },
-            toString: function () {
+            ToString: function () {
                 return this._sb.toString();
             }
         }
@@ -4383,6 +4385,7 @@
 
     Bridge.define("System.IO.TextReader.NullTextReader", {
         inherits: [System.IO.TextReader],
+        $kind: "nested class",
         ctors: {
             ctor: function () {
                 this.$initialize();
@@ -4401,6 +4404,7 @@
 
     Bridge.define("System.IO.TextWriter.NullTextWriter", {
         inherits: [System.IO.TextWriter],
+        $kind: "nested class",
         props: {
             Encoding: {
                 get: function () {
@@ -4425,6 +4429,7 @@
 
     Bridge.define("System.IO.StreamReader.NullStreamReader", {
         inherits: [System.IO.StreamReader],
+        $kind: "nested class",
         props: {
             BaseStream: {
                 get: function () {

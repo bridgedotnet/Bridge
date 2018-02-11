@@ -647,8 +647,8 @@ namespace Bridge.Contract
 
             bool isTop = list == null;
             list = list ?? new List<IMethod>();
-
-            if (this.Member != null && this.Member.IsOverride && !this.IsTemplateOverride(this.Member))
+            var toStringOverride = (this.JsName == "toString" && this.Member is IMethod && ((IMethod)this.Member).Parameters.Count == 0);
+            if (this.Member != null && this.Member.IsOverride && (!this.IsTemplateOverride(this.Member) || toStringOverride))
             {
                 if (this.OriginalMember == null)
                 {
@@ -663,6 +663,13 @@ namespace Bridge.Contract
             {
                 var isExternalType = this.Emitter.Validator.IsExternalType(typeDef);
                 bool externalFound = false;
+
+                var oldIncludeInline = this.IncludeInline;
+                if (toStringOverride)
+                {
+                    this.IncludeInline = true;
+                }
+
                 var methods = typeDef.Methods.Where(m =>
                 {
                     if (m.IsExplicitInterfaceImplementation)
@@ -673,9 +680,9 @@ namespace Bridge.Contract
                     if (!this.IncludeInline)
                     {
                         var inline = this.Emitter.GetInline(m);
-                        if (!string.IsNullOrWhiteSpace(inline))
+                        if (!string.IsNullOrWhiteSpace(inline) && !(m.Name == "ToString" && m.Parameters.Count == 0 && !m.IsOverride))
                         {
-                            return false;
+                            return false;           
                         }
                     }
 
@@ -688,7 +695,7 @@ namespace Bridge.Contract
                             return false;
                         }
 
-                        if (m.IsOverride && !this.IsTemplateOverride(m))
+                        if (m.IsOverride && (!this.IsTemplateOverride(m) || m.Name == "ToString" && m.Parameters.Count == 0))
                         {
                             return false;
                         }
@@ -716,6 +723,8 @@ namespace Bridge.Contract
 
                     return false;
                 });
+
+                this.IncludeInline = oldIncludeInline;
 
                 list.AddRange(methods);
 

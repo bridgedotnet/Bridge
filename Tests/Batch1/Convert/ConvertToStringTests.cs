@@ -668,9 +668,9 @@ namespace Bridge.ClientTest.ConvertTests
         {
             Foo foo = new Foo(3);
             string result = Convert.ToString(foo);
-            Assert.AreEqual("Bridge.ClientTest.ConvertTests.ConvertToStringTests.Foo", result);
+            Assert.AreEqual("Bridge.ClientTest.ConvertTests.ConvertToStringTests+Foo", result);
             result = Convert.ToString(foo, NumberFormatInfo.CurrentInfo);
-            Assert.AreEqual("Bridge.ClientTest.ConvertTests.ConvertToStringTests.Foo", result);
+            Assert.AreEqual("Bridge.ClientTest.ConvertTests.ConvertToStringTests+Foo", result);
 
             foo = null;
             result = Convert.ToString(foo, NumberFormatInfo.CurrentInfo);

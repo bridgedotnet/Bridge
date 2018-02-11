@@ -58,6 +58,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CreateInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor: function (assert) {
@@ -83,6 +84,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.AppDomainTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.AppDomainTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetAssembliesWorks_SPI_1646: function (assert) {
@@ -108,6 +110,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.CharTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.CharTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreInt32_SPI_1603: function (assert) {
@@ -133,6 +136,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ContractExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -163,6 +167,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ParseWorks_SPI_1624: function (assert) {
@@ -188,6 +193,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DecimalTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ConversionsToDecimalWork_SPI_1580: function (assert) {
@@ -293,6 +299,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 CreateWorks: function (assert) {
@@ -343,6 +350,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect_SPI_1564: function (assert) {
@@ -378,6 +386,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.FormattableStringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.FormattableStringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 ToStringWithFormatProviderWorks_SPI_1651: function (assert) {
@@ -408,6 +417,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.Int32Tests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 IntegerModuloWorks_SPI_1602: function (assert) {
@@ -433,6 +443,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 NonGenericParseWorks_SPI_1574: function (assert) {
@@ -473,6 +484,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RuntimeHelpersTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570: function (assert) {
@@ -498,6 +510,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 FormatWorksWithIFormattable_SPI_1598: function (assert) {
@@ -528,6 +541,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.UserDefinedStructTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.UserDefinedStructTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 DefaultValueOfStructWithInlineCodeDefaultConstructorWorks_SPI_1610: function (assert) {

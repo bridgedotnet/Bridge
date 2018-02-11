@@ -4,6 +4,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("TypeScript.Issues.N1060");
 
     Bridge.define("TypeScript.Issues.N1060.B$1", function (T) { return {
+        $kind: "nested class",
         methods: {
             GetC: function () {
                 return new (TypeScript.Issues.N1060.B$1.C(T))();
@@ -12,13 +13,13 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     }; });
 
     Bridge.define("TypeScript.Issues.N1060.B$1.C", function (T) { return {
-
+        $kind: "nested class"
     }; });
 
     Bridge.define("TypeScript.Issues.N1640");
 
     Bridge.define("TypeScript.Issues.N1640.IGamePlay", {
-        $kind: "interface"
+        $kind: "nested interface"
     });
 
     Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {
@@ -91,6 +92,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     }; });
 
     Bridge.define("TypeScript.Issues.N2031DictionaryMap$2.Indexer$2", function (T1, T2, T3, T4) { return {
+        $kind: "nested class",
         fields: {
             _dictionary: null
         },
@@ -160,7 +162,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("TypeScript.Issues.N2474");
 
     Bridge.define("TypeScript.Issues.N2474.Enum", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 Value: 1
@@ -169,7 +171,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.NameEnum", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 value: 3
@@ -178,7 +180,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.NameLowerCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 value: 4
@@ -187,7 +189,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.NamePreserveCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 Value: 5
@@ -196,7 +198,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.NameUpperCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 VALUE: 6
@@ -205,7 +207,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.StringName", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 value: "value"
@@ -215,7 +217,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.StringNameLowerCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 value: "value"
@@ -225,7 +227,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.StringNamePreserveCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 Value: "Value"
@@ -235,7 +237,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.StringNameUpperCase", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 VALUE: "VALUE"
@@ -245,7 +247,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2474.ValueEnum", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 Value: 2
@@ -285,11 +287,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N3061.IVehicle", {
         inherits: function () { return [System.IEquatable$1(TypeScript.Issues.N3061.IVehicle)]; },
-        $kind: "interface"
+        $kind: "nested interface"
     });
 
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
+        $kind: "nested class",
         events: {
             OnGameEvent: null
         },
@@ -330,6 +333,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N3061.Car", {
         inherits: function () { return [TypeScript.Issues.N3061.IVehicle,System.IEquatable$1(TypeScript.Issues.N3061.Car)]; },
+        $kind: "nested class",
         props: {
             Horses: 0
         },
@@ -346,6 +350,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N3061.Tractor", {
         inherits: [TypeScript.Issues.N3061.Car],
+        $kind: "nested class",
         alias: ["equalsT", "System$IEquatable$1$TypeScript$Issues$N3061$Car$equalsT"],
         methods: {
             equalsT: function (car) {
@@ -356,6 +361,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N3061.Truck", {
         inherits: [TypeScript.Issues.N3061.Car],
+        $kind: "nested class",
         alias: ["equalsT", "System$IEquatable$1$TypeScript$Issues$N3061$Car$equalsT"],
         methods: {
             equalsT: function (car) {

@@ -184,7 +184,7 @@ Bridge.define("System.String", {
             } else if (Bridge.isDate(value)) {
                 value = System.DateTime.format(value, formatStr, provider);
             } else {
-                value = "" + value.toString();
+                value = "" + Bridge.toString(value);
             }
 
             if (alignment) {
@@ -195,7 +195,7 @@ Bridge.define("System.String", {
                 }
             }
 
-            return System.String.alignString(value.toString(), alignment);
+            return System.String.alignString(Bridge.toString(value), alignment);
         },
 
         decodeBraceSequence: function (braces, remove) {
@@ -542,7 +542,7 @@ Bridge.define("System.String", {
                 s = "";
 
             for (var i = 0; i < list.length; i++) {
-                s += list[i] == null ? "" : list[i].toString();
+                s += list[i] == null ? "" : Bridge.toString(list[i]);
             }
 
             return s;

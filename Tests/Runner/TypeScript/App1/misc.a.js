@@ -18,7 +18,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("Misc.A.EnumTest.EnumA", {
-        $kind: "enum",
+        $kind: "nested enum",
         statics: {
             fields: {
                 M1: 0,
