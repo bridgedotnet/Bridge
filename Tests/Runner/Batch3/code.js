@@ -27901,6 +27901,19 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3360", {
+        statics: {
+            methods: {
+                TestDoubleParse: function () {
+                    var test = { };
+                    var result = System.Double.tryParse("2/1", null, test);
+
+                    Bridge.Test.NUnit.Assert.False(result);
+                }
+            }
+        }
+    });
+
     /**
      * This test consists in ensuring types that can't be represented in
      JavaScript are converted to string when their .ToJson() method is

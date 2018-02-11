@@ -6960,7 +6960,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var countExp = 0;
 
                 for (var i = 0; i < s.length; i++) {
-                    if (System.Char.isLetter(s[i].charCodeAt(0))) {
+                    if (!System.Char.isNumber(s[i].charCodeAt(0)) &&
+                        s[i] !== '.' &&
+                        s[i] !== ',' &&
+                        s[i] !== nfInfo.positiveSign &&
+                        s[i] !== nfInfo.negativeSign &&
+                        s[i] !== point &&
+                        s[i] !== thousands) {
                         if (s[i].toLowerCase() === "e") {
                             countExp++;
                             if (countExp > 1) {
