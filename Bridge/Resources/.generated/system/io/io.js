@@ -1498,7 +1498,7 @@
                 return n;
             },
             ReadToEndAsync: function () {
-                return System.Threading.Tasks.Task.fromResult(this.ReadToEnd());
+                return System.Threading.Tasks.Task.fromResult(this.ReadToEnd(), System.String);
             },
             ReadToEnd: function () {
 

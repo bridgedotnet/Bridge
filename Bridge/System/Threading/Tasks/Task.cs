@@ -52,6 +52,7 @@ namespace System.Threading.Tasks
 
         public static extern Task Delay(int millisecondDelay);
 
+        [Template("System.Threading.Tasks.Task.fromResult({result}, {TResult})")]
         public static extern Task<TResult> FromResult<TResult>(TResult result);
 
         public static extern Task Run(Action action);

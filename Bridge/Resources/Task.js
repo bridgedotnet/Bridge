@@ -28,8 +28,8 @@
                 return tcs.task;
             },
 
-            fromResult: function (result) {
-                var t = new System.Threading.Tasks.Task();
+            fromResult: function (result, T) {
+                var t = new (System.Threading.Tasks.Task$1(T || System.Object))();
 
                 t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
                 t.result = result;
