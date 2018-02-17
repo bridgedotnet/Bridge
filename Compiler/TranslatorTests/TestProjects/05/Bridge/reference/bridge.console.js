@@ -1,5 +1,5 @@
 /**
- * @version   : 16.7.2 - Bridge.NET
+ * @version   : 16.8.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
