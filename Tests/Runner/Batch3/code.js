@@ -29297,9 +29297,28 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in checking whether Task.FromResult() returns
+     a generics instance of System.Threading.Tasks, so that it can be
+     cast into non-generics then back to the generics version.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3420
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3420", {
         statics: {
             methods: {
+                /**
+                 * Call Task.FromResult() casting to non-generics Task and try to cast
+                 it back to the generics, thus being able to fetch the result value
+                 fed to FromResult().
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3420
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3420
+                 * @return  {void}
+                 */
                 TestTaskFromResult: function () {
                     var $step = 0,
                         $task1, 
@@ -29323,7 +29342,7 @@ Bridge.$N1391Result =                     r;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
-                                        Bridge.Test.NUnit.Assert.AreEqual(3, $taskResult1);
+                                        Bridge.Test.NUnit.Assert.AreEqual(3, $taskResult1, "The task result matches the expected value.");
                                         done();
                                         return;
                                     }
