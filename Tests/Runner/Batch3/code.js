@@ -23748,11 +23748,13 @@ Bridge.$N1391Result =                     r;
                     s2 = (s = "test");
                     Bridge.Test.NUnit.Assert.AreEqual(s2, "test", "On more than one variable, works to the indirect variable.");
                     Bridge.Test.NUnit.Assert.AreEqual(s, "test", "On more than one variable, works to the direct variable."); /// Variable is declared but never used
+
+
                     var c;
                     var c3;
                     var c2;
                     c2 = (c = "test");
-                    var c4; /// Variable is declared but never used
+                    var c4;
                     Bridge.Test.NUnit.Assert.AreEqual(c2, "test", "With unrelated variables, works on indirect variable.");
                     Bridge.Test.NUnit.Assert.AreEqual(c, "test", "With unrelated variables, works on direct variable.");
 
@@ -24847,8 +24849,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -27456,6 +27460,36 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The test here consists in checking whether System.DateTime tests works
+     with current date and max/min values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3290
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3290", {
+        statics: {
+            methods: {
+                /**
+                 * Tests the comparison variations between datetime values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3290
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3290
+                 * @return  {void}
+                 */
+                CheckCultureInfoGetFormatIsVirtual: function () {
+                    var culture = new Bridge.ClientTest.Batch3.BridgeIssues.MyCultureInfoAdapter("en-US");
+
+                    var format = culture.getFormat(System.Globalization.NumberFormatInfo);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(culture.numberFormat, Bridge.unbox(format), "GetFormat can be overridden");
+                }
+            }
+        }
+    });
+
+    /**
      * The test here consists in instantiating a class using an interface
      reference and ensure it is, client-side, reaching the type it
      refers to.
@@ -28915,6 +28949,8 @@ Bridge.$N1391Result =                     r;
                  * @return  {void}
                  */
                 TestCustomComparer: function () { /// The given expression is always of the provided ('short') type
+
+
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Float32Array.BYTES_PER_ELEMENT), "Could reference Float32Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Float64Array.BYTES_PER_ELEMENT), "Could reference Float64Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Int16Array.BYTES_PER_ELEMENT), "Could reference Int16Array's bytes per element constant.");
@@ -28923,7 +28959,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint16Array.BYTES_PER_ELEMENT), "Could reference Uint16Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint32Array.BYTES_PER_ELEMENT), "Could reference Uint32Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8Array.BYTES_PER_ELEMENT), "Could reference Uint8Array's bytes per element constant.");
-                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8ClampedArray.BYTES_PER_ELEMENT), "Could reference Uint8ClampedArray's bytes per element constant."); /// The given expression is always of the provided ('short') type
+                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8ClampedArray.BYTES_PER_ELEMENT), "Could reference Uint8ClampedArray's bytes per element constant.");
                 }
             }
         }
@@ -36714,6 +36750,22 @@ Bridge.$N1391Result =                     r;
                 SetValue: function (item) {
                     return item;
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.MyCultureInfoAdapter", {
+        inherits: [System.Globalization.CultureInfo],
+        alias: ["getFormat", "System$IFormatProvider$getFormat"],
+        ctors: {
+            ctor: function (name) {
+                this.$initialize();
+                System.Globalization.CultureInfo.ctor.call(this, name);
+            }
+        },
+        methods: {
+            getFormat: function (formatType) {
+                return this.numberFormat;
             }
         }
     });

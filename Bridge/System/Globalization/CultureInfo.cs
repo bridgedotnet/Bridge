@@ -102,7 +102,7 @@ namespace System.Globalization
             set;
         }
 
-        public extern object GetFormat(Type formatType);
+        public extern virtual Object GetFormat(Type formatType);
 
         /// <summary>
         /// Creates a copy of the current CultureInfo.
