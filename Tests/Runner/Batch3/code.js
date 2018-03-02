@@ -36462,7 +36462,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 DateTimeToISOStringWorks: function () {
-                    var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15, 0, System.DateTimeKind.Utc);
+                    var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15, 0, 1);
                     var d2 = System.DateTime.toLocalTime(d1);
                     var d3 = System.DateTime.toUniversalTime(d2);
 
