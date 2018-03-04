@@ -210,10 +210,14 @@ namespace Bridge.ClientTest.SimpleTypes
             var utcNow = DateTime.UtcNow;
             var localNowToUtc = DateTime.Now.ToUniversalTime();
 
-            var utcString = utcNow.ToString("o");
-            var utcFromLocalString = localNowToUtc.ToString("o");
+            var diff = utcNow - localNowToUtc;
+            var adjusted = new DateTime(localNowToUtc.Ticks + diff.Ticks, DateTimeKind.Utc);
 
-            var useSimpleEqual = utcString == utcFromLocalString;
+            var utcString = utcNow.ToString("o");
+            //var utcFromLocalString = localNowToUtc.ToString("o");
+            var adjustedString = adjusted.ToString("o");
+
+            var useSimpleEqual = utcString == adjustedString;
 
             if (!useSimpleEqual)
             {
@@ -222,7 +226,7 @@ namespace Bridge.ClientTest.SimpleTypes
                 try
                 {
                     var utcParts = utcString.Split('.');
-                    var utcFromLocalParts = utcFromLocalString.Split('.');
+                    var utcFromLocalParts = adjustedString.Split('.');
 
                     if (utcParts[0] != utcFromLocalParts[0] || utcParts.Length != utcFromLocalParts.Length)
                     {
@@ -243,7 +247,7 @@ namespace Bridge.ClientTest.SimpleTypes
                             var utcTicksDiff = utcTicks - utcFromLocalTicks;
 
                             var message = string.Format("String representaions should equal {0} vs {1}; (Abs(Diff({2}, {3})) = {4}) <= 10000",
-                                utcString, utcFromLocalString, utcTicks, utcFromLocalTicks, utcTicksDiff);
+                                utcString, adjustedString, utcTicks, utcFromLocalTicks, utcTicksDiff);
 
                             Assert.True(Math.Abs(utcTicksDiff) <= 10000, message);
                         }
@@ -262,24 +266,24 @@ namespace Bridge.ClientTest.SimpleTypes
 
             if (useSimpleEqual)
             {
-                Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+                Assert.AreEqual(utcString, adjustedString, "String representaions should equal");
             }
 
-            var fromLocal = new DateTime(localNowToUtc.Year, localNowToUtc.Month, localNowToUtc.Day, localNowToUtc.Hour, localNowToUtc.Minute, localNowToUtc.Second, localNowToUtc.Millisecond);
-            var tickDiff = fromLocal.Ticks - utcNow.Ticks;
+            var tickDiff = adjusted.Ticks - utcNow.Ticks;
 
             Assert.True(Math.Abs(tickDiff) <= 10000, "Tick diff: Abs(" + tickDiff + ") <= 10000");
 
-            var dateDiff = fromLocal - utcNow;
+            var dateDiff = adjusted - utcNow;
             var minutes = dateDiff.TotalMinutes;
 
-            Assert.True(Math.Abs(minutes) < 1000, "Date diff in minutes: Abs(" + minutes + ") < 1000");
+            Assert.True(Math.Abs(minutes) == 0, "Date diff in minutes: Abs(" + minutes + ") = 0");
 
             var year = utcNow.Year;
             var kind = utcNow.Kind;
             var ticks = utcNow.Ticks;
+            var nowYr = DateTime.Now.Year - 1;
 
-            Assert.True(year > 2016, year + " > 2016");
+            Assert.True(year > nowYr, year + " > "  + nowYr.ToString());
             Assert.AreEqual(DateTimeKind.Utc, kind, kind + " = Utc");
             Assert.True(ticks > 636352945138088328, ticks + " > 636352945138088328");
         }
