@@ -10193,8 +10193,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 me = this,
                 dtInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
                 format = function (t, n, dir, cut) {
-                    return System.String.alignString((t | 0).toString(), n || 2, "0", dir || 2, cut || false);
-                };
+                    return System.String.alignString(Math.abs(t | 0).toString(), n || 2, "0", dir || 2, cut || false);
+                },
+                isNeg = ticks < 0;
 
             if (formatStr) {
                 return formatStr.replace(/(\\.|'[^']*'|"[^"]*"|dd?|HH?|hh?|mm?|ss?|tt?|f{1,7}|\:|\/)/g,
@@ -10242,7 +10243,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             if (ticks.abs().gte(864e9)) {
-                result += format(ticks.toNumberDivided(864e9)) + ".";
+                result += format(ticks.toNumberDivided(864e9), 1) + ".";
                 ticks = ticks.mod(864e9);
             }
 
@@ -10257,7 +10258,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result += "." + format(ticks.toNumber(), 7);
             }
 
-            return result;
+            return (isNeg ? "-" : "") + result;
         }
     });
 
