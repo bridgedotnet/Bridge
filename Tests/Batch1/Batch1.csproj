@@ -58,6 +58,7 @@
     <Compile Include="CSharp7\TestCaseLabelPattern.cs" />
     <Compile Include="CSharp7\TestROStruct.cs" />
     <Compile Include="CSharp7\TestIsPattern.cs" />
+    <Compile Include="CSharp7\TestExpressionBodyMember.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />
