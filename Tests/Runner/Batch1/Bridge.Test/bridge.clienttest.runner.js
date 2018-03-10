@@ -96,6 +96,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Exception filter - TestFailedFilter_2223", Bridge.Test.Runtime.BridgeClientTestRunner.TestExceptionFilter.TestFailedFilter_2223);
             QUnit.test("Exception filter - TestFailedFilter2_2223", Bridge.Test.Runtime.BridgeClientTestRunner.TestExceptionFilter.TestFailedFilter2_2223);
             QUnit.test("Expression-bodied function members - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyFunction.TestBasic);
+            QUnit.test("Expression-bodied members - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember.TestBasic);
             QUnit.test("Index initializer - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestIndexInitializer.TestBasic);
             QUnit.test("Interpolated Strings - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings.TestBasic);
             QUnit.test("NameOf - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf.TestBasic);
@@ -22961,6 +22962,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExpressionBodyFunction", $t.File = "Batch1\\CSharp6\\TestExpressionBodyFunction.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestExpressionBodyMember)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestExpressionBodyMember).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "9", $t));
+                    Bridge.ClientTest.CSharp6.TestExpressionBodyMember.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestExpressionBodyMember", $t.File = "Batch1\\CSharp7\\TestExpressionBodyMember.cs", $t);
                 }
                 return this.context;
             }

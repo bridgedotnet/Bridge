@@ -52,6 +52,7 @@
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="Collections\Native\Constants.cs" />
+    <Compile Include="CSharp7\TestExpressionBodyMember.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />

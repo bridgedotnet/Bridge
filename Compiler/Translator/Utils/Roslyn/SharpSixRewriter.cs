@@ -272,6 +272,30 @@ namespace Bridge.Translator
             return node;
         }
 
+        public override SyntaxNode VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+        {
+            node = (ConstructorDeclarationSyntax)base.VisitConstructorDeclaration(node);
+
+            if (node.ExpressionBody != null)
+            {
+                return SyntaxHelper.ToStatementBody(node);
+            }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitDestructorDeclaration(DestructorDeclarationSyntax node)
+        {
+            node = (DestructorDeclarationSyntax)base.VisitDestructorDeclaration(node);
+
+            if (node.ExpressionBody != null)
+            {
+                return SyntaxHelper.ToStatementBody(node);
+            }
+
+            return node;
+        }
+
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var method = this.semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
@@ -602,6 +626,31 @@ namespace Bridge.Translator
                         symbol.Value.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart),
                         node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitAccessorList(AccessorListSyntax node)
+        {
+            node = (AccessorListSyntax)base.VisitAccessorList(node);
+
+            if (node.Accessors.Any(a => a.ExpressionBody != null))
+            {
+                var list = new List<AccessorDeclarationSyntax>();
+                foreach (var accessor in node.Accessors)
+                {
+                    if (accessor != null && accessor.ExpressionBody != null)
+                    {
+                        list.Add(SyntaxHelper.ToStatementBody(accessor));
+                    }
+                    else
+                    {
+                        list.Add(accessor);
+                    }
+                }
+
+                node = node.WithAccessors(SyntaxFactory.List(list));
+            }            
 
             return node;
         }
