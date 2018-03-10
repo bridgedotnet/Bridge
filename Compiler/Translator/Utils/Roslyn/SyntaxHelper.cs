@@ -566,6 +566,38 @@ namespace Bridge.Translator
                          .WithTrailingTrivia(method.GetTrailingTrivia());
         }
 
+        public static ConstructorDeclarationSyntax ToStatementBody(ConstructorDeclarationSyntax method)
+        {
+            var body = method.ExpressionBody.Expression.WithLeadingTrivia(SyntaxFactory.Space);
+
+            return method.WithBody(SyntaxFactory.Block(SyntaxFactory.ExpressionStatement(body)))
+                         .WithExpressionBody(null)
+                         .WithSemicolonToken(SyntaxFactory.MissingToken(SyntaxKind.SemicolonToken))
+                         .WithTrailingTrivia(method.GetTrailingTrivia());
+        }
+
+        public static DestructorDeclarationSyntax ToStatementBody(DestructorDeclarationSyntax method)
+        {
+            var body = method.ExpressionBody.Expression.WithLeadingTrivia(SyntaxFactory.Space);
+
+            return method.WithBody(SyntaxFactory.Block(SyntaxFactory.ExpressionStatement(body)))
+                         .WithExpressionBody(null)
+                         .WithSemicolonToken(SyntaxFactory.MissingToken(SyntaxKind.SemicolonToken))
+                         .WithTrailingTrivia(method.GetTrailingTrivia());
+        }
+
+        public static AccessorDeclarationSyntax ToStatementBody(AccessorDeclarationSyntax method)
+        {
+            var needReturn = method.Keyword.Kind() == SyntaxKind.GetKeyword;
+
+            var body = method.ExpressionBody.Expression.WithLeadingTrivia(SyntaxFactory.Space);
+
+            return method.WithBody(SyntaxFactory.Block(needReturn ? (StatementSyntax)SyntaxFactory.ReturnStatement(body) : SyntaxFactory.ExpressionStatement(body)))
+                         .WithExpressionBody(null)
+                         .WithSemicolonToken(SyntaxFactory.MissingToken(SyntaxKind.SemicolonToken))
+                         .WithTrailingTrivia(method.GetTrailingTrivia());
+        }
+
         public static OperatorDeclarationSyntax ToStatementBody(OperatorDeclarationSyntax method)
         {
             var isVoid = false;
