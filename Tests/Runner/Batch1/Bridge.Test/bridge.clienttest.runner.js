@@ -89,6 +89,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Virtual methods - TestB", Bridge.Test.Runtime.BridgeClientTestRunner.TestVirtualMethods.TestB);
             QUnit.test("Auto properties - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps.TestBasic);
             QUnit.test("Await in catch and finally - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestAwaitInCatchFinally.TestBasic);
+            QUnit.test("Case label pattern - TestCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCase);
             QUnit.test("ConditionAccess - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestConditionAccess.TestBasic);
             QUnit.test("Exception filter - TestFalseFilter", Bridge.Test.Runtime.BridgeClientTestRunner.TestExceptionFilter.TestFalseFilter);
             QUnit.test("Exception filter - TestTrueFilter", Bridge.Test.Runtime.BridgeClientTestRunner.TestExceptionFilter.TestTrueFilter);
@@ -98,6 +99,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Expression-bodied function members - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyFunction.TestBasic);
             QUnit.test("Index initializer - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestIndexInitializer.TestBasic);
             QUnit.test("Interpolated Strings - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings.TestBasic);
+            QUnit.test("Is pattern - PatterAndTry", Bridge.Test.Runtime.BridgeClientTestRunner.TestIsPattern.PatterAndTry);
             QUnit.test("NameOf - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf.TestBasic);
             QUnit.test("Using static - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic.TestBasic);
             QUnit.module("Checked/Unckecked");
@@ -22869,6 +22871,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestCaseLabelPattern)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestCase: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCase()", $t.Line = "53", $t));
+                    Bridge.ClientTest.CSharp6.TestCaseLabelPattern.TestCase();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestCaseLabelPattern", $t.File = "Batch1\\CSharp7\\TestCaseLabelPattern.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestConditionAccess", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestConditionAccess)],
         $kind: "nested class",
@@ -23116,6 +23144,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestInterpolatedStrings", $t.File = "Batch1\\CSharp6\\TestInterpolatedStrings.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestIsPattern", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestIsPattern)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                PatterAndTry: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestIsPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestIsPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PatterAndTry()", $t.Line = "9", $t));
+                    Bridge.ClientTest.CSharp6.TestIsPattern.PatterAndTry();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestIsPattern", $t.File = "Batch1\\CSharp7\\TestIsPattern.cs", $t);
                 }
                 return this.context;
             }
