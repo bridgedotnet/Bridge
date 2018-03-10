@@ -90,6 +90,18 @@ namespace Bridge
             set;
         }
 
+        public
+#if BRIDGE_COMPILER
+            InlineCommentRule?
+#else
+            InlineCommentRule
+#endif
+        InlineComment
+        {
+            get;
+            set;
+        }
+
 #if BRIDGE_COMPILER
         public CompilerRuleLevel Level
         {
@@ -148,6 +160,15 @@ namespace Bridge
     [NonScriptable]
 #endif
     public enum AutoPropertyRule
+    {
+        Managed = 0,
+        Plain = 1
+    }
+
+#if !BRIDGE_COMPILER
+    [NonScriptable]
+#endif
+    public enum InlineCommentRule
     {
         Managed = 0,
         Plain = 1
