@@ -18,7 +18,8 @@ namespace Bridge.Contract
             Integer = IntegerRule.Managed,
             Boxing = BoxingRule.Managed,
             ArrayIndex = ArrayIndexRule.Managed,
-            AutoProperty = null
+            AutoProperty = null,
+            InlineComment = InlineCommentRule.Managed
         };
 
         public static CompilerRule Get(IEmitter emitter, IEntity entity)
@@ -111,7 +112,8 @@ namespace Bridge.Contract
                 Integer = IntegerRule.Managed,
                 Boxing = BoxingRule.Managed,
                 ArrayIndex = ArrayIndexRule.Managed,
-                AutoProperty = null
+                AutoProperty = null,
+                InlineComment = InlineCommentRule.Managed
             };
 
             for (int i = rules.Count - 1; i >= 0; i--)
@@ -146,6 +148,11 @@ namespace Bridge.Contract
                 if (rule.Boxing.HasValue)
                 {
                     resultRule.Boxing = rule.Boxing;
+                }
+
+                if (rule.InlineComment.HasValue)
+                {
+                    resultRule.InlineComment = rule.InlineComment;
                 }
             }
 
@@ -185,6 +192,10 @@ namespace Bridge.Contract
 
                     case nameof(CompilerRule.AutoProperty):
                         rule.AutoProperty = (AutoPropertyRule)(int)value.ConstantValue;
+                        break;
+
+                    case nameof(CompilerRule.InlineComment):
+                        rule.InlineComment = (InlineCommentRule)(int)value.ConstantValue;
                         break;
 
                     default:
