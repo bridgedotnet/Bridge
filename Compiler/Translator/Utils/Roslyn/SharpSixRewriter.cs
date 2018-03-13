@@ -74,7 +74,7 @@ namespace Bridge.Translator
         {
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
 
-            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp6, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
+            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
             var syntaxTrees = translator.SourceFiles.Select(s => ParseSourceFile(s, parseOptions)).Where(s => s != null).ToList();
             var references = new MetadataReference[this.translator.References.Count()];
             var i = 0;
@@ -169,7 +169,7 @@ namespace Bridge.Translator
             {
                 return base.VisitTupleExpression(node);
             }
-
+            
             var typeInfo = semanticModel.GetTypeInfo(node);
             var type = typeInfo.Type ?? typeInfo.ConvertedType;
             ImmutableArray<IFieldSymbol> elements;
