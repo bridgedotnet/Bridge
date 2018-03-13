@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Bridge.Translator
 {
@@ -155,6 +156,66 @@ namespace Bridge.Translator
                 return true;    // A param array needs to be created
 
             return false;
+        }
+
+        public override SyntaxNode VisitTupleElement(TupleElementSyntax node)
+        {
+            return base.VisitTupleElement(node);
+        }
+
+        public override SyntaxNode VisitTupleExpression(TupleExpressionSyntax node)
+        {
+            if (node.Parent is AssignmentExpressionSyntax ae && ae.Left == node)
+            {
+                return base.VisitTupleExpression(node);
+            }
+
+            var typeInfo = semanticModel.GetTypeInfo(node);
+            var type = typeInfo.Type ?? typeInfo.ConvertedType;
+            ImmutableArray<IFieldSymbol> elements;
+            List<TypeSyntax> types = new List<TypeSyntax>();
+
+            if (type.IsTupleType)
+            {
+                elements = ((INamedTypeSymbol)type).TupleElements;
+                foreach (var el in elements)
+                {
+                    types.Add(SyntaxHelper.GenerateTypeSyntax(el.Type));
+                }
+            }
+
+            node = (TupleExpressionSyntax)base.VisitTupleExpression(node);
+
+            if (type.IsTupleType)
+            {
+                var createExpression = SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.Tuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types))));
+                var argExpressions = new List<ArgumentSyntax>();
+
+                foreach (var arg in node.Arguments)
+                {
+                    argExpressions.Add(arg.WithNameColon(null));
+                }
+
+                createExpression = createExpression.WithArgumentList(SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList<ArgumentSyntax>(argExpressions))).NormalizeWhitespace();
+                return createExpression.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitTupleType(TupleTypeSyntax node)
+        {
+            node = (TupleTypeSyntax)base.VisitTupleType(node);
+
+            List<TypeSyntax> types = new List<TypeSyntax>();
+            foreach (var el in node.Elements)
+            {
+                types.Add(el.Type);
+            }
+
+            var newType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.Tuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types)));
+
+            return newType.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia()); ;
         }
 
         public override SyntaxNode VisitAssignmentExpression(AssignmentExpressionSyntax node)
@@ -572,8 +633,16 @@ namespace Bridge.Translator
 
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
+            var isIdentifier = node.Expression.Kind() == SyntaxKind.IdentifierName;
 
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+            if (isIdentifier && symbolNode.Value != null && symbolNode.Value is IFieldSymbol && symbolNode.Value.ContainingType.IsTupleType)
+            {
+                var field = symbolNode.Value as IFieldSymbol;
+                var tupleField = field.CorrespondingTupleField;
+                node = node.WithName(SyntaxFactory.IdentifierName(tupleField.Name));
+            }
+
+            if (isIdentifier
                 && symbol.Value != null
                 && (symbol.Value.IsStatic || symbol.Value.Kind == SymbolKind.NamedType)
                 && symbol.Value.ContainingType != null
@@ -587,7 +656,7 @@ namespace Bridge.Translator
                         node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+            if (isIdentifier
                 && symbol.Value != null 
                 && symbolNode.Value != null 
                 && symbol.Value.Kind == SymbolKind.NamedType

@@ -348,6 +348,17 @@ namespace System.Runtime.CompilerServices
     [EditorBrowsable(EditorBrowsableState.Never)]
     [External]
     [NonScriptable]
+    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    public sealed class TupleElementNamesAttribute : Attribute
+    {
+        public extern TupleElementNamesAttribute(string[] transformNames);
+
+        public IList<string> TransformNames { get; }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [External]
+    [NonScriptable]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public sealed class InternalsVisibleToAttribute : Attribute
     {
