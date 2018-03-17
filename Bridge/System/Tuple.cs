@@ -22,6 +22,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1})")]
+        public extern void Deconstruct(out T1 item1);
     }
 
     [External]
@@ -50,6 +53,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2);
     }
 
     [External]
@@ -84,6 +90,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3);
     }
 
     [External]
@@ -124,6 +133,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4);
     }
 
     [External]
@@ -170,6 +182,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5);
     }
 
     [External]
@@ -222,6 +237,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6);
     }
 
     [External]
@@ -280,6 +298,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7);
     }
 
     [External]
@@ -344,6 +365,9 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7}, {rest})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7, out TRest rest);
     }
 
     [External]

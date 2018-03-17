@@ -27,6 +27,14 @@
             return x;
         },
 
+        deconstruct: function (obj) {
+            var args = Array.prototype.slice.call(arguments, 1);
+
+            for (var i = 0; i < args.length; i++) {
+                args[i].v = i == 7 ? obj["rest"] : obj["item" + (i + 1)];
+            }
+        },
+
         toString: function (instance) {
             if (instance == null) {
                 throw new System.ArgumentNullException();
@@ -12086,6 +12094,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.$initialize();
                 this.key = key;
                 this.value = value;
+            },
+
+            deconstruct: function (key, value) {
+                key.v = this.key;
+                value.v = this.value;
             },
 
             toString: function () {

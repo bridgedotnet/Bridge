@@ -22,6 +22,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1})")]
+        public extern void Deconstruct(out T1 item1);
     }
 
     [External]
@@ -47,6 +50,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2);
     }
 
     [External]
@@ -75,6 +81,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3);
     }
 
     [External]
@@ -106,6 +115,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3, T4> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4);
     }
 
     [External]
@@ -140,6 +152,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3, T4, T5> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5);
     }
 
     [External]
@@ -177,6 +192,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3, T4, T5, T6> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6);
     }
 
     [External]
@@ -217,6 +235,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3, T4, T5, T6, T7> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7);
     }
 
     [External]
@@ -260,6 +281,9 @@ namespace System
 
         [Template("{this}")]
         public extern Tuple<T1, T2, T3, T4, T5, T6, T7, TRest> ToTuple();
+
+        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7}, {rest})")]
+        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7, out TRest rest);
     }
 
     [External]

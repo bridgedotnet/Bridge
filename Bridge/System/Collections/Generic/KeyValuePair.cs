@@ -20,5 +20,8 @@ namespace System.Collections.Generic
         {
             get;
         }
+
+        [Convention(Notation.LowerCamelCase)]
+        public extern void Deconstruct(out TKey key, out TValue value);
     }
 }

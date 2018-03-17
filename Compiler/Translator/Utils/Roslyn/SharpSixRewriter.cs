@@ -20,7 +20,7 @@ namespace Bridge.Translator
 
         private readonly ILogger logger;
         private readonly ITranslator translator;
-        private readonly CSharpCompilation compilation;
+        private CSharpCompilation compilation;
         private SemanticModel semanticModel;
         private List<MemberDeclarationSyntax> fields;
         private int tempKey = 1;
@@ -48,7 +48,22 @@ namespace Bridge.Translator
 
             var syntaxTree = this.compilation.SyntaxTrees[index];
             this.semanticModel = this.compilation.GetSemanticModel(syntaxTree, true);
-            var result = this.Visit(syntaxTree.GetRoot());
+            SyntaxTree newTree;
+
+            var result = new DeconstructionReplacer().Replace(syntaxTree.GetRoot(), semanticModel, (root) => {
+                newTree = SyntaxFactory.SyntaxTree(root, GetParseOptions());
+                compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
+                syntaxTree = newTree;
+                this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+                return new Tuple<SyntaxTree, SemanticModel>(newTree, semanticModel);
+            });
+
+            newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
+            compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
+            syntaxTree = newTree;
+            this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+
+            result = this.Visit(syntaxTree.GetRoot());
 
             var replacers = new List<ICSharpReplacer>();
             
@@ -61,20 +76,34 @@ namespace Bridge.Translator
             {
                 replacers.Add(new UsingStaticReplacer());
             }
+
             
             foreach (var replacer in replacers)
             {
-                result = replacer.Replace(result, semanticModel);
+                newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
+                compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
+                syntaxTree = newTree;
+                this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+                result = replacer.Replace(newTree.GetRoot(), semanticModel);
             }
 
-            return result.ToFullString();
+            newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
+            compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
+            this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+
+            return newTree.GetRoot().ToFullString();
+        }
+
+        private CSharpParseOptions GetParseOptions()
+        {
+            return new CSharpParseOptions(LanguageVersion.CSharp7_2, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
         }
 
         private CSharpCompilation CreateCompilation()
         {
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
 
-            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
+            var parseOptions = GetParseOptions();
             var syntaxTrees = translator.SourceFiles.Select(s => ParseSourceFile(s, parseOptions)).Where(s => s != null).ToList();
             var references = new MetadataReference[this.translator.References.Count()];
             var i = 0;
@@ -161,6 +190,11 @@ namespace Bridge.Translator
         public override SyntaxNode VisitTupleElement(TupleElementSyntax node)
         {
             return base.VisitTupleElement(node);
+        }
+
+        public override SyntaxNode VisitParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntax node)
+        {
+            return base.VisitParenthesizedVariableDesignation(node);
         }
 
         public override SyntaxNode VisitTupleExpression(TupleExpressionSyntax node)

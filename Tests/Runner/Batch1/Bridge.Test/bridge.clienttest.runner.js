@@ -100,6 +100,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Interpolated Strings - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings.TestBasic);
             QUnit.test("NameOf - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf.TestBasic);
             QUnit.test("Using static - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic.TestBasic);
+            QUnit.test("ValueTuple and deconstruction - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction.TestBasic);
             QUnit.module("Checked/Unckecked");
             QUnit.test("CheckedInsideUnchecked - TestInt32", Bridge.Test.Runtime.BridgeClientTestRunner.CheckedInsideUncheckedTests.TestInt32);
             QUnit.test("CheckedInsideUnchecked - TestUInt32", Bridge.Test.Runtime.BridgeClientTestRunner.CheckedInsideUncheckedTests.TestUInt32);
@@ -23935,6 +23936,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestUsingStatic", $t.File = "Batch1\\CSharp6\\TestUsingStatic.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestValueTupleAndDeconstruction)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestValueTupleAndDeconstruction).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "34", $t));
+                    Bridge.ClientTest.CSharp6.TestValueTupleAndDeconstruction.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestValueTupleAndDeconstruction", $t.File = "Batch1\\CSharp7\\TestValueTupleAndDeconstruction.cs", $t);
                 }
                 return this.context;
             }

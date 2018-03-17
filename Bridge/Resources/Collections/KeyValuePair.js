@@ -22,6 +22,11 @@
                 this.value = value;
             },
 
+            deconstruct: function (key, value) {
+                key.v = this.key;
+                value.v = this.value;
+            },
+
             toString: function () {
                 var s = "[";
 

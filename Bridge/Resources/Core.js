@@ -9,6 +9,14 @@
             return x;
         },
 
+        deconstruct: function (obj) {
+            var args = Array.prototype.slice.call(arguments, 1);
+
+            for (var i = 0; i < args.length; i++) {
+                args[i].v = i == 7 ? obj["rest"] : obj["item" + (i + 1)];
+            }
+        },
+
         toString: function (instance) {
             if (instance == null) {
                 throw new System.ArgumentNullException();
