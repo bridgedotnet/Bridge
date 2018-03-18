@@ -298,6 +298,7 @@
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Utils\ByteSizeHelper.cs" />
     <Compile Include="Utils\Roslyn\AwaitersCollector.cs" />
+    <Compile Include="Utils\Roslyn\DiscardReplacer.cs" />
     <Compile Include="Utils\Roslyn\DeconstructionReplacer.cs" />
     <Compile Include="Utils\Roslyn\UsingStaticReplacer.cs" />
     <Compile Include="Utils\Roslyn\ChainingAssigmentReplacer.cs" />

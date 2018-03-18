@@ -48,20 +48,21 @@ namespace Bridge.Translator
 
             var syntaxTree = this.compilation.SyntaxTrees[index];
             this.semanticModel = this.compilation.GetSemanticModel(syntaxTree, true);
-            SyntaxTree newTree;
+            SyntaxTree newTree = null;
 
-            var result = new DeconstructionReplacer().Replace(syntaxTree.GetRoot(), semanticModel, (root) => {
+            Func<SyntaxNode, Tuple<SyntaxTree, SemanticModel>> modelUpdater = (root) => {
                 newTree = SyntaxFactory.SyntaxTree(root, GetParseOptions());
                 compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
                 syntaxTree = newTree;
                 this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
                 return new Tuple<SyntaxTree, SemanticModel>(newTree, semanticModel);
-            });
+            };
 
-            newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
-            compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
-            syntaxTree = newTree;
-            this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+            var result = new DeconstructionReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
+            modelUpdater(result);
+
+            result = new DiscardReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
+            modelUpdater(result);
 
             result = this.Visit(syntaxTree.GetRoot());
 
@@ -80,16 +81,11 @@ namespace Bridge.Translator
             
             foreach (var replacer in replacers)
             {
-                newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
-                compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
-                syntaxTree = newTree;
-                this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+                modelUpdater(result);
                 result = replacer.Replace(newTree.GetRoot(), semanticModel);
             }
 
-            newTree = SyntaxFactory.SyntaxTree(result, GetParseOptions());
-            compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
-            this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+            modelUpdater(result);
 
             return newTree.GetRoot().ToFullString();
         }
@@ -187,16 +183,6 @@ namespace Bridge.Translator
             return false;
         }
 
-        public override SyntaxNode VisitTupleElement(TupleElementSyntax node)
-        {
-            return base.VisitTupleElement(node);
-        }
-
-        public override SyntaxNode VisitParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntax node)
-        {
-            return base.VisitParenthesizedVariableDesignation(node);
-        }
-
         public override SyntaxNode VisitTupleExpression(TupleExpressionSyntax node)
         {
             if (node.Parent is AssignmentExpressionSyntax ae && ae.Left == node)
@@ -222,7 +208,7 @@ namespace Bridge.Translator
 
             if (type.IsTupleType)
             {
-                var createExpression = SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.Tuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types))));
+                var createExpression = SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.ValueTuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types))));
                 var argExpressions = new List<ArgumentSyntax>();
 
                 foreach (var arg in node.Arguments)
@@ -247,7 +233,7 @@ namespace Bridge.Translator
                 types.Add(el.Type);
             }
 
-            var newType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.Tuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types)));
+            var newType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.ValueTuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types)));
 
             return newType.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia()); ;
         }

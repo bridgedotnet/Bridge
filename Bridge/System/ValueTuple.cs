@@ -6,12 +6,12 @@ namespace System
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1>
     {
-        [Template("{ item1: {item1} }")]
+        [Template("{ Item1: {item1} }")]
         public extern ValueTuple(T1 item1);
 
-        [Name("item1")]
         public T1 Item1;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -19,27 +19,20 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1})")]
-        public extern void Deconstruct(out T1 item1);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2>
     {
-        [Template("{ item1: {item1}, item2: {item2} }")]
+        [Template("{ Item1: {item1}, Item2: {item2} }")]
         public extern ValueTuple(T1 item1, T2 item2);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -47,30 +40,22 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -78,33 +63,24 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3, T4>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
-        [Name("item4")]
         public T4 Item4;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -112,36 +88,26 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3, T4> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3, T4, T5>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
-        [Name("item4")]
         public T4 Item4;
 
-        [Name("item5")]
         public T5 Item5;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -149,39 +115,28 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3, T4, T5> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
-        [Name("item4")]
         public T4 Item4;
 
-        [Name("item5")]
         public T5 Item5;
 
-        [Name("item6")]
         public T6 Item6;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -189,42 +144,30 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3, T4, T5, T6> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
-        [Name("item4")]
         public T4 Item4;
 
-        [Name("item5")]
         public T5 Item5;
 
-        [Name("item6")]
         public T6 Item6;
 
-        [Name("item7")]
         public T7 Item7;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -232,45 +175,32 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3, T4, T5, T6, T7> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7);
     }
 
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("System.Object")]
+    [Convention]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>
     {
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7}, rest: {rest} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7}, Rest: {rest} }")]
         public extern ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest);
 
-        [Name("item1")]
         public T1 Item1;
 
-        [Name("item2")]
         public T2 Item2;
 
-        [Name("item3")]
         public T3 Item3;
 
-        [Name("item4")]
         public T4 Item4;
 
-        [Name("item5")]
         public T5 Item5;
 
-        [Name("item6")]
         public T6 Item6;
 
-        [Name("item7")]
         public T7 Item7;
 
-        [Name("rest")]
         public TRest Rest;
 
         [Template("Bridge.objectEquals({this}, {o})")]
@@ -278,12 +208,6 @@ namespace System
 
         [Template("Bridge.getHashCode({this}, false, true)")]
         public override extern int GetHashCode();
-
-        [Template("{this}")]
-        public extern Tuple<T1, T2, T3, T4, T5, T6, T7, TRest> ToTuple();
-
-        [Template("Bridge.deconstruct({this}, {item1}, {item2}, {item3}, {item4}, {item5}, {item6}, {item7}, {rest})")]
-        public extern void Deconstruct(out T1 item1, out T2 item2, out T3 item3, out T4 item4, out T5 item5, out T6 item6, out T7 item7, out TRest rest);
     }
 
     [External]
@@ -292,28 +216,28 @@ namespace System
     [Name("System.Object")]
     public static class ValueTuple
     {
-        [Template("{ item1: {item1} }")]
+        [Template("{ Item1: {item1} }")]
         public static extern ValueTuple<T1> Create<T1>(T1 item1);
 
-        [Template("{ item1: {item1}, item2: {item2} }")]
+        [Template("{ Item1: {item1}, Item2: {item2} }")]
         public static extern ValueTuple<T1, T2> Create<T1, T2>(T1 item1, T2 item2);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3} }")]
         public static extern ValueTuple<T1, T2, T3> Create<T1, T2, T3>(T1 item1, T2 item2, T3 item3);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4} }")]
         public static extern ValueTuple<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 item1, T2 item2, T3 item3, T4 item4);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5} }")]
         public static extern ValueTuple<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6} }")]
         public static extern ValueTuple<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7} }")]
         public static extern ValueTuple<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7);
 
-        [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7}, rest: {rest} }")]
+        [Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7}, Rest: {rest} }")]
         public static extern ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> Create<T1, T2, T3, T4, T5, T6, T7, TRest>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest);
     }
 }

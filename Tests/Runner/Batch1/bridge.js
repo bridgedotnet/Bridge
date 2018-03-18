@@ -31,7 +31,7 @@
             var args = Array.prototype.slice.call(arguments, 1);
 
             for (var i = 0; i < args.length; i++) {
-                args[i].v = i == 7 ? obj["rest"] : obj["item" + (i + 1)];
+                args[i].v = i == 7 ? obj["Rest"] : obj["Item" + (i + 1)];
             }
         },
 
@@ -596,7 +596,7 @@
                 throw new System.InvalidOperationException("HashCode cannot be calculated for empty value");
             }
 
-            if (deep !== false && value.hasOwnProperty("item1") && Bridge.isPlainObject(value)) {
+            if (deep !== false && value.hasOwnProperty("Item1") && Bridge.isPlainObject(value)) {
                 deep = true;
             }
 
@@ -1285,7 +1285,7 @@
                     return Bridge.getHashCode(a) === Bridge.getHashCode(b) && Bridge.objectEquals(a, b);
                 }
 
-                if (!eq && a && b && a.hasOwnProperty("item1") && Bridge.isPlainObject(a) && b.hasOwnProperty("item1") && Bridge.isPlainObject(b)) {
+                if (!eq && a && b && a.hasOwnProperty("Item1") && Bridge.isPlainObject(a) && b.hasOwnProperty("Item1") && Bridge.isPlainObject(b)) {
                     return Bridge.objectEquals(a, b);
                 }
 
