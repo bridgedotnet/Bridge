@@ -58,11 +58,11 @@ namespace Bridge.Translator
             foreach (var discard in discards)
             {
                 var typeInfo = model.GetTypeInfo(discard.Parent);
+                var beforeStatement = discard.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
 
-                if (typeInfo.Type != null)
+                if (beforeStatement != null)
                 {
-                    var beforeStatement = discard.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                    if (beforeStatement != null)
+                    if (typeInfo.Type != null)
                     {
                         string instance = "_discard" + ++tempIndex;
                         if (beforeStatement.Parent != null)
@@ -84,6 +84,21 @@ namespace Bridge.Translator
                         locals.Add(local);
 
                         updatedStatements[beforeStatement] = locals;
+                        updatedDiscards[discard] = instance;
+                    }
+                    else if (discard.Parent is DeclarationPatternSyntax && !(discard.Parent.Parent is IsPatternExpressionSyntax))
+                    {
+                        string instance = "_discard" + ++tempIndex;
+                        if (beforeStatement.Parent != null)
+                        {
+                            var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
+
+                            while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                            {
+                                instance = "_discard" + ++tempIndex;
+                            }
+                        }
+
                         updatedDiscards[discard] = instance;
                     }
                 }
@@ -255,7 +270,7 @@ namespace Bridge.Translator
                 root = root.ReplaceNodes(discardPatterns, (n1, n2) => {
                     return SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression, SyntaxFactory.Token(SyntaxKind.TrueKeyword));
                 });
-            }            
+            }
 
             return root;
         }

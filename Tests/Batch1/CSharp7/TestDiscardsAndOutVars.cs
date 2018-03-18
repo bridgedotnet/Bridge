@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using System;
 using System.Collections.Generic;
 using static Bridge.Test.NUnit.Assert;
 using static System.DayOfWeek;
@@ -78,6 +79,11 @@ namespace Bridge.ClientTest.CSharp6
 
             var x = 21;
             _ = x > 20 ? Success() : Fail();
+
+            Action a = () => {
+                var _ = x > 20 ? Success() : Fail();
+            };
+            a();
 
             object y = null;
             if (!(y is var _))
