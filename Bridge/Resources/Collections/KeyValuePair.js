@@ -22,7 +22,7 @@
                 this.value = value;
             },
 
-            deconstruct: function (key, value) {
+            Deconstruct: function (key, value) {
                 key.v = this.key;
                 value.v = this.value;
             },

@@ -9,7 +9,7 @@
             return x;
         },
 
-        deconstruct: function (obj) {
+        Deconstruct: function (obj) {
             var args = Array.prototype.slice.call(arguments, 1);
 
             for (var i = 0; i < args.length; i++) {

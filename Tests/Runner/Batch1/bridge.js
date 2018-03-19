@@ -27,7 +27,7 @@
             return x;
         },
 
-        deconstruct: function (obj) {
+        Deconstruct: function (obj) {
             var args = Array.prototype.slice.call(arguments, 1);
 
             for (var i = 0; i < args.length; i++) {
@@ -12096,7 +12096,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.value = value;
             },
 
-            deconstruct: function (key, value) {
+            Deconstruct: function (key, value) {
                 key.v = this.key;
                 value.v = this.value;
             },

@@ -12,6 +12,8 @@ namespace Bridge.Translator
 {
     public class DiscardReplacer
     {
+        private const string DISCARD_IDENTIFIER = "_";
+        private const string DISCARD_VARIABLE = "_discard";
         public SyntaxNode Replace(SyntaxNode root, SemanticModel model, Func<SyntaxNode, Tuple<SyntaxTree, SemanticModel>> updater)
         {
             var discards = root
@@ -27,7 +29,7 @@ namespace Bridge.Translator
                 .DescendantNodes()
                 .OfType<ArgumentSyntax>()
                 .Where(arg => {
-                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == "_" && arg.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword)
+                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER && arg.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword)
                     {
                         var si = model.GetSymbolInfo(arg.Expression);
                         return si.Symbol == null || si.Symbol.Kind == SymbolKind.Discard;
@@ -40,7 +42,7 @@ namespace Bridge.Translator
                 .DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(assignment => {
-                    if (assignment.Left is IdentifierNameSyntax ins && ins.Identifier.ValueText == "_")
+                    if (assignment.Left is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER)
                     {
                         var si = model.GetSymbolInfo(assignment.Left);
                         return si.Symbol == null || si.Symbol.Kind == SymbolKind.Discard;
@@ -64,14 +66,14 @@ namespace Bridge.Translator
                 {
                     if (typeInfo.Type != null)
                     {
-                        string instance = "_discard" + ++tempIndex;
+                        string instance = DISCARD_VARIABLE + ++tempIndex;
                         if (beforeStatement.Parent != null)
                         {
                             var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
 
                             while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                             {
-                                instance = "_discard" + ++tempIndex;
+                                instance = DISCARD_VARIABLE + ++tempIndex;
                             }
                         }
 
@@ -88,14 +90,14 @@ namespace Bridge.Translator
                     }
                     else if (discard.Parent is DeclarationPatternSyntax && !(discard.Parent.Parent is IsPatternExpressionSyntax))
                     {
-                        string instance = "_discard" + ++tempIndex;
+                        string instance = DISCARD_VARIABLE + ++tempIndex;
                         if (beforeStatement.Parent != null)
                         {
                             var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
 
                             while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                             {
-                                instance = "_discard" + ++tempIndex;
+                                instance = DISCARD_VARIABLE + ++tempIndex;
                             }
                         }
 
@@ -113,14 +115,14 @@ namespace Bridge.Translator
                     var beforeStatement = discardVar.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
                     if (beforeStatement != null)
                     {
-                        string instance = "_discard" + ++tempIndex;
+                        string instance = DISCARD_VARIABLE + ++tempIndex;
                         if (beforeStatement.Parent != null)
                         {
                             var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
 
                             while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
                             {
-                                instance = "_discard" + ++tempIndex;
+                                instance = DISCARD_VARIABLE + ++tempIndex;
                             }
                         }
 
@@ -226,7 +228,7 @@ namespace Bridge.Translator
             foreach (var annotation in annotatedAssigments)
             {
                 var annotatedNode = root.GetAnnotatedNodes(annotation).First();
-                root = root.ReplaceNode(annotatedNode, ((AssignmentExpressionSyntax)annotatedNode).WithLeft(SyntaxFactory.IdentifierName("Bridge.Script.discard")));
+                root = root.ReplaceNode(annotatedNode, ((AssignmentExpressionSyntax)annotatedNode).WithLeft(SyntaxFactory.IdentifierName("Bridge.Script.Discard")));
             }
 
             outVars = root
