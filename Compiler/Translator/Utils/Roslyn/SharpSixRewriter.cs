@@ -1177,6 +1177,86 @@ namespace Bridge.Translator
             }
         }
 
+        public override SyntaxNode VisitThrowExpression(ThrowExpressionSyntax node)
+        {            
+            if (node.Parent is ExpressionStatementSyntax es && es.Expression == node || node.Parent is ThrowStatementSyntax)
+            {
+                return base.VisitThrowExpression(node);
+            }
+
+            var typeInfo = semanticModel.GetTypeInfo(node);
+
+            node = (ThrowExpressionSyntax)base.VisitThrowExpression(node);
+
+            if ((typeInfo.ConvertedType ?? typeInfo.Type) != null)
+            {
+                var type = typeInfo.ConvertedType ?? typeInfo.Type;
+
+                var invocation = SyntaxFactory.InvocationExpression(
+                            SyntaxFactory.ParenthesizedExpression(
+                                SyntaxFactory.CastExpression(
+                                    SyntaxFactory.QualifiedName(
+                                        SyntaxFactory.IdentifierName("System"),
+                                        SyntaxFactory.GenericName(
+                                            SyntaxFactory.Identifier("Func"))
+                                        .WithTypeArgumentList(
+                                            SyntaxFactory.TypeArgumentList(
+                                                SyntaxFactory.SingletonSeparatedList<TypeSyntax>(
+                                                    SyntaxFactory.ParseTypeName(type.ToMinimalDisplayString(semanticModel, node.GetLocation().SourceSpan.Start))
+                                                    ))
+                                            .WithLessThanToken(
+                                                SyntaxFactory.Token(SyntaxKind.LessThanToken))
+                                            .WithGreaterThanToken(
+                                                SyntaxFactory.Token(SyntaxKind.GreaterThanToken))))
+                                    .WithDotToken(
+                                        SyntaxFactory.Token(SyntaxKind.DotToken)),
+                                    SyntaxFactory.ParenthesizedExpression(
+                                        SyntaxFactory.ParenthesizedLambdaExpression(
+                                            SyntaxFactory.Block(
+                                                SyntaxFactory.SingletonList<StatementSyntax>(
+                                                    SyntaxFactory.ThrowStatement(node.Expression)
+                                                    .WithThrowKeyword(
+                                                        SyntaxFactory.Token(SyntaxKind.ThrowKeyword))
+                                                    .WithSemicolonToken(
+                                                        SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                                                    .NormalizeWhitespace()))
+                                            .WithOpenBraceToken(
+                                                SyntaxFactory.Token(SyntaxKind.OpenBraceToken))
+                                            .WithCloseBraceToken(
+                                                SyntaxFactory.Token(SyntaxKind.CloseBraceToken)))
+                                        .WithParameterList(
+                                            SyntaxFactory.ParameterList()
+                                            .WithOpenParenToken(
+                                                SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                            .WithCloseParenToken(
+                                                SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                                        .WithArrowToken(
+                                            SyntaxFactory.Token(SyntaxKind.EqualsGreaterThanToken)))
+                                    .WithOpenParenToken(
+                                        SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                    .WithCloseParenToken(
+                                        SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                                .WithOpenParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                .WithCloseParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                            .WithOpenParenToken(
+                                SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                            .WithCloseParenToken(
+                                SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                        .WithArgumentList(
+                            SyntaxFactory.ArgumentList()
+                            .WithOpenParenToken(
+                                SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                            .WithCloseParenToken(
+                                SyntaxFactory.Token(SyntaxKind.CloseParenToken)));
+
+                return invocation;
+            }
+
+            return node;
+        }
+
         public override SyntaxNode VisitTryStatement(TryStatementSyntax node)
         {
             var replace = node.Catches.Any(c => c.Filter != null);
