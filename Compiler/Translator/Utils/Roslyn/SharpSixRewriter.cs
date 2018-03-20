@@ -186,6 +186,36 @@ namespace Bridge.Translator
             return false;
         }
 
+        private void ThrowRefNotSupported(SyntaxNode node)
+        {
+            var mapped = this.semanticModel.SyntaxTree.GetLineSpan(node.Span);
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "{2} - {3}({0},{1}): {4}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, "Ref returns and locals are not supported", this.semanticModel.SyntaxTree.FilePath, node.ToString()));
+        }
+
+        public override SyntaxNode VisitRefType(RefTypeSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefExpression(RefExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefTypeExpression(RefTypeExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefValueExpression(RefValueExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
         private static Regex binaryLiteral = new Regex(@"[_Bb]", RegexOptions.Compiled);
         public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
         {
