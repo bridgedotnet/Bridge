@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
 {
@@ -183,6 +184,36 @@ namespace Bridge.Translator
                 return true;    // A param array needs to be created
 
             return false;
+        }
+
+        private static Regex binaryLiteral = new Regex(@"[_Bb]", RegexOptions.Compiled);
+        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+        {
+            var spanStart = node.SpanStart;
+            node = (LiteralExpressionSyntax)base.VisitLiteralExpression(node);
+
+            if (node.Kind() == SyntaxKind.NumericLiteralExpression)
+            {
+                var text = node.Token.Text;
+
+                if (node.Token.ValueText != node.Token.Text && binaryLiteral.Match(text).Success)
+                {
+                    dynamic value = node.Token.Value;
+                    node = node.WithToken(SyntaxFactory.Literal(value));
+                }
+            }
+            else if (node.Kind() == SyntaxKind.DefaultLiteralExpression)
+            {
+                var typeInfo = semanticModel.GetTypeInfo(node);
+                var type = typeInfo.Type ?? typeInfo.ConvertedType;
+
+                if (type != null)
+                {
+                    return SyntaxFactory.DefaultExpression(SyntaxFactory.ParseTypeName(type.ToMinimalDisplayString(semanticModel, node.GetLocation().SourceSpan.Start)));
+                }
+            }
+
+            return node;
         }
 
         public override SyntaxNode VisitTupleExpression(TupleExpressionSyntax node)
