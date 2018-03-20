@@ -17,6 +17,8 @@ namespace Bridge.Translator
     public class SharpSixRewriter : CSharpSyntaxRewriter
     {
         public const string AutoInitFieldPrefix = "__Property__Initializer__";
+        private const string SYSTEM_IDENTIFIER = "System";
+        private const string FUNC_IDENTIFIER = "Func";
 
         private readonly ILogger logger;
         private readonly ITranslator translator;
@@ -1196,9 +1198,9 @@ namespace Bridge.Translator
                             SyntaxFactory.ParenthesizedExpression(
                                 SyntaxFactory.CastExpression(
                                     SyntaxFactory.QualifiedName(
-                                        SyntaxFactory.IdentifierName("System"),
+                                        SyntaxFactory.IdentifierName(SYSTEM_IDENTIFIER),
                                         SyntaxFactory.GenericName(
-                                            SyntaxFactory.Identifier("Func"))
+                                            SyntaxFactory.Identifier(FUNC_IDENTIFIER))
                                         .WithTypeArgumentList(
                                             SyntaxFactory.TypeArgumentList(
                                                 SyntaxFactory.SingletonSeparatedList<TypeSyntax>(
