@@ -37,15 +37,18 @@ namespace Bridge.Translator
 
         static Dictionary<string, AssemblyName> assemblyBindings = new Dictionary<string, AssemblyName>
         {
-            { "System.ValueTuple", new AssemblyName("System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51") },
-            { "System.Collections.Immutable", new AssemblyName("System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
-            { "System.IO.Compression", new AssemblyName("System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089") },
-            { "System.Security.Cryptography.Algorithms", new AssemblyName("System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.ValueTuple", new AssemblyName("System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51") },
+            { "System.Collections.Immutable", new AssemblyName("System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.IO.Compression", new AssemblyName("System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089") },
+            { "System.Security.Cryptography.Algorithms", new AssemblyName("System.Security.Cryptography.Algorithms, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
             { "System.IO.FileSystem", new AssemblyName("System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
             { "System.IO.FileSystem.Primitives", new AssemblyName("System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
-            { "System.Security.Cryptography.Primitives", new AssemblyName("System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
-            { "System.Xml.XPath.XDocument", new AssemblyName("System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
-            { "System.Diagnostics.FileVersionInfo", new AssemblyName("System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") }
+            { "System.Security.Cryptography.Primitives", new AssemblyName("System.Security.Cryptography.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Xml.XPath.XDocument", new AssemblyName("System.Xml.XPath.XDocument, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Diagnostics.FileVersionInfo", new AssemblyName("System.Diagnostics.FileVersionInfo, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Reflection.Metadata", new AssemblyName("System.Reflection.Metadata, Version=1.4.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "Microsoft.CodeAnalysis", new AssemblyName("Microsoft.CodeAnalysis, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35") },
+            { "Microsoft.CodeAnalysis.CSharp", new AssemblyName("Microsoft.CodeAnalysis.CSharp, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35") }
         };
 
         protected class AssemblyResolver

@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -52,6 +53,10 @@
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="Collections\Native\Constants.cs" />
+    <Compile Include="CSharp7\TestDiscardsAndOutVars.cs" />
+    <Compile Include="CSharp7\TestThrowExpression.cs" />
+    <Compile Include="CSharp7\TestDefaultLiteralExpression.cs" />
+    <Compile Include="CSharp7\TestValueTupleAndDeconstruction.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />

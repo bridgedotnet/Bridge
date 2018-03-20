@@ -42,6 +42,30 @@ namespace Bridge.Translator
             );
         }
 
+        public static InvocationExpressionSyntax GenerateInvocation(string methodName, string targetIdentifier, ArgumentSyntax[] arguments = null, ITypeSymbol[] typeArguments = null)
+        {
+            var methodIdentifier = GenerateMethodIdentifier(methodName, targetIdentifier, typeArguments);
+            return SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(arguments ?? new ArgumentSyntax[] { })));
+        }
+
+        /// <summary>
+        /// Generates the method call.
+        /// </summary>
+        public static ExpressionStatementSyntax GenerateMethodCall(string methodName, ExpressionSyntax targetIdentifier, ArgumentSyntax[] arguments = null, ITypeSymbol[] typeArguments = null)
+        {
+            var methodIdentifier = GenerateMethodIdentifier(methodName, targetIdentifier, typeArguments);
+            return SyntaxFactory.ExpressionStatement(
+                SyntaxFactory.InvocationExpression(methodIdentifier,
+                SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(arguments ?? new ArgumentSyntax[] { })))
+            );
+        }
+
+        public static InvocationExpressionSyntax GenerateInvocation(string methodName, ExpressionSyntax targetIdentifier, ArgumentSyntax[] arguments = null, ITypeSymbol[] typeArguments = null)
+        {
+            var methodIdentifier = GenerateMethodIdentifier(methodName, targetIdentifier, typeArguments);
+            return SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(arguments ?? new ArgumentSyntax[] { })));
+        }
+
         /// <summary>
         /// Generates the method identifier.
         /// </summary>
@@ -54,6 +78,20 @@ namespace Bridge.Translator
                     SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(typeArguments.Select(GenerateTypeSyntax))));
             }
             return methodIdentifier;
+        }
+
+        /// <summary>
+        /// Generates the method identifier.
+        /// </summary>
+        public static ExpressionSyntax GenerateMethodIdentifier(string methodName, ExpressionSyntax targetIdentifierOrTypeName, ITypeSymbol[] typeArguments = null)
+        {
+            return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, targetIdentifierOrTypeName, SyntaxFactory.IdentifierName(methodName));
+            /*if (typeArguments != null && typeArguments.Length > 0)
+            {
+                methodIdentifier = SyntaxFactory.GenericName(,
+                    SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(typeArguments.Select(GenerateTypeSyntax))));
+            }
+            return methodIdentifier;*/
         }
 
         /// <summary>
