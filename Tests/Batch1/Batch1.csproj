@@ -55,10 +55,15 @@
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="Collections\Native\Constants.cs" />
+    <Compile Include="CSharp7\TestBinaryLiterals.cs" />
     <Compile Include="CSharp7\TestCaseLabelPattern.cs" />
+    <Compile Include="CSharp7\TestDefaultLiteralExpression.cs" />
+    <Compile Include="CSharp7\TestDiscardsAndOutVars.cs" />
     <Compile Include="CSharp7\TestROStruct.cs" />
     <Compile Include="CSharp7\TestIsPattern.cs" />
     <Compile Include="CSharp7\TestExpressionBodyMember.cs" />
+    <Compile Include="CSharp7\TestThrowExpression.cs" />
+    <Compile Include="CSharp7\TestValueTupleAndDeconstruction.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />

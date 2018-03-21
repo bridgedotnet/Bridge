@@ -6,9 +6,8 @@ namespace Bridge
     /// For classes marked with [External], controls unboxing for method parameters of type object.
     /// By default, Bridge applies unboxing. Add this attributes with allow = false to override this behaviour.
     /// </summary>
-    [External]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Field)]
     public class UnboxAttribute : Attribute
     {
         /// <summary>

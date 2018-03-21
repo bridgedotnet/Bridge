@@ -520,6 +520,7 @@
     <Compile Include="System\TimeSpan.cs" />
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
+    <Compile Include="System\ValueTuple.cs" />
     <Compile Include="System\Version.cs" />
   </ItemGroup>
   <ItemGroup>

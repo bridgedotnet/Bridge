@@ -12,9 +12,8 @@ namespace Bridge
 #if BRIDGE_COMPILER
     public class CompilerRule
 #else
-    [External]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     public class RulesAttribute : Attribute
 #endif
     {

@@ -5,9 +5,8 @@ namespace Bridge
     /// <summary>
     ///
     /// </summary>
-    [External]
-    [AttributeUsage(AttributeTargets.Field)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Field)]
     public sealed class InlineConstAttribute : Attribute
     {
     }

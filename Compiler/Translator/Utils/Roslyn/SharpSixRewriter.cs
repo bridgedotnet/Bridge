@@ -2,6 +2,7 @@
 using Bridge.Contract.Constants;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 
 namespace Bridge.Translator
@@ -16,6 +18,8 @@ namespace Bridge.Translator
     public class SharpSixRewriter : CSharpSyntaxRewriter
     {
         public const string AutoInitFieldPrefix = "__Property__Initializer__";
+        private const string SYSTEM_IDENTIFIER = "System";
+        private const string FUNC_IDENTIFIER = "Func";
 
         private readonly ILogger logger;
         private readonly ITranslator translator;
@@ -49,7 +53,24 @@ namespace Bridge.Translator
 
             var syntaxTree = this.compilation.SyntaxTrees[index];
             this.semanticModel = this.compilation.GetSemanticModel(syntaxTree, true);
-            var result = this.Visit(syntaxTree.GetRoot());
+
+            SyntaxTree newTree = null;
+
+            Func<SyntaxNode, Tuple<SyntaxTree, SemanticModel>> modelUpdater = (root) => {
+                newTree = SyntaxFactory.SyntaxTree(root, GetParseOptions());
+                compilation = compilation.ReplaceSyntaxTree(syntaxTree, newTree);
+                syntaxTree = newTree;
+                this.semanticModel = this.compilation.GetSemanticModel(newTree, true);
+                return new Tuple<SyntaxTree, SemanticModel>(newTree, semanticModel);
+            };
+
+            var result = new DeconstructionReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
+            modelUpdater(result);
+
+            result = new DiscardReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
+            modelUpdater(result);
+
+            result = this.Visit(syntaxTree.GetRoot());
 
             var replacers = new List<ICSharpReplacer>();
             
@@ -75,23 +96,29 @@ namespace Bridge.Translator
             
             foreach (var replacer in replacers)
             {
-                compilation = compilation.ReplaceSyntaxTree(syntaxTree, result.SyntaxTree);
-                syntaxTree = result.SyntaxTree;
-                this.semanticModel = this.compilation.GetSemanticModel(result.SyntaxTree, true);
-                result = replacer.Replace(result, semanticModel);
+                modelUpdater(result);
+                result = replacer.Replace(newTree.GetRoot(), semanticModel);
             }
 
-            compilation = compilation.ReplaceSyntaxTree(syntaxTree, result.SyntaxTree);
-            this.semanticModel = this.compilation.GetSemanticModel(result.SyntaxTree, true);
+            modelUpdater(result);
 
-            return result.ToFullString();
+            return newTree.GetRoot().ToFullString();
+        }
+
+        // FIXME: Same call made by Bridge.Translator.BuildAssembly
+        // (Translator\Translator.Build.cs). Shouldn't this also be called
+        // from there (so this might become public/static).
+        private CSharpParseOptions GetParseOptions()
+        {
+            return new CSharpParseOptions(LanguageVersion.CSharp7, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
         }
 
         private CSharpCompilation CreateCompilation()
         {
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
 
-            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp7, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
+            var parseOptions = GetParseOptions();
+
             var syntaxTrees = translator.SourceFiles.Select(s => ParseSourceFile(s, parseOptions)).Where(s => s != null).ToList();
             var references = new MetadataReference[this.translator.References.Count()];
             var i = 0;
@@ -173,6 +200,120 @@ namespace Bridge.Translator
                 return true;    // A param array needs to be created
 
             return false;
+        }
+
+        private void ThrowRefNotSupported(SyntaxNode node)
+        {
+            var mapped = this.semanticModel.SyntaxTree.GetLineSpan(node.Span);
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "{2} - {3}({0},{1}): {4}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, "Ref returns and locals are not supported", this.semanticModel.SyntaxTree.FilePath, node.ToString()));
+        }
+
+        public override SyntaxNode VisitRefType(RefTypeSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefExpression(RefExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefTypeExpression(RefTypeExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        public override SyntaxNode VisitRefValueExpression(RefValueExpressionSyntax node)
+        {
+            ThrowRefNotSupported(node);
+            return node;
+        }
+
+        private static Regex binaryLiteral = new Regex(@"[_Bb]", RegexOptions.Compiled);
+        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+        {
+            var spanStart = node.SpanStart;
+            node =  (LiteralExpressionSyntax)base.VisitLiteralExpression(node);
+
+            if (node.Kind() == SyntaxKind.NumericLiteralExpression)
+            {
+                var text = node.Token.Text;
+
+                if (node.Token.ValueText != node.Token.Text && binaryLiteral.Match(text).Success)
+                {
+                    dynamic value = node.Token.Value;
+                    node = node.WithToken(SyntaxFactory.Literal(value));
+                }                
+            }
+            else if (node.Kind() == SyntaxKind.DefaultLiteralExpression)
+            {
+                var typeInfo = semanticModel.GetTypeInfo(node);
+                var type = typeInfo.Type ?? typeInfo.ConvertedType;
+
+                if (type != null)
+                {
+                    return SyntaxFactory.DefaultExpression(SyntaxFactory.ParseTypeName(type.ToMinimalDisplayString(semanticModel, node.GetLocation().SourceSpan.Start)));
+                }
+            }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitTupleExpression(TupleExpressionSyntax node)
+        {
+            if (node.Parent is AssignmentExpressionSyntax ae && ae.Left == node)
+            {
+                return base.VisitTupleExpression(node);
+            }
+
+            var typeInfo = semanticModel.GetTypeInfo(node);
+            var type = typeInfo.Type ?? typeInfo.ConvertedType;
+            ImmutableArray<IFieldSymbol> elements;
+            List<TypeSyntax> types = new List<TypeSyntax>();
+
+            if (type.IsTupleType)
+            {
+                elements = ((INamedTypeSymbol)type).TupleElements;
+                foreach (var el in elements)
+                {
+                    types.Add(SyntaxHelper.GenerateTypeSyntax(el.Type));
+                }
+            }
+            node = (TupleExpressionSyntax)base.VisitTupleExpression(node);
+
+            if (type.IsTupleType)
+            {
+                var createExpression = SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.ValueTuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types))));
+                var argExpressions = new List<ArgumentSyntax>();
+
+                foreach (var arg in node.Arguments)
+                {
+                    argExpressions.Add(arg.WithNameColon(null));
+                }
+
+                createExpression = createExpression.WithArgumentList(SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList<ArgumentSyntax>(argExpressions))).NormalizeWhitespace();
+                return createExpression.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitTupleType(TupleTypeSyntax node)
+        {
+            node = (TupleTypeSyntax)base.VisitTupleType(node);
+
+            List<TypeSyntax> types = new List<TypeSyntax>();
+            foreach (var el in node.Elements)
+            {
+                types.Add(el.Type);
+            }
+
+            var newType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("System.ValueTuple"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(types)));
+
+            return newType.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia()); ;
         }
 
         public override SyntaxNode VisitCasePatternSwitchLabel(CasePatternSwitchLabelSyntax node)
@@ -332,6 +473,7 @@ namespace Bridge.Translator
             var spanStart = node.SpanStart;
             var si = node.ArgumentList.Arguments.Count > 0 ? semanticModel.GetSymbolInfo(node.ArgumentList.Arguments[0].Expression) : default(SymbolInfo);
             var costValue = (string)semanticModel.GetConstantValue(node).Value;
+            var conditionalParent = node.GetParent<ConditionalAccessExpressionSyntax>();
 
             node = (InvocationExpressionSyntax)base.VisitInvocationExpression(node);
             if (node.Expression is IdentifierNameSyntax &&
@@ -362,7 +504,7 @@ namespace Bridge.Translator
                         var genericName = SyntaxHelper.GenerateGenericName(name.Identifier, method.TypeArguments);
                         genericName = genericName.WithLeadingTrivia(name.GetLeadingTrivia().ExcludeDirectivies()).WithTrailingTrivia(name.GetTrailingTrivia().ExcludeDirectivies());
 
-                        if (method.MethodKind == MethodKind.ReducedExtension && node.GetParent<ConditionalAccessExpressionSyntax>() == null)
+                        if (method.MethodKind == MethodKind.ReducedExtension && conditionalParent == null)
                         {
                             var target = ma.Expression;
                             var clsName = method.ContainingType.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart);
@@ -385,6 +527,7 @@ namespace Bridge.Translator
         public override SyntaxNode VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
         {
             var isInterpolatedString = semanticModel.GetConversion(node).IsInterpolatedString;
+
             node = (InterpolatedStringExpressionSyntax)base.VisitInterpolatedStringExpression(node);
             string methodNameToCall;
             string classNameToCall;
@@ -403,9 +546,11 @@ namespace Bridge.Translator
             string str = "";
             int placeholder = 0;
             var expressions = new List<ExpressionSyntax>();
+            var idx = -1;
 
             foreach (var content in node.Contents)
             {
+                idx++;
                 var interpolatedStringTextSyntax = content as InterpolatedStringTextSyntax;
                 if (interpolatedStringTextSyntax != null)
                 {
@@ -419,7 +564,16 @@ namespace Bridge.Translator
 
                     if (interpolation.AlignmentClause != null)
                     {
-                        var value = semanticModel.GetConstantValue(interpolation.AlignmentClause.Value).Value;
+                        object value = null;
+
+                        if (interpolation.AlignmentClause.Value is LiteralExpressionSyntax)
+                        {
+                            value = ((LiteralExpressionSyntax)interpolation.AlignmentClause.Value).Token.Value;
+                        }
+                        else
+                        {
+                            value = semanticModel.GetConstantValue(interpolation.AlignmentClause.Value).Value;
+                        }
 
                         if (value == null)
                         {
@@ -626,8 +780,16 @@ namespace Bridge.Translator
 
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
+            var isIdentifier = node.Expression.Kind() == SyntaxKind.IdentifierName;
 
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+            if (isIdentifier && symbolNode.Value != null && symbolNode.Value is IFieldSymbol && symbolNode.Value.ContainingType.IsTupleType)
+            {
+                var field = symbolNode.Value as IFieldSymbol;
+                var tupleField = field.CorrespondingTupleField;
+                node = node.WithName(SyntaxFactory.IdentifierName(tupleField.Name));
+            }
+
+            if (isIdentifier
                 && symbol.Value != null
                 && (symbol.Value.IsStatic || symbol.Value.Kind == SymbolKind.NamedType)
                 && symbol.Value.ContainingType != null
@@ -641,7 +803,7 @@ namespace Bridge.Translator
                         node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName
+            if (isIdentifier
                 && symbol.Value != null
                 && symbolNode.Value != null
                 && symbol.Value.Kind == SymbolKind.NamedType
@@ -1171,6 +1333,86 @@ namespace Bridge.Translator
                     }
                 }
             }
+        }
+
+        public override SyntaxNode VisitThrowExpression(ThrowExpressionSyntax node)
+        {
+            if (node.Parent is ExpressionStatementSyntax es && es.Expression == node || node.Parent is ThrowStatementSyntax)
+            {
+                return base.VisitThrowExpression(node);
+            }
+
+            var typeInfo = semanticModel.GetTypeInfo(node);
+
+            node = (ThrowExpressionSyntax)base.VisitThrowExpression(node);
+
+            if ((typeInfo.ConvertedType ?? typeInfo.Type) != null)
+            {
+                var type = typeInfo.ConvertedType ?? typeInfo.Type;
+
+                var invocation = SyntaxFactory.InvocationExpression(
+                        SyntaxFactory.ParenthesizedExpression(
+                            SyntaxFactory.CastExpression(
+                                SyntaxFactory.QualifiedName(
+                                    SyntaxFactory.IdentifierName(SYSTEM_IDENTIFIER),
+                                    SyntaxFactory.GenericName(
+                                        SyntaxFactory.Identifier(FUNC_IDENTIFIER))
+                                    .WithTypeArgumentList(
+                                        SyntaxFactory.TypeArgumentList(
+                                            SyntaxFactory.SingletonSeparatedList<TypeSyntax>(
+                                                SyntaxFactory.ParseTypeName(type.ToMinimalDisplayString(semanticModel, node.GetLocation().SourceSpan.Start))
+                                                ))
+                                        .WithLessThanToken(
+                                            SyntaxFactory.Token(SyntaxKind.LessThanToken))
+                                        .WithGreaterThanToken(
+                                            SyntaxFactory.Token(SyntaxKind.GreaterThanToken))))
+                                .WithDotToken(
+                                    SyntaxFactory.Token(SyntaxKind.DotToken)),
+                                SyntaxFactory.ParenthesizedExpression(
+                                    SyntaxFactory.ParenthesizedLambdaExpression(
+                                        SyntaxFactory.Block(
+                                            SyntaxFactory.SingletonList<StatementSyntax>(
+                                                SyntaxFactory.ThrowStatement(node.Expression)
+                                                .WithThrowKeyword(
+                                                    SyntaxFactory.Token(SyntaxKind.ThrowKeyword))
+                                                .WithSemicolonToken(
+                                                    SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                                                .NormalizeWhitespace()))
+                                        .WithOpenBraceToken(
+                                            SyntaxFactory.Token(SyntaxKind.OpenBraceToken))
+                                        .WithCloseBraceToken(
+                                            SyntaxFactory.Token(SyntaxKind.CloseBraceToken)))
+                                    .WithParameterList(
+                                        SyntaxFactory.ParameterList()
+                                        .WithOpenParenToken(
+                                            SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                        .WithCloseParenToken(
+                                            SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                                    .WithArrowToken(
+                                        SyntaxFactory.Token(SyntaxKind.EqualsGreaterThanToken)))
+                                .WithOpenParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                .WithCloseParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                            .WithOpenParenToken(
+                                SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                            .WithCloseParenToken(
+                                SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                        .WithOpenParenToken(
+                            SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                        .WithCloseParenToken(
+                            SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                    .WithArgumentList(
+                        SyntaxFactory.ArgumentList()
+                        .WithOpenParenToken(
+                            SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                        .WithCloseParenToken(
+                            SyntaxFactory.Token(SyntaxKind.CloseParenToken)));
+
+                return invocation;
+            }
+
+            return node;
         }
 
         public override SyntaxNode VisitTryStatement(TryStatementSyntax node)

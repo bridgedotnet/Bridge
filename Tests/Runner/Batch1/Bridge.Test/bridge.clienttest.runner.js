@@ -107,10 +107,15 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Interpolated Strings - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings.TestBasic);
             QUnit.test("NameOf - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf.TestBasic);
             QUnit.test("Using static - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic.TestBasic);
+            QUnit.test("Binary Literals - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestBinaryLiterals.TestBasic);
             QUnit.test("Case label pattern - TestCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCase);
+            QUnit.test("DefaultLiteralExpression - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDefaultLiteralExpression.TestBasic);
+            QUnit.test("Discards and out variables - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars.TestBasic);
             QUnit.test("Expression-bodied members - Test", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember.Test);
             QUnit.test("Is pattern - IsPatternTests", Bridge.Test.Runtime.BridgeClientTestRunner.TestIsPattern.IsPatternTests);
             QUnit.test("C# 7.2's ReadOnly struct - TestReadOnlyStruct", Bridge.Test.Runtime.BridgeClientTestRunner.TestROStruct.TestReadOnlyStruct);
+            QUnit.test("Throw expressions - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestThrowExpression.TestBasic);
+            QUnit.test("ValueTuple and deconstruction - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction.TestBasic);
             QUnit.module("Checked/Unckecked");
             QUnit.test("CheckedInsideUnchecked - TestInt32", Bridge.Test.Runtime.BridgeClientTestRunner.CheckedInsideUncheckedTests.TestInt32);
             QUnit.test("CheckedInsideUnchecked - TestUInt32", Bridge.Test.Runtime.BridgeClientTestRunner.CheckedInsideUncheckedTests.TestUInt32);
@@ -22925,6 +22930,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestBinaryLiterals", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestBinaryLiterals)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestBinaryLiterals).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestBinaryLiterals, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "13", $t));
+                    Bridge.ClientTest.CSharp7.TestBinaryLiterals.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestBinaryLiterals", $t.File = "Batch1\\CSharp7\\TestBinaryLiterals.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern)],
         $kind: "nested class",
@@ -22971,6 +23002,58 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestConditionAccess", $t.File = "Batch1\\CSharp6\\TestConditionalAccess.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestDefaultLiteralExpression", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDefaultLiteralExpression)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDefaultLiteralExpression).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestDefaultLiteralExpression, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "18", $t));
+                    Bridge.ClientTest.CSharp7.TestDefaultLiteralExpression.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestDefaultLiteralExpression", $t.File = "Batch1\\CSharp7\\TestDefaultLiteralExpression.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "72", $t));
+                    Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars", $t.File = "Batch1\\CSharp7\\TestDiscardsAndOutVars.cs", $t);
                 }
                 return this.context;
             }
@@ -23842,6 +23925,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestThrowExpression", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestThrowExpression)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestThrowExpression).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestThrowExpression, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "17", $t));
+                    Bridge.ClientTest.CSharp7.TestThrowExpression.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestThrowExpression", $t.File = "Batch1\\CSharp7\\TestThrowExpression.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestTryCatchBlocks", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks)],
         $kind: "nested class",
@@ -24095,6 +24204,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp6.TestUsingStatic", $t.File = "Batch1\\CSharp6\\TestUsingStatic.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestValueTupleAndDeconstruction)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestValueTupleAndDeconstruction).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "49", $t));
+                    Bridge.ClientTest.CSharp7.TestValueTupleAndDeconstruction.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestValueTupleAndDeconstruction", $t.File = "Batch1\\CSharp7\\TestValueTupleAndDeconstruction.cs", $t);
                 }
                 return this.context;
             }

@@ -19,5 +19,8 @@ namespace System.Collections.Generic
         {
             get;
         }
+
+        [Bridge.Convention(Bridge.Notation.None)]
+        public extern void Deconstruct(out TKey key, out TValue value);
     }
 }

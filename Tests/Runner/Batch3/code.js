@@ -7763,27 +7763,27 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1517", {
         methods: {
             TestEqualTuples: function () {
-                var a1 = { item1: 1 };
-                var b1 = { item1: 1 };
+                var a1 = { Item1: 1 };
+                var b1 = { Item1: 1 };
                 Bridge.Test.NUnit.Assert.True(Bridge.objectEquals(a1, b1), "1 equals");
                 Bridge.Test.NUnit.Assert.True(Bridge.getHashCode(a1, false, true) === Bridge.getHashCode(b1, false, true), "1 ==");
                 Bridge.Test.NUnit.Assert.False(Bridge.getHashCode(a1, false, true) !== Bridge.getHashCode(b1, false, true), "1 !=");
 
-                var a2 = { item1: 1, item2: 2 };
-                var b2 = { item1: 1, item2: 2 };
+                var a2 = { Item1: 1, Item2: 2 };
+                var b2 = { Item1: 1, Item2: 2 };
                 Bridge.Test.NUnit.Assert.True(Bridge.objectEquals(a2, b2), "2 equals");
                 Bridge.Test.NUnit.Assert.True(Bridge.getHashCode(a2, false, true) === Bridge.getHashCode(b2, false, true), "2 ==");
                 Bridge.Test.NUnit.Assert.False(Bridge.getHashCode(a2, false, true) !== Bridge.getHashCode(b2, false, true), "2 !=");
             },
             TestInequalTuples: function () {
-                var a1 = { item1: 3 };
-                var b1 = { item1: 4 };
+                var a1 = { Item1: 3 };
+                var b1 = { Item1: 4 };
                 Bridge.Test.NUnit.Assert.False(Bridge.objectEquals(a1, b1), "1 equals");
                 Bridge.Test.NUnit.Assert.False(Bridge.getHashCode(a1, false, true) === Bridge.getHashCode(b1, false, true), "1 ==");
                 Bridge.Test.NUnit.Assert.True(Bridge.getHashCode(a1, false, true) !== Bridge.getHashCode(b1, false, true), "1 !=");
 
-                var a2 = { item1: 1, item2: 7 };
-                var b2 = { item1: 1, item2: 8 };
+                var a2 = { Item1: 1, Item2: 7 };
+                var b2 = { Item1: 1, Item2: 8 };
                 Bridge.Test.NUnit.Assert.False(Bridge.objectEquals(a2, b2), "2 equals");
                 Bridge.Test.NUnit.Assert.False(Bridge.getHashCode(a2, false, true) === Bridge.getHashCode(b2, false, true), "2 ==");
                 Bridge.Test.NUnit.Assert.True(Bridge.getHashCode(a2, false, true) !== Bridge.getHashCode(b2, false, true), "2 !=");
@@ -9756,8 +9756,8 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1776", {
         methods: {
             TestTupleHashCode: function () {
-                var key1 = { item1: 1, item2: 2 };
-                var key2 = { item1: 1, item2: 2 };
+                var key1 = { Item1: 1, Item2: 2 };
+                var key2 = { Item1: 1, Item2: 2 };
 
                 Bridge.Test.NUnit.Assert.True(Bridge.objectEquals(key1, key2), "Equals works");
 
@@ -14355,14 +14355,14 @@ Bridge.$N1391Result =                     r;
                     return combiner(value, toAdd);
                 },
                 ExtendTuple: function (tuple, value) {
-                    return { item1: tuple.item1, item2: value };
+                    return { Item1: tuple.Item1, Item2: value };
                 },
                 TestIgnoreGenericForDelegate: function () {
-                    var stringValueInTuple = { item1: "abc" };
+                    var stringValueInTuple = { Item1: "abc" };
                     var stringAndIntValuesInTuple = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092.Combine(stringValueInTuple, 123, function (tuple, value) { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092.ExtendTuple(tuple, value); });
 
-                    Bridge.Test.NUnit.Assert.AreEqual("abc", stringAndIntValuesInTuple.item1);
-                    Bridge.Test.NUnit.Assert.AreEqual(123, stringAndIntValuesInTuple.item2);
+                    Bridge.Test.NUnit.Assert.AreEqual("abc", stringAndIntValuesInTuple.Item1);
+                    Bridge.Test.NUnit.Assert.AreEqual(123, stringAndIntValuesInTuple.Item2);
                 }
             }
         }

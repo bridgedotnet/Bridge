@@ -6,9 +6,8 @@ namespace Bridge
     /// The option to manage JavaScript output folders and files.
     /// See TypesSplit enum for more details.
     /// </summary>
-    [External]
-    [AttributeUsage(AttributeTargets.Assembly)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Assembly)]
     public sealed class OutputByAttribute : Attribute
     {
         public OutputByAttribute(OutputBy outputBy)
@@ -23,7 +22,6 @@ namespace Bridge
     /// <summary>
     /// The options to manage JavaScript output folders and files.
     /// </summary>
-    [External]
     [NonScriptable]
     public enum OutputBy
     {

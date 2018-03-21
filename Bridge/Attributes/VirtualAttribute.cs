@@ -2,16 +2,15 @@
 
 namespace Bridge
 {
-    [External]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Delegate, AllowMultiple = false)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Delegate, AllowMultiple = false)]
     public sealed class VirtualAttribute : Attribute
     {
         public extern VirtualAttribute();
         public extern VirtualAttribute(VirtualTarget target);
     }
 
-    [External]
+    [NonScriptable]
     public enum VirtualTarget
     {
         All = 0,

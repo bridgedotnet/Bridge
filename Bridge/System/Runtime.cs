@@ -187,6 +187,19 @@ namespace System.Reflection
 
 namespace System.Runtime.CompilerServices
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+#pragma warning disable CS3015 // Type has no accessible constructors which use only CLS-compliant types
+    public sealed class TupleElementNamesAttribute : Attribute
+#pragma warning restore CS3015 // Type has no accessible constructors which use only CLS-compliant types
+    {
+        public extern TupleElementNamesAttribute(string[] transformNames);
+
+        public IList<string> TransformNames { get; }
+    }
+
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Bridge.External]
