@@ -46,3 +46,4 @@
 # Instruct GitHub linguist to ignore some folders
 Tests/Runner/* linguist-vendored
 Bridge/Resources/* linguist-vendored
+linguist-language=csharp
