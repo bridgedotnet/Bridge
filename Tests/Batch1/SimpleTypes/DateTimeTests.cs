@@ -1164,40 +1164,29 @@ namespace Bridge.ClientTest.SimpleTypes
         public void DayOfYearPropertyWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(193, dt.DayOfYear);
+            Assert.AreEqual(193, dt.DayOfYear, dt.ToString() + " day of year is 193.");
 
-            int daysFailing = 0;
             dt = new DateTime(2018, 1, 1);
 
             // Test for non-leap year
             for (var day = 1; day <= 365; day++)
             {
-                if (dt.DayOfYear != day)
-                {
-                    daysFailing++;
-                    Assert.Fail("Day #" + day + " did not match date: " + dt.ToString() + ".");
-                }
+                var succeeded = dt.DayOfYear == day;
+                Assert.True(succeeded, "Day #" + day + " matches date: " + dt.ToString() + ".");
 
                 dt = dt.AddDays(1);
             }
 
-            Assert.AreEqual(0, daysFailing, "DayOfYear correct for any day in a non-leap year.");
-
-            daysFailing = 0;
             dt = new DateTime(2016, 1, 1);
 
             // Test for leap year (2016)
             for (var day = 1; day <= 366; day++)
             {
-                if (dt.DayOfYear != day)
-                {
-                    daysFailing++;
-                    Assert.Fail("Day #" + day + " did not match date: " + dt.ToString() + ".");
-                }
+                var succeeded = dt.DayOfYear == day;
+                Assert.True(succeeded, "Day #" + day + " matches date: " + dt.ToString() + ".");
 
                 dt = dt.AddDays(1);
             }
-            Assert.AreEqual(0, daysFailing, "DayOfYear correct for any day in a leap year.");
         }
 
         [Test]
