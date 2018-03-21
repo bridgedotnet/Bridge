@@ -674,29 +674,36 @@ namespace System {
         }
 
         [Bridge.Convention(Notation = Bridge.Notation.CamelCase)]
-        public override String ToString() {
+        public override String ToString()
+        {
             return DateTime.ToString();
+
             // TODO: NotSupported [DateTimeFormatInfo]
             //Contract.Ensures(Contract.Result<String>() != null);
             //return DateTimeFormat.Format(ClockDateTime, null, DateTimeFormatInfo.CurrentInfo, Offset);
         }
 
-        public String ToString(String format) {
-            return DateTime.ToString(format);
+        public String ToString(String format)
+        {
+            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(format);
+
             // TODO: NotSupported [DateTimeFormatInfo]
             //Contract.Ensures(Contract.Result<String>() != null);
             //return DateTimeFormat.Format(ClockDateTime, format, DateTimeFormatInfo.CurrentInfo, Offset);
         }
 
-        public String ToString(IFormatProvider formatProvider) {
-            return DateTime.ToString(null, formatProvider);
+        public String ToString(IFormatProvider formatProvider)
+        {
+            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(null, formatProvider);
+
             // TODO: NotSupported [DateTimeFormatInfo]
             //Contract.Ensures(Contract.Result<String>() != null);
             //return DateTimeFormat.Format(ClockDateTime, null, DateTimeFormatInfo.GetInstance(formatProvider), Offset);
         }
 
-        public String ToString(String format, IFormatProvider formatProvider) {
-            return DateTime.ToString(format, formatProvider);
+        public String ToString(String format, IFormatProvider formatProvider)
+        {
+            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(format, formatProvider);
 
             // TODO: NotSupported [DateTimeFormatInfo]
             //Contract.Ensures(Contract.Result<String>() != null);

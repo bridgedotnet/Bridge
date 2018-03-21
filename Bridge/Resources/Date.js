@@ -169,7 +169,7 @@
                 var d = new Date(ticks.sub(System.DateTime.$minOffset).div(10000).toNumber());
 
                 if (kind !== 1) {
-                    d = System.DateTime.addMilliseconds(d, System.DateTime.$getTzOffset(d));
+                    d = new Date(d.getTime() + System.DateTime.$getTzOffset(d));
                 }
 
                 d.ticks = ticks;
@@ -189,9 +189,7 @@
             },
 
             getUtcNow: function () {
-                var d = new Date();
-
-                return System.DateTime.create$1(new Date(d.getTime() + System.DateTime.$getTzOffset(d)), 1);
+                return System.DateTime.create$1(new Date(), 1);
             },
 
             getTimeOfDay: function (d) {
@@ -1048,36 +1046,32 @@
             },
 
             isDaylightSavingTime: function (d) {
-                var temp = System.DateTime.getToday();
+                if (d.kind !== undefined && d.kind === 1) {
+                    return false;
+                }
 
-                temp.setMonth(0);
-                temp.setDate(1);
+                var tmp = new Date(d.getTime());
 
-                return temp.getTimezoneOffset() !== d.getTimezoneOffset();
+                tmp.setMonth(0);
+                tmp.setDate(1);
+
+                return tmp.getTimezoneOffset() !== d.getTimezoneOffset();
             },
 
-            dateAddSubTimespan: function (d, t, direction) {
-                var r = new Date(d.getTime());
-
-                r.setDate(r.getDate() + (direction * t.getDays()));
-                r.setHours(r.getHours() + (direction * t.getHours()));
-                r.setMinutes(r.getMinutes() + (direction * t.getMinutes()));
-                r.setSeconds(r.getSeconds() + (direction * t.getSeconds()));
-                r.setMilliseconds(r.getMilliseconds() + (direction * t.getMilliseconds()));
-
-                return r;
+            dateAddSubTimeSpan: function (d, t, direction) {
+                return Bridge.hasValue$1(d, t) ? System.DateTime.create$2(System.DateTime.getTicks(d).add(t.getTicks().mul(direction)), d.kind) : null;
             },
 
             subdt: function (d, t) {
-                return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, -1) : null;
+                return this.dateAddSubTimeSpan(d, t, -1);
             },
 
             adddt: function (d, t) {
-                return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, 1) : null;
+                return this.dateAddSubTimeSpan(d, t, 1);
             },
 
             subdd: function (a, b) {
-                return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
+                return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((System.DateTime.getTicks(a).sub(System.DateTime.getTicks(b))))) : null;
             },
 
             addYears: function (d, v) {
@@ -1126,46 +1120,32 @@
             },
 
             addMilliseconds: function (d, v) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
+                v = System.Int64.is64Bit(v) ? v : System.Int64(v);
 
-                var d1 = new Date(d.getTime() + Math.round(v));
-
-                d1.kind = d.kind;
-                d1.ticks = System.DateTime.getTicks(d1);
-
-                return d1;
+                return System.DateTime.addTicks(d, v.mul(10000));
             },
 
             addTicks: function (d, v) {
-                return System.DateTime.addMilliseconds(d, v / 10000);
+                v = System.Int64.is64Bit(v) ? v : System.Int64(v);
+
+                return System.DateTime.create$2(System.DateTime.getTicks(d).add(v), d.kind);
             },
 
             add: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
-
-                var d1 = new Date(d.getTime() + value.ticks.div(10000).toNumber());
-
-                d1.kind = d.kind;
-                d1.ticks = System.DateTime.getTicks(d1);
-
-                return d1;
+                return System.DateTime.create$2(System.DateTime.getTicks(d).add(value.getTicks()), d.kind);
             },
 
             subtract: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
-
-                var d1 = new Date(d.getTime() - value.ticks.div(10000).toNumber());
-
-                d1.kind = d.kind;
-                d1.ticks = System.DateTime.getTicks(d1);
-
-                return d1;
+                return System.DateTime.create$2(System.DateTime.getTicks(d).sub(value.getTicks()), d.kind);
             },
 
             // Replaced leap year calculation for performance:
             // https://jsperf.com/leapyear-calculation/1
             getIsLeapYear: function (year) {
-                if ((year & 3) != 0) return false;
+                if ((year & 3) != 0) {
+                    return false;
+                }
+
                 return ((year % 100) != 0 || (year % 400) == 0);
             },
 
@@ -1197,7 +1177,11 @@
                     mn = dt.getMonth(),
                     dn = dt.getDate(),
                     dayOfYear = System.DateTime.YearDaysByMonth[mn] + dn;
-                if (mn > 1 && System.DateTime.getIsLeapYear(dt.getFullYear())) dayOfYear++;
+
+                if (mn > 1 && System.DateTime.getIsLeapYear(dt.getFullYear())) {
+                    dayOfYear++;
+                }
+
                 return dayOfYear;
             },
 

@@ -409,15 +409,18 @@
             },
             toString: function () {
                 return System.DateTime.format(this.DateTime);
+
             },
             ToString$1: function (format) {
-                return System.DateTime.format(this.DateTime, format);
+                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format);
+
             },
             ToString: function (formatProvider) {
-                return System.DateTime.format(this.DateTime, null, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), null, formatProvider);
+
             },
             format: function (format, formatProvider) {
-                return System.DateTime.format(this.DateTime, format, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format, formatProvider);
 
             },
             ToUniversalTime: function () {
