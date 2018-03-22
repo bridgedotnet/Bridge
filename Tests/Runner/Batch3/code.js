@@ -29972,6 +29972,262 @@ Bridge.$N1391Result =                     r;
         $kind: "nested interface"
     });
 
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478", {
+        statics: {
+            fields: {
+                /**
+                 * All time zones available (according to https://en.wikipedia.org/wiki/List_of_UTC_time_offsets)
+                 *
+                 * @static
+                 * @public
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+                 * @type System.Collections.Generic.List$1
+                 */
+                WorldTZList: null
+            },
+            ctors: {
+                init: function () {
+                    this.WorldTZList = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset)).ctor());
+                }
+            },
+            methods: {
+                /**
+                 * This is an implementation of math to compare whether the builtin
+                 timespan result of the subtraction of two dates will equal to
+                 the "hardcoded" or "custom" calculation, which is validated against
+                 a native .NET/C# application.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+                 * @param   {System.DateTime}    date0    
+                 * @param   {System.DateTime}    date1
+                 * @return  {boolean}
+                 */
+                CompareDateMath: function (date0, date1) {
+                    var utcOffset = System.DateTime.subdd(date0, date1);
+
+                    // Manually calculate the time difference to ensure it is working
+                    // and matches the result.
+                    var deltaHr = 0;
+                    var deltaMn = 0;
+                    if (System.DateTime.getDay(date1) !== System.DateTime.getDay(date0)) {
+                        if (((System.DateTime.getDay(date1) + 1) | 0) === System.DateTime.getDay(date0) || ((System.DateTime.getMonth(date1) + 1) | 0) === System.DateTime.getMonth(date0) || ((System.DateTime.getYear(date1) + 1) | 0) === System.DateTime.getYear(date0)) {
+                            deltaHr = ((((24 + System.DateTime.getHour(date0)) | 0)) - System.DateTime.getHour(date1)) | 0;
+                        } else if (((System.DateTime.getDay(date1) - 1) | 0) === System.DateTime.getDay(date0) || ((System.DateTime.getMonth(date1) - 1) | 0) === System.DateTime.getMonth(date0) || ((System.DateTime.getYear(date1) - 1) | 0) === System.DateTime.getYear(date0)) {
+                            deltaHr = (System.DateTime.getHour(date0) - (((24 + System.DateTime.getHour(date1)) | 0))) | 0;
+                        }
+                    } else {
+                        deltaHr = (System.DateTime.getHour(date0) - System.DateTime.getHour(date1)) | 0;
+                    }
+
+                    if (deltaHr !== 0) {
+                        if (deltaHr > 0) {
+                            if (System.DateTime.getMinute(date1) > System.DateTime.getMinute(date0)) {
+                                deltaHr = (deltaHr - 1) | 0;
+                                deltaMn = (System.DateTime.getMinute(date1) - System.DateTime.getMinute(date0)) | 0;
+                            } else if (System.DateTime.getMinute(date1) < System.DateTime.getMinute(date0)) {
+                                deltaMn = (System.DateTime.getMinute(date1) + (((60 - System.DateTime.getMinute(date0)) | 0))) | 0;
+                            }
+                        } else {
+                            if (System.DateTime.getMinute(date1) > System.DateTime.getMinute(date0)) {
+                                deltaMn = (System.DateTime.getMinute(date0) - System.DateTime.getMinute(date1)) | 0;
+                            } else if (System.DateTime.getMinute(date1) < System.DateTime.getMinute(date0)) {
+                                deltaHr = (deltaHr + 1) | 0;
+                                deltaMn = (System.DateTime.getMinute(date0) - (((60 + System.DateTime.getMinute(date1)) | 0))) | 0;
+                            }
+                        }
+                    } else {
+                        // A -00:30 or +00:30 time zone
+                        if (System.DateTime.getMinute(date1) !== System.DateTime.getMinute(date0)) {
+                            // If negative, then it is a -0:30 time zone.
+                            deltaMn = (System.DateTime.getMinute(date0) - System.DateTime.getMinute(date1)) | 0;
+                        }
+                    }
+
+                    // The effective test. Only makes sense if our current time zone is not GMT.
+                    return utcOffset.getMinutes() === deltaMn && utcOffset.getHours() === deltaHr;
+                },
+                /**
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
+                 * @return  {void}
+                 */
+                TestDateTimeTzMath: function () {
+                    var $t, $t1, $t2;
+                    var now = System.DateTime.getNow();
+                    var unow = System.DateTime.getUtcNow();
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Date time's Now and UtcNow-based math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), 30);
+                    unow = System.DateTime.addMinutes(now, -120);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date (based on today and yesterday) math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), (1320));
+                    unow = System.DateTime.addMinutes(now, 120);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date (based on today and tomorrow) math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), (-60));
+                    unow = System.DateTime.addMinutes(now, 120);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date (based on yesterday and today) math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), 30);
+                    unow = System.DateTime.addMinutes(now, -150);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date +half hour (based on today and yesterday) math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), (1320));
+                    unow = System.DateTime.addMinutes(now, 150);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date +half hour (based on today and tomorrow) math is correct.");
+
+                    now = System.DateTime.addMinutes(System.DateTime.getToday(), (-60));
+                    unow = System.DateTime.addMinutes(now, 150);
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), "Arbitrary date +half hour (based on yesterday and today) math is correct.");
+
+                    var dateTimeSamples = new (System.Collections.Generic.List$1(System.DateTime)).ctor();
+                    var days = System.Array.init([1, 15, 31], System.Int32);
+
+                    // For every month, add dates for first day, 15th and last day of month, for
+                    // midnight, 1:30am, 1:15pm and 11:45pm.
+                    for (var month = 1; month <= 12; month = (month + 1) | 0) {
+                        $t = Bridge.getEnumerator(days);
+                        try {
+                            while ($t.moveNext()) {
+                                var day = $t.Current;
+
+                                if (day === 31) {
+                                    if (month === 12) {
+                                        now = System.DateTime.addDays(System.DateTime.create(((System.DateTime.getYear(System.DateTime.getNow()) + 1) | 0), 1, 1), -1);
+                                    } else {
+                                        now = System.DateTime.addDays(System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), ((month + 1) | 0), 1), -1);
+                                    }
+                                } else {
+                                    now = System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), month, day);
+                                }
+
+                                dateTimeSamples.add(System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), month, System.DateTime.getDay(now)));
+                                dateTimeSamples.add(System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), month, System.DateTime.getDay(now), 1, 30, 0));
+                                dateTimeSamples.add(System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), month, System.DateTime.getDay(now), 13, 15, 0));
+                                dateTimeSamples.add(System.DateTime.create(System.DateTime.getYear(System.DateTime.getNow()), month, System.DateTime.getDay(now), 23, 45, 0));
+                            }
+                        } finally {
+                            if (Bridge.is($t, System.IDisposable)) {
+                                $t.System$IDisposable$Dispose();
+                            }
+                        }}
+
+                    // For every available world time zone, check if a given date - its time zone offset results in the time zone offset itself.
+                    $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.WorldTZList);
+                    try {
+                        while ($t1.moveNext()) {
+                            var tz = $t1.Current;
+                            $t2 = Bridge.getEnumerator(dateTimeSamples);
+                            try {
+                                while ($t2.moveNext()) {
+                                    var refDate = $t2.Current;
+                                    now = refDate;
+                                    unow = System.DateTime.addMinutes(refDate, tz.ToMinutes());
+
+                                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.CompareDateMath(now, unow), (tz.NiceTS(now) || "") + " hardcoded math matches DateTime math result.");
+                                }
+                            } finally {
+                                if (Bridge.is($t2, System.IDisposable)) {
+                                    $t2.System$IDisposable$Dispose();
+                                }
+                            }
+                        }
+                    } finally {
+                        if (Bridge.is($t1, System.IDisposable)) {
+                            $t1.System$IDisposable$Dispose();
+                        }
+                    }}
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478, {
+        f1: function (_o1) {
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-12));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-11));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-10));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-9, -30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-9));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-8));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-7));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-6));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-5));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-4));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-3, -30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-3));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-2));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(-1));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(1));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(2));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(3));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(3, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(4));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(4, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(5));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(5, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(5, 45));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(6));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(6, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(7));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(8));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(8, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(8, 45));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(9));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(9, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(10));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(10, 30));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(11));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(12));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(12, 45));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(13));
+            _o1.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset(14));
+            return _o1;
+        }
+    });
+
+    /**
+     * A simple class to encapsulate a time zone offset.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478.TZ_Offset", {
+        $kind: "nested class",
+        fields: {
+            Hr: 0,
+            Mn: 0
+        },
+        ctors: {
+            ctor: function (h, m) {
+                if (m === void 0) { m = 0; }
+
+                this.$initialize();
+                this.Hr = h;
+                this.Mn = m;
+            }
+        },
+        methods: {
+            ToMinutes: function () {
+                return (((Bridge.Int.mul(60, this.Hr)) + this.Mn) | 0);
+            },
+            NiceTS: function (refDate) {
+                return System.DateTime.getYear(refDate) + "-" + System.DateTime.getMonth(refDate) + "-" + System.DateTime.getDay(refDate) + " " + System.DateTime.getHour(refDate) + ":" + System.DateTime.getMinute(refDate) + " @TZ: " + this.Hr + ":" + (System.Int32.format(Math.abs(this.Mn), "D2") || "") + "h";
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
