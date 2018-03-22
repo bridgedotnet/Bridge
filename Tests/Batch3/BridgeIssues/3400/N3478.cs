@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
-{/*
+{
     /// <summary>
     /// 
     /// </summary>
@@ -236,5 +236,5 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             }
         }
-    }*/
+    }
 }
