@@ -12568,54 +12568,70 @@
 
     // @source KeyValuePair.js
 
-    Bridge.define("System.Collections.Generic.KeyValuePair$2", function (TKey, TValue) {
-        return {
-            $kind: "struct",
-
-            statics: {
-                getDefaultValue: function () {
-                    return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(Bridge.getDefaultValue(TKey), Bridge.getDefaultValue(TValue));
+    Bridge.define("System.Collections.Generic.KeyValuePair$2", function (TKey, TValue) { return {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new (System.Collections.Generic.KeyValuePair$2(TKey,TValue))(); }
+            }
+        },
+        fields: {
+            key$1: Bridge.getDefaultValue(TKey),
+            value$1: Bridge.getDefaultValue(TValue)
+        },
+        props: {
+            key: {
+                get: function () {
+                    return this.key$1;
                 }
             },
-
-            ctor: function (key, value) {
-                if (key === undefined) {
-                    key = Bridge.getDefaultValue(TKey);
+            value: {
+                get: function () {
+                    return this.value$1;
                 }
-
-                if (value === undefined) {
-                    value = Bridge.getDefaultValue(TValue);
-                }
-
+            }
+        },
+        ctors: {
+            $ctor1: function (key, value) {
                 this.$initialize();
-                this.key = key;
-                this.value = value;
+                this.key$1 = key;
+                this.value$1 = value;
             },
-
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            toString: function () {
+                var s = System.Text.StringBuilderCache.Acquire();
+                s.append(String.fromCharCode(91));
+                if (this.key != null) {
+                    s.append(Bridge.toString(this.key));
+                }
+                s.append(", ");
+                if (this.value != null) {
+                    s.append(Bridge.toString(this.value));
+                }
+                s.append(String.fromCharCode(93));
+                return System.Text.StringBuilderCache.GetStringAndRelease(s);
+            },
             Deconstruct: function (key, value) {
                 key.v = this.key;
                 value.v = this.value;
             },
-
-            toString: function () {
-                var s = "[";
-
-                if (this.key != null) {
-                    s += Bridge.toString(this.key);
+            getHashCode: function () {
+                var h = Bridge.addHash([5072499452, this.key$1, this.value$1]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, System.Collections.Generic.KeyValuePair$2(TKey,TValue))) {
+                    return false;
                 }
-
-                s += ", ";
-
-                if (this.value != null) {
-                    s += Bridge.toString(this.value);
-                }
-
-                s += "]";
-
-                return s;
-            }
-        };
-    });
+                return Bridge.equals(this.key$1, o.key$1) && Bridge.equals(this.value$1, o.value$1);
+            },
+            $clone: function (to) { return this; }
+        }
+    }; });
 
     // @source Interfaces.js
 
@@ -13269,11 +13285,11 @@
                         throw new System.ArgumentException.$ctor1("Key " + key + " already exists.");
                     }
 
-                    entry.value = value;
+                    entry.value$1 = value;
                     return;
                 }
 
-                entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
+                entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue)).$ctor1(key, value);
 
                 if (this.isSimpleKey) {
                     this.entries[key] = entry;
@@ -33769,7 +33785,7 @@
 
     // @source StringBuilderCache.js
 
-    Bridge.define("System.IO.StringBuilderCache", {
+    Bridge.define("System.Text.StringBuilderCache", {
         statics: {
             fields: {
                 MAX_BUILDER_SIZE: 0,
@@ -33785,11 +33801,11 @@
             methods: {
                 Acquire: function (capacity) {
                     if (capacity === void 0) { capacity = 16; }
-                    if (capacity <= System.IO.StringBuilderCache.MAX_BUILDER_SIZE) {
-                        var sb = System.IO.StringBuilderCache.t_cachedInstance;
+                    if (capacity <= System.Text.StringBuilderCache.MAX_BUILDER_SIZE) {
+                        var sb = System.Text.StringBuilderCache.t_cachedInstance;
                         if (sb != null) {
                             if (capacity <= sb.getCapacity()) {
-                                System.IO.StringBuilderCache.t_cachedInstance = null;
+                                System.Text.StringBuilderCache.t_cachedInstance = null;
                                 sb.clear();
                                 return sb;
                             }
@@ -33798,13 +33814,13 @@
                     return new System.Text.StringBuilder("", capacity);
                 },
                 Release: function (sb) {
-                    if (sb.getCapacity() <= System.IO.StringBuilderCache.MAX_BUILDER_SIZE) {
-                        System.IO.StringBuilderCache.t_cachedInstance = sb;
+                    if (sb.getCapacity() <= System.Text.StringBuilderCache.MAX_BUILDER_SIZE) {
+                        System.Text.StringBuilderCache.t_cachedInstance = sb;
                     }
                 },
                 GetStringAndRelease: function (sb) {
                     var result = sb.toString();
-                    System.IO.StringBuilderCache.Release(sb);
+                    System.Text.StringBuilderCache.Release(sb);
                     return result;
                 }
             }

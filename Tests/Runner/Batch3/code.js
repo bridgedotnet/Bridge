@@ -30234,6 +30234,27 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3483
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3483", {
+        statics: {
+            methods: {
+                KeyValuePairAsDictionaryKeyWorks: function () {
+                    var val = "MyValue";
+                    var g = new System.Guid.$ctor4("9B9AAC17-22BB-425C-AA93-9C02C5146965");
+                    var a = new (System.Collections.Generic.KeyValuePair$2(System.Guid,System.Guid)).$ctor1(g, System.Guid.Empty);
+                    var dict = new (System.Collections.Generic.Dictionary$2(System.Collections.Generic.KeyValuePair$2(System.Guid,System.Guid),System.String))();
+                    dict.set(a, val);
+                    var b = new (System.Collections.Generic.KeyValuePair$2(System.Guid,System.Guid)).$ctor1(g, System.Guid.Empty);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(val, dict.get(b), "KeyValuePair as Dictionary key works. See Issue #3483");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
@@ -30542,10 +30563,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var pair = new (System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))(1, "value");
+                    var pair = new (System.Collections.Generic.KeyValuePair$2(System.Int32,System.String)).$ctor1(1, "value");
                     Bridge.Test.NUnit.Assert.AreEqual(1, pair.key, "Bridge479 Key");
                     Bridge.Test.NUnit.Assert.AreEqual("value", pair.value, "Bridge479 Value");
-                    Bridge.Test.NUnit.Assert.AreEqual("[1, value]", Bridge.toString(pair), "Bridge479 ToString");
+                    Bridge.Test.NUnit.Assert.AreEqual("[1, value]", pair.toString(), "Bridge479 ToString");
                 }
             }
         }

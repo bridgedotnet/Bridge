@@ -251,11 +251,11 @@
                         throw new System.ArgumentException.$ctor1("Key " + key + " already exists.");
                     }
 
-                    entry.value = value;
+                    entry.value$1 = value;
                     return;
                 }
 
-                entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
+                entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue)).$ctor1(key, value);
 
                 if (this.isSimpleKey) {
                     this.entries[key] = entry;

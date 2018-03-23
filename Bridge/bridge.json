@@ -77,7 +77,7 @@
         "Resources/Array.js",
         "Resources/ArraySegment.js",
 
-        "Resources/Collections/KeyValuePair.js",
+        "Resources/.generated/System/Collections/Generic/KeyValuePair.js",
         "Resources/Collections/Interfaces.js",
 
         "Resources/.generated/System/Collections/IEnumerator.js",
@@ -233,7 +233,7 @@
         "Resources/.generated/System/ParseFailureKind.js",
         "Resources/.generated/System/ParseFlags.js",
 
-        "Resources/.generated/System/IO/StringBuilderCache.js",
+        "Resources/.generated/System/Text/StringBuilderCache.js",
         "Resources/.generated/System/IO/BinaryReader.js",
         "Resources/.generated/System/IO/BinaryWriter.js",
         "Resources/.generated/System/IO/Stream.js",
