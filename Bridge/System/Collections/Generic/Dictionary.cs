@@ -37,7 +37,7 @@ namespace System.Collections.Generic
             get;
         }
 
-        new public extern ICollection<TKey> Keys
+        public extern ICollection<TKey> Keys
         {
             [Bridge.Template("getKeys()")]
             get;

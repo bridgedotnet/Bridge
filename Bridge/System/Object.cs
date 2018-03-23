@@ -65,11 +65,6 @@ namespace System
         public virtual extern int GetHashCode();
 
         [Bridge.Convention(Bridge.Notation.CamelCase)]
-        [Bridge.Template("Object.keys({obj})")]
-        [Bridge.Unbox(true)]
-        public static extern string[] Keys(object obj);
-
-        [Bridge.Convention(Bridge.Notation.CamelCase)]
         [Bridge.Template("Object.getOwnPropertyNames({obj})")]
         [Bridge.Unbox(true)]
         public static extern string[] GetOwnPropertyNames(object obj);
