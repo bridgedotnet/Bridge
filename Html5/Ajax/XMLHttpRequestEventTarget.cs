@@ -13,25 +13,25 @@ namespace Bridge.Html5
         /// The function to call when a request is aborted.
         /// </summary>
         [Name("onabort")]
-        public Action<Event> OnAbort;
+        public Action<ProgressEvent> OnAbort;
 
         /// <summary>
         /// The function to call when a request encounters an error.
         /// </summary>
         [Name("onerror")]
-        public Action<Event> OnError;
+        public Action<ProgressEvent> OnError;
 
         /// <summary>
         /// The function to call when an HTTP request returns after successfully loading content.
         /// </summary>
         [Name("onload")]
-        public Action<Event> OnLoad;
+        public Action<ProgressEvent> OnLoad;
 
         /// <summary>
         /// A function that gets called when the HTTP request first begins loading data.
         /// </summary>
         [Name("onloadstart")]
-        public Action<Event> OnLoadStart;
+        public Action<ProgressEvent> OnLoadStart;
 
         /// <summary>
         /// A function that is called periodically with information about the progress of the request.
@@ -43,12 +43,12 @@ namespace Bridge.Html5
         /// A function that is called if the event times out; this only happens if a timeout has been previously established by setting the value of the XMLHttpRequest object's timeout attribute.
         /// </summary>
         [Name("ontimeout")]
-        public Action<Event> OnTimeout;
+        public Action<ProgressEvent> OnTimeout;
 
         /// <summary>
         /// A function that is called when the load is completed, even if the request failed.
         /// </summary>
         [Name("onloadend")]
-        public Action<Event> OnLoadEnd;
+        public Action<ProgressEvent> OnLoadEnd;
     }
 }
