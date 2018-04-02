@@ -61,6 +61,8 @@ namespace Bridge.Contract
 
         bool IsBridgeClass(Mono.Cecil.TypeDefinition type);
 
+        bool IsBridgeClass(IType type);
+
         bool IsObjectLiteral(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type);
 
         bool IsObjectLiteral(Mono.Cecil.TypeDefinition type);

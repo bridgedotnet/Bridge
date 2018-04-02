@@ -76,7 +76,14 @@ namespace Bridge.Translator
                     if (this.Emitter.GetInline(member) == null)
                     {
                         var name = OverloadsCollection.Create(this.Emitter, member).GetOverloadName(true);
-                        this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, " + this.Emitter.ToJavaScript(name) + ")");
+                        this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, " + this.Emitter.ToJavaScript(name));
+
+                        if (this.Emitter.Validator.IsExternalType(member.DeclaringTypeDefinition) && !this.Emitter.Validator.IsBridgeClass(member.DeclaringTypeDefinition))
+                        {
+                            this.Write(", \"" + BridgeTypes.ToJsName(member.DeclaringType, this.Emitter, isAlias: true) + "\"");
+                        }
+
+                        this.Write(")");
                     }
                     else
                     {

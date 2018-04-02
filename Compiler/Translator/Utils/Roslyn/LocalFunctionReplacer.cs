@@ -161,7 +161,7 @@ namespace Bridge.Translator
                 var varDecl = SyntaxFactory.VariableDeclaration(varType).WithVariables(SyntaxFactory.SingletonSeparatedList(
                     SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
                     (
-                        SyntaxFactory.EqualsValueClause(SyntaxFactory.ParenthesizedLambdaExpression(fn.Body).WithParameterList(
+                        SyntaxFactory.EqualsValueClause(SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
                             SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
                         ))
                     )

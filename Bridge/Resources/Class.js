@@ -387,6 +387,8 @@
 
                             if (Class.$base.ctor) {
                                 Class.$base.ctor.call(this);
+                            } else if (Bridge.isFunction(Class.$base.constructor)) {
+                                Class.$base.constructor.call(this);
                             }
                         }
                     };
@@ -466,7 +468,19 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+
+            if (extend && !extend[0].$$initCtor) {
+                var cls = extend[0];
+                var $$initCtor = function () { };
+                $$initCtor.prototype = cls.prototype;
+                $$initCtor.prototype.constructor = cls;
+                $$initCtor.prototype.$$fullname = Bridge.Reflection.getTypeFullName(cls);
+
+                prototype = new $$initCtor();
+            }
+            else {
+                prototype = extend ? new extend[0].$$initCtor() : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+            }            
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;

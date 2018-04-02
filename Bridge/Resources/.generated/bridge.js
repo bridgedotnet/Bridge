@@ -276,7 +276,7 @@
             return proxy;
         },
 
-        ensureBaseProperty: function (scope, name) {
+        ensureBaseProperty: function (scope, name, alias) {
             var scopeType = Bridge.getType(scope),
                 descriptors = scopeType.$descriptors || [];
 
@@ -286,22 +286,38 @@
                 return scope;
             }
 
-            for (var j = 0; j < descriptors.length; j++) {
-                var d = descriptors[j];
+            if ((!scopeType.$descriptors || scopeType.$descriptors.length === 0) && alias) {
+                var aliasCfg = {},
+                    aliasName = "$" + alias + "$" + name;
 
-                if (d.name === name) {
-                    var aliasCfg = {},
-                        aliasName = "$" + Bridge.getTypeAlias(d.cls) + "$" + name;
+                aliasCfg.get = function () {
+                    return scope[name];
+                };
 
-                    if (d.get) {
-                        aliasCfg.get = d.get;
+                aliasCfg.set = function (value) {
+                    scope[name] = value;
+                };
+
+                Bridge.property(scope, aliasName, aliasCfg, false, scopeType, true);
+            }
+            else {
+                for (var j = 0; j < descriptors.length; j++) {
+                    var d = descriptors[j];
+
+                    if (d.name === name) {
+                        var aliasCfg = {},
+                            aliasName = "$" + Bridge.getTypeAlias(d.cls) + "$" + name;
+
+                        if (d.get) {
+                            aliasCfg.get = d.get;
+                        }
+
+                        if (d.set) {
+                            aliasCfg.set = d.set;
+                        }
+
+                        Bridge.property(scope, aliasName, aliasCfg, false, scopeType, true);
                     }
-
-                    if (d.set) {
-                        aliasCfg.set = d.set;
-                    }
-
-                    Bridge.property(scope, aliasName, aliasCfg, false, scopeType, true);
                 }
             }
 
@@ -2533,6 +2549,8 @@
 
                             if (Class.$base.ctor) {
                                 Class.$base.ctor.call(this);
+                            } else if (Bridge.isFunction(Class.$base.constructor)) {
+                                Class.$base.constructor.call(this);
                             }
                         }
                     };
@@ -2612,7 +2630,19 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+
+            if (extend && !extend[0].$$initCtor) {
+                var cls = extend[0];
+                var $$initCtor = function () { };
+                $$initCtor.prototype = cls.prototype;
+                $$initCtor.prototype.constructor = cls;
+                $$initCtor.prototype.$$fullname = Bridge.Reflection.getTypeFullName(cls);
+
+                prototype = new $$initCtor();
+            }
+            else {
+                prototype = extend ? new extend[0].$$initCtor() : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+            }            
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
@@ -12737,7 +12767,8 @@
     Bridge.define("System.Collections.Generic.IReadOnlyList$1", function (T) {
         return {
             inherits: [System.Collections.Generic.IReadOnlyCollection$1(T)],
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [1]
         };
     });
 
@@ -13195,21 +13226,12 @@
                 if (this.isSimpleKey) {
                     keys = this.keys
                 } else {
-                    // FIXME: A single key may hold more than one values. So
-                    // when getting keys, should we return the repeated keys
-                    // when more than one value is bound to them, or return
-                    // just an array of unique keys?
                     for (var i = 0; i < this.keys.length; i++) {
                         entry = this.entries[this.keys[i]];
 
-                        // If we don't want to loop thru the entry, we should
-                        // at least throw an exception if there's more than one
-                        // element in a given key.
-                        if (entry.length != 1) {
-                            throw new System.Exception("The single dictionary key has more than one entries at key: " + this.keys[i]);
-                        }
-
-                        keys.push(entry[0].key);
+                        for (var j = 0; j < entry.length; j++) {
+                            keys.push(entry[j].key);
+                        }                       
                     }
                 }
 
@@ -13228,11 +13250,9 @@
                     for (var i = 0; i < this.keys.length; i++) {
                         entry = this.entries[this.keys[i]];
 
-                        if (entry.length != 1) {
-                            throw new System.Exception("The single dictionary value has more than one entries at key: " + this.keys[i]);
-                        }
-
-                        values.push(entry[0].value);
+                        for (var j = 0; j < entry.length; j++) {
+                            values.push(entry[j].value);
+                        }                         
                     }
                 }
 

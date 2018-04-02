@@ -24,6 +24,20 @@ var Bridge3001_SomeLib = (function () {
 
     return Bridge3001_SomeLib;
 }());
+var Bridge3485_A = (function () {
+    function A() {
+        this.V1 = "value1";
+        this.V2 = "value2";
+    }
+    return A;
+}());
+var Bridge3494_A = (function () {
+    function Bridge3494_A(s) {
+        Bridge3494_A.InstancesCount++;
+    }
+    Bridge3494_A.InstancesCount = 0;
+    return Bridge3494_A;
+}());
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -30830,6 +30844,87 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485", {
+        statics: {
+            methods: {
+                /**
+                 * The tests consists in just instantiating a class, which inherits
+                 from an external-marked class, and references a property that's
+                 declared in the base class after the 'virtual' keyword, thus that
+                 should have been inherited by the class instance.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485
+                 * @return  {void}
+                 */
+                TestExternalVirtualProperty: function () {
+                    var v1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485.B().GetV1();
+                    var v2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485.B().GetV2();
+
+                    Bridge.Test.NUnit.Assert.AreEqual("value1", v1, "Non-virtual inherited property reference works.");
+                    Bridge.Test.NUnit.Assert.AreEqual("value2", v2, "Virtual inherited property reference works.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3485.B", {
+        inherits: [Bridge3485_A],
+        $kind: "nested class",
+        methods: {
+            GetV1: function () {
+                return this.V1;
+            },
+            GetV2: function () {
+                return Bridge.ensureBaseProperty(this, "V2", "Bridge3485_A").$Bridge3485_A$V2;
+            }
+        }
+    });
+
+    /**
+     * Test whether constructor calls are correctly issued when instantiating
+     classes that inherit from external classes.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494", {
+        statics: {
+            methods: {
+                /**
+                 * Instantiate classes several times and checks the return types and
+                 values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494
+                 * @return  {void}
+                 */
+                TestExtrenalClasCtor: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(0, Bridge3494_A.InstancesCount, "Amount of instances of a class are initially zero.");
+
+                    var a = new Bridge3494_A();
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge3494_A.InstancesCount, "Amount if instances of a class are 1 after one instance of it is created.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(a, Bridge3494_A), "Casting to object once allows 'is' to infer it is relative to the class.");
+
+                    for (var i = 0; i < 10; i = (i + 1) | 0) {
+                        var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494.B();
+                        Bridge.Test.NUnit.Assert.True(Bridge.is(b, Bridge3494_A), "Casting to object " + (((i + 1) | 0)) + " time" + ((i > 0 ? "s" : "") || "") + " allows inferring its base class instance.");
+                    }
+                    Bridge.Test.NUnit.Assert.AreEqual(11, Bridge3494_A.InstancesCount, "Instantiating a class that inherits from the other counts as instance count of the base class.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3494.B", {
+        inherits: [Bridge3494_A],
+        $kind: "nested class"
+    });
+
     /**
      * The test verifies that binary data is not changed by the browser
      after it was downloaded from a remote location.
@@ -30864,6 +30959,164 @@ Bridge.$N1391Result =                     r;
             }
         }
     });
+
+    /**
+     * Tests dictionary keys as System.Guids against issues fetching the values.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499", {
+        statics: {
+            methods: {
+                /**
+                 * Original test case provided by the reporter. The second Guid key
+                 does not trigger the problem whereas the third does.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499
+                 * @return  {void}
+                 */
+                TestKeysWithSimilarHashCode: function () {
+                    var superDict = new (System.Collections.Generic.Dictionary$2(System.Guid,System.String))();
+
+
+                    var x1 = "str1";
+                    var guid1 = new System.Guid.$ctor4("00000003-0000-0000-0001-00001c000000");
+                    var x2 = "str2";
+                    var guid2 = new System.Guid.$ctor4("00000001-0000-0000-0001-000004000000");
+                    var x3 = "str3";
+                    var guid3 = new System.Guid.$ctor4("00000003-0000-0000-0001-000022000000");
+
+                    superDict.add(guid1, x1);
+                    superDict.add(guid2, x2);
+                    superDict.add(guid3, x3);
+
+                    var keys = superDict.getKeys();
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Linq.Enumerable.from(keys).count(), "Can fetch key count from dictionary.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(keys, guid1, System.Guid), "Can fetch key matching first Guid value.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(keys, guid2, System.Guid), "Can fetch key matching second Guid value.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(keys, guid3, System.Guid), "Can fetch key matching third Guid value.");
+
+                    var values = superDict.getValues();
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Linq.Enumerable.from(values).count(), "Can fetch value count from dictionary.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(values, x1, System.String), "Can fetch value matching first string value.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(values, x2, System.String), "Can fetch value matching second string value.");
+                    Bridge.Test.NUnit.Assert.True(System.Array.contains(values, x3, System.String), "Can fetch value matching third string value.");
+                },
+                /**
+                 * This expands and generalizes the test by making dictionaries with
+                 increasing levels of similarity and fetching the values.
+                 Originally this broke at position 19 (or 20, as position 19 is a
+                 hyphen).
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3499
+                 * @return  {void}
+                 */
+                TestKeysWithIncreasingSimilarity: function () {
+                    var guidstr = "00000000-0000-0000-0000-000000000000";
+                    var guid1 = new System.Guid.$ctor4(guidstr);
+
+                    for (var i = 0; i < guidstr.length; i = (i + 1) | 0) {
+                        if (guidstr.charCodeAt(i) === 45) {
+                            continue;
+                        }
+
+                        var guidstr2 = (guidstr.substr(0, i) || "") + "1" + (guidstr.substr(((i + 1) | 0)) || "");
+                        var guid2 = new System.Guid.$ctor4(guidstr2);
+
+                        var dict = new (System.Collections.Generic.Dictionary$2(System.Guid,System.Int32))();
+                        dict.add(guid1, ((0 + i) | 0));
+                        dict.add(guid2, ((1 + i) | 0));
+
+                        Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getCount(dict.getValues(), System.Int32), "'Values' works when difference is at position #" + (((i + 1) | 0)));
+                    }
+                }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in checking whether a casting/inheritance
+     scenario involving variance triggers a runtime error in built
+     Bridge code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502", {
+        statics: {
+            methods: {
+                GetList: function () {
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.TestList$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.SubClass))(System.Linq.Enumerable.range(1, 10).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.f1));
+                },
+                /**
+                 * Test by instantiating the class as one of the interfaces that it
+                 implements. Then, cast that instance to the other interface also
+                 implemented by the actual class.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502
+                 * @return  {void}
+                 */
+                TestInvariance: function () {
+                    var $t;
+                    var list = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.GetList();
+
+                    var readable = Bridge.cast(list, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.ITestReadValue$1(System.Collections.Generic.IReadOnlyList$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.BaseClass)));
+
+                    var i = 0;
+                    $t = Bridge.getEnumerator(readable[Bridge.geti(readable, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$ITestReadValue$1$System$Collections$Generic$IReadOnlyList$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$BaseClass$Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$ITestReadValue$1$Value")], Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.BaseClass);
+                    try {
+                        while ($t.moveNext()) {
+                            var item = $t.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(((i = (i + 1) | 0)), item.Value, "Variance cast works for value at position #" + i + ".");
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$Dispose();
+                        }
+                    }}
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502, {
+        f1: function (i) {
+            return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.SubClass(i);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.BaseClass", {
+        $kind: "nested class",
+        props: {
+            Value: 0
+        },
+        ctors: {
+            ctor: function (i) {
+                this.$initialize();
+                this.Value = i;
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.ITestInterface$1", function (T) { return {
+        $kind: "nested interface"
+    }; });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.ITestReadValue$1", function (T) { return {
+        $kind: "nested interface",
+        $variance: [1]
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
@@ -41287,6 +41540,42 @@ Bridge.$N1391Result =                     r;
         $kind: "nested class",
         alias: ["m1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3453$i1$m1"]
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.SubClass", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.BaseClass],
+        $kind: "nested class",
+        ctors: {
+            ctor: function (i) {
+                this.$initialize();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.BaseClass.ctor.call(this, i);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.TestList$1", function (T) { return {
+        inherits: [System.Collections.Generic.List$1(T),Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.ITestInterface$1(T),Bridge.ClientTest.Batch3.BridgeIssues.Bridge3502.ITestReadValue$1(System.Collections.Generic.IReadOnlyList$1(T))],
+        $kind: "nested class",
+        props: {
+            TestCount: 0,
+            Value: {
+                get: function () {
+                    return this;
+                }
+            }
+        },
+        alias: [
+            "TestCount", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$ITestInterface$1$" + Bridge.getTypeAlias(T) + "$TestCount",
+            "Value", ["Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$ITestReadValue$1$System$Collections$Generic$IReadOnlyList$1$" + Bridge.getTypeAlias(T) + "$Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3502$ITestReadValue$1$Value"]
+        ],
+        ctors: {
+            ctor: function (items) {
+                this.$initialize();
+                System.Collections.Generic.List$1(T).ctor.call(this);
+                this.AddRange(items);
+                this.TestCount = this.Count;
+            }
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],

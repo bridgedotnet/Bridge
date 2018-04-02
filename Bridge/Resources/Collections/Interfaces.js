@@ -67,7 +67,8 @@
     Bridge.define("System.Collections.Generic.IReadOnlyList$1", function (T) {
         return {
             inherits: [System.Collections.Generic.IReadOnlyCollection$1(T)],
-            $kind: "interface"
+            $kind: "interface",
+            $variance: [1]
         };
     });
 

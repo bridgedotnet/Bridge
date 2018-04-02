@@ -128,21 +128,12 @@
                 if (this.isSimpleKey) {
                     keys = this.keys
                 } else {
-                    // FIXME: A single key may hold more than one values. So
-                    // when getting keys, should we return the repeated keys
-                    // when more than one value is bound to them, or return
-                    // just an array of unique keys?
                     for (var i = 0; i < this.keys.length; i++) {
                         entry = this.entries[this.keys[i]];
 
-                        // If we don't want to loop thru the entry, we should
-                        // at least throw an exception if there's more than one
-                        // element in a given key.
-                        if (entry.length != 1) {
-                            throw new System.Exception("The single dictionary key has more than one entries at key: " + this.keys[i]);
-                        }
-
-                        keys.push(entry[0].key);
+                        for (var j = 0; j < entry.length; j++) {
+                            keys.push(entry[j].key);
+                        }                       
                     }
                 }
 
@@ -161,11 +152,9 @@
                     for (var i = 0; i < this.keys.length; i++) {
                         entry = this.entries[this.keys[i]];
 
-                        if (entry.length != 1) {
-                            throw new System.Exception("The single dictionary value has more than one entries at key: " + this.keys[i]);
-                        }
-
-                        values.push(entry[0].value);
+                        for (var j = 0; j < entry.length; j++) {
+                            values.push(entry[j].value);
+                        }                         
                     }
                 }
 
