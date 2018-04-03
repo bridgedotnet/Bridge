@@ -48,7 +48,7 @@ namespace Bridge.ClientTest.CSharp7
         /// <summary>
         /// Just check if the members are accessible from within the class
         /// </summary>
-        [Test]
+        [Test(ExpectedCount = 12)]
         public void TestModifiers()
         {
             Assert.AreEqual(2, testField, "Private protected field works.");
