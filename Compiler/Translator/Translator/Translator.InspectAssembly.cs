@@ -1,3 +1,4 @@
+#define PARALLEL
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.TypeSystem;
@@ -317,8 +318,15 @@ namespace Bridge.Translator
 
             var rewriten = Rewrite();
 
+#if PARALLEL
             Task.WaitAll(this.SourceFiles.Select((fileName, index) => Task.Run(() =>
+#else
+            for (var index=0; index < this.SourceFiles.Count; index++)
+#endif
             {
+#if !PARALLEL
+                var fileName = this.SourceFiles[index];
+#endif
                 this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
 
                 var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
@@ -373,7 +381,10 @@ namespace Bridge.Translator
                 this.Log.Trace("\tAccepting type system convert visitor done");
 
                 this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
-            })).ToArray());
+            }
+#if PARALLEL
+            )).ToArray());
+#endif
 
             this.Log.Info("Building syntax tree done");
         }
