@@ -341,15 +341,17 @@ namespace Bridge.Translator
 
                 var syntaxTree = parser.Parse(rewriten[index], fileName);
                 syntaxTree.FileName = fileName;
-                //var syntaxTree = parser.Parse(reader, fileName);
                 this.Log.Trace("\tParsing syntax tree done");
 
                 if (parser.HasErrors)
                 {
+                    var errors = new List<string>();
                     foreach (var error in parser.Errors)
                     {
-                        throw new EmitterException(syntaxTree, string.Format("Parsing error in a file {0} {2}: {1}", fileName, error.Message, error.Region.Begin.ToString()));
+                        errors.Add(fileName + ":" + error.Region.BeginLine + "," + error.Region.BeginColumn + ": " + error.Message);
                     }
+
+                    throw new EmitterException(syntaxTree, string.Format("Error parsing code." + Environment.NewLine + String.Join(Environment.NewLine, errors)));
                 }
 
                 var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
