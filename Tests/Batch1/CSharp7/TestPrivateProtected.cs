@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using System.Reflection;
 
 namespace Bridge.ClientTest.CSharp7
 {
@@ -26,6 +27,7 @@ namespace Bridge.ClientTest.CSharp7
             set;
         }
 
+        [Reflectable]
         public class Probe
         {
             public int X = 3;
@@ -55,7 +57,7 @@ namespace Bridge.ClientTest.CSharp7
             Assert.AreEqual(3, new Probe().X, "Public class with public and 'private protected' members works.");
             Assert.AreEqual(4, new PublicMember().X, "Private protected class with public and private-protected members works.");
 
-            //var noX = true;
+            var noX = true;
             var noY = true;
             var noY1 = true;
             var noY2 = true;
@@ -66,11 +68,9 @@ namespace Bridge.ClientTest.CSharp7
             {
                 switch (member.Name)
                 {
-                    /*
                     case "X":
                         noX = false;
                         break;
-                    */
                     case "Y":
                         noY = false;
                         break;
@@ -89,23 +89,13 @@ namespace Bridge.ClientTest.CSharp7
                 }
             }
 
-            // This is not related to this issue, but GetMebers() is not
-            // returning the public 'X' field, as it does in native .NET.
-            //Assert.False(noX, "The public (publicly accessible) member 'X' is returned by reflection's GetMembers()");
-
-            // It may be that GetMembers() returns nothing in Bridge
-            // (currently) but the results below have been tested in native
-            // .NET and this is the expected behavior for them anyway.
+            Assert.False(noX, "The public (publicly accessible) member 'X' is returned by reflection's GetMembers()");
             Assert.True(noY, "The 'private protected' (Family+Assembly accessible) field member  is not returned by reflection's GetMembers()");
             Assert.True(noY1, "The 'private protected' (Family+Assembly accessible) property member is not returned by reflection's GetMembers()");
             Assert.True(noY2, "The 'private protected' (Family+Assembly accessible) method member is not returned by reflection's GetMembers()");
             Assert.True(noY3, "The 'private protected' (Family+Assembly accessible) class member is not returned by reflection's GetMembers()");
             Assert.True(noY4, "The 'private protected' (Family+Assembly accessible) struct member is not returned by reflection's GetMembers()");
 
-            /* There's still not enough reflection support in order to ensure a
-             * class' members are correctly set as 'private protected'. The
-             * code below works in native .NET (not dotnet fiddle).
-             *
             foreach (var member in typeof(Probe).GetMembers(BindingFlags.NonPublic | BindingFlags.Instance))
             {
                 if (member.MemberType == MemberTypes.Field && member.Name == "Y")
@@ -114,7 +104,6 @@ namespace Bridge.ClientTest.CSharp7
                     Assert.True(!fi.IsPublic && !fi.IsPrivate && !fi.IsStatic && !fi.IsFamily && !fi.IsAssembly && fi.IsFamilyAndAssembly && !fi.IsFamilyOrAssembly, "A private protected field has the correct set of reflection flags.");
                 }
             }
-             */
         }
     }
 }
