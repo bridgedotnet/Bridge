@@ -23904,7 +23904,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestModifiers: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestPrivateProtected).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestPrivateProtected, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestModifiers()", $t.Line = "20", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestPrivateProtected).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestPrivateProtected, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestModifiers()", $t.Line = "45", $t));
                     t.Fixture.TestModifiers();
                 }
             }
