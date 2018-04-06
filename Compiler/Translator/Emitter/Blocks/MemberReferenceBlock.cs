@@ -404,7 +404,7 @@ namespace Bridge.Translator
                 if (parentInvocation == null || parentInvocation.Target != memberReferenceExpression)
                 {
                     var method = (IMethod)member.Member;
-                    if (method.TypeArguments.Count > 0)
+                    if (method.TypeArguments.Count > 0 || method.IsExtensionMethod)
                     {
                         inline = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
                     }

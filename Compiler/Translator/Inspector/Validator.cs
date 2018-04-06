@@ -212,6 +212,19 @@ namespace Bridge.Translator
                 || this.HasAttribute(entity.Attributes, nonScriptableAttr);
         }
 
+        public virtual bool IsBridgeClass(IType type)
+        {
+            foreach (var i in type.GetAllBaseTypes().Where(t => t.Kind == TypeKind.Interface))
+            {
+                if (i.FullName == JS.Types.BRIDGE_IBridgeClass)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public virtual bool IsBridgeClass(TypeDefinition type)
         {
             foreach (var i in type.Interfaces)

@@ -171,14 +171,14 @@ namespace Bridge.Translator
                             value = value.Trim();
                             if (value[value.Length - 1] == ';' || value.EndsWith("*/", StringComparison.InvariantCulture) || value.StartsWith("//"))
                             {
-                                this.Emitter.EnableSemicolon = false;
+                                this.Emitter.SkipSemiColon = true;
                                 this.WriteNewLine();
                             }
                         }
                         else
                         {
                             // Empty string, emit nothing.
-                            this.Emitter.EnableSemicolon = false;
+                            this.Emitter.SkipSemiColon = true;
                         }
 
                         this.Emitter.ReplaceAwaiterByVar = oldValue;

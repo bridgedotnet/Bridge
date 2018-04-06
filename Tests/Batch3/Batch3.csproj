@@ -721,9 +721,15 @@
     <Compile Include="BridgeIssues\3400\N3450.cs" />
     <Compile Include="BridgeIssues\3400\N3453.cs" />
     <Compile Include="BridgeIssues\3400\N3476.cs" />
-    <Compile Include="BridgeIssues\3400\N3483.cs" />
     <Compile Include="BridgeIssues\3400\N3478.cs" />
+    <Compile Include="BridgeIssues\3400\N3485.cs" />
+    <Compile Include="BridgeIssues\3400\N3483.cs" />
+    <Compile Include="BridgeIssues\3400\N3494.cs" />
     <Compile Include="BridgeIssues\3400\N3497.cs" />
+    <Compile Include="BridgeIssues\3400\N3499.cs" />
+    <Compile Include="BridgeIssues\3500\N3502.cs" />
+    <Compile Include="BridgeIssues\3500\N3513.cs" />
+    <Compile Include="BridgeIssues\3500\N3519.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>

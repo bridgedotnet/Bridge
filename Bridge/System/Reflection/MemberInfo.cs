@@ -71,6 +71,12 @@ namespace System.Reflection
             get;
         }
 
+        public extern bool IsFamilyAndAssembly
+        {
+            [Bridge.Template("({this}.a === 6)")]
+            get;
+        }
+
         public extern bool IsPrivate
         {
             [Bridge.Template("({this}.a === 1)")]

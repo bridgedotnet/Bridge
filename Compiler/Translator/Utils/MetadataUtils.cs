@@ -141,7 +141,14 @@ namespace Bridge.Translator
 
                 if (typedef.Accessibility != Accessibility.None)
                 {
-                    result.Add("a", (int)typedef.Accessibility);
+                    if (typedef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                    {
+                        result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                    }
+                    else
+                    {
+                        result.Add("a", (int)typedef.Accessibility);
+                    }                    
                 }
 
                 if (typedef.IsStatic)
@@ -957,7 +964,14 @@ namespace Bridge.Translator
 
             if (m.Accessibility != Accessibility.None)
             {
-                result.Add("a", (int)m.Accessibility);
+                if (m.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                {
+                    result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                }
+                else
+                {
+                    result.Add("a", (int)m.Accessibility);
+                }
             }
 
             if (m.IsSealed)
