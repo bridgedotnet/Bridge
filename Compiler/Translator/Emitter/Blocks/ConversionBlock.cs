@@ -385,7 +385,7 @@ namespace Bridge.Translator
                                      && !(memberDeclaringTypeDefinition.Namespace == CS.NS.SYSTEM || memberDeclaringTypeDefinition.Namespace.StartsWith(CS.NS.SYSTEM + "."));
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
-                         
+
                         if (attr != null)
                         {
                             isArgument = (bool)attr.PositionalArguments.First().ConstantValue;
@@ -447,7 +447,7 @@ namespace Bridge.Translator
                             block.Emitter.ForbidLifting = true;
                         }
                     }
-                    else  if(!Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
+                    else  if (!Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
                     {
                         if (nullable)
                         {
@@ -468,7 +468,7 @@ namespace Bridge.Translator
                         block.Write(JS.Types.Bridge.UNBOX);
                         block.WriteOpenParentheses();
                         block.AfterOutput2 += ")";
-                    }                    
+                    }
                 }
                 else if (conversion.IsUnboxingConversion && !Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
                 {
@@ -807,6 +807,12 @@ namespace Bridge.Translator
             {
                 var index = invocationExpression.Arguments.ToList().IndexOf(expression);
                 var methodResolveResult = block.Emitter.Resolver.ResolveNode(invocationExpression, block.Emitter) as MemberResolveResult;
+                var invocationResolveResult = methodResolveResult as CSharpInvocationResolveResult;
+
+                if (invocationResolveResult != null && invocationResolveResult.IsExtensionMethodInvocation)
+                {
+                    index++;
+                }
 
                 if (methodResolveResult != null)
                 {

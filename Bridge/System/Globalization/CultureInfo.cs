@@ -1,13 +1,12 @@
-using Bridge;
-
 namespace System.Globalization
 {
     /// <summary>
     /// Provides information about a specific culture (called a locale for unmanaged code development). The information includes the names for the culture, the writing system, the calendar used, the sort order of strings, and formatting for dates and numbers.
     /// </summary>
-    [External]
-    [Reflectable]
-    public class CultureInfo : ICloneable, IFormatProvider, IBridgeClass
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    public class CultureInfo : ICloneable, IFormatProvider, Bridge.IBridgeClass
     {
         /// <summary>
         /// Initializes a new instance of the CultureInfo class based on the culture specified by name.
@@ -20,7 +19,7 @@ namespace System.Globalization
         /// </summary>
         /// <param name="name">The name of a culture. name is not case-sensitive.</param>
         /// <returns>A read-only CultureInfo object.</returns>
-        [Name("getCultureInfo")]
+        [Bridge.Name("getCultureInfo")]
         public static extern CultureInfo GetCultureInfo(string name);
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace System.Globalization
         /// </summary>
         /// <param name="name">A predefined CultureInfo name or the name of an existing CultureInfo object. name is not case-sensitive.</param>
         /// <returns>A CultureInfo object</returns>
-        [Name("getCultureInfo")]
+        [Bridge.Name("getCultureInfo")]
         public static extern CultureInfo CreateSpecificCulture(string name);
 
         public static extern CultureInfo[] GetCultures();
@@ -38,16 +37,16 @@ namespace System.Globalization
         /// </summary>
         public static extern CultureInfo CurrentCulture
         {
-            [Template("{this}.getCurrentCulture()")]
+            [Bridge.Template("{this}.getCurrentCulture()")]
             get;
-            [Template("{this}.setCurrentCulture({0})")]
+            [Bridge.Template("{this}.setCurrentCulture({0})")]
             set;
         }
 
         /// <summary>
         /// Gets or sets a DateTimeFormatInfo that defines the culturally appropriate format of displaying dates and times.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern DateTimeFormatInfo DateTimeFormat
         {
             get;
@@ -57,7 +56,7 @@ namespace System.Globalization
         /// <summary>
         /// Gets the CultureInfo object that is culture-independent (invariant).
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public static extern CultureInfo InvariantCulture
         {
             get;
@@ -66,7 +65,7 @@ namespace System.Globalization
         /// <summary>
         /// Gets the culture name in the format languagecode2-country/regioncode2.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern string Name
         {
             get;
@@ -75,7 +74,7 @@ namespace System.Globalization
         /// <summary>
         /// Gets the culture name in the format languagefull [country/regionfull] in English.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern string EnglishName
         {
             get;
@@ -85,7 +84,7 @@ namespace System.Globalization
         /// <summary>
         /// Gets the culture name, consisting of the language, the country/region, and the optional script, that the culture is set to display.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern string NativeName
         {
             get;
@@ -95,14 +94,14 @@ namespace System.Globalization
         /// <summary>
         /// Gets or sets a NumberFormatInfo that defines the culturally appropriate format of displaying numbers, currency, and percentage.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public NumberFormatInfo NumberFormat
         {
             get;
             set;
         }
 
-        public extern object GetFormat(Type formatType);
+        public extern virtual Object GetFormat(Type formatType);
 
         /// <summary>
         /// Creates a copy of the current CultureInfo.

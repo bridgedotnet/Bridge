@@ -1,9 +1,9 @@
-using Bridge;
 using System.Reflection;
 
 namespace System
 {
-    [External]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
     public sealed class AppDomain
     {
         private extern AppDomain();
@@ -12,7 +12,7 @@ namespace System
 
         public static extern AppDomain CurrentDomain
         {
-            [Template("System.AppDomain")]
+            [Bridge.Template("System.AppDomain")]
             get;
         }
     }

@@ -3,6 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     require(["N3208_TestModule"], function (N3208_TestModule) {
         Bridge.define("N3208_1_AndreyReview1.App", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main","is":true,"t":8,"sn":"Main","rt":System.Void}]}; },
             main: function Main () {
                 var welcomer = new N3208_TestModule.N3208_1_AndreyReview1.N3208_TestModuleScope.Welcomer();
                 welcomer.Hello("world");
@@ -22,21 +23,14 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     }(this, function () {
         var N3208_TestModule = { };
         Bridge.define("N3208_1_AndreyReview1.N3208_TestModuleScope", {
-            $scope: N3208_TestModule,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048961,"a":2,"s":true}; }
-                }
-            }
+            $metadata : function () { return {"nested":[N3208_TestModule.N3208_1_AndreyReview1.N3208_TestModuleScope.Welcomer],"att":1048961,"a":2,"s":true}; },
+            $scope: N3208_TestModule
         });
 
         Bridge.define("N3208_1_AndreyReview1.N3208_TestModuleScope.Welcomer", {
+            $kind: "nested class",
+            $metadata : function () { return {"td":N3208_TestModule.N3208_1_AndreyReview1.N3208_TestModuleScope,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Hello","t":8,"pi":[{"n":"name","pt":System.String,"ps":0}],"sn":"Hello","rt":System.Void,"p":[System.String]}]}; },
             $scope: N3208_TestModule,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"td":N3208_TestModule.N3208_1_AndreyReview1.N3208_TestModuleScope,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Hello","t":8,"pi":[{"n":"name","pt":System.String,"ps":0}],"sn":"Hello","rt":System.Void,"p":[System.String]}]}; }
-                }
-            },
             methods: {
                 Hello: function (name) {
                     System.Console.WriteLine("Hello, " + (name || "") + "!");

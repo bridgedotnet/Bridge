@@ -255,6 +255,7 @@ namespace Bridge.Translator
             StringBuilder currentOutput = null;
             this.Emitter.NamedBoxedFunctions = new Dictionary<IType, Dictionary<string, string>>();
 
+            this.Emitter.HasModules = this.Emitter.Types.Any(t => t.Module != null);
             foreach (var type in this.Emitter.Types)
             {
                 this.Emitter.Translator.Plugins.BeforeTypeEmit(this.Emitter, type);
@@ -337,43 +338,47 @@ namespace Bridge.Translator
             this.EmitNamedBoxedFunctions();
 
             this.Emitter.NamespacesCache = new Dictionary<string, int>();
-            foreach (var type in this.Emitter.Types)
+
+            if (!this.Emitter.HasModules && this.Emitter.AssemblyInfo.Reflection.Target != MetadataTarget.Type)
             {
-                var typeDef = type.Type.GetDefinition();
-                bool isGlobal = false;
-                if (typeDef != null)
+                foreach (var type in this.Emitter.Types)
                 {
-                    isGlobal = typeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" || a.AttributeType.FullName == "Bridge.MixinAttribute");
-                }
+                    var typeDef = type.Type.GetDefinition();
+                    bool isGlobal = false;
+                    if (typeDef != null)
+                    {
+                        isGlobal = typeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" || a.AttributeType.FullName == "Bridge.MixinAttribute");
+                    }
 
-                if (typeDef.FullName != "System.Object")
-                {
-                    var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
+                    if (typeDef.FullName != "System.Object")
+                    {
+                        var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
 
-                    if (name == "Object")
+                        if (name == "Object")
+                        {
+                            continue;
+                        }
+                    }
+
+                    var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+                    var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(this.Emitter.BridgeTypes.Get(type.Key).TypeDefinition) == 0;
+
+                    if (isPlainMode)
                     {
                         continue;
                     }
-                }
 
-                var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
-                var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(this.Emitter.BridgeTypes.Get(type.Key).TypeDefinition) == 0;
+                    if (isGlobal || this.Emitter.TypeInfo.Module != null || reflectedTypes.Any(t => t == type.Type))
+                    {
+                        continue;
+                    }
 
-                if (isPlainMode)
-                {
-                    continue;
-                }
+                    var meta = MetadataUtils.ConstructTypeMetadata(typeDef, this.Emitter, true, type.TypeDeclaration.GetParent<SyntaxTree>());
 
-                if (isGlobal || this.Emitter.TypeInfo.Module != null || reflectedTypes.Any(t => t == type.Type))
-                {
-                    continue;
-                }
-
-                var meta = MetadataUtils.ConstructTypeMetadata(typeDef, this.Emitter, true, type.TypeDeclaration.GetParent<SyntaxTree>());
-
-                if (meta != null)
-                {
-                    metas.Add(type.Type, meta);
+                    if (meta != null)
+                    {
+                        metas.Add(type.Type, meta);
+                    }
                 }
             }
 
@@ -391,7 +396,7 @@ namespace Bridge.Translator
                         tree = tInfo.TypeDeclaration.GetParent<SyntaxTree>();
                     }
 
-                    if (tInfo != null && tInfo.Module != null)
+                    if (tInfo != null && tInfo.Module != null || this.Emitter.HasModules || this.Emitter.AssemblyInfo.Reflection.Target == MetadataTarget.Type)
                     {
                         continue;
                     }
@@ -470,7 +475,7 @@ namespace Bridge.Translator
                         typeArgs = arr_sb.ToString();
                     }
 
-                    this.Write(string.Format("$m({0}, function ({2}) {{ return {1}; }});", MetadataUtils.GetTypeName(meta.Key, this.Emitter, false, true), metaData.ToString(Formatting.None), typeArgs));
+                    this.Write(string.Format("$m(\"{0}\", function ({2}) {{ return {1}; }});", MetadataUtils.GetTypeName(meta.Key, this.Emitter, false, true, false), metaData.ToString(Formatting.None), typeArgs));
                     this.WriteNewLine();
                 }
 
@@ -587,7 +592,7 @@ namespace Bridge.Translator
             {
                 enable = !configInternal.Disabled.Value;
             }
-            else if(!config.Disabled.HasValue)
+            else if (!config.Disabled.HasValue)
             {
                 enable = true;
             }

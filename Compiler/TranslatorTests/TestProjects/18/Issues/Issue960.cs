@@ -1,12 +1,11 @@
 ﻿using Bridge;
-using Bridge.Html5;
 
 //#960
 namespace TestIssue960
 {
     public class Issue960
     {
-        [Ready]
+        [Bridge.Ready]
         public static void Go()
         {
             var x = new Named("Test");

@@ -28,12 +28,12 @@ namespace Bridge.Translator
                     string filePath = DefineOutputItemFullPath(item, projectOutputPath, defaultFileName);
                     string path = "./" + FileHelper.GetRelativePath(filePath, projectOutputPath).Replace(Path.DirectorySeparatorChar, '/');
 
-                    if(!dtsReferences.Contains(path))
+                    if (!dtsReferences.Contains(path))
                     {
                         dtsReferences.Add(path);
-                    }                    
+                    }
 
-                    if(!addNoLibReference && item.Assembly.StartsWith("Retyped."))
+                    if (!addNoLibReference && item.Assembly.StartsWith("Retyped."))
                     {
                         addNoLibReference = true;
                     }
@@ -58,7 +58,7 @@ namespace Bridge.Translator
                 byte[] buffer = null;
                 string content = null;
 
-                if(item.OutputType == TranslatorOutputType.TypeScript && item.OutputKind == TranslatorOutputKind.ProjectOutput)
+                if (item.OutputType == TranslatorOutputType.TypeScript && item.OutputKind == TranslatorOutputKind.ProjectOutput)
                 {
                     content = item.Content.GetContentAsString();
                     StringBuilder sb = new StringBuilder();
@@ -74,7 +74,7 @@ namespace Bridge.Translator
                         sb.Append($"/// <reference path=\"{reference}\" />" + nl);
                     }
 
-                    if(sb.Length > 0 && !content.StartsWith("/// <reference path="))
+                    if (sb.Length > 0 && !content.StartsWith("/// <reference path="))
                     {
                         sb.Append(nl);
                     }

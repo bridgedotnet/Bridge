@@ -1,13 +1,11 @@
-using Bridge;
-
 namespace System
 {
     /// <summary>
     /// Specifies how mathematical rounding methods should process a number that is midway between two numbers.
     /// </summary>
-    [External]
-    [Enum(Emit.Value)]
-    [Name("Number")]
+    [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.Value)]
+    [Bridge.Name("Number")]
     public enum MidpointRounding
     {
         /// <summary>

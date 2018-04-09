@@ -3,7 +3,7 @@
 [assembly:Module("MyModule")]
 namespace TestProject1
 {
-	public class N3334
+    public class N3334
     {
     }
 }

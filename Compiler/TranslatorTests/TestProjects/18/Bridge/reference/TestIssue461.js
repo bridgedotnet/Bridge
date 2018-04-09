@@ -2,39 +2,32 @@
         statics: {
             methods: {
                 Test: function Test () {
-                    var input = document.createElement("input");
+                    //HTMLInputElement input = new HTMLInputElement();
 
-                    input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
+                    //input.OnChange += (ev) =>
+                    //{
+                    //    // Tests if ev.CurrentTarget.Value compiles
+                    //    Console.WriteLine("ev.CurrentTarget.Value: " + ev.CurrentTarget.Value);
 
-                    var anchor = document.createElement("a");
+                    //    // Tests if ev.IsMouseEvent() compiles
+                    //    Console.WriteLine("IsMouseEvent: " + ev.IsMouseEvent());
+                    //};
 
-                    anchor.onclick = Bridge.fn.combine(anchor.onclick, $asm.$.TestIssue461.Issue461.f2);
+                    //HTMLAnchorElement anchor = new HTMLAnchorElement();
 
-                    // Test if Document.GetElementById<>() compiles
-                    var div = document.getElementById("div1");
+                    //anchor.OnClick += (ev) =>
+                    //{
+                    //    // Tests if ev.CurrentTarget.Href compiles
+                    //    Console.WriteLine("ev.CurrentTarget.Href: " + ev.CurrentTarget.Href);
+                    //};
 
-                    // Tests if Element is still a superclass of all the element classes and the following code compiles
-                    var element;
+                    //HTMLDivElement div = Document.GetElementById<HTMLDivElement>("div1");
 
-                    element = document.createElement("input");
-                    element = document.createElement("textarea");
+                    //HTMLElement element;
+
+                    //element = new HTMLInputElement();
+                    //element = new HTMLTextAreaElement();
                 }
             }
-        }
-    });
-
-    Bridge.ns("TestIssue461.Issue461", $asm.$);
-
-    Bridge.apply($asm.$.TestIssue461.Issue461, {
-        f1: function (ev) {
-            // Tests if ev.CurrentTarget.Value compiles
-            System.Console.WriteLine("ev.CurrentTarget.Value: " + (ev.currentTarget.value || ""));
-
-            // Tests if ev.IsMouseEvent() compiles
-            System.Console.WriteLine("IsMouseEvent: " + System.Boolean.toString(Bridge.is(ev, MouseEvent)));
-        },
-        f2: function (ev) {
-            // Tests if ev.CurrentTarget.Href compiles
-            System.Console.WriteLine("ev.CurrentTarget.Href: " + (ev.currentTarget.href || ""));
         }
     });

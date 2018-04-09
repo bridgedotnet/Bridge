@@ -1,4 +1,3 @@
-using Bridge;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,154 +5,12 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace System
-{
-    [External]
-    [Flags]
-    [NonScriptable]
-    public enum AttributeTargets
-    {
-        Assembly = 0x0001,
-        Module = 0x0002,
-        Class = 0x0004,
-        Struct = 0x0008,
-        Enum = 0x0010,
-        Constructor = 0x0020,
-        Method = 0x0040,
-        Property = 0x0080,
-        Field = 0x0100,
-        Event = 0x0200,
-        Interface = 0x0400,
-        Parameter = 0x0800,
-        Delegate = 0x1000,
-        ReturnValue = 0x2000,
-        GenericParameter = 0x4000,
-        Type = Class | Struct | Enum | Interface | Delegate,
-
-        All = Assembly | Module | Class | Struct | Enum | Constructor |
-              Method | Property | Field | Event | Interface | Parameter |
-              Delegate | ReturnValue | GenericParameter
-    }
-
-    [External]
-    [AttributeUsage(AttributeTargets.Class)]
-    [NonScriptable]
-    public class AttributeUsageAttribute : Attribute
-    {
-        public extern AttributeUsageAttribute(AttributeTargets validOn);
-
-        internal extern AttributeUsageAttribute(AttributeTargets validOn, bool allowMultiple, bool inherited);
-
-        /// <summary>Gets or sets a Boolean value indicating whether more than one instance of the indicated attribute can be specified for a single program element.</summary>
-        /// <returns>true if more than one instance is allowed to be specified; otherwise, false. The default is false.</returns>
-        public extern bool AllowMultiple
-        {
-            get;
-            set;
-        }
-
-        /// <summary>Gets or sets a Boolean value indicating whether the indicated attribute can be inherited by derived classes and overriding members.</summary>
-        /// <returns>true if the attribute can be inherited by derived classes and overriding members; otherwise, false. The default is true.</returns>
-        public extern bool Inherited
-        {
-            get;
-            set;
-        }
-
-        /// <summary>Gets a set of values identifying which program elements that the indicated attribute can be applied to.</summary>
-        /// <returns>One or several <see cref="T:System.AttributeTargets"/> values. The default is All.</returns>
-        public extern AttributeTargets ValidOn
-        {
-            get;
-        }
-    }
-
-    [AttributeUsage(AttributeTargets.Enum, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
-    public class FlagsAttribute : Attribute
-    {
-    }
-
-    [AttributeUsage(AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Class, Inherited = false)]
-    [External]
-    [NonScriptable]
-    public sealed class ObsoleteAttribute : Attribute
-    {
-        public extern ObsoleteAttribute();
-
-        public extern ObsoleteAttribute(string message);
-
-        public extern ObsoleteAttribute(string message, bool error);
-
-        public extern bool IsError
-        {
-            get;
-        }
-
-        public extern string Message
-        {
-            get;
-        }
-    }
-}
-
-namespace System.Runtime.InteropServices
-{
-    [ComVisible(true)]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Delegate,
-    Inherited = false)]
-    [External]
-    [NonScriptable]
-    public sealed class ComVisibleAttribute : Attribute
-    {
-        public extern ComVisibleAttribute(bool visibility);
-
-        public extern bool Value
-        {
-            get;
-            private set;
-        }
-    }
-
-    [AttributeUsageAttribute(AttributeTargets.Parameter)]
-    [External]
-    [NonScriptable]
-    public sealed class OutAttribute : Attribute
-    {
-    }
-
-    [AttributeUsageAttribute(AttributeTargets.Parameter)]
-    [External]
-    [NonScriptable]
-    public sealed class InAttribute : Attribute
-    {
-    }
-}
-
-namespace System.Runtime.InteropServices
-{
-    [ComVisible(true)]
-    [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
-    public sealed class GuidAttribute : Attribute
-    {
-        public extern GuidAttribute(string guid);
-
-        public extern string Value
-        {
-            get;
-            private set;
-        }
-    }
-}
-
 namespace System.Reflection
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyTitleAttribute : Attribute
     {
         public extern AssemblyTitleAttribute(string title);
@@ -166,8 +23,8 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyDescriptionAttribute : Attribute
     {
         public extern AssemblyDescriptionAttribute(string description);
@@ -179,9 +36,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyConfigurationAttribute : Attribute
     {
         public extern AssemblyConfigurationAttribute(string configuration);
@@ -193,9 +51,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyCompanyAttribute : Attribute
     {
         public extern AssemblyCompanyAttribute(string company);
@@ -207,9 +66,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyProductAttribute : Attribute
     {
         public extern AssemblyProductAttribute(string product);
@@ -221,9 +81,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyCopyrightAttribute : Attribute
     {
         public extern AssemblyCopyrightAttribute(string copyright);
@@ -235,9 +96,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyTrademarkAttribute : Attribute
     {
         public extern AssemblyTrademarkAttribute(string trademark);
@@ -249,9 +111,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyCultureAttribute : Attribute
     {
         public extern AssemblyCultureAttribute(string culture);
@@ -263,9 +126,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyVersionAttribute : Attribute
     {
         public extern AssemblyVersionAttribute(string version);
@@ -277,9 +141,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyFileVersionAttribute : Attribute
     {
         public extern AssemblyFileVersionAttribute(string version);
@@ -291,9 +156,10 @@ namespace System.Reflection
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssemblyInformationalVersionAttribute : Attribute
     {
         public extern AssemblyInformationalVersionAttribute(string informationalVersion);
@@ -304,8 +170,9 @@ namespace System.Reflection
         }
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class DefaultMemberAttribute : Attribute
     {
         public extern DefaultMemberAttribute(string memberName);
@@ -318,36 +185,25 @@ namespace System.Reflection
     }
 }
 
-namespace System.Runtime.Versioning
-{
-    [AttributeUsage(AttributeTargets.Assembly)]
-    [External]
-    [NonScriptable]
-    public sealed class TargetFrameworkAttribute : Attribute
-    {
-        public extern TargetFrameworkAttribute();
-
-        public extern TargetFrameworkAttribute(string frameworkName);
-
-        public extern string FrameworkDisplayName
-        {
-            get;
-            set;
-        }
-
-        public extern string FrameworkName
-        {
-            get;
-            private set;
-        }
-    }
-}
-
 namespace System.Runtime.CompilerServices
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+#pragma warning disable CS3015 // Type has no accessible constructors which use only CLS-compliant types
+    public sealed class TupleElementNamesAttribute : Attribute
+#pragma warning restore CS3015 // Type has no accessible constructors which use only CLS-compliant types
+    {
+        public extern TupleElementNamesAttribute(string[] transformNames);
+
+        public IList<string> TransformNames { get; }
+    }
+
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public sealed class InternalsVisibleToAttribute : Attribute
     {
@@ -378,6 +234,7 @@ namespace System.Runtime.CompilerServices
     ///     If AllInternalsVisible is not true for a friend assembly, the FriendAccessAllowed attribute
     ///     indicates which internals are shared with that friend assembly.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Class |
                     AttributeTargets.Constructor |
                     AttributeTargets.Enum |
@@ -391,8 +248,8 @@ namespace System.Runtime.CompilerServices
         Inherited = false)]
     [FriendAccessAllowed]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     internal sealed class FriendAccessAllowedAttribute : Attribute
     {
     }
@@ -400,17 +257,19 @@ namespace System.Runtime.CompilerServices
     /// <summary>
     /// If a constructor for a value type takes an instance of this type as a parameter, any attribute applied to that constructor will instead be applied to the default (undeclarable) constructor.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor
     {
         private extern DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor();
     }
 
-    [External]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
     [AttributeUsage(AttributeTargets.Property)]
-    [NonScriptable]
+    [Bridge.NonScriptable]
     public class IndexerNameAttribute : Attribute
     {
         public extern IndexerNameAttribute(string indexerName);
@@ -422,12 +281,14 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field)]
-    [NonScriptable]
+    [Bridge.NonScriptable]
     public sealed class DecimalConstantAttribute : Attribute
     {
         public extern DecimalConstantAttribute(byte scale, byte sign, int hi, int mid, int low);
 
+        [CLSCompliant(false)]
         public extern DecimalConstantAttribute(byte scale, byte sign, uint hi, uint mid, uint low);
 
         public extern decimal Value
@@ -436,17 +297,19 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class ExtensionAttribute : Attribute
     {
         public extern ExtensionAttribute();
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class DynamicAttribute : Attribute
     {
         public extern DynamicAttribute();
@@ -459,8 +322,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class CallSite
     {
         public extern CallSiteBinder Binder
@@ -471,8 +335,9 @@ namespace System.Runtime.CompilerServices
         public static extern CallSite Create(Type delegateType, CallSiteBinder binder);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class CallSite<T> : CallSite where T : class
     {
         public extern T Update
@@ -485,8 +350,9 @@ namespace System.Runtime.CompilerServices
         public static extern CallSite<T> Create(CallSiteBinder binder);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public abstract class CallSiteBinder
     {
         public static extern LabelTarget UpdateLabel
@@ -497,8 +363,9 @@ namespace System.Runtime.CompilerServices
         public extern T BindDelegate<T>(CallSite<T> site, object[] args) where T : class;
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public struct AsyncVoidMethodBuilder
     {
         public static extern AsyncVoidMethodBuilder Create();
@@ -520,8 +387,9 @@ namespace System.Runtime.CompilerServices
         public extern void SetException(Exception exception);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public struct AsyncTaskMethodBuilder
     {
         public extern Task Task
@@ -548,8 +416,9 @@ namespace System.Runtime.CompilerServices
         public extern void SetException(Exception exception);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public struct AsyncTaskMethodBuilder<TResult>
     {
         public extern Task<TResult> Task
@@ -576,8 +445,9 @@ namespace System.Runtime.CompilerServices
         public extern void SetException(Exception exception);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public interface IAsyncStateMachine
     {
         void MoveNext();
@@ -585,15 +455,17 @@ namespace System.Runtime.CompilerServices
         void SetStateMachine(IAsyncStateMachine stateMachine);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public interface INotifyCompletion
     {
         void OnCompleted(Action continuation);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public interface ICriticalNotifyCompletion : INotifyCompletion
     {
         void UnsafeOnCompleted(Action continuation);
@@ -602,8 +474,9 @@ namespace System.Runtime.CompilerServices
 
 namespace Microsoft.CSharp.RuntimeBinder
 {
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public static class Binder
     {
         public static extern CallSiteBinder BinaryOperation(CSharpBinderFlags flags, ExpressionType operation, Type context, IEnumerable<CSharpArgumentInfo> argumentInfo);
@@ -629,8 +502,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static extern CallSiteBinder UnaryOperation(CSharpBinderFlags flags, ExpressionType operation, Type context, IEnumerable<CSharpArgumentInfo> argumentInfo);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public enum CSharpBinderFlags
     {
         None = 0,
@@ -645,15 +518,16 @@ namespace Microsoft.CSharp.RuntimeBinder
         ResultDiscarded = 256,
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class CSharpArgumentInfo
     {
         public static extern CSharpArgumentInfo Create(CSharpArgumentInfoFlags flags, string name);
     }
 
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public enum CSharpArgumentInfoFlags
     {
         None = 0,
@@ -668,9 +542,10 @@ namespace Microsoft.CSharp.RuntimeBinder
 
 namespace System.Threading
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public static class Interlocked
     {
         public static extern int CompareExchange(ref int location1, int value, int comparand);
@@ -678,9 +553,10 @@ namespace System.Threading
         public static extern T CompareExchange<T>(ref T location1, T value, T comparand) where T : class;
     }
 
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public static class Monitor
     {
         public static extern void Enter(object obj);

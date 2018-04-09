@@ -2,6 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N391.Class391", {
+        $metadata : function () { return {"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main1","is":true,"t":8,"sn":"Main1","rt":System.Void}]}; },
         statics: {
             methods: {
                 Main1: function () {
@@ -22,13 +23,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 }
                             } finally {
                                 if (Bridge.is($t1, System.IDisposable)) {
-                                    $t1.System$IDisposable$dispose();
+                                    $t1.System$IDisposable$Dispose();
                                 }
                             }
                         }
                     } finally {
                         if (Bridge.is($t, System.IDisposable)) {
-                            $t.System$IDisposable$dispose();
+                            $t.System$IDisposable$Dispose();
                         }
                     }
                     $t2 = Bridge.getEnumerator(TestArray1);
@@ -43,13 +44,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 }
                             } finally {
                                 if (Bridge.is($t3, System.IDisposable)) {
-                                    $t3.System$IDisposable$dispose();
+                                    $t3.System$IDisposable$Dispose();
                                 }
                             }
                         }
                     } finally {
                         if (Bridge.is($t2, System.IDisposable)) {
-                            $t2.System$IDisposable$dispose();
+                            $t2.System$IDisposable$Dispose();
                         }
                     }}
             }

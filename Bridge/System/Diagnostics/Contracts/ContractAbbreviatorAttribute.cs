@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
     /// <summary>
@@ -7,7 +5,7 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [Conditional("CONTRACTS_FULL")]
-    [External]
+    [Bridge.External]
     public sealed class ContractAbbreviatorAttribute : Attribute
     {
     }

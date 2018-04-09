@@ -1,6 +1,6 @@
 ﻿/// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
-/// <reference path="..\..\Runner\TypeScript\App1\generics.d.ts" />
+/// <reference path="..\..\Runner\TypeScript\App1\Generics.d.ts" />
 
 "use strict";
 
@@ -69,7 +69,7 @@ QUnit.test("Create generic instances", function (assert) {
     assert.deepEqual(c10.Instance, 5, "simpleGeneric$1(Number) instance");
 
     var c11 = new (Generics.SimpleGeneric$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c11.GetSomething(namedEntity).Name$1, name, "SimpleGeneric$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual((c11.GetSomething(namedEntity) as Generics.NamedEntity).Name$1, name, "SimpleGeneric$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c11.Instance, namedEntity, "SimpleGeneric$1(Generics.NamedEntity) instance");
 
     var c20 = new (Generics.SimpleDoubleGeneric$2(Object, Number).$ctor1)("I'm object", 35);
@@ -85,22 +85,22 @@ QUnit.test("Create generic instances", function (assert) {
     assert.deepEqual(c21.InstanceK, 0, "SimpleDoubleGeneric$2(Object, Number) instanceK");
 
     var c30 = new (Generics.GenericINamedEntity$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c30.GetSomething(namedEntity).Name$1, name, "GenericINamedEntity$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual((c30.GetSomething(namedEntity) as Generics.NamedEntity).Name$1, name, "GenericINamedEntity$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c30.Instance, namedEntity, "GenericINamedEntity$1(Generics.NamedEntity) instance");
 
     var c40 = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c40.GetSomething(namedEntity).Name$1, name, "GenericNamedEntity$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual((c40.GetSomething(namedEntity) as Generics.NamedEntity).Name$1, name, "GenericNamedEntity$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c40.Instance, namedEntity, "GenericNamedEntity$1(Generics.NamedEntity) instance");
 
     var c50 = new (Generics.GenericClass$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c50.GetSomething(namedEntity).Name$1, name, "GenericClass$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual((c50.GetSomething(namedEntity) as Generics.NamedEntity).Name$1, name, "GenericClass$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c50.Instance, namedEntity, "GenericClass$1(Generics.NamedEntity) instance");
     var c51 = new (Generics.GenericClass$1(String))("Trest");
     assert.deepEqual(c51.GetSomething("Just string"), "Just string", "GenericClass$1(String) getSomething");
     assert.deepEqual(c51.Instance, "Trest", "GenericClass$1(String) instance");
 
     var c60 = new (Generics.GenericStruct$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c60.GetSomething(namedEntity).Name$1, name, "GenericStruct$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual((c60.GetSomething(namedEntity) as Generics.NamedEntity).Name$1, name, "GenericStruct$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c60.Instance, namedEntity, "GenericStruct$1(Generics.NamedEntity) instance");
     var c61 = new (Generics.GenericStruct$1(String))("Trest");
     assert.deepEqual(c61.GetSomething("Just string"), "Just string", "GenericStruct$1(String) getSomething");

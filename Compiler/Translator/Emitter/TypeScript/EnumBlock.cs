@@ -30,16 +30,11 @@ namespace Bridge.Translator.TypeScript
         protected override void DoEmit()
         {
             var typeDef = this.Emitter.GetTypeDefinition();
-            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
+            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, true, false);
 
             if (name.IsEmpty())
             {
                 name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, false, true);
-            }
-
-            if (this.Namespace != null)
-            {
-                this.Write("export ");
             }
 
             this.Write("enum ");
@@ -68,7 +63,7 @@ namespace Bridge.Translator.TypeScript
                         {
                             this.Write(((PrimitiveExpression)initializer).Value);
                         }
-                        
+
                     }
 
                     if (field != lastField)

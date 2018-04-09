@@ -1,9 +1,7 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
-    [Enum(Emit.Name)]
-    [External]
+    [Bridge.Enum(Bridge.Emit.Name)]
+    [Bridge.External]
     public enum ContractFailureKind
     {
         Precondition,

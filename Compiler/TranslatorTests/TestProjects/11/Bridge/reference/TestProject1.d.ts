@@ -1,10 +1,10 @@
 /// <reference path="./bridge.d.ts" />
 
 declare namespace TestProject1 {
-    export interface TestClassA {
+    interface TestClassA {
         Value1: number;
     }
-    export interface TestClassAFunc extends Function {
+    interface TestClassAFunc extends Function {
         prototype: TestClassA;
         new (): TestClassA;
     }

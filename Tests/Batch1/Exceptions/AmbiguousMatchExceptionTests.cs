@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.Exceptions
         {
             Assert.AreEqual("System.Reflection.AmbiguousMatchException", typeof(AmbiguousMatchException).FullName, "Name");
             Assert.True(typeof(AmbiguousMatchException).IsClass, "IsClass");
-            Assert.AreEqual(typeof(Exception), typeof(AmbiguousMatchException).BaseType, "BaseType");
+            Assert.AreEqual(typeof(SystemException), typeof(AmbiguousMatchException).BaseType, "BaseType");
             object d = new AmbiguousMatchException();
             Assert.True(d is AmbiguousMatchException, "is AmbiguousMatchException");
             Assert.True(d is Exception, "is Exception");
@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Exceptions
             var ex = new AmbiguousMatchException();
             Assert.True((object)ex is AmbiguousMatchException, "is AmbiguousMatchException");
             Assert.True(ex.InnerException == null, "InnerException");
-            Assert.AreEqual("Ambiguous match.", ex.Message);
+            Assert.AreEqual("Ambiguous match found.", ex.Message);
         }
 
         [Test]

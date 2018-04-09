@@ -1,13 +1,12 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Exception used for validation using <see cref="ValidationAttribute" />.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Serializable]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class ValidationException : Exception
     {
         /// <summary>

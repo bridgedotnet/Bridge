@@ -1,43 +1,43 @@
-﻿using Bridge;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace System
 {
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public struct Boolean : IComparable, IComparable<bool>, IEquatable<bool>
     {
-        [InlineConst]
+        [Bridge.InlineConst]
         internal const int True = 1;
 
-        [InlineConst]
+        [Bridge.InlineConst]
         internal const int False = 0;
 
-        [Template("System.Boolean.trueString")]
+        [Bridge.Template("System.Boolean.trueString")]
         public static readonly string TrueString = "True";
 
-        [Template("System.Boolean.falseString")]
+        [Bridge.Template("System.Boolean.falseString")]
         public static readonly string FalseString = "False";
 
-        [Template("false")]
+        [Bridge.Template("false")]
         private extern Boolean(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Bridge.Template("Bridge.compare({this}, {other})")]
         public extern int CompareTo(bool other);
 
-        [Template("{this} === {other}")]
+        [Bridge.Template("{this} === {other}")]
         public extern bool Equals(bool other);
 
-        [Template("System.Boolean.parse({value})")]
+        [Bridge.Template("System.Boolean.parse({value})")]
         public static extern bool Parse(string value);
 
-        [Template("System.Boolean.tryParse({value}, {result})")]
+        [Bridge.Template("System.Boolean.tryParse({value}, {result})")]
         public static extern bool TryParse(string value, out bool result);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Bridge.Template("Bridge.compare({this}, {other})")]
         public extern int CompareTo(object obj);
 
-        [Template(Fn = "System.Boolean.toString")]
+        [Bridge.Template(Fn = "System.Boolean.toString")]
         public override extern string ToString();
     }
 }

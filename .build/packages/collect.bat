@@ -21,9 +21,6 @@ SET output="%root%Bridge\.build\packages\"
 :: Bridge.PostBuild
 echo f | xcopy /f /y "%root%Bridge\PostBuild\bin\%build%\*.nupkg"                   %output%
 
-:: Bridge.Html5
-echo f | xcopy /f /y "%root%Bridge\Html5\bin\%build%\*.nupkg"                       %output%
-
 :: Bridge.Build
 echo f | xcopy /f /y "%root%Bridge\Compiler\Build\bin\%build%\*.nupkg"              %output%
 
@@ -47,6 +44,9 @@ echo f | xcopy /f /y "%root%Test\Bridge.Test\bin\%build%\*.nupkg"               
 ::------------------------------------------------------------------------------------------::
 :: Frameworks
 ::------------------------------------------------------------------------------------------::
+
+:: Bridge.Html5
+echo f | xcopy /f /y "%root%Frameworks\Html5\bin\%build%\*.nupkg"                   %output%
 
 :: Bridge.Newtonsoft.Json
 echo f | xcopy /f /y "%root%Bridge.Newtonsoft.Json\Newtonsoft.Json\bin\%build%\*.nupkg"	%output%

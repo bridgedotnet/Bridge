@@ -142,12 +142,12 @@ namespace Bridge.Translator.Tests.CompilerTests
                 <RootNamespace>TestProject</RootNamespace>
                 <AssemblyName>TestProject</AssemblyName>
                 <TargetFramework>net40</TargetFramework>
-    
+
                 <NoStdLib>true</NoStdLib>
                 <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
                 <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
                 <AdditionalExplicitAssemblyReferences />
-    
+
               </PropertyGroup>
 
               <PropertyGroup Condition="" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "">
@@ -193,7 +193,7 @@ namespace Bridge.Translator.Tests.CompilerTests
                     Configuration = "Release",
                     Platform = "AnyCPU",
                 };
-                
+
                 translator.EnsureProjectProperties();
 
                 Assert.AreEqual(OverflowMode.Checked, translator.OverflowMode);

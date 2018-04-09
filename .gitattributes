@@ -5,7 +5,7 @@
 *.asax text
 *.ashx text
 *.aspx text
-*.bat text
+*.bat text eol=crlf
 *.config text
 *.cs text
 *.cshtml text
@@ -42,3 +42,12 @@
 *.ttf binary
 *.woff binary
 *.woff2 binary
+
+# Instruct GitHub linguist to ignore some folders
+Tests/Runner/* linguist-vendored
+Bridge/Resources/* linguist-vendored
+Compiler/TranslatorTests/TestProjects/*/Bridge/reference/* linguist-vendored
+Tests/TypeScript/Batch1/* linguist-vendored
+
+linguist-language=csharp
+*.cs     diff=csharp

@@ -65,8 +65,8 @@ namespace TestIssue434
             System.Console.WriteLine(i);
         }
     }
-	
-	public class Issue434C
+
+    public class Issue434C
     {
         [Init(InitPosition.Top)]
         public static void Top()

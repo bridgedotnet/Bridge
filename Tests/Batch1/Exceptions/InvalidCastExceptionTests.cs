@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         {
             Assert.AreEqual("System.InvalidCastException", typeof(InvalidCastException).FullName, "Name");
             Assert.True(typeof(InvalidCastException).IsClass, "IsClass");
-            Assert.AreEqual(typeof(Exception), typeof(InvalidCastException).BaseType, "BaseType");
+            Assert.AreEqual(typeof(SystemException), typeof(InvalidCastException).BaseType, "BaseType");
             object d = new InvalidCastException();
             Assert.True(d is InvalidCastException, "is InvalidCastException");
             Assert.True(d is Exception, "is Exception");
@@ -27,7 +27,7 @@ namespace Bridge.ClientTest.Exceptions
             var ex = new InvalidCastException();
             Assert.True((object)ex is InvalidCastException, "is InvalidCastException");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
-            Assert.AreEqual("The cast is not valid.", ex.Message);
+            Assert.AreEqual("Specified cast is not valid.", ex.Message);
         }
 
         [Test]

@@ -59,7 +59,7 @@ namespace Bridge.ClientTest.Text
             foreach (var objectse in UnicodeEncodingEncodeTests.Encode_TestData())
             {
                 string source = (string)objectse[0];
-                int index = (int)objectse[1]; 
+                int index = (int)objectse[1];
                 int count = (int)objectse[2];
                 byte[] expectedLittleEndian = (byte[])objectse[3];
 
@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.Text
                 EncodingHelpers.Encode(new UnicodeEncoding(true, false, true), source, index, count, expectedBigEndian);
             }
 
-            
+
         }
 
         public static IEnumerable<object[]> Encode_InvalidChars_TestData()

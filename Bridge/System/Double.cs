@@ -1,62 +1,61 @@
-using Bridge;
-
 namespace System
 {
-    [External]
-    [Constructor("Number")]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Constructor("Number")]
+    [Bridge.Reflectable]
     public struct Double : IComparable, IComparable<Double>, IEquatable<Double>, IFormattable
     {
         private extern Double(int i);
 
-        [Template("System.Double.max")]
+        [Bridge.Template("System.Double.max")]
         public const double MaxValue = 1.7976931348623157E+308;
 
-        [Template("System.Double.min")]
+        [Bridge.Template("System.Double.min")]
         public const double MinValue = -1.7976931348623157E+308;
 
-        [InlineConst]
+        [Bridge.InlineConst]
         public const double Epsilon = 4.94065645841247E-324;
 
-        [Template("Number.NEGATIVE_INFINITY")]
-        public static readonly double NegativeInfinity = -1.0 / 0.0;
+        [Bridge.Template("Number.NEGATIVE_INFINITY")]
+        public const double NegativeInfinity = -1D / 0D;
 
-        [Template("Number.POSITIVE_INFINITY")]
-        public static readonly double PositiveInfinity = 1.0 / 0.0;
+        [Bridge.Template("Number.POSITIVE_INFINITY")]
+        public const double PositiveInfinity = 1D / 0D;
 
-        [Template("Number.NaN")]
-        public static readonly double NaN = 0.0 / 0.0;
+        [Bridge.Template("Number.NaN")]
+        public const double NaN = 0D / 0D;
 
-        [Template("System.Double.format({this}, {format})")]
+        [Bridge.Template("System.Double.format({this}, {format})")]
         public extern string Format(string format);
 
-        [Template("System.Double.format({this}, {format}, {provider})")]
+        [Bridge.Template("System.Double.format({this}, {format}, {provider})")]
         public extern string Format(string format, IFormatProvider provider);
 
         public extern string ToString(int radix);
 
-        [Template("System.Double.format({this}, {format})")]
+        [Bridge.Template("System.Double.format({this}, {format})")]
         public extern string ToString(string format);
 
-        [Template("System.Double.format({this}, {format}, {provider})")]
+        [Bridge.Template("System.Double.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template(Fn = "System.Double.format")]
+        [Bridge.Template(Fn = "System.Double.format")]
         public override extern string ToString();
 
-        [Template("System.Double.format({this}, \"G\", {provider})")]
+        [Bridge.Template("System.Double.format({this}, \"G\", {provider})")]
         public extern string ToString(IFormatProvider provider);
 
-        [Template("System.Double.parse({s})")]
+        [Bridge.Template("System.Double.parse({s})")]
         public static extern double Parse(string s);
 
-        [Template("Bridge.Int.parseFloat({s}, {provider})")]
+        [Bridge.Template("Bridge.Int.parseFloat({s}, {provider})")]
         public static extern double Parse(string s, IFormatProvider provider);
 
-        [Template("System.Double.tryParse({s}, null, {result})")]
+        [Bridge.Template("System.Double.tryParse({s}, null, {result})")]
         public static extern bool TryParse(string s, out double result);
 
-        [Template("System.Double.tryParse({s}, {provider}, {result})")]
+        [Bridge.Template("System.Double.tryParse({s}, {provider}, {result})")]
         public static extern bool TryParse(string s, IFormatProvider provider, out double result);
 
         public extern string ToExponential();
@@ -71,34 +70,34 @@ namespace System
 
         public extern string ToPrecision(int precision);
 
-        [Template("({d} === Number.POSITIVE_INFINITY)")]
+        [Bridge.Template("({d} === Number.POSITIVE_INFINITY)")]
         public static extern bool IsPositiveInfinity(double d);
 
-        [Template("({d} === Number.NEGATIVE_INFINITY)")]
+        [Bridge.Template("({d} === Number.NEGATIVE_INFINITY)")]
         public static extern bool IsNegativeInfinity(double d);
 
-        [Template("(Math.abs({d}) === Number.POSITIVE_INFINITY)")]
+        [Bridge.Template("(Math.abs({d}) === Number.POSITIVE_INFINITY)")]
         public static extern bool IsInfinity(double d);
 
-        [Template("isFinite({d})")]
+        [Bridge.Template("isFinite({d})")]
         public static extern bool IsFinite(double d);
 
-        [Template("isNaN({d})")]
+        [Bridge.Template("isNaN({d})")]
         public static extern bool IsNaN(double d);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Bridge.Template("Bridge.compare({this}, {other})")]
         public extern int CompareTo(double other);
 
-        [Template("Bridge.compare({this}, {obj})")]
+        [Bridge.Template("Bridge.compare({this}, {obj})")]
         public extern int CompareTo(object obj);
 
-        [Template("{this} === {other}")]
+        [Bridge.Template("{this} === {other}")]
         public extern bool Equals(double other);
 
-        [Template("System.Double.equals({this}, {other})")]
+        [Bridge.Template("System.Double.equals({this}, {other})")]
         public override extern bool Equals(object other);
 
-        [Template(Fn = "System.Double.getHashCode")]
+        [Bridge.Template(Fn = "System.Double.getHashCode")]
         public override extern int GetHashCode();
     }
 }

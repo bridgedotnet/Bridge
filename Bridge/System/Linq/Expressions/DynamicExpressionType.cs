@@ -1,9 +1,7 @@
-using Bridge;
-
 namespace System.Linq.Expressions
 {
-    [External]
-    [Enum(Emit.Value)]
+    [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.Value)]
     public enum DynamicExpressionType
     {
         MemberAccess,

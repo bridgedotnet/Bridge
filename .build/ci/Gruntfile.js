@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     , {
         browserName: "googlechrome",
         platform: "linux"
-    } 
+    }
     //, {
         // browserName: "iphone",
         // platform: 'Mac 10.10',

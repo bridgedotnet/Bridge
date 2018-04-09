@@ -69,14 +69,17 @@
                 for (var i = 0; i < config.alias.length; i++) {
                     (function (obj, name, alias, cls) {
                         var descriptor = null;
+
                         for (var i = descriptors.length - 1; i >= 0; i--) {
                             if (descriptors[i].name === name) {
                                 descriptor = descriptors[i];
+
                                 break;
                             }
                         }
 
                         var arr = Array.isArray(alias) ? alias : [alias];
+
                         for (var j = 0; j < arr.length; j++) {
                             alias = arr[j];
 
@@ -105,7 +108,7 @@
                                 } else {
                                     scope[alias] = m;
                                     aliases.push({ fn: name, alias: alias });
-                                }                                
+                                }
                             }
                         }
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
@@ -131,9 +134,10 @@
             }
         },
 
-        convertScheme: function(obj) {
+        convertScheme: function (obj) {
             var result = {},
-            copy = function (obj, to) {
+                copy = function (obj, to) {
+
                 var reserved = ["fields", "methods", "events", "props", "properties", "alias", "ctors"],
                     keys = Object.keys(obj);
 
@@ -270,6 +274,14 @@
             }
 
             prop = prop || {};
+            prop.$kind = prop.$kind || "class";
+
+            var isNested = false;
+
+            if (prop.$kind.match("^nested ") !== null) {
+                isNested = true;
+                prop.$kind = prop.$kind.substr(7);
+            }
 
             if (prop.$kind === "enum" && !prop.inherits) {
                 prop.inherits = [System.IComparable, System.IFormattable];
@@ -282,6 +294,7 @@
                         scope.$main && Bridge.isFunction(scope.$main) ||
                         scope.hasOwnProperty("ctor") && Bridge.isFunction(scope.ctor)) {
                         defaultScheme = 1;
+
                         return false;
                     }
 
@@ -294,6 +307,7 @@
                             return true;
                         }
                     }
+
                     return false;
                 },
                 alternateScheme = check(prop);
@@ -323,8 +337,6 @@
                 ctorName,
                 name,
                 registerT = true;
-
-            prop.$kind = prop.$kind || "class";
 
             if (prop.$kind === "enum") {
                 extend = [System.Enum];
@@ -361,11 +373,13 @@
                     Class = function (obj) {
                         obj = obj || {};
                         obj.$getType = function () { return Class };
+
                         return obj;
                     };
                 } else {
                     Class = function () {
                         this.$initialize();
+
                         if (Class.$base) {
                             if (Class.$$inherits && Class.$$inherits.length > 0 && Class.$$inherits[0].$staticInit) {
                                 Class.$$inherits[0].$staticInit();
@@ -373,6 +387,8 @@
 
                             if (Class.$base.ctor) {
                                 Class.$base.ctor.call(this);
+                            } else if (Bridge.isFunction(Class.$base.constructor)) {
+                                Class.$base.constructor.call(this);
                             }
                         }
                     };
@@ -387,7 +403,9 @@
                 if ((!statics || !statics.createInstance)) {
                     Class.createInstance = function () {
                         var obj = {};
-                        obj.$getType = function() { return Class };
+
+                        obj.$getType = function () { return Class };
+
                         return obj;
                     };
                 }
@@ -405,7 +423,18 @@
             }
 
             Class.$$name = className;
+
+            if (isNested) {
+                var lastIndex = Class.$$name.lastIndexOf(".");
+
+                Class.$$name = Class.$$name.substr(0, lastIndex) + "+" + Class.$$name.substr(lastIndex + 1)
+            }
+
             Class.$kind = prop.$kind;
+
+            if (prop.$metadata) {
+                Class.$metadata = prop.$metadata;
+            }
 
             if (gCfg && isGenericInstance) {
                 Class.$genericTypeDefinition = gCfg.fn;
@@ -415,10 +444,10 @@
                 var result = Bridge.Reflection.getTypeFullName(gCfg.fn);
 
                 for (i = 0; i < gCfg.args.length; i++) {
-                    result += (i === 0 ? '[' : ',') + '[' + Bridge.Reflection.getTypeQName(gCfg.args[i]) + ']';
+                    result += (i === 0 ? "[" : ",") + "[" + Bridge.Reflection.getTypeQName(gCfg.args[i]) + "]";
                 }
 
-                result += ']';
+                result += "]";
 
                 Class.$$fullname = result;
             } else {
@@ -439,7 +468,19 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+
+            if (extend && !extend[0].$$initCtor) {
+                var cls = extend[0];
+                var $$initCtor = function () { };
+                $$initCtor.prototype = cls.prototype;
+                $$initCtor.prototype.constructor = cls;
+                $$initCtor.prototype.$$fullname = Bridge.Reflection.getTypeFullName(cls);
+
+                prototype = new $$initCtor();
+            }
+            else {
+                prototype = extend ? new extend[0].$$initCtor() : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
+            }            
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
@@ -496,6 +537,7 @@
                 }
 
                 var member = prop[name];
+
                 if (isCtor) {
                     Class[ctorName] = member;
                     Class[ctorName].prototype = prototype;
@@ -515,6 +557,7 @@
             if (statics) {
                 for (name in statics) {
                     var member = statics[name];
+
                     if (name === "ctor") {
                         Class["$ctor"] = member;
                     } else {
@@ -534,7 +577,7 @@
                         }
 
                         return i1.value - i2.value;
-                    }).map(function(i) {
+                    }).map(function (i) {
                         return i.name;
                     });
                 }
@@ -563,6 +606,7 @@
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
                 if (prototype.$main) {
                     var entryName = prototype.$main.name || "Main";
+
                     if (!Class[entryName]) {
                         Class[entryName] = prototype.$main;
                     }
@@ -621,11 +665,11 @@
             return Class;
         },
 
-        toCtorString: function() {
+        toCtorString: function () {
             return Bridge.Reflection.getTypeName(this);
         },
 
-        createInheritors: function(cls, extend) {
+        createInheritors: function (cls, extend) {
             var interfaces = [],
                 baseInterfaces = [],
                 descriptors = [],
@@ -684,12 +728,14 @@
                     for (var i = descriptors.length - 1; i >= 0; i--) {
                         if (descriptors[i].name === key) {
                             descriptor = descriptors[i];
+
                             break;
                         }
                     }
                 }
 
                 var dcount = key.split("$").length;
+
                 if ((own || descriptor != null) && (dcount === 1 || dcount === 2 && key.match("\$\d+$"))) {
                     obj[key] = this[key];
                 }
@@ -698,7 +744,7 @@
             return obj;
         },
 
-        setInheritors: function(cls, extend) {
+        setInheritors: function (cls, extend) {
             cls.$$inherits = extend;
 
             for (var i = 0; i < extend.length; i++) {
@@ -721,9 +767,11 @@
                         switch (v) {
                             case 1: if (!Bridge.Reflection.isAssignableFrom(t, s))
                                 return false;
+
                                 break;
                             case 2: if (!Bridge.Reflection.isAssignableFrom(s, t))
                                 return false;
+
                                 break;
                             default: if (s !== t)
                                 return false;
@@ -747,6 +795,7 @@
                     return true;
                 }
             }
+
             return false;
         },
 
@@ -938,11 +987,12 @@
             fn.$isGenericTypeDefinition = true;
             fn.$getMetadata = Bridge.Reflection.getMetadata;
 
-            fn.$staticInit = function() {
+            fn.$staticInit = function () {
                 fn.$typeArguments = Bridge.Reflection.createTypeParams(prop);
 
                 var old = Bridge.Class.staticInitAllow,
                     oldIsBlocked = Bridge.Class.queueIsBlocked;
+
                 Bridge.Class.staticInitAllow = false;
                 Bridge.Class.queueIsBlocked = true;
 
@@ -957,7 +1007,9 @@
                 }
 
                 Bridge.Class.createInheritors(fn, extend);
+
                 var objectType = Bridge.global.System && Bridge.global.System.Object || Object;
+
                 if (!extend) {
                     extend = [objectType].concat(fn.$interfaces);
                 }
@@ -965,6 +1017,7 @@
                 Bridge.Class.setInheritors(fn, extend);
 
                 var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new objectType();
+
                 fn.prototype = prototype;
                 fn.prototype.constructor = fn;
             };
@@ -975,17 +1028,35 @@
         },
 
         init: function (fn) {
+            if (Bridge.Reflection) {
+                var metas = Bridge.Reflection.deferredMeta,
+                    len = metas.length;
+
+                if (len > 0) {
+                    Bridge.Reflection.deferredMeta = [];
+
+                    for (var i = 0; i < len; i++) {
+                        var item = metas[i];
+
+                        Bridge.setMetadata(item.typeName, item.metadata);
+                    }
+                }
+            }
+
             if (fn) {
                 var old = Bridge.Class.staticInitAllow;
+
                 Bridge.Class.staticInitAllow = true;
                 fn();
                 Bridge.Class.staticInitAllow = old;
+
                 return;
             }
 
             Bridge.Class.staticInitAllow = true;
 
             var queue = Bridge.Class.$queue.concat(Bridge.Class.$queueEntry);
+
             Bridge.Class.$queue.length = 0;
             Bridge.Class.$queueEntry.length = 0;
 
@@ -997,7 +1068,7 @@
                 }
 
                 if (t.prototype.$main) {
-                    (function(cls, name) {
+                    (function (cls, name) {
                         Bridge.ready(function () {
                              cls[name]();
                         });

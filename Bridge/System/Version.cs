@@ -7,7 +7,7 @@ namespace System
     // internally as a -1.  By definition, an unspecified component matches anything
     // (both unspecified and specified), and an unspecified component is "less than" any
     // specified component.
-    //[External] the class should have External attribute as it uses transpiled js code Version.js
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public sealed class Version : ICloneable, IComparable<Version>, IEquatable<Version>
     {
         // AssemblyName depends on the order staying the same

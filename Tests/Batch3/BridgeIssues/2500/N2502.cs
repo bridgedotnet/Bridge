@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                     case -1:
                         break;
                 }
-                
+
                 for (i = 0; i < 10; i++)
                 {
                     break;

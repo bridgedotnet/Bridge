@@ -87,21 +87,21 @@ namespace Bridge.ClientTest.Batch1.Reflection
         private Assembly ImportedModuleTestCase
         {
             [Script(@"
-	var x = {
-		Foo: {
-			Bar: {
-				Inner: {
-					OtherFunction: function() { }
-				},
-				Something: function() { }
-			},
-			baz: function() {
-			},
-			Bar2: 0
-		}
-	};
-	x.Foo.baz.Test = function() {};
-	return x;")]
+    var x = {
+        Foo: {
+            Bar: {
+                Inner: {
+                    OtherFunction: function() { }
+                },
+                Something: function() { }
+            },
+            baz: function() {
+            },
+            Bar2: 0
+        }
+    };
+    x.Foo.baz.Test = function() {};
+    return x;")]
             get
             {
                 return null;

@@ -28,7 +28,7 @@
 
         if (T && T.precision && typeof v === "number") {
             var i = Bridge.Int.trunc(v);
-            var length = (i + '').length;
+            var length = (i + "").length;
             var p = T.precision - length;
             if (p < 0) {
                 p = 0;
@@ -435,7 +435,7 @@
         return this.value.valueOf();
     };
 
-    System.Decimal.prototype._toFormat = function(dp, rm, f) {
+    System.Decimal.prototype._toFormat = function (dp, rm, f) {
         var x = this.value;
 
         if (!x.isFinite()) {
@@ -447,7 +447,7 @@
             groupSeparator = f.groupSeparator,
             g1 = +f.groupSize,
             g2 = +f.secondaryGroupSize,
-            arr = x.toFixed(dp, rm).split('.'),
+            arr = x.toFixed(dp, rm).split("."),
             intPart = arr[0],
             fractionPart = arr[1],
             intDigits = isNeg ? intPart.slice(1) : intPart,
@@ -470,25 +470,25 @@
             }
 
             if (isNeg) {
-                intPart = '-' + intPart;
+                intPart = "-" + intPart;
             }
         }
 
         return fractionPart
             ? intPart + f.decimalSeparator + ((g2 = +f.fractionGroupSize)
-                ? fractionPart.replace(new RegExp('\\d{' + g2 + '}\\B', 'g'),
-                    '$&' + f.fractionGroupSeparator)
+                ? fractionPart.replace(new RegExp("\\d{" + g2 + "}\\B", "g"),
+                    "$&" + f.fractionGroupSeparator)
                 : fractionPart)
             : intPart;
     };
 
     System.Decimal.prototype.toFormat = function (dp, rm, provider) {
         var config = {
-                decimalSeparator : '.',
-                groupSeparator : ',',
+                decimalSeparator : ".",
+                groupSeparator : ",",
                 groupSize : 3,
                 secondaryGroupSize : 0,
-                fractionGroupSeparator : '\xA0',
+                fractionGroupSeparator : "\xA0",
                 fractionGroupSize : 0
             },
             d;
@@ -530,9 +530,8 @@
                 bytes[i*4 + 4] = (d[i] >> 8) & 255;
                 bytes[i*4 + 5] = (d[i] >> 16) & 255;
                 bytes[i*4 + 6] = (d[i] >> 24) & 255;
-            }            
-        }
-        else {
+            }
+        } else {
             bytes[2] = 0;
         }
 
@@ -555,7 +554,7 @@
                 i = i + 4;
             }
         }
-        
+
         value.value.d = d;
 
         return value;

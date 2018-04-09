@@ -2,6 +2,7 @@ using System;
 
 namespace Bridge
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [External]
     [Name("Bridge.Validation")]
     public sealed class Validation

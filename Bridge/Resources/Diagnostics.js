@@ -1,30 +1,3 @@
-    System.Diagnostics.Debug = {
-        writeln: function (text) {
-            if (Bridge.global.console && Bridge.global.console.debug) {
-                Bridge.global.console.debug(text);
-            }
-        },
-
-        _fail: function (message) {
-            System.Diagnostics.Debug.writeln(message);
-            debugger;
-        },
-
-        assert: function (condition, message) {
-            if (!condition) {
-                message = 'Assert failed: ' + message;
-
-                if (confirm(message + '\r\n\r\nBreak into debugger?')) {
-                    System.Diagnostics.Debug._fail(message);
-                }
-            }
-        },
-
-        fail: function (message) {
-            System.Diagnostics.Debug._fail(message);
-        }
-    }
-
     Bridge.define("System.Diagnostics.Stopwatch", {
         ctor: function () {
             this.$initialize();
@@ -71,8 +44,10 @@
             {
                 var currentTimeStamp = System.Diagnostics.Stopwatch.getTimestamp();
                 var elapsedUntilNow = currentTimeStamp.sub(this._startTime);
+
                 timeElapsed = timeElapsed.add(elapsedUntilNow);
             }
+
             return timeElapsed;
         },
 
@@ -88,18 +63,19 @@
             startNew: function () {
                 var s = new System.Diagnostics.Stopwatch();
                 s.start();
+
                 return s;
             }
         }
     });
 
-    if (typeof (window) !== 'undefined' && window.performance && window.performance.now) {
+    if (typeof (window) !== "undefined" && window.performance && window.performance.now) {
         System.Diagnostics.Stopwatch.frequency = new System.Int64(1e6);
         System.Diagnostics.Stopwatch.isHighResolution = true;
         System.Diagnostics.Stopwatch.getTimestamp = function () {
             return new System.Int64(Math.round(window.performance.now() * 1000));
         };
-    } else if (typeof (process) !== 'undefined' && process.hrtime) {
+    } else if (typeof (process) !== "undefined" && process.hrtime) {
         System.Diagnostics.Stopwatch.frequency = new System.Int64(1e9);
         System.Diagnostics.Stopwatch.isHighResolution = true;
         System.Diagnostics.Stopwatch.getTimestamp = function () {
@@ -142,7 +118,7 @@
         },
         forAll: function (fromInclusive, toExclusive, predicate) {
             if (!predicate) {
-                throw new System.ArgumentNullException("predicate");
+                throw new System.ArgumentNullException.$ctor1("predicate");
             }
 
             for (; fromInclusive < toExclusive; fromInclusive++) {
@@ -155,11 +131,11 @@
         },
         forAll$1: function (collection, predicate) {
             if (!collection) {
-                throw new System.ArgumentNullException("collection");
+                throw new System.ArgumentNullException.$ctor1("collection");
             }
 
             if (!predicate) {
-                throw new System.ArgumentNullException("predicate");
+                throw new System.ArgumentNullException.$ctor1("predicate");
             }
 
             var enumerator = Bridge.getEnumerator(collection);
@@ -170,14 +146,15 @@
                         return false;
                     }
                 }
+
                 return true;
             } finally {
-                enumerator.dispose();
+                enumerator.Dispose();
             }
         },
         exists: function (fromInclusive, toExclusive, predicate) {
             if (!predicate) {
-                throw new System.ArgumentNullException("predicate");
+                throw new System.ArgumentNullException.$ctor1("predicate");
             }
 
             for (; fromInclusive < toExclusive; fromInclusive++) {
@@ -190,11 +167,11 @@
         },
         exists$1: function (collection, predicate) {
             if (!collection) {
-                throw new System.ArgumentNullException("collection");
+                throw new System.ArgumentNullException.$ctor1("collection");
             }
 
             if (!predicate) {
-                throw new System.ArgumentNullException("predicate");
+                throw new System.ArgumentNullException.$ctor1("predicate");
             }
 
             var enumerator = Bridge.getEnumerator(collection);
@@ -205,9 +182,10 @@
                         return true;
                     }
                 }
+
                 return false;
             } finally {
-                enumerator.dispose();
+                enumerator.Dispose();
             }
         }
     };
@@ -230,7 +208,7 @@
         config: {
             properties: {
                 Kind: {
-                    get: function() {
+                    get: function () {
                         return this._kind;
                     }
                 },
@@ -252,7 +230,7 @@
                         return this._condition;
                     }
                 }
-            }  
+            }
         },
 
         ctor: function (failureKind, failureMessage, userMessage, condition, innerException) {

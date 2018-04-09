@@ -1,11 +1,5 @@
-using Bridge;
-using Bridge.Internal.Html5;
-
 namespace System.Text
 {
-    [Reflectable]
-    [FileName("system\\text\\encoding.js")]
-    [Convention]
     public class UnicodeEncoding : Encoding
     {
         private bool bigEndian;
@@ -128,7 +122,7 @@ namespace System.Text
                 }
                 else if (ch <= 0x10FFFF)
                 {
-                    ch = Script.Write<char>("ch - 0x10000"); //?????
+                    ch = Bridge.Script.Write<char>("ch - 0x10000"); //?????
 
                     char lowBits = (char)((ch & 0x3FF) | 0xDC00);
                     char highBits = (char)(((ch >> 10) & 0x3FF) | 0xD800);

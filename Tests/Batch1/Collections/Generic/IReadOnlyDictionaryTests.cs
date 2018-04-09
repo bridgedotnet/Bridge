@@ -32,7 +32,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 }
             }
 
-            public new IEnumerable<int> Keys
+            public IEnumerable<int> Keys
             {
                 get
                 {

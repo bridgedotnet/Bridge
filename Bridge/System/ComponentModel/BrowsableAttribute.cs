@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.ComponentModel
 {
     using System;
@@ -7,6 +5,7 @@ namespace System.ComponentModel
     /// <summary>
     /// Specifies whether a property or event should be displayed in a Properties window.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.All)]
     public sealed class BrowsableAttribute : Attribute
     {

@@ -29,6 +29,7 @@
     <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +42,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
     <DocumentationFile>bin\Release\Bridge.xml</DocumentationFile>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -51,72 +53,179 @@
     <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Html5\Ajax\XMLHttpRequest.cs">
-      <Link>Internal\XMLHttpRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\File\File.cs">
-      <Link>Internal\File.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\ArrayBuffer.cs">
-      <Link>Internal\Html5\TypedArray\ArrayBuffer.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\ArrayBufferView.cs">
-      <Link>Internal\Html5\TypedArray\ArrayBufferView.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\DataView.cs">
-      <Link>Internal\Html5\TypedArray\DataView.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Float32Array.cs">
-      <Link>Internal\Html5\TypedArray\Float32Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Float64Array.cs">
-      <Link>Internal\Html5\TypedArray\Float64Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Int16Array.cs">
-      <Link>Internal\Html5\TypedArray\Int16Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Int32Array.cs">
-      <Link>Internal\Html5\TypedArray\Int32Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Int8Array.cs">
-      <Link>Internal\Html5\TypedArray\Int8Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Prototype.cs">
-      <Link>Internal\Html5\TypedArray\Prototype.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Uint16Array.cs">
-      <Link>Internal\Html5\TypedArray\Uint16Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Uint32Array.cs">
-      <Link>Internal\Html5\TypedArray\Uint32Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Uint8Array.cs">
-      <Link>Internal\Html5\TypedArray\Uint8Array.cs</Link>
-    </Compile>
-    <Compile Include="..\Html5\TypedArray\Uint8ClampedArray.cs">
-      <Link>Internal\Html5\TypedArray\Uint8ClampedArray.cs</Link>
-    </Compile>
     <Compile Include="Attributes\Convention.cs" />
+    <Compile Include="Attributes\PrivateProtectedAttribute.cs" />
+    <Compile Include="Attributes\ExternalInterfaceAttribute.cs" />
+    <Compile Include="Attributes\CastAttribute.cs" />
+    <Compile Include="Attributes\OutputByAttribute.cs" />
+    <Compile Include="Attributes\OutputAttribute.cs" />
+    <Compile Include="Attributes\VirtualAttribute.cs" />
+    <Compile Include="Attributes\NonScriptableAttribute.cs" />
+    <Compile Include="Attributes\ReadyAttribute.cs" />
     <Compile Include="Attributes\RulesAttribute.cs" />
+    <Compile Include="Attributes\WhereAttribute.cs" />
+    <Compile Include="shared\System\ApplicationException.cs" />
+    <Compile Include="shared\System\ArgumentException.cs" />
+    <Compile Include="shared\System\ArgumentNullException.cs" />
+    <Compile Include="shared\System\ArgumentOutOfRangeException.cs" />
+    <Compile Include="shared\System\AttributeTargets.cs" />
+    <Compile Include="shared\System\AttributeUsageAttribute.cs" />
+    <Compile Include="shared\System\CharEnumerator.cs" />
+    <Compile Include="shared\System\Collections\DictionaryEntry.cs" />
+    <Compile Include="shared\System\Collections\Generic\HashSet.cs" />
+    <Compile Include="shared\System\Collections\Generic\IComparer.cs" />
+    <Compile Include="shared\System\Collections\Generic\IEnumerator.cs" />
+    <Compile Include="shared\System\Collections\IComparer.cs" />
+    <Compile Include="shared\System\Collections\IEnumerator.cs" />
+    <Compile Include="shared\System\Collections\IEqualityComparer.cs" />
+    <Compile Include="shared\System\Collections\IStructuralComparable.cs" />
+    <Compile Include="shared\System\Collections\IStructuralEquatable.cs" />
+    <Compile Include="shared\System\Collections\ObjectModel\Collection.cs" />
+    <Compile Include="shared\System\ComponentModel\DefaultValueAttribute.cs" />
+    <Compile Include="shared\System\ComponentModel\EditorBrowsableAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\CodeAnalysis\SuppressMessageAttribute.cs" />
+    <Compile Include="shared\System\FlagsAttribute.cs" />
+    <Compile Include="shared\System\FormattableString.cs" />
+    <Compile Include="shared\System\Globalization\BidiCategory.cs" />
+    <Compile Include="shared\System\Globalization\DaylightTime.cs" />
+    <Compile Include="shared\System\Globalization\SortVersion.cs" />
+    <Compile Include="shared\System\Globalization\UnicodeCategory.cs" />
+    <Compile Include="shared\System\IO\FileOptions.cs" />
+    <Compile Include="shared\System\IO\FileShare.cs" />
+    <Compile Include="shared\System\IO\MemoryStream.cs" />
+    <Compile Include="shared\System\ObjectDisposedException.cs" />
+    <Compile Include="shared\System\ObsoleteAttribute.cs" />
+    <Compile Include="shared\System\OutOfMemoryException.cs" />
+    <Compile Include="shared\System\ArithmeticException.cs" />
+    <Compile Include="shared\System\ArrayTypeMismatchException.cs" />
+    <Compile Include="shared\System\Collections\Generic\ICollectionDebugView.cs" />
+    <Compile Include="shared\System\Collections\Generic\IDictionaryDebugView.cs" />
+    <Compile Include="shared\System\Collections\Generic\KeyNotFoundException.cs" />
+    <Compile Include="shared\System\Convert.cs" />
+    <Compile Include="shared\System\DBNull.cs" />
+    <Compile Include="shared\System\Diagnostics\ConditionalAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\Debug.cs" />
+    <Compile Include="shared\System\Diagnostics\Debug.Unix.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerBrowsableAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerDisplayAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerHiddenAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerNonUserCodeAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerStepperBoundaryAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerStepThroughAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerTypeProxyAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\DebuggerVisualizerAttribute.cs" />
+    <Compile Include="shared\System\Diagnostics\StackTraceHiddenAttribute.cs" />
+    <Compile Include="shared\System\DivideByZeroException.cs" />
+    <Compile Include="shared\System\Empty.cs" />
+    <Compile Include="shared\System\FormatException.cs" />
+    <Compile Include="shared\System\Globalization\CultureNotFoundException.cs" />
+    <Compile Include="shared\System\Globalization\DateTimeParse.cs" />
+    <Compile Include="shared\System\HResults.cs" />
+    <Compile Include="shared\System\IConvertible.cs" />
+    <Compile Include="shared\System\IndexOutOfRangeException.cs" />
+    <Compile Include="shared\System\InvalidCastException.cs" />
+    <Compile Include="shared\System\InvalidOperationException.cs" />
+    <Compile Include="shared\System\InvalidProgramException.cs" />
+    <Compile Include="shared\System\NonSerializedAttribute.cs" />
+    <Compile Include="shared\System\NullReferenceException.cs" />
+    <Compile Include="shared\System\OperationCanceledException.cs" />
+    <Compile Include="shared\System\OverflowException.cs" />
+    <Compile Include="shared\System\RankException.cs" />
+    <Compile Include="shared\System\Reflection\AmbiguousMatchException.cs" />
+    <Compile Include="shared\System\Reflection\Binder.cs" />
+    <Compile Include="shared\System\Reflection\BindingFlags.cs" />
+    <Compile Include="shared\System\Reflection\CallingConventions.cs" />
+    <Compile Include="shared\System\Reflection\ICustomAttributeProvider.cs" />
+    <Compile Include="shared\System\Reflection\InvalidFilterCriteriaException.cs" />
+    <Compile Include="shared\System\Reflection\IReflect.cs" />
+    <Compile Include="shared\System\Reflection\MemberTypes.cs" />
+    <Compile Include="shared\System\Reflection\Module.cs" />
+    <Compile Include="shared\System\Reflection\ParameterModifier.cs" />
+    <Compile Include="shared\System\Reflection\TypeFilter.cs" />
+    <Compile Include="shared\System\Resources\MissingManifestResourceException.cs" />
+    <Compile Include="shared\System\Resources\ResourceManager.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\CallerFilePathAttribute.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\CallerLineNumberAttribute.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\CallerMemberNameAttribute.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\FormattableStringFactory.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\IsVolatile.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\MethodCodeType.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\MethodImplAttribute.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\MethodImplOptions.cs" />
+    <Compile Include="shared\System\Runtime\CompilerServices\TypeForwardedFromAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\BestFitMappingAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\CallingConvention.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\CharSet.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\ComVisibleAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\DefaultCharSetAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\DefaultDllImportSearchPathsAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\DllImportAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\DllImportSearchPath.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\ExternalException.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\FieldOffsetAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\GuidAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\HandleRef.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\InAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\LayoutKind.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\OutAttribute.cs" />
+    <Compile Include="shared\System\Runtime\InteropServices\StructLayoutAttribute.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\IDeserializationCallback.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\IFormatterConverter.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\IObjectReference.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\ISafeSerializationData.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\SerializationException.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\SerializationInfoEnumerator.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\StreamingContext.cs" />
+    <Compile Include="shared\System\Runtime\Versioning\NonVersionableAttribute.cs" />
+    <Compile Include="shared\System\Runtime\Versioning\TargetFrameworkAttribute.cs" />
+    <Compile Include="shared\System\Security\SecurityCriticalAttribute.cs" />
+    <Compile Include="shared\System\Security\SecurityCriticalScope.cs" />
+    <Compile Include="shared\System\Security\SecurityException.cs" />
+    <Compile Include="shared\System\Security\SecuritySafeCriticalAttribute.cs" />
+    <Compile Include="shared\System\SerializableAttribute.cs" />
+    <Compile Include="shared\System\StringComparison.cs" />
+    <Compile Include="shared\System\StringSplitOptions.cs" />
+    <Compile Include="shared\System\SystemException.cs" />
+    <Compile Include="shared\System\Threading\Tasks\TaskCanceledException.cs" />
+    <Compile Include="shared\System\Threading\Tasks\TaskSchedulerException.cs" />
+    <Compile Include="shared\System\ThreadStaticAttribute.cs" />
+    <Compile Include="shared\System\TimeoutException.cs" />
+    <Compile Include="shared\System\UnauthorizedAccessException.cs" />
+    <Compile Include="shared\System\UnhandledExceptionEventArgs.cs" />
+    <Compile Include="shared\System\UnhandledExceptionEventHandler.cs" />
+    <Compile Include="shared\System\UnitySerializationHolder.cs" />
+    <Compile Include="shared\System\Void.cs" />
+    <Compile Include="shared\System\Collections\Generic\IDictionaryEnumerator.cs" />
+    <Compile Include="shared\System\DateTimeOffset.cs" />
+    <Compile Include="shared\System\Globalization\Calendar.cs" />
+    <Compile Include="shared\System\Globalization\DateTimeFormatInfoScanner.cs" />
+    <Compile Include="shared\System\Globalization\GlobalizationMode.cs" />
+    <Compile Include="shared\System\Globalization\GlobalizationMode.Windows.cs" />
+    <Compile Include="shared\System\NotImplemented.cs" />
+    <Compile Include="shared\System\Reflection\TypeAttributes.cs" />
+    <Compile Include="shared\System\SR.cs" />
+    <Compile Include="shared\System\ThrowHelper.cs" />
+    <Compile Include="shared\System\Text\StringBuilderCache.cs" />
+    <Compile Include="System\AggregateException.cs" />
+    <Compile Include="System\ArraySegment.cs" />
     <Compile Include="System\AsyncCallback.cs" />
-    <Compile Include="System\Attributes\CLSCompliantAttribute.cs" />
-    <Compile Include="System\Attributes\DataContractAttribute.cs" />
-    <Compile Include="System\Attributes\DataMemberAttribute.cs" />
-    <Compile Include="System\Attributes\DebuggerDisplayAttribute.cs" />
+    <Compile Include="shared\System\CLSCompliantAttribute.cs" />
     <Compile Include="System\Attributes\HostProtectionAttribute.cs" />
-    <Compile Include="System\Attributes\MethodImplAttribute.cs" />
     <Compile Include="System\Attributes\NeutralResourcesLanguageAttribute.cs" />
-    <Compile Include="System\Attributes\NonSerializedAttribute.cs" />
     <Compile Include="System\BitConverter.cs" />
-    <Compile Include="System\Collections\BitArrray.cs" />
-    <Compile Include="System\Collections\Generic\BitHelper.cs" />
+    <Compile Include="shared\System\Collections\BitArrray.cs" />
+    <Compile Include="shared\System\Collections\Generic\BitHelper.cs" />
+    <Compile Include="System\Collections\Generic\Dictionary.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="System\Collections\Generic\EnumerableHelpers.cs" />
-    <Compile Include="System\Collections\Generic\HashSet.cs" />
+    <Compile Include="System\Collections\Generic\IDictionary.cs" />
     <Compile Include="System\Collections\Generic\IReadOnlyDictionary.cs" />
-    <Compile Include="System\Collections\Generic\Queue.cs" />
-    <Compile Include="System\Collections\Generic\Stack.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyCollection.cs" />
+    <Compile Include="shared\System\Collections\Generic\Queue.cs" />
+    <Compile Include="shared\System\Collections\Generic\Stack.cs" />
     <Compile Include="System\Collections\HashHelpers.cs" />
-    <Compile Include="System\ComponentModel\DefaultValueAttribute.cs" />
+    <Compile Include="System\Collections\IDictionary.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociationAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\CompareAttribute.cs" />
@@ -159,30 +268,39 @@
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationException.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationResult.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
-    <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
+    <Compile Include="shared\System\Globalization\CalendarAlgorithmType.cs" />
+    <Compile Include="shared\System\Globalization\CalendarWeekRule.cs" />
+    <Compile Include="shared\System\Globalization\DateTimeStyles.cs" />
+    <Compile Include="System\Convert.cs" />
+    <Compile Include="System\DateTime.cs" />
+    <Compile Include="System\Globalization\DateTimeFormatInfo.cs" />
+    <Compile Include="System\Guid.cs" />
     <Compile Include="System\IAsyncResult.cs" />
-    <Compile Include="System\DateTimeKind.cs" />
+    <Compile Include="shared\System\DateTimeKind.cs" />
     <Compile Include="System\Globalization\TextInfo.cs" />
-    <Compile Include="System\IO\binaryreader.cs" />
-    <Compile Include="System\IO\binarywriter.cs" />
-    <Compile Include="System\IO\bufferedstream.cs" />
-    <Compile Include="System\IO\endofstreamexception.cs" />
-    <Compile Include="System\IO\file.cs" />
-    <Compile Include="System\IO\filemode.cs" />
-    <Compile Include="System\IO\filestream.cs" />
-    <Compile Include="System\IO\ioexception.cs" />
-    <Compile Include="System\IO\memorystream.cs" />
-    <Compile Include="System\IO\ReadLinesIterator.cs" />
-    <Compile Include="System\IO\seekorigin.cs" />
-    <Compile Include="System\IO\stream.cs" />
-    <Compile Include="System\IO\streamreader.cs" />
-    <Compile Include="System\IO\streamwriter.cs" />
-    <Compile Include="System\IO\stringreader.cs" />
-    <Compile Include="System\IO\stringwriter.cs" />
-    <Compile Include="System\IO\textreader.cs" />
-    <Compile Include="System\IO\textwriter.cs" />
-    <Compile Include="System\IO\__error.cs" />
-    <Compile Include="System\SerializableAttribute.cs" />
+    <Compile Include="shared\System\IO\BinaryReader.cs" />
+    <Compile Include="shared\System\IO\BinaryWriter.cs" />
+    <Compile Include="shared\System\IO\BufferedStream.cs" />
+    <Compile Include="shared\System\IO\EndOfStreamException.cs" />
+    <Compile Include="shared\System\IO\File.cs" />
+    <Compile Include="shared\System\IO\FileMode.cs" />
+    <Compile Include="System\IO\FileStream.cs" />
+    <Compile Include="shared\System\IO\IOException.cs" />
+    <Compile Include="shared\System\IO\ReadLinesIterator.cs" />
+    <Compile Include="shared\System\IO\SeekOrigin.cs" />
+    <Compile Include="shared\System\IO\Stream.cs" />
+    <Compile Include="shared\System\IO\StreamReader.cs" />
+    <Compile Include="shared\System\IO\StreamWriter.cs" />
+    <Compile Include="shared\System\IO\StringReader.cs" />
+    <Compile Include="shared\System\IO\StringWriter.cs" />
+    <Compile Include="shared\System\IO\TextReader.cs" />
+    <Compile Include="shared\System\IO\TextWriter.cs" />
+    <Compile Include="shared\System\IO\__Error.cs" />
+    <Compile Include="shared\System\Reflection\MethodImplAttributes.cs" />
+    <Compile Include="shared\System\Runtime\Serialization\ISerializable.cs" />
+    <Compile Include="shared\System\NotImplementedException.cs" />
+    <Compile Include="shared\System\NotSupportedException.cs" />
+    <Compile Include="System\RegexMatchTimeoutException.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
     <Compile Include="Attributes\MixinAttribute.cs" />
@@ -191,7 +309,7 @@
     <Compile Include="Attributes\GlobalTargetAttribute.cs" />
     <Compile Include="Attributes\IgnoreCastAttribute.cs" />
     <Compile Include="Attributes\IgnoreGenericAttribute.cs" />
-    <Compile Include="Attributes\FieldPropertyAttribute.cs" />
+    <Compile Include="Attributes\FieldAttribute.cs" />
     <Compile Include="Attributes\PriorityAttribute.cs" />
     <Compile Include="Attributes\AdapterAttribute.cs" />
     <Compile Include="Attributes\EnumAttribute.cs" />
@@ -228,14 +346,8 @@
     <Compile Include="System\AppDomain.cs" />
     <Compile Include="Bridge\Arguments.cs" />
     <Compile Include="System\Collections\Generic\IReadOnlyList.cs" />
-    <Compile Include="System\Collections\IDictionary.cs" />
     <Compile Include="System\Collections\IList.cs" />
-    <Compile Include="System\CompilerServices\CallerInformationAttributes.cs" />
-    <Compile Include="System\CompilerServices\FormattableStringFactory.cs" />
     <Compile Include="System\CompilerServices\RuntimeHelpers.cs" />
-    <Compile Include="System\CompilerServices\IsVolatile.cs" />
-    <Compile Include="System\FormattableString.cs" />
-    <Compile Include="System\Guid.cs" />
     <Compile Include="System\Linq\Expressions\BinaryExpression.cs" />
     <Compile Include="System\Linq\Expressions\BlockExpression.cs" />
     <Compile Include="System\Linq\Expressions\CatchBlock.cs" />
@@ -276,23 +388,14 @@
     <Compile Include="System\Linq\Expressions\TryExpression.cs" />
     <Compile Include="System\Linq\Expressions\TypeBinaryExpression.cs" />
     <Compile Include="System\Linq\Expressions\UnaryExpression.cs" />
-    <Compile Include="System\Random.cs" />
-    <Compile Include="System\IndexOutOfRangeException.cs" />
-    <Compile Include="System\ArgumentNullException.cs" />
-    <Compile Include="System\ArgumentException.cs" />
-    <Compile Include="System\ArithmeticException.cs" />
+    <Compile Include="shared\System\Random.cs" />
     <Compile Include="System\Console.cs" />
-    <Compile Include="System\ArraySegment.cs" />
-    <Compile Include="System\Base64FormattingOptions.cs" />
-    <Compile Include="System\CharEnumerator.cs" />
     <Compile Include="System\Collections\Generic\Comparer.cs" />
-    <Compile Include="System\Collections\Generic\IComparer.cs" />
     <Compile Include="System\Collections\Generic\IList.cs" />
     <Compile Include="System\Collections\Generic\ISet.cs" />
-    <Compile Include="System\Collections\ObjectModel\ReadOnlyCollection.cs" />
+    <Compile Include="shared\System\Collections\ObjectModel\ReadOnlyCollection.cs" />
     <Compile Include="System\Comparison.cs" />
     <Compile Include="System\Converter.cs" />
-    <Compile Include="System\Diagnostics\ConditionalAttribute.cs" />
     <Compile Include="System\Diagnostics\Contracts\Contract.cs" />
     <Compile Include="System\Diagnostics\Contracts\ContractAbbreviatorAttribute.cs" />
     <Compile Include="System\Diagnostics\Contracts\ContractArgumentValidatorAttribute.cs" />
@@ -308,17 +411,13 @@
     <Compile Include="System\Diagnostics\Contracts\ContractRuntimeIgnoredAttribute.cs" />
     <Compile Include="System\Diagnostics\Contracts\ContractVerificationAttribute.cs" />
     <Compile Include="System\Diagnostics\Contracts\PureAttribute.cs" />
-    <Compile Include="System\Diagnostics\Debug.cs" />
-    <Compile Include="System\Diagnostics\Debugger.cs" />
+    <Compile Include="runtime\Debugger.cs" />
     <Compile Include="System\Diagnostics\Stopwatch.cs" />
-    <Compile Include="System\Diagnostics\SuppressMessageAttribute.cs" />
-    <Compile Include="System\Convert.cs" />
     <Compile Include="System\Enum.cs" />
     <Compile Include="System\Environment.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="System\EventHandler.cs" />
     <Compile Include="System\IDisposable.cs" />
-    <Compile Include="System\IConvertible.cs" />
     <Compile Include="System\Net\WebSockets\ClientWebSocket.cs" />
     <Compile Include="System\Net\WebSockets\ClientWebSocketOptions.cs" />
     <Compile Include="System\Net\WebSockets\WebSocketState.cs" />
@@ -326,38 +425,28 @@
     <Compile Include="System\Net\WebSockets\WebSocketMessageType.cs" />
     <Compile Include="System\Net\WebSockets\WebSocketReceiveResult.cs" />
     <Compile Include="System\Predicate.cs" />
-    <Compile Include="System\OutOfMemoryException.cs" />
-    <Compile Include="System\RankException.cs" />
     <Compile Include="System\Linq\Enumerable.cs" />
     <Compile Include="System\Linq\Grouping.cs" />
     <Compile Include="System\Linq\EnumerableInstance.cs" />
     <Compile Include="System\Linq\Lookup.cs" />
     <Compile Include="System\Linq\OrderedEnumerable.cs" />
     <Compile Include="System\MidpointRounding.cs" />
-    <Compile Include="System\Reflection\AmbiguousMatchException.cs" />
     <Compile Include="System\Reflection\Assembly.cs" />
-    <Compile Include="System\Reflection\BindingFlags.cs" />
     <Compile Include="System\Reflection\ConstructorInfo.cs" />
     <Compile Include="System\Reflection\EventInfo.cs" />
     <Compile Include="System\Reflection\FieldInfo.cs" />
     <Compile Include="System\Reflection\MemberInfo.cs" />
-    <Compile Include="System\Reflection\MemberTypes.cs" />
     <Compile Include="System\Reflection\MethodBase.cs" />
     <Compile Include="System\Reflection\MethodInfo.cs" />
     <Compile Include="System\Reflection\ParameterInfo.cs" />
-    <Compile Include="System\Reflection\TypeAttributes.cs" />
     <Compile Include="System\Reflection\PropertyInfo.cs" />
-    <Compile Include="System\RegexMatchTimeoutException.cs" />
-    <Compile Include="System\StringComparison.cs" />
-    <Compile Include="System\StringSplitOptions.cs" />
-    <Compile Include="System\AggregateException.cs" />
+    <Compile Include="System\Text\ASCIIEncoding.cs" />
+    <Compile Include="System\Text\Encoding.cs" />
     <Compile Include="System\Text\UTF32Encoding.cs" />
     <Compile Include="System\Text\UTF7Encoding.cs" />
     <Compile Include="System\Text\UTF8Encoding.cs" />
     <Compile Include="System\Text\UnicodeEncoding.cs" />
-    <Compile Include="System\Text\ASCIIEncoding.cs" />
     <Compile Include="System\Text\EncodingInfo.cs" />
-    <Compile Include="System\Text\Encoding.cs" />
     <Compile Include="System\Type.cs" />
     <Compile Include="System\Text\RegularExpressions\Capture.cs" />
     <Compile Include="System\Text\RegularExpressions\CaptureCollection.cs" />
@@ -374,32 +463,22 @@
     <Compile Include="System\Threading\CancellationToken.cs" />
     <Compile Include="System\Threading\CancellationTokenRegistration.cs" />
     <Compile Include="System\Threading\CancellationTokenSource.cs" />
-    <Compile Include="System\OperationCanceledException.cs" />
     <Compile Include="System\Threading\Tasks\Promise.cs" />
     <Compile Include="System\Threading\Tasks\PromiseException.cs" />
     <Compile Include="System\Threading\Tasks\Task.cs" />
     <Compile Include="System\Threading\Tasks\TaskAwaiter.cs" />
-    <Compile Include="System\Threading\Tasks\TaskCanceledException.cs" />
     <Compile Include="System\Threading\Tasks\TaskCompletionSource.cs" />
     <Compile Include="System\Threading\Tasks\TaskStatus.cs" />
-    <Compile Include="System\SystemException.cs" />
-    <Compile Include="System\TimeoutException.cs" />
     <Compile Include="System\TypeCode.cs" />
     <Compile Include="System\IServiceProvider.cs" />
     <Compile Include="System\Uri.cs" />
-    <Compile Include="System\Version.cs" />
     <Compile Include="Bridge\This.cs" />
-    <Compile Include="System\OverflowException.cs" />
-    <Compile Include="System\Globalization\CultureNotFoundException.cs" />
-    <Compile Include="System\ArgumentOutOfRangeException.cs" />
     <Compile Include="System\Array.cs" />
     <Compile Include="System\Boolean.cs" />
     <Compile Include="System\Char.cs" />
-    <Compile Include="System\DateTime.cs" />
     <Compile Include="System\DayOfWeek.cs" />
     <Compile Include="System\Double.cs" />
     <Compile Include="System\Globalization\CultureInfo.cs" />
-    <Compile Include="System\Globalization\DateTimeFormatInfo.cs" />
     <Compile Include="System\Globalization\NumberFormatInfo.cs" />
     <Compile Include="System\ICloneable.cs" />
     <Compile Include="System\IFormatProvider.cs" />
@@ -415,44 +494,28 @@
     <Compile Include="System\UInt32.cs" />
     <Compile Include="Bridge\Validation.cs" />
     <Compile Include="Bridge\Browser.cs" />
-    <Compile Include="System\Collections\Generic\Dictionary.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="System\Collections\Generic\ICollection.cs" />
-    <Compile Include="System\Collections\Generic\IDictionary.cs" />
     <Compile Include="System\Collections\Generic\IEnumerable.cs" />
-    <Compile Include="System\Collections\Generic\IEnumerator.cs" />
     <Compile Include="System\Collections\Generic\IEqualityComparer.cs" />
-    <Compile Include="System\Collections\Generic\KeyValuePair.cs">
+    <Compile Include="shared\System\Collections\Generic\KeyValuePair.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="System\Collections\Generic\List.cs">
+    <Compile Include="shared\System\Collections\Generic\List.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="System\Collections\ICollection.cs" />
     <Compile Include="System\Collections\IEnumerable.cs" />
-    <Compile Include="System\Collections\IEnumerator.cs" />
-    <Compile Include="System\Collections\IEqualityComparer.cs" />
-    <Compile Include="System\Collections\Generic\KeyNotFoundException.cs" />
-    <Compile Include="System\DivideByZeroException.cs" />
     <Compile Include="Bridge\Error.cs" />
-    <Compile Include="Bridge\ErrorException.cs" />
-    <Compile Include="System\FormatException.cs" />
     <Compile Include="System\IFormattable.cs" />
     <Compile Include="System\Decimal.cs" />
     <Compile Include="System\IComparable.cs" />
     <Compile Include="System\IEquatable.cs" />
     <Compile Include="System\ComponentModel\INotifyPropertyChanged.cs" />
-    <Compile Include="System\InvalidCastException.cs" />
-    <Compile Include="System\InvalidOperationException.cs" />
     <Compile Include="System\Func.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />
     <Compile Include="System\Math.cs" />
-    <Compile Include="System\NotImplementedException.cs" />
-    <Compile Include="System\NotSupportedException.cs" />
     <Compile Include="System\Nullable.cs" />
-    <Compile Include="System\NullReferenceException.cs" />
     <Compile Include="System\Object.cs" />
     <Compile Include="System\Runtime.cs" />
     <Compile Include="System\String.cs" />
@@ -460,7 +523,8 @@
     <Compile Include="System\TimeSpan.cs" />
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
-    <Compile Include="System\Void.cs" />
+    <Compile Include="System\ValueTuple.cs" />
+    <Compile Include="System\Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\.auxiliary\AssemblyEnd.js" />
@@ -468,44 +532,181 @@
     <Content Include="Resources\.auxiliary\AssemblyBegin.js" />
     <Content Include="Resources\.generated\bridge.js" />
     <Content Include="Resources\.generated\bridge.meta.js" />
-    <Content Include="Resources\.generated\bridge\utils\console.js" />
-    <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
-    <Content Include="Resources\.generated\system\bitConverter.js" />
-    <Content Include="Resources\.generated\system\collections\bitArray.js" />
-    <Content Include="Resources\.generated\system\collections\bitArray\bitArrayEnumeratorSimple.js" />
-    <Content Include="Resources\.generated\system\collections\generic\bitHelper.js" />
-    <Content Include="Resources\.generated\system\collections\generic\enumerableHelpers.js" />
-    <Content Include="Resources\.generated\system\collections\generic\hashSet.js" />
-    <Content Include="Resources\.generated\system\collections\generic\hashSet\elementCount.js" />
-    <Content Include="Resources\.generated\system\collections\generic\hashSet\enumerator.js" />
-    <Content Include="Resources\.generated\system\collections\generic\hashSet\slot.js" />
-    <Content Include="Resources\.generated\system\collections\generic\list.js" />
-    <Content Include="Resources\.generated\system\collections\generic\list\enumerator.js" />
-    <Content Include="Resources\.generated\system\collections\generic\queue.js" />
-    <Content Include="Resources\.generated\system\collections\generic\queue\enumerator.js" />
-    <Content Include="Resources\.generated\system\collections\generic\stack.js" />
-    <Content Include="Resources\.generated\system\collections\generic\stack\enumerator.js" />
-    <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
-    <Content Include="Resources\.generated\system\collections\objectModel\readOnlyCollection.js" />
-    <Content Include="Resources\.generated\system\componentModel\browsableAttribute.js" />
-    <Content Include="Resources\.generated\system\componentModel\defaultValueAttribute.js" />
-    <Content Include="Resources\.generated\system\console.js" />
-    <Content Include="Resources\.generated\system\dateTimeKind.js" />
-    <Content Include="Resources\.generated\system\dayOfWeek.js" />
-    <Content Include="Resources\.generated\system\environment.js" />
-    <Content Include="Resources\.generated\system\formattableString.js" />
-    <Content Include="Resources\.generated\system\formattableStringImpl.js" />
-    <Content Include="Resources\.generated\system\globalization\textInfo.js" />
-    <Content Include="Resources\.generated\system\guid.js" />
-    <Content Include="Resources\.generated\system\io\io.js" />
-    <Content Include="Resources\.generated\system\random.js" />
-    <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
-    <Content Include="Resources\.generated\system\text\encoding.js" />
-    <Content Include="Resources\.generated\system\text\regularExpressions\regex.js" />
-    <Content Include="Resources\.generated\system\threading\timer.js" />
-    <Content Include="Resources\.generated\system\version.js" />
-    <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
-    <Content Include="Resources\.generated\system\version\versionResult.js" />
+    <Content Include="Resources\.generated\Bridge\Utils\Console.js" />
+    <Content Include="Resources\.generated\Bridge\Utils\SystemAssemblyVersion.js" />
+    <Content Include="Resources\.generated\System\ApplicationException.js" />
+    <Content Include="Resources\.generated\System\ArgumentException.js" />
+    <Content Include="Resources\.generated\System\ArgumentNullException.js" />
+    <Content Include="Resources\.generated\System\ArgumentOutOfRangeException.js" />
+    <Content Include="Resources\.generated\System\ArithmeticException.js" />
+    <Content Include="Resources\.generated\System\ArrayTypeMismatchException.js" />
+    <Content Include="Resources\.generated\System\Base64FormattingOptions.js" />
+    <Content Include="Resources\.generated\System\BitConverter.js" />
+    <Content Include="Resources\.generated\System\CharEnumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\BitArray.js" />
+    <Content Include="Resources\.generated\System\Collections\BitArray\BitArrayEnumeratorSimple.js" />
+    <Content Include="Resources\.generated\System\Collections\DictionaryEntry.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\BitHelper.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\DictionaryKeyCollectionDebugView.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\DictionaryValueCollectionDebugView.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\EnumerableHelpers.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\HashSet.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\HashSet\ElementCount.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\HashSet\Enumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\HashSet\Slot.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\ICollectionDebugView.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\IComparer.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\IDictionaryDebugView.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\IEnumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\KeyNotFoundException.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\KeyValuePair.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\List.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\List\Enumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\Queue.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\Queue\Enumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\Stack.js" />
+    <Content Include="Resources\.generated\System\Collections\Generic\Stack\Enumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\HashHelpers.js" />
+    <Content Include="Resources\.generated\System\Collections\IComparer.js" />
+    <Content Include="Resources\.generated\System\Collections\IDictionaryEnumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\IEnumerator.js" />
+    <Content Include="Resources\.generated\System\Collections\IEqualityComparer.js" />
+    <Content Include="Resources\.generated\System\Collections\IStructuralComparable.js" />
+    <Content Include="Resources\.generated\System\Collections\IStructuralEquatable.js" />
+    <Content Include="Resources\.generated\System\Collections\ObjectModel\Collection.js" />
+    <Content Include="Resources\.generated\System\Collections\ObjectModel\ReadOnlyCollection.js" />
+    <Content Include="Resources\.generated\System\ComponentModel\BrowsableAttribute.js" />
+    <Content Include="Resources\.generated\System\ComponentModel\DefaultValueAttribute.js" />
+    <Content Include="Resources\.generated\System\Console.js" />
+    <Content Include="Resources\.generated\System\DateTimeKind.js" />
+    <Content Include="Resources\.generated\System\DateTimeOffset.js" />
+    <Content Include="Resources\.generated\System\DateTimeParse.js" />
+    <Content Include="Resources\.generated\System\DateTimeResult.js" />
+    <Content Include="Resources\.generated\System\DayOfWeek.js" />
+    <Content Include="Resources\.generated\System\DBNull.js" />
+    <Content Include="Resources\.generated\System\Diagnostics\Debug.js" />
+    <Content Include="Resources\.generated\System\Diagnostics\Debugger.js" />
+    <Content Include="Resources\.generated\System\Diagnostics\Debug\DebugAssertException.js" />
+    <Content Include="Resources\.generated\System\DivideByZeroException.js" />
+    <Content Include="Resources\.generated\System\Empty.js" />
+    <Content Include="Resources\.generated\System\Environment.js" />
+    <Content Include="Resources\.generated\System\ExceptionArgument.js" />
+    <Content Include="Resources\.generated\System\ExceptionResource.js" />
+    <Content Include="Resources\.generated\System\FormatException.js" />
+    <Content Include="Resources\.generated\System\FormattableString.js" />
+    <Content Include="Resources\.generated\System\Globalization\BidiCategory.js" />
+    <Content Include="Resources\.generated\System\Globalization\Calendar.js" />
+    <Content Include="Resources\.generated\System\Globalization\CalendarAlgorithmType.js" />
+    <Content Include="Resources\.generated\System\Globalization\CalendarId.js" />
+    <Content Include="Resources\.generated\System\Globalization\CalendarWeekRule.js" />
+    <Content Include="Resources\.generated\System\Globalization\CultureNotFoundException.js" />
+    <Content Include="Resources\.generated\System\Globalization\DateTimeFormatInfoScanner.js" />
+    <Content Include="Resources\.generated\System\Globalization\DateTimeFormatInfoScanner\FoundDatePattern.js" />
+    <Content Include="Resources\.generated\System\Globalization\DateTimeStyles.js" />
+    <Content Include="Resources\.generated\System\Globalization\DaylightTime.js" />
+    <Content Include="Resources\.generated\System\Globalization\DaylightTimeStruct.js" />
+    <Content Include="Resources\.generated\System\Globalization\FORMATFLAGS.js" />
+    <Content Include="Resources\.generated\System\Globalization\GlobalizationMode.js" />
+    <Content Include="Resources\.generated\System\Globalization\SortVersion.js" />
+    <Content Include="Resources\.generated\System\Globalization\TextInfo.js" />
+    <Content Include="Resources\.generated\System\Globalization\UnicodeCategory.js" />
+    <Content Include="Resources\.generated\System\Guid.js" />
+    <Content Include="Resources\.generated\System\HResults.js" />
+    <Content Include="Resources\.generated\System\IConvertible.js" />
+    <Content Include="Resources\.generated\System\IndexOutOfRangeException.js" />
+    <Content Include="Resources\.generated\System\InvalidCastException.js" />
+    <Content Include="Resources\.generated\System\InvalidOperationException.js" />
+    <Content Include="Resources\.generated\System\InvalidProgramException.js" />
+    <Content Include="Resources\.generated\System\IO\BinaryReader.js" />
+    <Content Include="Resources\.generated\System\IO\BinaryWriter.js" />
+    <Content Include="Resources\.generated\System\IO\BufferedStream.js" />
+    <Content Include="Resources\.generated\System\IO\EndOfStreamException.js" />
+    <Content Include="Resources\.generated\System\IO\File.js" />
+    <Content Include="Resources\.generated\System\IO\FileMode.js" />
+    <Content Include="Resources\.generated\System\IO\FileOptions.js" />
+    <Content Include="Resources\.generated\System\IO\FileShare.js" />
+    <Content Include="Resources\.generated\System\IO\FileStream.js" />
+    <Content Include="Resources\.generated\System\IO\IOException.js" />
+    <Content Include="Resources\.generated\System\IO\Iterator.js" />
+    <Content Include="Resources\.generated\System\IO\MemoryStream.js" />
+    <Content Include="Resources\.generated\System\IO\ReadLinesIterator.js" />
+    <Content Include="Resources\.generated\System\IO\SeekOrigin.js" />
+    <Content Include="Resources\.generated\System\IO\Stream.js" />
+    <Content Include="Resources\.generated\System\IO\StreamReader.js" />
+    <Content Include="Resources\.generated\System\IO\StreamReader\NullStreamReader.js" />
+    <Content Include="Resources\.generated\System\IO\StreamWriter.js" />
+    <Content Include="Resources\.generated\System\IO\Stream\NullStream.js" />
+    <Content Include="Resources\.generated\System\IO\Stream\SynchronousAsyncResult.js" />
+    <Content Include="Resources\.generated\System\IO\StringReader.js" />
+    <Content Include="Resources\.generated\System\IO\StringWriter.js" />
+    <Content Include="Resources\.generated\System\IO\TextReader.js" />
+    <Content Include="Resources\.generated\System\IO\TextReader\NullTextReader.js" />
+    <Content Include="Resources\.generated\System\IO\TextWriter.js" />
+    <Content Include="Resources\.generated\System\IO\TextWriter\NullTextWriter.js" />
+    <Content Include="Resources\.generated\System\IO\__Error.js" />
+    <Content Include="Resources\.generated\System\NotImplemented.js" />
+    <Content Include="Resources\.generated\System\NotImplementedException.js" />
+    <Content Include="Resources\.generated\System\NotSupportedException.js" />
+    <Content Include="Resources\.generated\System\NullReferenceException.js" />
+    <Content Include="Resources\.generated\System\ObjectDisposedException.js" />
+    <Content Include="Resources\.generated\System\OperationCanceledException.js" />
+    <Content Include="Resources\.generated\System\OutOfMemoryException.js" />
+    <Content Include="Resources\.generated\System\OverflowException.js" />
+    <Content Include="Resources\.generated\System\ParseFailureKind.js" />
+    <Content Include="Resources\.generated\System\ParseFlags.js" />
+    <Content Include="Resources\.generated\System\Random.js" />
+    <Content Include="Resources\.generated\System\RankException.js" />
+    <Content Include="Resources\.generated\System\Reflection\AmbiguousMatchException.js" />
+    <Content Include="Resources\.generated\System\Reflection\Binder.js" />
+    <Content Include="Resources\.generated\System\Reflection\BindingFlags.js" />
+    <Content Include="Resources\.generated\System\Reflection\CallingConventions.js" />
+    <Content Include="Resources\.generated\System\Reflection\ICustomAttributeProvider.js" />
+    <Content Include="Resources\.generated\System\Reflection\InvalidFilterCriteriaException.js" />
+    <Content Include="Resources\.generated\System\Reflection\IReflect.js" />
+    <Content Include="Resources\.generated\System\Reflection\MemberTypes.js" />
+    <Content Include="Resources\.generated\System\Reflection\Module.js" />
+    <Content Include="Resources\.generated\System\Reflection\ParameterModifier.js" />
+    <Content Include="Resources\.generated\System\Reflection\TypeAttributes.js" />
+    <Content Include="Resources\.generated\System\Resources\MissingManifestResourceException.js" />
+    <Content Include="Resources\.generated\System\Runtime\CompilerServices\FormattableStringFactory.js" />
+    <Content Include="Resources\.generated\System\Runtime\CompilerServices\FormattableStringFactory\ConcreteFormattableString.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\IDeserializationCallback.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\IFormatterConverter.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\IObjectReference.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\ISafeSerializationData.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\ISerializable.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\SerializationEntry.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\SerializationException.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\SerializationInfoEnumerator.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\StreamingContext.js" />
+    <Content Include="Resources\.generated\System\Runtime\Serialization\StreamingContextStates.js" />
+    <Content Include="Resources\.generated\System\Security\SecurityException.js" />
+    <Content Include="Resources\.generated\System\SerializableAttribute.js" />
+    <Content Include="Resources\.generated\System\SR.js" />
+    <Content Include="Resources\.generated\System\StringComparison.js" />
+    <Content Include="Resources\.generated\System\StringSplitOptions.js" />
+    <Content Include="Resources\.generated\System\SystemException.js" />
+    <Content Include="Resources\.generated\System\Text\ASCIIEncoding.js" />
+    <Content Include="Resources\.generated\System\Text\Encoding.js" />
+    <Content Include="Resources\.generated\System\Text\EncodingInfo.js" />
+    <Content Include="Resources\.generated\System\Text\RegularExpressions\Regex.js" />
+    <Content Include="Resources\.generated\System\Text\StringBuilderCache.js" />
+    <Content Include="Resources\.generated\System\Text\UnicodeEncoding.js" />
+    <Content Include="Resources\.generated\System\Text\UTF32Encoding.js" />
+    <Content Include="Resources\.generated\System\Text\UTF7Encoding.js" />
+    <Content Include="Resources\.generated\System\Text\UTF8Encoding.js" />
+    <Content Include="Resources\.generated\System\Threading\Tasks\TaskCanceledException.js" />
+    <Content Include="Resources\.generated\System\Threading\Tasks\TaskSchedulerException.js" />
+    <Content Include="Resources\.generated\System\Threading\Timer.js" />
+    <Content Include="Resources\.generated\System\ThrowHelper.js" />
+    <Content Include="Resources\.generated\System\TimeoutException.js" />
+    <Content Include="Resources\.generated\System\TokenType.js" />
+    <Content Include="Resources\.generated\System\UnauthorizedAccessException.js" />
+    <Content Include="Resources\.generated\System\UnhandledExceptionEventArgs.js" />
+    <Content Include="Resources\.generated\System\UnitySerializationHolder.js" />
+    <Content Include="Resources\.generated\System\Version.js" />
+    <Content Include="Resources\.generated\System\Version\ParseFailureKind.js" />
+    <Content Include="Resources\.generated\System\Version\VersionResult.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Locales\aa-DJ.js" />
@@ -1339,15 +1540,20 @@
     <EmbeddedResource Include="Resources\Locales\zh.js" />
     <EmbeddedResource Include="Resources\Locales\zu-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\zu.js" />
+    <EmbeddedResource Include="shared\Resources\Strings.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Bool.js" />
+    <Content Include="Resources\.generated\System\Void.js" />
     <Content Include="Resources\ArraySegment.js" />
-    <Content Include="Resources\Collections\KeyValuePair.js" />
+    <Content Include="Resources\Bool.js" />
+    <Content Include="Resources\DateTimeHelpers.js" />
     <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
+    <Content Include="Resources\AggregateException.js" />
+    <Content Include="Resources\RegexMatchTimeoutException.js" />
+    <Content Include="Resources\Exception.js" />
     <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Double.js" />
     <Content Include="Resources\Locales\de-IT.js" />
@@ -1399,7 +1605,7 @@
     <Content Include="Resources\Collections\Dictionary.js" />
     <Content Include="Resources\Collections\Interfaces.js" />
     <Content Include="Resources\Globalization.js" />
-    <Content Include="Resources\Exception.js" />
+    <Content Include="Resources\PromiseException.js" />
     <Content Include="Resources\INotifyPropertyChanged.js" />
     <Content Include="Resources\Date.js" />
     <Content Include="Resources\linq.js" />
@@ -1426,11 +1632,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" Condition="Exists('$(SolutionDir).build\common\NuGet.Build.Package.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir).nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir).nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir).build\common\NuGet.Build.Package.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir).build\common\NuGet.Build.Package.targets'))" />
   </Target>
 </Project>

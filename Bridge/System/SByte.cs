@@ -1,57 +1,64 @@
-using Bridge;
-
 namespace System
 {
-    [External]
-    [Reflectable]
-    [Constructor("Number")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    [Bridge.Constructor("Number")]
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct SByte : IComparable, IComparable<SByte>, IEquatable<SByte>, IFormattable
     {
         private extern SByte(int i);
 
-        [InlineConst]
+        [Bridge.InlineConst]
+        [CLSCompliant(false)]
         public const sbyte MinValue = -128;
 
-        [InlineConst]
+        [Bridge.InlineConst]
+        [CLSCompliant(false)]
         public const sbyte MaxValue = 127;
 
-        [Template("System.SByte.parse({s})")]
+        [Bridge.Template("System.SByte.parse({s})")]
+        [CLSCompliant(false)]
         public static extern sbyte Parse(string s);
 
-        [Template("System.SByte.parse({s}, {radix})")]
+        [Bridge.Template("System.SByte.parse({s}, {radix})")]
+        [CLSCompliant(false)]
         public static extern sbyte Parse(string s, int radix);
 
-        [Template("System.SByte.tryParse({s}, {result})")]
+        [Bridge.Template("System.SByte.tryParse({s}, {result})")]
+        [CLSCompliant(false)]
         public static extern bool TryParse(string s, out sbyte result);
 
-        [Template("System.SByte.tryParse({s}, {result}, {radix})")]
+        [Bridge.Template("System.SByte.tryParse({s}, {result}, {radix})")]
+        [CLSCompliant(false)]
         public static extern bool TryParse(string s, out sbyte result, int radix);
 
         public extern string ToString(int radix);
 
-        [Template("System.SByte.format({this}, {format})")]
+        [Bridge.Template("System.SByte.format({this}, {format})")]
         public extern string Format(string format);
 
-        [Template("System.SByte.format({this}, {format}, {provider})")]
+        [Bridge.Template("System.SByte.format({this}, {format}, {provider})")]
         public extern string Format(string format, IFormatProvider provider);
 
-        [Template("System.SByte.format({this}, {format})")]
+        [Bridge.Template("System.SByte.format({this}, {format})")]
         public extern string ToString(string format);
 
-        [Template("System.SByte.format({this}, {format}, {provider})")]
+        [Bridge.Template("System.SByte.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Bridge.Template("Bridge.compare({this}, {other})")]
+        [CLSCompliant(false)]
         public extern int CompareTo(sbyte other);
 
-        [Template("Bridge.compare({this}, {obj})")]
+        [Bridge.Template("Bridge.compare({this}, {obj})")]
         public extern int CompareTo(object obj);
 
-        [Template("{this} === {other}")]
+        [Bridge.Template("{this} === {other}")]
+        [CLSCompliant(false)]
         public extern bool Equals(sbyte other);
 
-        [Template("System.SByte.equals({this}, {other})")]
+        [Bridge.Template("System.SByte.equals({this}, {other})")]
         public override extern bool Equals(object other);
     }
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()

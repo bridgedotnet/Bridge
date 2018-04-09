@@ -1,18 +1,16 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
-    [External]
-    [Reflectable]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
-    public interface ICollection<T> : IEnumerable<T>, IBridgeClass
+    [Bridge.External]
+    [Bridge.Reflectable]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    public interface ICollection<T> : IEnumerable<T>, Bridge.IBridgeClass
     {
         /// <summary>
         /// Gets the number of elements contained in the ICollection.
         /// </summary>
         int Count
         {
-            [Template("System.Array.getCount({this}, {T})")]
+            [Bridge.Template("System.Array.getCount({this}, {T})")]
             get;
         }
 
@@ -21,7 +19,7 @@ namespace System.Collections.Generic
         /// </summary>
         bool IsReadOnly
         {
-            [Template("System.Array.getIsReadOnly({this}, {T})")]
+            [Bridge.Template("System.Array.getIsReadOnly({this}, {T})")]
             get;
         }
 
@@ -29,7 +27,7 @@ namespace System.Collections.Generic
         /// Adds an item to the ICollection.
         /// </summary>
         /// <param name="item">The object to add to the ICollection</param>
-        [Template("System.Array.add({this}, {item}, {T})")]
+        [Bridge.Template("System.Array.add({this}, {item}, {T})")]
         void Add(T item);
 
         /// <summary>
@@ -37,13 +35,13 @@ namespace System.Collections.Generic
         /// </summary>
         /// <param name="array">The one-dimensional Array that is the destination of the elements copied from ICollection.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        [Template("System.Array.copyTo({this}, {array}, {arrayIndex}, {T})")]
+        [Bridge.Template("System.Array.copyTo({this}, {array}, {arrayIndex}, {T})")]
         void CopyTo(T[] array, int arrayIndex);
 
         /// <summary>
         /// Removes all items from the ICollection.
         /// </summary>
-        [Template("System.Array.clear({this}, {T})")]
+        [Bridge.Template("System.Array.clear({this}, {T})")]
         void Clear();
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace System.Collections.Generic
         /// </summary>
         /// <param name="item">The object to locate in the ICollection.</param>
         /// <returns>true if item is found in the ICollection; otherwise, false.</returns>
-        [Template("System.Array.contains({this}, {item}, {T})")]
+        [Bridge.Template("System.Array.contains({this}, {item}, {T})")]
         bool Contains(T item);
 
         /// <summary>
@@ -59,7 +57,7 @@ namespace System.Collections.Generic
         /// </summary>
         /// <param name="item">The object to remove from the ICollection.</param>
         /// <returns>true if item was successfully removed from the ICollection; otherwise, false. This method also returns false if item is not found in the original ICollection.</returns>
-        [Template("System.Array.remove({this}, {item}, {T})")]
+        [Bridge.Template("System.Array.remove({this}, {item}, {T})")]
         bool Remove(T item);
     }
 }

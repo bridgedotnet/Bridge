@@ -1,11 +1,9 @@
-using Bridge;
-
 namespace System
 {
-    [External]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
-    [Reflectable]
-    public interface IFormatProvider : IBridgeClass
+    [Bridge.External]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.Reflectable]
+    public interface IFormatProvider : Bridge.IBridgeClass
     {
         object GetFormat(Type formatType);
     }

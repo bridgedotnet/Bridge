@@ -1,6 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 
-#pragma warning disable 626	// CS0626  Method, operator, or accessor 'MixinTests.GlobalWrapper.IsNaN(object)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+#pragma warning disable 626    // CS0626  Method, operator, or accessor 'MixinTests.GlobalWrapper.IsNaN(object)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
 
 namespace Bridge.ClientTest
 {
@@ -10,7 +10,7 @@ namespace Bridge.ClientTest
     {
         [External]
         [GlobalMethods]
-        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.CamelCase)]
         private class GlobalWrapper
         {
             public static extern bool IsNaN(object o);
@@ -25,7 +25,7 @@ namespace Bridge.ClientTest
 
         [External]
         [Mixin("System.Byte")]
-        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.CamelCase)]
         private class MixinWrapper
         {
             public static extern byte Parse(string s);

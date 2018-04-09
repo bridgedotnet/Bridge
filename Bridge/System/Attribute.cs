@@ -1,12 +1,12 @@
-using Bridge;
 using System.Reflection;
 
 namespace System
 {
-    [External]
-    [Name("System.Attribute")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Attribute")]
     [AttributeUsageAttribute(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
-    public class Attribute : IBridgeClass
+    public class Attribute : Bridge.IBridgeClass
     {
         protected extern Attribute();
 
@@ -15,7 +15,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes$1({element}, false)")]
+        [Bridge.Template("System.Attribute.getCustomAttributes$1({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(Assembly element);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace System
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <param name="inherit">This parameter is ignored, and does not affect the operation of this method.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes$1({element}, false, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes$1({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, bool inherit);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace System
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes$1({element}, {attributeType})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes$1({element}, {attributeType})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, Type attributeType);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace System
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <param name="inherit">This parameter is ignored, and does not affect the operation of this method.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes$1({element}, {attributeType}, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes$1({element}, {attributeType}, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, Type attributeType, bool inherit);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the MemberInfo class that describes a constructor, event, field, method, or property member of a class.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, false)")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace System
         /// <param name="element">An object derived from the MemberInfo class that describes a constructor, event, field, method, or property member of a class.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element, bool inherit);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace System
         /// <param name="element">An object derived from the MemberInfo class that describes a constructor, event, field, method, or property member of a class.</param>
         /// <param name="type">The type, or a base type, of the custom attribute to search for.</param>
         /// <returns>An Attribute array that contains the custom attributes of type type applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, {type})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, {type})")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element, Type type);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace System
         /// <param name="type">The type, or a base type, of the custom attribute to search for.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes of type type applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, {type}, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, {type}, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element, Type type, bool inherit);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the ParameterInfo class that describes a parameter of a member of a class.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, false)")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element);
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace System
         /// <param name="element">An object derived from the ParameterInfo class that describes a parameter of a member of a class.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element, bool inherit);
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace System
         /// <param name="element">An object derived from the ParameterInfo class that describes a parameter of a member of a class.</param>
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, {attributeType})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, {attributeType})")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element, Type attributeType);
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace System
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, {attributeType}, {inherit})")]
+        [Bridge.Template("System.Attribute.getCustomAttributes({element}, {attributeType}, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element, Type attributeType, bool inherit);
     }
 }

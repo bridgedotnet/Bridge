@@ -15,7 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3200
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class Employee
         {
@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class Customer
         {

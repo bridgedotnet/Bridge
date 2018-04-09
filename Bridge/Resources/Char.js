@@ -16,7 +16,7 @@
 
             parse: function (s) {
                 if (!Bridge.hasValue(s)) {
-                    throw new System.ArgumentNullException("s");
+                    throw new System.ArgumentNullException.$ctor1("s");
                 }
 
                 if (s.length !== 1) {
@@ -44,7 +44,7 @@
                 }
 
                 if (str.length != 1) {
-                    throw new System.FormatException("String must be exactly one character long");
+                    throw new System.FormatException.$ctor1("String must be exactly one character long");
                 }
 
                 return str.charCodeAt(index);
@@ -136,11 +136,11 @@
 
             isUpper: function (s, index) {
                 if (s == null) {
-                    throw new System.ArgumentNullException("s");
+                    throw new System.ArgumentNullException.$ctor1("s");
                 }
 
                 if ((index >>> 0) >= ((s.length) >>> 0)) {
-                    throw new System.ArgumentOutOfRangeException("index");
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
                 }
 
                 var c = s.charCodeAt(index);
@@ -166,7 +166,7 @@
                 return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
             },
 
-            getHashCode: function(v) {
+            getHashCode: function (v) {
                 return v | (v << 16);
             }
         }

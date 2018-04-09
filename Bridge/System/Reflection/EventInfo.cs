@@ -1,28 +1,27 @@
-using Bridge;
-
 namespace System.Reflection
 {
-    [External]
-    public class EventInfo : MemberInfo
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    public abstract class EventInfo : MemberInfo
     {
-        [Name("ad")]
+        [Bridge.Name("ad")]
         public extern MethodInfo AddMethod
         {
             get;
             private set;
         }
 
-        [Name("r")]
+        [Bridge.Name("r")]
         public extern MethodInfo RemoveMethod
         {
             get;
             private set;
         }
 
-        [Template("Bridge.Reflection.midel({this}.ad, {target})({handler})")]
+        [Bridge.Template("Bridge.Reflection.midel({this}.ad, {target})({handler})")]
         public extern void AddEventHandler(object target, Delegate handler);
 
-        [Template("Bridge.Reflection.midel({this}.r, {target})({handler})")]
+        [Bridge.Template("Bridge.Reflection.midel({this}.r, {target})({handler})")]
         public extern void RemoveEventHandler(object target, Delegate handler);
 
         internal extern EventInfo();

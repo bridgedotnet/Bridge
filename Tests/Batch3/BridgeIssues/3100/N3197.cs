@@ -36,12 +36,12 @@ namespace IssueBridge3197
     public static class pixi_js
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static class PIXI
         {
             /// <summary>
-            /// 
+            ///
             /// </summary>
             public class Sprite
             {
@@ -67,17 +67,17 @@ namespace IssueBridge3197_1
     public static class phaser
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class Phaser
         {
             /// <summary>
-            /// 
+            ///
             /// </summary>
             public class Physics
             {
                 /// <summary>
-                /// 
+                ///
                 /// </summary>
                 public static double ARCADE { get; set; } = 1;
             }

@@ -125,8 +125,8 @@ namespace Bridge.Translator
         {
             var scriptType = ExpressionTreeBuilder.GetTypeName(type, this._emitter);
 
-            string getterDefinition = "function (){ return " + accessor + "}";
-            string setterDefinition = "function ($){ " + accessor + " = $; }";
+            string getterDefinition = "function () { return " + accessor + "}";
+            string setterDefinition = "function ($) { " + accessor + " = $; }";
 
             /*if (UsesThisVisitor.Analyze(accessor))
             {

@@ -1,13 +1,13 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // HostProtectionPermission.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //
- 
+
 namespace System.Security.Permissions
 {
     using System;
@@ -19,9 +19,8 @@ namespace System.Security.Permissions
     using System.Globalization;
     using System.Diagnostics.Contracts;
 
-    [Serializable]
     [Bridge.NonScriptable]
-    [Bridge.External]
+    [Serializable]
     public enum SecurityAction
     {
         // Demand permission of all caller
@@ -58,11 +57,10 @@ namespace System.Security.Permissions
 
     // Keep this enum in sync with tools\ngen\ngen.cpp and inc\mscoree.idl
 
+    [Bridge.NonScriptable]
     [Serializable]
     [Flags]
     [Runtime.InteropServices.ComVisible(true)]
-    [Bridge.NonScriptable]
-    [Bridge.External]
     public enum HostProtectionResource
     {
         None = 0x0,
@@ -80,11 +78,10 @@ namespace System.Security.Permissions
         All = 0x1ff,
     }
 
+    [Bridge.NonScriptable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly | AttributeTargets.Delegate, AllowMultiple = true, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    [Bridge.NonScriptable]
-    [Bridge.External]
 #if FEATURE_CORECLR
     // This needs to be in the asmmeta to enable SecAnnotate to successfully resolve and run the security rules. It gets marked
     // as internal by BCLRewriter so we are simply marking it as FriendAccessAllowed so it stays in the asmmeta.
@@ -95,7 +92,7 @@ namespace System.Security.Permissions
 #pragma warning restore 618
     {
         public extern HostProtectionAttribute();
-        
+
         public extern HostProtectionAttribute(SecurityAction action);
 
         public extern HostProtectionResource Resources { get; set; }

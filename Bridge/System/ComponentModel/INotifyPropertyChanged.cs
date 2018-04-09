@@ -1,18 +1,17 @@
-using Bridge;
-
 namespace System.ComponentModel
 {
-    [External]
-    public interface INotifyPropertyChanged : IBridgeClass
+    [Bridge.External]
+    public interface INotifyPropertyChanged : Bridge.IBridgeClass
     {
         event PropertyChangedEventHandler PropertyChanged;
     }
 
-    [Name("Function")]
+    [Bridge.Name("Function")]
     public delegate void PropertyChangedEventHandler(object sender, PropertyChangedEventArgs e);
 
-    [External]
-    public class PropertyChangedEventArgs : IBridgeClass
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    public class PropertyChangedEventArgs : Bridge.IBridgeClass
     {
         public PropertyChangedEventArgs(string propertyName)
         {

@@ -1,13 +1,12 @@
-using Bridge;
-
 namespace System.Linq.Expressions
 {
-    [External]
-    [Name("System.Object")]
-    [Cast("{this}.ntype === 38")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Object")]
+    [Bridge.Cast("{this}.ntype === 38")]
     public sealed class ParameterExpression : Expression
     {
-        [Name("n")]
+        [Bridge.Name("n")]
         public extern string Name { get; private set; }
 
         internal extern ParameterExpression();

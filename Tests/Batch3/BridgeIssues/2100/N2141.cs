@@ -22,7 +22,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Name = "test"
             };
 
-            Assert.AreEqual(1, Object.Keys(config).Length);
             Assert.AreEqual("test", config.Name);
         }
     }

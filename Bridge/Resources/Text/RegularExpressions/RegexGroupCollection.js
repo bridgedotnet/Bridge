@@ -12,7 +12,7 @@
                 }
             },
             alias: [
-            "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
+            "GetEnumerator", "System$Collections$IEnumerable$GetEnumerator",
             "getCount", "System$Collections$ICollection$getCount",
             "Count", "System$Collections$ICollection$Count",
             "copyTo", "System$Collections$ICollection$copyTo"
@@ -61,7 +61,7 @@
 
         copyTo: function (array, arrayIndex) {
             if (array == null) {
-                throw new System.ArgumentNullException("array");
+                throw new System.ArgumentNullException.$ctor1("array");
             }
 
             var count = this.getCount();
@@ -80,7 +80,7 @@
             }
         },
 
-        getEnumerator: function () {
+        GetEnumerator: function () {
             return new System.Text.RegularExpressions.GroupEnumerator(this);
         },
 
@@ -138,6 +138,7 @@
                     matchCapcount = this._match._matchcount[i + 1];
                     groups[i + 1] = new System.Text.RegularExpressions.Group(matchText, matchCaps, matchCapcount);
                 }
+
                 this._groups = groups;
             }
         }
@@ -149,19 +150,19 @@
         },
 
         config: {
-			properties: {
-				Current: {
-					get: function () {
-						return this.getCurrent();
-					}
-				}
-			},
-			
+            properties: {
+                Current: {
+                    get: function () {
+                        return this.getCurrent();
+                    }
+                }
+            },
+
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
                 "moveNext", "System$Collections$IEnumerator$moveNext",
                 "reset", "System$Collections$IEnumerator$reset",
-				"Current", "System$Collections$IEnumerator$Current"
+                "Current", "System$Collections$IEnumerator$Current"
             ]
         },
 
@@ -192,7 +193,7 @@
 
         getCapture: function () {
             if (this._curindex < 0 || this._curindex >= this._groupColl.getCount()) {
-                throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
+                throw new System.InvalidOperationException.$ctor1("Enumeration has either not started or has already finished.");
             }
 
             return this._groupColl.get(this._curindex);

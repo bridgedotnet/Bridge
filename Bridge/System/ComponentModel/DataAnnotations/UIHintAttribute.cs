@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Bridge;
 
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Attribute to provide a hint to the presentation layer about what control it should use
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class UIHintAttribute : Attribute
     {
         /// <summary>

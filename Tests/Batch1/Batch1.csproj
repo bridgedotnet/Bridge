@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -48,9 +50,22 @@
     <Compile Include="ActivatorTests.cs" />
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
+    <Compile Include="Bridge.Core\Validation.cs" />
     <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
+    <Compile Include="Collections\Native\Constants.cs" />
+    <Compile Include="CSharp7\TestBinaryLiterals.cs" />
+    <Compile Include="CSharp7\TestCaseLabelPattern.cs" />
+    <Compile Include="CSharp7\TestDefaultLiteralExpression.cs" />
+    <Compile Include="CSharp7\TestDiscardsAndOutVars.cs" />
+    <Compile Include="CSharp7\TestPrivateProtected.cs" />
+    <Compile Include="CSharp7\TestROStruct.cs" />
+    <Compile Include="CSharp7\TestIsPattern.cs" />
+    <Compile Include="CSharp7\TestExpressionBodyMember.cs" />
+    <Compile Include="CSharp7\TestLocalFunctions.cs" />
+    <Compile Include="CSharp7\TestThrowExpression.cs" />
+    <Compile Include="CSharp7\TestValueTupleAndDeconstruction.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />
@@ -321,6 +336,7 @@
     <Compile Include="..\..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <None Include="Bridge.Core\README.md" />
     <None Include="Bridge\bridge.Release.json" />
     <None Include="Bridge\bridge.Debug.json" />
     <None Include="Bridge\bridge.json" />
@@ -330,10 +346,6 @@
     <ProjectReference Include="..\..\Bridge\Bridge.csproj">
       <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
       <Name>Bridge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Html5\Bridge.Html5.csproj">
-      <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
-      <Name>Bridge.Html5</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClientTestHelperExternal\ClientTestHelperExternal.csproj">
       <Project>{a9251b8f-d2e1-42e4-b7be-09cd25a6d2f8}</Project>
@@ -349,13 +361,16 @@
     <EmbeddedResource Include="Reflection\Resource2.bin" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bridge.Test, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.1.0\lib\net40\Bridge.Test.dll</HintPath>
+    <Reference Include="Bridge.Html5, Version=17.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Html5.17.0.0-bridge17-0-0-beta0\lib\net40\Bridge.Html5.dll</HintPath>
+    </Reference>
+    <Reference Include="Bridge.Test, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Test.Core.1.4.0-bridge17-0-0-beta0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" Condition="Exists('$(SolutionDir).build\common\NuGet.Build.Package.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">
     <ItemGroup>
       <BridgeTestFilesToDelete Include="$(ProjectDir)$(OutDir)bridgeTest*.log" />

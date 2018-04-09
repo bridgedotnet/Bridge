@@ -1,8 +1,7 @@
-using Bridge;
-
 namespace System.Reflection
 {
-    [External]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
     public class Assembly
     {
         private extern Assembly();
@@ -10,7 +9,7 @@ namespace System.Reflection
         /// <summary>
         /// Gets the display name of the assembly.
         /// </summary>
-        [Name("name")]
+        [Bridge.Name("name")]
         public extern string FullName
         {
             get;
@@ -22,7 +21,7 @@ namespace System.Reflection
         /// <param name="assemblyName">The display name of an assembly.</param>
         /// <param name="typeName">The full name of a type.</param>
         /// <returns>The full name of the type qualified by the display name of the assembly.</returns>
-        [Template("{typeName} + \", \" + {assemblyName}")]
+        [Bridge.Template("{typeName} + \", \" + {assemblyName}")]
         public static extern string CreateQualifiedName(string assemblyName, string typeName);
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="type">An object representing a type in the assembly that will be returned.</param>
         /// <returns>The assembly in which the specified type is defined.</returns>
-        [Template("Bridge.Reflection.getTypeAssembly({type})")]
+        [Bridge.Template("Bridge.Reflection.getTypeAssembly({type})")]
         public static extern Assembly GetAssembly(Type type);
 
         /// <summary>
@@ -38,7 +37,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="assemblyString">The long form of the assembly name.</param>
         /// <returns>The loaded assembly.</returns>
-        [Template("Bridge.Reflection.load({assemblyString})")]
+        [Bridge.Template("Bridge.Reflection.load({assemblyString})")]
         public static extern Assembly Load(string assemblyString);
 
         /// <summary>
@@ -46,14 +45,14 @@ namespace System.Reflection
         /// </summary>
         /// <param name="name">The full name of the type.</param>
         /// <returns>An object that represents the specified class, or null if the class is not found.</returns>
-        [Template("Bridge.Reflection.getType({name}, {this})")]
+        [Bridge.Template("Bridge.Reflection.getType({name}, {this})")]
         public extern Type GetType(string name);
 
         /// <summary>
         /// Gets the types defined in this assembly.
         /// </summary>
         /// <returns>An array that contains all the types that are defined in this assembly.</returns>
-        [Template("Bridge.Reflection.getAssemblyTypes({this})")]
+        [Bridge.Template("Bridge.Reflection.getAssemblyTypes({this})")]
         public extern Type[] GetTypes();
 
         /// <summary>
@@ -61,14 +60,14 @@ namespace System.Reflection
         /// </summary>
         /// <param name="typeName">The Type.FullName of the type to locate.</param>
         /// <returns>An instance of the specified type created with the default constructor; or null if typeName is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with BindingFlags set to Public or Instance.</returns>
-        [Template("Bridge.Reflection.createAssemblyInstance({this}, {typeName})")]
+        [Bridge.Template("Bridge.Reflection.createAssemblyInstance({this}, {typeName})")]
         public extern object CreateInstance(string typeName);
 
         /// <summary>
         /// Gets the assembly that contains the code that is currently executing.
         /// </summary>
         /// <returns>The assembly that contains the code that is currently executing.</returns>
-        [Template("$asm")]
+        [Bridge.Template("$asm")]
         public static extern Assembly GetExecutingAssembly();
 
         /// <summary>

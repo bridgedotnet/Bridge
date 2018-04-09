@@ -1,12 +1,10 @@
-﻿using Bridge;
-
-namespace System.Net.WebSockets
+﻿namespace System.Net.WebSockets
 {
     /// <summary>
     /// Options to use with a <see cref="ClientWebSocket"/> object.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class ClientWebSocketOptions
     {
         /// <summary>

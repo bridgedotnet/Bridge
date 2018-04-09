@@ -115,7 +115,7 @@ namespace Bridge.Contract
 
         protected bool Equals(Module other)
         {
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

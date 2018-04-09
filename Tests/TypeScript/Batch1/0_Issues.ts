@@ -1,7 +1,7 @@
 ﻿/// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
-/// <reference path="..\..\Runner\TypeScript\App1\misc.a.d.ts" />
-/// <reference path="..\..\Runner\TypeScript\App1\misc.b.d.ts" />
+/// <reference path="..\..\Runner\TypeScript\App1\Misc.A.d.ts" />
+/// <reference path="..\..\Runner\TypeScript\App1\Misc.B.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\typeScriptTest.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\typeScript.issues.d.ts" />
 "use strict";
@@ -24,8 +24,8 @@ QUnit.test("#336", function (assert) {
     var l1 = new (System.Collections.Generic.List$1(String).$ctor1)(["4"]);
     var l2 = new (System.Collections.Generic.List$1(String).$ctor1)(["1", "2"]);
 
-    l1.insertRange(0, l2);
-    assert.deepEqual(l1.toArray(), ["1", "2", "4"], "InsertRange works (1)");
+    l1.InsertRange(0, l2);
+    assert.deepEqual(l1.ToArray(), ["1", "2", "4"], "InsertRange works (1)");
 });
 
 QUnit.test("#338", function (assert) {
@@ -123,7 +123,7 @@ QUnit.test("#2264", function (assert) {
 
     assert.notEqual(b.Values, null);
 
-    var enumerator = b.Values.getEnumerator();
+    var enumerator = b.Values.GetEnumerator();
     enumerator.moveNext();
 
     assert.deepEqual(enumerator.Current, "first");

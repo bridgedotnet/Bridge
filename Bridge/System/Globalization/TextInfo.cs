@@ -1,4 +1,3 @@
-using Bridge;
 using System.Runtime.InteropServices;
 
 namespace System.Globalization
@@ -6,8 +5,7 @@ namespace System.Globalization
     /// <summary>
     /// Defines text properties and behaviors, such as casing, that are specific to a writing system.
     /// </summary>
-    [Reflectable]
-    public class TextInfo : ICloneable, IBridgeClass
+    public class TextInfo : ICloneable
     {
         private string listSeparator;
 
@@ -80,7 +78,7 @@ namespace System.Globalization
         [ComVisibleAttribute(false)]
         public virtual object Clone()
         {
-            return Script.Copy(new TextInfo(), this, new string[]
+            return Bridge.Script.Copy(new TextInfo(), this, new string[]
             {
                 "ANSICodePage",
                 "CultureName",

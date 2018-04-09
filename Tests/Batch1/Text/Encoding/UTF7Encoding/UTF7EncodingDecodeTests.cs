@@ -116,6 +116,6 @@ namespace Bridge.ClientTest.Text
             }
         }
 
-        
+
     }
 }

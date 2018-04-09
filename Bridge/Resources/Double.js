@@ -55,6 +55,7 @@
                 if (value === Number.NEGATIVE_INFINITY) {
                     return 0xFFF00000;
                 }
+
                 return Bridge.getHashCode(value.toExponential());
             }
         }

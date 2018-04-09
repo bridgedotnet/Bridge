@@ -834,7 +834,7 @@ namespace Bridge.Translator
             {
                 nonEmpty = true;
                 this.EnsureComma();
-                this.WriteScript(OverloadsCollection.Create(Emitter, member).GetOverloadName(false, null, excludeTypeParam));
+                this.WriteScript(OverloadsCollection.Create(Emitter, member).GetOverloadName(false, null, excludeTypeOnly: excludeTypeParam));
                 this.WriteComma();
                 var alias = OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName(withoutTypeParams: excludeAliasTypeParam);
 

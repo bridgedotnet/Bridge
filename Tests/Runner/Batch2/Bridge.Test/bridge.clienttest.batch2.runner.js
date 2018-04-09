@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.6.1
+ * @compiler Bridge.NET 17.0.0-beta0
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals) {
     
@@ -88,6 +88,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1385", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestIsTypedArrayForByte: function (assert) {
@@ -113,6 +114,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1499", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestObjectStringCoalesceWorks: function (assert) {
@@ -138,6 +140,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -178,6 +181,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -218,6 +222,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestClippingInJavaScriptOverflowMode: function (assert) {
@@ -248,6 +253,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1204", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestStrictNullChecksOptionForNulls: function (assert) {
@@ -273,6 +279,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N3075", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N3075)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestRawModifier: function (assert) {
@@ -298,6 +305,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
@@ -558,6 +566,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -598,6 +607,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {
@@ -638,6 +648,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
+        $kind: "nested class",
         statics: {
             methods: {
                 TestInt32: function (assert) {

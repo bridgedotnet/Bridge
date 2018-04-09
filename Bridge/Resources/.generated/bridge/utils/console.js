@@ -82,7 +82,8 @@
                     var v = "";
 
                     if (value != null) {
-                        v = (value.toString == { }.toString) ? JSON.stringify(value, null, 2) : value.toString();
+                        var hasToString = value.ToString !== undefined;
+                        v = (value.toString == { }.toString && !hasToString) ? JSON.stringify(value, null, 2) : hasToString ? value.ToString() : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {
@@ -216,7 +217,6 @@
 
                 var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
-                // Bridge Icon
                 this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
 
                 var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
@@ -231,11 +231,9 @@
 
                 this.setAttributes(this.bridgeIconPath, items2);
 
-                // Bridge Console Label
                 this.bridgeConsoleLabel = this.bridgeConsoleLabel || document.createElement("span");
                 this.bridgeConsoleLabel.innerHTML = "Bridge Console";
 
-                // Close Button
                 this.closeBtn = this.closeBtn || document.createElement("span");
                 this.closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
 
@@ -256,8 +254,6 @@
 
                 this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
 
-                // Styles and other stuff based on position
-                // Force to horizontal for now
                 Bridge.Console.position = "horizontal";
 
                 if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
@@ -276,19 +272,15 @@
                     consoleBodyStyles.set("height", "100%");
                 }
 
-                // Console wrapper
                 this.consoleWrap = this.consoleWrap || document.createElement("div");
                 this.consoleWrap.setAttribute("style", this.obj2Css(consoleWrapStyles));
 
-                // Console Header
                 this.consoleHeader = this.consoleHeader || document.createElement("div");
                 this.consoleHeader.setAttribute("style", this.obj2Css(consoleHeaderStyles));
 
-                // Console Body Wrapper
                 this.consoleBody = this.consoleBody || document.createElement("div");
                 this.consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
 
-                // Console Messages Unordered List Element
                 this.consoleMessages = this.consoleMessages || document.createElement("ul");
                 var cm = this.consoleMessages;
                 cm.id = Bridge.Console.CONSOLE_MESSAGES_ID;
@@ -301,25 +293,19 @@
                     this.closeBtn.appendChild(this.closeIcon);
                     this.closeBtn.appendChild(this.tooltip);
 
-                    // Add child elements into console header
                     this.consoleHeader.appendChild(this.bridgeIcon);
                     this.consoleHeader.appendChild(this.bridgeConsoleLabel);
                     this.consoleHeader.appendChild(this.closeBtn);
 
-                    // Add messages to console body
                     this.consoleBody.appendChild(cm);
 
-                    // Add console header and console body into console wrapper
                     this.consoleWrap.appendChild(this.consoleHeader);
                     this.consoleWrap.appendChild(this.consoleBody);
 
-                    // Finally add console to body
                     document.body.appendChild(this.consoleWrap);
 
-                    // Close console
                     this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
 
-                    // Show/hide Tooltip
                     this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
                     this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
                 }
@@ -351,7 +337,6 @@
                     return;
                 }
 
-                // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
                 var bodyStyle = document.defaultView.getComputedStyle(document.body, null);
 
                 var bodyPaddingTop = bodyStyle.paddingTop;
@@ -435,7 +420,7 @@
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
+                        $t.System$IDisposable$Dispose();
                     }
                 }},
             obj2Css: function (obj) {
@@ -450,7 +435,7 @@
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
+                        $t.System$IDisposable$Dispose();
                     }
                 }
                 return str;

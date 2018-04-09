@@ -47,8 +47,13 @@
     <Compile Include="BridgeIssues\0500\N065.cs" />
     <Compile Include="BridgeIssues\0500\N064.cs" />
     <Compile Include="BridgeIssues\0500\N062.cs" />
+    <Compile Include="BridgeIssues\0500\N384.cs" />
     <Compile Include="BridgeIssues\0500\N391.cs" />
+    <Compile Include="BridgeIssues\0500\N411.cs" />
     <Compile Include="BridgeIssues\0500\N447.cs" />
+    <Compile Include="BridgeIssues\0500\N475A.cs" />
+    <Compile Include="BridgeIssues\0500\N475B.cs" />
+    <Compile Include="BridgeIssues\0500\N477.cs" />
     <Compile Include="BridgeIssues\1000\N527.cs" />
     <Compile Include="BridgeIssues\1000\N644B.cs" />
     <Compile Include="BridgeIssues\1000\N644A.cs" />
@@ -58,10 +63,6 @@
     <Compile Include="BridgeIssues\1000\N534.cs" />
     <Compile Include="BridgeIssues\1000\N528.cs" />
     <Compile Include="BridgeIssues\1000\N524.cs" />
-    <Compile Include="BridgeIssues\0500\N477.cs" />
-    <Compile Include="BridgeIssues\0500\N411.cs" />
-    <Compile Include="BridgeIssues\0500\N475A.cs" />
-    <Compile Include="BridgeIssues\0500\N475B.cs" />
     <Compile Include="BridgeIssues\1000\N883A.cs" />
     <Compile Include="BridgeIssues\1000\N963.cs" />
     <Compile Include="BridgeIssues\1000\N883.cs" />
@@ -87,8 +88,9 @@
     <Compile Include="BridgeIssues\2500\N2113.cs" />
     <Compile Include="BridgeIssues\3000\N2567.cs" />
     <Compile Include="BridgeIssues\3000\N2747.cs" />
+    <Compile Include="BridgeIssues\3000-3999\N3386.cs" />
+    <Compile Include="BridgeIssues\3000-3999\N3438.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BridgeIssues\0500\N384.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Bridge\bridge.json" />
@@ -97,10 +99,6 @@
     <Reference Include="Bridge">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Bridge.Html5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Html5\bin\$(Configuration)\Bridge.Html5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

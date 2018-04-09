@@ -12,12 +12,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere with JavaScript.</description>
     <summary>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere in JavaScript with Bridge.NET.</summary>
-    <copyright>Copyright (c) 2008-2017, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
+    <copyright>Copyright (c) 2008-2018, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.Contract" version="16.6.1" />
+      <dependency id="Bridge.Contract" version="17.0.0-beta0" />
       <dependency id="AjaxMin" version="5.14.5506.26202" />
-      <dependency id="Bridge.NRefactory" version="5.5.8" />
+      <dependency id="Bridge.NRefactory" version="5.5.9" />
       <dependency id="Microsoft.CodeAnalysis.CSharp" version="2.2.0" />
       <dependency id="Mono.Cecil" version="0.9.6.4" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />

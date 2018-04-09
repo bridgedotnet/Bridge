@@ -1,14 +1,13 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Validation attribute to indicate that a property field or parameter is required.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
         AllowMultiple = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class RequiredAttribute : ValidationAttribute
     {
         /// <summary>

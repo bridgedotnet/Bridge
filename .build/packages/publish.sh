@@ -16,8 +16,9 @@ otherpkgs=(
 logfile="publish.log"
 nuget_exe="../../.nuget/nuget.exe"
 
-echo -n "Inferring Bridge version: "
-version="$(egrep AssemblyInformationalVersion ../common/CommonAssemblyInfo.cs | cut -f2 -d\")"
+function log() {
+ echo "$(date) - ${@}" >> "${logfile}"
+}
 
 function trigger_error() {
  if [ ${#@} -gt 0 ]; then
@@ -30,9 +31,21 @@ function trigger_error() {
  exit 1
 }
 
-function log() {
- echo "$(date) - ${@}" >> "${logfile}"
+function showhelp() {
+ echo "usage: ${0} [--dry-run|--help]"
 }
+
+dry_run=false
+if [ ! -z "${1}" ]; then
+ case "${1}" in
+  "--dry-run") dry_run=true;;
+  "--help"|"-h") showhelp; exit 0;;
+  *) showhelp; trigger_error "Unexpected argument: ${1}"
+ esac
+fi
+
+echo -n "Inferring Bridge version: "
+version="$(egrep AssemblyInformationalVersion ../common/CommonAssemblyInfo.cs | cut -f2 -d\")"
 
 log "Publish script started."
 
@@ -41,11 +54,6 @@ if [ -z "${version}" ]; then
  trigger_error "Unable to fetch Bridge version number. Bailing out."
 fi
 echo "${version}."
-
-dry_run=false
-if [ "${1}" == "--dry-run" ]; then
- dry_run=true
-fi
 
 if [ ! -x "${nuget_exe}" ]; then
  trigger_error "Unable to run NuGet client at: ${nuget_exe}."
@@ -197,7 +205,7 @@ $(date) - End of report." >> publish.error.log
  echo "Done. Total: ${#packages_to_publish[@]} packages published.
 
 Please notice it may take a while for NuGet API and website to reflect the
-updated packages' version. This means, running this script right after a-f0-9-
+updated packages' version. This means, running this script right after a
 successful publish sweep will still report the versions as not published."
 else
  echo "

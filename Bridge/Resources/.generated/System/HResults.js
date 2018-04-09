@@ -1,0 +1,1 @@
+    Bridge.define("System.HResults");

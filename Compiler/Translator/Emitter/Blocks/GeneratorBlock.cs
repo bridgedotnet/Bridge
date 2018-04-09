@@ -46,22 +46,22 @@ namespace Bridge.Translator
         {
             get
             {
-                if(this.MethodDeclaration != null)
+                if (this.MethodDeclaration != null)
                 {
                     return this.MethodDeclaration;
                 }
 
-                if(this.AnonymousMethodExpression != null)
+                if (this.AnonymousMethodExpression != null)
                 {
                     return this.AnonymousMethodExpression;
                 }
 
-                if(this.LambdaExpression != null)
+                if (this.LambdaExpression != null)
                 {
                     return this.LambdaExpression;
                 }
 
-                if(this.Accessor != null)
+                if (this.Accessor != null)
                 {
                     return this.Accessor;
                 }
@@ -104,22 +104,22 @@ namespace Bridge.Translator
         {
             get
             {
-                if(this.MethodDeclaration != null)
+                if (this.MethodDeclaration != null)
                 {
                     return this.MethodDeclaration.Body;
                 }
 
-                if(this.LambdaExpression != null)
+                if (this.LambdaExpression != null)
                 {
                     return this.LambdaExpression.Body;
                 }
 
-                if(this.AnonymousMethodExpression != null)
+                if (this.AnonymousMethodExpression != null)
                 {
                     return this.AnonymousMethodExpression.Body;
                 }
 
-                if(this.Accessor != null)
+                if (this.Accessor != null)
                 {
                     return this.Accessor.Body;
                 }
@@ -292,19 +292,19 @@ namespace Bridge.Translator
 
         protected void DetectReturnType()
         {
-            if(this.MethodDeclaration != null)
+            if (this.MethodDeclaration != null)
             {
                 this.ReturnType = this.Emitter.Resolver.ResolveNode(this.MethodDeclaration.ReturnType, this.Emitter).Type;
             }
-            else if(this.LambdaExpression != null)
+            else if (this.LambdaExpression != null)
             {
                 this.ReturnType = ((LambdaResolveResult)this.Emitter.Resolver.ResolveNode(this.LambdaExpression, this.Emitter)).ReturnType;
             }
-            else if(this.AnonymousMethodExpression != null)
+            else if (this.AnonymousMethodExpression != null)
             {
                 this.ReturnType = ((LambdaResolveResult)this.Emitter.Resolver.ResolveNode(this.AnonymousMethodExpression, this.Emitter)).ReturnType;
             }
-            else if(this.Accessor != null)
+            else if (this.Accessor != null)
             {
                 this.ReturnType = this.Emitter.Resolver.ResolveNode(((EntityDeclaration)this.Accessor.Parent).ReturnType, this.Emitter).Type;
             }
@@ -328,7 +328,7 @@ namespace Bridge.Translator
 
         public void Emit(bool skipInit)
         {
-            if(!skipInit)
+            if (!skipInit)
             {
                 this.InitAsyncBlock();
             }
@@ -347,7 +347,7 @@ namespace Bridge.Translator
                 this.WriteReturn(true);
                 this.Write("new ");
 
-                if(this.ReturnType.IsParameterized)
+                if (this.ReturnType.IsParameterized)
                 {
                     this.Write("(Bridge.GeneratorEnumerable$1(" + BridgeTypes.ToJsName(this.ReturnType.TypeArguments[0], this.Emitter) + "))");
                 }
@@ -414,7 +414,7 @@ namespace Bridge.Translator
             this.WriteVar(true);
             this.Write(JS.Vars.ENUMERATOR + " = new ");
 
-            if(this.ReturnType.IsParameterized)
+            if (this.ReturnType.IsParameterized)
             {
                 this.Write("(" + JS.Types.Bridge.Generator.NAME_GENERIC +"(" + BridgeTypes.ToJsName(this.ReturnType.TypeArguments[0], this.Emitter) + "))");
             }
@@ -441,7 +441,7 @@ namespace Bridge.Translator
             this.WriteSemiColon();
             this.WriteNewLine();
 
-            if(!IsEnumeratorReturn)
+            if (!IsEnumeratorReturn)
             {
                 this.EndBlock();
                 if (args.Count > 0)
@@ -498,9 +498,9 @@ namespace Bridge.Translator
             this.WriteNewLine();
             this.EndBlock();
 
-            if(needTry)
+            if (needTry)
             {
-                if(!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
+                if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
                 {
                     this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
                 }
@@ -527,7 +527,7 @@ namespace Bridge.Translator
 
             foreach(var info in infos)
             {
-                if(info.CatchBlocks.Count > 0)
+                if (info.CatchBlocks.Count > 0)
                 {
                     this.WriteIf();
                     this.WriteOpenParentheses(true);
@@ -544,9 +544,9 @@ namespace Bridge.Translator
                         var step = clause.Item3;
                         var isBaseException = exceptionType == JS.Types.System.Exception.NAME;
 
-                        if(info.CatchBlocks.Count == 1 && isBaseException)
+                        if (info.CatchBlocks.Count == 1 && isBaseException)
                         {
-                            if(!string.IsNullOrEmpty(varName))
+                            if (!string.IsNullOrEmpty(varName))
                             {
                                 this.Write(varName + " = " + JS.Vars.ASYNC_E + ";");
                                 this.WriteNewLine();
@@ -561,13 +561,13 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            if(!firstClause)
+                            if (!firstClause)
                             {
                                 this.WriteSpace();
                                 this.WriteElse();
                             }
 
-                            if(!isBaseException)
+                            if (!isBaseException)
                             {
                                 this.WriteIf();
                                 this.WriteOpenParentheses();
@@ -580,7 +580,7 @@ namespace Bridge.Translator
 
                             this.BeginBlock();
 
-                            if(!string.IsNullOrEmpty(varName))
+                            if (!string.IsNullOrEmpty(varName))
                             {
                                 this.Write(varName + " = " + JS.Vars.ASYNC_E + ";");
                                 this.WriteNewLine();
@@ -602,9 +602,9 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                 }
 
-                if(info.FinallyStep > 0)
+                if (info.FinallyStep > 0)
                 {
-                    if(!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
+                    if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
                     {
                         this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
                     }
@@ -695,7 +695,7 @@ namespace Bridge.Translator
             {
                 var step = this.Steps[i];
 
-                if(i != 0)
+                if (i != 0)
                 {
                     this.WriteNewLine();
                 }
@@ -709,9 +709,9 @@ namespace Bridge.Translator
 
                 bool addNewLine = false;
 
-                if(!string.IsNullOrWhiteSpace(cleanOutput))
+                if (!string.IsNullOrWhiteSpace(cleanOutput))
                 {
-                    if(addNewLine)
+                    if (addNewLine)
                     {
                         this.WriteNewLine();
                     }
@@ -719,14 +719,14 @@ namespace Bridge.Translator
                     this.Write(this.WriteIndentToString(output.TrimEnd()));
                 }
 
-                if(!this.IsOnlyWhitespaceOnPenultimateLine(false))
+                if (!this.IsOnlyWhitespaceOnPenultimateLine(false))
                 {
                     addNewLine = true;
                 }
 
-                if(step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
+                if (step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
-                    if(addNewLine)
+                    if (addNewLine)
                     {
                         this.WriteNewLine();
                     }
@@ -735,11 +735,11 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if(step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
+                else if (step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
                     var tostep = this.Steps.First(s => s.Node == step.JumpToNode);
 
-                    if(addNewLine)
+                    if (addNewLine)
                     {
                         this.WriteNewLine();
                     }
@@ -748,9 +748,9 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if(i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(cleanOutput))
+                else if (i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(cleanOutput))
                 {
-                    if(addNewLine)
+                    if (addNewLine)
                     {
                         this.WriteNewLine();
                     }
@@ -788,7 +788,7 @@ namespace Bridge.Translator
 
         public bool IsParentForAsync(AstNode child)
         {
-            if(child is IfElseStatement)
+            if (child is IfElseStatement)
             {
                 return false;
             }
@@ -796,7 +796,7 @@ namespace Bridge.Translator
             {
                 foreach(var awaiter in this.AwaitExpressions)
                 {
-                    if(child.IsInside(awaiter.StartLocation))
+                    if (child.IsInside(awaiter.StartLocation))
                     {
                         return true;
                     }
@@ -815,7 +815,7 @@ namespace Bridge.Translator
             this.Emitter = emitter;
             this.JumpToStep = -1;
 
-            if(this.Emitter.LastSavedWriter != null)
+            if (this.Emitter.LastSavedWriter != null)
             {
                 this.Emitter.LastSavedWriter.Comma = this.Emitter.Comma;
                 this.Emitter.LastSavedWriter.IsNewLine = this.Emitter.IsNewLine;

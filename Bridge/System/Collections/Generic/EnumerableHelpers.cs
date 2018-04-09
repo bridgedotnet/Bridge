@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Bridge;
 
 namespace System.Collections.Generic
 {
     /// <summary>Internal helper functions for working with enumerables.</summary>
-    [Namespace("Bridge.Collections")]
+    [Bridge.Namespace("Bridge.Collections")]
     internal static class EnumerableHelpers
     {
         /// <summary>Converts an enumerable to an array using the same logic as does List{T}.</summary>

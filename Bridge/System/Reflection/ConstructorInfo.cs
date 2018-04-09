@@ -1,18 +1,17 @@
-using Bridge;
-
 namespace System.Reflection
 {
-    [External]
-    [Unbox(true)]
-    public class ConstructorInfo : MethodBase
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Unbox(true)]
+    public abstract partial class ConstructorInfo : MethodBase
     {
-        [Template("Bridge.Reflection.invokeCI({this}, {arguments:array})")]
+        [Bridge.Template("Bridge.Reflection.invokeCI({this}, {arguments:array})")]
         public extern object Invoke(params object[] arguments);
 
         /// <summary>
         /// Script name of the constructor. Null for the unnamed constructor and for constructors with special implementations
         /// </summary>
-        [Name("sn")]
+        [Bridge.Name("sn")]
         public extern string ScriptName
         {
             get;
@@ -24,16 +23,16 @@ namespace System.Reflection
         /// </summary>
         public extern bool IsStaticMethod
         {
-            [Template("({this}.sm || false)")]
+            [Bridge.Template("({this}.sm || false)")]
             get;
-            [Template("{this}.sm = {value}")]
+            [Bridge.Template("{this}.sm = {value}")]
             private set;
         }
 
         /// <summary>
-        /// For constructors with a special implementation (eg. [Template]), contains a delegate that can be invoked to create an instance.
+        /// For constructors with a special implementation (eg. [Bridge.Template]), contains a delegate that can be invoked to create an instance.
         /// </summary>
-        [Name("def")]
+        [Bridge.Name("def")]
         public extern Delegate SpecialImplementation
         {
             get;
@@ -41,9 +40,9 @@ namespace System.Reflection
         }
 
         /// <summary>
-		/// Whether the [ExpandParams] attribute was specified on the constructor.
-		/// </summary>
-		public extern bool IsExpandParams {[Template("{this}.exp || false")] get;[Template("{this}.exp = {value}")] private set; }
+        /// Whether the [ExpandParams] attribute was specified on the constructor.
+        /// </summary>
+        public extern bool IsExpandParams {[Bridge.Template("{this}.exp || false")] get;[Bridge.Template("{this}.exp = {value}")] private set; }
 
         internal extern ConstructorInfo();
     }

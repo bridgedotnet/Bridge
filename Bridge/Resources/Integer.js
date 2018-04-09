@@ -54,6 +54,9 @@
         statics: {
             $number: true,
 
+            MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1,
+            MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER || -(Math.pow(2, 53) - 1),
+
             $is: function (instance) {
                 return typeof (instance) === "number" && isFinite(instance) && Math.floor(instance, 0) === instance;
             },
@@ -124,6 +127,7 @@
                                 } else {
                                     coefficient *= 10;
                                 }
+
                                 exponent--;
                             }
 
@@ -145,6 +149,7 @@
                                 if ((exponent > -5 && exponent < precision) || isDecimal && noPrecision) {
                                     minDecimals = 0;
                                     maxDecimals = precision - (exponent > 0 ? exponent + 1 : 1);
+
                                     return this.defaultFormat(number, 1, minDecimals, maxDecimals, nf, true);
                                 }
 
@@ -298,7 +303,7 @@
                     str = "" + (+Math.abs(number).toFixed(maxDecLen));
                 }
 
-                isZero = str.split('').every(function (s) { return s === '0' || s === '.'; });
+                isZero = str.split("").every(function (s) { return s === "0" || s === "."; });
 
                 decimalIndex = str.indexOf(".");
 
@@ -465,7 +470,7 @@
                     number = "" + (Math.round(Math.abs(number) * roundingFactor) / roundingFactor);
                 }
 
-                isZero = number.split('').every(function (s) { return s === '0' || s === '.'; });
+                isZero = number.split("").every(function (s) { return s === "0" || s === "."; });
 
                 decimalIndex = number.indexOf(".");
                 integralDigits = decimalIndex < 0 ? number.length : decimalIndex;
@@ -582,7 +587,8 @@
                     if (safe) {
                         return false;
                     }
-                    throw new System.ArgumentNullException("s");
+
+                    throw new System.ArgumentNullException.$ctor1("s");
                 }
 
                 s = s.trim();
@@ -606,7 +612,8 @@
                         if (safe) {
                             return false;
                         }
-                        throw new System.FormatException(errMsg);
+
+                        throw new System.FormatException.$ctor1(errMsg);
                     }
                 }
 
@@ -614,7 +621,8 @@
                     if (safe) {
                         return false;
                     }
-                    throw new System.FormatException(errMsg);
+
+                    throw new System.FormatException.$ctor1(errMsg);
                 }
 
                 if (thousandIndex > -1) {
@@ -632,33 +640,44 @@
 
                 if (s === nfInfo.negativeInfinitySymbol) {
                     result.v = Number.NEGATIVE_INFINITY;
+
                     return true;
                 } else if (s === nfInfo.positiveInfinitySymbol) {
                     result.v = Number.POSITIVE_INFINITY;
+
                     return true;
                 } else if (s === nfInfo.nanSymbol) {
                     result.v = Number.NaN;
+
                     return true;
                 }
 
                 var countExp = 0;
 
                 for (var i = 0; i < s.length; i++) {
-                    if (System.Char.isLetter(s[i].charCodeAt(0))) {
+                    if (!System.Char.isNumber(s[i].charCodeAt(0)) &&
+                        s[i] !== "." &&
+                        s[i] !== "," &&
+                        s[i] !== nfInfo.positiveSign &&
+                        s[i] !== nfInfo.negativeSign &&
+                        s[i] !== point &&
+                        s[i] !== thousands) {
                         if (s[i].toLowerCase() === "e") {
                             countExp++;
+
                             if (countExp > 1) {
                                 if (safe) {
                                     return false;
                                 }
-                                throw new System.FormatException(errMsg);
+
+                                throw new System.FormatException.$ctor1(errMsg);
                             }
-                        }
-                        else {
+                        } else {
                             if (safe) {
                                 return false;
                             }
-                            throw new System.FormatException(errMsg);
+
+                            throw new System.FormatException.$ctor1(errMsg);
                         }
                     }
                 }
@@ -669,10 +688,12 @@
                     if (safe) {
                         return false;
                     }
-                    throw new System.FormatException(errMsg);
+
+                    throw new System.FormatException.$ctor1(errMsg);
                 }
 
                 result.v = r;
+
                 return true;
             },
 
@@ -680,18 +701,18 @@
                 radix = radix || 10;
 
                 if (str == null) {
-                    throw new System.ArgumentNullException("str");
+                    throw new System.ArgumentNullException.$ctor1("str");
                 }
 
                 if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
                     || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
-                    throw new System.FormatException("Input string was not in a correct format.");
+                    throw new System.FormatException.$ctor1("Input string was not in a correct format.");
                 }
 
                 var result = parseInt(str, radix);
 
                 if (isNaN(result)) {
-                    throw new System.FormatException("Input string was not in a correct format.");
+                    throw new System.FormatException.$ctor1("Input string was not in a correct format.");
                 }
 
                 if (result < min || result > max) {
@@ -714,6 +735,7 @@
 
                 if (result.v < min || result.v > max) {
                     result.v = 0;
+
                     return false;
                 }
 
@@ -770,8 +792,7 @@
                         }
 
                         return type === System.Int64 ? System.Int64(x) : System.UInt64(x);
-                    }
-                    else if (!type.$is(x)) {
+                    } else if (!type.$is(x)) {
                         throw new System.OverflowException();
                     }
                 }
@@ -836,6 +857,7 @@
                     al = a & 0xffff,
                     bh = (b >>> 16) & 0xffff,
                     bl = b & 0xffff;
+
                 return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
             },
 

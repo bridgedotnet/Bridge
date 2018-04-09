@@ -1,13 +1,8 @@
-using Bridge;
-
 namespace System.Text
 {
     /// <summary>
     /// Provides basic information about an encoding.
     /// </summary>
-    [Reflectable]
-    [FileName("system\\text\\encoding.js")]
-    [Convention]
     public sealed class EncodingInfo
     {
         internal EncodingInfo(int codePage, string name, string displayName)

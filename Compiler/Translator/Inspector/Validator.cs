@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Mono.Cecil.Rocks;
 using ICustomAttributeProvider = Mono.Cecil.ICustomAttributeProvider;
+using System.Text;
 
 namespace Bridge.Translator
 {
@@ -209,6 +210,19 @@ namespace Bridge.Translator
             return
                 this.HasAttribute(entity.Attributes, externalAttr)
                 || this.HasAttribute(entity.Attributes, nonScriptableAttr);
+        }
+
+        public virtual bool IsBridgeClass(IType type)
+        {
+            foreach (var i in type.GetAllBaseTypes().Where(t => t.Kind == TypeKind.Interface))
+            {
+                if (i.FullName == JS.Types.BRIDGE_IBridgeClass)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public virtual bool IsBridgeClass(TypeDefinition type)
@@ -510,7 +524,7 @@ namespace Bridge.Translator
 
         private Stack<TypeDefinition> _stack = new Stack<TypeDefinition>();
 
-        public virtual string GetCustomTypeName(TypeDefinition type, IEmitter emitter, bool excludeNs)
+        public virtual string GetCustomTypeName(TypeDefinition type, IEmitter emitter, bool excludeNs, bool asDefinition = true)
         {
             if (this._stack.Contains(type))
             {
@@ -565,6 +579,37 @@ namespace Bridge.Translator
 
             if (!string.IsNullOrEmpty(name))
             {
+                if (excludeNs)
+                {
+                    var idx = name.LastIndexOf('.');
+
+                    if (idx > -1)
+                    {
+                        name = name.Substring(idx + 1);
+                    }
+                }
+
+                var typeDef = emitter.BridgeTypes.Get(type).Type;
+
+                if (typeDef != null && !asDefinition && typeDef.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(typeDef, emitter, true))
+                {
+                    StringBuilder sb = new StringBuilder(name);
+                    bool needComma = false;
+                    sb.Append("<");
+                    foreach (var typeArg in typeDef.TypeArguments)
+                    {
+                        if (needComma)
+                        {
+                            sb.Append(",");
+                        }
+
+                        needComma = true;
+                        sb.Append(BridgeTypes.ToTypeScriptName(typeArg, emitter));
+                    }
+                    sb.Append(">");
+                    name = sb.ToString();
+                }
+
                 return name;
             }
 

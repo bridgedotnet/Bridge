@@ -265,7 +265,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        public new ICollection<int> Keys
+        public ICollection<int> Keys
         {
             get
             {
@@ -291,7 +291,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         public bool IsReadOnly
         {
-            get { return this._backingDictionary.IsReadOnly; }
+            // This is always false: http://referencesource.microsoft.com/#mscorlib/system/collections/generic/dictionary.cs,604
+            // And Dictionary.IsReadOnly is private.
+            get { return false; }
         }
 
         public void Add(KeyValuePair<int, string> item)

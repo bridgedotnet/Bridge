@@ -10,12 +10,12 @@ declare namespace Issue3309 {
      * @public
      * @class Issue3309.Program
      */
-    export interface Program {
+    interface Program {
         TestFieldPub: string;
         TestPropPub: string;
         TestMethodPub(): void;
     }
-    export interface ProgramFunc extends Function {
+    interface ProgramFunc extends Function {
         prototype: Program;
         new (): Program;
     }

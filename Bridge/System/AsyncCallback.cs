@@ -1,9 +1,7 @@
-using Bridge;
-
 namespace System
 {
-    [Name("Function")]
-    [IgnoreCast]
-    [External]
+    [Bridge.Name("Function")]
+    [Bridge.IgnoreCast]
+    [Bridge.External]
     public delegate void AsyncCallback(IAsyncResult ar);
 }

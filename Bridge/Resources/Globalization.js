@@ -72,7 +72,7 @@
 
         getAbbreviatedDayName: function (dayofweek) {
             if (dayofweek < 0 || dayofweek > 6) {
-                throw new System.ArgumentOutOfRangeException("dayofweek");
+                throw new System.ArgumentOutOfRangeException$ctor1("dayofweek");
             }
 
             return this.abbreviatedDayNames[dayofweek];
@@ -80,7 +80,7 @@
 
         getAbbreviatedMonthName: function (month) {
             if (month < 1 || month > 13) {
-                throw new System.ArgumentOutOfRangeException("month");
+                throw new System.ArgumentOutOfRangeException.$ctor1("month");
             }
 
             return this.abbreviatedMonthNames[month - 1];
@@ -100,7 +100,7 @@
                         return null;
                     }
 
-                    throw new System.ArgumentException(null, "format");
+                    throw new System.ArgumentException.$ctor3("", "format");
                 }
 
                 formats = {};
@@ -125,7 +125,7 @@
 
         getDayName: function (dayofweek) {
             if (dayofweek < 0 || dayofweek > 6) {
-                throw new System.ArgumentOutOfRangeException("dayofweek");
+                throw new System.ArgumentOutOfRangeException.$ctor1("dayofweek");
             }
 
             return this.dayNames[dayofweek];
@@ -133,7 +133,7 @@
 
         getMonthName: function (month) {
             if (month < 1 || month > 13) {
-                throw new System.ArgumentOutOfRangeException("month");
+                throw new System.ArgumentOutOfRangeException.$ctor1("month");
             }
 
             return this.monthNames[month - 1];
@@ -141,7 +141,7 @@
 
         getShortestDayName: function (dayOfWeek) {
             if (dayOfWeek < 0 || dayOfWeek > 6) {
-                throw new System.ArgumentOutOfRangeException("dayOfWeek");
+                throw new System.ArgumentOutOfRangeException.$ctor1("dayOfWeek");
             }
 
             return this.shortestDayNames[dayOfWeek];
@@ -313,7 +313,7 @@
 
             getCultureInfo: function (name) {
                 if (name == null) {
-                    throw new System.ArgumentNullException("name");
+                    throw new System.ArgumentNullException.$ctor1("name");
                 } else if (name === "") {
                     return System.Globalization.CultureInfo.invariantCulture;
                 }
@@ -321,7 +321,7 @@
                 var c = this.cultures[name];
 
                 if (c == null) {
-                    throw new System.Globalization.CultureNotFoundException("name", name);
+                    throw new System.Globalization.CultureNotFoundException.$ctor5("name", name);
                 }
 
                 return c;
@@ -349,7 +349,7 @@
             }
 
             if (name == null) {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException.$ctor1("name");
             }
 
             var c;
@@ -362,7 +362,7 @@
 
             if (c == null) {
                 if (!create) {
-                    throw new System.Globalization.CultureNotFoundException("name", name);
+                    throw new System.Globalization.CultureNotFoundException.$ctor5("name", name);
                 }
 
                 System.Globalization.CultureInfo.cultures[name] = this;

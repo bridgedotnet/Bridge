@@ -87,7 +87,7 @@ namespace Bridge.Translator
             this.EnsureAssemblyLocation(project);
 
             this.SourceFiles = this.GetSourceFiles(project);
-            this.ParsedSourceFiles = new List<ParsedSourceFile>();
+            this.ParsedSourceFiles = new ParsedSourceFile[this.SourceFiles.Count];
 
             this.EnsureDefineConstants(project);
 
@@ -95,15 +95,13 @@ namespace Bridge.Translator
 
             this.Log.Trace("EnsureProjectProperties done");
         }
-        
-
 
         internal virtual void ReadFolderFiles()
         {
             this.Log.Trace("Reading folder files...");
 
             this.SourceFiles = this.GetSourceFiles(this.Location);
-            this.ParsedSourceFiles = new List<ParsedSourceFile>();
+            this.ParsedSourceFiles = new ParsedSourceFile[this.SourceFiles.Count];
 
             this.Log.Trace("Reading folder files done");
         }

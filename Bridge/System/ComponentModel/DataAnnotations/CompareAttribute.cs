@@ -1,10 +1,9 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class CompareAttribute : ValidationAttribute
     {
         public extern CompareAttribute(string otherProperty);

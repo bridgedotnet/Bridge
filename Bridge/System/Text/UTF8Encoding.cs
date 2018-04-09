@@ -1,11 +1,5 @@
-using Bridge;
-using Bridge.Internal.Html5;
-
 namespace System.Text
 {
-    [Reflectable]
-    [FileName("system\\text\\encoding.js")]
-    [Convention]
     public class UTF8Encoding : Encoding
     {
         private bool encoderShouldEmitUTF8Identifier;

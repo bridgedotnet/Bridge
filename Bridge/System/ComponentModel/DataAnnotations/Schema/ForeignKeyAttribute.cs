@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations.Schema
 {
     /// <summary>
@@ -7,9 +5,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
     /// The annotation may be placed on the foreign key property and specify the associated navigation property name,
     /// or placed on a navigation property and specify the associated foreign key name.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class ForeignKeyAttribute : Attribute
     {
         /// <summary>

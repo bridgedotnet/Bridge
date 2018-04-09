@@ -7,7 +7,7 @@ using Bridge;
 
 namespace TestIssue1754
 {
-    [Bridge.Convention(Member = ConventionMember.Field | ConventionMember.Property, Notation = Notation.LowerCamelCase)]
+    [Bridge.Convention(Member = ConventionMember.Field | ConventionMember.Property, Notation = Notation.CamelCase)]
     class Issue1754
     {
         public Issue1754()

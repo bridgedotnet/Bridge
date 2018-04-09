@@ -1,4 +1,3 @@
-using Bridge;
 using System.Collections;
 
 namespace System.Text.RegularExpressions
@@ -6,8 +5,9 @@ namespace System.Text.RegularExpressions
     /// <summary>
     /// Returns the set of captured groups in a single match.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class GroupCollection : ICollection
     {
         internal extern GroupCollection();
@@ -17,7 +17,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern object SyncRoot
         {
-            [Template("getSyncRoot()")]
+            [Bridge.Template("getSyncRoot()")]
             get;
         }
 
@@ -26,7 +26,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsSynchronized
         {
-            [Template("getIsSynchronized()")]
+            [Bridge.Template("getIsSynchronized()")]
             get;
         }
 
@@ -35,7 +35,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsReadOnly
         {
-            [Template("getIsReadOnly()")]
+            [Bridge.Template("getIsReadOnly()")]
             get;
         }
 
@@ -44,7 +44,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern int Count
         {
-            [Template("getCount()")]
+            [Bridge.Template("getCount()")]
             get;
         }
 
@@ -53,7 +53,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern Group this[int groupnum]
         {
-            [Template("get({0})")]
+            [Bridge.Template("get({0})")]
             get;
         }
 
@@ -62,7 +62,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern new Group this[string groupname]
         {
-            [Template("getByName({0})")]
+            [Bridge.Template("getByName({0})")]
             get;
         }
 
@@ -74,6 +74,7 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Provides an enumerator that iterates through the collection.
         /// </summary>
+        [Bridge.Convention(Bridge.Notation.None)]
         public extern IEnumerator GetEnumerator();
     }
 }

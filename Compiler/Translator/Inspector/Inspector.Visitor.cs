@@ -172,11 +172,11 @@ namespace Bridge.Translator
                                 IEnumerable<IMember> baseMembers;
                                 if (interfaceMember.SymbolKind == SymbolKind.Accessor)
                                 {
-                                    baseMembers = baseType.GetAccessors(m => m.Name == interfaceMember.Name && !m.IsExplicitInterfaceImplementation, GetMemberOptions.IgnoreInheritedMembers);
+                                    baseMembers = baseType.GetAccessors(null, GetMemberOptions.IgnoreInheritedMembers).Where(m => m.Name == interfaceMember.Name && TypeComparer.Equals(m.ReturnType, interfaceMember.ReturnType));
                                 }
                                 else
                                 {
-                                    baseMembers = baseType.GetMembers(m => m.Name == interfaceMember.Name && !m.IsExplicitInterfaceImplementation, GetMemberOptions.IgnoreInheritedMembers);
+                                    baseMembers = baseType.GetMembers(null, GetMemberOptions.IgnoreInheritedMembers).Where(m => m.Name == interfaceMember.Name && TypeComparer.Equals(m.ReturnType, interfaceMember.ReturnType));
                                 }
 
                                 foreach (IMember baseMember in baseMembers)
@@ -512,7 +512,7 @@ namespace Bridge.Translator
                                 }
                             }
                         }
-                    }                    
+                    }
                 }
 
                 var autoInitializer = info.AutoPropertyInitializers.FirstOrDefault(f => f.Name == key);
@@ -853,7 +853,7 @@ namespace Bridge.Translator
                         Name = ((MemberResolveResult)((OperatorResolveResult)s).Operands[0]).Member.Name,
                         Value = ((OperatorResolveResult)s).Operands[1].ConstantValue
                     }).ToList();
-                
+
                 if (args.Count == 1)
                 {
                     var obj = args[0];

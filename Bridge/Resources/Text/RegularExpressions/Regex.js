@@ -9,7 +9,7 @@
 
             setCacheSize: function (value) {
                 if (value < 0) {
-                    throw new System.ArgumentOutOfRangeException("value");
+                    throw new System.ArgumentOutOfRangeException.$ctor1("value");
                 }
 
                 System.Text.RegularExpressions.Regex._cacheSize = value;
@@ -18,7 +18,7 @@
 
             escape: function (str) {
                 if (str == null) {
-                    throw new System.ArgumentNullException("str");
+                    throw new System.ArgumentNullException.$ctor1("str");
                 }
 
                 return System.Text.RegularExpressions.RegexParser.escape(str);
@@ -26,7 +26,7 @@
 
             unescape: function (str) {
                 if (str == null) {
-                    throw new System.ArgumentNullException("str");
+                    throw new System.ArgumentNullException.$ctor1("str");
                 }
 
                 return System.Text.RegularExpressions.RegexParser.unescape(str);
@@ -44,6 +44,7 @@
                 }
 
                 var regex = new System.Text.RegularExpressions.Regex.ctor(pattern, options, matchTimeout, true);
+
                 return regex.isMatch(input);
             },
 
@@ -59,6 +60,7 @@
                 }
 
                 var regex = new System.Text.RegularExpressions.Regex.ctor(pattern, options, matchTimeout, true);
+
                 return regex.match(input);
             },
 
@@ -74,6 +76,7 @@
                 }
 
                 var regex = new System.Text.RegularExpressions.Regex.ctor(pattern, options, matchTimeout, true);
+
                 return regex.matches(input);
             },
 
@@ -89,6 +92,7 @@
                 }
 
                 var regex = new System.Text.RegularExpressions.Regex.ctor(pattern, options, matchTimeout, true);
+
                 return regex.replace(input, replacement);
             },
 
@@ -104,6 +108,7 @@
                 }
 
                 var regex = new System.Text.RegularExpressions.Regex.ctor(pattern, options, matchTimeout, true);
+
                 return regex.split(input);
             }
         },
@@ -124,6 +129,7 @@
 
         ctor: function (pattern, options, matchTimeout, useCache) {
             this.$initialize();
+
             if (!Bridge.isDefined(options)) {
                 options = System.Text.RegularExpressions.RegexOptions.None;
             }
@@ -135,15 +141,15 @@
             if (!Bridge.isDefined(useCache)) {
                 useCache = false;
             }
-            
+
             var scope = System.Text.RegularExpressions;
 
             if (pattern == null) {
-                throw new System.ArgumentNullException("pattern");
+                throw new System.ArgumentNullException.$ctor1("pattern");
             }
 
             if (options < scope.RegexOptions.None || ((options >> 10) !== 0)) {
-                throw new System.ArgumentOutOfRangeException("options");
+                throw new System.ArgumentOutOfRangeException.$ctor1("options");
             }
 
             if (((options & scope.RegexOptions.ECMAScript) !== 0) &&
@@ -152,7 +158,7 @@
                     scope.RegexOptions.Multiline |
                     scope.RegexOptions.CultureInvariant
                 )) !== 0)) {
-                throw new System.ArgumentOutOfRangeException("options");
+                throw new System.ArgumentOutOfRangeException.$ctor1("options");
             }
 
             // Check if the specified options are supported.
@@ -164,7 +170,7 @@
                 System.Text.RegularExpressions.RegexOptions.ExplicitCapture;
 
             if ((options | supportedOptions) !== supportedOptions) {
-                throw new System.NotSupportedException("Specified Regex options are not supported.");
+                throw new System.NotSupportedException.$ctor1("Specified Regex options are not supported.");
             }
 
             this._validateMatchTimeout(matchTimeout);
@@ -196,7 +202,7 @@
 
         isMatch: function (input, startat) {
             if (input == null) {
-                throw new System.ArgumentNullException("input");
+                throw new System.ArgumentNullException.$ctor1("input");
             }
 
             if (!Bridge.isDefined(startat)) {
@@ -210,7 +216,7 @@
 
         match: function (input, startat, arg3) {
             if (input == null) {
-                throw new System.ArgumentNullException("input");
+                throw new System.ArgumentNullException.$ctor1("input");
             }
 
             var length = input.length,
@@ -229,7 +235,7 @@
 
         matches: function (input, startat) {
             if (input == null) {
-                throw new System.ArgumentNullException("input");
+                throw new System.ArgumentNullException.$ctor1("input");
             }
 
             if (!Bridge.isDefined(startat)) {
@@ -272,6 +278,7 @@
                 }
             } else {
                 result = [];
+
                 for (key in caps) {
                     if (caps.hasOwnProperty(key)) {
                         result[caps[key]] = key;
@@ -312,7 +319,7 @@
 
         groupNumberFromName: function (name) {
             if (name == null) {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException.$ctor1("name");
             }
 
             // look up name if we have a hashtable of names
@@ -352,7 +359,7 @@
 
         replace: function (input, evaluator, count, startat) {
             if (input == null) {
-                throw new System.ArgumentNullException("input");
+                throw new System.ArgumentNullException.$ctor1("input");
             }
 
             if (!Bridge.isDefined(count)) {
@@ -364,7 +371,7 @@
             }
 
             if (evaluator == null) {
-                throw new System.ArgumentNullException("evaluator");
+                throw new System.ArgumentNullException.$ctor1("evaluator");
             }
 
             if (Bridge.isFunction(evaluator)) {
@@ -379,7 +386,7 @@
 
         split: function (input, count, startat) {
             if (input == null) {
-                throw new System.ArgumentNullException("input");
+                throw new System.ArgumentNullException.$ctor1("input");
             }
 
             if (!Bridge.isDefined(count)) {
@@ -404,6 +411,6 @@
                 return;
             }
 
-            throw new System.ArgumentOutOfRangeException("matchTimeout");
+            throw new System.ArgumentOutOfRangeException.$ctor1("matchTimeout");
         }
     });

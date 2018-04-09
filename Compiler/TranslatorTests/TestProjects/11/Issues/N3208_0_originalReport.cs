@@ -14,7 +14,7 @@ namespace N3208_0_originalReport
         public static void Main()
         {
             var msg = "Hello, World!";
-            
+
             System.Console.WriteLine(msg);
         }
     }

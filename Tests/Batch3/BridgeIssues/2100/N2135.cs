@@ -56,8 +56,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestNestedTypesNames()
         {
-            Assert.AreEqual("_Bridge2135_1.Config", typeof(Class1.Config).FullName);
-            Assert.AreEqual("_Bridge2135_2.Class2_1$1.Config", typeof(Class2.Class2_1<int>.Config).FullName);
+            Assert.AreEqual("_Bridge2135_1+Config", typeof(Class1.Config).FullName);
+            Assert.AreEqual("_Bridge2135_2.Class2_1$1+Config", typeof(Class2.Class2_1<int>.Config).FullName);
             Assert.AreEqual("_Bridge2135_3.Config$1", typeof(Class3.Config<>).FullName);
             Assert.AreEqual("_Bridge2135_4.Class4_1$1.Config[[System.Object, mscorlib]]", typeof(Class4.Class4_1<object>.Config).FullName);
         }

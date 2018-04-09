@@ -1,13 +1,13 @@
-﻿using Bridge;
-using System.Collections;
+﻿using System.Collections;
 
 namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Represents the set of captures made by a single capturing group.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class CaptureCollection : ICollection
     {
         internal extern CaptureCollection();
@@ -17,7 +17,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern object SyncRoot
         {
-            [Template("getSyncRoot()")]
+            [Bridge.Template("getSyncRoot()")]
             get;
         }
 
@@ -26,7 +26,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsSynchronized
         {
-            [Template("getIsSynchronized()")]
+            [Bridge.Template("getIsSynchronized()")]
             get;
         }
 
@@ -35,7 +35,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsReadOnly
         {
-            [Template("getIsReadOnly()")]
+            [Bridge.Template("getIsReadOnly()")]
             get;
         }
 
@@ -44,7 +44,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern int Count
         {
-            [Template("getCount()")]
+            [Bridge.Template("getCount()")]
             get;
         }
 
@@ -54,7 +54,7 @@ namespace System.Text.RegularExpressions
 
         public extern Capture this[int i]
         {
-            [Template("get({0})")]
+            [Bridge.Template("get({0})")]
             get;
         }
 
@@ -66,6 +66,7 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Provides an enumerator that iterates through the collection.
         /// </summary>
+        [Bridge.Convention(Bridge.Notation.None)]
         public extern IEnumerator GetEnumerator();
     }
 }

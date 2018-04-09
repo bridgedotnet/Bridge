@@ -1,14 +1,9 @@
-using Bridge;
-
 namespace System.Text
 {
     /// <summary>
     /// Represents a character encoding.
     /// </summary>
-    [Reflectable]
-    [FileName("system\\text\\encoding.js")]
-    [Convention]
-    public abstract class Encoding : IBridgeClass
+    public abstract class Encoding
     {
         internal bool _hasError;
 
@@ -415,7 +410,7 @@ namespace System.Text
         /// <returns>The maximum number of characters produced by decoding the specified number of bytes.</returns>
         public abstract int GetMaxCharCount(int byteCount);
 
-        [Template("System.String.fromCharCode({code})")]
+        [Bridge.Template("System.String.fromCharCode({code})")]
         internal static extern string FromCharCode(int code);
     }
 }

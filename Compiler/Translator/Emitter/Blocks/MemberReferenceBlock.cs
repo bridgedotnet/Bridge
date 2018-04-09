@@ -404,7 +404,7 @@ namespace Bridge.Translator
                 if (parentInvocation == null || parentInvocation.Target != memberReferenceExpression)
                 {
                     var method = (IMethod)member.Member;
-                    if (method.TypeArguments.Count > 0)
+                    if (method.TypeArguments.Count > 0 || method.IsExtensionMethod)
                     {
                         inline = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
                     }
@@ -926,7 +926,9 @@ namespace Bridge.Translator
                     {
                         new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, memberReferenceExpression, resolveResult), inline, (IMethod)member.Member, targetrr).EmitFunctionReference();
                     }
-                    else if (resolveResult is InvocationResolveResult || (member.Member.SymbolKind == SymbolKind.Property && this.Emitter.IsAssignment))
+                    else if (resolveResult is InvocationResolveResult ||
+                        (member.Member.SymbolKind == SymbolKind.Property && this.Emitter.IsAssignment) ||
+                        (member.Member != null && member.Member is IEvent))
                     {
                         this.PushWriter(inline);
                     }

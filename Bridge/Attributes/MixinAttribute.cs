@@ -2,9 +2,8 @@
 
 namespace Bridge
 {
-    [External]
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class MixinAttribute : Attribute
     {
         public MixinAttribute(string expression)

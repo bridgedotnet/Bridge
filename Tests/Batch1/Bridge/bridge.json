@@ -6,7 +6,7 @@
   "outputBy": "Project",
   "localesOutput": "locales",
   "locales": "ru-RU;en-US;en-GB;nb-NO;es*",
-  "combineLocales":  true,
+  "combineLocales": true,
   "fileNameCasing": "CamelCase",
   "console": true,
   "sourceMap": false,
@@ -15,7 +15,7 @@
   },
   "reflection": {
     "disabled": true,
-    "target":  "Inline"
+    "target": "Inline"
   },
   "test": {
     "skipCombine": true

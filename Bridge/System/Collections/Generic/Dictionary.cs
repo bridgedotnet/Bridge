@@ -1,77 +1,78 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
-        IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IBridgeClass
+        IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, Bridge.IBridgeClass
     {
         public extern Dictionary();
 
-        [Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))()")]
+        [Bridge.Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))()")]
         public extern Dictionary(int capacity);
 
-        [Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))(null, {comparer})")]
+        [Bridge.Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))(null, {comparer})")]
         public extern Dictionary(int capacity, IEqualityComparer<TKey> comparer);
 
         public extern Dictionary(object obj);
 
         public extern Dictionary(object obj, IEqualityComparer<TKey> comparer);
 
-        [Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))(null, {comparer})")]
+        [Bridge.Template("new (System.Collections.Generic.Dictionary$2({TKey}, {TValue}))(null, {comparer})")]
         public extern Dictionary(IEqualityComparer<TKey> comparer);
 
         public extern Dictionary(IDictionary<TKey, TValue> dictionary);
 
         public extern Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer);
 
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern IEqualityComparer<TKey> Comparer
         {
             get;
         }
 
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern int Count
         {
             get;
         }
 
-        new public extern ICollection<TKey> Keys
+        public extern ICollection<TKey> Keys
         {
-            [Template("getKeys()")]
+            [Bridge.Template("getKeys()")]
             get;
         }
 
         IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys
         {
-            [Template("getKeys()")]
+            [Bridge.Template("getKeys()")]
             get;
         }
 
         public extern ICollection<TValue> Values
         {
-            [Template("getValues()")]
+            [Bridge.Template("getValues()")]
             get;
         }
 
         IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values
         {
-            [Template("getValues()")]
+            [Bridge.Template("getValues()")]
             get;
         }
 
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         public extern TValue this[TKey key]
         {
-            [Name("get")]
+            [Bridge.Name("get")]
             get;
-            [Name("set")]
+            [Bridge.Name("set")]
             set;
         }
 
         public extern void Set(TKey key, TValue value);
+
+        private extern static bool IsCompatibleKey(object key);
 
         public extern void Add(TKey key, TValue value);
 
@@ -81,22 +82,56 @@ namespace System.Collections.Generic
 
         public extern void Clear();
 
+        // Stub just to fulfill IDictionary interface.
+        extern bool IDictionary.Contains(object key);
+
+        // Stub just to fulfill IDictionary interface.
+        [Bridge.Convention(Bridge.Notation.None)]
+        extern IDictionaryEnumerator IDictionary.GetEnumerator();
+
+        bool ICollection.IsSynchronized { get { return false; } }
+
+        object ICollection.SyncRoot { get { return this; } }
+
         public extern bool ContainsKey(TKey key);
 
         public extern bool ContainsValue(TValue value);
 
+        [Bridge.Convention(Bridge.Notation.None)]
         public extern IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator();
 
+        [Bridge.Convention(Bridge.Notation.None)]
         extern IEnumerator IEnumerable.GetEnumerator();
 
         public extern bool Remove(TKey key);
 
         public extern bool TryGetValue(TKey key, out TValue value);
 
-        public extern bool IsReadOnly
+        bool IsFixedSize
         {
-            [Template("getIsReadOnly()")]
+            [Bridge.Template("false")]
             get;
+        }
+
+        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
+        {
+            get { return false; }
+        }
+
+        bool IsReadOnly
+        {
+            [Bridge.Template("getIsReadOnly()")]
+            get;
+        }
+
+        bool IDictionary.IsReadOnly
+        {
+            get { return false; }
+        }
+
+        bool IDictionary.IsFixedSize
+        {
+            get { return false; }
         }
 
         extern void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item);
@@ -109,12 +144,12 @@ namespace System.Collections.Generic
 
         extern void ICollection.CopyTo(Array array, int arrayIndex);
 
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         extern object IDictionary.this[object key]
         {
-            [Name("get")]
+            [Bridge.Name("get")]
             get;
-            [Name("set")]
+            [Bridge.Name("set")]
             set;
         }
 
@@ -122,8 +157,6 @@ namespace System.Collections.Generic
         {
             get;
         }
-
-        extern bool IDictionary.ContainsKey(object key);
 
         extern void IDictionary.Add(object key, object value);
 

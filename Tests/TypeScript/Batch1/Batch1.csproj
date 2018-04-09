@@ -16,6 +16,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="web.config" />

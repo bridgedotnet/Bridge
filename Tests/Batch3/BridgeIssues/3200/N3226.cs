@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#3226 - {0}")]
     public class Bridge3226
-    {        
+    {
         /// <summary>
         /// Build a simple, static integer two-dimensional array and iterate
         /// throught it incrementing a cell with a previous one's value.
@@ -29,8 +29,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 for (var x = 0; x < (a.GetLength(0) - 1); x++)
                 {
                     a[x + 1, y + 1] += a[x, y];
-                }                    
-            }                
+                }
+            }
 
             List<int> list = new List<int>();
             string s = "";
@@ -42,7 +42,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             // By the time it was broken, (bridgedotnet/Bridge#3226) the result
             // was wrong: 100010011
-            Assert.AreEqual("100010001", s, "Result matches '100010001'"); 
+            Assert.AreEqual("100010001", s, "Result matches '100010001'");
         }
     }
 }

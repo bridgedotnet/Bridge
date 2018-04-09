@@ -123,11 +123,29 @@ namespace Bridge.Translator
                 this.Write(JS.Types.System.Array.CREATE);
                 this.WriteOpenParentheses();
 
-                var defaultInitializer =
-                    new PrimitiveExpression(Inspector.GetDefaultFieldValue(at.ElementType, arrayCreateExpression.Type),
-                        "?");
+                var def = Inspector.GetDefaultFieldValue(at.ElementType, arrayCreateExpression.Type);
+                var defaultInitializer = new PrimitiveExpression(def, "?");
 
-                if (defaultInitializer.Value is IType)
+                if (def == at.ElementType || def is RawValue)
+                {
+                    this.WriteFunction();
+                    this.WriteOpenCloseParentheses();
+                    this.BeginBlock();
+                    this.WriteReturn(true);
+                    if (def is RawValue)
+                    {
+                        this.Write(def.ToString());
+                    }
+                    else
+                    {
+                        this.Write(Inspector.GetStructDefaultValue(at.ElementType, this.Emitter));
+                    }
+
+                    this.WriteSemiColon();
+                    this.WriteNewLine();
+                    this.EndBlock();
+                }
+                else if (defaultInitializer.Value is IType)
                 {
                     this.Write(Inspector.GetStructDefaultValue((IType) defaultInitializer.Value, this.Emitter));
                 }

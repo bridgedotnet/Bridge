@@ -2,6 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N2318.N2318", {
+        $metadata : function () { return {"nested":[Test.BridgeIssues.N2318.N2318.JustEnum,Test.BridgeIssues.N2318.N2318.JustStruct],"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldBox","t":8,"sn":"ShouldBox","rt":System.Void},{"a":2,"n":"ShouldNotBox","t":8,"sn":"ShouldNotBox","rt":System.Void},{"a":2,"n":"ShouldUnbox","t":8,"sn":"ShouldUnbox","rt":System.Void}]}; },
         methods: {
             ShouldBox: function () {
                 var o;
@@ -79,7 +80,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("Test.BridgeIssues.N2318.N2318.JustEnum", {
-        $kind: "enum",
+        $kind: "nested enum",
+        $metadata : function () { return {"td":Test.BridgeIssues.N2318.N2318,"att":259,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Value","is":true,"t":4,"rt":Test.BridgeIssues.N2318.N2318.JustEnum,"sn":"Value","box":function ($v) { return Bridge.box($v, Test.BridgeIssues.N2318.N2318.JustEnum, System.Enum.toStringFn(Test.BridgeIssues.N2318.N2318.JustEnum));}}]}; },
         statics: {
             fields: {
                 Value: 1
@@ -88,7 +90,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("Test.BridgeIssues.N2318.N2318.JustStruct", {
-        $kind: "struct",
+        $kind: "nested struct",
+        $metadata : function () { return {"td":Test.BridgeIssues.N2318.N2318,"att":1048843,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; },
         statics: {
             methods: {
                 getDefaultValue: function () { return new Test.BridgeIssues.N2318.N2318.JustStruct(); }

@@ -32,10 +32,10 @@ namespace Bridge.Translator
 
             var rr = this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter) as MemberResolveResult;
 
-            if(rr != null)
+            if (rr != null)
             {
                 this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
-            }            
+            }
         }
 
         protected override void EndEmit()
@@ -98,7 +98,7 @@ namespace Bridge.Translator
             var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
             var member_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter);
 
-            string name = overloads.GetOverloadName(false, null, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr));
+            string name = overloads.GetOverloadName(false, null, excludeTypeOnly: OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr));
 
             if (isEntryPoint)
             {

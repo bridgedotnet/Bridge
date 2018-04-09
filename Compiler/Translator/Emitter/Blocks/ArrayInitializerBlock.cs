@@ -32,7 +32,7 @@ namespace Bridge.Translator
             var at = rr != null ? (ArrayType)rr.Type : null;
             var create = at != null && at.Dimensions > 1;
 
-            if(rr != null) { }
+            if (rr != null) { }
             if (!isObjectInitializer || this.ArrayInitializerExpression.IsSingleElement)
             {
                 if (at != null)

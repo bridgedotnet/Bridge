@@ -435,6 +435,26 @@ namespace Bridge.ClientTest
                 Assert.AreEqual("xy", result);
             }
 
+            #region System.Collections.ICollection
+            /// <summary>
+            /// Tests System.Collections.ICollection inherited members to
+            /// System.Array (public members).
+            /// </summary>
+            [Test]
+            public void ICollectionNonGenericInterface()
+            {
+                Array a = new[] { 1, 2, 3 };
+
+                // We expect it to return the same array reference -- because
+                // an array reference is effectively the root of an array.
+                Assert.AreEqual(a, a.SyncRoot, "ICollection's SyncRoot returns the same array reference.");
+
+                // By design, this is always false.
+                Assert.False(a.IsSynchronized, "ICollection's IsSynchronized returns false.");
+            }
+            #endregion System.Collections.ICollections
+
+            #region System.Collections.Generic.ICollection
             [Test]
             public void ICollectionCountWorks()
             {
@@ -532,6 +552,21 @@ namespace Bridge.ClientTest
                 Assert.Throws<NotSupportedException>(() => l.Remove("y"));
                 Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
+            #endregion System.Collections.Generic.ICollection
+
+            #region System.Collections.IList
+            /// <summary>
+            /// Tests System.Collections.IList inherited members to
+            /// System.Array
+            /// </summary>
+            [Test]
+            public void IListNonGenericInterface()
+            {
+                Array a = new[] { 1, 2, 3 };
+
+                Assert.True(a.IsFixedSize, "IList's IsFixedSize returns true.");
+            }
+            #endregion System.Collections.IList
 
             [Test]
             public void IReadOnlyCollectionCountWorks_SPI_1626()

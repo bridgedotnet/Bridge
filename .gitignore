@@ -29,7 +29,7 @@ TestResults
 *.sln.docstates
 
 # Build results
-[Dd]ebug/
+# [Dd]ebug/
 [Rr]elease/
 x64/
 *_i.c
@@ -202,3 +202,10 @@ Tests/**/App_Readme/
 *.log
 !Compiler/TranslatorTests/TestProjects/*/Bridge/reference/*
 !Compiler/TranslatorTests/TestProjects/*/Bridge/reference/reports/*
+
+# We don't want to track executable/binary files.
+# Additionally, NuGet client is automatically downloaded by msbuild tasks.
+.nuget/nuget.exe
+
+# y no work?
+# !/Bridge/Bridge/Resources/.generated/System/Diagnostics/Debug/*

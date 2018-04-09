@@ -116,6 +116,24 @@ namespace Bridge.Translator
                     result.Add("td", new JRaw(MetadataUtils.GetTypeName(type.DeclaringType, emitter, false)));
                 }
 
+                var nestedTypes = type.GetNestedTypes(null, GetMemberOptions.IgnoreInheritedMembers);
+                if (nestedTypes != null && nestedTypes.Any())
+                {
+                    var array = new JArray();
+                    foreach (var nestedType in nestedTypes)
+                    {
+                        if (!emitter.Validator.IsExternalType(nestedType.GetDefinition()) && emitter.BridgeTypes.Get(nestedType, true) != null)
+                        {
+                            array.Add(new JRaw(MetadataUtils.GetTypeName(nestedType, emitter, false, true)));
+                        }
+                    }
+
+                    if (array.Count > 0)
+                    {
+                        result.Add("nested", array);
+                    }
+                }
+
                 if (cecilType != null)
                 {
                     result.Add("att", (int)cecilType.Attributes);
@@ -123,7 +141,14 @@ namespace Bridge.Translator
 
                 if (typedef.Accessibility != Accessibility.None)
                 {
-                    result.Add("a", (int)typedef.Accessibility);
+                    if (typedef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                    {
+                        result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                    }
+                    else
+                    {
+                        result.Add("a", (int)typedef.Accessibility);
+                    }                    
                 }
 
                 if (typedef.IsStatic)
@@ -551,7 +576,7 @@ namespace Bridge.Translator
                         inline = inline.Substring(6);
                     }
 
-                    if(!method.IsStatic && !isSelf && !inline.Contains("{this}"))
+                    if (!method.IsStatic && !isSelf && !inline.Contains("{this}"))
                     {
                         inline = "this." + inline;
                     }
@@ -645,13 +670,20 @@ namespace Bridge.Translator
                 var monoProp = typeDef != null ? emitter.BridgeTypes.Get(typeDef).TypeDefinition.Properties.FirstOrDefault(p => p.Name == m.Name) : null;
 
                 var prop = (IProperty)m;
-                var canGet = prop.CanGet;
-                var canSet = prop.CanSet;
+                var canGet = prop.CanGet && prop.Getter != null;
+                var canSet = prop.CanSet && prop.Setter != null;
 
                 if (monoProp != null)
                 {
-                    canGet = monoProp.GetMethod != null;
-                    canSet = monoProp.SetMethod != null;
+                    if (canGet)
+                    {
+                        canGet = monoProp.GetMethod != null;
+                    }
+
+                    if (canSet)
+                    {
+                        canSet = monoProp.SetMethod != null;
+                    }
                 }
 
                 properties.Add("t", (int)MemberTypes.Property);
@@ -686,8 +718,8 @@ namespace Bridge.Translator
                     }
                 }
 
-                var inlineGetter = canGet && (emitter.GetInline(prop.Getter) != null || Helpers.IsScript(prop.Getter));
-                var inlineSetter = canSet && (emitter.GetInline(prop.Setter) != null || Helpers.IsScript(prop.Setter));
+                var inlineGetter = canGet && prop.Getter != null && (emitter.GetInline(prop.Getter) != null || Helpers.IsScript(prop.Getter));
+                var inlineSetter = canSet && prop.Setter != null && (emitter.GetInline(prop.Setter) != null || Helpers.IsScript(prop.Setter));
 
                 if (inlineGetter || inlineSetter || prop.IsIndexer)
                 {
@@ -932,7 +964,14 @@ namespace Bridge.Translator
 
             if (m.Accessibility != Accessibility.None)
             {
-                result.Add("a", (int)m.Accessibility);
+                if (m.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                {
+                    result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                }
+                else
+                {
+                    result.Add("a", (int)m.Accessibility);
+                }
             }
 
             if (m.IsSealed)
@@ -950,7 +989,7 @@ namespace Bridge.Translator
             return result;
         }
 
-        internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false)
+        internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false, bool cache = true)
         {
             var typeParam = type as ITypeParameter;
             if (typeParam != null && (typeParam.OwnerType == SymbolKind.Method || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter)))
@@ -964,9 +1003,9 @@ namespace Bridge.Translator
                 return JS.Types.System.Object.NAME;
             }
 
-            var name = BridgeTypes.ToJsName(type, emitter, asDefinition, skipMethodTypeParam: true);
+            var name = BridgeTypes.ToJsName(type, emitter, asDefinition, excludeTypeOnly: true);
 
-            if (emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
+            if (cache && emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
             {
                 int key;
                 if (emitter.NamespacesCache.ContainsKey(type.Namespace))

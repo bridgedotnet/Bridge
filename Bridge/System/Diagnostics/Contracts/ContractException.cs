@@ -1,8 +1,7 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
-    [External]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
     public sealed class ContractException : Exception
     {
         public extern ContractFailureKind Kind

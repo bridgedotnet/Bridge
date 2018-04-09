@@ -1,12 +1,11 @@
-﻿using Bridge;
-
-namespace System.Net.WebSockets
+﻿namespace System.Net.WebSockets
 {
     /// <summary>
     /// An instance of this class represents the result of performing a single ReceiveAsync operation on a WebSocket.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class WebSocketReceiveResult
     {
         public extern WebSocketReceiveResult(int count, WebSocketMessageType messageType, bool endOfMessage);
@@ -19,7 +18,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern int Count
         {
-            [Template("getCount()")]
+            [Bridge.Template("getCount()")]
             get;
         }
 
@@ -28,7 +27,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern bool EndOfMessage
         {
-            [Template("getEndOfMessage()")]
+            [Bridge.Template("getEndOfMessage()")]
             get;
         }
 
@@ -37,7 +36,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketMessageType MessageType
         {
-            [Template("getMessageType()")]
+            [Bridge.Template("getMessageType()")]
             get;
         }
 
@@ -46,7 +45,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketCloseStatus? CloseStatus
         {
-            [Template("getCloseStatus()")]
+            [Bridge.Template("getCloseStatus()")]
             get;
         }
 
@@ -55,7 +54,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string CloseStatusDescription
         {
-            [Template("getCloseStatusDescription()")]
+            [Bridge.Template("getCloseStatusDescription()")]
             get;
         }
     }

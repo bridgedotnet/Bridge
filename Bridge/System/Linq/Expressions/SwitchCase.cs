@@ -1,16 +1,16 @@
-using Bridge;
 using System.Collections.ObjectModel;
 
 namespace System.Linq.Expressions
 {
-    [External]
-    [Name("System.Object")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Object")]
     public sealed class SwitchCase
     {
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern ReadOnlyCollection<Expression> TestValues { get; private set; }
 
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern Expression Body { get; private set; }
 
         internal extern SwitchCase();

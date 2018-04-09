@@ -50,34 +50,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bridge\Bridge.csproj">
-      <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
-      <Name>Bridge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Html5\Bridge.Html5.csproj">
-      <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
-      <Name>Bridge.Html5</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="readme.md" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
-  <PropertyGroup Condition="'$(OS)' != 'Unix'">
-    <PreBuildEvent>
-REM Run Bridge Compiler for the project
-"$(SolutionDir)Compiler\Builder\$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge\Bridge.csproj" -b "$(SolutionDir)Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
-</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(OS)' == 'Unix'">
-    <PreBuildEvent>
-mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge/Bridge.csproj" -b "$(SolutionDir)Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
-    </PreBuildEvent>
-  </PropertyGroup>
   <!-- NuGet packaging starts -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetBuildPackage>true</NuGetBuildPackage>
+    <BuildBridgePackage>true</BuildBridgePackage>
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
@@ -89,7 +66,12 @@ mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Brid
       <Path>$(SolutionDir).build\specs\Bridge.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
-  <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Bridge\Bridge.csproj">
+      <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
+      <Name>Bridge</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
     <ItemGroup>
       <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />
@@ -98,4 +80,17 @@ mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Brid
     <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
   </Target>
   <!-- NuGet packaging finishes -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" Condition="Exists('$(SolutionDir).build\common\NuGet.Build.Package.targets')" />
+  <PropertyGroup Condition="'$(OS)' != 'Unix'">
+    <PreBuildEvent>
+REM Run Bridge Compiler for the project
+"$(SolutionDir)Compiler\Builder\$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge\Bridge.csproj" -b "$(SolutionDir)Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <PreBuildEvent>
+mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge/Bridge.csproj" -b "$(SolutionDir)Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

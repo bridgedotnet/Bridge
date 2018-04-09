@@ -82,6 +82,7 @@
                 return -1;
             } else {
                 var y = Math.exp(2 * x);
+
                 return (y - 1) / (y + 1);
             }
         }

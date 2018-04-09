@@ -19,12 +19,7 @@
  * https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/io/filestream.cs
  */
 
-using System;
-using System.Security.Permissions;
-using System.Threading;
 using System.Runtime.InteropServices;
-using Bridge;
-using Bridge.Internal.Html5;
 using System.Threading.Tasks;
 
 /*
@@ -57,55 +52,55 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
-    [External]
-    [Namespace(false)]
+    [Bridge.External]
+    [Bridge.Namespace(false)]
     internal class FileReader
     {
         public extern FileReader();
 
-        [Convention(Notation.LowerCamelCase)]
-        public extern void ReadAsArrayBuffer(Bridge.Internal.Html5.File file);
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
+        public extern void ReadAsArrayBuffer(object file);
 
-        [Convention(Notation.LowerCamelCase)]
-        public readonly ArrayBuffer Result;
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
+        public readonly string Result;
 
-        [Convention(Notation.LowerCase)]
+        [Bridge.Convention(Bridge.Notation.LowerCase)]
         public Action OnLoad;
 
-        [Convention(Notation.LowerCase)]
+        [Bridge.Convention(Bridge.Notation.LowerCase)]
         public Action<object> OnError;
     }
 
-    [Reflectable]
-    [FileName("system\\io\\io.js")]
-    [Convention]
+    [Bridge.Reflectable]
+    [Bridge.Convention]
     public class FileStream : Stream
     {
         private string name;
-        ArrayBuffer _buffer;
+        byte[] _buffer;
 
         public FileStream(string path, FileMode mode)
-        {            
+        {
             this.name = path;
         }
 
-        internal FileStream(ArrayBuffer buffer, string name)
+        internal FileStream(byte[] buffer, string name)
         {
             this._buffer = buffer;
             this.name = name;
         }
 
-        internal static Task<FileStream> FromFile(Bridge.Internal.Html5.File file)
+        internal static Task<FileStream> FromFile(object file)
         {
             var completer = new System.Threading.Tasks.TaskCompletionSource<FileStream>();
             var fileReader = new FileReader();
-            fileReader.OnLoad = () =>
-            {
-                completer.SetResult(new FileStream(fileReader.Result, file.Name));
+            /*@
+            fileReader.onload = function () {
+                completer.setResult(new System.IO.FileStream.ctor(fileReader.result, file.name));
             };
+            */
             fileReader.OnError = (e) =>
             {
-                completer.SetException(new ErrorException(e.As<dynamic>().target.error.As<string>()));
+                completer.SetException(new SystemException(e.As<dynamic>().target.error.As<string>()));
             };
             fileReader.ReadAsArrayBuffer(file);
 
@@ -156,7 +151,7 @@ namespace System.IO
         {
             get
             {
-                return this.GetInternalBuffer().ByteLength;
+                return this.GetInternalBuffer().ToDynamic().byteLength;
             }
         }
 
@@ -185,12 +180,12 @@ namespace System.IO
             throw new NotImplementedException();
         }
 
-        private ArrayBuffer GetInternalBuffer()
+        private byte[] GetInternalBuffer()
         {
-            if(this._buffer == null)
+            if (this._buffer == null)
             {
                 this._buffer = FileStream.ReadBytes(this.name);
-                
+
             }
 
             return this._buffer;
@@ -236,13 +231,13 @@ namespace System.IO
             {
                 return 0;
             }
-
-            var byteBuffer = new Uint8Array(this.GetInternalBuffer());
+            
+            var byteBuffer = Bridge.Script.Write<dynamic>("new Uint8Array(this.GetInternalBuffer())");
             if (num > 8)
             {
                 for (var n = 0; n < num; n++)
                 {
-                    buffer[n + offset] = byteBuffer[(int)(this.Position + n)];
+                    buffer[n + offset] = Bridge.Script.Write<dynamic>("byteBuffer[this.Position.add(System.Int64(n))]");
                 }
             }
             else
@@ -256,46 +251,47 @@ namespace System.IO
                     {
                         break;
                     }
-                    buffer[offset + num1] = byteBuffer[(int)(this.Position + num1)];
+                    buffer[offset + num1] = Bridge.Script.Write<dynamic>("byteBuffer[this.Position.add(num1)]");
                 }
             }
             this.Position += num;
             return (int)num;
         }
 
-        internal static ArrayBuffer ReadBytes(string path)
+        internal static byte[] ReadBytes(string path)
         {
-            if (Script.IsNode)
+            if (Bridge.Script.IsNode)
             {
-                var fs = Script.Write<dynamic>(@"require(""fs"")");
-                return ((ArrayBuffer)fs.readFileSync(path));
+                var fs = Bridge.Script.Write<dynamic>(@"require(""fs"")");
+                return Bridge.Script.Write<dynamic>("Bridge.cast(fs.readFileSync(path), ArrayBuffer)");
             }
             else
             {
-                var req = new XMLHttpRequest();
-                req.Open("GET", path, false);
-                req.OverrideMimeType("text/plain; charset=binary-data");
-                req.Send(null);
-                if (req.Status != 200)
+                var req = Bridge.Script.Write<dynamic>("new XMLHttpRequest()");
+                req.open("GET", path, false);
+                req.overrideMimeType("text/plain; charset=x-user-defined");
+                req.send(null);
+                if (Bridge.Script.Write<bool>("req.status !== 200"))
                 {
-                    throw new IOException($"Status of request to {path} returned status: {req.Status}");
+                    throw new IOException("Status of request to " + path + " returned status: " + req.status);
                 }
-                string text = req.ResponseText;
-                var resultArray = new Uint8Array(text.Length);
+
+                string text = req.responseText;
+                var resultArray = Bridge.Script.Write<dynamic>("new Uint8Array(text.length)");
                 text.ToCharArray().ForEach((v, index, array) => resultArray[index] = (byte)(v & byte.MaxValue));
-                return resultArray.Buffer;
+                return resultArray.buffer;
             }
         }
 
-        internal static Task<ArrayBuffer> ReadBytesAsync(string path)
+        internal static Task<byte[]> ReadBytesAsync(string path)
         {
-            var tcs = new TaskCompletionSource<ArrayBuffer>();
+            var tcs = new TaskCompletionSource<byte[]>();
 
-            if (Script.IsNode)
+            if (Bridge.Script.IsNode)
             {
-                var fs = Script.Write<dynamic>(@"require(""fs"")");
-                fs.readFile(path, new Action<object, ArrayBuffer>((err, data) => {
-                    if(err != null)
+                var fs = Bridge.Script.Write<dynamic>(@"require(""fs"")");
+                fs.readFile(path, new Action<object, byte[]>((err, data) => {
+                    if (err != null)
                     {
                         throw new IOException();
                     }
@@ -305,27 +301,31 @@ namespace System.IO
             }
             else
             {
-                var req = new XMLHttpRequest();
-                req.Open("GET", path, true);
-                req.OverrideMimeType("text/plain; charset=binary-data");
-                req.Send(null);
+                var req = Bridge.Script.Write<dynamic>("new XMLHttpRequest()");
+                req.open("GET", path, true);
+                req.overrideMimeType("text/plain; charset=binary-data");
+                req.send(null);
 
-                req.OnReadyStateChange = () => {
-                    if (req.ReadyState != 4)
+                /*@
+                req.onreadystatechange = function () {
+                */
+                    if (Bridge.Script.Write<bool>("req.readyState !== 4"))
                     {
-                        return;
+                        Bridge.Script.Write("return;");
                     }
 
-                    if (req.Status != 200)
+                    if (Bridge.Script.Write<bool>("req.status !== 200"))
                     {
-                        throw new IOException($"Status of request to {path} returned status: {req.Status}");
+                        throw new IOException("Status of request to " + path + " returned status: " + req.status);
                     }
 
-                    string text = req.ResponseText;
-                    var resultArray = new Uint8Array(text.Length);
+                    string text = req.responseText;
+                    var resultArray = Bridge.Script.Write<dynamic>("new Uint8Array(text.length)");
                     text.ToCharArray().ForEach((v, index, array) => resultArray[index] = (byte)(v & byte.MaxValue));
-                    tcs.SetResult(resultArray.Buffer);
-                };                
+                    tcs.SetResult(resultArray.buffer);
+                /*@
+                };
+                */
             }
 
             return tcs.Task;

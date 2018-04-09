@@ -3,6 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("TestProject.Issues.N2262.CI2262", {
         inherits: [TestProject.Issues.N2262.I2262],
+        $kind: "nested class",
         props: {
             Count: 0
         },

@@ -137,6 +137,6 @@
             return ((i + 1000) | 0);
         },
         f15: function (i) {
-            return i.toString();
+            return Bridge.toString(i);
         }
     });

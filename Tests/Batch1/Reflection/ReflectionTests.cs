@@ -1105,10 +1105,10 @@ namespace Bridge.ClientTest.Reflection
         }
 
         /*[Test]
-		public void IsStaticMethodWithThisAsFirstArgumentIsTrueOnlyForMethodsOnSerializableTypes() {
-			Assert.False(typeof(C21).GetMethod("M3").IsStaticMethodWithThisAsFirstArgument, "C21.M3");
-			Assert.True (typeof(C7 ).GetMethod("M1").IsStaticMethodWithThisAsFirstArgument, "C7.m1");
-		}*/
+        public void IsStaticMethodWithThisAsFirstArgumentIsTrueOnlyForMethodsOnSerializableTypes() {
+            Assert.False(typeof(C21).GetMethod("M3").IsStaticMethodWithThisAsFirstArgument, "C21.M3");
+            Assert.True (typeof(C7 ).GetMethod("M1").IsStaticMethodWithThisAsFirstArgument, "C7.m1");
+        }*/
 
         [Test]
         public void SpecialImplementationExistsOnlyForMethodsImplementedAsInlineCode()

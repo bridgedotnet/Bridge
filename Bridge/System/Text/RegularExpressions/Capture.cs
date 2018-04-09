@@ -1,12 +1,11 @@
-﻿using Bridge;
-
-namespace System.Text.RegularExpressions
+﻿namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Represents the results from a single successful subexpression capture.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class Capture
     {
         internal extern Capture(string text, int i, int l);
@@ -16,7 +15,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern int Index
         {
-            [Template("getIndex()")]
+            [Bridge.Template("getIndex()")]
             get;
         }
 
@@ -25,7 +24,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern int Length
         {
-            [Template("getLength()")]
+            [Bridge.Template("getLength()")]
             get;
         }
 
@@ -34,7 +33,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern string Value
         {
-            [Template("getValue()")]
+            [Bridge.Template("getValue()")]
             get;
         }
 

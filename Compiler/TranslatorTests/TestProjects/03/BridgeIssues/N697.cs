@@ -63,14 +63,14 @@ namespace Test.BridgeIssues.N697
             // would not get called on the component, but that's just the same as for stateful components (from the Component class).
             var fullClassName = this.GetType().FullName;
             /*@
-			var classPrototype;
-			eval('classPrototype = ' + fullClassName + '.prototype');
-			var scopeBoundFunction = function(props) {
-				var target = Object.create(classPrototype);
-				target.props = props;
-				return target.render.apply(target, []);
-			}
-			*/
+            var classPrototype;
+            eval('classPrototype = ' + fullClassName + '.prototype');
+            var scopeBoundFunction = function(props) {
+                var target = Object.create(classPrototype);
+                target.props = props;
+                return target.render.apply(target, []);
+            }
+            */
 
             // We have an anonymous function for the renderer now but it would better to name it, since React Dev Tools will use show the function name (if defined) as
             // the component name in the tree. The only way to do this is, unfortunately, with eval - but the only dynamic content is the class name (which should be
@@ -79,8 +79,8 @@ namespace Test.BridgeIssues.N697
             var className = fullClassName.Split('.').Last();
             Func<TProps, ReactElement> namedScopeBoundFunction = null;
             /*@
-			eval("namedScopeBoundFunction = function " + className + "(props) { return scopeBoundFunction(props); };");
-			*/
+            eval("namedScopeBoundFunction = function " + className + "(props) { return scopeBoundFunction(props); };");
+            */
             return namedScopeBoundFunction;
         }
 

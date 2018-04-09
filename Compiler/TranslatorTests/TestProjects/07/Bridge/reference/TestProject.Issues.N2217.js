@@ -10,12 +10,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_AMD.TestProject.Issues.N2217.N2217_AMD
          */
         Bridge.define("TestProject.Issues.N2217.N2217_AMD", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; },
             $scope: Module2217_AMD,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; }
-                }
-            },
             methods: {
                 /**
                  * @instance
@@ -39,12 +35,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_Auto.TestProject.Issues.N2217.N2217_Auto
          */
         Bridge.define("TestProject.Issues.N2217.N2217_Auto", {
-            $scope: Module2217_Auto,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
-                }
-            }
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; },
+            $scope: Module2217_Auto
         });
         return Module2217_Auto;
     });
@@ -56,12 +48,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_CommonJS.TestProject.Issues.N2217.N2217_CommonJS
          */
         Bridge.define("TestProject.Issues.N2217.N2217_CommonJS", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; },
             $scope: Module2217_CommonJS,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; }
-                }
-            },
             methods: {
                 /**
                  * @instance
@@ -85,12 +73,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_ES6.TestProject.Issues.N2217.N2217_ES6
          */
         Bridge.define("TestProject.Issues.N2217.N2217_ES6", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; },
             $scope: Module2217_ES6,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; }
-                }
-            },
             methods: {
                 /**
                  * @instance
@@ -114,12 +98,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class MyModule.TestProject.Issues.N2217.N2217_Loader
          */
         Bridge.define("TestProject.Issues.N2217.N2217_Loader", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Load","t":8,"sn":"Load","rt":System.Void},{"a":2,"n":"LoadManualModule","t":8,"sn":"LoadManualModule","rt":System.Void}]}; },
             $scope: MyModule,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Load","t":8,"sn":"Load","rt":System.Void},{"a":2,"n":"LoadManualModule","t":8,"sn":"LoadManualModule","rt":System.Void}]}; }
-                }
-            },
             methods: {
                 /**
                  * @instance
@@ -205,12 +185,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_Manual.TestProject.Issues.N2217.N2217_Manual
          */
         Bridge.define("TestProject.Issues.N2217.N2217_Manual", {
-            $scope: Module2217_Manual,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
-                }
-            }
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; },
+            $scope: Module2217_Manual
         });
         return Module2217_Manual;
     });
@@ -230,12 +206,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @class Module2217_UMD.TestProject.Issues.N2217.N2217_UMD
          */
         Bridge.define("TestProject.Issues.N2217.N2217_UMD", {
+            $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; },
             $scope: Module2217_UMD,
-            statics: {
-                methods: {
-                    $metadata : function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"GetNumber","t":8,"sn":"GetNumber","rt":System.Int32,"box":function ($v) { return Bridge.box($v, System.Int32);}}]}; }
-                }
-            },
             methods: {
                 /**
                  * @instance

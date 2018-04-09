@@ -1,4 +1,4 @@
-    Bridge.define('System.Collections.Generic.EqualityComparer$1', function (T) {
+    Bridge.define("System.Collections.Generic.EqualityComparer$1", function (T) {
         return {
             inherits: [System.Collections.Generic.IEqualityComparer$1(T)],
 
@@ -25,14 +25,11 @@
 
                     if (Bridge.isFunction(x) && Bridge.isFunction(y)) {
                         return Bridge.fn.equals.call(x, y);
-                    }
-                    else if (!isBridge || x && x.$boxed || y && y.$boxed) {
+                    } else if (!isBridge || x && x.$boxed || y && y.$boxed) {
                         return Bridge.equals(x, y);
-                    }
-                    else if (Bridge.isFunction(x.equalsT)) {
+                    } else if (Bridge.isFunction(x.equalsT)) {
                         return Bridge.equalsT(x, y);
-                    }
-                    else if (Bridge.isFunction(x.equals)) {
+                    } else if (Bridge.isFunction(x.equals)) {
                         return Bridge.equals(x, y);
                     }
 

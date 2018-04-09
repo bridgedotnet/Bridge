@@ -1,5 +1,4 @@
 ﻿using Bridge;
-using Bridge.Html5;
 
 using System;
 using System.Collections.Generic;
@@ -10,13 +9,13 @@ namespace TestIssue1303
 {
     public class App
     {
-        [Ready]
+        [Bridge.Ready]
         public static void NotMain()
         {
             //Should be in config.init
         }
 
-        [Ready]
+        [Bridge.Ready]
         public static void Main()
         {
             //Should be in config.init
@@ -26,7 +25,7 @@ namespace TestIssue1303
 
     public class App1
     {
-        [Ready]
+        [Bridge.Ready]
         public static void NotMain()
         {
             //Should be in config.init
@@ -40,7 +39,7 @@ namespace TestIssue1303
 
     public class App2
     {
-        [Ready]
+        [Bridge.Ready]
         public static void Main()
         {
             //Should be in config.init

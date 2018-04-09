@@ -49,7 +49,8 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is ArgumentNullException, "is ArgumentNullException");
             Assert.AreEqual("someParam", ex.ParamName, "ParamName");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
-            Assert.AreEqual("The message", ex.Message);
+            //Assert.AreEqual("The message", ex.Message);
+            Assert.AreEqual("The message\nParameter name: someParam", ex.Message);
         }
 
         [Test]

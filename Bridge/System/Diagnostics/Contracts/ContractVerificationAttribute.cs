@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
     /// <summary>
@@ -15,7 +13,7 @@ namespace System.Diagnostics.Contracts
     /// </remarks>
     [Conditional("CONTRACTS_FULL")]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property)]
-    [External]
+    [Bridge.External]
     public sealed class ContractVerificationAttribute : Attribute
     {
         public extern ContractVerificationAttribute(bool value);

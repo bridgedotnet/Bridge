@@ -9,16 +9,17 @@
 
         checkEnumType: function (enumType) {
             if (!enumType) {
-                throw new System.ArgumentNullException("enumType");
+                throw new System.ArgumentNullException.$ctor1("enumType");
             }
 
             if (enumType.prototype && enumType.$kind !== "enum") {
-                throw new System.ArgumentException("", "enumType");
+                throw new System.ArgumentException.$ctor1("", "enumType");
             }
         },
 
         getUnderlyingType: function (type) {
             System.Enum.checkEnumType(type);
+
             return type.prototype.$utype || System.Int32;
         },
 
@@ -52,7 +53,7 @@
                         }
                     }
                 } else {
-                    var parts = s.split(','),
+                    var parts = s.split(","),
                         value = 0,
                         parsed = true;
 
@@ -85,14 +86,14 @@
             }
 
             if (silent !== true) {
-                throw new System.ArgumentException('Invalid Enumeration Value');
+                throw new System.ArgumentException.$ctor3("silent", "Invalid Enumeration Value");
             }
 
             return null;
         },
 
-        toStringFn: function(type) {
-            return function(value) {
+        toStringFn: function (type) {
+            return function (value) {
                 return System.Enum.toString(type, value);
             };
         },
@@ -126,8 +127,7 @@
                         return enumMethods.toName(name);
                     }
                 }
-
-                //throw new System.ArgumentException('Invalid Enumeration Value');
+                
                 return value.toString();
             } else {
                 var parts = [],
@@ -162,6 +162,7 @@
 
                 if (isLong ? saveResult.isZero() : saveResult === 0) {
                     var entry = entries[0];
+
                     if (entry && (System.Int64.is64Bit(entry.value) ? entry.value.isZero() : (entry.value == 0))) {
                         return entry.name;
                     }
@@ -169,7 +170,7 @@
                     return "0";
                 }
 
-                return parts.join(', ');
+                return parts.join(", ");
             }
         },
 
@@ -211,7 +212,7 @@
             var name;
 
             if (!Bridge.hasValue(value) && (name = "value") || !Bridge.hasValue(format) && (name = "format")) {
-                throw new System.ArgumentNullException(name);
+                throw new System.ArgumentNullException.$ctor1(name);
             }
 
             value = Bridge.unbox(value, true);
@@ -261,13 +262,13 @@
             value = Bridge.unbox(value, true);
 
             if (value == null) {
-                throw new System.ArgumentNullException("value");
+                throw new System.ArgumentNullException.$ctor1("value");
             }
 
             var isLong = System.Int64.is64Bit(value);
 
             if (!isLong && !(typeof (value) === "number" && Math.floor(value, 0) === value)) {
-                throw new System.ArgumentException("Argument must be integer", "value");
+                throw new System.ArgumentException.$ctor1("Argument must be integer", "value");
             }
 
             System.Enum.checkEnumType(enumType);
@@ -289,6 +290,7 @@
         hasFlag: function (value, flag) {
             flag = Bridge.unbox(flag, true);
             var isLong = System.Int64.is64Bit(value);
+
             return flag === 0 || (isLong ? !value.and(flag).isZero() : !!(value & flag));
         },
 
@@ -304,6 +306,7 @@
 
             for (var i = 0; i < names.length; i++) {
                 var name = names[i];
+
                 if (isString ? enumMethods.nameEquals(name, value, false) : (isLong ? value.eq(values[name]) : (values[name] === value))) {
                     return true;
                 }
@@ -313,10 +316,11 @@
         },
 
         tryParse: function (enumType, value, result, ignoreCase) {
-            result.v = 0;
             result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true), true);
 
             if (result.v == null) {
+                result.v = 0;
+
                 return false;
             }
 
