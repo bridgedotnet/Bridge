@@ -35,6 +35,36 @@ namespace Bridge.ClientTest.CSharp7
             {
                 Assert.Fail("'Is Pattern' failure");
             }
+
+            o = null;
+            if (o is null)
+            {
+                Assert.Null(o);
+            }
+            else
+            {
+                Assert.Fail();
+            }
+
+            if (!(o is int ii))
+            {
+                Assert.Null(o);
+            }
+            else
+            {
+                Assert.Fail();
+            }
+
+            o = double.NaN;
+            const double value = double.NaN;
+            if (o is value)
+            {
+                Assert.True(o.Equals(double.NaN));
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
     }
 }

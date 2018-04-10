@@ -82,27 +82,52 @@ namespace Bridge.Translator
         public SyntaxNode ReplacePatterns(SyntaxNode root, SemanticModel model)
         {
             var patterns = root.DescendantNodes().OfType<IsPatternExpressionSyntax>();
-            var updatedPatterns = new Dictionary<IsPatternExpressionSyntax, BinaryExpressionSyntax>();
+            var updatedPatterns = new Dictionary<IsPatternExpressionSyntax, ExpressionSyntax>();
 
             foreach (var pattern in patterns)
             {
                 var block = pattern.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
-                if (block != null && pattern.Pattern is DeclarationPatternSyntax)
-                {
-                    var declarationPattern = (DeclarationPatternSyntax)pattern.Pattern;
-                    var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
-                    var beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
 
-                    if (designation != null)
+                if (block != null)
+                {
+                    if (pattern.Pattern is DeclarationPatternSyntax)
                     {
-                        var newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.ParenthesizedExpression(SyntaxFactory.AssignmentExpression(
-                            SyntaxKind.SimpleAssignmentExpression,
-                            SyntaxFactory.IdentifierName(designation.Identifier.ValueText),
-                            SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, pattern.Expression, declarationPattern.Type)
-                        )), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+                        var declarationPattern = (DeclarationPatternSyntax)pattern.Pattern;
+                        var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
+                        var beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
+
+                        if (designation != null)
+                        {
+                            var newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.ParenthesizedExpression(SyntaxFactory.AssignmentExpression(
+                                SyntaxKind.SimpleAssignmentExpression,
+                                SyntaxFactory.IdentifierName(designation.Identifier.ValueText),
+                                SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, pattern.Expression, declarationPattern.Type)
+                            )), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+                            updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
+                        }
+                    }
+                    else  if (pattern.Pattern is ConstantPatternSyntax cps)
+                    {
+                        ExpressionSyntax newExpr;
+
+                        if (cps.Expression.Kind() == SyntaxKind.NullLiteralExpression)
+                        {
+                            newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, pattern.Expression, cps.Expression);
+                        }
+                        else
+                        {
+                            newExpr = SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                   SyntaxKind.SimpleMemberAccessExpression,
+                                   pattern.Expression,
+                                   SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                   SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
+                                       SyntaxFactory.Argument(
+                                           cps.Expression))));
+                        }                        
+                        
                         updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
                     }
-                }
+                }                
             }
 
             if (updatedPatterns.Count > 0)

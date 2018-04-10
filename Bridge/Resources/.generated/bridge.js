@@ -7565,7 +7565,14 @@
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Double) && Bridge.is(v2, System.Double)) {
-                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+                    v1 = Bridge.unbox(v1, true);
+                    v2 = Bridge.unbox(v2, true);
+
+                    if (isNaN(v1) && isNaN(v2)) {
+                        return true;
+                    }
+
+                    return v1 === v2;
                 }
 
                 return false;
@@ -7623,7 +7630,14 @@
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Single) && Bridge.is(v2, System.Single)) {
-                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+                    v1 = Bridge.unbox(v1, true);
+                    v2 = Bridge.unbox(v2, true);
+
+                    if (isNaN(v1) && isNaN(v2)) {
+                        return true;
+                    }
+
+                    return v1 === v2;
                 }
 
                 return false;

@@ -208,6 +208,26 @@ namespace Bridge.Translator
             return false;
         }
 
+        public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            var symbol = semanticModel.GetSymbolInfo(node.Right).Symbol;
+            var newNode = base.VisitBinaryExpression(node);
+            node = newNode as BinaryExpressionSyntax;
+            if (node != null && node.OperatorToken.Kind() == SyntaxKind.IsKeyword && !(symbol is ITypeSymbol))
+            {
+                //node = node.WithOperatorToken(SyntaxFactory.Token(SyntaxKind.EqualsEqualsToken));                
+                newNode = SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    node.Left,
+                                    SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                    SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
+                                        SyntaxFactory.Argument(
+                                            node.Right)))).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
+
+            return newNode;
+        }
+
         public override SyntaxNode VisitLocalFunctionStatement(LocalFunctionStatementSyntax node)
         {
             this.hasLocalFunctions = true;

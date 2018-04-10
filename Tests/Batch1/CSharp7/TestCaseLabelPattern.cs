@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using System.Collections.Generic;
 
 namespace Bridge.ClientTest.CSharp7
 {
@@ -70,6 +71,55 @@ namespace Bridge.ClientTest.CSharp7
             Assert.AreEqual(6, Get(new Circle()), "C#7 switch for empty class 'Circle' works.");
             Assert.AreEqual(7, Get(new Ellipsis()), "C#7 switch for empty class 'Ellipsis' works.");
             Assert.AreEqual(5, Get(null), "C#7 switch for partially null (hitting 'default' clause) works.");
+        }
+
+        [Test]
+        public static void TestVarCase()
+        {
+            var age = 84;
+            var msg = "...";
+
+            switch (age)
+            {
+                case 50:
+                    msg = "the big five-oh";
+                    break;
+                case var testAge when (new List<int>()
+              { 80, 81, 82, 83, 84, 85, 86, 87, 88, 89 }).Contains(testAge):
+                    msg = "octogenarian";
+                    break;
+                case var testAge when ((testAge >= 90) & (testAge <= 99)):
+                    msg = "nonagenarian";
+                    break;
+                case var testAge when (testAge >= 100):
+                    msg = "centenarian";
+                    break;
+                default:
+                    msg = "just old";
+                    break;
+            }
+
+            Assert.AreEqual("octogenarian", msg);
+        }
+
+        public static void TestCaseNull()
+        {
+            object o = null;
+            switch (o)
+            {
+                case int i when i > 100000:
+                    Assert.Fail();
+                    break;
+                case null:
+                    Assert.Null(o);
+                    break;
+                case string _:
+                    Assert.Fail();
+                    break;
+                default:
+                    Assert.Fail();
+                    break;
+            }
         }
 
         /// <summary>
