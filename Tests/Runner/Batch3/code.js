@@ -31173,6 +31173,81 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The tests here consists in ensuring the ExternalCastRule emits code
+     accordingly to its setting.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516", {
+        statics: {
+            methods: {
+                /**
+                 * The test here sets it so no cast is made for classes marked with
+                 the 'external' attributes. So an invalid cast won't really be
+                 thrown when the code is run.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestPlainExternalCastRule: function () {
+                    var obj = "test";
+
+                    // This won't throw an exception because the cast is not passed in.
+                    var el = obj;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("test", el, "Cast was suppressed for ExternalCastRule.Plain.");
+
+                    obj = new (System.Collections.Generic.List$1(System.String)).ctor();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, function () {
+                        // This should throw an exception as it is not marked as external at all.
+                        obj = Bridge.cast(obj, System.Collections.Generic.IEqualityComparer$1(System.String));
+                    }, "Cast emitted for non-external class even if ExternalCastRule is Plain.");
+                },
+                /**
+                 * And here, we force-set it as managed, so that the cast, passed
+                 down to the client-side application, will be done, thus an
+                 exception thrown.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestManagedExternalCastRule: function () {
+                    Bridge.Test.NUnit.Assert.Throws$2(System.SystemException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516.f1, "Cast is emitted if ExternalCastRule is Managed.");
+                },
+                /**
+                 * And here we ensure the default is Managed, so that the exception
+                 will effectively be thrown in an external class' invalid cast.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestDefaultExternalCastRule: function () {
+                    Bridge.Test.NUnit.Assert.Throws$2(System.SystemException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516.f1, "Cast is emitted if ExternalCastRule is not specified, meaning it is 'Managed'.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516, {
+        f1: function () {
+            var obj = "test";
+            var el = Bridge.cast(obj, ExternalNS3516.ExternalClass3516);
+        }
+    });
+
+    /**
      * The tests here consists in ensuring some types of provided Script.Write
      input won't break Bridge output code.
      *
@@ -31209,17 +31284,11 @@ Bridge.$N1391Result =                     r;
                  * @return  {string}
                  */
                 SpaceWritten: function () { /// Variable is assigned but its value is never used
-
-
                     var i = 0; /// Variable is assigned but its value is never used
-
-
                     return 
                 },
                 NothingWritten: function () { /// Variable is assigned but its value is never used
-
-
-                    var i = 0;
+                    var i = 0; /// Variable is assigned but its value is never used
                     return 
                 },
                 /**
