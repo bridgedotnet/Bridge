@@ -1,6 +1,7 @@
 
     var $m = Bridge.setMetadata,
         $n = [System,System.Collections.Generic,TestIssue958,TestIssue921Nested,TestIssue2140];
+    $m("TestIssue3516.ExternalCastRuleTest", function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"DefaultExternalCast","is":true,"t":8,"sn":"DefaultExternalCast","rt":$n[0].Void},{"a":2,"n":"ManagedExternalCast","is":true,"t":8,"sn":"ManagedExternalCast","rt":$n[0].Void},{"a":2,"n":"PlainExternalCast","is":true,"t":8,"sn":"PlainExternalCast","rt":$n[0].Void}]}; });
     $m("TestIssue461.Issue461", function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Test","is":true,"t":8,"sn":"Test","rt":$n[0].Void}]}; });
     $m("TestIssue599.Issue599", function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Main1","is":true,"t":8,"sn":"Main1","rt":$n[0].Void},{"a":1,"n":"_something","t":4,"rt":$n[0].String,"sn":"_something"}]}; });
     $m("TestIssue948.Issue948", function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Test","is":true,"t":8,"sn":"Test","rt":$n[0].Void}]}; });

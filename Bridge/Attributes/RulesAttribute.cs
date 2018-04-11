@@ -101,6 +101,18 @@ namespace Bridge
             set;
         }
 
+        public
+#if BRIDGE_COMPILER
+            ExternalCastRule?
+#else
+            ExternalCastRule
+#endif
+        ExternalCast
+        {
+            get;
+            set;
+        }
+
 #if BRIDGE_COMPILER
         public CompilerRuleLevel Level
         {
@@ -168,6 +180,15 @@ namespace Bridge
     [NonScriptable]
 #endif
     public enum InlineCommentRule
+    {
+        Managed = 0,
+        Plain = 1
+    }
+
+#if !BRIDGE_COMPILER
+    [NonScriptable]
+#endif
+    public enum ExternalCastRule
     {
         Managed = 0,
         Plain = 1
