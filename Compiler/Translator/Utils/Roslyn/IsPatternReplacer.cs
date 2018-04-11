@@ -73,7 +73,6 @@ namespace Bridge.Translator
                     list.Add((StatementSyntax)annotatedNode);
                     root = root.ReplaceNode(annotatedNode, SyntaxFactory.Block(list).NormalizeWhitespace());
                 }
-                
             }
 
             return root;
@@ -123,11 +122,11 @@ namespace Bridge.Translator
                                    SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
                                        SyntaxFactory.Argument(
                                            cps.Expression))));
-                        }                        
-                        
+                        }
+
                         updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
                     }
-                }                
+                }
             }
 
             if (updatedPatterns.Count > 0)
