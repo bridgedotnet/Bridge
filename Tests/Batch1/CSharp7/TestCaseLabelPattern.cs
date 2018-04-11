@@ -73,6 +73,45 @@ namespace Bridge.ClientTest.CSharp7
             Assert.AreEqual(5, Get(null), "C#7 switch for partially null (hitting 'default' clause) works.");
         }
 
+        /// <summary>
+        /// The 'Get' method will handle different provided parameters using
+        /// C#7 switch syntax to infer the parameter type and handle it
+        /// accordingly.
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
+        private static int Get(object shape)
+        {
+            switch (shape)
+            {
+                case Triangle t when t.SideA == t.SideB && t.SideB == t.SideC:
+                    return 1;
+
+                case Triangle t:
+                    return 2;
+
+                case Rectangle r when r.Height == r.Width:
+                    return 3;
+
+                case Rectangle r:
+                    return 4;
+
+                default:
+                    switch (shape)
+                    {
+                        case Circle c:
+                            return 6;
+                        case Ellipsis e:
+                            return 7;
+                    }
+                    return 5;
+            }
+        }
+
+        /// <summary>
+        /// Tests 'var' variable definition inlined with switch case
+        /// expressions.
+        /// </summary>
         [Test]
         public static void TestVarCase()
         {
@@ -99,62 +138,31 @@ namespace Bridge.ClientTest.CSharp7
                     break;
             }
 
-            Assert.AreEqual("octogenarian", msg);
+            Assert.AreEqual("octogenarian", msg, "Var within switch case statements is correctly evaluated.");
         }
 
+        /// <summary>
+        /// Tests 'null' occurrence within a switch case expression.
+        /// </summary>
+        [Test]
         public static void TestCaseNull()
         {
             object o = null;
             switch (o)
             {
                 case int i when i > 100000:
-                    Assert.Fail();
+                    Assert.Fail("A null value matched an integer.");
                     break;
                 case null:
-                    Assert.Null(o);
+                    Assert.Null(o, "Null can be used as switch case expression.");
                     break;
                 case string _:
-                    Assert.Fail();
+                    Assert.Fail("String matched when null was evaluated within a switch case expression.");
                     break;
                 default:
-                    Assert.Fail();
+                    Assert.Fail("Default/fallthru switch case statement is matched instead of the 'null' entry.");
                     break;
             }
-        }
-
-        /// <summary>
-        /// The 'Get' method will handle different provided parameters using
-        /// C#7 switch syntax to infer the parameter type and handle it
-        /// accordingly.
-        /// </summary>
-        /// <param name="shape"></param>
-        /// <returns></returns>
-        private static int Get(object shape)
-        {
-            switch (shape)
-            {
-                case Triangle t when t.SideA == t.SideB && t.SideB == t.SideC:
-                    return 1;
-
-                case Triangle t:
-                    return 2;
-
-                case Rectangle r when r.Height == r.Width:
-                    return 3;
-
-                case Rectangle r:
-                    return 4;
-
-                default:
-                    switch(shape)
-                    {
-                        case Circle c:
-                            return 6;
-                        case Ellipsis e:
-                            return 7;
-                    }
-                    return 5;
-            }            
         }
     }
 }
