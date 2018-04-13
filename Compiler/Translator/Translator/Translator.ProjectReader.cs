@@ -34,21 +34,7 @@ namespace Bridge.Translator
 
         internal static Project OpenProject(string location, IDictionary<string,string> globalProperties)
         {
-            bool isOnMono = Translator.IsRunningOnMono();
-            if (isOnMono)
-            {
-                // Using XmlReader here addresses a Mono issue logged as #38224 at Mono's official BugZilla.
-                // Bridge issue #860
-                // This constructor below works on Linux and DOES break #531
-                return new Project(XmlReader.Create(location), globalProperties, null, new ProjectCollection());
-            }
-            else
-            {
-                // Using XmlReader above breaks feature #531 - referencing linked files in csproj (Compiler test 18 fails)
-                // To avoid it at least on Windows, use different Project constructors
-                // This constructor below works on Windows and does NOT break #531
-                return new Project(location, globalProperties, null, new ProjectCollection());
-            }
+            return new Project(location, globalProperties, null, new ProjectCollection());
         }
 
         internal static void CloseProject(Project project)
