@@ -1,5 +1,5 @@
 /**
- * @version   : 17.0.0-beta0 - Bridge.NET
+ * @version   : 17.0.0-beta - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -3377,8 +3377,8 @@
     // @source SystemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "17.0.0-beta0";
-        Bridge.SystemAssembly.compiler = "17.0.0-beta0";
+        Bridge.SystemAssembly.version = "17.0.0-beta";
+        Bridge.SystemAssembly.compiler = "17.0.0-beta";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -7565,7 +7565,14 @@
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Double) && Bridge.is(v2, System.Double)) {
-                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+                    v1 = Bridge.unbox(v1, true);
+                    v2 = Bridge.unbox(v2, true);
+
+                    if (isNaN(v1) && isNaN(v2)) {
+                        return true;
+                    }
+
+                    return v1 === v2;
                 }
 
                 return false;
@@ -7623,7 +7630,14 @@
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Single) && Bridge.is(v2, System.Single)) {
-                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+                    v1 = Bridge.unbox(v1, true);
+                    v2 = Bridge.unbox(v2, true);
+
+                    if (isNaN(v1) && isNaN(v2)) {
+                        return true;
+                    }
+
+                    return v1 === v2;
                 }
 
                 return false;
