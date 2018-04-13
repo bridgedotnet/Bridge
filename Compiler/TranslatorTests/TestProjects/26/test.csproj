@@ -12,13 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- This is just an example include that does not necessarily needs to exist at all. -->
+    <!-- The test this file is subject to is not building an actual Bridge app, but just having Bridge.Translator load the project file. -->
     <Reference Include="Bridge">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Bridge.Html5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Html5\bin\$(Configuration)\Bridge.Html5.dll</HintPath>
     </Reference>
   </ItemGroup>
 
