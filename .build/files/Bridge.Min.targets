@@ -16,11 +16,8 @@
     <BridgeNetCompilerTarget Condition="$(OnWin) == true">BridgeNetCompilerTask</BridgeNetCompilerTarget>
     <BridgeNetCompilerTarget Condition="$(OnWin) != true">BridgeNetCompilerUtil</BridgeNetCompilerTarget>
     <BridgeNetCompilerTarget Condition="$(OnWin) != true And $(MSBuildToolsPath.Contains('msbuild'))">BridgeNetCompilerTask</BridgeNetCompilerTarget>
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);$(BridgeNetCompilerTarget)</PrepareForRunDependsOn>
   </PropertyGroup>
-
-  <Target Name="BridgeExecute" AfterTargets="Build">
-    <CallTarget Targets="$(BridgeNetCompilerTarget)" />
-  </Target>
 
   <Target Name="BridgeNetCompilerTask">
     <Message Text="Bridge started" Importance="high" />
