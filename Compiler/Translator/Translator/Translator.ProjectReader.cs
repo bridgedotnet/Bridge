@@ -346,10 +346,18 @@ namespace Bridge.Translator
             {
                 this.Log.Trace("Reading define constants...");
 
-                this.ProjectProperties.DefineConstants = project.AllEvaluatedProperties
+                var constantList = project.AllEvaluatedProperties
                     .Where(p => p.Name == ProjectPropertyNames.DEFINE_CONSTANTS_PROP)
-                    .Select(p => p.EvaluatedValue)
-                    .LastOrDefault() ?? "";
+                    .Select(p => p.EvaluatedValue);
+
+                if (constantList == null || constantList.Count() < 1)
+                {
+                    this.ProjectProperties.DefineConstants = "";
+                }
+                else
+                {
+                    this.ProjectProperties.DefineConstants = String.Join(";", constantList);
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(this.ProjectProperties.DefineConstants))
