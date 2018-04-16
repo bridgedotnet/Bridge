@@ -211,6 +211,7 @@
     <Compile Include="System\AsyncCallback.cs" />
     <Compile Include="shared\System\CLSCompliantAttribute.cs" />
     <Compile Include="System\Attributes\HostProtectionAttribute.cs" />
+    <Compile Include="System\Attributes\NeutralResourcesLanguageAttribute.cs" />
     <Compile Include="System\BitConverter.cs" />
     <Compile Include="shared\System\Collections\BitArrray.cs" />
     <Compile Include="shared\System\Collections\Generic\BitHelper.cs" />

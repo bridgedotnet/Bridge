@@ -70,5 +70,9 @@
     <file src="../../Compiler/Translator/bin/Release/System.Xml.XPath.dll" target="tools/System.Xml.XPath.dll" />
     <file src="../../Compiler/Translator/bin/Release/System.Xml.XPath.XDocument.dll" target="tools/System.Xml.XPath.XDocument.dll" />
     <file src="../../Compiler/Build/bin/Release/TopologicalSorting.dll" target="tools/TopologicalSorting.dll" />
+    <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.dll" target="tools/Microsoft.Build.dll" />
+    <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.Framework.dll" target="tools/Microsoft.Build.Framework.dll" />
+    <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.Utilities.Core.dll" target="tools/Microsoft.Build.Utilities.Core.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Runtime.InteropServices.RuntimeInformation.dll" target="tools/System.Runtime.InteropServices.RuntimeInformation.dll" />
   </files>
 </package>
