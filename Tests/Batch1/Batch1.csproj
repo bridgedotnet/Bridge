@@ -65,6 +65,7 @@
     <Compile Include="CSharp7\TestExpressionBodyMember.cs" />
     <Compile Include="CSharp7\TestLocalFunctions.cs" />
     <Compile Include="CSharp7\TestThrowExpression.cs" />
+    <Compile Include="CSharp7\TestRefReturnAndLocal.cs" />
     <Compile Include="CSharp7\TestValueTupleAndDeconstruction.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
