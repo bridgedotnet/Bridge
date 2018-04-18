@@ -23982,22 +23982,22 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "25", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "32", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic();
                 },
                 TestBasic2: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic2()", $t.Line = "52", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic2()", $t.Line = "64", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic2();
                 },
                 TestBasic3: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic3()", $t.Line = "65", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic3()", $t.Line = "82", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic3();
                 },
                 TestBasic4: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic4()", $t.Line = "87", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic4()", $t.Line = "107", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic4();
                 }
             }

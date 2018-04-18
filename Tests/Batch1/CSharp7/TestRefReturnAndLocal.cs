@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Bridge.ClientTest.CSharp7
 {
+    /// <summary>
+    /// Tests related to the reference return value and reference local value
+    /// C#7 functionality.
+    /// </summary>
     [Category(Constants.MODULE_BASIC_CSHARP)]
     [TestFixture(TestNameFormat = "Ref return and ref local - {0}")]
     public class TestRefReturnAndLocal
@@ -17,11 +21,14 @@ namespace Bridge.ClientTest.CSharp7
             }
         }
 
-        private static void change(int value)
+        private static void Change(int value)
         {
             value = 30;
         }
 
+        /// <summary>
+        /// General tests on the 'ref' functionality.
+        /// </summary>
         [Test]
         public static void TestBasic()
         {
@@ -30,18 +37,20 @@ namespace Bridge.ClientTest.CSharp7
             ref int highscore = ref score.Get();
             int anotherScore = score.Get();
 
-            Assert.AreEqual(5, score.value);
-            Assert.AreEqual(5, highscore);
-            Assert.AreEqual(5, anotherScore);
+            Assert.AreEqual(5, score.value, "Direct variable value is reachable.");
+            Assert.AreEqual(5, highscore, "Returned reference value correctly points to the referenced variable.");
+            Assert.AreEqual(5, anotherScore, "Returned reference can be assigned to non-reference variables.");
 
             highscore = 10;
+            Assert.AreEqual(10, score.value, "Assigning a value to the referencing variable reflects in referenced variables.");
+
             anotherScore = 20;
+            Assert.AreEqual(10, score.value, "Assigning a value to a non-referencing variable does not affect referenceable variables.");
 
-            change(highscore);
+            Change(highscore);
 
-            Assert.AreEqual(10, score.value);
-            Assert.AreEqual(10, highscore);
-            Assert.AreEqual(20, anotherScore);
+            Assert.AreEqual(10, highscore, "Changing the referenceable variable reflects in variables referencing it.");
+            Assert.AreEqual(20, anotherScore, "Changing the referenceable variable does not affect non-referencing variabel.");
         }
 
         private static ref int ThirdElement(int[] array)
@@ -49,19 +58,27 @@ namespace Bridge.ClientTest.CSharp7
             return ref array[2];
         }
 
+        /// <summary>
+        /// Tests changing an array contents by referencing its index entry.
+        /// </summary>
         [Test]
         public static void TestBasic2()
         {
             int[] values = { 1, 2, 3, 4, 5 };
 
-            Assert.AreEqual("1,2,3,4,5", string.Join(",", values));
+            Assert.AreEqual("1,2,3,4,5", string.Join(",", values), "The initial array values are the expected ones.");
 
             ref int value = ref ThirdElement(values);
             value = 10;
 
-            Assert.AreEqual("1,2,10,4,5", string.Join(",", values));
+            Assert.AreEqual(10, value, "Value can be assigned to a reference variable pointing to an array's entry.");
+            Assert.AreEqual(10, values[2], "The value modification is reflected in the referenced array entry.");
+            Assert.AreEqual("1,2,10,4,5", string.Join(",", values), "The final modified array reflects the modification in the reference variable.");
         }
 
+        /// <summary>
+        /// Tests referencing a variable to another (pointer)-like.
+        /// </summary>
         [Test]
         public static void TestBasic3()
         {
@@ -71,8 +88,8 @@ namespace Bridge.ClientTest.CSharp7
 
             j = 10;
 
-            Assert.AreEqual(10, i);
-            Assert.AreEqual(10, j);
+            Assert.AreEqual(10, i, "The non-reference variable has the expected queried value.");
+            Assert.AreEqual(10, j, "The referenced variable inherited the value from the one it references.");
         }
 
         private static ref int Max(ref int first, ref int second)
@@ -83,20 +100,24 @@ namespace Bridge.ClientTest.CSharp7
             return ref second;
         }
 
-
+        /// <summary>
+        /// Tests reference-returning method as a way to select a variable
+        /// conditionally.
+        /// </summary>
         [Test]
         public static void TestBasic4()
         {
             int i = 5;
             int j = 10;
 
-            Assert.AreEqual(5, i);
-            Assert.AreEqual(10, j);
+            Assert.AreEqual(5, i, "Non-reference-assigned value for i works.");
+            Assert.AreEqual(10, j, "Non-reference-assigned value for j works.");
 
+            // This should assign '20' to the variable with the bigger value (j).
             Max(ref i, ref j) = 20;
 
-            Assert.AreEqual(5, i);
-            Assert.AreEqual(20, j);
+            Assert.AreEqual(5, i, "Reference returning method did not return the wrong value.");
+            Assert.AreEqual(20, j, "Reference returning method assigned the expected variable.");
         }
     }
 }
