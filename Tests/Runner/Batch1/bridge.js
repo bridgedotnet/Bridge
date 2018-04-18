@@ -1606,7 +1606,7 @@
 
                 if (name != "Object") {
                     result = instance;
-                }                
+                }
             }
 
             return Bridge.Reflection.convertType(result);
