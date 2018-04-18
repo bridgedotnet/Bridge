@@ -19,7 +19,8 @@ namespace Bridge.Contract
             Boxing = BoxingRule.Managed,
             ArrayIndex = ArrayIndexRule.Managed,
             AutoProperty = null,
-            InlineComment = InlineCommentRule.Managed
+            InlineComment = InlineCommentRule.Managed,
+            ExternalCast = ExternalCastRule.Managed
         };
 
         public static CompilerRule Get(IEmitter emitter, IEntity entity)
@@ -113,7 +114,8 @@ namespace Bridge.Contract
                 Boxing = BoxingRule.Managed,
                 ArrayIndex = ArrayIndexRule.Managed,
                 AutoProperty = null,
-                InlineComment = InlineCommentRule.Managed
+                InlineComment = InlineCommentRule.Managed,
+                ExternalCast = ExternalCastRule.Managed
             };
 
             for (int i = rules.Count - 1; i >= 0; i--)
@@ -153,6 +155,11 @@ namespace Bridge.Contract
                 if (rule.InlineComment.HasValue)
                 {
                     resultRule.InlineComment = rule.InlineComment;
+                }
+
+                if (rule.ExternalCast.HasValue)
+                {
+                    resultRule.ExternalCast = rule.ExternalCast;
                 }
             }
 
@@ -196,6 +203,10 @@ namespace Bridge.Contract
 
                     case nameof(CompilerRule.InlineComment):
                         rule.InlineComment = (InlineCommentRule)(int)value.ConstantValue;
+                        break;
+
+                    case nameof(CompilerRule.ExternalCast):
+                        rule.ExternalCast = (ExternalCastRule)(int)value.ConstantValue;
                         break;
 
                     default:

@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 17.0.0-beta0
+ * @compiler Bridge.NET 17.0.0-beta
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
@@ -109,6 +109,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Using static - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic.TestBasic);
             QUnit.test("Binary Literals - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestBinaryLiterals.TestBasic);
             QUnit.test("Case label pattern - TestCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCase);
+            QUnit.test("Case label pattern - TestVarCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestVarCase);
+            QUnit.test("Case label pattern - TestCaseNull", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCaseNull);
             QUnit.test("DefaultLiteralExpression - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDefaultLiteralExpression.TestBasic);
             QUnit.test("Discards and out variables - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars.TestBasic);
             QUnit.test("Expression-bodied members - Test", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember.Test);
@@ -22970,8 +22972,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestCase: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCase()", $t.Line = "61", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCase()", $t.Line = "62", $t));
                     Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestCase();
+                },
+                TestVarCase: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVarCase()", $t.Line = "142", $t));
+                    Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestVarCase();
+                },
+                TestCaseNull: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCaseNull()", $t.Line = "212", $t));
+                    Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestCaseNull();
                 }
             }
         },
