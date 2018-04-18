@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using System.Collections.Generic;
 
 namespace Bridge.ClientTest.CSharp7
 {
@@ -96,7 +97,7 @@ namespace Bridge.ClientTest.CSharp7
                     return 4;
 
                 default:
-                    switch(shape)
+                    switch (shape)
                     {
                         case Circle c:
                             return 6;
@@ -104,7 +105,64 @@ namespace Bridge.ClientTest.CSharp7
                             return 7;
                     }
                     return 5;
-            }            
+            }
+        }
+
+        /// <summary>
+        /// Tests 'var' variable definition inlined with switch case
+        /// expressions.
+        /// </summary>
+        [Test]
+        public static void TestVarCase()
+        {
+            var age = 84;
+            var msg = "...";
+
+            switch (age)
+            {
+                case 50:
+                    msg = "the big five-oh";
+                    break;
+                case var testAge when (new List<int>()
+              { 80, 81, 82, 83, 84, 85, 86, 87, 88, 89 }).Contains(testAge):
+                    msg = "octogenarian";
+                    break;
+                case var testAge when ((testAge >= 90) & (testAge <= 99)):
+                    msg = "nonagenarian";
+                    break;
+                case var testAge when (testAge >= 100):
+                    msg = "centenarian";
+                    break;
+                default:
+                    msg = "just old";
+                    break;
+            }
+
+            Assert.AreEqual("octogenarian", msg, "Var within switch case statements is correctly evaluated.");
+        }
+
+        /// <summary>
+        /// Tests 'null' occurrence within a switch case expression.
+        /// </summary>
+        [Test]
+        public static void TestCaseNull()
+        {
+            object o = null;
+            switch (o)
+            {
+                case int i when i > 100000:
+                    Assert.Fail("A null value matched an integer.");
+                    break;
+                case null:
+                    Assert.Null(o, "Null can be used as switch case expression.");
+                    break;
+                case string _:
+                    Assert.Fail("String matched when null was evaluated within a switch case expression.");
+                    break;
+                default:
+                    Assert.Fail("Default/fallthru switch case statement is matched instead of the 'null' entry.");
+                    break;
+            }
         }
     }
 }

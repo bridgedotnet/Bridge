@@ -106,7 +106,7 @@
                                     Object.defineProperty(obj, alias, descriptor);
                                     aliases.push({ alias: alias, descriptor: descriptor });
                                 } else {
-                                    scope[alias] = m;
+                                    obj[alias] = m;
                                     aliases.push({ fn: name, alias: alias });
                                 }
                             }

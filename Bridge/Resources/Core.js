@@ -1581,6 +1581,16 @@
                 result = Object;
             }
 
+            if (result === Object) {
+                var str = instance.toString(),
+                    match = (/\[object (.{1,})\]/).exec(str),
+                    name = (match && match.length > 1) ? match[1] : "Object";
+
+                if (name != "Object") {
+                    result = instance;
+                }
+            }
+
             return Bridge.Reflection.convertType(result);
         },
 
