@@ -363,12 +363,30 @@ namespace Bridge.Translator
             ITypeSymbol type = null;
             IMethodSymbol method = null;
             IParameterSymbol parameter = null;
+            bool nonTrailing = false;
 
-            if (ti.Type != null && ti.Type.TypeKind == TypeKind.Delegate)
+            if (node.NameColon == null && node.Parent is ArgumentListSyntax argList)
+            {
+                foreach (var arg in argList.Arguments)
+                {
+                    if (arg == node)
+                    {
+                        break;
+                    }
+
+                    if (arg.NameColon != null)
+                    {
+                        nonTrailing = true;
+                        break;
+                    }
+                }
+            }
+
+            if (ti.Type != null && (ti.Type.TypeKind == TypeKind.Delegate || nonTrailing))
             {
                 type = ti.Type;
             }
-            else if (ti.ConvertedType != null && ti.ConvertedType.TypeKind == TypeKind.Delegate)
+            else if (ti.ConvertedType != null && (ti.ConvertedType.TypeKind == TypeKind.Delegate || nonTrailing))
             {
                 type = ti.ConvertedType;
             }
@@ -450,6 +468,11 @@ namespace Bridge.Translator
                     var cast = SyntaxFactory.CastExpression(name, expr);
                     node = node.WithExpression(cast);
                 }
+            }
+
+            if (nonTrailing && parameter != null)
+            {
+                node = node.WithNameColon(SyntaxFactory.NameColon(SyntaxFactory.IdentifierName(parameter.Name)));
             }
 
             return node;

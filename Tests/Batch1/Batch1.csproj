@@ -59,6 +59,7 @@
     <Compile Include="CSharp7\TestCaseLabelPattern.cs" />
     <Compile Include="CSharp7\TestDefaultLiteralExpression.cs" />
     <Compile Include="CSharp7\TestDiscardsAndOutVars.cs" />
+    <Compile Include="CSharp7\TestNonTrailingNamedArg.cs" />
     <Compile Include="CSharp7\TestPrivateProtected.cs" />
     <Compile Include="CSharp7\TestROStruct.cs" />
     <Compile Include="CSharp7\TestIsPattern.cs" />

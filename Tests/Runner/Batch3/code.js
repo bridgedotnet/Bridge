@@ -31209,17 +31209,11 @@ Bridge.$N1391Result =                     r;
                  * @return  {string}
                  */
                 SpaceWritten: function () { /// Variable is assigned but its value is never used
-
-
                     var i = 0; /// Variable is assigned but its value is never used
-
-
                     return 
                 },
                 NothingWritten: function () { /// Variable is assigned but its value is never used
-
-
-                    var i = 0;
+                    var i = 0; /// Variable is assigned but its value is never used
                     return 
                 },
                 /**
