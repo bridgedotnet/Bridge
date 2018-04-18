@@ -26,6 +26,9 @@ namespace Bridge.Translator
                 var switchExpression = sw.Expression;
                 StatementSyntax switchConditionVariable = null;
 
+                var iType = model.GetTypeInfo(s1.Expression).Type;
+                var expressionType = SyntaxFactory.ParseTypeName(iType.ToMinimalDisplayString(model, s1.Expression.GetLocation().SourceSpan.Start));
+
                 if (isComplex)
                 {
                     var key = tempKey++;
@@ -35,10 +38,7 @@ namespace Bridge.Translator
                     var toTemp = SyntaxFactory.InvocationExpression(methodIdentifier,
                         SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg), SyntaxFactory.Argument(switchExpression) })));
 
-                    switchConditionVariable = SyntaxFactory.ExpressionStatement(toTemp).NormalizeWhitespace();
-
-                    var iType = model.GetTypeInfo(s1.Expression).Type;
-                    var expressionType = SyntaxFactory.ParseTypeName(iType.ToMinimalDisplayString(model, s1.Expression.GetLocation().SourceSpan.Start));
+                    switchConditionVariable = SyntaxFactory.ExpressionStatement(toTemp).NormalizeWhitespace();                    
 
                     var parentMethodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier("global::Bridge.Script.FromTemp"),
                                                                  SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(new[] { expressionType })));
@@ -48,7 +48,7 @@ namespace Bridge.Translator
 
                 foreach (var section in sw.Sections)
                 {
-                    var tuple = CollectCondition(switchExpression, section.Labels);
+                    var tuple = CollectCondition(switchExpression, section.Labels, expressionType);
                     var condition = tuple.Item1;
                     var variables = tuple.Item2;
                     var whens = tuple.Item3;
@@ -117,7 +117,7 @@ namespace Bridge.Translator
             return root;
         }
 
-        Tuple<ExpressionSyntax, List<VariableDeclarationSyntax>, List<ExpressionSyntax>> CollectCondition(ExpressionSyntax expressionSyntax, SyntaxList<SwitchLabelSyntax> labels)
+        Tuple<ExpressionSyntax, List<VariableDeclarationSyntax>, List<ExpressionSyntax>> CollectCondition(ExpressionSyntax expressionSyntax, SyntaxList<SwitchLabelSyntax> labels, TypeSyntax keyType)
         {
             var conditionList = new List<ExpressionSyntax>();
             var variables = new List<VariableDeclarationSyntax>();
@@ -148,15 +148,22 @@ namespace Bridge.Translator
 
                         if (designation != null)
                         {
+                            var declarationType = declarationPattern.Type;
+
+                            if (declarationType.IsVar)
+                            {
+                                declarationType = keyType;
+                            }
+
                             var varDecl = SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("var")).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
                                 SyntaxFactory.VariableDeclarator(
                                     SyntaxFactory.Identifier(designation.Identifier.ValueText)                                    
-                                ).WithInitializer(SyntaxFactory.EqualsValueClause(patternsCount > 1 ? (ExpressionSyntax)SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, expressionSyntax, declarationPattern.Type) : SyntaxFactory.CastExpression(declarationPattern.Type, expressionSyntax)))
+                                ).WithInitializer(SyntaxFactory.EqualsValueClause(patternsCount > 1 ? (ExpressionSyntax)SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, expressionSyntax, declarationType) : SyntaxFactory.CastExpression(declarationType, expressionSyntax)))
                             )).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace();
                             varName = designation.Identifier.ValueText;
                             variables.Add(varDecl);
 
-                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, declarationPattern.Type));
+                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, declarationType));
                         }
                     }
 

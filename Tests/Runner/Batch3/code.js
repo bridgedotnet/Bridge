@@ -41,10 +41,10 @@ var Bridge3494_A = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 17.0.0-beta0
+ * @version 17.0.0-beta
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 17.0.0-beta0
+ * @compiler Bridge.NET 17.0.0-beta
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -31117,6 +31117,218 @@ Bridge.$N1391Result =                     r;
         $kind: "nested interface",
         $variance: [1]
     }; });
+
+    /**
+     * The test here consists in ensuring conversion from an extension method
+     to Action works in Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513", {
+        statics: {
+            methods: {
+                Run: function (a) {
+                    a();
+                },
+                /**
+                 * Tests passing the string's extension method as a parameter to the
+                 'Action'-parametered function and checking whether the result is
+                 the expected one.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513
+                 * @return  {void}
+                 */
+                TestExtensionMethodAsAction: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension.StaticMessage = "Inline extension conversion works.";
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513.Run(function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension.Print("Hello, World!"); });
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension.StaticMessage = "Variable-bound extension conversion works.";
+                    var str = "Hello, World!";
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513.Run(function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension.Print(str); });
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension", {
+        statics: {
+            fields: {
+                StaticMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.StaticMessage = "passed";
+                }
+            },
+            methods: {
+                Print: function (message) {
+                    Bridge.Test.NUnit.Assert.AreEqual("Hello, World!", message, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3513StringExtension.StaticMessage);
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring the ExternalCastRule emits code
+     accordingly to its setting.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516", {
+        statics: {
+            methods: {
+                /**
+                 * The test here sets it so no cast is made for classes marked with
+                 the 'external' attributes. So an invalid cast won't really be
+                 thrown when the code is run.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestPlainExternalCastRule: function () {
+                    var obj = "test";
+
+                    // This won't throw an exception because the cast is not passed in.
+                    var el = obj;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("test", el, "Cast was suppressed for ExternalCastRule.Plain.");
+
+                    obj = new (System.Collections.Generic.List$1(System.String)).ctor();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, function () {
+                        // This should throw an exception as it is not marked as external at all.
+                        obj = Bridge.cast(obj, System.Collections.Generic.IEqualityComparer$1(System.String));
+                    }, "Cast emitted for non-external class even if ExternalCastRule is Plain.");
+                },
+                /**
+                 * And here, we force-set it as managed, so that the cast, passed
+                 down to the client-side application, will be done, thus an
+                 exception thrown.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestManagedExternalCastRule: function () {
+                    Bridge.Test.NUnit.Assert.Throws$2(System.SystemException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516.f1, "Cast is emitted if ExternalCastRule is Managed.");
+                },
+                /**
+                 * And here we ensure the default is Managed, so that the exception
+                 will effectively be thrown in an external class' invalid cast.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516
+                 * @return  {void}
+                 */
+                TestDefaultExternalCastRule: function () {
+                    Bridge.Test.NUnit.Assert.Throws$2(System.SystemException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516.f1, "Cast is emitted if ExternalCastRule is not specified, meaning it is 'Managed'.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3516, {
+        f1: function () {
+            var obj = "test";
+            var el = Bridge.cast(obj, ExternalNS3516.ExternalClass3516);
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring some types of provided Script.Write
+     input won't break Bridge output code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519", {
+        statics: {
+            fields: {
+                Keys: null,
+                SMap: null,
+                vMap: null
+            },
+            ctors: {
+                init: function () {
+                    this.Keys = System.Array.init(["a", "b"], System.String);
+                    this.SMap = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                    this.vMap = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                }
+            },
+            methods: {
+                RegExpEscape: function (s) {
+                    // because of this string magic happens :)
+                    return s.replace(/[-\/\^$*+?.()|[\]{}]/g, '\\$&');
+
+                },
+                /**
+                 * This should break the very code execution if wrong
+                 *
+                 * @static
+                 * @private
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519
+                 * @return  {string}
+                 */
+                SpaceWritten: function () { /// Variable is assigned but its value is never used
+                    var i = 0; /// Variable is assigned but its value is never used
+                    return 
+                },
+                NothingWritten: function () { /// Variable is assigned but its value is never used
+                    var i = 0; /// Variable is assigned but its value is never used
+                    return 
+                },
+                /**
+                 * Tests by issuing the Script-Write-driven methods and checking
+                 whether they provide valid JavaScript output code..
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519
+                 * @return  {void}
+                 */
+                TestInjectScript: function () {
+                    var $t;
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.SMap.set("a", "b");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.SMap.set("c", "d");
+
+                    $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.Keys);
+                    try {
+                        while ($t.moveNext()) {
+                            var vote = $t.Current;
+                            // colon and \n missing
+                            Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.vMap.set(vote, vote);
+                            var a = 1;
+                            Bridge.Test.NUnit.Assert.AreEqual(1, a, "Code can run and key '" + (vote || "") + "' value is correct");
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$Dispose();
+                        }
+                    }
+                    Bridge.Test.NUnit.Assert.AreEqual("b", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.SMap.get("a"), "'a' still maps to 'b'");
+                    Bridge.Test.NUnit.Assert.AreEqual("d", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.SMap.get("c"), "'c' still maps to 'd'");
+
+                    Bridge.Test.NUnit.Assert.Null(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.SpaceWritten(), "Blank Script.Write works");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519.NothingWritten(), "Empty Script.Write works");
+                }
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
