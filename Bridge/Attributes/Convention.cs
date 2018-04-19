@@ -5,9 +5,8 @@ namespace Bridge
     /// <summary>
     /// Controls a type or type members case notation in the script output.
     /// </summary>
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    [External]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public sealed class ConventionAttribute : Attribute
     {
         /// <summary>
@@ -143,7 +142,7 @@ namespace Bridge
         None = 0,
         LowerCase = 1,
         UpperCase = 2,
-        LowerCamelCase = 3,
-        UpperCamelCase = 4
+        CamelCase = 3,
+        PascalCase = 4
     }
 }

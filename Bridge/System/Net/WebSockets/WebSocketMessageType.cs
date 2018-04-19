@@ -1,9 +1,7 @@
-﻿using Bridge;
-
-namespace System.Net.WebSockets
+﻿namespace System.Net.WebSockets
 {
-    [External]
-    [Enum(Emit.StringNameLowerCase)]
+    [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.StringNameLowerCase)]
     public enum WebSocketMessageType
     {
         Text,

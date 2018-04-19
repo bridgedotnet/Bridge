@@ -1,13 +1,13 @@
-﻿using Bridge;
-using System.Collections;
+﻿using System.Collections;
 
 namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Represents the set of successful matches found by iteratively applying a regular expression pattern to the input string.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class MatchCollection : ICollection
     {
         internal extern MatchCollection(Regex regex, string input, int beginning, int length, int startat);
@@ -17,7 +17,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern int Count
         {
-            [Template("getCount()")]
+            [Bridge.Template("getCount()")]
             get;
         }
 
@@ -26,7 +26,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern object SyncRoot
         {
-            [Template("getSyncRoot()")]
+            [Bridge.Template("getSyncRoot()")]
             get;
         }
 
@@ -35,7 +35,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsSynchronized
         {
-            [Template("getIsSynchronized()")]
+            [Bridge.Template("getIsSynchronized()")]
             get;
         }
 
@@ -44,7 +44,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool IsReadOnly
         {
-            [Template("getIsReadOnly()")]
+            [Bridge.Template("getIsReadOnly()")]
             get;
         }
 
@@ -53,7 +53,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern virtual Match this[int i]
         {
-            [Template("get({0})")]
+            [Bridge.Template("get({0})")]
             get;
         }
 
@@ -65,6 +65,7 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Provides an enumerator that iterates through the collection.
         /// </summary>
+        [Bridge.Convention(Bridge.Notation.None)]
         public extern IEnumerator GetEnumerator();
     }
 }

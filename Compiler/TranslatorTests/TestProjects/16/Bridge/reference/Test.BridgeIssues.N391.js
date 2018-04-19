@@ -23,13 +23,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 }
                             } finally {
                                 if (Bridge.is($t1, System.IDisposable)) {
-                                    $t1.System$IDisposable$dispose();
+                                    $t1.System$IDisposable$Dispose();
                                 }
                             }
                         }
                     } finally {
                         if (Bridge.is($t, System.IDisposable)) {
-                            $t.System$IDisposable$dispose();
+                            $t.System$IDisposable$Dispose();
                         }
                     }
                     $t2 = Bridge.getEnumerator(TestArray1);
@@ -44,13 +44,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 }
                             } finally {
                                 if (Bridge.is($t3, System.IDisposable)) {
-                                    $t3.System$IDisposable$dispose();
+                                    $t3.System$IDisposable$Dispose();
                                 }
                             }
                         }
                     } finally {
                         if (Bridge.is($t2, System.IDisposable)) {
-                            $t2.System$IDisposable$dispose();
+                            $t2.System$IDisposable$Dispose();
                         }
                     }}
             }

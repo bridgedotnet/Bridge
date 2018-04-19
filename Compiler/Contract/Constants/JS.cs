@@ -89,7 +89,7 @@
             public const string APPLY = "apply";
             public const string CALL = "call";
             public const string DEFINE = "define";
-            public const string DISPOSE = "System$IDisposable$dispose";
+            public const string DISPOSE = "System$IDisposable$Dispose";
 
             public const string SLICE = "slice";
 
@@ -197,8 +197,8 @@
                     private const string DOTNAME = NAME + ".";
                     public const string NAME = System.DOTNAME + "IDisposable";
 
-                    public const string DISPOSE = "dispose";
-                    public const string INTERFACE_DISPOSE = "System$IDisposable$dispose";
+                    public const string DISPOSE = "Dispose";
+                    public const string INTERFACE_DISPOSE = "System$IDisposable$Dispose";
                 }
 
                 public class Array

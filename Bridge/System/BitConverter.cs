@@ -1,10 +1,9 @@
 ﻿namespace System
 {
-    using Bridge;
-    using Bridge.Internal.Html5;
     /// <summary>
     /// Converts base data types to an array of bytes, and an array of bytes to base data types.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public static class BitConverter
     {
         /// <summary>
@@ -44,7 +43,7 @@
         public static byte[] GetBytes(short value)
         {
             var view = View(2);
-            view.SetInt16(0, value);
+            view.ToDynamic().setInt16(0, value);
 
             return GetViewBytes(view);
         }
@@ -57,7 +56,7 @@
         public static byte[] GetBytes(int value)
         {
             var view = View(4);
-            view.SetInt32(0, value);
+            view.ToDynamic().setInt32(0, value);
 
             return GetViewBytes(view);
         }
@@ -79,10 +78,11 @@
         /// </summary>
         /// <param name="value">The number to convert.</param>
         /// <returns>An array of bytes with length 2.</returns>
+        [CLSCompliant(false)]
         public static byte[] GetBytes(ushort value)
         {
             var view = View(2);
-            view.SetUint16(0, value);
+            view.ToDynamic().setUint16(0, value);
 
             return GetViewBytes(view);
         }
@@ -92,10 +92,11 @@
         /// </summary>
         /// <param name="value">The number to convert.</param>
         /// <returns>An array of bytes with length 4.</returns>
+        [CLSCompliant(false)]
         public static byte[] GetBytes(uint value)
         {
             var view = View(4);
-            view.SetUint32(0, value);
+            view.ToDynamic().setUint32(0, value);
 
             return GetViewBytes(view);
         }
@@ -105,6 +106,7 @@
         /// </summary>
         /// <param name="value">The number to convert.</param>
         /// <returns>An array of bytes with length 8.</returns>
+        [CLSCompliant(false)]
         public static byte[] GetBytes(ulong value)
         {
             var view = GetView((long)value);
@@ -120,7 +122,7 @@
         public static byte[] GetBytes(float value)
         {
             var view = View(4);
-            view.SetFloat32(0, value);
+            view.ToDynamic().setFloat32(0, value);
 
             return GetViewBytes(view);
         }
@@ -145,7 +147,7 @@
             }
 
             var view = View(8);
-            view.SetFloat64(0, value);
+            view.ToDynamic().setFloat64(0, value);
 
             return GetViewBytes(view);
         }
@@ -175,7 +177,7 @@
 
             SetViewBytes(view, value, startIndex: startIndex);
 
-            return view.GetInt16(0);
+            return view.ToDynamic().getInt16(0);
         }
 
         /// <summary>
@@ -192,7 +194,7 @@
 
             SetViewBytes(view, value, startIndex: startIndex);
 
-            return view.GetInt32(0);
+            return view.ToDynamic().getInt32(0);
         }
 
         /// <summary>
@@ -223,6 +225,7 @@
         /// <param name="value">The array of bytes.</param>
         /// <param name="startIndex">The starting position within value.</param>
         /// <returns>A 16-bit unsigned integer formed by two bytes beginning at startIndex.</returns>
+        [CLSCompliant(false)]
         public static ushort ToUInt16(byte[] value, int startIndex)
         {
             return (ushort)ToInt16(value, startIndex);
@@ -234,6 +237,7 @@
         /// <param name="value">An array of bytes.</param>
         /// <param name="startIndex">The starting position within value.</param>
         /// <returns>A 32-bit unsigned integer formed by four bytes beginning at startIndex.</returns>
+        [CLSCompliant(false)]
         public static uint ToUInt32(byte[] value, int startIndex)
         {
             return (uint)ToInt32(value, startIndex);
@@ -245,6 +249,7 @@
         /// <param name="value">An array of bytes.</param>
         /// <param name="startIndex">The starting position within value.</param>
         /// <returns>A 64-bit unsigned integer formed by the eight bytes beginning at startIndex.</returns>
+        [CLSCompliant(false)]
         public static ulong ToUInt64(byte[] value, int startIndex)
         {
             var l = ToInt64(value, startIndex);
@@ -266,7 +271,7 @@
 
             SetViewBytes(view, value, startIndex: startIndex);
 
-            return view.GetFloat32(0);
+            return view.ToDynamic().getFloat32(0);
         }
 
         /// <summary>
@@ -283,7 +288,7 @@
 
             SetViewBytes(view, value, startIndex: startIndex);
 
-            return view.GetFloat64(0);
+            return view.ToDynamic().getFloat64(0);
         }
 
         /// <summary>
@@ -331,6 +336,7 @@
             char[] chArray = new char[chArrayLength];
             int i = 0;
             int index = startIndex;
+
             for (i = 0; i < chArrayLength; i += 3)
             {
                 byte b = value[index++];
@@ -394,10 +400,10 @@
         /// <returns>A 64-bit signed integer whose value is equivalent to value.</returns>
         public static long DoubleToInt64Bits(double value)
         {
-            var view = View(8);
-            view.SetFloat64(0, value);
+            var view = View(8).ToDynamic();
+            view.setFloat64(0, value);
 
-            return CreateLong(view.GetInt32(4), view.GetInt32(0));
+            return Bridge.Script.Write<dynamic>("[view.getInt32(4), view.getInt32(0)]");
         }
 
         /// <summary>
@@ -409,7 +415,7 @@
         {
             var view = GetView(value);
 
-            return view.GetFloat64(0);
+            return view.ToDynamic().getFloat64(0);
         }
 
         private static char GetHexValue(int i)
@@ -422,11 +428,11 @@
             return (char)(i - 10 + 'A');
         }
 
-        private static byte[] GetViewBytes(DataView view, int count = -1, int startIndex = 0)
+        private static byte[] GetViewBytes(object view, int count = -1, int startIndex = 0)
         {
             if (count == -1)
             {
-                count = view.ByteLength;
+                count = view.ToDynamic().byteLength;
             }
 
             var r = new byte[count];
@@ -435,57 +441,57 @@
             {
                 for (int i = count - 1; i >= 0; i--)
                 {
-                    r[i] = view.GetUint8(startIndex++);
+                    Bridge.Script.Write("r[System.Array.index(i, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));");
                 }
             }
             else
             {
                 for (int i = 0; i < count; i++)
                 {
-                    r[i] = view.GetUint8(startIndex++);
+                    Bridge.Script.Write("r[System.Array.index(i1, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));");
                 }
             }
 
             return r;
         }
 
-        private static void SetViewBytes(DataView view, byte[] value, int count = -1, int startIndex = 0)
+        private static void SetViewBytes(object view, byte[] value, int count = -1, int startIndex = 0)
         {
             if (count == -1)
             {
-                count = view.ByteLength;
+                count = view.ToDynamic().byteLength;
             }
 
             if (IsLittleEndian)
             {
                 for (int i = count - 1; i >= 0; i--)
                 {
-                    view.SetUint8(i, value[startIndex++]);
+                    Bridge.Script.Write("view.setUint8(i, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);");
                 }
             }
             else
             {
                 for (int i = 0; i < count; i++)
                 {
-                    view.SetUint8(i, value[startIndex++]);
+                    Bridge.Script.Write("view.setUint8(i1, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);");
                 }
             }
         }
 
-        private static DataView View(int length)
+        private static object View(int length)
         {
-            var buffer = new ArrayBuffer(length);
-            var view = new DataView(buffer);
+            var buffer = Bridge.Script.Write<dynamic>("new ArrayBuffer(length)");
+            var view = Bridge.Script.Write<dynamic>("new DataView(buffer)");
 
             return view;
         }
 
-        private static DataView GetView(long value)
+        private static object GetView(long value)
         {
             var view = View(8);
 
-            view.SetInt32(4, GetLongLow(value));
-            view.SetInt32(0, GetLongHigh(value));
+            Bridge.Script.Write("view.setInt32(4, value.value.low);");
+            Bridge.Script.Write("view.setInt32(0, value.value.high);");
 
             return view;
         }
@@ -494,13 +500,14 @@
         {
             var view = View(2);
 
-            view.SetUint8(0, 0xAA);
-            view.SetUint8(1, 0xBB);
+            /*@
+            view.setUint8(0, 170);
+            view.setUint8(1, 187);
 
-            if (view.GetUint16(0) == 0xAABB)
-            {
+            if (view.getUint16(0) === 43707) {
                 return true;
             }
+            */
 
             return false;
         }
@@ -523,16 +530,16 @@
             }
         }
 
-        [Template("{0}.value.high")]
+        [Bridge.Template("{0}.value.high")]
         private static extern int GetLongHigh(long value);
 
-        [Template("{0}.value.low")]
+        [Bridge.Template("{0}.value.low")]
         private static extern int GetLongLow(long value);
 
-        [Template("System.Int64([{0}, {1}])")]
+        [Bridge.Template("System.Int64([{0}, {1}])")]
         private static extern long CreateLong(int low, int high);
 
-        [Template("System.UInt64([{0}, {1}])")]
+        [Bridge.Template("System.UInt64([{0}, {1}])")]
         private static extern ulong CreateULong(int low, int high);
     }
 }

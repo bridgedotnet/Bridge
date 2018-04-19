@@ -1,9 +1,8 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
-    [External]
-    [Name("System.Object")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Object")]
     public sealed class ContractFailedEventArgs : EventArgs
     {
         public extern ContractFailedEventArgs(ContractFailureKind failureKind, String message, String condition, Exception originalException);

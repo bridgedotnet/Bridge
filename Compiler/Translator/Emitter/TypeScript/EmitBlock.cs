@@ -103,10 +103,10 @@ namespace Bridge.Translator.TypeScript
 
                 output = new StringBuilder();
                 this.Emitter.Output = output;
-                
+
                 if (ns != null)
                 {
-                    if(module == null || module.Type == ModuleType.UMD)
+                    if (module == null || module.Type == ModuleType.UMD)
                     {
                         output.Append("declare ");
                     }
@@ -114,7 +114,7 @@ namespace Bridge.Translator.TypeScript
                     output.Append("namespace " + ns + " ");
                     this.BeginBlock();
                 }
-                
+
                 this.Outputs.Add(key, output);
                 this.Emitter.CurrentDependencies = new List<IPluginDependency>();
             }
@@ -195,7 +195,7 @@ namespace Bridge.Translator.TypeScript
             if (item.Key.Type == ModuleType.AMD || item.Key.Type == ModuleType.CommonJS)
             {
                 sb.Append("declare module \"" + item.Key.ExportAsNamespace + "\" {");
-                sb.Append(Bridge.Translator.Emitter.NEW_LINE);                
+                sb.Append(Bridge.Translator.Emitter.NEW_LINE);
                 sb.Append("    " + AbstractEmitterBlock.WriteIndentToString(item.Value, 1));
                 sb.Append(Bridge.Translator.Emitter.NEW_LINE);
                 sb.Append("}");
@@ -266,7 +266,7 @@ namespace Bridge.Translator.TypeScript
                     {
                         nsExists = true;
                     }
-                }                
+                }
 
                 if (type.ParentType != null)
                 {

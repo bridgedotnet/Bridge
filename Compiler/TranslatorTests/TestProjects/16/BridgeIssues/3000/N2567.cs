@@ -19,14 +19,14 @@ namespace Test.BridgeIssues.N2567
             // The comment below contains a line with asterisk with ONE whitespace at the end
             /*@
              * console.log('three');
-             * 
+             *
              * console.log('four');
              */
 
             // The comment below contains a line with asterisk with TWO whitespaces at the end
             /*@
              * console.log('fix');
-             *  
+             *
              * console.log('six');
              */
 
@@ -53,7 +53,7 @@ namespace Test.BridgeIssues.N2567
         {
             /*@
                console.log('one');
-                          
+
                console.log('two');
              */
 
@@ -81,10 +81,10 @@ namespace Test.BridgeIssues.N2567
             //@
 
             // The line below is with ONE whitespace at the end - should be emitted as empty line
-            //@ 
+            //@
 
             // The line below is with TWO whitespaces at the end - should be emitted as empty line
-            //@  
+            //@
 
             // The line below is with ONE whitespace and a code - should be emitted as code
             //@ someCode1();
@@ -142,7 +142,7 @@ namespace Test.BridgeIssues.N2567
 
             /*@*/
         }
-        
+
         public static void CheckTheSameLineAndEmptyComments()
         {
             /*var a = 1,
@@ -153,7 +153,7 @@ namespace Test.BridgeIssues.N2567
                 e = 5;*/
 
             /*var f = 6;*/
-            
+
             /* */
 
             /**/
@@ -210,7 +210,7 @@ namespace Test.BridgeIssues.N2567
                 return true;
             });
         }
-        
+
         [Init(InitPosition.Bottom)]
         public static void CheckCommentsInInitPositionBottom()
         {

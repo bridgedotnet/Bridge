@@ -33,7 +33,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 get;
                 set;
             }
-        }        
+        }
 
         /// <summary>
         /// Checks whether it is possible to fetch the BrowsableAttribute from

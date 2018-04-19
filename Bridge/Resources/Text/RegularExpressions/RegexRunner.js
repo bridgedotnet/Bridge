@@ -15,8 +15,9 @@
 
         ctor: function (regex) {
             this.$initialize();
+
             if (regex == null) {
-                throw new System.ArgumentNullException("regex");
+                throw new System.ArgumentNullException.$ctor1("regex");
             }
 
             this._runregex = regex;
@@ -37,7 +38,7 @@
 
         run: function (quick, prevlen, input, beginning, length, startat) {
             if (startat < 0 || startat > input.Length) {
-                throw new System.ArgumentOutOfRangeException("start", "Start index cannot be less than 0 or greater than input length.");
+                throw new System.ArgumentOutOfRangeException.$ctor4("start", "Start index cannot be less than 0 or greater than input length.");
             }
 
             if (length < 0 || length > input.Length) {
@@ -80,6 +81,7 @@
 
         parsePattern: function () {
             var result = this._netEngine.parsePattern();
+
             return result;
         },
 
@@ -112,6 +114,7 @@
 
                 // Paste group index/length according to group ordering:
                 grOrder = 0;
+
                 if (jsGroup.descriptor != null) {
                     grOrder = this._runregex.groupNumberFromName(jsGroup.descriptor.name);
                 }
@@ -123,6 +126,7 @@
             }
 
             var textEndPos = jsMatch.capIndex + jsMatch.capLength;
+
             match._tidy(textEndPos);
 
             return match;

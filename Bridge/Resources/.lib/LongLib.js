@@ -236,10 +236,10 @@
      */
     function fromString(str, unsigned, radix) {
         if (str.length === 0)
-            throw Error('empty string');
+            throw Error("empty string");
         if (str === "NaN" || str === "Infinity" || str === "+Infinity" || str === "-Infinity")
             return ZERO;
-        if (typeof unsigned === 'number') {
+        if (typeof unsigned === "number") {
             // For goog.math.long compatibility
             radix = unsigned,
             unsigned = false;
@@ -248,11 +248,11 @@
         }
         radix = radix || 10;
         if (radix < 2 || 36 < radix)
-            throw RangeError('radix');
+            throw RangeError("radix");
 
         var p;
-        if ((p = str.indexOf('-')) > 0)
-            throw Error('interior hyphen');
+        if ((p = str.indexOf("-")) > 0)
+            throw Error("interior hyphen");
         else if (p === 0) {
             return fromString(str.substring(1), unsigned, radix).neg();
         }
@@ -297,9 +297,9 @@
     function fromValue(val) {
         if (val /* is compatible */ instanceof Long)
             return val;
-        if (typeof val === 'number')
+        if (typeof val === "number")
             return fromNumber(val);
-        if (typeof val === 'string')
+        if (typeof val === "string")
             return fromString(val);
         // Throws for non-objects, converts non-instanceof Long:
         return fromBits(val.low, val.high, val.unsigned);
@@ -500,9 +500,9 @@
     LongPrototype.toString = function toString(radix) {
         radix = radix || 10;
         if (radix < 2 || 36 < radix)
-            throw RangeError('radix');
+            throw RangeError("radix");
         if (this.isZero())
-            return '0';
+            return "0";
         if (this.isNegative()) { // Unsigned Longs are never negative
             if (this.eq(MIN_VALUE)) {
                 // We need to change the Long value before it can be negated, so we remove
@@ -521,7 +521,7 @@
         // minimize the calls to the very expensive emulated div.
         var radixToPower = fromNumber(pow_dbl(radix, 6), this.unsigned),
             rem = this;
-        var result = '';
+        var result = "";
         while (true) {
             var remDiv = rem.div(radixToPower),
                 intval = rem.sub(remDiv.mul(radixToPower)).toInt() >>> 0,
@@ -531,8 +531,8 @@
                 return digits + result;
             else {
                 while (digits.length < 6)
-                    digits = '0' + digits;
-                result = '' + digits + result;
+                    digits = "0" + digits;
+                result = "" + digits + result;
             }
         }
     };
@@ -950,7 +950,7 @@
         if (!isLong(divisor))
             divisor = fromValue(divisor);
         if (divisor.isZero())
-            throw Error('division by zero');
+            throw Error("division by zero");
         if (this.isZero())
             return this.unsigned ? UZERO : ZERO;
         var approx, rem, res;

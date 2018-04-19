@@ -1,8 +1,8 @@
 #!/bin/bash
 
-bridgepkgs=(Bridge.Core Bridge.Min Bridge.Html5 Bridge)
+bridgepkgs=(Bridge.Core Bridge.Min Bridge)
 #bridgepkgs=()
-frameworkpkgs=(Bridge.Bootstrap Bridge.Html5.Console Bridge.jQuery Bridge.QUnit Bridge.WebGL)
+frameworkpkgs=(Bridge.Bootstrap Bridge.Html5 Bridge.Html5.Console Bridge.jQuery Bridge.QUnit Bridge.WebGL)
 #frameworkpkgs=()
 otherpkgs=(
  "Bridge.Clean:Bridge"
@@ -98,7 +98,7 @@ for pkg in "${frameworkpkgs[@]}"; do
   echo "error."
   trigger_error "Unable to find .nuspec file for '${pkg}': ${nuspecfile}"
  fi
- pkgdir="$(egrep "^ *<file src=\"\.\.\\\\\.\.\\\\" "${nuspecfile}" | head -n1 | cut -f3 -d\\)"
+ pkgdir="$(egrep "^ *<file src=\"\.\.[\\\\\\\/].\.[\\\\\\/].+[\\\\\\/]${pkg//\./\\\.}[0-9]*\.dll\"" "${nuspecfile}" | head -n1 | sed -E "s/^.* src=\"(\.\.[\\\/]){2}([^\\\/]+)[\\\/].*\".*\$/\2/")"
  asmifile="../../../Frameworks/${pkgdir}/Properties/AssemblyInfo.cs"
 
  if [ ! -e "${asmifile}" ]; then

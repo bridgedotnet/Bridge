@@ -23,7 +23,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     }(this, function () {
         var N3208_TestModule = { };
         Bridge.define("N3208_1_AndreyReview1.N3208_TestModuleScope", {
-            $metadata : function () { return {"att":1048961,"a":2,"s":true}; },
+            $metadata : function () { return {"nested":[N3208_TestModule.N3208_1_AndreyReview1.N3208_TestModuleScope.Welcomer],"att":1048961,"a":2,"s":true}; },
             $scope: N3208_TestModule
         });
 

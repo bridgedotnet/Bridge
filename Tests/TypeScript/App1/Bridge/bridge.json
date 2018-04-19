@@ -4,7 +4,6 @@
   "outputBy": "Namespace",
   "generateTypeScript": "true",
   "outputFormatting": "Formatted",
-  "fileNameCasing": "CamelCase",
   "html": {
     "disabled": true
   },

@@ -25,7 +25,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         // #2477!!!
-        [Convention(Notation.LowerCamelCase)]
+        [Convention(Notation.CamelCase)]
         public enum OverlayType
         {
             CIRCLE,
@@ -33,14 +33,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         // #2477!!!
-        [Convention(Notation.LowerCamelCase)]
+        [Convention(Notation.CamelCase)]
         [Namespace("$Bridge1058")]
         public class Class1
         {
         }
 
         // #2477!!!
-        [Convention(Notation.LowerCamelCase)]
+        [Convention(Notation.CamelCase)]
         [Namespace(false)]
         public class Class2
         {

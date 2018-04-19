@@ -135,7 +135,10 @@ namespace Bridge.Translator
             }
             else if (comment.CommentType == CommentType.SingleLine)
             {
-                this.WriteSingleLineComment(comment.Content, newLine, true, false, 0);
+                if (this.Emitter.Rules.InlineComment == InlineCommentRule.Managed)
+                {
+                    this.WriteSingleLineComment(comment.Content, newLine, true, false, 0);
+                }
             }
         }
 

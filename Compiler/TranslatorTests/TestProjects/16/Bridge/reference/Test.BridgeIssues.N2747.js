@@ -6,8 +6,9 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             methods: {
                 Output: function () {
-                    var inputElement = document.createElement("input");
-                    var file = Bridge.cast(inputElement.files, FileList)[0.0];
+                    // TODO: Move to HTML5 tests
+                    //var inputElement = new HTMLInputElement();
+                    //var file = ((FileL)inputElement.Files)[0d];
                 }
             }
         }

@@ -1,26 +1,25 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
-    [External]
-    [Reflectable]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
-    public interface IEqualityComparer<in T> : IBridgeClass
+    [Bridge.External]
+    [Bridge.Reflectable]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    public interface IEqualityComparer<in T> : Bridge.IBridgeClass
     {
-        [Name("equals2")]
+        [Bridge.Name("equals2")]
         bool Equals(T x, T y);
 
-        [Name("getHashCode2")]
+        [Bridge.Name("getHashCode2")]
         int GetHashCode(T obj);
     }
 
-    [External]
-    [Reflectable]
-    public abstract class EqualityComparer<T> : IEqualityComparer<T>, IBridgeClass
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    public abstract class EqualityComparer<T> : IEqualityComparer<T>, Bridge.IBridgeClass
     {
         public static EqualityComparer<T> Default
         {
-            [Template("System.Collections.Generic.EqualityComparer$1({T}).def")]
+            [Bridge.Template("System.Collections.Generic.EqualityComparer$1({T}).def")]
             get
             {
                 return null;

@@ -1,15 +1,13 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
-    [External]
-    [Reflectable]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public interface IReadOnlyList<out T> : IReadOnlyCollection<T>
     {
         T this[int index]
         {
-            [Template("System.Array.getItem({this}, {0}, {T})")]
+            [Bridge.Template("System.Array.getItem({this}, {0}, {T})")]
             get;
         }
     }

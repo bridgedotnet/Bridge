@@ -1,6 +1,4 @@
-﻿using Bridge.Html5;
-
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Test.BridgeIssues.N694

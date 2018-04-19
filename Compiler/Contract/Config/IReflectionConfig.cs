@@ -42,6 +42,6 @@ namespace Bridge.Contract
     {
         File,
         Inline,
-        Type      
+        Type
     }
 }

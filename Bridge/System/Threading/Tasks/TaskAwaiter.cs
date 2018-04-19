@@ -1,43 +1,43 @@
-using Bridge;
 using System.Runtime.CompilerServices;
 
 namespace System.Threading.Tasks
 {
-    [External]
-    //[Name("System.Threading.Tasks.Task")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
     public class TaskAwaiter : INotifyCompletion
     {
         internal extern TaskAwaiter();
 
         public extern bool IsCompleted
         {
-            [Template("isCompleted()")]
+            [Bridge.Template("isCompleted()")]
             get;
         }
 
-        [Name("continueWith")]
+        [Bridge.Name("continueWith")]
         public extern void OnCompleted(Action continuation);
 
-        [Name("getAwaitedResult")]
+        [Bridge.Name("getAwaitedResult")]
         public extern void GetResult();
     }
 
-    [External]
-    [Name("System.Threading.Tasks.Task")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Threading.Tasks.Task")]
     public class TaskAwaiter<TResult> : INotifyCompletion
     {
         internal extern TaskAwaiter();
 
         public extern bool IsCompleted
         {
-            [Template("isCompleted()")]
+            [Bridge.Template("isCompleted()")]
             get;
         }
 
-        [Name("continueWith")]
+        [Bridge.Name("continueWith")]
         public extern void OnCompleted(Action continuation);
 
-        [Name("getAwaitedResult")]
+        [Bridge.Name("getAwaitedResult")]
         public extern TResult GetResult();
     }
 }

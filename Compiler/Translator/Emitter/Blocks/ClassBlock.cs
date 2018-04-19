@@ -431,7 +431,7 @@ namespace Bridge.Translator
         }
 
         protected virtual void EmitClassEnd()
-        {            
+        {
             this.WriteNewLine();
             this.EndBlock();
 

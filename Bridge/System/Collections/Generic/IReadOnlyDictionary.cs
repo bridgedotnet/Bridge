@@ -1,16 +1,14 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
-    [External]
-    [Reflectable]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public interface IReadOnlyDictionary<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>,
         IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
     {
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         TValue this[TKey key]
         {
-            [Name("getItem")]
+            [Bridge.Name("getItem")]
             get;
         }
 

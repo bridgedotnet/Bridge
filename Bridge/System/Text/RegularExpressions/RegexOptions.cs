@@ -1,12 +1,10 @@
-﻿using Bridge;
-
-namespace System.Text.RegularExpressions
+﻿namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Provides enumerated values to use to set regular expression options.
     /// </summary>
-    [External]
-    [Enum(Emit.Value)]
+    [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.Value)]
     [Flags]
     public enum RegexOptions
     {

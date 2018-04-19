@@ -31,7 +31,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is TaskCanceledException, "is TaskCanceledException");
             Assert.AreEqual("A task was canceled.", ex.Message, "Message");
             Assert.Null(ex.Task, "Task");
-            Assert.True(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
+            Assert.False(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
             Assert.Null(ex.InnerException, "InnerException");
         }
 
@@ -42,7 +42,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is TaskCanceledException, "is TaskCanceledException");
             Assert.AreEqual("Some message", ex.Message, "Message");
             Assert.Null(ex.Task, "Task");
-            Assert.True(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
+            Assert.False(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
             Assert.Null(ex.InnerException, "InnerException");
         }
 
@@ -54,7 +54,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is TaskCanceledException, "is TaskCanceledException");
             Assert.AreEqual("A task was canceled.", ex.Message, "Message");
             Assert.True(ReferenceEquals(ex.Task, task), "Task");
-            Assert.True(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
+            Assert.False(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
             Assert.Null(ex.InnerException, "InnerException");
         }
 
@@ -66,7 +66,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is TaskCanceledException, "is TaskCanceledException");
             Assert.AreEqual("Some message", ex.Message, "Message");
             Assert.Null(ex.Task, "Task");
-            Assert.True(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
+            Assert.False(ReferenceEquals(ex.CancellationToken, CancellationToken.None), "CancellationToken");
             Assert.True(ReferenceEquals(ex.InnerException, innerException), "InnerException");
         }
     }

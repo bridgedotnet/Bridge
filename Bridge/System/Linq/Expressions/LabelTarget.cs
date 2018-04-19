@@ -1,15 +1,14 @@
-using Bridge;
-
 namespace System.Linq.Expressions
 {
-    [External]
-    [Name("System.Object")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Name("System.Object")]
     public sealed class LabelTarget
     {
-        [Name("n")]
+        [Bridge.Name("n")]
         public extern string Name { get; }
 
-        [Name("t")]
+        [Bridge.Name("t")]
         public extern Type Type { get; }
 
         internal extern LabelTarget();

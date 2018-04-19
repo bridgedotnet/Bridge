@@ -20,7 +20,7 @@ namespace Bridge.Translator
                 if (u.StaticKeyword.RawKind == (int)SyntaxKind.StaticKeyword)
                 {
                     removingUsings.Add(u);
-                }                
+                }
             }
 
             return root.RemoveNodes(removingUsings, SyntaxRemoveOptions.KeepDirectives);

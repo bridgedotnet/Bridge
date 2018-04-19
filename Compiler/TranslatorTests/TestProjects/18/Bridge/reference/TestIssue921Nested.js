@@ -34,7 +34,7 @@
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
+                        $t.System$IDisposable$Dispose();
                     }
                 }},
             UseNestedFunOneIntStatic: function UseNestedFunOneIntStatic () {

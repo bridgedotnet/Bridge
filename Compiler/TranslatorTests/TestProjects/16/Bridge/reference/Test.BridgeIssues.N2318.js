@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N2318.N2318", {
-        $metadata : function () { return {"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldBox","t":8,"sn":"ShouldBox","rt":System.Void},{"a":2,"n":"ShouldNotBox","t":8,"sn":"ShouldNotBox","rt":System.Void},{"a":2,"n":"ShouldUnbox","t":8,"sn":"ShouldUnbox","rt":System.Void}]}; },
+        $metadata : function () { return {"nested":[Test.BridgeIssues.N2318.N2318.JustEnum,Test.BridgeIssues.N2318.N2318.JustStruct],"att":1048576,"a":4,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldBox","t":8,"sn":"ShouldBox","rt":System.Void},{"a":2,"n":"ShouldNotBox","t":8,"sn":"ShouldNotBox","rt":System.Void},{"a":2,"n":"ShouldUnbox","t":8,"sn":"ShouldUnbox","rt":System.Void}]}; },
         methods: {
             ShouldBox: function () {
                 var o;

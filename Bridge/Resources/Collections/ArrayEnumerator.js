@@ -1,4 +1,4 @@
-    Bridge.define('Bridge.ArrayEnumerator', {
+    Bridge.define("Bridge.ArrayEnumerator", {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
 
         statics: {
@@ -6,26 +6,26 @@
         },
 
         config: {
-			properties: {
-				Current: {
-					get: function () {
-						return this.getCurrent();
-					}
-				},
+            properties: {
+                Current: {
+                    get: function () {
+                        return this.getCurrent();
+                    }
+                },
 
-				Current$1: {
-				    get: function () {
-				        return this.getCurrent();
-				    }
-				}
-			},
-			
+                Current$1: {
+                    get: function () {
+                        return this.getCurrent();
+                    }
+                }
+            },
+
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
                 "moveNext", "System$Collections$IEnumerator$moveNext",
                 "reset", "System$Collections$IEnumerator$reset",
-                "dispose", "System$IDisposable$dispose",
-				"Current", "System$Collections$IEnumerator$Current"
+                "Dispose", "System$IDisposable$Dispose",
+                "Current", "System$Collections$IEnumerator$Current"
             ]
         },
 
@@ -68,15 +68,15 @@
             this.index = -1;
         },
 
-        dispose: Bridge.emptyFn
+        Dispose: Bridge.emptyFn
     });
 
-    Bridge.define('Bridge.ArrayEnumerable', {
+    Bridge.define("Bridge.ArrayEnumerable", {
         inherits: [System.Collections.IEnumerable],
 
         config: {
             alias: [
-                "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+                "GetEnumerator", "System$Collections$IEnumerable$GetEnumerator"
             ]
         },
 
@@ -85,7 +85,7 @@
             this.array = array;
         },
 
-        getEnumerator: function () {
+        GetEnumerator: function () {
             return new Bridge.ArrayEnumerator(this.array);
         }
     });

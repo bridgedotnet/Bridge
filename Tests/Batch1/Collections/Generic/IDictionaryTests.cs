@@ -45,7 +45,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 }
             }
 
-            public new ICollection<int> Keys
+            public ICollection<int> Keys
             {
                 get
                 {

@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations.Schema
 {
     /// <summary>
@@ -8,8 +6,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
     /// entities.
     /// Complex types do not have keys and cannot be managed by the Entity Framework apart from the parent object.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class ComplexTypeAttribute : Attribute { }
 }

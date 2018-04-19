@@ -40,7 +40,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     Normalize(ref this, out this);
                 }
-                
+
             }
 
             public static void Normalize(ref Vector2 value, out Vector2 result)

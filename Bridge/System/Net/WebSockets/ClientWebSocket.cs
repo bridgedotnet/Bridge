@@ -1,5 +1,4 @@
-﻿using Bridge;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace System.Net.WebSockets
@@ -7,16 +6,17 @@ namespace System.Net.WebSockets
     /// <summary>
     /// Provides a client for connecting to WebSocket services.
     /// </summary>
-    [External]
-    [Reflectable]
-    public class ClientWebSocket : IBridgeClass, IDisposable
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    public class ClientWebSocket : Bridge.IBridgeClass, IDisposable
     {
         /// <summary>
         /// Get the WebSocket state of the <see cref="ClientWebSocket"/> instance.
         /// </summary>
         public extern WebSocketState State
         {
-            [Template("getState()")]
+            [Bridge.Template("getState()")]
             get;
         }
 
@@ -25,7 +25,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern ClientWebSocketOptions Options
         {
-            [Template("getOptions()")]
+            [Bridge.Template("getOptions()")]
             get;
         }
 
@@ -34,7 +34,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketCloseStatus? CloseStatus
         {
-            [Template("getCloseStatus()")]
+            [Bridge.Template("getCloseStatus()")]
             get;
         }
 
@@ -44,7 +44,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string CloseStatusDescription
         {
-            [Template("getCloseStatusDescription()")]
+            [Bridge.Template("getCloseStatusDescription()")]
             get;
         }
 
@@ -53,7 +53,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string SubProtocol
         {
-            [Template("getSubProtocol()")]
+            [Bridge.Template("getSubProtocol()")]
             get;
         }
 

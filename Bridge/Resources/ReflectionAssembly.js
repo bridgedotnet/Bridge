@@ -15,6 +15,7 @@
         }
 
         var oldAssembly = Bridge.$currentAssembly;
+
         Bridge.$currentAssembly = asm;
 
         if (callback) {
@@ -99,4 +100,5 @@
     Bridge.SystemAssembly = Bridge.$currentAssembly;
     Bridge.SystemAssembly.$types["System.Reflection.Assembly"] = System.Reflection.Assembly;
     System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;
+
     var $asm = Bridge.$currentAssembly;

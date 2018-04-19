@@ -11,11 +11,11 @@ namespace Issue3309
         public string TestPropPub { get; }
         protected string TestPropProt { get; }
         private string TestPropPriv { get; }
-     
+
         public string TestFieldPub = "public";
-        protected string TestFieldProt = "protected"; 
-        private string TestFieldPriv = "private"; 
-        
+        protected string TestFieldProt = "protected";
+        private string TestFieldPriv = "private";
+
         public void TestMethodPub() { }
         protected void TestMethodProt() { }
         private void TestMethodPriv() { }

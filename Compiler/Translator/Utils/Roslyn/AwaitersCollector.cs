@@ -11,7 +11,7 @@ namespace Bridge.Translator
         {
             private readonly SemanticModel _semanticModel;
             public HashSet<AwaitExpressionSyntax> Awaiters { get; }
-            
+
             public Analyzer(SemanticModel semanticModel)
             {
                 _semanticModel = semanticModel;

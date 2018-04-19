@@ -5,7 +5,7 @@ using Bridge.Html5;
 
 namespace Bridge.ClientTest.ConventionTests.Class
 {
-    [Convention(Notation = Notation.LowerCamelCase)]
+    [Convention(Notation = Notation.CamelCase)]
     public class Class1
     {
         public int Field1;
@@ -137,13 +137,13 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
     [Convention(Target = ConventionTarget.Class, Notation = Notation.UpperCase)]
     [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
-    [Convention(Target = ConventionTarget.Enum, Notation = Notation.LowerCamelCase)]
+    [Convention(Target = ConventionTarget.Enum, Notation = Notation.CamelCase)]
     public enum Enum1
     {
         EnumMember1,
         enumMember2,
         ENUMMEMBER3,
-        [Convention(Notation.UpperCamelCase)]
+        [Convention(Notation.PascalCase)]
         enumMember4,
     }
 
@@ -151,7 +151,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
     public enum Enum2
     {
         EnumMember1,
-        [Convention(Notation.UpperCamelCase)]
+        [Convention(Notation.PascalCase)]
         enumMember2,
     }
 
@@ -184,9 +184,9 @@ namespace Bridge.ClientTest.ConventionTests.Class
     }
 
     [Convention(Accessibility = ConventionAccessibility.Internal, Notation = Notation.LowerCase)]
-    [Convention(Accessibility = ConventionAccessibility.Private, Notation = Notation.LowerCamelCase)]
+    [Convention(Accessibility = ConventionAccessibility.Private, Notation = Notation.CamelCase)]
     [Convention(Accessibility = ConventionAccessibility.Protected, Notation = Notation.UpperCase)]
-    [Convention(Accessibility = ConventionAccessibility.ProtectedInternal, Notation = Notation.UpperCamelCase)]
+    [Convention(Accessibility = ConventionAccessibility.ProtectedInternal, Notation = Notation.PascalCase)]
     [Convention(Accessibility = ConventionAccessibility.Public, Notation = Notation.LowerCase)]
     class Class12
     {
@@ -327,7 +327,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
     // Uncomment when ConventionTarget.Delegate implemented
     //[Convention(Notation.UpperCase, ConventionTarget.Class)]
-    //[Convention(Notation.UpperCamelCase, ConventionTarget.Delegate)]
+    //[Convention(Notation.PascalCase, ConventionTarget.Delegate)]
     //public class Class14
     //{
     //    public delegate int delegate91();

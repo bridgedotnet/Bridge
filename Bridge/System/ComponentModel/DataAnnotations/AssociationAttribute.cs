@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using Bridge;
 
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Used to mark an Entity member as an association
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false,
         Inherited = true)]
     [Obsolete("This attribute is no longer in use and will be ignored if applied.")]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class AssociationAttribute : Attribute
     {
         /// <summary>

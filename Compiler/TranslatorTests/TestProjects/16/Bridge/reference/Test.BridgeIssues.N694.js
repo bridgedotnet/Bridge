@@ -11,7 +11,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                     fruits[System.Array.index(1, fruits)] = "apple";
                     fruits[System.Array.index(2, fruits)] = "lemon";
 
-                    var list = System.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, System.String); }).orderBy($asm.$.Test.BridgeIssues.N694.Bridge694.f1).select($asm.$.Test.BridgeIssues.N694.Bridge694.f1).toList(System.String);
+                    var list = System.Linq.Enumerable.from(fruits).select(function (x) { return Bridge.cast(x, System.String); }).orderBy($asm.$.Test.BridgeIssues.N694.Bridge694.f1).select($asm.$.Test.BridgeIssues.N694.Bridge694.f1).toList(System.String);
                 }
             }
         }

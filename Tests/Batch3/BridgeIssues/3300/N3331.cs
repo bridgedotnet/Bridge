@@ -6,7 +6,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     /// <summary>
     /// The tests here should be verified in Microsoft Edge 41.16299.15.0 (Microsoft EdgeHTML 16.16299).
-    /// Ensures that HTML attributes are being processed correctly 
+    /// Ensures that HTML attributes are being processed correctly
     /// even if incorrect names of properties are being requested.
     /// </summary>
     [Category(Constants.MODULE_ISSUES)]

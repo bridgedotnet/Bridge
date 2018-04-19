@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - special tests with custom config options like useTypedArrays
- * @version 16.8.2
+ * @version 17.0.0-beta
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 16.8.2
+ * @compiler Bridge.NET 17.0.0-beta
  */
 Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
@@ -267,7 +267,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
+                        $t.System$IDisposable$Dispose();
                     }
                 }Bridge.Test.NUnit.Assert.AreEqual("xy", result);
             },
@@ -415,7 +415,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
+                        $t.System$IDisposable$Dispose();
                     }
                 }Bridge.Test.NUnit.Assert.AreEqual("xy", result);
             },
@@ -455,7 +455,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var l = System.Array.init(["x", "y", "z"], System.String);
                 Bridge.Test.NUnit.Assert.AreEqual("y", System.Array.getItem(l, 1, System.String));
                 System.Array.setItem(l, 1, "a", System.String);
-                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["x", "a", "z"], System.String), System.Linq.Enumerable.from(l).toArray());
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["x", "a", "z"], System.String), System.Linq.Enumerable.from(l).ToArray());
             },
             IListIndexOfWorks: function () {
                 var l = System.Array.init(["x", "y", "z"], System.String);

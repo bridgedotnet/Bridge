@@ -1,11 +1,11 @@
-using Bridge;
 using System.Collections.Generic;
 
 namespace System
 {
-    [External]
-    [Reflectable]
-    public class Exception : IBridgeClass
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    public class Exception : Bridge.IBridgeClass
     {
         /// <summary>
         /// Gets a collection of key/value pairs that provide additional user-defined information about the exception.
@@ -44,6 +44,12 @@ namespace System
         public virtual extern string StackTrace
         {
             get;
+        }
+
+        public extern int HResult
+        {
+            get;
+            protected set;
         }
 
         public extern Exception();

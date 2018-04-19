@@ -32,10 +32,10 @@ namespace Bridge.Translator
 
             var rr = this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter) as MemberResolveResult;
 
-            if(rr != null)
+            if (rr != null)
             {
                 this.Emitter.Rules = Rules.Get(this.Emitter, rr.Member);
-            }            
+            }
         }
 
         protected override void EndEmit()

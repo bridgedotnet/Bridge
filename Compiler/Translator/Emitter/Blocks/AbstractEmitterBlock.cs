@@ -1,3 +1,4 @@
+using System.Text;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
@@ -42,6 +43,8 @@ namespace Bridge.Translator
 
         private int startPos;
         private int checkPos;
+        private StringBuilder checkedOutput;
+
         protected virtual void BeginEmit()
         {
             if (this.NeedSequencePoint())
@@ -49,12 +52,13 @@ namespace Bridge.Translator
                 this.startPos = this.Emitter.Output.Length;
                 this.WriteSequencePoint(this.Emitter.Translator.EmitNode.Region);
                 this.checkPos = this.Emitter.Output.Length;
+                this.checkedOutput = this.Emitter.Output;
             }
         }
 
         protected virtual void EndEmit()
         {
-            if (this.NeedSequencePoint() && this.checkPos == this.Emitter.Output.Length)
+            if (this.NeedSequencePoint() && this.checkPos == this.Emitter.Output.Length && this.checkedOutput == this.Emitter.Output)
             {
                 this.Emitter.Output.Length = this.startPos;
             }
@@ -351,7 +355,7 @@ namespace Bridge.Translator
             }
             else
             {
-                if(colon)
+                if (colon)
                 {
                     this.WriteScript(name);
                 }

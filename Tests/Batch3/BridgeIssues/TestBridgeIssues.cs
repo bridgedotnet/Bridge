@@ -265,7 +265,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        public new ICollection<int> Keys
+        public ICollection<int> Keys
         {
             get
             {

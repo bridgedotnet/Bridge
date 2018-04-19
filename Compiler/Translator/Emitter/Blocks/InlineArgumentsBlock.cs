@@ -606,7 +606,7 @@ namespace Bridge.Translator
                 }
                 else if (key == "this" || key == argsInfo.ThisName || (key == "0" && argsInfo.IsExtensionMethod))
                 {
-                    if(modifier == CS.Methods.GETHASHCODE || modifier == CS.Methods.TOSTRING)
+                    if (modifier == CS.Methods.GETHASHCODE || modifier == CS.Methods.TOSTRING)
                     {
                         AstNode node = null;
                         if (argsInfo.ThisArgument is AstNode)
@@ -674,7 +674,7 @@ namespace Bridge.Translator
                                     argExpr = ((MemberReferenceExpression)expr.Target).Target;
                                 }
                             }
-                            
+
                             string thisValue = argsInfo.GetThisValue();
                             bool skipType = false;
 
@@ -688,7 +688,7 @@ namespace Bridge.Translator
                                     argExpr.AcceptVisitor(this.Emitter);
                                     thisValue = this.Emitter.Output.ToString();
                                     this.RestoreWriter(writer);
-                                }                                    
+                                }
 
                                 if (thisValue != null)
                                 {
@@ -716,7 +716,7 @@ namespace Bridge.Translator
                             {
                                 isSimple = true;
                                 this.Write(GetTypeName(type));
-                            }                            
+                            }
                         }
                     }
                     else

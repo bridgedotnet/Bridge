@@ -16,7 +16,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="a">/param>
         public void Test2(string a = null)

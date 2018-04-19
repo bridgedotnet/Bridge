@@ -439,7 +439,7 @@ namespace Bridge.Contract
                 else
                 {
                     name = BridgeTypes.AddModule(name, bridgeType, excludens, isNested, out isCustomName);
-                }                
+                }
             }
 
             var tDef = type.GetDefinition();
@@ -751,7 +751,7 @@ namespace Bridge.Contract
 
             if (currentTypeInfo != null && module != null)
             {
-                if(emitter.Tag != "TS" || currentTypeInfo.Module == null || !currentTypeInfo.Module.Equals(module))
+                if (emitter.Tag != "TS" || currentTypeInfo.Module == null || !currentTypeInfo.Module.Equals(module))
                 {
                     if (!module.PreventModuleName || type.TypeInfo != null)
                     {
@@ -759,7 +759,7 @@ namespace Bridge.Contract
                     }
 
                     EnsureDependencies(type, emitter, currentTypeInfo, module);
-                }                
+                }
             }
 
             return GetCustomName(name, type, excludeNs, isNested, ref isCustomName, moduleName);
@@ -987,7 +987,7 @@ namespace Bridge.Contract
             {
                 return "any[]";
             }
-            
+
             if (type.IsKnownType(KnownTypeCode.Byte) ||
                 type.IsKnownType(KnownTypeCode.Char) ||
                 type.IsKnownType(KnownTypeCode.Double) ||

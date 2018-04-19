@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Text
     {
         public static IEnumerable<object[]> Encode_TestData()
         {
-            var list = new List<object[]>(); 
+            var list = new List<object[]>();
             // All ASCII chars
             for (char c = char.MinValue; c <= 0xFF; c++)
             {

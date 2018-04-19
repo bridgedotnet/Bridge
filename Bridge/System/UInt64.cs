@@ -1,23 +1,24 @@
-using Bridge;
-
 namespace System
 {
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public struct UInt64 : IComparable, IComparable<UInt64>, IEquatable<UInt64>, IFormattable
     {
         private extern UInt64(int i);
 
-        [Convention]
+        [CLSCompliant(false)]
         public const ulong MinValue = 0;
 
-        [Convention]
+        [CLSCompliant(false)]
         public const ulong MaxValue = 18446744073709551615;
 
-        [Template("System.UInt64.parse({s})")]
+        [Bridge.Template("System.UInt64.parse({s})")]
+        [CLSCompliant(false)]
         public static extern ulong Parse(string s);
 
-        [Template("System.UInt64.tryParse({s}, {result})")]
+        [Bridge.Template("System.UInt64.tryParse({s}, {result})")]
+        [CLSCompliant(false)]
         public static extern bool TryParse(string s, out ulong result);
 
         public extern string ToString(int radix);
@@ -30,70 +31,66 @@ namespace System
 
         public extern string ToString(string format, IFormatProvider provider);
 
+        [CLSCompliant(false)]
         public extern int CompareTo(ulong other);
 
         public extern int CompareTo(object obj);
 
+        [CLSCompliant(false)]
         public extern bool Equals(ulong other);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (byte value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (sbyte value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (short value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (ushort value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (char value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (int value);
 
-        //[Template("System.UInt64.lift({value})")]
+        [CLSCompliant(false)]
         public static extern implicit operator ulong (uint value);
 
-        //[Template("System.UInt64.lift(Bridge.Int.clipu64({value}))")]
+        [CLSCompliant(false)]
         public static extern explicit operator ulong (float value);
 
-        //[Template("System.UInt64.lift(Bridge.Int.clipu64({value}))")]
+        [CLSCompliant(false)]
         public static extern explicit operator ulong (double value);
 
-        //[Template("System.Int64.lift({value})")]
-        //public static extern explicit operator ulong(long value);
-
-        //[Template("System.Int64.clip8({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator byte (ulong value);
 
-        //[Template("System.Int64.clipu8({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator sbyte (ulong value);
 
-        //[Template("System.Int64.clipu16({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator char (ulong value);
 
-        //[Template("System.Int64.clip16({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator short (ulong value);
 
-        //[Template("System.Int64.clipu16({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator ushort (ulong value);
 
-        //[Template("System.Int64.clip32({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator int (ulong value);
 
-        //[Template("System.Int64.clipu32({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator uint (ulong value);
 
-        //[Template("System.UInt64.lift({value})")]
-        //public static extern explicit operator long(ulong value);
-
-        //[Template("System.UInt64.toNumber({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator float (ulong value);
 
-        //[Template("System.UInt64.toNumber({value})")]
+        [CLSCompliant(false)]
         public static extern explicit operator double (ulong value);
     }
 }

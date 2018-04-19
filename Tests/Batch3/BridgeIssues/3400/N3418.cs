@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3418
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public event Action OnDragEnd
         {

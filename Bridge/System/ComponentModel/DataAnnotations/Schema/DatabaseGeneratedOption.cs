@@ -1,11 +1,9 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations.Schema
 {
     /// <summary>
     /// The pattern used to generate values for a property in the database.
     /// </summary>
-    [External]
+    [Bridge.External]
     public enum DatabaseGeneratedOption
     {
         /// <summary>

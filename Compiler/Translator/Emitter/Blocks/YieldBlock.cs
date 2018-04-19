@@ -46,7 +46,7 @@ namespace Bridge.Translator
             this.EmittedAsyncSteps = this.Emitter.AsyncBlock.EmittedAsyncSteps;
             this.Emitter.AsyncBlock.EmittedAsyncSteps = new List<IAsyncStep>();
 
-            if(this.YieldReturnStatement != null)
+            if (this.YieldReturnStatement != null)
             {
                 this.Write(JS.Vars.ENUMERATOR + "." + JS.Fields.CURRENT + " = ");
                 this.YieldReturnStatement.Expression.AcceptVisitor(this.Emitter);
@@ -64,7 +64,7 @@ namespace Bridge.Translator
 
                 this.Emitter.AsyncBlock.AddAsyncStep();
             }
-            else if(this.YieldBreakStatement != null)
+            else if (this.YieldBreakStatement != null)
             {
                 this.WriteReturn(true);
                 this.Write("false");

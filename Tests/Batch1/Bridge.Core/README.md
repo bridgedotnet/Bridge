@@ -1,0 +1,1 @@
+﻿This directory contains tests related to the Bridge.* namespace. Because just 'Bridge' would conflict with the bridge output folder, possibly resulting in code erasing.

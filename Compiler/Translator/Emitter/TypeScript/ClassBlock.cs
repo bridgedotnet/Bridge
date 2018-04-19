@@ -97,7 +97,7 @@ namespace Bridge.Translator.TypeScript
             {
                 this.DefName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, true);
             }
-            
+
             this.Write("interface ");
 
             this.JsName = name;
@@ -298,7 +298,7 @@ namespace Bridge.Translator.TypeScript
                 this.WriteNewLine();
                 this.EndBlock();
             }
-            
+
             if (this.TypeInfo.ParentType == null && !isInterface)
             {
                 string name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, true, true);

@@ -12,9 +12,8 @@ namespace Bridge
 #if BRIDGE_COMPILER
     public class CompilerRule
 #else
-    [External]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     public class RulesAttribute : Attribute
 #endif
     {
@@ -90,6 +89,30 @@ namespace Bridge
             set;
         }
 
+        public
+#if BRIDGE_COMPILER
+            InlineCommentRule?
+#else
+            InlineCommentRule
+#endif
+        InlineComment
+        {
+            get;
+            set;
+        }
+
+        public
+#if BRIDGE_COMPILER
+            ExternalCastRule?
+#else
+            ExternalCastRule
+#endif
+        ExternalCast
+        {
+            get;
+            set;
+        }
+
 #if BRIDGE_COMPILER
         public CompilerRuleLevel Level
         {
@@ -148,6 +171,24 @@ namespace Bridge
     [NonScriptable]
 #endif
     public enum AutoPropertyRule
+    {
+        Managed = 0,
+        Plain = 1
+    }
+
+#if !BRIDGE_COMPILER
+    [NonScriptable]
+#endif
+    public enum InlineCommentRule
+    {
+        Managed = 0,
+        Plain = 1
+    }
+
+#if !BRIDGE_COMPILER
+    [NonScriptable]
+#endif
+    public enum ExternalCastRule
     {
         Managed = 0,
         Plain = 1

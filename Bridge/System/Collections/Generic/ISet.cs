@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.Collections.Generic
 {
     /// <summary>
@@ -7,9 +5,9 @@ namespace System.Collections.Generic
     /// by some comparer. It also supports basic set operations such as Union, Intersection,
     /// Complement and Exclusive Complement.
     /// </summary>
-    [External]
-    [Reflectable]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public interface ISet<T> : ICollection<T>
     {
         // Add ITEM to the set, return true if added, false if duplicate

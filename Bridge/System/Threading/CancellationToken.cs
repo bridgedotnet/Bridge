@@ -1,14 +1,13 @@
-using Bridge;
-
 namespace System.Threading
 {
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public struct CancellationToken
     {
         public extern CancellationToken(bool canceled);
 
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public static extern CancellationToken None
         {
             get;
@@ -16,13 +15,13 @@ namespace System.Threading
 
         public extern bool CanBeCanceled
         {
-            [Template("getCanBeCanceled()")]
+            [Bridge.Template("getCanBeCanceled()")]
             get;
         }
 
         public extern bool IsCancellationRequested
         {
-            [Template("getIsCancellationRequested()")]
+            [Bridge.Template("getIsCancellationRequested()")]
             get;
         }
 
@@ -30,12 +29,12 @@ namespace System.Threading
 
         public extern CancellationTokenRegistration Register(Action callback);
 
-        [Template("{this}.register({callback})")]
+        [Bridge.Template("{this}.register({callback})")]
         public extern CancellationTokenRegistration Register(Action callback, bool useSynchronizationContext);
 
         public extern CancellationTokenRegistration Register(Action<object> callback, object state);
 
-        [Template("{this}.register({callback}, {state})")]
+        [Bridge.Template("{this}.register({callback}, {state})")]
         public extern CancellationTokenRegistration Register(Action<object> callback, object state, bool useSynchronizationContext);
     }
 }

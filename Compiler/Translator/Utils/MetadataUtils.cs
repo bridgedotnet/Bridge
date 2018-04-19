@@ -116,6 +116,24 @@ namespace Bridge.Translator
                     result.Add("td", new JRaw(MetadataUtils.GetTypeName(type.DeclaringType, emitter, false)));
                 }
 
+                var nestedTypes = type.GetNestedTypes(null, GetMemberOptions.IgnoreInheritedMembers);
+                if (nestedTypes != null && nestedTypes.Any())
+                {
+                    var array = new JArray();
+                    foreach (var nestedType in nestedTypes)
+                    {
+                        if (!emitter.Validator.IsExternalType(nestedType.GetDefinition()) && emitter.BridgeTypes.Get(nestedType, true) != null)
+                        {
+                            array.Add(new JRaw(MetadataUtils.GetTypeName(nestedType, emitter, false, true)));
+                        }
+                    }
+
+                    if (array.Count > 0)
+                    {
+                        result.Add("nested", array);
+                    }
+                }
+
                 if (cecilType != null)
                 {
                     result.Add("att", (int)cecilType.Attributes);
@@ -123,7 +141,14 @@ namespace Bridge.Translator
 
                 if (typedef.Accessibility != Accessibility.None)
                 {
-                    result.Add("a", (int)typedef.Accessibility);
+                    if (typedef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                    {
+                        result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                    }
+                    else
+                    {
+                        result.Add("a", (int)typedef.Accessibility);
+                    }                    
                 }
 
                 if (typedef.IsStatic)
@@ -551,7 +576,7 @@ namespace Bridge.Translator
                         inline = inline.Substring(6);
                     }
 
-                    if(!method.IsStatic && !isSelf && !inline.Contains("{this}"))
+                    if (!method.IsStatic && !isSelf && !inline.Contains("{this}"))
                     {
                         inline = "this." + inline;
                     }
@@ -939,7 +964,14 @@ namespace Bridge.Translator
 
             if (m.Accessibility != Accessibility.None)
             {
-                result.Add("a", (int)m.Accessibility);
+                if (m.Attributes.Any(a => a.AttributeType.FullName == "Bridge.PrivateProtectedAttribute"))
+                {
+                    result.Add("a", (int)Accessibility.ProtectedAndInternal);
+                }
+                else
+                {
+                    result.Add("a", (int)m.Accessibility);
+                }
             }
 
             if (m.IsSealed)

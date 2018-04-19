@@ -705,6 +705,7 @@
     <Compile Include="BridgeIssues\3300\N3391.cs" />
     <Compile Include="BridgeIssues\3300\N3394.cs" />
     <Compile Include="BridgeIssues\3300\N3360.cs" />
+    <Compile Include="BridgeIssues\3300\N3373.cs" />
     <Compile Include="BridgeIssues\3300\N3396.cs" />
     <Compile Include="BridgeIssues\3400\N3401.cs" />
     <Compile Include="BridgeIssues\3400\N3404.cs" />
@@ -712,11 +713,24 @@
     <Compile Include="BridgeIssues\3400\N3415.cs" />
     <Compile Include="BridgeIssues\3400\N3418.cs" />
     <Compile Include="BridgeIssues\3400\N3420.cs" />
+    <Compile Include="BridgeIssues\3400\N3421.cs" />
+    <Compile Include="BridgeIssues\3400\N3426.cs" />
+    <Compile Include="BridgeIssues\3400\N3432.cs" />
     <Compile Include="BridgeIssues\3400\N3437.cs" />
     <Compile Include="BridgeIssues\3400\N3441.cs" />
-    <Compile Include="BridgeIssues\3400\N3432.cs" />
-    <Compile Include="BridgeIssues\3400\N3426.cs" />
-    <Compile Include="BridgeIssues\3400\N3421.cs" />
+    <Compile Include="BridgeIssues\3400\N3450.cs" />
+    <Compile Include="BridgeIssues\3400\N3453.cs" />
+    <Compile Include="BridgeIssues\3400\N3476.cs" />
+    <Compile Include="BridgeIssues\3400\N3478.cs" />
+    <Compile Include="BridgeIssues\3400\N3485.cs" />
+    <Compile Include="BridgeIssues\3400\N3483.cs" />
+    <Compile Include="BridgeIssues\3400\N3494.cs" />
+    <Compile Include="BridgeIssues\3400\N3497.cs" />
+    <Compile Include="BridgeIssues\3400\N3499.cs" />
+    <Compile Include="BridgeIssues\3500\N3502.cs" />
+    <Compile Include="BridgeIssues\3500\N3513.cs" />
+    <Compile Include="BridgeIssues\3500\N3516.cs" />
+    <Compile Include="BridgeIssues\3500\N3519.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
@@ -738,10 +752,6 @@
       <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
       <Name>Bridge</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Html5\Bridge.Html5.csproj">
-      <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
-      <Name>Bridge.Html5</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ClientTestHelperExternal\ClientTestHelperExternal.csproj">
       <Project>{a9251b8f-d2e1-42e4-b7be-09cd25a6d2f8}</Project>
       <Name>ClientTestHelperExternal</Name>
@@ -755,8 +765,11 @@
     <Folder Include="BridgeIssues\0200\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bridge.Test, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.3.2\lib\net40\Bridge.Test.dll</HintPath>
+    <Reference Include="Bridge.Html5, Version=17.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Html5.17.0.0-bridge17-0-0-beta\lib\net40\Bridge.Html5.dll</HintPath>
+    </Reference>
+    <Reference Include="Bridge.Test, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Test.Core.1.4.0-bridge17-0-0-beta\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -5,9 +5,8 @@ namespace Bridge
     /// <summary>
     ///
     /// </summary>
-    [External]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Interface, AllowMultiple = true)]
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Interface, AllowMultiple = true)]
     public sealed class ModuleDependencyAttribute : Attribute
     {
         public ModuleDependencyAttribute(string dependencyName)

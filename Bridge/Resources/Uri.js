@@ -1,4 +1,4 @@
-Bridge.assembly("System", {}, function ($asm, globals) {
+    Bridge.assembly("System", {}, function ($asm, globals) {
         "use strict";
 
         Bridge.define("System.Uri", {

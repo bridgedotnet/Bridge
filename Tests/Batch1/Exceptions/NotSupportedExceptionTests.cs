@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         {
             Assert.AreEqual("System.NotSupportedException", typeof(NotSupportedException).FullName, "Name");
             Assert.True(typeof(NotSupportedException).IsClass, "IsClass");
-            Assert.AreEqual(typeof(Exception), typeof(NotSupportedException).BaseType, "BaseType");
+            Assert.AreEqual(typeof(SystemException), typeof(NotSupportedException).BaseType, "BaseType");
             object d = new NotSupportedException();
             Assert.True(d is NotSupportedException, "is NotSupportedException");
             Assert.True(d is Exception, "is Exception");

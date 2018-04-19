@@ -1,20 +1,19 @@
 using System.Collections.Generic;
-using Bridge;
 
 namespace System.Collections
 {
-    [External]
-    [Unbox(true)]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
-    [Reflectable]
-    public interface IDictionary : ICollection, IBridgeClass
+    [Bridge.External]
+    [Bridge.Unbox(true)]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.Reflectable]
+    public interface IDictionary : ICollection, Bridge.IBridgeClass
     {
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         object this[object key]
         {
-            [Name("getItem")]
+            [Bridge.Name("getItem")]
             get;
-            [Name("setItem")]
+            [Bridge.Name("setItem")]
             set;
         }
 
@@ -43,6 +42,7 @@ namespace System.Collections
         /// An System.Collections.IDictionaryEnumerator object for the System.Collections.IDictionary
         /// object.
         /// </returns>
+        [Bridge.Convention(Bridge.Notation.None)]
         new IDictionaryEnumerator GetEnumerator();
 
         /// <summary>

@@ -86,7 +86,7 @@ namespace Bridge.Translator
                         {
                             Write(JS.Vars.ASYNC_E + " = null;");
                         }
-                        
+
                         var hashcode = finallyNode.GetHashCode();
                         this.Emitter.AsyncBlock.JumpLabels.Add(new AsyncJumpLabel
                         {

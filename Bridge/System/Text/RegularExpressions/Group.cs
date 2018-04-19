@@ -1,12 +1,11 @@
-using Bridge;
-
 namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Represents the results from a single capturing group.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class Group : Capture
     {
         internal extern Group(string text, int[] caps, int capcount);
@@ -16,7 +15,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool Success
         {
-            [Template("getSuccess()")]
+            [Bridge.Template("getSuccess()")]
             get;
         }
 
@@ -27,7 +26,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern CaptureCollection Captures
         {
-            [Template("getCaptures()")]
+            [Bridge.Template("getCaptures()")]
             get;
         }
 

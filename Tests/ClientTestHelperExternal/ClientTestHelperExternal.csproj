@@ -49,15 +49,17 @@
     <Compile Include="External\BridgeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="bridge.json" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Bridge.Html5, Version=17.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Html5.17.0.0-bridge17-0-0-beta\lib\net40\Bridge.Html5.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Bridge\Bridge.csproj">
       <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
       <Name>Bridge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Html5\Bridge.Html5.csproj">
-      <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
-      <Name>Bridge.Html5</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

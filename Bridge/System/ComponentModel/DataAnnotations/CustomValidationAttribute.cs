@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
@@ -15,11 +13,12 @@ namespace System.ComponentModel.DataAnnotations
     ///     The value can be strongly typed as type conversion will be attempted.
     /// </para>
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(
         AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method |
         AttributeTargets.Parameter, AllowMultiple = true)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class CustomValidationAttribute : ValidationAttribute
     {
         /// <summary>

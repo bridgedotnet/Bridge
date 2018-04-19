@@ -30,7 +30,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
 
             public void CheckDateTime(DateTime time)
-            {                
+            {
                 if (DateTime.MaxValue > time)
                 {
                     Assert.True(time == DateTime.MinValue, "Provided DateTime value is DateTime.MinValue.");

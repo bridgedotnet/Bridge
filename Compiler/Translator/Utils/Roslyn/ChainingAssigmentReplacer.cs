@@ -59,13 +59,13 @@ namespace Bridge.Translator
 
                                 statements.Insert(index++, equals);
                             }
-                        }                        
-                        
+                        }
+
                         statements.Remove(local);
 
                         updatedBlocks[block] = statements;
                     }
-                }    
+                }
             }
 
             if (updatedBlocks.Count > 0)

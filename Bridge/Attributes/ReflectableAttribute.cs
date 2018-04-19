@@ -3,11 +3,10 @@
 namespace Bridge
 {
     /// <summary>
-	/// Can be applied to a member to indicate that metadata for the member should (or should not) be included in the compiled script. By default members are reflectable if they have at least one scriptable attribute. The default reflectability can be changed with the DefaultMemberReflectabilityAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    [External]
+    /// Can be applied to a member to indicate that metadata for the member should (or should not) be included in the compiled script. By default members are reflectable if they have at least one scriptable attribute. The default reflectability can be changed with the DefaultMemberReflectabilityAttribute.
+    /// </summary>
     [NonScriptable]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public sealed class ReflectableAttribute : Attribute
     {
         public extern ReflectableAttribute();

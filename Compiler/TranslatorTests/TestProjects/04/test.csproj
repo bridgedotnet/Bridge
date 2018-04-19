@@ -54,10 +54,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Bridge.Html5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Html5\bin\$(Configuration)\Bridge.Html5.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bridge\build\" />

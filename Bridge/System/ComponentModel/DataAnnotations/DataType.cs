@@ -1,11 +1,9 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Enumeration of logical data types that may appear in <see cref="DataTypeAttribute" />
     /// </summary>
-    [External]
+    [Bridge.External]
     public enum DataType
     {
         /// <summary>

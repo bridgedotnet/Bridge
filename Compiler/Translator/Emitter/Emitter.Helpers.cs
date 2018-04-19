@@ -368,7 +368,7 @@ namespace Bridge.Translator
         public virtual NameSemantic GetNameSemantic(IEntity member)
         {
             NameSemantic result;
-            if(this.entityNameCache.TryGetValue(member, out result))
+            if (this.entityNameCache.TryGetValue(member, out result))
             {
                 return result;
             }
@@ -540,7 +540,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if(inlineCode == null)
+                if (inlineCode == null)
                 {
                     inlineCode = attr != null && attr.PositionalArguments.Count > 0 ? attr.PositionalArguments[0].ConstantValue.ToString() : null;
                 }

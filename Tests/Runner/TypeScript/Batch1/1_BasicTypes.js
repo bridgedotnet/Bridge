@@ -1,6 +1,6 @@
 /// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
-/// <reference path="..\..\Runner\TypeScript\App1\basicTypes.d.ts" />
+/// <reference path="..\..\Runner\TypeScript\App1\BasicTypes.d.ts" />
 "use strict";
 QUnit.module("TypeScript - Basic Types");
 QUnit.test("Fields of basic types", function (assert) {
@@ -86,8 +86,8 @@ QUnit.test("Reserved words", function (assert) {
     assert.deepEqual(k.Yield, "yield", "yield");
     assert.deepEqual(k.Any, "any", "any");
     assert.deepEqual(k.Boolean, "boolean", "boolean");
-    assert.deepEqual(k.constructor$1, "constructor", "constructor$ #299");
-    assert.deepEqual(k.Constructor, "new constructor", "constructor$$1");
+    assert.deepEqual(k.constructor, "constructor", "constructor$ #299");
+    assert.deepEqual(k.Constructor$1, "new constructor", "constructor$$1");
     assert.deepEqual(k.Declare, "declare", "declare");
     assert.deepEqual(k.Get, "get", "get");
     assert.deepEqual(k.Module, "module", "module");
@@ -105,15 +105,15 @@ QUnit.test("Issue #1877", function (assert) {
     var r = new System.Random.ctor();
     var ITERATIONS = 100;
     for (var i = 0; i < ITERATIONS; i++) {
-        var x = r.next$1(20);
+        var x = r.Next$1(20);
         assert.ok(x >= 0 && x < 20, x + " under 20 - Next(maxValue)");
     }
     for (var i = 0; i < ITERATIONS; i++) {
-        var x = r.next$2(20, 30);
+        var x = r.Next$2(20, 30);
         assert.ok(x >= 20 && x < 30, x + " between 20 and 30 - Next(minValue, maxValue)");
     }
     for (var i = 0; i < ITERATIONS; i++) {
-        var x = r.nextDouble();
+        var x = r.NextDouble();
         assert.ok(x >= 0.0 && x < 1.0, x + " between 0.0 and 1.0  - NextDouble()");
     }
     //Seeded
@@ -121,20 +121,20 @@ QUnit.test("Issue #1877", function (assert) {
     var r1 = new System.Random.$ctor1(seed);
     var r2 = new System.Random.$ctor1(seed);
     var b1 = [];
-    r1.nextBytes(b1);
+    r1.NextBytes(b1);
     var b2 = [];
-    r2.nextBytes(b2);
+    r2.NextBytes(b2);
     for (var i = 0; i < b1.length; i++) {
         assert.equal(b1[i], b2[i], "NextBytes()");
     }
     for (var i = 0; i < b1.length; i++) {
-        var x1 = r1.next();
-        var x2 = r2.next();
+        var x1 = r1.Next();
+        var x2 = r2.Next();
         assert.equal(x1, x2, "Next()");
     }
 });
 QUnit.test("Issue #1898", function (assert) {
-    assert.equal(System.Guid.empty.toString(), "00000000-0000-0000-0000-000000000000");
+    assert.equal(System.Guid.Empty.toString(), "00000000-0000-0000-0000-000000000000");
     var result = new System.Guid.ctor();
     assert.equal(result.toString(), "00000000-0000-0000-0000-000000000000");
     var g = new System.Guid.$ctor1([0x78, 0x95, 0x62, 0xa8, 0x26, 0x7a, 0x45, 0x61, 0x90, 0x32, 0xd9, 0x1a, 0x3d, 0x54, 0xbd, 0x68]);
@@ -155,56 +155,56 @@ QUnit.test("Issue #1898", function (assert) {
     assert.equal(g3.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
     assert.equal(g4.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
     assert.throws(function () { return new System.Guid.$ctor4("x"); }, "Invalid should throw");
-    g1 = System.Guid.parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6");
+    g1 = System.Guid.Parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6");
     assert.equal(g1.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-    assert.throws(function () { return System.Guid.parse("x"); }, "Invalid should throw");
-    g1 = System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D");
-    var g2 = System.Guid.parseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B");
-    var g3 = System.Guid.parseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P");
-    var g4 = System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N");
+    assert.throws(function () { return System.Guid.Parse("x"); }, "Invalid should throw");
+    g1 = System.Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D");
+    var g2 = System.Guid.ParseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B");
+    var g3 = System.Guid.ParseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P");
+    var g4 = System.Guid.ParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N");
     assert.equal(g1.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
     assert.equal(g2.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
     assert.equal(g3.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
     assert.equal(g4.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
-    assert.throws(function () { return System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "B"); }, "Invalid B should throw");
-    assert.throws(function () { return System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P"); }, "Invalid P should throw");
-    assert.throws(function () { return System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N"); }, "Invalid N should throw");
-    assert.throws(function () { return System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "D"); }, "Invalid D should throw");
+    assert.throws(function () { return System.Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "B"); }, "Invalid B should throw");
+    assert.throws(function () { return System.Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P"); }, "Invalid P should throw");
+    assert.throws(function () { return System.Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N"); }, "Invalid N should throw");
+    assert.throws(function () { return System.Guid.ParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "D"); }, "Invalid D should throw");
     var r = { v: new System.Guid.ctor() };
-    assert.ok(System.Guid.tryParse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", r), "g1 result");
+    assert.ok(System.Guid.TryParse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", r), "g1 result");
     assert.equal(r.v.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-    assert.notOk(System.Guid.tryParse("x", r), "Invalid should throw");
+    assert.notOk(System.Guid.TryParse("x", r), "Invalid should throw");
     assert.equal(r.v.toString(), "00000000-0000-0000-0000-000000000000", "g5");
-    assert.ok(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D", r), "g1 result");
+    assert.ok(System.Guid.TryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D", r), "g1 result");
     assert.equal(r.v.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-    assert.ok(System.Guid.tryParseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B", r), "g2 result");
+    assert.ok(System.Guid.TryParseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B", r), "g2 result");
     assert.equal(r.v.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-    assert.ok(System.Guid.tryParseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P", r), "g3 result");
+    assert.ok(System.Guid.TryParseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P", r), "g3 result");
     assert.equal(r.v.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-    assert.ok(System.Guid.tryParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N", r), "g4 result");
+    assert.ok(System.Guid.TryParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N", r), "g4 result");
     assert.equal(r.v.toString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
-    assert.notOk(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "B", r), "g5 result");
+    assert.notOk(System.Guid.TryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "B", r), "g5 result");
     assert.equal(r.v.toString(), "00000000-0000-0000-0000-000000000000", "g5");
-    assert.notOk(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P", r), "g6 result");
+    assert.notOk(System.Guid.TryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P", r), "g6 result");
     assert.equal(r.v.toString(), "00000000-0000-0000-0000-000000000000", "g6");
-    assert.notOk(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N", r), "g7 result");
+    assert.notOk(System.Guid.TryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N", r), "g7 result");
     assert.equal(r.v.toString(), "00000000-0000-0000-0000-000000000000", "g7");
-    assert.notOk(System.Guid.tryParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "D", r), "g8 result");
+    assert.notOk(System.Guid.TryParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "D", r), "g8 result");
     assert.equal(r.v.toString(), "00000000-0000-0000-0000-000000000000", "g8");
     g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
     assert.equal(g.compareTo(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), 0, "equal");
     assert.notEqual(g.compareTo(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "not equal");
     var g = new System.Guid.$ctor4("DE33AC65-09CB-465C-AD7E-53124B2104E8");
-    assert.equal(g.toString$1("N"), "de33ac6509cb465cad7e53124b2104e8", "N");
-    assert.equal(g.toString$1("D"), "de33ac65-09cb-465c-ad7e-53124b2104e8", "D");
-    assert.equal(g.toString$1("B"), "{de33ac65-09cb-465c-ad7e-53124b2104e8}", "B");
-    assert.equal(g.toString$1("P"), "(de33ac65-09cb-465c-ad7e-53124b2104e8)", "P");
-    assert.equal(g.toString$1(""), "de33ac65-09cb-465c-ad7e-53124b2104e8", "empty");
-    assert.equal(g.toString$1(null), "de33ac65-09cb-465c-ad7e-53124b2104e8", "null");
-    var g = System.Guid.newGuid();
-    var s = g.toString$1("N");
+    assert.equal(g.ToString("N"), "de33ac6509cb465cad7e53124b2104e8", "N");
+    assert.equal(g.ToString("D"), "de33ac65-09cb-465c-ad7e-53124b2104e8", "D");
+    assert.equal(g.ToString("B"), "{de33ac65-09cb-465c-ad7e-53124b2104e8}", "B");
+    assert.equal(g.ToString("P"), "(de33ac65-09cb-465c-ad7e-53124b2104e8)", "P");
+    assert.equal(g.ToString(""), "de33ac65-09cb-465c-ad7e-53124b2104e8", "empty");
+    assert.equal(g.ToString(null), "de33ac65-09cb-465c-ad7e-53124b2104e8", "null");
+    var g = System.Guid.NewGuid();
+    var s = g.ToString("N");
     assert.ok(s[16] == '8' || s[16] == '9' || s[16] == 'a' || s[16] == 'b', "Should be standard guid");
     assert.ok(s[12] == '4', "Should be type 4 guid");
     var g = new System.Guid.$ctor4("8440F854-0C0B-4355-9722-1608D62E8F87");
-    assert.deepEqual(g.toByteArray(), [0x54, 0xf8, 0x40, 0x84, 0x0b, 0x0c, 0x55, 0x43, 0x97, 0x22, 0x16, 0x08, 0xd6, 0x2e, 0x8f, 0x87]);
+    assert.deepEqual(g.ToByteArray(), [0x54, 0xf8, 0x40, 0x84, 0x0b, 0x0c, 0x55, 0x43, 0x97, 0x22, 0x16, 0x08, 0xd6, 0x2e, 0x8f, 0x87]);
 });

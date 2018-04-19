@@ -1,9 +1,7 @@
-using Bridge;
-
 namespace System.Threading.Tasks
 {
-    [External]
-    [Enum(Emit.Name)]
+    [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.Name)]
     public enum TaskStatus
     {
         /// <summary>

@@ -33,7 +33,7 @@
         $kind: "interface"
     });
 
-    Bridge.define('System.IComparable$1', function (T) {
+    Bridge.define("System.IComparable$1", function (T) {
         return {
             $kind: "interface",
 
@@ -57,7 +57,7 @@
         };
     });
 
-    Bridge.define('System.IEquatable$1', function (T) {
+    Bridge.define("System.IEquatable$1", function (T) {
         return {
             $kind: "interface",
 

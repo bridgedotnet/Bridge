@@ -35,7 +35,7 @@ namespace Bridge.ClientTest.Threading
             Assert.True(task is Task);
             Assert.True(task is IDisposable);
 
-            task.Dispose();	// Should not throw
+            task.Dispose();    // Should not throw
         }
 
         [Test(ExpectedCount = 10)]

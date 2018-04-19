@@ -54,7 +54,7 @@ namespace Bridge.Translator.TypeScript
                 }
 
                 var props = properties[name];
-                
+
                 foreach (var prop in props)
                 {
                     if (prop is PropertyDeclaration)

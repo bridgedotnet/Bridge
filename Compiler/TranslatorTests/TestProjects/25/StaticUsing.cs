@@ -3,7 +3,7 @@ using static System.Console;
 
 namespace TestProject1
 {
-	public class StaticUsing
+    public class StaticUsing
     {
         public StaticUsing()
         {

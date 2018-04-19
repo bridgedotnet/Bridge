@@ -239,9 +239,9 @@ namespace Bridge.Translator
             if (this._usedVariables.Count == 0)
             {
                 var rr = this.emitter.Resolver.ResolveNode(memberReferenceExpression, this.emitter);
-                
+
                 var member = rr as MemberResolveResult;
-                
+
                 if (member != null)
                 {
                     CheckMember(member.Member);
@@ -270,7 +270,7 @@ namespace Bridge.Translator
             if (this._usedVariables.Count == 0)
             {
                 var member = rr as MemberResolveResult;
-                
+
                 if (member != null && member.Member.IsStatic && member.Member.DeclaringTypeDefinition.TypeParameterCount > 0 && member.Member.DeclaringTypeDefinition.Equals(this.emitter.TypeInfo.Type.GetDefinition()) && !Helpers.IsIgnoreGeneric(member.Member.DeclaringTypeDefinition))
                 {
                     var ivar = new TypeVariable(member.Member.DeclaringType);

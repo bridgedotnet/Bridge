@@ -9,31 +9,38 @@
 
 [Bridge.NET](http://bridge.net/) is an open source C#-to-JavaScript Compiler. Write your application in C# and run on billions of devices.
 
-Compile your C#...
+### Write in C#. Run in a Web Browser.
 
-```csharp
+<table>
+<tr><td align="center" width="50%">C#</td><td></td><td align="center"  width="50%">JavaScript</td></tr>
+<tr>
+<td>
+<pre lang="csharp">
 public class Program
 {
     public static void Main()
     {
         var msg = "Hello, World!";
-        
-        Console.WriteLine(msg);
-    }
+
+            Console.WriteLine(msg);
+        }
 }
-```
-
-into JavaScript
-
-```js
+</pre>
+</td>
+<td><h1>&#8680;</h1></td>
+<td>
+<pre lang="javascript">
 Bridge.define("Demo.Program", {
     main: function Main () {
         var msg = "Hello, World!";
 
-        System.Console.WriteLine(msg);
-    }
+            System.Console.WriteLine(msg);
+        }
 });
-```
+</pre>
+</td>
+</tr>
+</table>
 
 Run the sample above at [Deck.NET](https://deck.net/helloworld).
 
@@ -45,9 +52,9 @@ Run the sample above at [Deck.NET](https://deck.net/helloworld).
   * Add **Bridge.NET** Visual Studio extension, or 
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`), or
   * [Download](http://bridge.net/download/) the Visual Studio Code starter project
-* The [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) is important
-* The [Global Configuration](https://github.com/bridgedotnet/Bridge/wiki/global-configuration) is important
-* Check out [Retyped](https://retyped.com/) for 2200+ supported libraries
+* The [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) documentation is important
+* The [Global Configuration](https://github.com/bridgedotnet/Bridge/wiki/global-configuration) documentation is important
+* Check out [Retyped](https://retyped.com/) for 2400+ supported libraries ([demos](https://demos.retyped.com))
 * Licensed under [Apache License, Version 2.0](https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md)
 * Need Help? Bridge.NET [Forums](http://forums.bridge.net/) or GitHub [Issues](https://github.com/bridgedotnet/Bridge/issues)
 * [@bridgedotnet](https://twitter.com/bridgedotnet) on Twitter
@@ -146,8 +153,8 @@ Show your support by adding a **built with Bridge.NET** badge to your projects R
 
 We need your help spreading the word about Bridge. Any of the following items will help:
 
-1. Add a [Badge](#badges)
 1. Star the [Bridge](https://github.com/bridgedotnet/Bridge/) project on GitHub
+1. Add a [Badge](#badges)
 1. Leave a review at [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BridgeNET.BridgeNET)
 1. Blog about Bridge.NET
 1. Tweet about [@bridgedotnet](https://twitter.com/bridgedotnet)
@@ -156,7 +163,6 @@ We need your help spreading the word about Bridge. Any of the following items wi
 1. Give a local usergroup presentation on Bridge
 1. Give a conference talk on Bridge
 1. Provide feedback ([forums](http://forums.bridge.net), [GitHub](https://github.com/bridgedotnet/Bridge/issues) or [email](mailto:hello@bridge.net))
-1. Vote for Bridge.NET on [UserVoice](https://visualstudio.uservoice.com/forums/121579-visual-studio-ide/suggestions/17335078-support-bridge-net)
 
 ## Testing
 

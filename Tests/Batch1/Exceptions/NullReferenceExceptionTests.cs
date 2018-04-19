@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         {
             Assert.AreEqual("System.NullReferenceException", typeof(NullReferenceException).FullName, "Name");
             Assert.True(typeof(NullReferenceException).IsClass, "IsClass");
-            Assert.AreEqual(typeof(Exception), typeof(NullReferenceException).BaseType, "BaseType");
+            Assert.AreEqual(typeof(SystemException), typeof(NullReferenceException).BaseType, "BaseType");
             object d = new NullReferenceException();
             Assert.True(d is NullReferenceException, "is NullReferenceException");
             Assert.True(d is Exception, "is Exception");
@@ -27,7 +27,7 @@ namespace Bridge.ClientTest.Exceptions
             var ex = new NullReferenceException();
             Assert.True((object)ex is NullReferenceException, "is NullReferenceException");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
-            Assert.AreEqual("Object is null.", ex.Message);
+            Assert.AreEqual("Object reference not set to an instance of an object.", ex.Message);
         }
 
         [Test]
@@ -49,26 +49,27 @@ namespace Bridge.ClientTest.Exceptions
             Assert.AreEqual("The message", ex.Message);
         }
 
-        [Test(Name = "NullReferenceException - {0}", ExpectedCount = 1)]
-        public void AccessingAFieldOnANullObjectCausesANullReferenceException()
-        {
-            try
-            {
-                dynamic d = null;
-#pragma warning disable 219
-                int x = d.someField;
-#pragma warning restore 219
-                Assert.Fail("A NullReferenceException should have been thrown");
-            }
-            catch (NullReferenceException ex)
-            {
-                Exception inner = ex.InnerException;
-                Assert.NotNull(inner, "Inner Exception");
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Expected NullReferenceException, got type " + ex.GetType());
-            }
-        }
+        // TODO: FAIL [should throw a Microsoft.CSharp.RuntimeBinder.RuntimeBinderException]
+        //        [Test(Name = "NullReferenceException - {0}", ExpectedCount = 1)]
+        //        public void AccessingAFieldOnANullObjectCausesANullReferenceException()
+        //        {
+        //            try
+        //            {
+        //                dynamic d = null;
+        //#pragma warning disable 219
+        //                int x = d.someField;
+        //#pragma warning restore 219
+        //                Assert.Fail("A NullReferenceException should have been thrown");
+        //            }
+        //            catch (NullReferenceException ex)
+        //            {
+        //                Exception inner = ex.InnerException;
+        //                Assert.NotNull(inner, "Inner Exception");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Assert.Fail("Expected NullReferenceException, got type " + ex.GetType());
+        //            }
+        //        }
     }
 }

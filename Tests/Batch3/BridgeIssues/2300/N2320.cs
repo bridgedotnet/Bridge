@@ -1,5 +1,4 @@
 using System;
-using Bridge.Html5;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -10,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         private static bool invoked;
 
-        [Ready]
+        [Bridge.Ready]
         public static void Main()
         {
             Bridge2320.invoked = true;

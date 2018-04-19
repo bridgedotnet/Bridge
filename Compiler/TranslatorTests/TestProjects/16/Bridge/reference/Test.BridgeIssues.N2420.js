@@ -24,7 +24,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("Test.BridgeIssues.N2420.Options", {
-        $metadata : function () { return {"att":1048961,"a":2,"s":true}; }
+        $metadata : function () { return {"nested":[Test.BridgeIssues.N2420.Options.Format],"att":1048961,"a":2,"s":true}; }
     });
 
     Bridge.define("Test.BridgeIssues.N2420.Options.Format", {

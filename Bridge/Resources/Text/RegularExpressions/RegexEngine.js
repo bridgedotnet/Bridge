@@ -30,7 +30,7 @@
             this.$initialize();
 
             if (pattern == null) {
-                throw new System.ArgumentNullException("pattern");
+                throw new System.ArgumentNullException.$ctor1("pattern");
             }
 
             this._pattern = pattern;
@@ -46,11 +46,11 @@
 
         match: function (text, textStart) {
             if (text == null) {
-                throw new System.ArgumentNullException("text");
+                throw new System.ArgumentNullException.$ctor1("text");
             }
 
             if (textStart != null && (textStart < 0 || textStart > text.length)) {
-                throw new System.ArgumentOutOfRangeException("textStart", "Start index cannot be less than 0 or greater than input length.");
+                throw new System.ArgumentOutOfRangeException.$ctor4("textStart", "Start index cannot be less than 0 or greater than input length.");
             }
 
             this._text = text;
@@ -59,6 +59,7 @@
 
             // Get group descriptors
             var patternInfo = this.parsePattern();
+
             if (patternInfo.shouldFail) {
                 return this._getEmptyMatch();
             }
@@ -66,6 +67,7 @@
             this._checkTimeout();
 
             var scanRes = this._scanAndTransformResult(textStart, patternInfo.tokens, false, null);
+
             return scanRes;
         },
 
@@ -75,6 +77,7 @@
                 var patternInfo = parser.parsePattern(this._pattern, this._cloneSettings(this._settings));
                 this._patternInfo = patternInfo;
             }
+
             return this._patternInfo;
         },
 
@@ -101,6 +104,7 @@
                 state.capIndex = textPos;
                 state.txtIndex = textPos;
                 state.capLength = 0;
+
                 return state;
             }
 
@@ -109,6 +113,7 @@
 
             var endPos = this._patternInfo.isContiguous ? textPos : textEndPos;
             var baseBranch = new System.Text.RegularExpressions.RegexEngineBranch(baseBranchType, textPos, textPos, endPos);
+
             baseBranch.pushPass(0, tokens, this._cloneSettings(this._settings));
             baseBranch.started = true;
             baseBranch.state.txtIndex = textPos;
@@ -118,6 +123,7 @@
                 branch = branches[branches.length - 1];
 
                 res = this._scanBranch(textEndPos, branches, branch);
+
                 if (res === resKind.ok && (desiredLen == null || branch.state.capLength === desiredLen)) {
                     return branch.state;
                 }
@@ -146,6 +152,7 @@
 
             if (branch.mustFail) {
                 branch.mustFail = false;
+
                 return resKind.nextBranch;
             }
 
@@ -180,7 +187,7 @@
                         break;
 
                     default:
-                        throw new System.InvalidOperationException("Unexpected branch result.");
+                        throw new System.InvalidOperationException.$ctor1("Unexpected branch result.");
                 }
             }
 
@@ -206,21 +213,26 @@
                 } else {
                     if (probe.value < probe.min || probe.forced) {
                         res = this._scanToken(textEndPos, branches, branch, pass, token);
+
                         if (res !== resKind.ok) {
                             return res;
                         }
+
                         probe.value += 1;
                         probe.forced = false;
+
                         continue;
                     }
 
                     this._addBranchAfterProbing(branches, branch, pass, probe);
+
                     if (probe.forced) {
                         continue;
                     }
 
                     pass.probe = null;
                     pass.index++;
+
                     continue;
                 }
 
@@ -240,7 +252,7 @@
                         break;
 
                     default:
-                        throw new System.InvalidOperationException("Unexpected branch-pass result.");
+                        throw new System.InvalidOperationException.$ctor1("Unexpected branch-pass result.");
                 }
             }
 
@@ -261,8 +273,10 @@
             // Scan potential alternations:
             if (!pass.alternationHandled && !pass.tokens.noAlternation) {
                 orIndexes = [-1];
+
                 for (i = 0; i < passEndIndex; i++) {
                     token = pass.tokens[i];
+
                     if (token.type === tokenTypes.alternation) {
                         orIndexes.push(i);
                     }
@@ -285,6 +299,7 @@
                     branch.mustFail = true;
 
                     pass.alternationHandled = true;
+
                     return resKind.nextBranch;
                 } else {
                     pass.tokens.noAlternation = true;
@@ -297,6 +312,7 @@
         _addBranchBeforeProbing: function (branches, branch, pass, token) {
             // Add +, *, ? branches:
             var probe = this._tryGetTokenProbe(token);
+
             if (probe == null) {
                 return false;
             }
@@ -305,7 +321,9 @@
 
             var branchType = probe.isLazy ? this._branchType.lazy : this._branchType.greedy;
             var newBranch = new System.Text.RegularExpressions.RegexEngineBranch(branchType, probe.value, probe.min, probe.max, branch.state);
+
             branches.push(newBranch);
+
             return true;
         },
 
@@ -314,6 +332,7 @@
                 if (probe.value + 1 <= probe.max) {
                     var lazyBranch = branch.clone();
                     var lazyProbe = lazyBranch.peekPass().probe;
+
                     lazyBranch.value += 1;
                     lazyProbe.forced = true;
 
@@ -324,6 +343,7 @@
             } else {
                 if (probe.value + 1 <= probe.max) {
                     var greedyBranch = branch.clone();
+
                     greedyBranch.started = true;
                     greedyBranch.peekPass().probe = null;
                     greedyBranch.peekPass().index++;
@@ -338,6 +358,7 @@
 
         _tryGetTokenProbe: function (token) {
             var qtoken = token.qtoken;
+
             if (qtoken == null) {
                 return null;
             }
@@ -367,7 +388,7 @@
                         break;
 
                     default:
-                        throw new System.InvalidOperationException("Unexpected quantifier value.");
+                        throw new System.InvalidOperationException.$ctor1("Unexpected quantifier value.");
                 }
             } else if (qtoken.type === tokenTypes.quantifierN) {
                 min = qtoken.data.n;
@@ -389,13 +410,14 @@
             }
 
             var lastBranch = branches[branches.length - 1];
+
             if (!lastBranch.started) {
                 lastBranch.started = true;
                 return;
             }
 
             if (branch !== lastBranch) {
-                throw new System.InvalidOperationException("Current branch is supposed to be the last one.");
+                throw new System.InvalidOperationException.$ctor1("Current branch is supposed to be the last one.");
             }
 
             if (branches.length === 1 && branch.type === this._branchType.offset) {
@@ -419,6 +441,7 @@
                 if (!branch.isNotFailing) {
                     lastBranch = branches[branches.length - 1];
                     this._advanceToNextBranch(branches, lastBranch);
+
                     return;
                 }
             }
@@ -449,6 +472,7 @@
                 for (i = 0; i < capGroups.length; i++) {
                     capGroup = capGroups[i];
                     groupDesc = groupDescs[capGroup.rawIndex - 1];
+
                     if (groupDesc.constructs.skipCapture) {
                         continue;
                     }
@@ -460,6 +484,7 @@
                     };
 
                     group = groupsMap[groupDesc.name];
+
                     if (group == null) {
                         group = {
                             capIndex: 0,
@@ -478,6 +503,7 @@
                 // Add groups to Match in the required order:
                 for (i = 0; i < groupDescs.length; i++) {
                     groupDesc = groupDescs[i];
+
                     if (groupDesc.constructs.skipCapture) {
                         continue;
                     }
@@ -487,6 +513,7 @@
                     }
 
                     group = groupsMap[groupDesc.name];
+
                     if (group == null) {
                         group = {
                             capIndex: 0,
@@ -550,10 +577,10 @@
                     return this._scanEscapeToken(branches, branch, pass, token);
 
                 case tokenTypes.escCharClassCategory:
-                    throw new System.NotSupportedException("Unicode Category constructions are not supported.");
+                    throw new System.NotSupportedException.$ctor1("Unicode Category constructions are not supported.");
 
                 case tokenTypes.escCharClassBlock:
-                    throw new System.NotSupportedException("Unicode Named block constructions are not supported.");
+                    throw new System.NotSupportedException.$ctor1("Unicode Named block constructions are not supported.");
 
                 case tokenTypes.escCharClassDot:
                     return this._scanDotToken(textEndPos, branches, branch, pass);
@@ -604,12 +631,14 @@
 
                     // Cache value to avoid proceeding with the already checked route:
                     var tokenCache = branches.grCaptureCache[rawIndex];
+
                     if (tokenCache == null) {
                         tokenCache = {};
                         branches.grCaptureCache[rawIndex] = tokenCache;
                     }
 
                     var key = capIndex.toString() + "_" + capLength.toString();
+
                     if (tokenCache[key] == null) {
                         tokenCache[key] = true;
                     } else {
@@ -627,6 +656,7 @@
 
                 pass.onHold = false;
                 pass.onHoldTextIndex = -1;
+
                 return resKind.ok;
             }
 
@@ -641,9 +671,11 @@
                 if (constructs.isPositiveLookahead || constructs.isNegativeLookahead ||
                     constructs.isPositiveLookbehind || constructs.isNegativeLookbehind) {
                     var scanLookRes = this._scanLook(branch, textIndex, textEndPos, token);
+
                     return scanLookRes;
                 } else if (constructs.isNonbacktracking) {
                     var scanNonBacktrackingRes = this._scanNonBacktracking(branch, textIndex, textEndPos, token);
+
                     return scanNonBacktrackingRes;
                 }
             }
@@ -653,6 +685,7 @@
             pass.onHold = true;
 
             branch.pushPass(0, token.children, this._cloneSettings(pass.settings));
+
             return resKind.nextPass;
         },
 
@@ -692,6 +725,7 @@
             if (token.type === tokenTypes.alternationGroupRefNameCondition ||
                 token.type === tokenTypes.alternationGroupRefNumberCondition) {
                 var grCapture = branch.state.resolveBackref(token.data.packedSlotId);
+
                 if (grCapture != null) {
                     res = resKind.ok;
                 } else {
@@ -700,6 +734,7 @@
             } else {
                 // Resolve expression:
                 var state = this._scan(textIndex, textEndPos, children, true, null);
+
                 if (this._combineScanResults(branch, state)) {
                     res = resKind.ok;
                 }
@@ -726,6 +761,7 @@
                 children = children.slice(1, children.length); // remove constructs
 
                 expectedRes = constructs.isPositiveLookahead || constructs.isPositiveLookbehind;
+
                 if (isLookahead) {
                     actualRes = this._scanLookAhead(branch, textIndex, textEndPos, children);
                 } else {
@@ -744,6 +780,7 @@
 
         _scanLookAhead: function (branch, textIndex, textEndPos, tokens) {
             var state = this._scan(textIndex, textEndPos, tokens, true, null);
+
             return this._combineScanResults(branch, state);
         },
 
@@ -772,6 +809,7 @@
             children = children.slice(1, children.length); // remove constructs
 
             var state = this._scan(textIndex, textEndPos, children, true, null);
+
             if (!state) {
                 return resKind.nextBranch;
             }
@@ -790,6 +828,7 @@
             }
 
             var i;
+
             if (pass.settings.ignoreCase) {
                 for (i = 0; i < literal.length; i++) {
                     if (this._text[index + i].toLowerCase() !== literal[i].toLowerCase()) {
@@ -805,6 +844,7 @@
             }
 
             branch.state.logCapture(literal.length);
+
             return resKind.ok;
         },
 
@@ -812,6 +852,7 @@
             var resKind = this._branchResultKind;
             var index = branch.state.txtIndex;
             var ch = this._text[index];
+
             if (ch == null) {
                 ch = "";
             }
@@ -819,16 +860,19 @@
             var options = pass.settings.ignoreCase ? "i" : "";
 
             var rgx = token.rgx;
+
             if (rgx == null) {
                 if (tokenValue == null) {
                     tokenValue = token.value;
                 }
+
                 rgx = new RegExp(tokenValue, options);
                 token.rgx = rgx;
             }
 
             if (rgx.test(ch)) {
                 branch.state.logCapture(ch.length);
+
                 return resKind.ok;
             }
 
@@ -838,11 +882,13 @@
         _scanWithJsRegex2: function (textIndex, pattern) {
             var resKind = this._branchResultKind;
             var ch = this._text[textIndex];
+
             if (ch == null) {
                 ch = "";
             }
 
             var rgx = new RegExp(pattern, "");
+
             if (rgx.test(ch)) {
                 return resKind.ok;
             }
@@ -855,6 +901,7 @@
             var resKind = this._branchResultKind;
             var index = branch.state.txtIndex;
             var ch = this._text[index];
+
             if (ch == null) {
                 return resKind.nextBranch;
             }
@@ -869,12 +916,13 @@
             // Check susbstruct group:
             if (token.data.substractToken != null) {
                 var substractRes;
+
                 if (token.data.substractToken.type === tokenTypes.charGroup) {
                     substractRes = this._scanCharGroupToken(branches, branch, pass, token.data.substractToken, true);
                 } else if (token.data.substractToken.type === tokenTypes.charNegativeGroup) {
                     substractRes = this._scanCharNegativeGroupToken(branches, branch, pass, token.data.substractToken, true);
                 } else {
-                    throw new System.InvalidOperationException("Unexpected substuct group token.");
+                    throw new System.InvalidOperationException.$ctor1("Unexpected substuct group token.");
                 }
 
                 if (substractRes === resKind.ok) {
@@ -885,6 +933,7 @@
             // Try CharClass tokens like: \s \S \d \D
             if (ranges.charClassToken != null) {
                 var charClassRes = this._scanWithJsRegex(branches, branch, pass, ranges.charClassToken);
+
                 if (charClassRes === resKind.ok) {
                     return resKind.ok;
                 }
@@ -904,6 +953,7 @@
                         if (!skipLoggingCapture) {
                             branch.state.logCapture(1);
                         }
+
                         return resKind.ok;
                     }
                 }
@@ -929,6 +979,7 @@
             var resKind = this._branchResultKind;
             var index = branch.state.txtIndex;
             var ch = this._text[index];
+
             if (ch == null) {
                 return resKind.nextBranch;
             }
@@ -959,11 +1010,13 @@
             if (pass.settings.singleline) {
                 if (index < textEndPos) {
                     branch.state.logCapture(1);
+
                     return resKind.ok;
                 }
             } else {
                 if (index < textEndPos && this._text[index] !== "\n") {
                     branch.state.logCapture(1);
+
                     return resKind.ok;
                 }
             }
@@ -975,11 +1028,13 @@
             var resKind = this._branchResultKind;
 
             var grCapture = branch.state.resolveBackref(token.data.slotId);
+
             if (grCapture == null) {
                 return resKind.nextBranch;
             }
 
             var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
+
             return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
         },
 
@@ -987,11 +1042,13 @@
             var resKind = this._branchResultKind;
 
             var grCapture = branch.state.resolveBackref(token.data.slotId);
+
             if (grCapture == null) {
                 return resKind.nextBranch;
             }
 
             var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
+
             return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
         },
 
@@ -1002,6 +1059,7 @@
             if (token.value === "\\b" || token.value === "\\B") {
                 var prevIsWord = index > 0 && this._scanWithJsRegex2(index - 1, "\\w") === resKind.ok;
                 var currIsWord = this._scanWithJsRegex2(index, "\\w") === resKind.ok;
+
                 if ((prevIsWord === currIsWord) === (token.value === "\\B")) {
                     return resKind.ok;
                 }
@@ -1009,6 +1067,7 @@
                 if (index === 0) {
                     return resKind.ok;
                 }
+
                 if (pass.settings.multiline && this._text[index - 1] === "\n") {
                     return resKind.ok;
                 }
@@ -1016,6 +1075,7 @@
                 if (index === textEndPos) {
                     return resKind.ok;
                 }
+
                 if (pass.settings.multiline && this._text[index] === "\n") {
                     return resKind.ok;
                 }
@@ -1031,6 +1091,7 @@
                 if (index === textEndPos) {
                     return resKind.ok;
                 }
+
                 if (index === textEndPos - 1 && this._text[index] === "\n") {
                     return resKind.ok;
                 }
@@ -1052,6 +1113,7 @@
                 ignoreWhitespace: settings.ignoreWhitespace,
                 explicitCapture: settings.explicitCapture
             };
+
             return cloned;
         },
 
@@ -1064,7 +1126,7 @@
 
                 for (i = 0; i < srcGroupsLen; ++i) {
                     dstGroups.push(srcGroups[i]);
-                    }
+                }
 
                 return true;
             }

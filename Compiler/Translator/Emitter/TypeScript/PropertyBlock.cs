@@ -45,7 +45,7 @@ namespace Bridge.Translator.TypeScript
             if (!propertyDeclaration.Getter.IsNull && this.Emitter.GetInline(propertyDeclaration.Getter) == null)
             {
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
-                
+
                 var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
                 this.WriteAccessor(propertyDeclaration, memberResult, ignoreInterface);

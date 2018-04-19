@@ -107,6 +107,11 @@
             }
         },
 
+        TimeToTicks: function (hour, minute, second) {
+            var totalSeconds = System.Int64(hour).mul("3600").add(System.Int64(minute).mul("60")).add(System.Int64(second));
+            return totalSeconds.mul("10000000");
+        },
+
         getTicks: function () {
             return this.ticks;
         },

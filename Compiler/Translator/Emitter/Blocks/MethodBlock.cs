@@ -139,7 +139,7 @@ namespace Bridge.Translator
                     this.EndBlock();
                     this.Emitter.Comma = true;
                 }
-            }        
+            }
 
             if (globalTarget == null)
             {

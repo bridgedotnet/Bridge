@@ -23,6 +23,7 @@
 
         pushPass: function (index, tokens, settings) {
             var pass = new System.Text.RegularExpressions.RegexEnginePass(index, tokens, settings);
+
             this.state.passes.push(pass);
         },
 
@@ -40,7 +41,9 @@
 
         clone: function () {
             var cloned = new System.Text.RegularExpressions.RegexEngineBranch(this.type, this.value, this.min, this.max, this.state);
+
             cloned.isNotFailing = this.isNotFailing;
+
             return cloned;
         }
     });

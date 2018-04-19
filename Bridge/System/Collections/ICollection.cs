@@ -1,22 +1,20 @@
-using Bridge;
-
 namespace System.Collections
 {
-    [External]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
-    [Reflectable]
-    public interface ICollection : IEnumerable, IBridgeClass
+    [Bridge.External]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.Reflectable]
+    public interface ICollection : IEnumerable, Bridge.IBridgeClass
     {
         /// <summary>
         /// Gets the number of elements contained in the ICollection.
         /// </summary>
         int Count
         {
-            [Template("System.Array.getCount({this})")]
+            [Bridge.Template("System.Array.getCount({this})")]
             get;
         }
 
-        [Template("System.Array.copyTo({this}, {array}, {arrayIndex})")]
+        [Bridge.Template("System.Array.copyTo({this}, {array}, {arrayIndex})")]
         void CopyTo(Array array, int arrayIndex);
 
         /// <summary>

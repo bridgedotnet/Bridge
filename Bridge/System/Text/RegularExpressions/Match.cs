@@ -1,12 +1,11 @@
-﻿using Bridge;
-
-namespace System.Text.RegularExpressions
+﻿namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Represents the results from a single regular expression match.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Reflectable]
     public class Match : Group
     {
         internal extern Match(Regex regex, int capcount, String text, int begpos, int len, int startpos);
@@ -16,7 +15,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern static Match Empty
         {
-            [Template("{this}.getEmpty()")]
+            [Bridge.Template("{this}.getEmpty()")]
             get;
         }
 
@@ -25,7 +24,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern virtual GroupCollection Groups
         {
-            [Template("getGroups()")]
+            [Bridge.Template("getGroups()")]
             get;
         }
 

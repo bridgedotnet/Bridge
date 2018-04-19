@@ -18,7 +18,9 @@ namespace Bridge.Contract
             Integer = IntegerRule.Managed,
             Boxing = BoxingRule.Managed,
             ArrayIndex = ArrayIndexRule.Managed,
-            AutoProperty = null
+            AutoProperty = null,
+            InlineComment = InlineCommentRule.Managed,
+            ExternalCast = ExternalCastRule.Managed
         };
 
         public static CompilerRule Get(IEmitter emitter, IEntity entity)
@@ -66,10 +68,10 @@ namespace Bridge.Contract
                     assemblyRules[i] = Rules.ToRule(assemblyAttrs[i], CompilerRuleLevel.Assembly);
                 }
 
-                if(emitter != null)
+                if (emitter != null)
                 {
                     emitter.AssemblyCompilerRuleCache.Add(assembly, assemblyRules);
-                }                
+                }
             }
 
             var rules = new List<CompilerRule>();
@@ -89,10 +91,10 @@ namespace Bridge.Contract
                 rules.AddRange(interfaceRules);
             }
 
-            if(emitter != null)
+            if (emitter != null)
             {
                 rules.Add(emitter.AssemblyInfo.Rules);
-            }            
+            }
 
             if (assemblyRules != null && assemblyRules.Length > 0)
             {
@@ -111,7 +113,9 @@ namespace Bridge.Contract
                 Integer = IntegerRule.Managed,
                 Boxing = BoxingRule.Managed,
                 ArrayIndex = ArrayIndexRule.Managed,
-                AutoProperty = null
+                AutoProperty = null,
+                InlineComment = InlineCommentRule.Managed,
+                ExternalCast = ExternalCastRule.Managed
             };
 
             for (int i = rules.Count - 1; i >= 0; i--)
@@ -146,6 +150,16 @@ namespace Bridge.Contract
                 if (rule.Boxing.HasValue)
                 {
                     resultRule.Boxing = rule.Boxing;
+                }
+
+                if (rule.InlineComment.HasValue)
+                {
+                    resultRule.InlineComment = rule.InlineComment;
+                }
+
+                if (rule.ExternalCast.HasValue)
+                {
+                    resultRule.ExternalCast = rule.ExternalCast;
                 }
             }
 
@@ -185,6 +199,14 @@ namespace Bridge.Contract
 
                     case nameof(CompilerRule.AutoProperty):
                         rule.AutoProperty = (AutoPropertyRule)(int)value.ConstantValue;
+                        break;
+
+                    case nameof(CompilerRule.InlineComment):
+                        rule.InlineComment = (InlineCommentRule)(int)value.ConstantValue;
+                        break;
+
+                    case nameof(CompilerRule.ExternalCast):
+                        rule.ExternalCast = (ExternalCastRule)(int)value.ConstantValue;
                         break;
 
                     default:
@@ -243,7 +265,7 @@ namespace Bridge.Contract
             {
                 emitter.ClassCompilerRuleCache.Add(typeDef, classRules);
             }
-            
+
             return classRules;
         }
     }

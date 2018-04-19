@@ -1,7 +1,6 @@
-﻿using Bridge;
-
-namespace System.Text.RegularExpressions
+﻿namespace System.Text.RegularExpressions
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public sealed class Regex
     {
         public extern Regex(string pattern);
@@ -17,7 +16,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern TimeSpan MatchTimeout
         {
-            [Template("getMatchTimeout()")]
+            [Bridge.Template("getMatchTimeout()")]
             get;
         }
 
@@ -26,7 +25,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern RegexOptions Options
         {
-            [Template("getOptions()")]
+            [Bridge.Template("getOptions()")]
             get;
         }
 
@@ -35,7 +34,7 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public extern bool RightToLeft
         {
-            [Template("getRightToLeft()")]
+            [Bridge.Template("getRightToLeft()")]
             get;
         }
 

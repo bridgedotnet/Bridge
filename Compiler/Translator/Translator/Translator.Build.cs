@@ -23,7 +23,7 @@ namespace Bridge.Translator
             this.Log.Info("Building assembly...");
 
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
-            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp6, Microsoft.CodeAnalysis.DocumentationMode.Parse, SourceCodeKind.Regular, this.DefineConstants);
+            var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp7, Microsoft.CodeAnalysis.DocumentationMode.Parse, SourceCodeKind.Regular, this.DefineConstants);
             var files = this.SourceFiles;
             IList<string> referencesPathes = null;
             var baseDir = Path.GetDirectoryName(this.Location);

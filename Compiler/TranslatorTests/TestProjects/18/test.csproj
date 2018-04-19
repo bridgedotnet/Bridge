@@ -63,15 +63,12 @@
     <Compile Include="Issues\Issue948.cs" />
     <Compile Include="Issues\Issue599ReadyAttribute.cs" />
     <Compile Include="Issues\Issue461.cs" />
+    <Compile Include="Issues\Issue3516.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Bridge.Html5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Html5\bin\$(Configuration)\Bridge.Html5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

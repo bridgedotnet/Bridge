@@ -444,11 +444,11 @@ namespace Bridge.ClientTest
             public void ICollectionNonGenericInterface()
             {
                 Array a = new[] { 1, 2, 3 };
-                
+
                 // We expect it to return the same array reference -- because
                 // an array reference is effectively the root of an array.
                 Assert.AreEqual(a, a.SyncRoot, "ICollection's SyncRoot returns the same array reference.");
-                
+
                 // By design, this is always false.
                 Assert.False(a.IsSynchronized, "ICollection's IsSynchronized returns false.");
             }

@@ -1,12 +1,11 @@
-using Bridge;
-
 namespace System.Threading.Tasks
 {
     /// <summary>
     /// This exception is used as the exception for a task created from a promise when the underlying promise fails.
     /// </summary>
-    [External]
-    [Namespace("Bridge")]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.Namespace("Bridge")]
     public class PromiseException : Exception
     {
         public extern PromiseException(object[] arguments);
@@ -18,7 +17,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Arguments supplied to the promise onError() callback.
         /// </summary>
-        [Convention(Notation.LowerCamelCase)] //[Field]
+        [Bridge.Convention(Bridge.Notation.CamelCase)]
         public extern object[] Arguments
         {
             get;

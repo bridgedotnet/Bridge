@@ -36,6 +36,7 @@
                 if (groups[index].slotId === balancingSlotId) {
                     group2 = groups[index];
                     group2Index = index;
+
                     break;
                 }
                 --index;
@@ -66,6 +67,7 @@
                 if (groups[index].slotId === packedSlotId) {
                     return groups[index];
                 }
+
                 --index;
             }
 

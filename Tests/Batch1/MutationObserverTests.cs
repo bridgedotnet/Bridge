@@ -50,13 +50,9 @@ namespace Bridge.ClientTest
                 root.AppendChild(new HTMLSpanElement());
             });
 
-            var task1 = task.ContinueWith(x =>
+            task.ContinueWith(async x =>
             {
-                Task.Delay(10);
-            });
-
-            task1.ContinueWith(x =>
-            {
+                await Task.Delay(10);
                 try
                 {
                     AssertRecords(this.Records);

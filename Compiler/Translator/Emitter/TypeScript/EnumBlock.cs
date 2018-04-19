@@ -63,7 +63,7 @@ namespace Bridge.Translator.TypeScript
                         {
                             this.Write(((PrimitiveExpression)initializer).Value);
                         }
-                        
+
                     }
 
                     if (field != lastField)

@@ -592,7 +592,7 @@ namespace Bridge.Translator
             {
                 enable = !configInternal.Disabled.Value;
             }
-            else if(!config.Disabled.HasValue)
+            else if (!config.Disabled.HasValue)
             {
                 enable = true;
             }

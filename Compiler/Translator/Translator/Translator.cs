@@ -99,7 +99,7 @@ namespace Bridge.Translator
         public void Translate()
         {
             var logger = this.Log;
-            logger.Info("Translating...");            
+            logger.Info("Translating...");
 
             var config = this.AssemblyInfo;
 

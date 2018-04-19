@@ -1,4 +1,4 @@
-    Bridge.define('System.Collections.Generic.Comparer$1', function (T) {
+    Bridge.define("System.Collections.Generic.Comparer$1", function (T) {
         return {
             inherits: [System.Collections.Generic.IComparer$1(T)],
 
@@ -24,6 +24,7 @@
 
     System.Collections.Generic.Comparer$1.get = function (obj, T) {
         var m;
+
         if (T && (m = obj["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"])) {
             return m;
         }

@@ -19,7 +19,7 @@ namespace System
     /// Specifies the day of the week.
     /// </summary>
     [Serializable]
-    //[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum DayOfWeek
     {
         /// <summary>

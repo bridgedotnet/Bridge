@@ -128,7 +128,7 @@ namespace Bridge.Translator
                     {
                         var name = OverloadsCollection.Create(this.Emitter, get_rr.Member).GetOverloadName();
 
-                        if (name != "getEnumerator" && name != "System$Collections$IEnumerable$getEnumerator")
+                        if (name != "GetEnumerator" && name != "System$Collections$IEnumerable$GetEnumerator")
                         {
                             this.WriteComma(false);
                             this.WriteScript(name);
@@ -340,7 +340,7 @@ namespace Bridge.Translator
                     {
                         var name = OverloadsCollection.Create(this.Emitter, get_rr.Member).GetOverloadName();
 
-                        if (name != "getEnumerator" && name != "System$Collections$IEnumerable$getEnumerator")
+                        if (name != "GetEnumerator" && name != "System$Collections$IEnumerable$GetEnumerator")
                         {
                             this.WriteComma(false);
                             this.WriteScript(name);

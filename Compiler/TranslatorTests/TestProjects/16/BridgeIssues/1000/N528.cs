@@ -1,5 +1,4 @@
 ﻿using Bridge;
-using Bridge.Html5;
 using System.Threading.Tasks;
 
 namespace Test.BridgeIssues.N528

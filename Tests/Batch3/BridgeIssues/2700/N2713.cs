@@ -6,7 +6,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#2713 - {0}")]
-    [Convention(Target = ConventionTarget.Class, Notation = Notation.LowerCamelCase)]
+    [Convention(Target = ConventionTarget.Class, Notation = Notation.CamelCase)]
     public class Bridge2713
     {
         [Namespace(false)]

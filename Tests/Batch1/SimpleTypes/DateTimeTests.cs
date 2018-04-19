@@ -1160,11 +1160,58 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(DayOfWeek.Friday, dt.DayOfWeek);
         }
 
+        private void AssertAndIncrement(int day, ref DateTime dt, string leapstr)
+        {
+            var succeeded = dt.DayOfYear == day;
+            Assert.True(succeeded, "Day #" + day + " matches " + leapstr + " year date: " + dt.ToString() + ".");
+            dt = dt.AddDays(1);
+        }
+
         [Test]
         public void DayOfYearPropertyWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(193, dt.DayOfYear);
+            Assert.AreEqual(193, dt.DayOfYear, dt.ToString() + " day of year is 193.");
+
+            // Test for both a leap and a non-leap year.
+            foreach (var year in new int[] { 2016, 2018 })
+            {
+                // Edge cases that may break with daylight saving changes.
+                var dt0h = new DateTime(year, 1, 1);
+
+                // Use these if you want extensive testing. At first, it is not
+                // necessary.
+                /*
+                var dt0h30m = new DateTime(year, 1, 1, 0, 30, 0);
+                var dt11h30m = new DateTime(year, 1, 1, 11, 30, 0);
+                var dt12h = new DateTime(year, 1, 1, 12, 00, 0);
+                var dt12h30m = new DateTime(year, 1, 1, 12, 30, 0);
+                var dt23h30m = new DateTime(year, 1, 1, 23, 30, 0);
+                 */
+
+                var leapstr = "non-leap";
+                var lastDayOfYear = 365;
+
+                if (DateTime.IsLeapYear(year))
+                {
+                    leapstr = "leap";
+                    lastDayOfYear = 366;
+
+                }
+
+                for (var day = 1; day <= lastDayOfYear; day++)
+                {
+                    AssertAndIncrement(day, ref dt0h, leapstr);
+
+                    /*
+                    AssertAndIncrement(day, ref dt0h30m, leapstr);
+                    AssertAndIncrement(day, ref dt11h30m, leapstr);
+                    AssertAndIncrement(day, ref dt12h, leapstr);
+                    AssertAndIncrement(day, ref dt12h30m, leapstr);
+                    AssertAndIncrement(day, ref dt23h30m, leapstr);
+                     */
+                }
+            }
         }
 
         [Test]

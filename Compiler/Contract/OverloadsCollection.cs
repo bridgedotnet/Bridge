@@ -682,7 +682,7 @@ namespace Bridge.Contract
                         var inline = this.Emitter.GetInline(m);
                         if (!string.IsNullOrWhiteSpace(inline) && !(m.Name == "ToString" && m.Parameters.Count == 0 && !m.IsOverride))
                         {
-                            return false;           
+                            return false;
                         }
                     }
 
@@ -1019,7 +1019,7 @@ namespace Bridge.Contract
                 name = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams, isObjectLiteral, excludeTypeOnly);
                 this.overloadName[key] = name;
             }
-            else if(contains)
+            else if (contains)
             {
                 name = this.overloadName[key];
             }

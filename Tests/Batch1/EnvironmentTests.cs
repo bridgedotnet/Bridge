@@ -13,7 +13,7 @@ namespace Bridge.ClientTest
 
         private static dynamic Variables
         {
-            [Template("System.Environment.variables")]
+            [Template("System.Environment.Variables")]
             get;
         }
 

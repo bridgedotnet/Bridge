@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.Diagnostics.Contracts
 {
     /// <summary>
@@ -12,7 +10,7 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    [External]
+    [Bridge.External]
     public sealed class ContractInvariantMethodAttribute : Attribute
     {
     }

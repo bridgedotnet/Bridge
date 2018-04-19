@@ -103,7 +103,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(typeof(Cavy).FullName, RegisterFactory(new CavyFactory(), registry), "Elaborate dynamic-typed static generic emits correctly.");
 
             Assert.True(Simplistic(1.ToDynamic()), "Simple dynamic-typed static generic emits correctly.");
-            
+
         }
     }
 }

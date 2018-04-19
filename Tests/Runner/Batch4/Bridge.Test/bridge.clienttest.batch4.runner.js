@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.8.2
+ * @compiler Bridge.NET 17.0.0-beta
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals) {
     
@@ -17,9 +17,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("DelegateTests - EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests.EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563);
             QUnit.test("ContractExceptionTests - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ContractExceptionTests.TypePropertiesAreCorrect);
             QUnit.test("ContractExceptionTests - DefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ContractExceptionTests.DefaultConstructorWorks);
-            QUnit.test("ErrorExceptionTests - TypePropertiesAreCorrect_SPI_1564", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests.TypePropertiesAreCorrect_SPI_1564);
-            QUnit.test("ErrorExceptionTests - ErrorOnlyConstructorWorks_SPI_1564", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests.ErrorOnlyConstructorWorks_SPI_1564);
-            QUnit.test("ErrorExceptionTests - ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests.ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564);
             QUnit.test("FormattableStringTests - ToStringWithFormatProviderWorks_SPI_1651", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.FormattableStringTests.ToStringWithFormatProviderWorks_SPI_1651);
             QUnit.test("FormattableStringTests - IFormattableToStringWorks_SPI_1633_1651", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.FormattableStringTests.IFormattableToStringWorks_SPI_1633_1651);
             QUnit.test("RuntimeHelpersTests - GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RuntimeHelpersTests.GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570);
@@ -342,42 +339,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.DelegateTests", $t.File = "Batch4\\DelegateTests.cs", $t);
-                }
-                return this.context;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests)],
-        $kind: "nested class",
-        statics: {
-            methods: {
-                TypePropertiesAreCorrect_SPI_1564: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect_SPI_1564()", $t.Line = "9", $t));
-                    t.Fixture.TypePropertiesAreCorrect_SPI_1564();
-                },
-                ErrorOnlyConstructorWorks_SPI_1564: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ErrorOnlyConstructorWorks_SPI_1564()", $t.Line = "30", $t));
-                    t.Fixture.ErrorOnlyConstructorWorks_SPI_1564();
-                },
-                ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564()", $t.Line = "62", $t));
-                    t.Fixture.ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564();
-                }
-            }
-        },
-        fields: {
-            context: null
-        },
-        methods: {
-            GetContext: function () {
-                var $t;
-                if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests", $t.File = "Batch4\\Exceptions\\JsErrorExceptionTests.cs", $t);
                 }
                 return this.context;
             }

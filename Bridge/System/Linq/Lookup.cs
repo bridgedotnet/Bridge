@@ -1,54 +1,57 @@
-using Bridge;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [External]
-    [IgnoreGeneric]
-    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.IgnoreGeneric]
+    [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     public interface ILookup<TKey, TElement> : IEnumerable<Grouping<TKey, TElement>>
     {
         int Count
         {
-            [Template("count()")]
+            [Bridge.Template("count()")]
             get;
         }
 
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         EnumerableInstance<TElement> this[TKey key]
         {
-            [Template("get({0})")]
+            [Bridge.Template("get({0})")]
             get;
         }
 
-        [Template("contains({key})")]
+        [Bridge.Template("contains({key})")]
         bool Contains(TKey key);
     }
 
-    [External]
-    [IgnoreGeneric]
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
+    [Bridge.External]
+    [Bridge.IgnoreGeneric]
     public class Lookup<TKey, TElement> : ILookup<TKey, TElement>
     {
         internal extern Lookup();
 
         public extern int Count
         {
-            [Template("count()")]
+            [Bridge.Template("count()")]
             get;
         }
 
-        [AccessorsIndexer]
+        [Bridge.AccessorsIndexer]
         public extern EnumerableInstance<TElement> this[TKey key]
         {
-            [Template("get({0})")]
+            [Bridge.Template("get({0})")]
             get;
         }
 
         public extern bool Contains(TKey key);
 
+        [Bridge.Convention(Bridge.Notation.None)]
         public extern IEnumerator<Grouping<TKey, TElement>> GetEnumerator();
 
+        [Bridge.Convention(Bridge.Notation.None)]
         extern IEnumerator IEnumerable.GetEnumerator();
     }
 }

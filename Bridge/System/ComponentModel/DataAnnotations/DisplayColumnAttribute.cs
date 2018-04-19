@@ -1,14 +1,13 @@
-using Bridge;
-
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// Sets the display column, the sort column, and the sort order for when a table is used as a parent table in FK
     /// relationships.
     /// </summary>
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public class DisplayColumnAttribute : Attribute
     {
         public extern DisplayColumnAttribute(string displayColumn);
