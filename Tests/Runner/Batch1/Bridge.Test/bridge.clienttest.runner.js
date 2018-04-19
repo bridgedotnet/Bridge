@@ -23869,7 +23869,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestNonTrailingNamedArg, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "15", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestNonTrailingNamedArg, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "24", $t));
                     Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg.TestBasic();
                 }
             }
