@@ -1,4 +1,5 @@
 using Bridge.Test.NUnit;
+using System;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.CSharp7
@@ -118,6 +119,41 @@ namespace Bridge.ClientTest.CSharp7
 
             Assert.AreEqual(5, i, "Reference returning method did not return the wrong value.");
             Assert.AreEqual(20, j, "Reference returning method assigned the expected variable.");
+        }
+
+
+        public struct Point3D
+        {
+            public double X { get; set; }
+            public double Y { get; set; }
+            public double Z { get; set; }
+
+            private static Point3D origin = new Point3D();
+            public static ref readonly Point3D Origin => ref origin;
+        }
+
+        readonly ref struct ReadOnlyRefPoint2D
+        {
+            public int X { get; }
+            public int Y { get; }
+
+            public ReadOnlyRefPoint2D(int x, int y) => (X, Y) = (x, y);
+        }
+
+        private static double CalculateDistance(in Point3D point1, in Point3D point2)
+        {
+            double xDifference = point1.X - point2.X;
+            double yDifference = point1.Y - point2.Y;
+            double zDifference = point1.Z - point2.Z;
+
+            return Math.Sqrt(xDifference * xDifference + yDifference * yDifference + zDifference * zDifference);
+        }
+
+        [Test]
+        public static void TestBasic5()
+        {
+            var distance = CalculateDistance(in Point3D.Origin, in Point3D.Origin);
+            Assert.AreEqual(0, distance);
         }
     }
 }

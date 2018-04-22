@@ -5346,6 +5346,14 @@
                 set: function (value) {
                     this.setter(value);
                 }
+            },
+            v: {
+                get: function () {
+                    return this.Value;
+                },
+                set: function (value) {
+                    this.Value = value;
+                }
             }
         },
         ctors: {

@@ -22,6 +22,18 @@ namespace Bridge
             }
         }
 
+        private T v
+        {
+            get
+            {
+                return Value;
+            }
+            set
+            {
+                Value = value;
+            }
+        }
+
         public Ref(Func<T> getter, Action<T> setter)
         {
             this.getter = getter;
