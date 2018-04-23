@@ -522,7 +522,7 @@ namespace Bridge.Translator
             }
             var isParam = parameter != null && !SyntaxHelper.IsAnonymous(parameter.Type);
             var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax)node.Parent.Parent : null;
-            node = (ArgumentSyntax)base.VisitArgument(node);            
+            node = (ArgumentSyntax)base.VisitArgument(node);
 
             if (isParam)
             {
@@ -952,7 +952,7 @@ namespace Bridge.Translator
                 var tupleField = field.CorrespondingTupleField;
                 node = node.WithName(SyntaxFactory.IdentifierName(tupleField.Name));
             }
-            
+
             if (isIdentifier
                 && symbol.Value != null
                 && (symbol.Value.IsStatic || symbol.Value.Kind == SymbolKind.NamedType)
