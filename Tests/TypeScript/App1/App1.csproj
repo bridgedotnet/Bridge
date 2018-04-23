@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Html5, Version=17.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Bridge.Html5.17.0.0-bridge17-0-0-beta\lib\net40\Bridge.Html5.dll</HintPath>
+      <HintPath>..\..\..\packages\Bridge.Html5.17.0.0\lib\net40\Bridge.Html5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
