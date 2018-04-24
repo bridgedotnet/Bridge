@@ -24030,7 +24030,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestBasic5: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic5()", $t.Line = "152", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic5()", $t.Line = "157", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic5();
                 }
             }

@@ -149,11 +149,16 @@ namespace Bridge.ClientTest.CSharp7
             return Math.Sqrt(xDifference * xDifference + yDifference * yDifference + zDifference * zDifference);
         }
 
+        /// <summary>
+        /// This tests the 'in' parameters by just calling a static method
+        /// which signature has it specified in its parameters' list.
+        /// Also, the arguments passed reference a ref struct.
+        /// </summary>
         [Test]
         public static void TestBasic5()
         {
             var distance = CalculateDistance(in Point3D.Origin, in Point3D.Origin);
-            Assert.AreEqual(0, distance);
+            Assert.AreEqual(0, distance, "Method using the 'in' parameter modifier from ref struct works.");
         }
     }
 }
