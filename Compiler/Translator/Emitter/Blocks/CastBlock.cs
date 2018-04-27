@@ -3,6 +3,7 @@ using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -141,7 +142,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (expression is NullReferenceExpression || (method != CS.Ops.IS && Helpers.IsIgnoreCast(type, this.Emitter)))
+            if (expression is NullReferenceExpression || (method != CS.Ops.IS && Helpers.IsIgnoreCast(type, this.Emitter)) || this.IsExternalCast(itype))
             {
                 if (expression is ParenthesizedExpression)
                 {
@@ -297,6 +298,29 @@ namespace Bridge.Translator
             {
                 this.Write(")");
             }
+        }
+
+        private bool IsExternalCast(IType type)
+        {
+            if (this.Emitter.Rules.ExternalCast == ExternalCastRule.Plain)
+            {
+                var typeDef = type.GetDefinition();
+                if (typeDef == null || !this.Emitter.Validator.IsExternalType(typeDef))
+                {
+                    return false;
+                }                
+
+                var fullName = type.FullName;
+
+                if (fullName.StartsWith("Bridge.") || fullName.StartsWith("System."))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         private void WriteCastValue(object value, IType expectedType)

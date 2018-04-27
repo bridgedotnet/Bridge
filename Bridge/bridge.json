@@ -39,6 +39,7 @@
         "Resources/Nullable.js",
         "Resources/Char.js",
 
+        "Resources/.generated/Bridge/Ref.js",
         "Resources/.generated/System/IConvertible.js",
         "Resources/.generated/System/HResults.js",
         "Resources/Exception.js",

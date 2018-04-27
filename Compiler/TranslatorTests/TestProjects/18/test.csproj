@@ -63,6 +63,7 @@
     <Compile Include="Issues\Issue948.cs" />
     <Compile Include="Issues\Issue599ReadyAttribute.cs" />
     <Compile Include="Issues\Issue461.cs" />
+    <Compile Include="Issues\Issue3516.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge">

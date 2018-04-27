@@ -64,6 +64,7 @@
     <Compile Include="Attributes\ReadyAttribute.cs" />
     <Compile Include="Attributes\RulesAttribute.cs" />
     <Compile Include="Attributes\WhereAttribute.cs" />
+    <Compile Include="Bridge\Ref.cs" />
     <Compile Include="shared\System\ApplicationException.cs" />
     <Compile Include="shared\System\ArgumentException.cs" />
     <Compile Include="shared\System\ArgumentNullException.cs" />

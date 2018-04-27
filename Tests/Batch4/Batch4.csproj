@@ -72,11 +72,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bridge.Html5, Version=17.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Html5.17.0.0-bridge17-0-0-beta0\lib\net40\Bridge.Html5.dll</HintPath>
+    <Reference Include="Bridge.Html5, Version=17.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Html5.17.1.0\lib\net40\Bridge.Html5.dll</HintPath>
     </Reference>
-    <Reference Include="Bridge.Test, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.4.0-bridge17-0-0-beta0\lib\net40\Bridge.Test.dll</HintPath>
+    <Reference Include="Bridge.Test, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Test.Core.1.5.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

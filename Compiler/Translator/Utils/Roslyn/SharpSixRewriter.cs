@@ -208,6 +208,26 @@ namespace Bridge.Translator
             return false;
         }
 
+        public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            var symbol = semanticModel.GetSymbolInfo(node.Right).Symbol;
+            var newNode = base.VisitBinaryExpression(node);
+            node = newNode as BinaryExpressionSyntax;
+            if (node != null && node.OperatorToken.Kind() == SyntaxKind.IsKeyword && !(symbol is ITypeSymbol))
+            {
+                //node = node.WithOperatorToken(SyntaxFactory.Token(SyntaxKind.EqualsEqualsToken));                
+                newNode = SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    node.Left,
+                                    SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                    SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
+                                        SyntaxFactory.Argument(
+                                            node.Right)))).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
+
+            return newNode;
+        }
+
         public override SyntaxNode VisitLocalFunctionStatement(LocalFunctionStatementSyntax node)
         {
             this.hasLocalFunctions = true;
@@ -222,14 +242,63 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitRefType(RefTypeSyntax node)
         {
-            ThrowRefNotSupported(node);
-            return node;
+            node = (RefTypeSyntax)base.VisitRefType(node);
+
+            return SyntaxFactory.GenericName(SyntaxFactory.Identifier("Bridge.Ref"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(new[] { node.Type }))).NormalizeWhitespace().WithTrailingTrivia(node.GetTrailingTrivia()).WithLeadingTrivia(node.GetLeadingTrivia());
         }
 
         public override SyntaxNode VisitRefExpression(RefExpressionSyntax node)
         {
-            ThrowRefNotSupported(node);
-            return node;
+            var symbol = semanticModel.GetSymbolInfo(node.Expression).Symbol;
+            var typeInfo = semanticModel.GetTypeInfo(node.Expression);
+            var type = typeInfo.Type ?? typeInfo.ConvertedType;
+
+            node = (RefExpressionSyntax)base.VisitRefExpression(node);
+
+            if (symbol is ILocalSymbol ls && ls.IsRef || symbol is IMethodSymbol ms && ms.ReturnsByRef)
+            {
+                return node.Expression.NormalizeWhitespace().WithTrailingTrivia(node.GetTrailingTrivia()).WithLeadingTrivia(node.GetLeadingTrivia());
+            }
+            
+            var createExpression = SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("Bridge.Ref"), SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(new []{
+                SyntaxHelper.GenerateTypeSyntax(type, semanticModel, node.Expression.GetLocation().SourceSpan.Start)
+            })))).WithArgumentList(SyntaxFactory.ArgumentList(
+                SyntaxFactory.SeparatedList<ArgumentSyntax>(
+                    new SyntaxNodeOrToken[]{
+                        SyntaxFactory.Argument(
+                            SyntaxFactory.ParenthesizedLambdaExpression(
+                                node.Expression)
+                            .WithParameterList(
+                                SyntaxFactory.ParameterList()
+                                .WithOpenParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                .WithCloseParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                            .WithArrowToken(
+                                SyntaxFactory.Token(SyntaxKind.EqualsGreaterThanToken))),
+                        SyntaxFactory.Token(SyntaxKind.CommaToken),
+                        SyntaxFactory.Argument(
+                            SyntaxFactory.ParenthesizedLambdaExpression(
+                                SyntaxFactory.AssignmentExpression(
+                                    SyntaxKind.SimpleAssignmentExpression,
+                                    node.Expression,
+                                    SyntaxFactory.IdentifierName("_v_"))
+                                .WithOperatorToken(
+                                    SyntaxFactory.Token(SyntaxKind.EqualsToken)))
+                            .WithParameterList(
+                                SyntaxFactory.ParameterList(
+                                    SyntaxFactory.SingletonSeparatedList<ParameterSyntax>(
+                                        SyntaxFactory.Parameter(
+                                            SyntaxFactory.Identifier("_v_"))))
+                                .WithOpenParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.OpenParenToken))
+                                .WithCloseParenToken(
+                                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)))
+                            .WithArrowToken(
+                                SyntaxFactory.Token(SyntaxKind.EqualsGreaterThanToken)))})));
+
+
+            return createExpression.NormalizeWhitespace().WithTrailingTrivia(node.GetTrailingTrivia()).WithLeadingTrivia(node.GetLeadingTrivia());
         }
 
         public override SyntaxNode VisitRefTypeExpression(RefTypeExpressionSyntax node)
@@ -356,6 +425,19 @@ namespace Bridge.Translator
             return base.VisitAssignmentExpression(node);
         }
 
+        public override SyntaxNode VisitParameter(ParameterSyntax node)
+        {
+            node = (ParameterSyntax)base.VisitParameter(node);
+
+            var idx = node.Modifiers.IndexOf(SyntaxKind.InKeyword);
+            if (idx > -1)
+            {
+                node = node.WithModifiers(node.Modifiers.RemoveAt(idx));
+            }
+
+            return node;
+        }
+
         public override SyntaxNode VisitArgument(ArgumentSyntax node)
         {
             var ti = this.semanticModel.GetTypeInfo(node.Expression);
@@ -363,12 +445,30 @@ namespace Bridge.Translator
             ITypeSymbol type = null;
             IMethodSymbol method = null;
             IParameterSymbol parameter = null;
+            bool nonTrailing = false;
 
-            if (ti.Type != null && ti.Type.TypeKind == TypeKind.Delegate)
+            if (node.NameColon == null && node.Parent is ArgumentListSyntax argList)
+            {
+                foreach (var arg in argList.Arguments)
+                {
+                    if (arg == node)
+                    {
+                        break;
+                    }
+
+                    if (arg.NameColon != null)
+                    {
+                        nonTrailing = true;
+                        break;
+                    }
+                }
+            }
+
+            if (ti.Type != null && (ti.Type.TypeKind == TypeKind.Delegate || nonTrailing))
             {
                 type = ti.Type;
             }
-            else if (ti.ConvertedType != null && ti.ConvertedType.TypeKind == TypeKind.Delegate)
+            else if (ti.ConvertedType != null && (ti.ConvertedType.TypeKind == TypeKind.Delegate || nonTrailing))
             {
                 type = ti.ConvertedType;
             }
@@ -452,6 +552,16 @@ namespace Bridge.Translator
                 }
             }
 
+            if (nonTrailing && parameter != null)
+            {
+                node = node.WithNameColon(SyntaxFactory.NameColon(SyntaxFactory.IdentifierName(parameter.Name)));
+            }
+
+            if (node.RefKindKeyword.Kind() == SyntaxKind.InKeyword)
+            {
+                node = node.WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.None));
+            }
+
             return node;
         }
 
@@ -489,6 +599,13 @@ namespace Bridge.Translator
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var method = this.semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
+            var isRef = false;
+
+            if (method != null && method.ReturnsByRef && node.Parent is AssignmentExpressionSyntax aes && aes.Left == node)
+            {
+                isRef = true;
+            }
+
             var spanStart = node.SpanStart;
             var si = node.ArgumentList.Arguments.Count > 0 ? semanticModel.GetSymbolInfo(node.ArgumentList.Arguments[0].Expression) : default(SymbolInfo);
             var costValue = (string)semanticModel.GetConstantValue(node).Value;
@@ -538,6 +655,11 @@ namespace Bridge.Translator
                         node = node.WithExpression(ma);
                     }
                 }
+            }
+
+            if (isRef)
+            {
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, node, SyntaxFactory.IdentifierName("Value")).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
             }
 
             return node;
@@ -714,12 +836,25 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (!this.hasStaticUsingOrAliases)
+            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            bool isRef = false;
+            if (symbol != null && symbol is ILocalSymbol ls && ls.IsRef && !(node.Parent is RefExpressionSyntax))
             {
-                return base.VisitIdentifierName(node);
+                isRef = true;
             }
 
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            if (!this.hasStaticUsingOrAliases)
+            {
+                var newNode = (ExpressionSyntax)base.VisitIdentifierName(node);
+
+                if (isRef)
+                {
+                    return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, newNode, SyntaxFactory.IdentifierName("Value")).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+                }
+
+                return newNode;
+            }
+            
             var isAlias = semanticModel.GetAliasInfo(node) != null;
 
             ITypeSymbol thisType = this.currentType.Count == 0 ? null : this.currentType.Peek();
@@ -786,6 +921,11 @@ namespace Bridge.Translator
                 return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia()));
             }
 
+            if (isRef)
+            {
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, node, SyntaxFactory.IdentifierName("Value")).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
+
             return node;
         }
 
@@ -800,6 +940,11 @@ namespace Bridge.Translator
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
             var isIdentifier = node.Expression.Kind() == SyntaxKind.IdentifierName;
+
+            if (isIdentifier && symbolNode.Value != null && symbolNode.Value is IPropertySymbol ps && ps.RefKind == RefKind.In)
+            {
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, node, SyntaxFactory.IdentifierName("Value")).NormalizeWhitespace().WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+            }
 
             if (isIdentifier && symbolNode.Value != null && symbolNode.Value is IFieldSymbol && symbolNode.Value.ContainingType.IsTupleType)
             {
@@ -1016,6 +1161,7 @@ namespace Bridge.Translator
             var old = this.fields;
             this.fields = new List<MemberDeclarationSyntax>();
             var isReadOnly = node.Modifiers.IndexOf(SyntaxKind.ReadOnlyKeyword) > -1;
+            var isRef = node.Modifiers.IndexOf(SyntaxKind.RefKeyword) > -1;
             var c = base.VisitStructDeclaration(node) as StructDeclarationSyntax;
 
             if (c != null && this.fields.Count > 0)
@@ -1034,6 +1180,11 @@ namespace Bridge.Translator
             {
                 c = c.WithModifiers(c.Modifiers.RemoveAt(c.Modifiers.IndexOf(SyntaxKind.ReadOnlyKeyword)));
                 c = c.WithAttributeLists(c.AttributeLists.Add(SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList<AttributeSyntax>(new AttributeSyntax[1] { SyntaxFactory.Attribute(SyntaxFactory.IdentifierName("Bridge.Immutable")) })).WithTrailingTrivia(SyntaxFactory.Whitespace("\n"))));
+            }
+
+            if (c != null && isRef)
+            {
+                c = c.WithModifiers(c.Modifiers.RemoveAt(c.Modifiers.IndexOf(SyntaxKind.RefKeyword)));
             }
 
             if (c.Modifiers.IndexOf(SyntaxKind.PrivateKeyword) > -1 && c.Modifiers.IndexOf(SyntaxKind.ProtectedKeyword) > -1)

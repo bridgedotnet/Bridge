@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 17.0.0-beta0
+ * @compiler Bridge.NET 17.1.0
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
@@ -109,13 +109,21 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Using static - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestUsingStatic.TestBasic);
             QUnit.test("Binary Literals - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestBinaryLiterals.TestBasic);
             QUnit.test("Case label pattern - TestCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCase);
+            QUnit.test("Case label pattern - TestVarCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestVarCase);
+            QUnit.test("Case label pattern - TestCaseNull", Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern.TestCaseNull);
             QUnit.test("DefaultLiteralExpression - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDefaultLiteralExpression.TestBasic);
             QUnit.test("Discards and out variables - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars.TestBasic);
             QUnit.test("Expression-bodied members - Test", Bridge.Test.Runtime.BridgeClientTestRunner.TestExpressionBodyMember.Test);
             QUnit.test("Is pattern - IsPatternTests", Bridge.Test.Runtime.BridgeClientTestRunner.TestIsPattern.IsPatternTests);
             QUnit.test("Local function - LocalFunctionsTests", Bridge.Test.Runtime.BridgeClientTestRunner.TestLocalFunctions.LocalFunctionsTests);
             QUnit.test("Local function - ExpressioNBodiedLocalFunctionsTests", Bridge.Test.Runtime.BridgeClientTestRunner.TestLocalFunctions.ExpressioNBodiedLocalFunctionsTests);
+            QUnit.test("C# Non-Trailing named arguments - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestNonTrailingNamedArg.TestBasic);
             QUnit.test("C# private protected - TestModifiers", Bridge.Test.Runtime.BridgeClientTestRunner.TestPrivateProtected.TestModifiers);
+            QUnit.test("Ref return and ref local - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal.TestBasic);
+            QUnit.test("Ref return and ref local - TestBasic2", Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal.TestBasic2);
+            QUnit.test("Ref return and ref local - TestBasic3", Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal.TestBasic3);
+            QUnit.test("Ref return and ref local - TestBasic4", Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal.TestBasic4);
+            QUnit.test("Ref return and ref local - TestBasic5", Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal.TestBasic5);
             QUnit.test("C# 7.2's ReadOnly struct - TestReadOnlyStruct", Bridge.Test.Runtime.BridgeClientTestRunner.TestROStruct.TestReadOnlyStruct);
             QUnit.test("Throw expressions - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestThrowExpression.TestBasic);
             QUnit.test("ValueTuple and deconstruction - TestBasic", Bridge.Test.Runtime.BridgeClientTestRunner.TestValueTupleAndDeconstruction.TestBasic);
@@ -22966,8 +22974,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestCase: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCase()", $t.Line = "61", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCase()", $t.Line = "62", $t));
                     Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestCase();
+                },
+                TestVarCase: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVarCase()", $t.Line = "142", $t));
+                    Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestVarCase();
+                },
+                TestCaseNull: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestCaseLabelPattern).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestCaseLabelPattern, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCaseNull()", $t.Line = "212", $t));
+                    Bridge.ClientTest.CSharp7.TestCaseLabelPattern.TestCaseNull();
                 }
             }
         },
@@ -23845,6 +23863,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestNonTrailingNamedArg", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestNonTrailingNamedArg, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "24", $t));
+                    Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg.TestBasic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestNonTrailingNamedArg", $t.File = "Batch1\\CSharp7\\TestNonTrailingNamedArg.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestOverloadInstanceMethods", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestOverloadInstanceMethods)],
         $kind: "nested class",
@@ -23953,6 +23997,52 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestReferenceTypes", $t.File = "Batch1\\BasicCSharp\\TestReferenceTypes.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestBasic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "33", $t));
+                    Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic();
+                },
+                TestBasic2: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic2()", $t.Line = "65", $t));
+                    Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic2();
+                },
+                TestBasic3: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic3()", $t.Line = "83", $t));
+                    Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic3();
+                },
+                TestBasic4: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic4()", $t.Line = "108", $t));
+                    Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic4();
+                },
+                TestBasic5: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic5()", $t.Line = "157", $t));
+                    Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic5();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CSharp7.TestRefReturnAndLocal", $t.File = "Batch1\\CSharp7\\TestRefReturnAndLocal.cs", $t);
                 }
                 return this.context;
             }
