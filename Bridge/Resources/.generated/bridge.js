@@ -2015,7 +2015,7 @@
                 func();
             }
 
-            if (Bridge.isDefined(window)) {
+            if (typeof window !== "undefined") {
                 if (window.addEventListener) {
                     window.addEventListener("message", onmessage);
                 } else {
@@ -2026,7 +2026,7 @@
             return function (func) {
                 tail = tail.next = { func: func };
 
-                if (Bridge.isDefined(window)) {
+                if (typeof window !== "undefined") {
                     window.postMessage(id, "*");
                 }
             };
@@ -40354,7 +40354,7 @@
         },
         f2: function (base64) {
             try {
-                if (!Bridge.isDefined(window) { throw new System.Exception(); };
+                if (!Bridge.isDefined(window)) { throw new System.Exception(); };
                 var binary_string = window.atob(base64);
                 var len = binary_string.length;
                 var arr = System.Array.init(len, 0, System.Char);

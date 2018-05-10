@@ -1997,7 +1997,7 @@
                 func();
             }
 
-            if (Bridge.isDefined(window)) {
+            if (typeof window !== "undefined") {
                 if (window.addEventListener) {
                     window.addEventListener("message", onmessage);
                 } else {
@@ -2008,7 +2008,7 @@
             return function (func) {
                 tail = tail.next = { func: func };
 
-                if (Bridge.isDefined(window)) {
+                if (typeof window !== "undefined") {
                     window.postMessage(id, "*");
                 }
             };
