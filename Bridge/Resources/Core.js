@@ -1851,6 +1851,7 @@
             combine: function (fn1, fn2) {
                 if (!fn1 || !fn2) {
                     var fn = fn1 || fn2;
+
                     return fn ? Bridge.fn.$build([fn]) : fn;
                 }
 
@@ -1985,29 +1986,34 @@
 
             var id = Math.random();
 
-            function onmessage(e) {
+            function onmessage (e) {
                 if (e.data != id) {
                     return;
                 }
+
                 head = head.next;
                 var func = head.func;
                 delete head.func;
                 func();
             }
 
-            if (window.addEventListener) {
-                window.addEventListener('message', onmessage);
-            } else {
-                window.attachEvent('onmessage', onmessage);
+            if (Bridge.isDefined(window)) {
+                if (window.addEventListener) {
+                    window.addEventListener("message", onmessage);
+                } else {
+                    window.attachEvent("onmessage", onmessage);
+                }
             }
 
             return function (func) {
                 tail = tail.next = { func: func };
-                window.postMessage(id, "*");
+
+                if (Bridge.isDefined(window)) {
+                    window.postMessage(id, "*");
+                }
             };
         }());
-    }
-    else {
+    } else {
         core.setImmediate = globals.setImmediate;
     }
 
