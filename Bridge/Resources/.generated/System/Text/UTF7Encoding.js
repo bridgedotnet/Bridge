@@ -125,7 +125,7 @@
         },
         f2: function (base64) {
             try {
-                if (!Bridge.isDefined(window)) { throw new System.Exception(); };
+                if (typeof window !== "undefined") { throw new System.Exception(); };
                 var binary_string = window.atob(base64);
                 var len = binary_string.length;
                 var arr = System.Array.init(len, 0, System.Char);
