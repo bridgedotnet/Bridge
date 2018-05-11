@@ -77,7 +77,7 @@ namespace System.Text
             {
                 try
                 {
-                    Bridge.Script.Write("if (!Bridge.isDefined(window)) { throw new System.Exception(); }");
+                    Bridge.Script.Write("if (typeof window !== \"undefined\") { throw new System.Exception(); }");
                     var binary_string = Bridge.Script.Write<string>("window.atob(base64)");
                     var len = binary_string.Length;
                     var arr = new char[len];
