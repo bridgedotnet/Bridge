@@ -624,15 +624,23 @@ namespace Bridge.Contract
             var def = type.Type.GetDefinition();
             if (def != null && type.Module == null)
             {
-                if (def.Attributes.Count > 0)
-                {
-                    var attr = def.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.ModuleAttribute");
+                var typeDef = def;
 
-                    if (attr != null)
+                do
+                {
+                    if (typeDef.Attributes.Count > 0)
                     {
-                        BridgeTypes.ReadModuleFromAttribute(type, attr);
+                        var attr = typeDef.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.ModuleAttribute");
+
+                        if (attr != null)
+                        {
+                            BridgeTypes.ReadModuleFromAttribute(type, attr);
+                        }
                     }
+
+                    typeDef = typeDef.DeclaringTypeDefinition;
                 }
+                while (typeDef != null && type.Module == null);                
 
                 if (type.Module == null)
                 {
