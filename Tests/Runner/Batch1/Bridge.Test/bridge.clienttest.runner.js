@@ -21060,7 +21060,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 CopyToAsyncTest: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CopyToAsyncTest()", $t.Line = "19", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.IO.StreamTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StreamTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CopyToAsyncTest()", $t.Line = "21", $t));
                     t.Fixture.CopyToAsyncTest();
                 }
             }
@@ -23063,7 +23063,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "72", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestDiscardsAndOutVars, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "73", $t));
                     Bridge.ClientTest.CSharp7.TestDiscardsAndOutVars.TestBasic();
                 }
             }
@@ -23845,7 +23845,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestNameOf).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "30", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestNameOf).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestNameOf, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "31", $t));
                     Bridge.ClientTest.CSharp6.TestNameOf.TestBasic();
                 }
             }
@@ -24031,7 +24031,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestBasic5: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic5()", $t.Line = "157", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestRefReturnAndLocal).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestRefReturnAndLocal, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic5()", $t.Line = "163", $t));
                     Bridge.ClientTest.CSharp7.TestRefReturnAndLocal.TestBasic5();
                 }
             }

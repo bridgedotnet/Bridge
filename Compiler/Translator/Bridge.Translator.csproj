@@ -306,6 +306,7 @@
     <Compile Include="Utils\Roslyn\AwaitersCollector.cs" />
     <Compile Include="Utils\Roslyn\DeconstructionReplacer.cs" />
     <Compile Include="Utils\Roslyn\DiscardReplacer.cs" />
+    <Compile Include="Utils\Roslyn\ExpressionBodyToStatementRewriter.cs" />
     <Compile Include="Utils\Roslyn\LocalFunctionReplacer.cs" />
     <Compile Include="Utils\Roslyn\SwitchPatternReplacer.cs" />
     <Compile Include="Utils\Roslyn\IsPatternReplacer.cs" />

@@ -312,6 +312,9 @@ namespace Bridge.Translator
         protected void VisitSwitchStatement()
         {
             SwitchStatement switchStatement = this.SwitchStatement;
+            this.ParentAsyncSwitch = this.Emitter.AsyncSwitch;
+            this.Emitter.AsyncSwitch = null;
+
             var jumpStatements = this.Emitter.JumpStatements;
             this.Emitter.JumpStatements = null;
 
@@ -354,6 +357,7 @@ namespace Bridge.Translator
             this.EndBlock();
             this.WriteNewLine();
             this.Emitter.JumpStatements = jumpStatements;
+            this.Emitter.AsyncSwitch = this.ParentAsyncSwitch;
         }
 
         protected void VisitSwitchSection()

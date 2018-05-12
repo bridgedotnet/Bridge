@@ -166,6 +166,11 @@ namespace Bridge.Translator
                             conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, declarationType));
                         }
                     }
+                    else if (label.Pattern is ConstantPatternSyntax)
+                    {
+                        var constPattern = (ConstantPatternSyntax)label.Pattern;
+                        conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, constPattern.Expression));
+                    }
 
                     if (label.WhenClause != null)
                     {

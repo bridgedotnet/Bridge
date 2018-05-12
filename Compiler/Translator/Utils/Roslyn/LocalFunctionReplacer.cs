@@ -22,7 +22,14 @@ namespace Bridge.Translator
                     return false;
                 }
 
-                var xSymbol = model.GetSymbolInfo(x).Symbol;
+                var info = model.GetSymbolInfo(x);
+                var xSymbol = info.Symbol;
+
+                if (xSymbol == null && info.CandidateSymbols != null && info.CandidateSymbols.Length > 0)
+                {
+                    xSymbol = info.CandidateSymbols[0];
+                }
+
                 if (xSymbol == null || !symbol.Equals(xSymbol))
                 {
                     return false;
@@ -35,14 +42,14 @@ namespace Bridge.Translator
         public SyntaxNode Replace(SyntaxNode root, SemanticModel model)
         {
             var localFns = root.DescendantNodes().OfType<LocalFunctionStatementSyntax>();
-            var updatedBlocks = new Dictionary<BlockSyntax, List<StatementSyntax>>();
+            var updatedBlocks = new Dictionary<SyntaxNode, List<StatementSyntax>>();
             var updatedClasses = new Dictionary<TypeDeclarationSyntax, List<DelegateDeclarationSyntax>>();
 
             foreach (var fn in localFns)
             {
-                var block = fn.Ancestors().OfType<BlockSyntax>().First();
-                var usage = GetFirstUsageLocalFunc(model, fn, block);
-                var beforeStatement = usage.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
+                var parentNode = fn.Parent;
+                var usage = GetFirstUsageLocalFunc(model, fn, parentNode);
+                var beforeStatement = usage.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
 
                 var customDelegate = false;
 
@@ -85,7 +92,7 @@ namespace Bridge.Translator
 
                 if (customDelegate)
                 {
-                    var typeDecl = block.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
+                    var typeDecl = parentNode.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
                     var delegates = updatedClasses.ContainsKey(typeDecl) ? updatedClasses[typeDecl] : new List<DelegateDeclarationSyntax>();
                     var name = $"___{fn.Identifier.ValueText}_Delegate_{delegates.Count}";
                     var delDecl = SyntaxFactory.DelegateDeclaration(fn.ReturnType, SyntaxFactory.Identifier(name))
@@ -148,7 +155,18 @@ namespace Bridge.Translator
 
                 if (customDelegate)
                 {
-                    prms = fn.ParameterList.Parameters.ToList();
+                    foreach (var prm in fn.ParameterList.Parameters)
+                    {
+                        var newPrm = prm.WithDefault(null);
+                        var idx = newPrm.Modifiers.IndexOf(SyntaxKind.ParamsKeyword);
+
+                        if (idx > -1)
+                        {
+                            newPrm = newPrm.WithModifiers(newPrm.Modifiers.RemoveAt(idx));
+                        }
+
+                        prms.Add(newPrm);
+                    }
                 }
                 else
                 {
@@ -156,7 +174,7 @@ namespace Bridge.Translator
                     {
                         prms.Add(SyntaxFactory.Parameter(prm.Identifier));
                     }
-                }                
+                }
 
                 var varDecl = SyntaxFactory.VariableDeclaration(varType).WithVariables(SyntaxFactory.SingletonSeparatedList(
                     SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
@@ -167,11 +185,29 @@ namespace Bridge.Translator
                     )
                 )).NormalizeWhitespace();
 
-                var statements = updatedBlocks.ContainsKey(block) ? updatedBlocks[block] : block.Statements.ToList();
+
+                List<StatementSyntax> statements = null;
+
+                if (updatedBlocks.ContainsKey(parentNode))
+                {
+                    statements = updatedBlocks[parentNode];
+                }
+                else
+                {
+                    if (parentNode is BlockSyntax bs)
+                    {
+                        statements = bs.Statements.ToList();
+                    }
+                    else if (parentNode is SwitchSectionSyntax sss)
+                    {
+                        statements = sss.Statements.ToList();
+                    }
+                }
+
                 statements.Remove(fn);
                 statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : 0, SyntaxFactory.LocalDeclarationStatement(varDecl));
 
-                updatedBlocks[block] = statements;
+                updatedBlocks[parentNode] = statements;
             }
 
             if (updatedClasses.Count > 0)
@@ -179,7 +215,11 @@ namespace Bridge.Translator
                 root = root.ReplaceNodes(updatedClasses.Keys, (t1, t2) =>
                 {
                     var members = updatedClasses[t1].ToArray();
-                    t1 = t1.ReplaceNodes(updatedBlocks.Keys, (b1, b2) => b1.WithStatements(SyntaxFactory.List(updatedBlocks[b1])));
+
+                    t1 = t1.ReplaceNodes(updatedBlocks.Keys, (b1, b2) => {
+                        SyntaxNode result = b1 is SwitchSectionSyntax sss ? sss.WithStatements(SyntaxFactory.List(updatedBlocks[b1])) : (SyntaxNode)(((BlockSyntax)b1).WithStatements(SyntaxFactory.List(updatedBlocks[b1])));
+                        return result;
+                    });
 
                     var cls = t1 as ClassDeclarationSyntax;
                     if (cls != null)
@@ -198,7 +238,10 @@ namespace Bridge.Translator
             }
             else if (updatedBlocks.Count > 0)
             {
-                root = root.ReplaceNodes(updatedBlocks.Keys, (b1, b2) => b1.WithStatements(SyntaxFactory.List(updatedBlocks[b1])));
+                root = root.ReplaceNodes(updatedBlocks.Keys, (b1, b2) => {
+                    SyntaxNode result = b1 is SwitchSectionSyntax sss ? sss.WithStatements(SyntaxFactory.List(updatedBlocks[b1])) : (SyntaxNode)(((BlockSyntax)b1).WithStatements(SyntaxFactory.List(updatedBlocks[b1])));
+                    return result;
+                });
             }
 
             return root;

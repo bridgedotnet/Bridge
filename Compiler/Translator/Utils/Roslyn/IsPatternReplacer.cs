@@ -23,36 +23,54 @@ namespace Bridge.Translator
                 .DescendantNodes()
                 .OfType<IsPatternExpressionSyntax>();
 
-            var updatedStatements = new Dictionary<StatementSyntax, List<LocalDeclarationStatementSyntax>>();
+            var updatedStatements = new Dictionary<SyntaxNode, List<LocalDeclarationStatementSyntax>>();
 
             foreach (var pattern in patterns)
             {
-                var beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                if (beforeStatement != null && pattern.Pattern is DeclarationPatternSyntax)
+                SyntaxNode lambdaExpr = pattern.Ancestors().OfType<LambdaExpressionSyntax>().FirstOrDefault();
+                SyntaxNode beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+
+                if (pattern.Pattern is DeclarationPatternSyntax declarationPattern)
                 {
-                    var declarationPattern = (DeclarationPatternSyntax)pattern.Pattern;
-                    var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
-
-                    if (designation != null)
+                    if (lambdaExpr != null && !SyntaxHelper.IsChildOf(beforeStatement, lambdaExpr))
                     {
-                        var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                        if (lambdaExpr is ParenthesizedLambdaExpressionSyntax pl && !(pl.Body is BlockSyntax))
+                        {
+                            beforeStatement = lambdaExpr;
+                        }
+                        else if (lambdaExpr is SimpleLambdaExpressionSyntax sl && !(sl.Body is BlockSyntax))
+                        {
+                            beforeStatement = lambdaExpr;
+                        }
+                    }
 
-                        var varDecl = SyntaxFactory.VariableDeclaration(declarationPattern.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                            SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
-                        ));
+                    if (beforeStatement != null)
+                    {
+                        var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
 
-                        locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace());
+                        if (designation != null)
+                        {
+                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
 
-                        updatedStatements[beforeStatement] = locals;
+                            var varDecl = SyntaxFactory.VariableDeclaration(declarationPattern.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
+                            ));
+
+                            locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace());
+
+                            updatedStatements[beforeStatement] = locals;
+                        }
                     }
                 }
             }
 
-            var annotated = new Dictionary<SyntaxAnnotation, List<LocalDeclarationStatementSyntax>>();
+            var annotated = new Dictionary<SyntaxAnnotation, Tuple<bool, List<LocalDeclarationStatementSyntax>>>();
+
             root = root.ReplaceNodes(updatedStatements.Keys, (n1, n2) =>
             {
                 var annotation = new SyntaxAnnotation();
-                annotated[annotation] = updatedStatements[n1];
+                var locals = updatedStatements[n1];
+                annotated[annotation] = new Tuple<bool, List<LocalDeclarationStatementSyntax>>(SyntaxHelper.RequireReturnStatement(model, n1), locals);
 
                 n2 = n2.WithAdditionalAnnotations(annotation);
                 return n2;
@@ -61,7 +79,45 @@ namespace Bridge.Translator
             foreach (var annotation in annotated.Keys)
             {
                 var annotatedNode = root.GetAnnotatedNodes(annotation).First();
-                var varStatements = annotated[annotation];
+                var tuple = annotated[annotation];
+                var requireReturn = tuple.Item1;
+                var varStatements = tuple.Item2;
+
+                if (annotatedNode is LambdaExpressionSyntax)
+                {
+                    ExpressionSyntax bodyExpr = null;
+                    if (annotatedNode.IsKind(SyntaxKind.ParenthesizedLambdaExpression))
+                    {
+                        bodyExpr = ((ParenthesizedLambdaExpressionSyntax)annotatedNode).Body as ExpressionSyntax;
+                    }
+                    else
+                    {
+                        bodyExpr = ((SimpleLambdaExpressionSyntax)annotatedNode).Body as ExpressionSyntax;
+                    }
+                    if (bodyExpr == null)
+                    {
+                        continue;
+                    }
+
+                    var list = new List<StatementSyntax>(varStatements);
+                    list.Add(requireReturn ? (StatementSyntax)SyntaxFactory.ReturnStatement(bodyExpr) : SyntaxFactory.ExpressionStatement(bodyExpr));
+
+                    LambdaExpressionSyntax lambdaExpression = null;
+                    if (annotatedNode is ParenthesizedLambdaExpressionSyntax pl && !(pl.Body is BlockSyntax))
+                    {
+                        lambdaExpression = pl.WithBody(SyntaxFactory.Block(list)).NormalizeWhitespace();
+                    }
+                    else if (annotatedNode is SimpleLambdaExpressionSyntax sl && !(sl.Body is BlockSyntax))
+                    {
+                        lambdaExpression = sl.WithBody(SyntaxFactory.Block(list)).NormalizeWhitespace();                        
+                    }
+
+                    if (lambdaExpression != null)
+                    {
+                        root = root.ReplaceNode(annotatedNode, lambdaExpression);
+                        continue;
+                    }                    
+                }
 
                 if(annotatedNode.Parent is BlockSyntax || !(annotatedNode is StatementSyntax))
                 {
