@@ -69,7 +69,7 @@
         }
     });
 
-    if (typeof (window) !== "undefined" && window.performance && window.performance.now) {
+if (typeof window !== 'undefined' && window.performance && window.performance.now) {
         System.Diagnostics.Stopwatch.frequency = new System.Int64(1e6);
         System.Diagnostics.Stopwatch.isHighResolution = true;
         System.Diagnostics.Stopwatch.getTimestamp = function () {

@@ -1869,6 +1869,7 @@
             combine: function (fn1, fn2) {
                 if (!fn1 || !fn2) {
                     var fn = fn1 || fn2;
+
                     return fn ? Bridge.fn.$build([fn]) : fn;
                 }
 
@@ -2003,29 +2004,34 @@
 
             var id = Math.random();
 
-            function onmessage(e) {
+            function onmessage (e) {
                 if (e.data != id) {
                     return;
                 }
+
                 head = head.next;
                 var func = head.func;
                 delete head.func;
                 func();
             }
 
-            if (window.addEventListener) {
-                window.addEventListener('message', onmessage);
-            } else {
-                window.attachEvent('onmessage', onmessage);
+            if (typeof window !== "undefined") {
+                if (window.addEventListener) {
+                    window.addEventListener("message", onmessage);
+                } else {
+                    window.attachEvent("onmessage", onmessage);
+                }
             }
 
             return function (func) {
                 tail = tail.next = { func: func };
-                window.postMessage(id, "*");
+
+                if (typeof window !== "undefined") {
+                    window.postMessage(id, "*");
+                }
             };
         }());
-    }
-    else {
+    } else {
         core.setImmediate = globals.setImmediate;
     }
 
@@ -11327,7 +11333,7 @@
         }
     });
 
-    if (typeof (window) !== "undefined" && window.performance && window.performance.now) {
+if (typeof window !== 'undefined' && window.performance && window.performance.now) {
         System.Diagnostics.Stopwatch.frequency = new System.Int64(1e6);
         System.Diagnostics.Stopwatch.isHighResolution = true;
         System.Diagnostics.Stopwatch.getTimestamp = function () {
@@ -40226,7 +40232,7 @@
         statics: {
             methods: {
                 Escape: function (chars) {
-                    return chars.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+                    return chars.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
                 }
             }
         },
@@ -40265,7 +40271,7 @@
                 var setO = System.Text.UTF7Encoding.Escape("!\"#$%&*;<=>@[]^_`{|}");
                 var setW = System.Text.UTF7Encoding.Escape(" \r\n\t");
 
-                s = s.replace(new RegExp("[^" + setW + setD + (this.allowOptionals ? setO : "") + "]+", 'g'), function (chunk) {return '+' + (chunk === '+' ? '' : encode(chunk)) + '-';});
+                s = s.replace(new RegExp("[^" + setW + setD + (this.allowOptionals ? setO : "") + "]+", "g"), function (chunk) { return "+" + (chunk === "+" ? "" : encode(chunk)) + "-"; });
 
                 var arr = System.String.toCharArray(s, 0, s.length);
 
@@ -40302,7 +40308,7 @@
                 };
 
                 var str = System.String.fromCharArray(bytes, index, count);
-                return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function (_, chunk) {if (chunk === '') {return _ == '+-' ? '+' : '';}return decode(chunk);});
+                return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function (_, chunk) { if (chunk === "") { return _ == "+-" ? "+" : ""; } return decode(chunk); });
             },
             GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
@@ -40344,10 +40350,11 @@
                 b[System.Array.index(Bridge.identity(bi, (bi = (bi + 1) | 0)), b)] = (c & 255);
             }
             var base64Str = System.Convert.toBase64String(b, null, null, null);
-            return base64Str.replace(/=+$/, '');
+            return base64Str.replace(/=+$/, "");
         },
         f2: function (base64) {
             try {
+                if (typeof window === "undefined") { throw new System.Exception(); };
                 var binary_string = window.atob(base64);
                 var len = binary_string.length;
                 var arr = System.Array.init(len, 0, System.Char);
@@ -40359,6 +40366,7 @@
                 for (var i = 0; i < len; i = (i + 1) | 0) {
                     arr[System.Array.index(i, arr)] = binary_string.charCodeAt(i);
                 }
+
                 return arr;
             }
             catch ($e1) {
