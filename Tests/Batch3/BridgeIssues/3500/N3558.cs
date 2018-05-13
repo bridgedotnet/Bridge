@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge3558
     {
         /// <summary>
-        /// 
+        /// Test by defining a local function and never actually referencing it.
         /// </summary>
         [Test]
         public static void TestUnusedLocalFn()

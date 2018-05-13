@@ -31341,6 +31341,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 /**
+                 * Test by defining a local function and never actually referencing it.
+                 *
                  * @static
                  * @public
                  * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
