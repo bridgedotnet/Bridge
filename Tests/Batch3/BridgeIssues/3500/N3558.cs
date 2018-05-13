@@ -5,9 +5,16 @@ using System.Linq;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
+    /// <summary>
+    /// The test here consists in ensuring code built with local function
+    /// definitions that are not actually referenced can be built with Bridge.
+    /// </summary>
     [TestFixture(TestNameFormat = "#3558 - {0}")]
     public class Bridge3558
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [Test]
         public static void TestUnusedLocalFn()
         {
@@ -16,9 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             bool test() => a > 10;
 #pragma warning restore CS8321 // Local function is declared but never used
 
-            {
-                Assert.AreEqual(15, a);
-            }
+            Assert.AreEqual(15, a, "Unused local function does not result in broken Bridge code.");
         }
     }
 }
