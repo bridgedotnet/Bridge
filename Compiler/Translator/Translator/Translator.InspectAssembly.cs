@@ -308,13 +308,8 @@ namespace Bridge.Translator
         {
             var rewriter = new SharpSixRewriter(this);
             var result = new string[this.SourceFiles.Count];
-
-            for (int i = 0; i < this.SourceFiles.Count; i++)
-            {
-                result[i] = new SharpSixRewriter(rewriter).Rewrite(i);
-            }
-
-            //Task.WaitAll(this.SourceFiles.Select((file, index) => Task.Run(() => result[index] = new SharpSixRewriter(rewriter).Rewrite(index))).ToArray());
+            
+            Task.WaitAll(this.SourceFiles.Select((file, index) => Task.Run(() => result[index] = new SharpSixRewriter(rewriter).Rewrite(index))).ToArray());
             return result;
         }
 
