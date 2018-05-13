@@ -173,14 +173,14 @@ namespace Bridge.Translator
                             SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression))
                         )
                     )
-                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
                 var assignment = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, 
                     SyntaxFactory.IdentifierName(fn.Identifier.ValueText),
                     SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
                         SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
                     )
-                )).NormalizeWhitespace();
+                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
                 var statements = updatedBlocks.ContainsKey(block) ? updatedBlocks[block] : block.Statements.ToList();
                 var fnIdx = statements.IndexOf(fn);
@@ -225,7 +225,7 @@ namespace Bridge.Translator
             }
 
             root = root.RemoveNodes(root.DescendantNodes().OfType<LocalFunctionStatementSyntax>(), SyntaxRemoveOptions.KeepTrailingTrivia | SyntaxRemoveOptions.KeepLeadingTrivia);
-            
+
             return root;
         }
     }

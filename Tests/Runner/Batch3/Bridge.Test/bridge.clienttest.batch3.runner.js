@@ -32,6 +32,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3516 - TestManagedExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestManagedExternalCastRule);
             QUnit.test("#3516 - TestDefaultExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestDefaultExternalCastRule);
             QUnit.test("#3519 - TestInjectScript", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3519.TestInjectScript);
+            QUnit.test("#3558 - TestUnusedLocalFn", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558.TestUnusedLocalFn);
             QUnit.test("#3560 - TestLocalFunctionRecursion", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560.TestLocalFunctionRecursion);
             QUnit.test("#3560 - TestLocalFunctionsReferences", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560.TestLocalFunctionsReferences);
             QUnit.module("Issues3");
@@ -16561,6 +16562,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestUnusedLocalFn: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUnusedLocalFn()", $t.Line = "18", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558.TestUnusedLocalFn();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", $t.File = "Batch3\\BridgeIssues\\3500\\N3558.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560)],
         $kind: "nested class",
@@ -16573,7 +16600,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 },
                 TestLocalFunctionsReferences: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionsReferences()", $t.Line = "30", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionsReferences()", $t.Line = "31", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560.TestLocalFunctionsReferences();
                 }
             }
