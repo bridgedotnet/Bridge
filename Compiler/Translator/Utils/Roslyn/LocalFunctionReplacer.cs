@@ -42,7 +42,7 @@ namespace Bridge.Translator
             {
                 var block = fn.Ancestors().OfType<BlockSyntax>().First();
                 var usage = GetFirstUsageLocalFunc(model, fn, block);
-                var beforeStatement = usage.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
+                var beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
 
                 var customDelegate = false;
 
@@ -79,7 +79,8 @@ namespace Bridge.Translator
                     }
                 }
 
-                var isVoid = fn.ReturnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
+                var returnType = fn.ReturnType.WithoutLeadingTrivia().WithoutTrailingTrivia();
+                var isVoid = returnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
 
                 TypeSyntax varType;
 
@@ -88,7 +89,7 @@ namespace Bridge.Translator
                     var typeDecl = block.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
                     var delegates = updatedClasses.ContainsKey(typeDecl) ? updatedClasses[typeDecl] : new List<DelegateDeclarationSyntax>();
                     var name = $"___{fn.Identifier.ValueText}_Delegate_{delegates.Count}";
-                    var delDecl = SyntaxFactory.DelegateDeclaration(fn.ReturnType, SyntaxFactory.Identifier(name))
+                    var delDecl = SyntaxFactory.DelegateDeclaration(returnType, SyntaxFactory.Identifier(name))
                         .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword)))
                         .WithParameterList(fn.ParameterList).NormalizeWhitespace();
                     delegates.Add(delDecl);
@@ -121,7 +122,7 @@ namespace Bridge.Translator
                         varType = SyntaxFactory.QualifiedName(
                             SyntaxFactory.IdentifierName("System"),
                             SyntaxFactory.GenericName("Func").WithTypeArgumentList(
-                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(fn.ReturnType))
+                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(returnType))
                             )
                         );
                     }
@@ -135,7 +136,7 @@ namespace Bridge.Translator
                                 SyntaxFactory.TypeArgumentList(
                                     SyntaxFactory.SeparatedList(
                                         fn.ParameterList.Parameters.Select(p => p.Type).Concat(
-                                            new TypeSyntax[] { fn.ReturnType }
+                                            new TypeSyntax[] { returnType }
                                         )
                                     )
                                 )
@@ -168,8 +169,9 @@ namespace Bridge.Translator
                 )).NormalizeWhitespace();
 
                 var statements = updatedBlocks.ContainsKey(block) ? updatedBlocks[block] : block.Statements.ToList();
-                statements.Remove(fn);
-                statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : 0, SyntaxFactory.LocalDeclarationStatement(varDecl));
+                var fnIdx = statements.IndexOf(fn);
+                //statements.Remove(fn);
+                statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : Math.Max(0, fnIdx), SyntaxFactory.LocalDeclarationStatement(varDecl).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
 
                 updatedBlocks[block] = statements;
             }
@@ -200,6 +202,8 @@ namespace Bridge.Translator
             {
                 root = root.ReplaceNodes(updatedBlocks.Keys, (b1, b2) => b1.WithStatements(SyntaxFactory.List(updatedBlocks[b1])));
             }
+
+            root = root.RemoveNodes(root.DescendantNodes().OfType<LocalFunctionStatementSyntax>(), SyntaxRemoveOptions.KeepTrailingTrivia | SyntaxRemoveOptions.KeepLeadingTrivia);
 
             return root;
         }

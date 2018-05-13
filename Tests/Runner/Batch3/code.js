@@ -31330,6 +31330,26 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", {
+        statics: {
+            methods: {
+                TestUnusedLocalFn: function () {
+                    var a = 15;
+                    var test = function () {
+                        return a > 10;
+                    }; /// Local function is declared but never used
+
+
+
+
+                    {
+                        Bridge.Test.NUnit.Assert.AreEqual(15, a);
+                    }
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {

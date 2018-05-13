@@ -32,6 +32,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3516 - TestManagedExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestManagedExternalCastRule);
             QUnit.test("#3516 - TestDefaultExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestDefaultExternalCastRule);
             QUnit.test("#3519 - TestInjectScript", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3519.TestInjectScript);
+            QUnit.test("#3558 - TestUnusedLocalFn", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558.TestUnusedLocalFn);
             QUnit.module("Issues3");
             QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge069.ThisKeywordInStructConstructorWorks);
             QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1000.TestStaticViaChild);
@@ -16553,6 +16554,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3519", $t.File = "Batch3\\BridgeIssues\\3500\\N3519.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                TestUnusedLocalFn: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3558, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUnusedLocalFn()", $t.Line = "11", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558.TestUnusedLocalFn();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", $t.File = "Batch3\\BridgeIssues\\3500\\N3558.cs", $t);
                 }
                 return this.context;
             }
