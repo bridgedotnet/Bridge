@@ -31330,21 +31330,30 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in ensuring code built with local function
+     definitions that are not actually referenced can be built with Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", {
         statics: {
             methods: {
+                /**
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @return  {void}
+                 */
                 TestUnusedLocalFn: function () {
                     var a = 15;
                     var test = function () {
                         return a > 10;
-                    }; /// Local function is declared but never used
+                    }; /// Local function is declared but never used /// Local function is declared but never used
 
-
-
-
-                    {
-                        Bridge.Test.NUnit.Assert.AreEqual(15, a);
-                    }
+                    Bridge.Test.NUnit.Assert.AreEqual(15, a, "Unused local function does not result in broken Bridge code.");
                 }
             }
         }
