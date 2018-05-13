@@ -31331,6 +31331,80 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The tests here consists in ensuring broken use cases identified and
+     reported in issue #3550 are usable in Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550", {
+        statics: {
+            methods: {
+                /**
+                 * The chained switch case involfing 'when' expression.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @return  {void}
+                 */
+                TestSwitchCaseWhen: function () {
+                    var probe0 = 744;
+                    var probe1 = 1;
+                    do {
+                        if (probe0 === 744 || probe0 === 745) {
+                            if ((probe1 === 1) || (probe1 === 2)) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case-when chained statement works.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                },
+                /**
+                 * The typed-default switch case.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @return  {void}
+                 */
+                TestSwitchCaseTypedDefault: function () {
+                    var obj = Bridge.box(false, System.Boolean, System.Boolean.toString);
+                    do {
+                        if (Bridge.is(obj, System.Boolean) && (obj === Bridge.getDefaultValue(System.Boolean))) {
+                            Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative works.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(obj, System.Int32) && (obj === Bridge.getDefaultValue(System.Int32))) {
+                            Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'int' fallover.");
+                            break;
+                        }
+
+                        if (Bridge.is(obj, System.String) && (Bridge.referenceEquals(obj, null))) {
+                            Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'string' fallover.");
+                            break;
+                        }
+
+                        if (Bridge.is(obj, System.Boolean) && (obj === Bridge.getDefaultValue(System.Boolean))) {
+                            Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative matches the type when choosing its fallover 'default'.");
+                            break;
+                        }
+                    } while (false);
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring given switch-case and local
+     function C#7 statement syntaxes are supported by Bridge.
+     The tests here have been based in a test project (pkHex-Bridge2) which
+     explored the issues.
+     *
      * @public
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
      */
@@ -31338,6 +31412,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 /**
+                 * Tests with switch-case-when.
+                 *
                  * @static
                  * @public
                  * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
@@ -31458,6 +31534,15 @@ Bridge.$N1391Result =                     r;
                         }
                     } while (false);
                 },
+                /**
+                 * Tests with Local Functions.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @return  {void}
+                 */
                 TestLocalFunction: function () {
                     var list = System.Array.init([1, 2, 3], System.Int32);
                     var strings = System.Array.init(["one", "two", "three"], System.String);
