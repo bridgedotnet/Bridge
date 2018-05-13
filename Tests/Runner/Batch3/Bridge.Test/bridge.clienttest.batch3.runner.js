@@ -16595,12 +16595,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestLocalFunctionRecursion: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionRecursion()", $t.Line = "11", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionRecursion()", $t.Line = "18", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560.TestLocalFunctionRecursion();
                 },
                 TestLocalFunctionsReferences: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionsReferences()", $t.Line = "31", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3560, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLocalFunctionsReferences()", $t.Line = "41", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560.TestLocalFunctionsReferences();
                 }
             }

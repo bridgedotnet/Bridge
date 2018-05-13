@@ -31362,9 +31362,25 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here ensures that local functions' recursion works with
+     Bridge translated code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560", {
         statics: {
             methods: {
+                /**
+                 * Tests local function recursion.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
                 TestLocalFunctionRecursion: function () {
                     var F = null;
                     var i = 0;
@@ -31378,8 +31394,17 @@ Bridge.$N1391Result =                     r;
 
 
 
-                    Bridge.Test.NUnit.Assert.AreEqual(11, i);
+                    Bridge.Test.NUnit.Assert.AreEqual(11, i, "Recursive local function call result in the expected value.");
                 },
+                /**
+                 * Tests local function referencing.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
                 TestLocalFunctionsReferences: function () {
                     var G = null;
                     var F = null;
@@ -31397,7 +31422,7 @@ Bridge.$N1391Result =                     r;
 
 
 
-                    Bridge.Test.NUnit.Assert.AreEqual("FG", buffer);
+                    Bridge.Test.NUnit.Assert.AreEqual("FG", buffer, "Local function referencing results in the expected side effect.");
                 }
             }
         }
