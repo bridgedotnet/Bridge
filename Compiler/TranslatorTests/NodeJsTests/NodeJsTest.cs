@@ -24,8 +24,6 @@ namespace Bridge.Translator.Tests
 
         private const string NODEJS_EXECUTEABLE_FILE_NAME = "node.exe";
 
-        private const int NODEJS_MAX_CONSOLE_OUTPUT_LENGTH = 500;
-
 #if UNIX
 
 #else
@@ -141,6 +139,7 @@ namespace Bridge.Translator.Tests
                 WorkingDirectory = Path.GetDirectoryName(path),
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
+                RedirectStandardError = true,
                 CreateNoWindow = true,
                 WindowStyle = ProcessWindowStyle.Hidden
             };
@@ -149,34 +148,33 @@ namespace Bridge.Translator.Tests
 
             using (var p = Process.Start(info))
             {
-                var output = new StringBuilder();
+                var stdout = new List<string>();
+                var stderr = new List<string>();
 
                 // Reading from the console output
                 while (!p.StandardOutput.EndOfStream)
                 {
-                    output.AppendLine(p.StandardOutput.ReadLine());
+                    stdout.Add(p.StandardOutput.ReadLine());
+                }
+                while (!p.StandardError.EndOfStream)
+                {
+                    stderr.Add(p.StandardError.ReadLine());
                 }
 
-                logger.Info("Read NodeJS console output:");
-                logger.Info(output.ToString());
+                logger.Info("NodeJS console output:");
+                logger.Info(String.Join(String.Empty, stdout));
 
-                logger.Info("Waiting for exiting NodeJS...");
+                logger.Info("Waiting NodeJS process to exit...");
 
                 p.WaitForExit();
 
-                logger.Info("Exited with exic code " + p.ExitCode);
+                logger.Info("Exited with code " + p.ExitCode);
 
                 if (p.ExitCode != NODEJS_EXPECTED_EXIT_CODE)
                 {
-                    if (output.Length > NODEJS_MAX_CONSOLE_OUTPUT_LENGTH)
-                    {
-                        output.Remove(NODEJS_MAX_CONSOLE_OUTPUT_LENGTH, output.Length - NODEJS_MAX_CONSOLE_OUTPUT_LENGTH);
-                    }
+                    var stderr_report = String.Join(Environment.NewLine, stderr.Count > 25 ? stderr.GetRange(0, 25) : stderr);
 
-                    Assert.Fail("Expected exit code {0} but actual is {1}. Console output: {2}",
-                        NODEJS_EXPECTED_EXIT_CODE,
-                        p.ExitCode,
-                        output);
+                    Assert.Fail("Expected exit code " + NODEJS_EXPECTED_EXIT_CODE + " but actual is " + p.ExitCode + ". Error output:" + Environment.NewLine + stderr_report);
                 }
 
                 return p.ExitCode;
