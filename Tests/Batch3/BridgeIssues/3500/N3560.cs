@@ -5,9 +5,16 @@ using System.Linq;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
+    /// <summary>
+    /// The tests here ensures that local functions' recursion works with
+    /// Bridge translated code.
+    /// </summary>
     [TestFixture(TestNameFormat = "#3560 - {0}")]
     public class Bridge3560
     {
+        /// <summary>
+        /// Tests local function recursion.
+        /// </summary>
         [Test]
         public static void TestLocalFunctionRecursion()
         {
@@ -21,9 +28,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                     F(x - 1);
             }
 
-            Assert.AreEqual(11, i);
+            Assert.AreEqual(11, i, "Recursive local function call result in the expected value.");
         }
 
+        /// <summary>
+        /// Tests local function referencing.
+        /// </summary>
         [Test]
         public static void TestLocalFunctionsReferences()
         {
@@ -41,7 +51,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 buffer += "G";
             }
 
-            Assert.AreEqual("FG", buffer);
+            Assert.AreEqual("FG", buffer, "Local function referencing results in the expected side effect.");
         }
     }
 }
