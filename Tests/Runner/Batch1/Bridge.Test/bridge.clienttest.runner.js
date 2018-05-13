@@ -23793,7 +23793,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 ExpressioNBodiedLocalFunctionsTests: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestLocalFunctions).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestLocalFunctions, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ExpressioNBodiedLocalFunctionsTests()", $t.Line = "48", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp7.TestLocalFunctions).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestLocalFunctions, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ExpressioNBodiedLocalFunctionsTests()", $t.Line = "67", $t));
                     Bridge.ClientTest.CSharp7.TestLocalFunctions.ExpressioNBodiedLocalFunctionsTests();
                 }
             }

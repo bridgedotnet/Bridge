@@ -31330,6 +31330,47 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560", {
+        statics: {
+            methods: {
+                TestLocalFunctionRecursion: function () {
+                    var F = null;
+                    var i = 0;
+                    F = function (x) {
+                        i = (i + 1) | 0;
+                        if (x > 0) {
+                            F(((x - 1) | 0));
+                        }
+                    };
+                    F(10);
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual(11, i);
+                },
+                TestLocalFunctionsReferences: function () {
+                    var G = null;
+                    var F = null;
+                    var buffer = "";
+                    F = function () {
+                        buffer = (buffer || "") + "F";
+                        G();
+                    };
+                    G = function () {
+                        buffer = (buffer || "") + "G";
+                    };
+                    F();
+
+
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual("FG", buffer);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
