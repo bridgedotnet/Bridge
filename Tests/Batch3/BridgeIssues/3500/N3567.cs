@@ -6,13 +6,16 @@ using System.Linq;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     /// <summary>
-    /// 
+    /// The tests here consists in ensuring given switch-case and local
+    /// function C#7 statement syntaxes are supported by Bridge.
+    /// The tests here have been based in a test project (pkHex-Bridge2) which
+    /// explored the issues.
     /// </summary>
     [TestFixture(TestNameFormat = "#3567 - {0}")]
     public class Bridge3567
     {
         /// <summary>
-        /// 
+        /// Tests with switch-case-when.
         /// </summary>
         [Test(ExpectedCount = 6)]
         public static void TestSwitchCase()
@@ -91,6 +94,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        /// <summary>
+        /// Tests with Local Functions.
+        /// </summary>
         [Test(ExpectedCount = 2)]
         public static void TestLocalFunction()
         {
