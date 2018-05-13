@@ -31330,6 +31330,193 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567", {
+        statics: {
+            methods: {
+                /**
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @return  {void}
+                 */
+                TestSwitchCase: function () {
+                    var int0 = 6;
+                    var int1 = 25;
+                    do {
+                        if (int1 === 25) {
+                            if (int0 === 6) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with when is accepted and it matches.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int0 === 6) {
+                            if (int1 === 254) {
+                                Bridge.Test.NUnit.Assert.Fail("Should not have matched this switch-case statement.");
+                                break;
+                            }
+                        }
+
+                        if (int0 === 6) {
+                            if (int1 === 25) {
+                                Bridge.Test.NUnit.Assert.True(true, "Hex to int and zero-padded integer constant supported in switch-case + when.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with 'when' is accepted and it matches.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 28) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        {
+                            Bridge.Test.NUnit.Assert.True(true, "Switch-case with 'when' works with the 'default' case when nothing matches.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 28) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    Bridge.Test.NUnit.Assert.True(true, "Switch-case matches nothing and moves ahead when nothing matches.");
+                    do {
+                        if (int1 === 25) {
+                            if (int0 === 6 && (((int1 + int0) | 0)) < 10) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 === 6 && (((int1 + int0) | 0)) > 10) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with when is accepted when involving nested when-expression.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                },
+                TestLocalFunction: function () {
+                    var list = System.Array.init([1, 2, 3], System.Int32);
+                    var strings = System.Array.init(["one", "two", "three"], System.String);
+                    var testProbe = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f1;
+                    var matches = System.Linq.Enumerable.from(list).select(testProbe).ToArray(System.Int32);
+
+                    Bridge.Test.NUnit.Assert.True(matches.length === 3 && matches[System.Array.index(0, matches)] === 2 && matches[System.Array.index(1, matches)] === 3 && matches[System.Array.index(2, matches)] === 4, "Linq-select-triggered local function works.");
+
+                    var stringPool = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f2(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum)).ctor());
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.TestLocalFnSort(stringPool, strings);
+                },
+                TestLocalFnSort: function (stringPool, strings) {
+                    var list = System.Array.init([1, 2, 3], System.Int32);
+                    var max = (strings.length - 1) | 0;
+                    var strProbe = function (s) {
+                        return s > max ? "" : strings[System.Array.index(s, strings)];
+                    };
+                    var ordered = System.Linq.Enumerable.from(stringPool).orderBy(function (p) {
+                            return p.Value > max;
+                        }).thenBy(function (p) {
+                        return strProbe(p.Value);
+                    });
+
+                    Bridge.Test.NUnit.Assert.AreEqual("one,oneself,three,two,twofold,not_one", Bridge.toArray(ordered.select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f3)).join(","), "Local function called from ordered lambda expression works.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567, {
+        f1: function (t) {
+            return ((t + 1) | 0);
+        },
+        f2: function (_o1) {
+            var $t;
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "two", $t.Value = 1, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "three", $t.Value = 2, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "one", $t.Value = 0, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "not_one", $t.Value = 5, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "oneself", $t.Value = 0, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "twofold", $t.Value = 1, $t));
+            return _o1;
+        },
+        f3: function (o) {
+            return o.Text;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum", {
+        $kind: "nested class",
+        props: {
+            Text: null,
+            Value: 0
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
