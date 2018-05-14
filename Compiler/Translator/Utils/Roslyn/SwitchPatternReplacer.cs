@@ -137,10 +137,21 @@ namespace Bridge.Translator
                     var label = (CaseSwitchLabelSyntax)item;
 
                     if (label.Value is CastExpressionSyntax ce && ce.Expression.Kind() == SyntaxKind.DefaultLiteralExpression)
-                    {                        
-                        conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.LogicalAndExpression, 
-                            SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, ce.Type), 
-                            SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, SyntaxFactory.DefaultExpression(ce.Type))
+                    {
+                        conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.LogicalAndExpression,
+                            SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, ce.Type),
+                            //SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, SyntaxFactory.DefaultExpression(ce.Type))
+                            SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                                SyntaxKind.SimpleMemberAccessExpression,
+                                                SyntaxFactory.IdentifierName("System.Object"),
+                                                SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                                SyntaxFactory.SeparatedList<ArgumentSyntax>(
+                                                    new SyntaxNodeOrToken[]{
+                                                        SyntaxFactory.Argument(expressionSyntax),
+                                                        SyntaxFactory.Token(SyntaxKind.CommaToken),
+                                                        SyntaxFactory.Argument(
+                                                            SyntaxFactory.DefaultExpression(ce.Type)
+                                                            )})))
                         ));
                     }
                     else

@@ -31373,23 +31373,23 @@ Bridge.$N1391Result =                     r;
                 TestSwitchCaseTypedDefault: function () {
                     var obj = Bridge.box(false, System.Boolean, System.Boolean.toString);
                     do {
-                        if (Bridge.is(obj, System.Boolean) && (obj === Bridge.getDefaultValue(System.Boolean))) {
+                        if (Bridge.is(obj, System.Boolean) && Bridge.equals(obj, Bridge.getDefaultValue(System.Boolean))) {
                             Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative works.");
                             break;
                         }
                     } while (false);
                     do {
-                        if (Bridge.is(obj, System.Int32) && (obj === Bridge.getDefaultValue(System.Int32))) {
+                        if (Bridge.is(obj, System.Int32) && Bridge.equals(obj, Bridge.getDefaultValue(System.Int32))) {
                             Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'int' fallover.");
                             break;
                         }
 
-                        if (Bridge.is(obj, System.String) && (Bridge.referenceEquals(obj, null))) {
+                        if (Bridge.is(obj, System.String) && Bridge.equals(obj, null)) {
                             Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'string' fallover.");
                             break;
                         }
 
-                        if (Bridge.is(obj, System.Boolean) && (obj === Bridge.getDefaultValue(System.Boolean))) {
+                        if (Bridge.is(obj, System.Boolean) && Bridge.equals(obj, Bridge.getDefaultValue(System.Boolean))) {
                             Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative matches the type when choosing its fallover 'default'.");
                             break;
                         }
