@@ -43,13 +43,20 @@ namespace Bridge.Translator
         {
             var localFns = root.DescendantNodes().OfType<LocalFunctionStatementSyntax>();
             var updatedBlocks = new Dictionary<SyntaxNode, List<StatementSyntax>>();
+            var initForBlocks = new Dictionary<SyntaxNode, List<StatementSyntax>>();
             var updatedClasses = new Dictionary<TypeDeclarationSyntax, List<DelegateDeclarationSyntax>>();
 
             foreach (var fn in localFns)
             {
                 var parentNode = fn.Parent;
                 var usage = GetFirstUsageLocalFunc(model, fn, parentNode);
-                var beforeStatement = usage.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+                var beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+
+                if (beforeStatement is LocalFunctionStatementSyntax beforeFn)
+                {
+                    usage = GetFirstUsageLocalFunc(model, beforeFn, parentNode);
+                    beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+                }
 
                 var customDelegate = false;
 
@@ -86,7 +93,8 @@ namespace Bridge.Translator
                     }
                 }
 
-                var isVoid = fn.ReturnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
+                var returnType = fn.ReturnType.WithoutLeadingTrivia().WithoutTrailingTrivia();
+                var isVoid = returnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
 
                 TypeSyntax varType;
 
@@ -95,7 +103,7 @@ namespace Bridge.Translator
                     var typeDecl = parentNode.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
                     var delegates = updatedClasses.ContainsKey(typeDecl) ? updatedClasses[typeDecl] : new List<DelegateDeclarationSyntax>();
                     var name = $"___{fn.Identifier.ValueText}_Delegate_{delegates.Count}";
-                    var delDecl = SyntaxFactory.DelegateDeclaration(fn.ReturnType, SyntaxFactory.Identifier(name))
+                    var delDecl = SyntaxFactory.DelegateDeclaration(returnType, SyntaxFactory.Identifier(name))
                         .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword)))
                         .WithParameterList(fn.ParameterList).NormalizeWhitespace();
                     delegates.Add(delDecl);
@@ -128,7 +136,7 @@ namespace Bridge.Translator
                         varType = SyntaxFactory.QualifiedName(
                             SyntaxFactory.IdentifierName("System"),
                             SyntaxFactory.GenericName("Func").WithTypeArgumentList(
-                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(fn.ReturnType))
+                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(returnType))
                             )
                         );
                     }
@@ -142,7 +150,7 @@ namespace Bridge.Translator
                                 SyntaxFactory.TypeArgumentList(
                                     SyntaxFactory.SeparatedList(
                                         fn.ParameterList.Parameters.Select(p => p.Type).Concat(
-                                            new TypeSyntax[] { fn.ReturnType }
+                                            new TypeSyntax[] { returnType }
                                         )
                                     )
                                 )
@@ -176,15 +184,21 @@ namespace Bridge.Translator
                     }
                 }
 
-                var varDecl = SyntaxFactory.VariableDeclaration(varType).WithVariables(SyntaxFactory.SingletonSeparatedList(
-                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
-                    (
-                        SyntaxFactory.EqualsValueClause(SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
-                            SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
-                        ))
+                var initVar = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(varType).WithVariables(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
+                        (
+                            SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression))
+                        )
                     )
-                )).NormalizeWhitespace();
+                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
+                var assignment = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, 
+                    SyntaxFactory.IdentifierName(fn.Identifier.ValueText),
+                    SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
+                        SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
+                    )
+                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
                 List<StatementSyntax> statements = null;
 
@@ -204,10 +218,18 @@ namespace Bridge.Translator
                     }
                 }
 
-                statements.Remove(fn);
-                statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : 0, SyntaxFactory.LocalDeclarationStatement(varDecl));
-
+                var fnIdx = statements.IndexOf(fn);
+                statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : Math.Max(0, fnIdx), assignment);
                 updatedBlocks[parentNode] = statements;
+
+                statements = initForBlocks.ContainsKey(parentNode) ? initForBlocks[parentNode] : new List<StatementSyntax>();
+                statements.Insert(0, initVar);
+                initForBlocks[parentNode] = statements;
+            }
+
+            foreach (var key in initForBlocks.Keys)
+            {
+                updatedBlocks[key] = initForBlocks[key].Concat(updatedBlocks[key]).ToList();
             }
 
             if (updatedClasses.Count > 0)
@@ -243,6 +265,8 @@ namespace Bridge.Translator
                     return result;
                 });
             }
+
+            root = root.RemoveNodes(root.DescendantNodes().OfType<LocalFunctionStatementSyntax>(), SyntaxRemoveOptions.KeepTrailingTrivia | SyntaxRemoveOptions.KeepLeadingTrivia);
 
             return root;
         }
