@@ -31400,6 +31400,104 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The test here consists in ensuring code built with local function
+     definitions that are not actually referenced can be built with Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", {
+        statics: {
+            methods: {
+                /**
+                 * Test by defining a local function and never actually referencing it.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @return  {void}
+                 */
+                TestUnusedLocalFn: function () {
+                    var test = null;
+                    var a = 15;
+                    test = function () {
+                        return a > 10;
+                    }; /// Local function is declared but never used /// Local function is declared but never used
+
+                    Bridge.Test.NUnit.Assert.AreEqual(15, a, "Unused local function does not result in broken Bridge code.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here ensures that local functions' recursion works with
+     Bridge translated code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560", {
+        statics: {
+            methods: {
+                /**
+                 * Tests local function recursion.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
+                TestLocalFunctionRecursion: function () {
+                    var F = null;
+                    var i = 0;
+                    F = function (x) {
+                        i = (i + 1) | 0;
+                        if (x > 0) {
+                            F(((x - 1) | 0));
+                        }
+                    };
+                    F(10);
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual(11, i, "Recursive local function call result in the expected value.");
+                },
+                /**
+                 * Tests local function referencing.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
+                TestLocalFunctionsReferences: function () {
+                    var G = null;
+                    var F = null;
+                    var buffer = "";
+                    F = function () {
+                        buffer = (buffer || "") + "F";
+                        G();
+                    };
+                    G = function () {
+                        buffer = (buffer || "") + "G";
+                    };
+                    F();
+
+
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual("FG", buffer, "Local function referencing results in the expected side effect.");
+                }
+            }
+        }
+    });
+
+    /**
      * The tests here consists in ensuring given switch-case and local
      function C#7 statement syntaxes are supported by Bridge.
      The tests here have been based in a test project (pkHex-Bridge2) which
@@ -31544,9 +31642,13 @@ Bridge.$N1391Result =                     r;
                  * @return  {void}
                  */
                 TestLocalFunction: function () {
+                    var testProbe = null;
                     var list = System.Array.init([1, 2, 3], System.Int32);
                     var strings = System.Array.init(["one", "two", "three"], System.String);
-                    var testProbe = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f1;
+
+
+                    testProbe = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f1;
+
                     var matches = System.Linq.Enumerable.from(list).select(testProbe).ToArray(System.Int32);
 
                     Bridge.Test.NUnit.Assert.True(matches.length === 3 && matches[System.Array.index(0, matches)] === 2 && matches[System.Array.index(1, matches)] === 3 && matches[System.Array.index(2, matches)] === 4, "Linq-select-triggered local function works.");
@@ -31556,11 +31658,15 @@ Bridge.$N1391Result =                     r;
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.TestLocalFnSort(stringPool, strings);
                 },
                 TestLocalFnSort: function (stringPool, strings) {
+                    var strProbe = null;
                     var list = System.Array.init([1, 2, 3], System.Int32);
                     var max = (strings.length - 1) | 0;
-                    var strProbe = function (s) {
+
+
+                    strProbe = function (s) {
                         return s > max ? "" : strings[System.Array.index(s, strings)];
                     };
+
                     var ordered = System.Linq.Enumerable.from(stringPool).orderBy(function (p) {
                             return p.Value > max;
                         }).thenBy(function (p) {
