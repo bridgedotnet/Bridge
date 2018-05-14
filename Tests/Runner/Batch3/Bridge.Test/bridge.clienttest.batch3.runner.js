@@ -16578,7 +16578,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 },
                 TestSwitchCaseTypedDefault: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3550, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSwitchCaseTypedDefault()", $t.Line = "39", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3550, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSwitchCaseTypedDefault()", $t.Line = "51", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.TestSwitchCaseTypedDefault();
                 }
             }

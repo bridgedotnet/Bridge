@@ -31394,9 +31394,52 @@ Bridge.$N1391Result =                     r;
                             break;
                         }
                     } while (false);
+                    var probe = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.hasValue(probe) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case 'object' cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case interface cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    var probe1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.hasValue(probe1) && Bridge.equals(probe1, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    var probe2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.is(probe2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation) && Bridge.equals(probe2, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance cast into its interface fell in switch-case instance cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.hasValue(probe2) && Bridge.equals(probe2, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance cast into its interface fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
                 }
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe", {
+        $kind: "nested interface"
     });
 
     /**
@@ -42166,6 +42209,19 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe],
+        $kind: "nested class",
+        props: {
+            Value: 0,
+            Text: null
+        },
+        alias: [
+            "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Value",
+            "Text", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Text"
+        ]
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],

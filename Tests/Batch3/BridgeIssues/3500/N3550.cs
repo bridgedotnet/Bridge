@@ -30,6 +30,18 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        interface IProbe
+        {
+            int Value { get; set; }
+            string Text { get; set; }
+        }
+
+        public class ProbeImplementation : IProbe
+        {
+            public int Value { get; set; }
+            public string Text { get; set; }
+        }
+
         /// <summary>
         /// The typed-default switch case.
         /// </summary>
@@ -55,6 +67,48 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                     break;
                 case (bool)default:
                     Assert.True(true, "Typed default switch-case alternative matches the type when choosing its fallover 'default'.");
+                    break;
+            }
+
+            object probe = new ProbeImplementation();
+            switch (probe)
+            {
+                case (object)default:
+                    Assert.Fail("Class instance object fell in switch-case 'object' cast fallover.");
+                    break;
+            }
+            switch (probe)
+            {
+                case (ProbeImplementation)default:
+                    Assert.Fail("Class instance object fell in switch-case own cast fallover.");
+                    break;
+            }
+            switch (probe)
+            {
+                case (IProbe)default:
+                    Assert.Fail("Class instance object fell in switch-case interface cast fallover.");
+                    break;
+            }
+
+            var probe1 = new ProbeImplementation();
+            switch (probe1)
+            {
+                case (ProbeImplementation)default:
+                    Assert.Fail("Class instance fell in switch-case own cast fallover.");
+                    break;
+            }
+
+            IProbe probe2 = new ProbeImplementation();
+            switch (probe2)
+            {
+                case (ProbeImplementation)default:
+                    Assert.Fail("Class instance cast into its interface fell in switch-case instance cast fallover.");
+                    break;
+            }
+            switch (probe2)
+            {
+                case (IProbe)default:
+                    Assert.Fail("Class instance cast into its interface fell in switch-case own cast fallover.");
                     break;
             }
         }
