@@ -15587,7 +15587,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15665,7 +15665,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             }
         },
 
-        Dispose: function () {
+        dispose: function () {
             this.clean();
         },
 

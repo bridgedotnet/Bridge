@@ -441,7 +441,7 @@
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -519,7 +519,7 @@
             }
         },
 
-        Dispose: function () {
+        dispose: function () {
             this.clean();
         },
 
