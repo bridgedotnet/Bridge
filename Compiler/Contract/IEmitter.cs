@@ -534,5 +534,6 @@ namespace Bridge.Contract
         bool InConstructor { get; set; }
         CompilerRule Rules { get; set; }
         bool HasModules { get; set; }
+        string TemplateModifier { get; set; }
     }
 }
