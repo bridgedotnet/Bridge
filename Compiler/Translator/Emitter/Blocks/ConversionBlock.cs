@@ -402,6 +402,7 @@ namespace Bridge.Translator
                     }
                 }
 
+                var nobox = block.Emitter.TemplateModifier == "nobox";
                 var isStringConcat = false;
                 var binaryOperatorExpression = expression.Parent as BinaryOperatorExpression;
                 if (binaryOperatorExpression != null)
@@ -418,7 +419,7 @@ namespace Bridge.Translator
 
                 if (conversion.IsBoxingConversion && !isStringConcat && block.Emitter.Rules.Boxing == BoxingRule.Managed)
                 {
-                    if (needBox && !isArgument)
+                    if (!nobox && needBox && !isArgument)
                     {
                         block.Write(JS.Types.Bridge.BOX);
                         block.WriteOpenParentheses();
@@ -463,7 +464,7 @@ namespace Bridge.Translator
 
                 if (conversion.IsUnboxingConversion || isArgument && (expectedType.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackArrayObject(expectedType)) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
-                    if (block.Emitter.Rules.Boxing == BoxingRule.Managed)
+                    if (!nobox && block.Emitter.Rules.Boxing == BoxingRule.Managed)
                     {
                         block.Write(JS.Types.Bridge.UNBOX);
                         block.WriteOpenParentheses();
