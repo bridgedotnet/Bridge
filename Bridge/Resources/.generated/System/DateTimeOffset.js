@@ -257,7 +257,7 @@
                 this.$initialize();
                 var offset;
                 if (System.DateTime.getKind(dateTime) !== 1) {
-                    offset = System.DateTime.subdd(System.DateTime.getNow(), System.DateTime.getUtcNow());
+                    offset = System.DateTime.subdd(System.DateTime.getUtcNow(), System.DateTime.getNow());
 
                 } else {
                     offset = new System.TimeSpan(System.Int64(0));
@@ -268,7 +268,7 @@
             $ctor2: function (dateTime, offset) {
                 this.$initialize();
                 if (System.DateTime.getKind(dateTime) === 2) {
-                    if (System.TimeSpan.neq(offset, (System.DateTime.subdd(System.DateTime.getNow(), System.DateTime.getUtcNow())))) {
+                    if (System.TimeSpan.neq(offset, (System.DateTime.subdd(System.DateTime.getUtcNow(), System.DateTime.getNow())))) {
                         throw new System.ArgumentException.$ctor3(System.Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
                     }
                 } else if (System.DateTime.getKind(dateTime) === 1) {

@@ -71,7 +71,7 @@ namespace System {
             TimeSpan offset;
             if (dateTime.Kind != DateTimeKind.Utc) {
                 // Local and Unspecified are both treated as Local
-                offset = DateTime.Now - DateTime.UtcNow;
+                offset = DateTime.UtcNow - DateTime.Now;
 
                 // TODO: Revised [TimeZoneInfo not supported]
                 //offset = TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime);
@@ -90,7 +90,7 @@ namespace System {
             if (dateTime.Kind == DateTimeKind.Local) {
                 // TODO: Revised [TimeZoneInfo not supported]
                 //if (offset != TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime)) {
-                if (offset != (DateTime.Now - DateTime.UtcNow)) {
+                if (offset != (DateTime.UtcNow - DateTime.Now)) {
                     throw new ArgumentException(Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
                 }
             }
