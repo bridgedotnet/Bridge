@@ -109,7 +109,7 @@ namespace Bridge.Translator.Tests
         [TestCase("23", false, true, TestName = "IntegrationTest 23 - Module in bridge.json")]
         [TestCase("24", false, true, TestName = "IntegrationTest 24 - Module as assembly attribute")]
         [TestCase("25", false, true, TestName = "IntegrationTest 25 - Static usings and using alias")]
-        [TestCase("26", false, true, TestName = "IntegrationTest 26 - New csproj compilation")]
+        [TestCase("32", false, true, TestName = "IntegrationTest 32 - New csproj compilation")]
         public void Test(string folder, bool isToBuild, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
