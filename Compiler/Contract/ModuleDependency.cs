@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Contract
 {
@@ -58,6 +59,11 @@ namespace Bridge.Contract
             this.InitName();
         }
 
+        public static string EscapeName(string value)
+        {
+            return Regex.Replace(value, "[^\\w_\\d]", "_");
+        }
+
         private string _name;
         public string Name
         {
@@ -67,9 +73,16 @@ namespace Bridge.Contract
             }
             set
             {
-                this._name = value;
+                this.OriginalName = value;
+                this._name = EscapeName(value);
                 this.NoName = false;
             }
+        }
+
+        public string OriginalName
+        {
+            get;
+            private set;
         }
 
         public ModuleType Type
@@ -99,7 +112,7 @@ namespace Bridge.Contract
             }
             set
             {
-                this._exportAsNamespace = value;
+                this._exportAsNamespace = Regex.Replace(value, "[^\\w_\\d]", "_");
             }
         }
 

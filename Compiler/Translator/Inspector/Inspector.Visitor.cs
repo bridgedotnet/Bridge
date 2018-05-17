@@ -1025,7 +1025,7 @@ namespace Bridge.Translator
 
                     if (nameObj is string)
                     {
-                        dependency.DependencyName = nameObj.ToString();
+                        dependency.DependencyName = nameObj.ToString();                        
                     }
 
                     nameObj = this.GetAttributeArgumentValue(attr, resolveResult, 1);
@@ -1033,6 +1033,10 @@ namespace Bridge.Translator
                     if (nameObj is string)
                     {
                         dependency.VariableName = nameObj.ToString();
+                    }
+                    else
+                    {
+                        dependency.VariableName = Module.EscapeName(dependency.DependencyName);
                     }
 
                     this.AssemblyInfo.Dependencies.Add(dependency);

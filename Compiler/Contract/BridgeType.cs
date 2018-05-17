@@ -761,7 +761,7 @@ namespace Bridge.Contract
             {
                 if (emitter.Tag != "TS" || currentTypeInfo.Module == null || !currentTypeInfo.Module.Equals(module))
                 {
-                    if (!module.PreventModuleName || type.TypeInfo != null)
+                    if (!module.PreventModuleName || (currentTypeInfo.Module != null && currentTypeInfo.Module.Equals(module)))
                     {
                         moduleName = module.ExportAsNamespace;
                     }
@@ -797,11 +797,11 @@ namespace Bridge.Contract
             if (!emitter.DisableDependencyTracking
                 && currentTypeInfo.Key != type.Key
                 && !Module.Equals(currentTypeInfo.Module, module)
-                && !emitter.CurrentDependencies.Any(d => d.DependencyName == module.Name))
+                && !emitter.CurrentDependencies.Any(d => d.DependencyName == module.OriginalName))
             {
                 emitter.CurrentDependencies.Add(new ModuleDependency
                 {
-                    DependencyName = module.Name,
+                    DependencyName = module.OriginalName,
                     VariableName = module.ExportAsNamespace,
                     Type = module.Type,
                     PreventName = module.PreventModuleName

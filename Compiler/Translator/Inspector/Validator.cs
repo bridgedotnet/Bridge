@@ -903,6 +903,10 @@ namespace Bridge.Translator
                             obj = this.GetAttributeArgumentValue(attr, 1);
                             dependency.VariableName = obj is string ? obj.ToString() : "";
                         }
+                        else
+                        {
+                            dependency.VariableName = Module.EscapeName(dependency.DependencyName);
+                        }
 
                         typeInfo.Dependencies.Add(dependency);
                     }
