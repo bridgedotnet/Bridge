@@ -56,118 +56,139 @@ namespace Bridge.Translator
 
             foreach (var discard in discards)
             {
-                var typeInfo = model.GetTypeInfo(discard.Parent);
-                var beforeStatement = discard.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-
-                if (beforeStatement != null)
+                try
                 {
-                    if (typeInfo.Type != null)
+                    var typeInfo = model.GetTypeInfo(discard.Parent);
+                    var beforeStatement = discard.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+
+                    if (beforeStatement != null)
                     {
-                        string instance = DISCARD_VARIABLE + ++tempIndex;
-                        if (beforeStatement.Parent != null)
+                        if (typeInfo.Type != null)
                         {
-                            var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
-
-                            while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                            string instance = DISCARD_VARIABLE + ++tempIndex;
+                            if (beforeStatement.Parent != null)
                             {
-                                instance = DISCARD_VARIABLE + ++tempIndex;
+                                var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
+
+                                while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                                {
+                                    instance = DISCARD_VARIABLE + ++tempIndex;
+                                }
                             }
+
+                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                            var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discard.Parent.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
+                            ));
+
+                            var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                            locals.Add(local);
+
+                            updatedStatements[beforeStatement] = locals;
+                            updatedDiscards[discard] = instance;
                         }
-
-                        var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                        var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discard.Parent.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                            SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
-                        ));
-
-                        var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
-                        locals.Add(local);
-
-                        updatedStatements[beforeStatement] = locals;
-                        updatedDiscards[discard] = instance;
-                    }
-                    else if (discard.Parent is DeclarationPatternSyntax && !(discard.Parent.Parent is IsPatternExpressionSyntax))
-                    {
-                        string instance = DISCARD_VARIABLE + ++tempIndex;
-                        if (beforeStatement.Parent != null)
+                        else if (discard.Parent is DeclarationPatternSyntax && !(discard.Parent.Parent is IsPatternExpressionSyntax))
                         {
-                            var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
-
-                            while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                            string instance = DISCARD_VARIABLE + ++tempIndex;
+                            if (beforeStatement.Parent != null)
                             {
-                                instance = DISCARD_VARIABLE + ++tempIndex;
-                            }
-                        }
+                                var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
 
-                        updatedDiscards[discard] = instance;
+                                while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                                {
+                                    instance = DISCARD_VARIABLE + ++tempIndex;
+                                }
+                            }
+
+                            updatedDiscards[discard] = instance;
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(discard, e);
                 }
             }
 
             foreach (var discardVar in outDiscardVars)
             {
-                var typeInfo = model.GetTypeInfo(discardVar.Expression);
-
-                if (typeInfo.Type != null)
+                try
                 {
-                    var beforeStatement = discardVar.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                    if (beforeStatement != null)
+                    var typeInfo = model.GetTypeInfo(discardVar.Expression);
+
+                    if (typeInfo.Type != null)
                     {
-                        string instance = DISCARD_VARIABLE + ++tempIndex;
-                        if (beforeStatement.Parent != null)
+                        var beforeStatement = discardVar.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+                        if (beforeStatement != null)
                         {
-                            var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
-
-                            while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                            string instance = DISCARD_VARIABLE + ++tempIndex;
+                            if (beforeStatement.Parent != null)
                             {
-                                instance = DISCARD_VARIABLE + ++tempIndex;
+                                var info = LocalUsageGatherer.GatherInfo(model, beforeStatement.Parent);
+
+                                while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance) || info.Names.Contains(instance))
+                                {
+                                    instance = DISCARD_VARIABLE + ++tempIndex;
+                                }
                             }
+
+                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                            var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discardVar.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
+                            ));
+
+                            var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                            locals.Add(local);
+
+                            updatedStatements[beforeStatement] = locals;
+                            updatedDiscardVars[discardVar] = instance;
                         }
-
-                        var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                        var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discardVar.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                            SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
-                        ));
-
-                        var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
-                        locals.Add(local);
-
-                        updatedStatements[beforeStatement] = locals;
-                        updatedDiscardVars[discardVar] = instance;
                     }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(discardVar, e);
                 }
             }
 
             foreach (var outVar in outVars)
             {
-                if (((DeclarationExpressionSyntax)outVar.Expression).Designation.Kind() == SyntaxKind.DiscardDesignation)
+                try
                 {
-                    continue;
-                }
-
-                var typeInfo = model.GetTypeInfo(outVar.Expression);
-
-                if (typeInfo.Type != null)
-                {
-                    var beforeStatement = outVar.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                    if (beforeStatement != null)
+                    if (((DeclarationExpressionSyntax)outVar.Expression).Designation.Kind() == SyntaxKind.DiscardDesignation)
                     {
-                        if (outVar.Expression is DeclarationExpressionSyntax de)
+                        continue;
+                    }
+
+                    var typeInfo = model.GetTypeInfo(outVar.Expression);
+
+                    if (typeInfo.Type != null)
+                    {
+                        var beforeStatement = outVar.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+                        if (beforeStatement != null)
                         {
-                            var designation = de.Designation as SingleVariableDesignationSyntax;
-
-                            if (designation != null)
+                            if (outVar.Expression is DeclarationExpressionSyntax de)
                             {
-                                var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                                var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, outVar.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
-                                ));
+                                var designation = de.Designation as SingleVariableDesignationSyntax;
 
-                                locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+                                if (designation != null)
+                                {
+                                    var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                                    var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, outVar.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                        SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
+                                    ));
 
-                                updatedStatements[beforeStatement] = locals;
+                                    locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+
+                                    updatedStatements[beforeStatement] = locals;
+                                }
                             }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(outVar, e);
                 }
             }
 

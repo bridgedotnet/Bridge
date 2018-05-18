@@ -18,6 +18,68 @@ namespace Bridge.Translator
     /// </summary>
     static internal class SyntaxHelper
     {
+        public static bool IsChildOf(SyntaxNode node, SyntaxNode parent)
+        {
+            return parent.FullSpan.Contains(node.FullSpan);
+        }
+
+        public static bool RequireReturnStatement(SemanticModel model, SyntaxNode lambda)
+        {
+            var typeInfo = model.GetTypeInfo(lambda);
+            var type = typeInfo.ConvertedType ?? typeInfo.Type;
+            if (type == null || !type.IsDelegateType())
+            {
+                return false;
+            }
+                
+            var returnType = type.GetDelegateInvokeMethod().GetReturnType();
+            return returnType != null && returnType.SpecialType != SpecialType.System_Void;
+        }
+
+        public static ITypeSymbol GetReturnType(this ISymbol symbol)
+        {
+            if (symbol == null)
+                throw new ArgumentNullException("symbol");
+            switch (symbol.Kind)
+            {
+                case SymbolKind.Field:
+                    var field = (IFieldSymbol)symbol;
+                    return field.Type;
+                case SymbolKind.Method:
+                    var method = (IMethodSymbol)symbol;
+                    if (method.MethodKind == MethodKind.Constructor)
+                        return method.ContainingType;
+                    return method.ReturnType;
+                case SymbolKind.Property:
+                    var property = (IPropertySymbol)symbol;
+                    return property.Type;
+                case SymbolKind.Event:
+                    var evt = (IEventSymbol)symbol;
+                    return evt.Type;
+                case SymbolKind.Parameter:
+                    var param = (IParameterSymbol)symbol;
+                    return param.Type;
+                case SymbolKind.Local:
+                    var local = (ILocalSymbol)symbol;
+                    return local.Type;
+            }
+            return null;
+        }
+
+        public static bool IsDelegateType(this ITypeSymbol symbol)
+        {
+            return symbol?.TypeKind == TypeKind.Delegate;
+        }
+
+        public static IMethodSymbol GetDelegateInvokeMethod(this ITypeSymbol type)
+        {
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (type.TypeKind == TypeKind.Delegate)
+                return type.GetMembers("Invoke").OfType<IMethodSymbol>().FirstOrDefault(m => m.MethodKind == MethodKind.DelegateInvoke);
+            return null;
+        }
+
         /// <summary>
         /// Generates the static method call.
         /// </summary>

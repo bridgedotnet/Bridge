@@ -177,5 +177,14 @@ namespace System
 
         [Bridge.Name("toString")]
         public extern string Format(string format, IFormatProvider provider);
+
+        public static extern TimeSpan Parse(string s);
+        public static extern TimeSpan Parse(string s, IFormatProvider provider);
+
+        [Bridge.Template("System.TimeSpan.tryParse({s}, null, {result})")]
+        public static extern bool TryParse(string s, out TimeSpan result);
+
+        [Bridge.Template("System.TimeSpan.tryParse({s}, {provider}, {result})")]
+        public static extern bool TryParse(string s, IFormatProvider provider, out TimeSpan result);
     }
 }

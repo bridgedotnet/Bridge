@@ -5,8 +5,7 @@
                     throw new System.ArgumentNullException.$ctor1("element");
                 }
 
-                if (t == null)
-                {
+                if (t == null) {
                     throw new System.ArgumentNullException.$ctor1("attributeType");
                 }
 
@@ -24,12 +23,17 @@
                     throw new System.ArgumentNullException.$ctor1("element");
                 }
 
-                if (t == null)
-                {
+                if (t == null) {
                     throw new System.ArgumentNullException.$ctor1("attributeType");
                 }
 
                 return a.getCustomAttributes(t || b);
+            },
+
+            isDefined: function (o, t, b) {
+                var attrs = System.Attribute.getCustomAttributes(o, t, b);
+
+                return attrs.length > 0;
             }
         }
     });

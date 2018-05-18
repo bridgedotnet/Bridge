@@ -64,6 +64,7 @@
     <Compile Include="Attributes\ReadyAttribute.cs" />
     <Compile Include="Attributes\RulesAttribute.cs" />
     <Compile Include="Attributes\WhereAttribute.cs" />
+    <Compile Include="Bridge\Ref.cs" />
     <Compile Include="shared\System\ApplicationException.cs" />
     <Compile Include="shared\System\ArgumentException.cs" />
     <Compile Include="shared\System\ArgumentNullException.cs" />
@@ -440,6 +441,10 @@
     <Compile Include="System\Reflection\MethodInfo.cs" />
     <Compile Include="System\Reflection\ParameterInfo.cs" />
     <Compile Include="System\Reflection\PropertyInfo.cs" />
+    <Compile Include="System\Runtime\Serialization\OnDeserializedAttribute.cs" />
+    <Compile Include="System\Runtime\Serialization\OnSerializedAttribute.cs" />
+    <Compile Include="System\Runtime\Serialization\OnDeserializingAttribute.cs" />
+    <Compile Include="System\Runtime\Serialization\OnSerializingAttribute.cs" />
     <Compile Include="System\Text\ASCIIEncoding.cs" />
     <Compile Include="System\Text\Encoding.cs" />
     <Compile Include="System\Text\UTF32Encoding.cs" />

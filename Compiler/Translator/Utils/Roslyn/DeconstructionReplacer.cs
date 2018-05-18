@@ -40,29 +40,36 @@ namespace Bridge.Translator
 
             foreach (var tuple in tuples)
             {
-                var beforeStatement = tuple.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                if (beforeStatement != null)
+                try
                 {
-                    foreach (var arg in tuple.Arguments)
+                    var beforeStatement = tuple.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+                    if (beforeStatement != null)
                     {
-                        if (arg.Expression is DeclarationExpressionSyntax de)
+                        foreach (var arg in tuple.Arguments)
                         {
-                            var designation = de.Designation as SingleVariableDesignationSyntax;
-
-                            if (designation != null)
+                            if (arg.Expression is DeclarationExpressionSyntax de)
                             {
-                                var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                                var typeInfo = model.GetTypeInfo(de).Type;
-                                var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo, model, arg.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
-                                ));
+                                var designation = de.Designation as SingleVariableDesignationSyntax;
 
-                                locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+                                if (designation != null)
+                                {
+                                    var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                                    var typeInfo = model.GetTypeInfo(de).Type;
+                                    var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo, model, arg.Expression.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                        SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
+                                    ));
 
-                                updatedStatements[beforeStatement] = locals;
+                                    locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+
+                                    updatedStatements[beforeStatement] = locals;
+                                }
                             }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(tuple, e);
                 }
             }
 
@@ -74,47 +81,52 @@ namespace Bridge.Translator
 
             foreach (var p in parenthesized)
             {
-                var beforeStatement = p.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-                var declaration = (DeclarationExpressionSyntax)p.Parent;
-                if (beforeStatement != null)
+                try
                 {
-                    var typeInfo = model.GetTypeInfo(declaration).Type;
-                    List<TypeSyntax> types = new List<TypeSyntax>();
-                    if (typeInfo.IsTupleType)
+                    var beforeStatement = p.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+                    var declaration = (DeclarationExpressionSyntax)p.Parent;
+                    if (beforeStatement != null)
                     {
-                        var elements = ((INamedTypeSymbol)typeInfo).TupleElements;
-                        foreach (var el in elements)
+                        var typeInfo = model.GetTypeInfo(declaration).Type;
+                        List<TypeSyntax> types = new List<TypeSyntax>();
+                        if (typeInfo.IsTupleType)
                         {
-                            types.Add(SyntaxHelper.GenerateTypeSyntax(el.Type, model, declaration.GetLocation().SourceSpan.Start));
+                            var elements = ((INamedTypeSymbol)typeInfo).TupleElements;
+                            foreach (var el in elements)
+                            {
+                                types.Add(SyntaxHelper.GenerateTypeSyntax(el.Type, model, declaration.GetLocation().SourceSpan.Start));
+                            }
                         }
-                    }
-                    else
-                    {
-                        continue;
-                    }
-
-                    int idx = 0;
-                    foreach (var v in p.Variables)
-                    {
-                        var designation = v as SingleVariableDesignationSyntax;
-
-                        if (designation != null)
+                        else
                         {
-                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                            
-                            var varDecl = SyntaxFactory.VariableDeclaration(types[idx++]).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
-                            ));
+                            continue;
+                        }
 
-                            locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+                        int idx = 0;
+                        foreach (var v in p.Variables)
+                        {
+                            var designation = v as SingleVariableDesignationSyntax;
 
-                            updatedStatements[beforeStatement] = locals;
+                            if (designation != null)
+                            {
+                                var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+
+                                var varDecl = SyntaxFactory.VariableDeclaration(types[idx++]).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
+                                ));
+
+                                locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n")));
+
+                                updatedStatements[beforeStatement] = locals;
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(p, e);
+                }
             }
-
-
 
             var annotated = new Dictionary<SyntaxAnnotation, List<LocalDeclarationStatementSyntax>>();
             root = root.ReplaceNodes(updatedStatements.Keys, (n1, n2) =>
@@ -175,8 +187,15 @@ namespace Bridge.Translator
 
                 foreach (var loop in loops)
                 {
-                    var deconstructionInfo = model.GetDeconstructionInfo(loop);
-                    infos.Add(loop, deconstructionInfo);
+                    try
+                    {
+                        var deconstructionInfo = model.GetDeconstructionInfo(loop);
+                        infos.Add(loop, deconstructionInfo);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ReplacerException(loop, e);
+                    }
                 }
 
                 var tempIndex = 0;
@@ -205,14 +224,21 @@ namespace Bridge.Translator
                     {
                         foreach (var statement in b.Statements)
                         {
-                            if (statement.ContainsAnnotations)
+                            try
                             {
-                                var annotaions = statement.GetAnnotations("last_variable");
-                                if (annotaions != null && annotaions.Any())
+                                if (statement.ContainsAnnotations)
                                 {
-                                    newloop = newloop.InsertNodesAfter(statement, new[] { SyntaxFactory.ExpressionStatement(invocation) });
-                                    break;
+                                    var annotaions = statement.GetAnnotations("last_variable");
+                                    if (annotaions != null && annotaions.Any())
+                                    {
+                                        newloop = newloop.InsertNodesAfter(statement, new[] { SyntaxFactory.ExpressionStatement(invocation) });
+                                        break;
+                                    }
                                 }
+                            }
+                            catch (Exception e)
+                            {
+                                throw new ReplacerException(statement, e);
                             }
                         }
                     }
@@ -236,9 +262,16 @@ namespace Bridge.Translator
 
             foreach (var assignment in assignments)
             {
-                var deconstructionInfo = model.GetDeconstructionInfo(assignment);
-                infos.Add(assignment, deconstructionInfo);
-                nodes.Add(assignment);
+                try
+                {
+                    var deconstructionInfo = model.GetDeconstructionInfo(assignment);
+                    infos.Add(assignment, deconstructionInfo);
+                    nodes.Add(assignment);
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(assignment, e);
+                }
             }
 
             if (nodes.Count > 0)
@@ -267,18 +300,25 @@ namespace Bridge.Translator
             {
                 foreach (var arg in te.Arguments)
                 {
-                    if (arg.Expression is DeclarationExpressionSyntax de)
+                    try
                     {
-                        if (de.Designation is SingleVariableDesignationSyntax sv)
+                        if (arg.Expression is DeclarationExpressionSyntax de)
                         {
-                            arguments.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(sv.Identifier)).WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
-                                                    SyntaxFactory.Token(SyntaxKind.OutKeyword)));
+                            if (de.Designation is SingleVariableDesignationSyntax sv)
+                            {
+                                arguments.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(sv.Identifier)).WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
+                                                        SyntaxFactory.Token(SyntaxKind.OutKeyword)));
+                            }
+                        }
+                        else
+                        {
+                            arguments.Add(arg.WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
+                                                        SyntaxFactory.Token(SyntaxKind.OutKeyword)));
                         }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        arguments.Add(arg.WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
-                                                    SyntaxFactory.Token(SyntaxKind.OutKeyword)));
+                        throw new ReplacerException(arg, e);
                     }
                 }
             }
@@ -287,10 +327,17 @@ namespace Bridge.Translator
                 var variables = ((ParenthesizedVariableDesignationSyntax)((DeclarationExpressionSyntax)tuple).Designation).Variables;
                 foreach (var variable in variables)
                 {
-                    if (variable is SingleVariableDesignationSyntax sv)
+                    try
                     {
-                        arguments.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(sv.Identifier)).WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
-                                                    SyntaxFactory.Token(SyntaxKind.OutKeyword)));
+                        if (variable is SingleVariableDesignationSyntax sv)
+                        {
+                            arguments.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(sv.Identifier)).WithRefKindKeyword(SyntaxFactory.Token(SyntaxKind.OutKeyword)).WithRefOrOutKeyword(
+                                                        SyntaxFactory.Token(SyntaxKind.OutKeyword)));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ReplacerException(variable, e);
                     }
                 }
             }

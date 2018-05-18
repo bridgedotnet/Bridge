@@ -32,8 +32,12 @@
   // Default is false.
   "generateTypeScript": false,
 
-  // Delete everything from the output folder
+  // Delete everything from the output folder.
   // Default is false
+  //        ** WARNING **
+  // If true, all files within the "output"
+  // folder location will be deleted on Build.
+  //    ** USE WITH CAUTION **
   "cleanOutputFolderBeforeBuild": false,
 
   // Set to true to enable bridge.report.log generation.
@@ -49,7 +53,24 @@
     "arrayIndex": "Managed",
     "autoProperty": "Plain",
     "boxing": "Managed",
+    "externalCast": "Plain",
+    "inlineComment": "Plain",
     "integer": "Managed",
     "lambda": "Plain"
+  },
+
+  // Automatically generate an index.html file
+  // and add the file to the output directory.
+  // Default is false.
+  "html": {
+    "disabled": false
+  },
+
+  // Add compilation logging to your Project.
+  // Outputs a tab-delimited bridge.log file.
+  // Set to "Trace" for full logging.
+  // Default is "None".
+  "logging": {
+    "level": "None"
   }
 }

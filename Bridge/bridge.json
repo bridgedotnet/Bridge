@@ -39,6 +39,7 @@
         "Resources/Nullable.js",
         "Resources/Char.js",
 
+        "Resources/.generated/Bridge/Ref.js",
         "Resources/.generated/System/IConvertible.js",
         "Resources/.generated/System/HResults.js",
         "Resources/Exception.js",
@@ -122,6 +123,10 @@
         "Resources/.generated/System/Runtime/Serialization/SerializationInfoEnumerator.js",
         "Resources/.generated/System/Runtime/Serialization/StreamingContext.js",
         "Resources/.generated/System/Runtime/Serialization/StreamingContextStates.js",
+        "Resources/.generated/System/Runtime/Serialization/OnSerializingAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnSerializedAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnDeserializingAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnDeserializedAttribute.js",
 
         "Resources/.generated/System/Security/SecurityException.js",
 

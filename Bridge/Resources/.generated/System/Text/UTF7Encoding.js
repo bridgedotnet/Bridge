@@ -3,7 +3,7 @@
         statics: {
             methods: {
                 Escape: function (chars) {
-                    return chars.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+                    return chars.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
                 }
             }
         },
@@ -42,7 +42,7 @@
                 var setO = System.Text.UTF7Encoding.Escape("!\"#$%&*;<=>@[]^_`{|}");
                 var setW = System.Text.UTF7Encoding.Escape(" \r\n\t");
 
-                s = s.replace(new RegExp("[^" + setW + setD + (this.allowOptionals ? setO : "") + "]+", 'g'), function (chunk) {return '+' + (chunk === '+' ? '' : encode(chunk)) + '-';});
+                s = s.replace(new RegExp("[^" + setW + setD + (this.allowOptionals ? setO : "") + "]+", "g"), function (chunk) { return "+" + (chunk === "+" ? "" : encode(chunk)) + "-"; });
 
                 var arr = System.String.toCharArray(s, 0, s.length);
 
@@ -79,7 +79,7 @@
                 };
 
                 var str = System.String.fromCharArray(bytes, index, count);
-                return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function (_, chunk) {if (chunk === '') {return _ == '+-' ? '+' : '';}return decode(chunk);});
+                return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function (_, chunk) { if (chunk === "") { return _ == "+-" ? "+" : ""; } return decode(chunk); });
             },
             GetMaxByteCount: function (charCount) {
                 if (charCount < 0) {
@@ -121,10 +121,11 @@
                 b[System.Array.index(Bridge.identity(bi, (bi = (bi + 1) | 0)), b)] = (c & 255);
             }
             var base64Str = System.Convert.toBase64String(b, null, null, null);
-            return base64Str.replace(/=+$/, '');
+            return base64Str.replace(/=+$/, "");
         },
         f2: function (base64) {
             try {
+                if (typeof window === "undefined") { throw new System.Exception(); };
                 var binary_string = window.atob(base64);
                 var len = binary_string.length;
                 var arr = System.Array.init(len, 0, System.Char);
@@ -136,6 +137,7 @@
                 for (var i = 0; i < len; i = (i + 1) | 0) {
                     arr[System.Array.index(i, arr)] = binary_string.charCodeAt(i);
                 }
+
                 return arr;
             }
             catch ($e1) {

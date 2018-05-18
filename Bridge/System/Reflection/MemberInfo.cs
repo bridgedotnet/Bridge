@@ -127,10 +127,8 @@ namespace System.Reflection
         [Bridge.Template("System.Attribute.getCustomAttributes({this}, {attributeType})")]
         public extern object[] GetCustomAttributes(Type attributeType);
 
-        public bool IsDefined(Type attributeType, bool inherit)
-        {
-            throw new NotImplementedException();
-        }
+        [Bridge.Template("System.Attribute.isDefined({this}, {attributeType}, {inherit})")]
+        public extern bool IsDefined(Type attributeType, bool inherit);
 
         internal extern MemberInfo();
     }

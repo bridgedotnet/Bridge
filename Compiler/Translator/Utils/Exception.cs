@@ -5,8 +5,17 @@ namespace Bridge.Translator
 {
     public class TranslatorException : System.Exception, IVisitorException
     {
+        public TranslatorException()
+        {
+        }
+
         public TranslatorException(string message)
             : base(message)
+        {
+        }
+
+        public TranslatorException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
 

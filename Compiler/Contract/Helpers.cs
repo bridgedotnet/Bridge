@@ -1200,8 +1200,9 @@ namespace Bridge.Contract
             if (m.Name != CS.Methods.AUTO_STARTUP_METHOD_NAME || !m.IsStatic || m.DeclaringTypeDefinition.TypeParameterCount > 0 ||
                 m.TypeParameters.Count > 0) // Must be a static, non-generic Main
                 return false;
-            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32))
-                // Must return void or int.
+            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32) &&
+                !(m.IsAsync && (m.ReturnType.IsKnownType(KnownTypeCode.Task) || m.ReturnType.FullName == "System.Threading.Tasks.Task" && m.ReturnType.TypeParameterCount == 1 && m.ReturnType.TypeArguments[0].IsKnownType(KnownTypeCode.Int32))))
+                // Must return void, int or be async and return a Task<int>.
                 return false;
             if (m.Parameters.Count == 0) // Can have 0 parameters.
                 return true;

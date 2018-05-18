@@ -41,10 +41,10 @@ var Bridge3494_A = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 17.0.0-beta
+ * @version 17.1.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 17.0.0-beta
+ * @compiler Bridge.NET 17.1.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -31330,6 +31330,487 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consists in ensuring broken use cases identified and
+     reported in issue #3550 are usable in Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550", {
+        statics: {
+            methods: {
+                /**
+                 * The chained switch case involfing 'when' expression.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @return  {void}
+                 */
+                TestSwitchCaseWhen: function () {
+                    var probe0 = 744;
+                    var probe1 = 1;
+                    do {
+                        if (probe0 === 744 || probe0 === 745) {
+                            if ((probe1 === 1) || (probe1 === 2)) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case-when chained statement works.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                },
+                /**
+                 * The typed-default switch case.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550
+                 * @return  {void}
+                 */
+                TestSwitchCaseTypedDefault: function () {
+                    var obj = Bridge.box(false, System.Boolean, System.Boolean.toString);
+                    do {
+                        if (Bridge.is(obj, System.Boolean) && Bridge.equals(obj, Bridge.getDefaultValue(System.Boolean))) {
+                            Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative works.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(obj, System.Int32) && Bridge.equals(obj, Bridge.getDefaultValue(System.Int32))) {
+                            Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'int' fallover.");
+                            break;
+                        }
+
+                        if (Bridge.is(obj, System.String) && Bridge.equals(obj, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Bool object fell in switch-case 'string' fallover.");
+                            break;
+                        }
+
+                        if (Bridge.is(obj, System.Boolean) && Bridge.equals(obj, Bridge.getDefaultValue(System.Boolean))) {
+                            Bridge.Test.NUnit.Assert.True(true, "Typed default switch-case alternative matches the type when choosing its fallover 'default'.");
+                            break;
+                        }
+                    } while (false);
+                    var probe = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.hasValue(probe) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case 'object' cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.is(probe, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe) && Bridge.equals(probe, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance object fell in switch-case interface cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    var probe1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.hasValue(probe1) && Bridge.equals(probe1, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    var probe2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation();
+                    do {
+                        if (Bridge.is(probe2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation) && Bridge.equals(probe2, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance cast into its interface fell in switch-case instance cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (Bridge.hasValue(probe2) && Bridge.equals(probe2, null)) {
+                            Bridge.Test.NUnit.Assert.Fail("Class instance cast into its interface fell in switch-case own cast fallover.");
+                            break;
+                        }
+                    } while (false);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe", {
+        $kind: "nested interface"
+    });
+
+    /**
+     * The test here consists in ensuring code built with local function
+     definitions that are not actually referenced can be built with Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558", {
+        statics: {
+            methods: {
+                /**
+                 * Test by defining a local function and never actually referencing it.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3558
+                 * @return  {void}
+                 */
+                TestUnusedLocalFn: function () {
+                    var test = null;
+                    var a = 15;
+                    test = function () {
+                        return a > 10;
+                    }; /// Local function is declared but never used /// Local function is declared but never used
+
+                    Bridge.Test.NUnit.Assert.AreEqual(15, a, "Unused local function does not result in broken Bridge code.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here ensures that local functions' recursion works with
+     Bridge translated code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560", {
+        statics: {
+            methods: {
+                /**
+                 * Tests local function recursion.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
+                TestLocalFunctionRecursion: function () {
+                    var F = null;
+                    var i = 0;
+                    F = function (x) {
+                        i = (i + 1) | 0;
+                        if (x > 0) {
+                            F(((x - 1) | 0));
+                        }
+                    };
+                    F(10);
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual(11, i, "Recursive local function call result in the expected value.");
+                },
+                /**
+                 * Tests local function referencing.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3560
+                 * @return  {void}
+                 */
+                TestLocalFunctionsReferences: function () {
+                    var G = null;
+                    var F = null;
+                    var buffer = "";
+                    F = function () {
+                        buffer = (buffer || "") + "F";
+                        G();
+                    };
+                    G = function () {
+                        buffer = (buffer || "") + "G";
+                    };
+                    F();
+
+
+
+
+
+                    Bridge.Test.NUnit.Assert.AreEqual("FG", buffer, "Local function referencing results in the expected side effect.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring given switch-case and local
+     function C#7 statement syntaxes are supported by Bridge.
+     The tests here have been based in a test project (pkHex-Bridge2) which
+     explored the issues.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567", {
+        statics: {
+            methods: {
+                /**
+                 * Tests with switch-case-when.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @return  {void}
+                 */
+                TestSwitchCase: function () {
+                    var int0 = 6;
+                    var int1 = 25;
+                    do {
+                        if (int1 === 25) {
+                            if (int0 === 6) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with when is accepted and it matches.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int0 === 6) {
+                            if (int1 === 254) {
+                                Bridge.Test.NUnit.Assert.Fail("Should not have matched this switch-case statement.");
+                                break;
+                            }
+                        }
+
+                        if (int0 === 6) {
+                            if (int1 === 25) {
+                                Bridge.Test.NUnit.Assert.True(true, "Hex to int and zero-padded integer constant supported in switch-case + when.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with 'when' is accepted and it matches.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 28) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        {
+                            Bridge.Test.NUnit.Assert.True(true, "Switch-case with 'when' works with the 'default' case when nothing matches.");
+                            break;
+                        }
+                    } while (false);
+                    do {
+                        if (int1 === 26) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 >= 7) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 28) {
+                            if (int0 >= 6) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                    Bridge.Test.NUnit.Assert.True(true, "Switch-case matches nothing and moves ahead when nothing matches.");
+                    do {
+                        if (int1 === 25) {
+                            if (int0 === 6 && (((int1 + int0) | 0)) < 10) {
+                                Bridge.Test.NUnit.Assert.Fail("Switch-case matches when it shouldn't.");
+                                break;
+                            }
+                        }
+
+                        if (int1 === 25) {
+                            if (int0 === 6 && (((int1 + int0) | 0)) > 10) {
+                                Bridge.Test.NUnit.Assert.True(true, "Switch-case with when is accepted when involving nested when-expression.");
+                                break;
+                            }
+                        }
+                    } while (false);
+                },
+                /**
+                 * Tests with Local Functions.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567
+                 * @return  {void}
+                 */
+                TestLocalFunction: function () {
+                    var testProbe = null;
+                    var list = System.Array.init([1, 2, 3], System.Int32);
+                    var strings = System.Array.init(["one", "two", "three"], System.String);
+
+
+                    testProbe = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f1;
+
+                    var matches = System.Linq.Enumerable.from(list).select(testProbe).ToArray(System.Int32);
+
+                    Bridge.Test.NUnit.Assert.True(matches.length === 3 && matches[System.Array.index(0, matches)] === 2 && matches[System.Array.index(1, matches)] === 3 && matches[System.Array.index(2, matches)] === 4, "Linq-select-triggered local function works.");
+
+                    var stringPool = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f2(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum)).ctor());
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.TestLocalFnSort(stringPool, strings);
+                },
+                TestLocalFnSort: function (stringPool, strings) {
+                    var strProbe = null;
+                    var list = System.Array.init([1, 2, 3], System.Int32);
+                    var max = (strings.length - 1) | 0;
+
+
+                    strProbe = function (s) {
+                        return s > max ? "" : strings[System.Array.index(s, strings)];
+                    };
+
+                    var ordered = System.Linq.Enumerable.from(stringPool).orderBy(function (p) {
+                            return p.Value > max;
+                        }).thenBy(function (p) {
+                        return strProbe(p.Value);
+                    });
+
+                    Bridge.Test.NUnit.Assert.AreEqual("one,oneself,three,two,twofold,not_one", Bridge.toArray(ordered.select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.f3)).join(","), "Local function called from ordered lambda expression works.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567, {
+        f1: function (t) {
+            return ((t + 1) | 0);
+        },
+        f2: function (_o1) {
+            var $t;
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "two", $t.Value = 1, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "three", $t.Value = 2, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "one", $t.Value = 0, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "not_one", $t.Value = 5, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "oneself", $t.Value = 0, $t));
+            _o1.add(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum(), $t.Text = "twofold", $t.Value = 1, $t));
+            return _o1;
+        },
+        f3: function (o) {
+            return o.Text;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3567.StringNum", {
+        $kind: "nested class",
+        props: {
+            Text: null,
+            Value: 0
+        }
+    });
+
+    /**
+     * The tests here consists in verifying the Script.Return method works
+     in a generic situation.
+     Notice despite the tests here just check whether it takes over return
+     values from methods, its intended use is for javascript events which
+     can be represented in regular C# blocks, which can't handle a 'return'
+     statement.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580", {
+        statics: {
+            methods: {
+                /**
+                 * Test returning a string constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {string}        A string 'correct' instead of the native 'wrong'.
+                 */
+                Probe0: function () {
+                    return "correct";
+
+                    return "wrong";
+                },
+                /**
+                 * Test returning a boolean constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {boolean}        A boolean 'true' instead of a native 'false'.
+                 */
+                Probe1: function () {
+                    return true;
+
+                    return false;
+                },
+                /**
+                 * Checks whether the functions return values are taken over by the
+                 Script.Return() call.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {void}
+                 */
+                TestScriptReturn: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("correct", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe0(), "Script.Return() takes over the return value of a string returning method.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe1(), "Script.Return() takes over the return value of a boolean returning method.");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
@@ -41788,6 +42269,19 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.ProbeImplementation", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge3550.IProbe],
+        $kind: "nested class",
+        props: {
+            Value: 0,
+            Text: null
+        },
+        alias: [
+            "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Value",
+            "Text", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Text"
+        ]
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436First],

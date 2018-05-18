@@ -14,104 +14,119 @@ namespace Bridge.Translator
         public SyntaxNode Replace(SyntaxNode root, SemanticModel model)
         {
             var switches = root.DescendantNodes().OfType<SwitchStatementSyntax>().Where(sw => {
-                return sw.Sections.Any(s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax));
+                return sw.Sections.Any(s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax || l is CaseSwitchLabelSyntax csl && csl.Value is CastExpressionSyntax ce && ce.Expression.Kind() == SyntaxKind.DefaultLiteralExpression));
             });
 
             var tempKey = 0;
             root = root.ReplaceNodes(switches, (s1, sw) =>
             {
-                var ifNodes = new List<IfStatementSyntax>();
-                BlockSyntax defaultBlock = null;
-                var isComplex = IsExpressionComplexEnoughToGetATemporaryVariable.IsComplex(model, s1.Expression);
-                var switchExpression = sw.Expression;
-                StatementSyntax switchConditionVariable = null;
-
-                var iType = model.GetTypeInfo(s1.Expression).Type;
-                var expressionType = SyntaxFactory.ParseTypeName(iType.ToMinimalDisplayString(model, s1.Expression.GetLocation().SourceSpan.Start));
-
-                if (isComplex)
+                try
                 {
-                    var key = tempKey++;
-                    var keyArg = SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("case_pattern" + key));
-                    var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.ToTemp");
+                    var ifNodes = new List<IfStatementSyntax>();
+                    BlockSyntax defaultBlock = null;
+                    var isComplex = IsExpressionComplexEnoughToGetATemporaryVariable.IsComplex(model, s1.Expression);
+                    var switchExpression = sw.Expression;
+                    StatementSyntax switchConditionVariable = null;
 
-                    var toTemp = SyntaxFactory.InvocationExpression(methodIdentifier,
-                        SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg), SyntaxFactory.Argument(switchExpression) })));
+                    var iType = model.GetTypeInfo(s1.Expression).Type;
+                    var expressionType = SyntaxFactory.ParseTypeName(iType.ToMinimalDisplayString(model, s1.Expression.GetLocation().SourceSpan.Start));
 
-                    switchConditionVariable = SyntaxFactory.ExpressionStatement(toTemp).NormalizeWhitespace();                    
-
-                    var parentMethodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier("global::Bridge.Script.FromTemp"),
-                                                                 SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(new[] { expressionType })));
-                    switchExpression = SyntaxFactory.InvocationExpression(parentMethodIdentifier,
-                        SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg) })));
-                }
-
-                foreach (var section in sw.Sections)
-                {
-                    var tuple = CollectCondition(switchExpression, section.Labels, expressionType);
-                    var condition = tuple.Item1;
-                    var variables = tuple.Item2;
-                    var whens = tuple.Item3;
-
-                    var body = SyntaxFactory.Block();
-                    var whenBody = SyntaxFactory.Block();
-
-                    foreach (var variable in variables)
+                    if (isComplex)
                     {
-                        body = body.WithStatements(body.Statements.Add(SyntaxFactory.LocalDeclarationStatement(variable)));
+                        var key = tempKey++;
+                        var keyArg = SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("case_pattern" + key));
+                        var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.ToTemp");
+
+                        var toTemp = SyntaxFactory.InvocationExpression(methodIdentifier,
+                            SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg), SyntaxFactory.Argument(switchExpression) })));
+
+                        switchConditionVariable = SyntaxFactory.ExpressionStatement(toTemp).NormalizeWhitespace();
+
+                        var parentMethodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier("global::Bridge.Script.FromTemp"),
+                                                                     SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(new[] { expressionType })));
+                        switchExpression = SyntaxFactory.InvocationExpression(parentMethodIdentifier,
+                            SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg) })));
                     }
 
-                    foreach (var statement in section.Statements)
+                    foreach (var section in sw.Sections)
                     {
-                        if (whens.Count > 0)
+                        // This should catch most (if not all) unhandled yet natively supported syntax usage
+                        try
                         {
-                            whenBody = whenBody.WithStatements(whenBody.Statements.Add(statement));
+                            var tuple = CollectCondition(switchExpression, section.Labels, expressionType);
+                            var condition = tuple.Item1;
+                            var variables = tuple.Item2;
+                            var whens = tuple.Item3;
+
+                            var body = SyntaxFactory.Block();
+                            var whenBody = SyntaxFactory.Block();
+
+                            foreach (var variable in variables)
+                            {
+                                body = body.WithStatements(body.Statements.Add(SyntaxFactory.LocalDeclarationStatement(variable)));
+                            }
+
+                            foreach (var statement in section.Statements)
+                            {
+                                if (whens.Count > 0)
+                                {
+                                    whenBody = whenBody.WithStatements(whenBody.Statements.Add(statement));
+                                }
+                                else
+                                {
+                                    body = body.WithStatements(body.Statements.Add(statement));
+                                }
+                            }
+
+                            if (whens.Count > 0)
+                            {
+                                ExpressionSyntax whenCondition = whens[0];
+                                for (int i = 1; i < whens.Count; ++i)
+                                {
+                                    whenCondition = SyntaxFactory.BinaryExpression(SyntaxKind.LogicalOrExpression, whenCondition, whens[i]);
+                                }
+
+                                body = body.WithStatements(body.Statements.Add(SyntaxFactory.IfStatement(whenCondition, whenBody)));
+                            }
+
+                            if (condition == null)
+                            {
+                                defaultBlock = body
+                                    .WithLeadingTrivia(section.GetLeadingTrivia())
+                                    .WithTrailingTrivia(section.GetTrailingTrivia());
+                                break;
+                            }
+
+                            ifNodes.Add(SyntaxFactory.IfStatement(condition, body).WithLeadingTrivia(section.GetLeadingTrivia()));
                         }
-                        else
+                        catch (Exception e)
                         {
-                            body = body.WithStatements(body.Statements.Add(statement));
+                            throw new ReplacerException(section, e);
                         }
                     }
 
-                    if (whens.Count > 0)
+                    var doBlock = SyntaxFactory.Block();
+                    if (switchConditionVariable != null)
                     {
-                        ExpressionSyntax whenCondition = whens[0];
-                        for (int i = 1; i < whens.Count; ++i)
-                        {
-                            whenCondition = SyntaxFactory.BinaryExpression(SyntaxKind.LogicalOrExpression, whenCondition, whens[i]);
-                        }
-
-                        body = body.WithStatements(body.Statements.Add(SyntaxFactory.IfStatement(whenCondition, whenBody)));
+                        doBlock = doBlock.WithStatements(doBlock.Statements.Add(switchConditionVariable));
                     }
 
-                    if (condition == null)
+                    doBlock = doBlock.WithStatements(doBlock.Statements.AddRange(ifNodes));
+
+                    if (defaultBlock != null)
                     {
-                        defaultBlock = body
-                            .WithLeadingTrivia(section.GetLeadingTrivia())
-                            .WithTrailingTrivia(section.GetTrailingTrivia());
-                        break;
+                        doBlock = doBlock.WithStatements(doBlock.Statements.Add(defaultBlock));
                     }
 
-                    ifNodes.Add(SyntaxFactory.IfStatement(condition, body).WithLeadingTrivia(section.GetLeadingTrivia()));
-                }
+                    var doStatement = SyntaxFactory.DoStatement(doBlock, SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression));
 
-                var doBlock = SyntaxFactory.Block();
-                if (switchConditionVariable != null)
+                    doStatement = doStatement.WithLeadingTrivia(sw.GetLeadingTrivia().Concat(doStatement.GetLeadingTrivia())).WithTrailingTrivia(sw.GetTrailingTrivia());
+                    return doStatement.NormalizeWhitespace();
+                }
+                catch (Exception e)
                 {
-                    doBlock = doBlock.WithStatements(doBlock.Statements.Add(switchConditionVariable));
+                    throw new ReplacerException(sw, e);
                 }
-
-                doBlock = doBlock.WithStatements(doBlock.Statements.AddRange(ifNodes));
-
-                if (defaultBlock != null)
-                {
-                    doBlock = doBlock.WithStatements(doBlock.Statements.Add(defaultBlock));
-                }
-
-                var doStatement = SyntaxFactory.DoStatement(doBlock, SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression));
-
-                doStatement = doStatement.WithLeadingTrivia(sw.GetLeadingTrivia().Concat(doStatement.GetLeadingTrivia())).WithTrailingTrivia(sw.GetTrailingTrivia());
-                return doStatement.NormalizeWhitespace();
             });
 
             return root;
@@ -132,79 +147,120 @@ namespace Bridge.Translator
 
             foreach (var item in labels)
             {
-                if (item is CaseSwitchLabelSyntax)
+                try
                 {
-                    var label = (CaseSwitchLabelSyntax)item;
-                    conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, label.Value));
-                }
-                else if (item is CasePatternSwitchLabelSyntax)
-                {
-                    var label = (CasePatternSwitchLabelSyntax)item;
-                    string varName = null;
-                    if (label.Pattern is DeclarationPatternSyntax)
+                    if (item is CaseSwitchLabelSyntax)
                     {
-                        var declarationPattern = (DeclarationPatternSyntax)label.Pattern;
-                        var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
+                        var label = (CaseSwitchLabelSyntax)item;
 
-                        if (designation != null)
+                        if (label.Value is CastExpressionSyntax ce && ce.Expression.Kind() == SyntaxKind.DefaultLiteralExpression)
                         {
-                            var declarationType = declarationPattern.Type;
-
-                            if (declarationType.IsVar)
-                            {
-                                declarationType = keyType;
-                            }
-
-                            var varDecl = SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("var")).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                SyntaxFactory.VariableDeclarator(
-                                    SyntaxFactory.Identifier(designation.Identifier.ValueText)                                    
-                                ).WithInitializer(SyntaxFactory.EqualsValueClause(patternsCount > 1 ? (ExpressionSyntax)SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, expressionSyntax, declarationType) : SyntaxFactory.CastExpression(declarationType, expressionSyntax)))
-                            )).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace();
-                            varName = designation.Identifier.ValueText;
-                            variables.Add(varDecl);
-
-                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, declarationType));
-                        }
-                    }
-
-                    if (label.WhenClause != null)
-                    {
-                        var c = label.WhenClause.Condition;
-                        if (patternsCount > 1 && NeedsParentheses(c))
-                        {
-                            c = SyntaxFactory.ParenthesizedExpression(c);
-                        }
-
-                        if (varName != null && patternsCount > 1)
-                        {
-                            whens.Add(SyntaxFactory.BinaryExpression(SyntaxKind.LogicalAndExpression, SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.IdentifierName(varName), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression)), c));
+                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.LogicalAndExpression,
+                                SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, ce.Type),
+                                //SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, SyntaxFactory.DefaultExpression(ce.Type))
+                                SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                                    SyntaxKind.SimpleMemberAccessExpression,
+                                                    SyntaxFactory.IdentifierName("System.Object"),
+                                                    SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                                    SyntaxFactory.SeparatedList<ArgumentSyntax>(
+                                                        new SyntaxNodeOrToken[]{
+                                                        SyntaxFactory.Argument(expressionSyntax),
+                                                        SyntaxFactory.Token(SyntaxKind.CommaToken),
+                                                        SyntaxFactory.Argument(
+                                                            SyntaxFactory.DefaultExpression(ce.Type)
+                                                            )})))
+                            ));
                         }
                         else
                         {
-                            whens.Add(c);
-                        }                        
+                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, label.Value));
+                        }
                     }
+                    else if (item is CasePatternSwitchLabelSyntax)
+                    {
+                        var label = (CasePatternSwitchLabelSyntax)item;
+                        string varName = null;
+                        if (label.Pattern is DeclarationPatternSyntax)
+                        {
+                            var declarationPattern = (DeclarationPatternSyntax)label.Pattern;
+                            var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
+
+                            if (designation != null)
+                            {
+                                var declarationType = declarationPattern.Type;
+
+                                if (declarationType.IsVar)
+                                {
+                                    declarationType = keyType;
+                                }
+
+                                var varDecl = SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("var")).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                    SyntaxFactory.VariableDeclarator(
+                                        SyntaxFactory.Identifier(designation.Identifier.ValueText)
+                                    ).WithInitializer(SyntaxFactory.EqualsValueClause(patternsCount > 1 ? (ExpressionSyntax)SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, expressionSyntax, declarationType) : SyntaxFactory.CastExpression(declarationType, expressionSyntax)))
+                                )).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace();
+                                varName = designation.Identifier.ValueText;
+                                variables.Add(varDecl);
+
+                                conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, expressionSyntax, declarationType));
+                            }
+                        }
+                        else if (label.Pattern is ConstantPatternSyntax)
+                        {
+                            var constPattern = (ConstantPatternSyntax)label.Pattern;
+                            conditionList.Add(SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, expressionSyntax, constPattern.Expression));
+                        }
+
+                        if (label.WhenClause != null)
+                        {
+                            var c = label.WhenClause.Condition;
+                            if (patternsCount > 1 && NeedsParentheses(c))
+                            {
+                                c = SyntaxFactory.ParenthesizedExpression(c);
+                            }
+
+                            if (varName != null && patternsCount > 1)
+                            {
+                                whens.Add(SyntaxFactory.BinaryExpression(SyntaxKind.LogicalAndExpression, SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.IdentifierName(varName), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression)), c));
+                            }
+                            else
+                            {
+                                whens.Add(c);
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(item, e);
                 }
             }
 
             for (int i = 0; i < conditionList.Count; ++i)
             {
                 var cond = conditionList[i];
-                var be = cond as BinaryExpressionSyntax;
+                try
+                {
+                    var be = cond as BinaryExpressionSyntax;
 
-                if (be != null)
-                {
-                    if (NeedsParentheses(be.Right))
+                    if (be != null)
                     {
-                        conditionList[i] = be.WithRight(SyntaxFactory.ParenthesizedExpression(be.Right));
-                    }                    
-                }
-                else
-                {
-                    if (NeedsParentheses(cond))
-                    {
-                        conditionList[i] = SyntaxFactory.ParenthesizedExpression(cond);
+                        if (NeedsParentheses(be.Right))
+                        {
+                            conditionList[i] = be.WithRight(SyntaxFactory.ParenthesizedExpression(be.Right));
+                        }
                     }
+                    else
+                    {
+                        if (NeedsParentheses(cond))
+                        {
+                            conditionList[i] = SyntaxFactory.ParenthesizedExpression(cond);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(cond, e);
                 }
             }
 

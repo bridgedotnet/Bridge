@@ -19,52 +19,60 @@ namespace Bridge.Translator
 
             foreach (var assignment in assignments)
             {
-                var identifier = assignment.Left as IdentifierNameSyntax;
-                if (identifier != null)
+                try
                 {
-                    var local = assignment.GetParent<LocalDeclarationStatementSyntax>();
-                    if (local != null && locals.Contains(local))
+                    var identifier = assignment.Left as IdentifierNameSyntax;
+                    if (identifier != null)
                     {
-                        continue;
-                    }
-                    locals.Add(local);
-
-                    var name = identifier.Identifier.ValueText;
-
-                    if (local != null && local.Declaration.Variables.Any(v => v.Identifier.ValueText == name))
-                    {
-                        var block = local.Ancestors().OfType<BlockSyntax>().First();
-
-                        var statements = updatedBlocks.ContainsKey(block) ? updatedBlocks[block] : block.Statements.ToList();
-                        var index = statements.IndexOf(local);
-
-                        foreach (var variable in local.Declaration.Variables)
+                        var local = assignment.GetParent<LocalDeclarationStatementSyntax>();
+                        if (local != null && locals.Contains(local))
                         {
-                            var newLocal = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(local.Declaration.Type.WithoutTrivia(), SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(variable.Identifier.ValueText)))).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                            continue;
+                        }
+                        locals.Add(local);
 
-                            if (local.Declaration.Variables.First().Equals(variable))
+                        var name = identifier.Identifier.ValueText;
+
+                        if (local != null && local.Declaration.Variables.Any(v => v.Identifier.ValueText == name))
+                        {
+                            var block = local.Ancestors().OfType<BlockSyntax>().First();
+
+                            var statements = updatedBlocks.ContainsKey(block) ? updatedBlocks[block] : block.Statements.ToList();
+                            var index = statements.IndexOf(local);
+
+                            foreach (var variable in local.Declaration.Variables)
                             {
-                                newLocal = newLocal.WithLeadingTrivia(local.GetLeadingTrivia());
-                            }
+                                var newLocal = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(local.Declaration.Type.WithoutTrivia(), SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(variable.Identifier.ValueText)))).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
 
-                            statements.Insert(index++, newLocal);
-
-                            if (variable.Initializer != null)
-                            {
-                                var equals = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, SyntaxFactory.IdentifierName(variable.Identifier.ValueText), variable.Initializer.Value.WithoutTrivia())).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
-                                if (local.Declaration.Variables.Last().Equals(variable))
+                                if (local.Declaration.Variables.First().Equals(variable))
                                 {
-                                    equals = equals.WithTrailingTrivia(local.GetTrailingTrivia());
+                                    newLocal = newLocal.WithLeadingTrivia(local.GetLeadingTrivia());
                                 }
 
-                                statements.Insert(index++, equals);
+                                statements.Insert(index++, newLocal);
+
+                                if (variable.Initializer != null)
+                                {
+                                    var equals = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, SyntaxFactory.IdentifierName(variable.Identifier.ValueText), variable.Initializer.Value.WithoutTrivia())).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                                    if (local.Declaration.Variables.Last().Equals(variable))
+                                    {
+                                        equals = equals.WithTrailingTrivia(local.GetTrailingTrivia());
+                                    }
+
+                                    statements.Insert(index++, equals);
+                                }
                             }
+
+                            statements.Remove(local);
+
+                            updatedBlocks[block] = statements;
                         }
-
-                        statements.Remove(local);
-
-                        updatedBlocks[block] = statements;
                     }
+                }
+                catch (Exception e)
+                {
+
+                    throw new ReplacerException(assignment, e);
                 }
             }
 

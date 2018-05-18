@@ -304,6 +304,12 @@ namespace Bridge.Translator
         {
             if (this.Emitter.Rules.ExternalCast == ExternalCastRule.Plain)
             {
+                var typeDef = type.GetDefinition();
+                if (typeDef == null || !this.Emitter.Validator.IsExternalType(typeDef))
+                {
+                    return false;
+                }                
+
                 var fullName = type.FullName;
 
                 if (fullName.StartsWith("Bridge.") || fullName.StartsWith("System."))

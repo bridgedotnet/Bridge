@@ -247,7 +247,7 @@ namespace Bridge.Translator
                 Indent();
             }
 
-            AsyncBlock asyncBlock = null;
+            IAsyncBlock asyncBlock = null;
             this.PushLocals();
 
             if (this.IsAsync)
@@ -259,6 +259,20 @@ namespace Bridge.Translator
                 else
                 {
                     asyncBlock = new AsyncBlock(this.Emitter, (AnonymousMethodExpression)context);
+                }
+
+                asyncBlock.InitAsyncBlock();
+            }
+            else if (YieldBlock.HasYield(body))
+            {
+                this.IsAsync = true;
+                if (context is LambdaExpression)
+                {
+                    asyncBlock = new GeneratorBlock(this.Emitter, (LambdaExpression)context);
+                }
+                else
+                {
+                    asyncBlock = new GeneratorBlock(this.Emitter, (AnonymousMethodExpression)context);
                 }
 
                 asyncBlock.InitAsyncBlock();
