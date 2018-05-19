@@ -69,16 +69,16 @@ namespace System {
         // extracts the local offset. For UTC, creates a UTC instance with a zero offset.
         public DateTimeOffset(DateTime dateTime) {
             TimeSpan offset;
-            if (dateTime.Kind != DateTimeKind.Utc) {
-                // Local and Unspecified are both treated as Local
-                offset = DateTime.UtcNow - DateTime.Now;
+            //if (dateTime.Kind != DateTimeKind.Utc) {
+            //    // Local and Unspecified are both treated as Local
+            //    offset = DateTime.Now - DateTime.UtcNow;
 
-                // TODO: Revised [TimeZoneInfo not supported]
-                //offset = TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime);
-            }
-            else {            
+            //    // TODO: Revised [TimeZoneInfo not supported]
+            //    //offset = TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime);
+            //}
+            //else {            
                 offset = new TimeSpan(0);
-            }
+            //}
             m_offsetMinutes = ValidateOffset(offset);
             m_dateTime = ValidateDate(dateTime, offset);
         }
@@ -87,18 +87,18 @@ namespace System {
         // consistent with the DateTime. For Utc ensures the offset is zero. For local, ensures that
         // the offset corresponds to the local.
         public DateTimeOffset(DateTime dateTime, TimeSpan offset) {
-            if (dateTime.Kind == DateTimeKind.Local) {
-                // TODO: Revised [TimeZoneInfo not supported]
-                //if (offset != TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime)) {
-                if (offset != (DateTime.UtcNow - DateTime.Now)) {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
-                }
-            }
-            else if (dateTime.Kind == DateTimeKind.Utc) {
-                if (offset != TimeSpan.Zero) {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_OffsetUtcMismatch"), "offset");
-                }
-            }
+            //if (dateTime.Kind == DateTimeKind.Local) {
+            //    // TODO: Revised [TimeZoneInfo not supported]
+            //    //if (offset != TimeZoneInfo.GetLocalUtcOffset(dateTime, TimeZoneInfoOptions.NoThrowOnInvalidTime)) {
+            //    if (offset != (DateTime.Now - DateTime.UtcNow)) {
+            //        throw new ArgumentException(Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
+            //    }
+            //}
+            //else if (dateTime.Kind == DateTimeKind.Utc) {
+            //    if (offset != TimeSpan.Zero) {
+            //        throw new ArgumentException(Environment.GetResourceString("Argument_OffsetUtcMismatch"), "offset");
+            //    }
+            //}
             m_offsetMinutes = ValidateOffset(offset);
             m_dateTime = ValidateDate(dateTime, offset);
         }
@@ -676,38 +676,34 @@ namespace System {
         [Bridge.Convention(Notation = Bridge.Notation.CamelCase)]
         public override String ToString()
         {
-            return DateTime.ToString();
+            return DateTime.SpecifyKind(ClockDateTime, DateTimeKind.Local).ToString();
 
             // TODO: NotSupported [DateTimeFormatInfo]
-            //Contract.Ensures(Contract.Result<String>() != null);
-            //return DateTimeFormat.Format(ClockDateTime, null, DateTimeFormatInfo.CurrentInfo, Offset);
+            //return DateTimeFormat.Format(ClockDateTime, null, null, Offset);
         }
 
         public String ToString(String format)
         {
-            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(format);
+            return DateTime.SpecifyKind(ClockDateTime, DateTimeKind.Local).ToString(format);
 
             // TODO: NotSupported [DateTimeFormatInfo]
-            //Contract.Ensures(Contract.Result<String>() != null);
-            //return DateTimeFormat.Format(ClockDateTime, format, DateTimeFormatInfo.CurrentInfo, Offset);
+            //return DateTimeFormat.Format(ClockDateTime, format, null, Offset);
         }
 
         public String ToString(IFormatProvider formatProvider)
         {
-            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(null, formatProvider);
+            return DateTime.SpecifyKind(ClockDateTime, DateTimeKind.Local).ToString(null, formatProvider);
 
             // TODO: NotSupported [DateTimeFormatInfo]
-            //Contract.Ensures(Contract.Result<String>() != null);
-            //return DateTimeFormat.Format(ClockDateTime, null, DateTimeFormatInfo.GetInstance(formatProvider), Offset);
+            //return DateTimeFormat.Format(ClockDateTime, null, formatProvider, Offset);
         }
 
         public String ToString(String format, IFormatProvider formatProvider)
         {
-            return DateTime.SpecifyKind(DateTime, DateTimeKind.Local).ToString(format, formatProvider);
+            return DateTime.SpecifyKind(ClockDateTime, DateTimeKind.Local).ToString(format, formatProvider);
 
             // TODO: NotSupported [DateTimeFormatInfo]
-            //Contract.Ensures(Contract.Result<String>() != null);
-            //return DateTimeFormat.Format(ClockDateTime, format, DateTimeFormatInfo.GetInstance(formatProvider), Offset);
+            //return DateTimeFormat.Format(ClockDateTime, format, formatProvider, Offset);
         }
 
         public DateTimeOffset ToUniversalTime() {

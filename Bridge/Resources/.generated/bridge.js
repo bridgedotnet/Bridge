@@ -31432,26 +31432,13 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             $ctor1: function (dateTime) {
                 this.$initialize();
                 var offset;
-                if (System.DateTime.getKind(dateTime) !== 1) {
-                    offset = System.DateTime.subdd(System.DateTime.getUtcNow(), System.DateTime.getNow());
 
-                } else {
-                    offset = new System.TimeSpan(System.Int64(0));
-                }
+                offset = new System.TimeSpan(System.Int64(0));
                 this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(offset);
                 this.m_dateTime = System.DateTimeOffset.ValidateDate(dateTime, offset);
             },
             $ctor2: function (dateTime, offset) {
                 this.$initialize();
-                if (System.DateTime.getKind(dateTime) === 2) {
-                    if (System.TimeSpan.neq(offset, (System.DateTime.subdd(System.DateTime.getUtcNow(), System.DateTime.getNow())))) {
-                        throw new System.ArgumentException.$ctor3(System.Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
-                    }
-                } else if (System.DateTime.getKind(dateTime) === 1) {
-                    if (System.TimeSpan.neq(offset, System.TimeSpan.zero)) {
-                        throw new System.ArgumentException.$ctor3(System.Environment.GetResourceString("Argument_OffsetUtcMismatch"), "offset");
-                    }
-                }
                 this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(offset);
                 this.m_dateTime = System.DateTimeOffset.ValidateDate(dateTime, offset);
             },
@@ -31584,19 +31571,19 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 return new System.DateTimeOffset.$ctor1(System.DateTime.toLocalTime(this.UtcDateTime, throwOnOverflow));
             },
             toString: function () {
-                return System.DateTime.format(this.DateTime);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2));
 
             },
             ToString$1: function (format) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), format);
 
             },
             ToString: function (formatProvider) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), null, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), null, formatProvider);
 
             },
             format: function (format, formatProvider) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), format, formatProvider);
 
             },
             ToUniversalTime: function () {
