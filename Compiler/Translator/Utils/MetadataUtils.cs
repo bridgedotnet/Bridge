@@ -1003,6 +1003,12 @@ namespace Bridge.Translator
                 return JS.Types.System.Object.NAME;
             }
 
+            var isGlobal = itypeDef != null && itypeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" || a.AttributeType.FullName == "Bridge.MixinAttribute");
+            if (isGlobal)
+            {
+                return JS.Types.Bridge.Global.NAME;
+            }
+
             var name = BridgeTypes.ToJsName(type, emitter, asDefinition, excludeTypeOnly: true);
 
             if (cache && emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
