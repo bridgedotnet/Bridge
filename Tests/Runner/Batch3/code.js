@@ -31811,6 +31811,32 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589", {
+        statics: {
+            methods: {
+                TestUsingStaticOnGeneric: function () {
+                    var s = "Hello, World!";
+                    Bridge.Test.NUnit.Assert.AreEqual(s, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1(System.String).Log(s));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root", {
+        $kind: "nested class"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1", function (T) { return {
+        $kind: "nested class",
+        statics: {
+            methods: {
+                Log: function (data) {
+                    return data;
+                }
+            }
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
