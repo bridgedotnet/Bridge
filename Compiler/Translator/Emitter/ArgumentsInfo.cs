@@ -178,11 +178,11 @@ namespace Bridge.Translator
                     this.ArgumentsNames = list.ToArray();
 
                     var expr = this.ArgumentsExpressions.ToList();
-                    expr.Add(invocationExpression);
+                    expr.Insert(0, invocationExpression);
                     this.ArgumentsExpressions = expr.ToArray();
 
                     var namedExpr = this.NamedExpressions.ToList();
-                    namedExpr.Add(new NamedParamExpression(name, invocationExpression));
+                    namedExpr.Insert(0, new NamedParamExpression(name, invocationExpression));
                     this.NamedExpressions = namedExpr.ToArray();
                 }
             }

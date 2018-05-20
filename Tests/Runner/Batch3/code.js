@@ -31811,6 +31811,53 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3588", {
+        statics: {
+            methods: {
+                TestOperatorTemplate: function () {
+                    var $t;
+                    var Bridge3588 = {
+                        Vec2: function (x, y) {
+                            this.x = x;
+                            this.y = y;
+                        },
+
+                        Vec3: function (x, y, z) {
+                            this.x = x;
+                            this.y = y;
+                            this.z = z;
+                        }
+                    };
+
+                    var u = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3588.Utility();
+                    var v0 = new Bridge3588.Vec2(1, 1);
+                    var v1 = ($t = u.F(new Bridge3588.Vec3(v0.x, v0.y, 0)), new Bridge3588.Vec2($t.x, $t.y));
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(v1, Bridge3588.Vec2));
+                    Bridge.Test.NUnit.Assert.AreEqual(2, v1.x);
+                    Bridge.Test.NUnit.Assert.AreEqual(3, v1.y);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3588.Utility", {
+        $kind: "nested class",
+        methods: {
+            F: function (v) {
+                var Bridge3588 = {
+                    Vec3: function (x, y, z) {
+                        this.x = x;
+                        this.y = y;
+                        this.z = z;
+                    }
+                };
+
+                return new Bridge3588.Vec3(v.x + 1, v.y + 2, v.z + 3);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
