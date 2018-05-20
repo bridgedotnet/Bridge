@@ -31811,6 +31811,94 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583", {
+        statics: {
+            methods: {
+                TestIsFixedSize: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr));
+
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(ilist));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584", {
+        statics: {
+            methods: {
+                TestInsert: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
+                    });
+                },
+                TestAdd: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.add(ilist, Bridge.box(0, System.Int32), Object);
+                    });
+                },
+                TestRemove: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.remove(ilist, Bridge.box(0, System.Int32), Object);
+                    });
+                },
+                TestRemoveAt: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.removeAt(ilist, 0, Object);
+                    });
+                },
+                TestClear: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.clear(ilist, Object);
+                    });
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585", {
+        statics: {
+            methods: {
+                TestInsert: function () {
+                    var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
+                    var roList = list.AsReadOnly();
+                    var ilist = Bridge.cast(roList, System.Collections.IList);
+
+                    try {
+                        System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
+                        Bridge.Test.NUnit.Assert.Fail();
+                    }
+                    catch (ex) {
+                        ex = System.Exception.create(ex);
+                        Bridge.Test.NUnit.Assert.AreEqual("Collection is read-only.", ex.Message);
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585, {
+        f1: function (_o1) {
+            _o1.add(1);
+            _o1.add(2);
+            _o1.add(3);
+            return _o1;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {

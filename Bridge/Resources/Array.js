@@ -316,7 +316,7 @@
 
         checkReadOnly: function (obj, T, msg) {
             if (System.Array.getIsReadOnly(obj, T)) {
-                throw new System.NotSupportedException.$ctor1(msg || "Collection was of a fixed size.");
+                throw new System.NotSupportedException.$ctor1(msg || "Collection is read-only.");
             }
         },
 
