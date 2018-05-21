@@ -15932,8 +15932,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     throw new System.ArgumentNullException.$ctor1("element");
                 }
 
-                if (t == null)
-                {
+                if (t == null) {
                     throw new System.ArgumentNullException.$ctor1("attributeType");
                 }
 
@@ -15951,12 +15950,17 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     throw new System.ArgumentNullException.$ctor1("element");
                 }
 
-                if (t == null)
-                {
+                if (t == null) {
                     throw new System.ArgumentNullException.$ctor1("attributeType");
                 }
 
                 return a.getCustomAttributes(t || b);
+            },
+
+            isDefined: function (o, t, b) {
+                var attrs = System.Attribute.getCustomAttributes(o, t, b);
+
+                return attrs.length > 0;
             }
         }
     });
@@ -21323,6 +21327,30 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             }
         },
         $flags: true
+    });
+
+    // @source OnSerializingAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.OnSerializingAttribute", {
+        inherits: [System.Attribute]
+    });
+
+    // @source OnSerializedAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.OnSerializedAttribute", {
+        inherits: [System.Attribute]
+    });
+
+    // @source OnDeserializingAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.OnDeserializingAttribute", {
+        inherits: [System.Attribute]
+    });
+
+    // @source OnDeserializedAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.OnDeserializedAttribute", {
+        inherits: [System.Attribute]
     });
 
     // @source SecurityException.js

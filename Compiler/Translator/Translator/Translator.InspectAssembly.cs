@@ -1,4 +1,4 @@
-#define PARALLEL
+#undef PARALLEL
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.TypeSystem;
@@ -308,8 +308,19 @@ namespace Bridge.Translator
         {
             var rewriter = new SharpSixRewriter(this);
             var result = new string[this.SourceFiles.Count];
-            
-            Task.WaitAll(this.SourceFiles.Select((file, index) => Task.Run(() => result[index] = new SharpSixRewriter(rewriter).Rewrite(index))).ToArray());
+
+            // Run in parallel only and only if logger level is not trace.
+            if (this.Log.LoggerLevel == LoggerLevel.Trace)
+            {
+                this.Log.Trace("Rewriting/replacing code from files one after the other (not parallel) due to logger level being 'trace'.");
+                this.SourceFiles.Select((file, index) => new { file, index }).ToList()
+                    .ForEach(entry => result[entry.index] = new SharpSixRewriter(rewriter).Rewrite(entry.index));
+            }
+            else
+            {
+                Task.WaitAll(this.SourceFiles.Select((file, index) => Task.Run(() => result[index] = new SharpSixRewriter(rewriter).Rewrite(index))).ToArray());
+            }
+
             return result;
         }
 
@@ -319,77 +330,82 @@ namespace Bridge.Translator
 
             var rewriten = Rewrite();
 
-#if PARALLEL
-            Task.WaitAll(this.SourceFiles.Select((fileName, index) => Task.Run(() =>
-#else
-            for (var index=0; index < this.SourceFiles.Count; index++)
-#endif
+            // Run in parallel only and only if logger level is not trace.
+            if (this.Log.LoggerLevel == LoggerLevel.Trace)
             {
-#if !PARALLEL
-                var fileName = this.SourceFiles[index];
-#endif
-                this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
-
-                var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
-
-                if (this.DefineConstants != null && this.DefineConstants.Count > 0)
+                this.Log.Trace("Building syntax tree..." + Environment.NewLine + "Parsing files one after the other (not parallel) due to logger level being 'trace'.");
+                for (var index = 0; index < this.SourceFiles.Count; index++)
                 {
-                    foreach (var defineConstant in this.DefineConstants)
-                    {
-                        parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
-                    }
+                    BuildSyntaxTreeForFile(index, ref rewriten);
                 }
-
-                var syntaxTree = parser.Parse(rewriten[index], fileName);
-                syntaxTree.FileName = fileName;
-                this.Log.Trace("\tParsing syntax tree done");
-
-                if (parser.HasErrors)
-                {
-                    var errors = new List<string>();
-                    foreach (var error in parser.Errors)
-                    {
-                        errors.Add(fileName + ":" + error.Region.BeginLine + "," + error.Region.BeginColumn + ": " + error.Message);
-                    }
-
-                    throw new EmitterException(syntaxTree, "Error parsing code." + Environment.NewLine + String.Join(Environment.NewLine, errors));
-                }
-
-                var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
-                this.Log.Trace("\tExpanding query expressions done");
-
-                syntaxTree = (expandResult != null ? (SyntaxTree)expandResult.AstNode : syntaxTree);
-
-                var emptyLambdaDetecter = new EmptyLambdaDetecter();
-                syntaxTree.AcceptVisitor(emptyLambdaDetecter);
-                this.Log.Trace("\tAccepting lambda detector visitor done");
-
-                if (emptyLambdaDetecter.Found)
-                {
-                    var fixer = new EmptyLambdaFixer();
-                    var astNode = syntaxTree.AcceptVisitor(fixer);
-                    this.Log.Trace("\tAccepting lambda fixer visitor done");
-                    syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
-                    syntaxTree.FileName = fileName;
-                }
-
-                var f = new ParsedSourceFile(syntaxTree, new CSharpUnresolvedFile
-                {
-                    FileName = fileName
-                });
-                this.ParsedSourceFiles[index] = f;
-
-                var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
-                f.SyntaxTree.AcceptVisitor(tcv);
-                this.Log.Trace("\tAccepting type system convert visitor done");
-
-                this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
             }
-#if PARALLEL
-            )).ToArray());
-#endif
+            else
+            {
+                Task.WaitAll(this.SourceFiles.Select((fileName, index) => Task.Run(() => BuildSyntaxTreeForFile(index, ref rewriten))).ToArray());
+            }
 
             this.Log.Info("Building syntax tree done");
+        }
+
+        private void BuildSyntaxTreeForFile(int index, ref string[] rewriten)
+        {
+            var fileName = this.SourceFiles[index];
+            this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
+
+            var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
+
+            if (this.DefineConstants != null && this.DefineConstants.Count > 0)
+            {
+                foreach (var defineConstant in this.DefineConstants)
+                {
+                    parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
+                }
+            }
+
+            var syntaxTree = parser.Parse(rewriten[index], fileName);
+            syntaxTree.FileName = fileName;
+            this.Log.Trace("\tParsing syntax tree done");
+
+            if (parser.HasErrors)
+            {
+                var errors = new List<string>();
+                foreach (var error in parser.Errors)
+                {
+                    errors.Add(fileName + ":" + error.Region.BeginLine + "," + error.Region.BeginColumn + ": " + error.Message);
+                }
+
+                throw new EmitterException(syntaxTree, "Error parsing code." + Environment.NewLine + String.Join(Environment.NewLine, errors));
+            }
+
+            var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
+            this.Log.Trace("\tExpanding query expressions done");
+
+            syntaxTree = (expandResult != null ? (SyntaxTree)expandResult.AstNode : syntaxTree);
+
+            var emptyLambdaDetecter = new EmptyLambdaDetecter();
+            syntaxTree.AcceptVisitor(emptyLambdaDetecter);
+            this.Log.Trace("\tAccepting lambda detector visitor done");
+
+            if (emptyLambdaDetecter.Found)
+            {
+                var fixer = new EmptyLambdaFixer();
+                var astNode = syntaxTree.AcceptVisitor(fixer);
+                this.Log.Trace("\tAccepting lambda fixer visitor done");
+                syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
+                syntaxTree.FileName = fileName;
+            }
+
+            var f = new ParsedSourceFile(syntaxTree, new CSharpUnresolvedFile
+            {
+                FileName = fileName
+            });
+            this.ParsedSourceFiles[index] = f;
+
+            var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
+            f.SyntaxTree.AcceptVisitor(tcv);
+            this.Log.Trace("\tAccepting type system convert visitor done");
+
+            this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
         }
     }
 }

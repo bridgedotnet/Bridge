@@ -21,6 +21,7 @@ namespace Bridge.Translator
         private const string SYSTEM_IDENTIFIER = "System";
         private const string FUNC_IDENTIFIER = "Func";
 
+        public readonly string envnl = Environment.NewLine;
         private readonly ILogger logger;
         private readonly ITranslator translator;
         private CSharpCompilation compilation;
@@ -106,7 +107,20 @@ namespace Bridge.Translator
             foreach (var replacer in replacers)
             {
                 modelUpdater(result);
-                result = replacer.Replace(newTree.GetRoot(), semanticModel);
+
+                try
+                {
+                    result = replacer.Replace(newTree.GetRoot(), semanticModel);
+                }
+                catch (Exception e)
+                {
+                    logger.Error("Error trying to rewrite syntax block while parsing source file." + envnl +
+                        "Replacer: " + replacer.ToString() + envnl +
+                        "File: " + translator.SourceFiles[index] + envnl +
+                        "Inner exception: " + e.Message);
+
+                    throw new TranslatorException("Error applying replacer '" + replacer.ToString() + "' on file '" + translator.SourceFiles[index] + "'. Inner exception: " + e.Message, e);
+                }
             }
 
             modelUpdater(result);

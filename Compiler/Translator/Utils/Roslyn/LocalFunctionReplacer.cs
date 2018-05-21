@@ -48,183 +48,190 @@ namespace Bridge.Translator
 
             foreach (var fn in localFns)
             {
-                var parentNode = fn.Parent;
-                var usage = GetFirstUsageLocalFunc(model, fn, parentNode);
-                var beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
-
-                if (beforeStatement is LocalFunctionStatementSyntax beforeFn)
+                try
                 {
-                    usage = GetFirstUsageLocalFunc(model, beforeFn, parentNode);
-                    beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
-                }
+                    var parentNode = fn.Parent;
+                    var usage = GetFirstUsageLocalFunc(model, fn, parentNode);
+                    var beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
 
-                var customDelegate = false;
-
-                if (fn.TypeParameterList != null && fn.TypeParameterList.Parameters.Count > 0)
-                {
-                    customDelegate = true;
-                }
-                else
-                {
-                    foreach (var prm in fn.ParameterList.Parameters)
+                    if (beforeStatement is LocalFunctionStatementSyntax beforeFn)
                     {
-                        if (prm.Default != null)
-                        {
-                            customDelegate = true;
-                            break;
-                        }
+                        usage = GetFirstUsageLocalFunc(model, beforeFn, parentNode);
+                        beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+                    }
 
-                        foreach (var modifier in prm.Modifiers)
+                    var customDelegate = false;
+
+                    if (fn.TypeParameterList != null && fn.TypeParameterList.Parameters.Count > 0)
+                    {
+                        customDelegate = true;
+                    }
+                    else
+                    {
+                        foreach (var prm in fn.ParameterList.Parameters)
                         {
-                            var kind = modifier.Kind();
-                            if (kind == SyntaxKind.RefKeyword ||
-                                kind == SyntaxKind.OutKeyword ||
-                                kind == SyntaxKind.ParamsKeyword)
+                            if (prm.Default != null)
                             {
                                 customDelegate = true;
                                 break;
                             }
-                        }
 
-                        if (customDelegate)
+                            foreach (var modifier in prm.Modifiers)
+                            {
+                                var kind = modifier.Kind();
+                                if (kind == SyntaxKind.RefKeyword ||
+                                    kind == SyntaxKind.OutKeyword ||
+                                    kind == SyntaxKind.ParamsKeyword)
+                                {
+                                    customDelegate = true;
+                                    break;
+                                }
+                            }
+
+                            if (customDelegate)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    var returnType = fn.ReturnType.WithoutLeadingTrivia().WithoutTrailingTrivia();
+                    var isVoid = returnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
+
+                    TypeSyntax varType;
+
+                    if (customDelegate)
+                    {
+                        var typeDecl = parentNode.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
+                        var delegates = updatedClasses.ContainsKey(typeDecl) ? updatedClasses[typeDecl] : new List<DelegateDeclarationSyntax>();
+                        var name = $"___{fn.Identifier.ValueText}_Delegate_{delegates.Count}";
+                        var delDecl = SyntaxFactory.DelegateDeclaration(returnType, SyntaxFactory.Identifier(name))
+                            .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword)))
+                            .WithParameterList(fn.ParameterList).NormalizeWhitespace();
+                        delegates.Add(delDecl);
+                        updatedClasses[typeDecl] = delegates;
+
+                        varType = SyntaxFactory.IdentifierName(name);
+                    }
+                    else if (isVoid)
+                    {
+                        if (fn.ParameterList.Parameters.Count == 0)
                         {
-                            break;
+                            varType = SyntaxFactory.QualifiedName(SyntaxFactory.IdentifierName("System"), SyntaxFactory.IdentifierName("Action"));
+                        }
+                        else
+                        {
+                            varType = SyntaxFactory.QualifiedName
+                            (
+                                SyntaxFactory.IdentifierName("System"),
+                                SyntaxFactory.GenericName("Action").WithTypeArgumentList
+                                (
+                                    SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(fn.ParameterList.Parameters.Select(p => p.Type)))
+                                )
+                            );
                         }
                     }
-                }
-
-                var returnType = fn.ReturnType.WithoutLeadingTrivia().WithoutTrailingTrivia();
-                var isVoid = returnType is PredefinedTypeSyntax ptsInstance && ptsInstance.Keyword.Kind() == SyntaxKind.VoidKeyword;
-
-                TypeSyntax varType;
-
-                if (customDelegate)
-                {
-                    var typeDecl = parentNode.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
-                    var delegates = updatedClasses.ContainsKey(typeDecl) ? updatedClasses[typeDecl] : new List<DelegateDeclarationSyntax>();
-                    var name = $"___{fn.Identifier.ValueText}_Delegate_{delegates.Count}";
-                    var delDecl = SyntaxFactory.DelegateDeclaration(returnType, SyntaxFactory.Identifier(name))
-                        .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword)))
-                        .WithParameterList(fn.ParameterList).NormalizeWhitespace();
-                    delegates.Add(delDecl);
-                    updatedClasses[typeDecl] = delegates;
-
-                    varType = SyntaxFactory.IdentifierName(name);
-                }
-                else if (isVoid)
-                {
-                    if (fn.ParameterList.Parameters.Count == 0)
-                    {
-                        varType = SyntaxFactory.QualifiedName(SyntaxFactory.IdentifierName("System"), SyntaxFactory.IdentifierName("Action"));
-                    }
                     else
                     {
-                        varType = SyntaxFactory.QualifiedName
-                        (
-                            SyntaxFactory.IdentifierName("System"),
-                            SyntaxFactory.GenericName("Action").WithTypeArgumentList
+                        if (fn.ParameterList.Parameters.Count == 0)
+                        {
+                            varType = SyntaxFactory.QualifiedName(
+                                SyntaxFactory.IdentifierName("System"),
+                                SyntaxFactory.GenericName("Func").WithTypeArgumentList(
+                                    SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(returnType))
+                                )
+                            );
+                        }
+                        else
+                        {
+                            varType = SyntaxFactory.QualifiedName
                             (
-                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(fn.ParameterList.Parameters.Select(p => p.Type)))
-                            )
-                        );
-                    }
-                }
-                else
-                {
-                    if (fn.ParameterList.Parameters.Count == 0)
-                    {
-                        varType = SyntaxFactory.QualifiedName(
-                            SyntaxFactory.IdentifierName("System"),
-                            SyntaxFactory.GenericName("Func").WithTypeArgumentList(
-                                SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(returnType))
-                            )
-                        );
-                    }
-                    else
-                    {
-                        varType = SyntaxFactory.QualifiedName
-                        (
-                            SyntaxFactory.IdentifierName("System"),
-                            SyntaxFactory.GenericName("Func").WithTypeArgumentList
-                            (
-                                SyntaxFactory.TypeArgumentList(
-                                    SyntaxFactory.SeparatedList(
-                                        fn.ParameterList.Parameters.Select(p => p.Type).Concat(
-                                            new TypeSyntax[] { returnType }
+                                SyntaxFactory.IdentifierName("System"),
+                                SyntaxFactory.GenericName("Func").WithTypeArgumentList
+                                (
+                                    SyntaxFactory.TypeArgumentList(
+                                        SyntaxFactory.SeparatedList(
+                                            fn.ParameterList.Parameters.Select(p => p.Type).Concat(
+                                                new TypeSyntax[] { returnType }
+                                            )
                                         )
                                     )
                                 )
-                            )
-                        );
-                    }
-                }
-
-                List<ParameterSyntax> prms = new List<ParameterSyntax>();
-
-                if (customDelegate)
-                {
-                    foreach (var prm in fn.ParameterList.Parameters)
-                    {
-                        var newPrm = prm.WithDefault(null);
-                        var idx = newPrm.Modifiers.IndexOf(SyntaxKind.ParamsKeyword);
-
-                        if (idx > -1)
-                        {
-                            newPrm = newPrm.WithModifiers(newPrm.Modifiers.RemoveAt(idx));
+                            );
                         }
-
-                        prms.Add(newPrm);
                     }
-                }
-                else
-                {
-                    foreach (var prm in fn.ParameterList.Parameters)
+
+                    List<ParameterSyntax> prms = new List<ParameterSyntax>();
+
+                    if (customDelegate)
                     {
-                        prms.Add(SyntaxFactory.Parameter(prm.Identifier));
-                    }
-                }
+                        foreach (var prm in fn.ParameterList.Parameters)
+                        {
+                            var newPrm = prm.WithDefault(null);
+                            var idx = newPrm.Modifiers.IndexOf(SyntaxKind.ParamsKeyword);
 
-                var initVar = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(varType).WithVariables(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
-                        (
-                            SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression))
+                            if (idx > -1)
+                            {
+                                newPrm = newPrm.WithModifiers(newPrm.Modifiers.RemoveAt(idx));
+                            }
+
+                            prms.Add(newPrm);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var prm in fn.ParameterList.Parameters)
+                        {
+                            prms.Add(SyntaxFactory.Parameter(prm.Identifier));
+                        }
+                    }
+
+                    var initVar = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(varType).WithVariables(
+                        SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fn.Identifier.ValueText)).WithInitializer
+                            (
+                                SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression))
+                            )
                         )
-                    )
-                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
+                    )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
-                var assignment = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, 
-                    SyntaxFactory.IdentifierName(fn.Identifier.ValueText),
-                    SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
-                        SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
-                    )
-                )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
+                    var assignment = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
+                        SyntaxFactory.IdentifierName(fn.Identifier.ValueText),
+                        SyntaxFactory.ParenthesizedLambdaExpression(fn.Body ?? (CSharpSyntaxNode)fn.ExpressionBody.Expression).WithParameterList(
+                            SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(prms))
+                        )
+                    )).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace(Emitter.NEW_LINE));
 
-                List<StatementSyntax> statements = null;
+                    List<StatementSyntax> statements = null;
 
-                if (updatedBlocks.ContainsKey(parentNode))
-                {
-                    statements = updatedBlocks[parentNode];
-                }
-                else
-                {
-                    if (parentNode is BlockSyntax bs)
+                    if (updatedBlocks.ContainsKey(parentNode))
                     {
-                        statements = bs.Statements.ToList();
+                        statements = updatedBlocks[parentNode];
                     }
-                    else if (parentNode is SwitchSectionSyntax sss)
+                    else
                     {
-                        statements = sss.Statements.ToList();
+                        if (parentNode is BlockSyntax bs)
+                        {
+                            statements = bs.Statements.ToList();
+                        }
+                        else if (parentNode is SwitchSectionSyntax sss)
+                        {
+                            statements = sss.Statements.ToList();
+                        }
                     }
+
+                    var fnIdx = statements.IndexOf(fn);
+                    statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : Math.Max(0, fnIdx), assignment);
+                    updatedBlocks[parentNode] = statements;
+
+                    statements = initForBlocks.ContainsKey(parentNode) ? initForBlocks[parentNode] : new List<StatementSyntax>();
+                    statements.Insert(0, initVar);
+                    initForBlocks[parentNode] = statements;
                 }
-
-                var fnIdx = statements.IndexOf(fn);
-                statements.Insert(beforeStatement != null ? statements.IndexOf(beforeStatement) : Math.Max(0, fnIdx), assignment);
-                updatedBlocks[parentNode] = statements;
-
-                statements = initForBlocks.ContainsKey(parentNode) ? initForBlocks[parentNode] : new List<StatementSyntax>();
-                statements.Insert(0, initVar);
-                initForBlocks[parentNode] = statements;
+                catch (Exception e)
+                {
+                    throw new ReplacerException(fn, e);
+                }
             }
 
             foreach (var key in initForBlocks.Keys)

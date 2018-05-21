@@ -27,40 +27,47 @@ namespace Bridge.Translator
 
             foreach (var pattern in patterns)
             {
-                SyntaxNode lambdaExpr = pattern.Ancestors().OfType<LambdaExpressionSyntax>().FirstOrDefault();
-                SyntaxNode beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
-
-                if (pattern.Pattern is DeclarationPatternSyntax declarationPattern)
+                try
                 {
-                    if (lambdaExpr != null && !SyntaxHelper.IsChildOf(beforeStatement, lambdaExpr))
+                    SyntaxNode lambdaExpr = pattern.Ancestors().OfType<LambdaExpressionSyntax>().FirstOrDefault();
+                    SyntaxNode beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
+
+                    if (pattern.Pattern is DeclarationPatternSyntax declarationPattern)
                     {
-                        if (lambdaExpr is ParenthesizedLambdaExpressionSyntax pl && !(pl.Body is BlockSyntax))
+                        if (lambdaExpr != null && !SyntaxHelper.IsChildOf(beforeStatement, lambdaExpr))
                         {
-                            beforeStatement = lambdaExpr;
+                            if (lambdaExpr is ParenthesizedLambdaExpressionSyntax pl && !(pl.Body is BlockSyntax))
+                            {
+                                beforeStatement = lambdaExpr;
+                            }
+                            else if (lambdaExpr is SimpleLambdaExpressionSyntax sl && !(sl.Body is BlockSyntax))
+                            {
+                                beforeStatement = lambdaExpr;
+                            }
                         }
-                        else if (lambdaExpr is SimpleLambdaExpressionSyntax sl && !(sl.Body is BlockSyntax))
+
+                        if (beforeStatement != null)
                         {
-                            beforeStatement = lambdaExpr;
+                            var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
+
+                            if (designation != null)
+                            {
+                                var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+
+                                var varDecl = SyntaxFactory.VariableDeclaration(declarationPattern.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
+                                ));
+
+                                locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace());
+
+                                updatedStatements[beforeStatement] = locals;
+                            }
                         }
                     }
-
-                    if (beforeStatement != null)
-                    {
-                        var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
-
-                        if (designation != null)
-                        {
-                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-
-                            var varDecl = SyntaxFactory.VariableDeclaration(declarationPattern.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(designation.Identifier.ValueText))
-                            ));
-
-                            locals.Add(SyntaxFactory.LocalDeclarationStatement(varDecl).WithTrailingTrivia(SyntaxFactory.Whitespace("\n")).NormalizeWhitespace());
-
-                            updatedStatements[beforeStatement] = locals;
-                        }
-                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(pattern, e);
                 }
             }
 
@@ -141,47 +148,54 @@ namespace Bridge.Translator
 
             foreach (var pattern in patterns)
             {
-                var block = pattern.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
-
-                if (block != null)
+                try
                 {
-                    if (pattern.Pattern is DeclarationPatternSyntax)
-                    {
-                        var declarationPattern = (DeclarationPatternSyntax)pattern.Pattern;
-                        var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
-                        var beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
+                    var block = pattern.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
 
-                        if (designation != null)
+                    if (block != null)
+                    {
+                        if (pattern.Pattern is DeclarationPatternSyntax)
                         {
-                            var newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.ParenthesizedExpression(SyntaxFactory.AssignmentExpression(
-                                SyntaxKind.SimpleAssignmentExpression,
-                                SyntaxFactory.IdentifierName(designation.Identifier.ValueText),
-                                SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, pattern.Expression, declarationPattern.Type)
-                            )), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+                            var declarationPattern = (DeclarationPatternSyntax)pattern.Pattern;
+                            var designation = declarationPattern.Designation as SingleVariableDesignationSyntax;
+                            var beforeStatement = pattern.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == block);
+
+                            if (designation != null)
+                            {
+                                var newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, SyntaxFactory.ParenthesizedExpression(SyntaxFactory.AssignmentExpression(
+                                    SyntaxKind.SimpleAssignmentExpression,
+                                    SyntaxFactory.IdentifierName(designation.Identifier.ValueText),
+                                    SyntaxFactory.BinaryExpression(SyntaxKind.AsExpression, pattern.Expression, declarationPattern.Type)
+                                )), SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+                                updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
+                            }
+                        }
+                        else if (pattern.Pattern is ConstantPatternSyntax cps)
+                        {
+                            ExpressionSyntax newExpr;
+
+                            if (cps.Expression.Kind() == SyntaxKind.NullLiteralExpression)
+                            {
+                                newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, pattern.Expression, cps.Expression);
+                            }
+                            else
+                            {
+                                newExpr = SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
+                                       SyntaxKind.SimpleMemberAccessExpression,
+                                       pattern.Expression,
+                                       SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
+                                       SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
+                                           SyntaxFactory.Argument(
+                                               cps.Expression))));
+                            }
+
                             updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
                         }
                     }
-                    else  if (pattern.Pattern is ConstantPatternSyntax cps)
-                    {
-                        ExpressionSyntax newExpr;
-
-                        if (cps.Expression.Kind() == SyntaxKind.NullLiteralExpression)
-                        {
-                            newExpr = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, pattern.Expression, cps.Expression);
-                        }
-                        else
-                        {
-                            newExpr = SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(
-                                   SyntaxKind.SimpleMemberAccessExpression,
-                                   pattern.Expression,
-                                   SyntaxFactory.IdentifierName("Equals")), SyntaxFactory.ArgumentList(
-                                   SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
-                                       SyntaxFactory.Argument(
-                                           cps.Expression))));
-                        }
-
-                        updatedPatterns[pattern] = newExpr.NormalizeWhitespace();
-                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ReplacerException(pattern, e);
                 }
             }
 

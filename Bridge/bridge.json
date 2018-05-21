@@ -123,6 +123,10 @@
         "Resources/.generated/System/Runtime/Serialization/SerializationInfoEnumerator.js",
         "Resources/.generated/System/Runtime/Serialization/StreamingContext.js",
         "Resources/.generated/System/Runtime/Serialization/StreamingContextStates.js",
+        "Resources/.generated/System/Runtime/Serialization/OnSerializingAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnSerializedAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnDeserializingAttribute.js",
+        "Resources/.generated/System/Runtime/Serialization/OnDeserializedAttribute.js",
 
         "Resources/.generated/System/Security/SecurityException.js",
 
