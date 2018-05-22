@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<RootNamespace>TestProject</RootNamespace>
+	<AssemblyName>TestProject</AssemblyName>
+	<TargetFramework>net40</TargetFramework>
+
+	<NoStdLib>true</NoStdLib>
+	<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+	<AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+	<AdditionalExplicitAssemblyReferences />
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- This is just an example include that does not necessarily needs to exist at all. -->
+    <!-- The test this file is subject to is not building an actual Bridge app, but just having Bridge.Translator load the project file. -->
+    <Reference Include="Bridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

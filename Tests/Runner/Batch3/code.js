@@ -31751,6 +31751,66 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consists in verifying the Script.Return method works
+     in a generic situation.
+     Notice despite the tests here just check whether it takes over return
+     values from methods, its intended use is for javascript events which
+     can be represented in regular C# blocks, which can't handle a 'return'
+     statement.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580", {
+        statics: {
+            methods: {
+                /**
+                 * Test returning a string constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {string}        A string 'correct' instead of the native 'wrong'.
+                 */
+                Probe0: function () {
+                    return "correct";
+
+                    return "wrong";
+                },
+                /**
+                 * Test returning a boolean constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {boolean}        A boolean 'true' instead of a native 'false'.
+                 */
+                Probe1: function () {
+                    return true;
+
+                    return false;
+                },
+                /**
+                 * Checks whether the functions return values are taken over by the
+                 Script.Return() call.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {void}
+                 */
+                TestScriptReturn: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("correct", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe0(), "Script.Return() takes over the return value of a string returning method.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe1(), "Script.Return() takes over the return value of a boolean returning method.");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
