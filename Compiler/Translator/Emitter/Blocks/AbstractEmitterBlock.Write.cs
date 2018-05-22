@@ -655,6 +655,23 @@ namespace Bridge.Translator
             return WriteIndentToString(value, this.Level);
         }
 
+        public static string UpdateIndentsInString(string value, int level)
+        {
+            StringBuilder output = new StringBuilder();
+
+            for (var i = 0; i < level; i++)
+            {
+                output.Append(Bridge.Translator.Emitter.INDENT);
+            }
+
+            string indent = output.ToString();
+
+            return Regex.Replace(value, "^(\\s*)(.*)$", (m) =>
+            {
+                return indent + m.Groups[2].Value;
+            }, RegexOptions.Multiline);
+        }
+
         public static string WriteIndentToString(string value, int level)
         {
             StringBuilder output = new StringBuilder();

@@ -22,6 +22,13 @@ namespace Bridge
         public static extern T Identity<T>(T arg, params object[] args);
 
         /// <summary>
+        /// Emit a return statement
+        /// </summary>
+        /// <param name="obj">An object to return.</param>
+        [Template("return {0}")]
+        public static extern void Return(object obj);
+
+        /// <summary>
         /// The delete operator removes a property from an object.
         /// </summary>
         /// <param name="obj">The name of an object, or an expression evaluating to an object.</param>
