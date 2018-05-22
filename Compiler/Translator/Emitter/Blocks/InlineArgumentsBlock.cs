@@ -419,6 +419,7 @@ namespace Bridge.Translator
                 bool isRaw = m.Groups[1].Success && m.Groups[1].Value == "*";
                 bool ignoreArray = isRaw || argsInfo.ParamsExpression == null;
                 string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
+                this.Emitter.TemplateModifier = modifier;
 
                 bool isSimple = false;
 
@@ -1146,6 +1147,7 @@ namespace Bridge.Translator
 
                 string replacement = this.Emitter.Output.ToString();
                 this.Emitter.Output = oldSb;
+                this.Emitter.TemplateModifier = null;
 
                 if (!isSimple && keyMatches.Count(keyMatch =>
                 {
