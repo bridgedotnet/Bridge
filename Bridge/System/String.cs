@@ -629,12 +629,21 @@ namespace System
         public extern bool Contains(string value);
 
         /// <summary>
-        /// Determines whether the end of this string instance matches the specified string.
+        /// Determines whether a specified string is a suffix of the current instance.
         /// </summary>
         /// <param name="value">The string to compare to the substring at the end of this instance.</param>
         /// <returns>true if value matches the end of this instance; otherwise, false.</returns>
         [Bridge.Template("System.String.endsWith({this}, {value})")]
         public extern bool EndsWith(string value);
+
+        /// <summary>
+        /// Determines whether a specified string is a suffix of the current instance.
+        /// </summary>
+        /// <param name="value">The string to compare to the substring at the end of this instance.</param>
+        /// <param name="comparisonType">The Stringcomparison type.</param>
+        /// <returns>true if value matches the end of this instance; otherwise, false.</returns>
+        [Bridge.Template("System.String.endsWith({this}, {value}, {comparisonType})")]
+        public extern bool EndsWith(string value, StringComparison comparisonType);
 
         /// <summary>
         /// Determines whether the beginning of this string instance matches the specified string.
@@ -644,8 +653,11 @@ namespace System
         [Bridge.Template("System.String.startsWith({this}, {value})")]
         public extern bool StartsWith(string value);
 
-        [Bridge.Template("System.String.startsWith({this}, {value}, {ordinal})")]
-        public extern bool StartsWith(string value, StringComparison ordinal);
+        /// <summary>
+        /// Determines whether the beginning of this string instance matches the specified string.
+        /// </summary>
+        [Bridge.Template("System.String.startsWith({this}, {value}, {comparisonType})")]
+        public extern bool StartsWith(string value, StringComparison comparisonType);
 
         /// <summary>
         /// Replaces the format item or items in a specified string with the string representation of the corresponding object. A parameter supplies culture-specific formatting information.
