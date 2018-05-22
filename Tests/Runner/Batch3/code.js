@@ -31330,22 +31330,56 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in ensuring the changing a boxed object's
+     properties can be changed thru reflection, and that the resulting
+     value can be fetched when it is cast back.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545", {
         statics: {
             methods: {
+                /**
+                 * Test by instantiating the object, binding it to a general-purpose
+                 object, then setting the property value thru reflection. Then
+                 casting it back to the original type and checking the value carried
+                 out.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545
+                 * @return  {void}
+                 */
                 TestSwitchCase: function () {
                     var $t;
+                    // Init value typed data-structure
                     var Test = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size(), $t.Width = 10, $t.Height = 20, $t);
+
+                    // Box the value-type and change it through Reflection
                     var Boxed = Test.$clone();
                     Bridge.Reflection.midel(Bridge.Reflection.getMembers(Bridge.getType(Boxed), 16, 284, "Height").s, Boxed)(1234);
+
+                    // Unbox it back
                     Test = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Boxed), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size));
-                    Bridge.Test.NUnit.Assert.AreEqual(10, Test.Width);
-                    Bridge.Test.NUnit.Assert.AreEqual(1234, Test.Height);
+
+                    // Should output: Width=10, Height=1234
+                    // (correct output observed on C# Windows Console Application)
+                    Bridge.Test.NUnit.Assert.AreEqual(10, Test.Width, "Value changed by reflection works for object's first property.");
+                    Bridge.Test.NUnit.Assert.AreEqual(1234, Test.Height, "Value changed by reflection works for object's second property.");
                 }
             }
         }
     });
 
+    /**
+     * Object to use as a probe.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size", {
         $kind: "nested struct",
         statics: {
