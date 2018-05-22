@@ -46,7 +46,6 @@ namespace System.Threading.Tasks
 
         public extern TaskAwaiter GetAwaiter();
 
-        [Bridge.Convention(Bridge.Notation.None)]
         public extern void Dispose();
 
         public extern void Complete(object result = null);
