@@ -115,6 +115,7 @@ namespace Bridge.Translator.Tests
         [TestCase("29", false, true, TestName = "IntegrationTest 29 - Async entry point - Task Main(string[])")]
         [TestCase("30", false, true, TestName = "IntegrationTest 30 - Async entry point - Task<int> Main()")]
         [TestCase("31", false, true, TestName = "IntegrationTest 31 - Async entry point - Task<int> Main(string[])")]
+        [TestCase("32", false, true, TestName = "IntegrationTest 32 - New csproj compilation")]
         public void Test(string folder, bool isToBuild, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());

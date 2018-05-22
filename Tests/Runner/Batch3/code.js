@@ -31331,6 +31331,39 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The tests here consists in ensuring line breaks in script.write string
+     parameters do not result in broken javascript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546", {
+        statics: {
+            methods: {
+                /**
+                 * Makes a Script.Call with line breaks within the code and checks if
+                 the resulting code is runnable.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+                 * @return  {void}
+                 */
+                TestScriptNewLines: function () {
+                    var a = "foo";
+
+                    var b = (
+                    function(p){ return p + 'bar';}
+                    )(a);
+
+                    Bridge.Test.NUnit.Assert.AreEqual("foobar", b, "Script.Call with line breaks results in runnable code.");
+                }
+            }
+        }
+    });
+
+    /**
      * The tests here consists in ensuring broken use cases identified and
      reported in issue #3550 are usable in Bridge.
      *
@@ -31748,6 +31781,106 @@ Bridge.$N1391Result =                     r;
         props: {
             Text: null,
             Value: 0
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring tasks' related Dispose() calls
+     works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570", {
+        statics: {
+            methods: {
+                /**
+                 * Just simply instantiate a task and related class then call its
+                 Dispose() method. Following, just check whether the instance is not
+                 null, meaning the code could be run down to that point.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+                 * @return  {void}
+                 */
+                TestIDisposable: function () {
+                    var tsk = System.Threading.Tasks.Task.fromResult(true, System.Boolean);
+                    tsk.dispose();
+                    Bridge.Test.NUnit.Assert.NotNull(tsk, "Task.Dispose() call works.");
+
+                    var cts = new System.Threading.CancellationTokenSource();
+                    cts.dispose();
+
+                    Bridge.Test.NUnit.Assert.NotNull(cts, "CancellationTokenSource.Dispose() call works.");
+
+                    var ctr = new System.Threading.CancellationTokenRegistration();
+                    ctr.dispose();
+
+                    Bridge.Test.NUnit.Assert.NotNull(ctr, "CancellationTokenRegistration.Dispose() call works.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in verifying the Script.Return method works
+     in a generic situation.
+     Notice despite the tests here just check whether it takes over return
+     values from methods, its intended use is for javascript events which
+     can be represented in regular C# blocks, which can't handle a 'return'
+     statement.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580", {
+        statics: {
+            methods: {
+                /**
+                 * Test returning a string constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {string}        A string 'correct' instead of the native 'wrong'.
+                 */
+                Probe0: function () {
+                    return "correct";
+
+                    return "wrong";
+                },
+                /**
+                 * Test returning a boolean constant.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {boolean}        A boolean 'true' instead of a native 'false'.
+                 */
+                Probe1: function () {
+                    return true;
+
+                    return false;
+                },
+                /**
+                 * Checks whether the functions return values are taken over by the
+                 Script.Return() call.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580
+                 * @return  {void}
+                 */
+                TestScriptReturn: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("correct", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe0(), "Script.Return() takes over the return value of a string returning method.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe1(), "Script.Return() takes over the return value of a boolean returning method.");
+                }
+            }
         }
     });
 

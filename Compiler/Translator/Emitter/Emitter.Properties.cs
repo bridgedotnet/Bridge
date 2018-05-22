@@ -572,5 +572,10 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        public string TemplateModifier
+        {
+            get; set;
+        }
     }
 }
