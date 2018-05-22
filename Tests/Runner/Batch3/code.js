@@ -31331,6 +31331,39 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The tests here consists in ensuring line breaks in script.write string
+     parameters do not result in broken javascript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546", {
+        statics: {
+            methods: {
+                /**
+                 * Makes a Script.Call with line breaks within the code and checks if
+                 the resulting code is runnable.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3546
+                 * @return  {void}
+                 */
+                TestScriptNewLines: function () {
+                    var a = "foo";
+
+                    var b = (
+                    function(p){ return p + 'bar';}
+                    )(a);
+
+                    Bridge.Test.NUnit.Assert.AreEqual("foobar", b, "Script.Call with line breaks results in runnable code.");
+                }
+            }
+        }
+    });
+
+    /**
      * The tests here consists in ensuring broken use cases identified and
      reported in issue #3550 are usable in Bridge.
      *
