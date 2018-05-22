@@ -195,7 +195,7 @@
                 },
                 ShowAssertDialog: function (stackTrace, message, detailMessage) {
                     if (System.Diagnostics.Debugger.IsAttached) {
-                        System.Diagnostics.Debugger.Break();
+                        debugger;
                     } else {
                         var ex = new System.Diagnostics.Debug.DebugAssertException(message, detailMessage, stackTrace);
                         System.Environment.FailFast$1(ex.Message, ex);

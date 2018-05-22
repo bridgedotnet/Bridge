@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Bridge.Translator.Utils;
+using Microsoft.Build.Evaluation;
 
 namespace Bridge.Translator.Tests.Helpers
 {
@@ -37,34 +38,28 @@ namespace Bridge.Translator.Tests.Helpers
 
         public static string ReadProjectOutputFolder(string configurationName, string platform, string projectFileFullName)
         {
-            var doc = XDocument.Load(projectFileFullName, LoadOptions.SetLineInfo);
-
-//            var opnodes = from n in doc.Descendants()
-//                          where n.Name.LocalName == "OutputPath"
-//                          select n;
-
             var properties = new Dictionary<string, string>
             {
                 ["Configuration"] = configurationName,
                 ["Platform"] = platform
             };
+            var project = Translator.OpenProject(projectFileFullName, properties);
 
-            var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == "OutputPath" &&
-                              MsBuildConditionEvaluator.EvaluateCondition(n.Parent.Attribute("Condition").Value, properties)
-                        select n;
+            var node = (from n in project.AllEvaluatedProperties
+                        where n.Name == "OutputPath"
+                        select n).LastOrDefault();
 
-            if (nodes.Count() != 1)
+            if (node == null)
             {
                 return null;
             }
 
-            var path = AgjustPath(nodes.First().Value);
+            var path = AdjustPath(node.EvaluatedValue);
 
             return path;
         }
 
-        public static string AgjustPath(string path)
+        public static string AdjustPath(string path)
         {
             if (path == null)
             {
