@@ -1160,7 +1160,7 @@ namespace Bridge.Translator
                     tempVars.Add(t, replacement);
                     tempMap[tempKey] = t;
                     return t;
-                }                
+                }
 
                 return replacement;
             });
