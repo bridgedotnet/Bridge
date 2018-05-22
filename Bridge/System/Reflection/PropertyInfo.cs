@@ -1,5 +1,3 @@
-using Bridge;
-
 namespace System.Reflection
 {
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
