@@ -14818,7 +14818,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 prefix = System.String.escape(prefix);
 
-                return str.match("^" + prefix) !== null;
+                return System.String.equals(str.slice(0, prefix.length), prefix, arguments[2]);
             },
 
             endsWith: function (str, suffix) {
@@ -14832,7 +14832,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 suffix = System.String.escape(suffix);
 
-                return str.match(suffix + "$") !== null;
+                return System.String.equals(str.slice(str.length - suffix.length, str.length), suffix, arguments[2]);
             },
 
             contains: function (str, value) {

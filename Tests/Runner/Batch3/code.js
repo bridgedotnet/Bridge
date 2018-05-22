@@ -23761,11 +23761,13 @@ Bridge.$N1391Result =                     r;
                     s2 = (s = "test");
                     Bridge.Test.NUnit.Assert.AreEqual(s2, "test", "On more than one variable, works to the indirect variable.");
                     Bridge.Test.NUnit.Assert.AreEqual(s, "test", "On more than one variable, works to the direct variable."); /// Variable is declared but never used
+
+
                     var c;
                     var c3;
                     var c2;
                     c2 = (c = "test");
-                    var c4; /// Variable is declared but never used
+                    var c4;
                     Bridge.Test.NUnit.Assert.AreEqual(c2, "test", "With unrelated variables, works on indirect variable.");
                     Bridge.Test.NUnit.Assert.AreEqual(c, "test", "With unrelated variables, works on direct variable.");
 
@@ -24860,8 +24862,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -29038,6 +29042,8 @@ Bridge.$N1391Result =                     r;
                  * @return  {void}
                  */
                 TestCustomComparer: function () { /// The given expression is always of the provided ('short') type
+
+
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Float32Array.BYTES_PER_ELEMENT), "Could reference Float32Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Float64Array.BYTES_PER_ELEMENT), "Could reference Float64Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Int16Array.BYTES_PER_ELEMENT), "Could reference Int16Array's bytes per element constant.");
@@ -29046,7 +29052,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint16Array.BYTES_PER_ELEMENT), "Could reference Uint16Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint32Array.BYTES_PER_ELEMENT), "Could reference Uint32Array's bytes per element constant.");
                     Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8Array.BYTES_PER_ELEMENT), "Could reference Uint8Array's bytes per element constant.");
-                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8ClampedArray.BYTES_PER_ELEMENT), "Could reference Uint8ClampedArray's bytes per element constant."); /// The given expression is always of the provided ('short') type
+                    Bridge.Test.NUnit.Assert.True(Bridge.hasValue(Uint8ClampedArray.BYTES_PER_ELEMENT), "Could reference Uint8ClampedArray's bytes per element constant.");
                 }
             }
         }
@@ -31284,11 +31290,17 @@ Bridge.$N1391Result =                     r;
                  * @return  {string}
                  */
                 SpaceWritten: function () { /// Variable is assigned but its value is never used
+
+
                     var i = 0; /// Variable is assigned but its value is never used
+
+
                     return 
                 },
                 NothingWritten: function () { /// Variable is assigned but its value is never used
-                    var i = 0; /// Variable is assigned but its value is never used
+
+
+                    var i = 0;
                     return 
                 },
                 /**
@@ -31499,7 +31511,10 @@ Bridge.$N1391Result =                     r;
                     var a = 15;
                     test = function () {
                         return a > 10;
-                    }; /// Local function is declared but never used /// Local function is declared but never used
+                    }; /// Local function is declared but never used
+
+
+
 
                     Bridge.Test.NUnit.Assert.AreEqual(15, a, "Unused local function does not result in broken Bridge code.");
                 }
@@ -31879,6 +31894,144 @@ Bridge.$N1391Result =                     r;
                 TestScriptReturn: function () {
                     Bridge.Test.NUnit.Assert.AreEqual("correct", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe0(), "Script.Return() takes over the return value of a string returning method.");
                     Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3580.Probe1(), "Script.Return() takes over the return value of a boolean returning method.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in verifying the Script.Return method works
+     in a generic situation.
+     Notice despite the tests here just check whether it takes over return
+     values from methods, its intended use is for javascript events which
+     can be represented in regular C# blocks, which can't handle a 'return'
+     statement.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593", {
+        statics: {
+            methods: {
+                CheckStringStartsWithString: function () {
+                    var val1 = "Value";
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X"));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 0));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 1));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 1));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 2));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 3));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 3));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 4));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 5));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 5));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X"));
+                },
+                CheckStringEndsWithString: function () {
+                    var val1 = "Value";
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X"));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 0));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 1));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 1));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 2));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 3));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 3));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 4));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 5));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 5));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X"));
                 }
             }
         }
