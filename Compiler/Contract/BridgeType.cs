@@ -669,19 +669,19 @@ namespace Bridge.Contract
 
                 if (obj is bool)
                 {
-                    module = new Module((bool)obj);
+                    module = new Module((bool)obj, type.Emitter);
                 }
                 else if (obj is string)
                 {
-                    module = new Module(obj.ToString());
+                    module = new Module(obj.ToString(), type.Emitter);
                 }
                 else if (obj is int)
                 {
-                    module = new Module("", (ModuleType) (int) obj);
+                    module = new Module("", (ModuleType) (int) obj, type.Emitter);
                 }
                 else
                 {
-                    module = new Module();
+                    module = new Module(type.Emitter);
                 }
             }
             else if (attr.PositionalArguments.Count == 2)
@@ -691,21 +691,21 @@ namespace Bridge.Contract
                     var name = attr.PositionalArguments[0].ConstantValue;
                     var preventName = attr.PositionalArguments[1].ConstantValue;
 
-                    module = new Module(name != null ? name.ToString() : "", (bool)preventName);
+                    module = new Module(name != null ? name.ToString() : "", type.Emitter, (bool)preventName);
                 }
                 else if (attr.PositionalArguments[1].ConstantValue is bool)
                 {
                     var mtype = attr.PositionalArguments[0].ConstantValue;
                     var preventName = attr.PositionalArguments[1].ConstantValue;
 
-                    module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                    module = new Module("", (ModuleType)(int)mtype, type.Emitter,(bool)preventName);
                 }
                 else
                 {
                     var mtype = attr.PositionalArguments[0].ConstantValue;
                     var name = attr.PositionalArguments[1].ConstantValue;
 
-                    module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype);
+                    module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype, type.Emitter);
                 }
             }
             else if (attr.PositionalArguments.Count == 3)
@@ -714,11 +714,11 @@ namespace Bridge.Contract
                 var name = attr.PositionalArguments[1].ConstantValue;
                 var preventName = attr.PositionalArguments[2].ConstantValue;
 
-                module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
+                module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype, type.Emitter, (bool)preventName);
             }
             else
             {
-                module = new Module();
+                module = new Module(type.Emitter);
             }
 
             if (attr.NamedArguments.Count > 0)

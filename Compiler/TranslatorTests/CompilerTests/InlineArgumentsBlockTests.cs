@@ -44,7 +44,7 @@ namespace Bridge.Translator.Tests
                 var amd = new List<string>();
                 var cjs = new List<string>();
 
-                var module = moduleType.HasValue ? new Module(moduleName, moduleType.Value) : null;
+                var module = moduleType.HasValue ? new Module(moduleName, moduleType.Value, null) : null;
 
                 block.AddModuleByType(amd, cjs, module);
 

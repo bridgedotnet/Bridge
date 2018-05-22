@@ -176,6 +176,19 @@ namespace Bridge.Translator
             emitter.Plugins = this.Plugins;
             emitter.InitialLevel = 1;
 
+            if (this.AssemblyInfo.Module != null)
+            {
+                this.AssemblyInfo.Module.Emitter = emitter;
+            }
+
+            foreach(var td in this.TypeInfoDefinitions)
+            {
+                if (td.Value.Module != null)
+                {
+                    td.Value.Module.Emitter = emitter;
+                }
+            }
+
             this.SortReferences();
 
             logger.Info("Before emitting...");
