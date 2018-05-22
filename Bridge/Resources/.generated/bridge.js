@@ -15149,7 +15149,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15505,7 +15505,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             return this._getResult(false);
         },
 
-        Dispose: function () {},
+        dispose: function () {},
 
         getAwaiter: function () {
             return this;
@@ -15679,7 +15679,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
             if (this.links) {
                 for (var i = 0; i < this.links.length; i++) {
-                    this.links[i].Dispose();
+                    this.links[i].dispose();
                 }
 
                 this.links = null;
@@ -15779,7 +15779,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15789,7 +15789,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             this.o = o;
         },
 
-        Dispose: function () {
+        dispose: function () {
             if (this.cts) {
                 this.cts.deregister(this.o);
                 this.cts = this.o = null;

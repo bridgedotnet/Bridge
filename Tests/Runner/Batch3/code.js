@@ -31751,14 +31751,41 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consists in ensuring tasks' related Dispose() calls
+     works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570", {
         statics: {
             methods: {
+                /**
+                 * Just simply instantiate a task and related class then call its
+                 Dispose() method. Following, just check whether the instance is not
+                 null, meaning the code could be run down to that point.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3570
+                 * @return  {void}
+                 */
                 TestIDisposable: function () {
+                    var tsk = System.Threading.Tasks.Task.fromResult(true, System.Boolean);
+                    tsk.dispose();
+                    Bridge.Test.NUnit.Assert.NotNull(tsk, "Task.Dispose() call works.");
+
                     var cts = new System.Threading.CancellationTokenSource();
                     cts.dispose();
 
-                    Bridge.Test.NUnit.Assert.NotNull(cts);
+                    Bridge.Test.NUnit.Assert.NotNull(cts, "CancellationTokenSource.Dispose() call works.");
+
+                    var ctr = new System.Threading.CancellationTokenRegistration();
+                    ctr.dispose();
+
+                    Bridge.Test.NUnit.Assert.NotNull(ctr, "CancellationTokenRegistration.Dispose() call works.");
                 }
             }
         }
