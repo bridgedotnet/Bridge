@@ -31353,7 +31353,7 @@ Bridge.$N1391Result =                     r;
                  * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545
                  * @return  {void}
                  */
-                TestSwitchCase: function () {
+                TestSetValueByReflection: function () {
                     var $t;
                     // Init value typed data-structure
                     var Test = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size(), $t.Width = 10, $t.Height = 20, $t);

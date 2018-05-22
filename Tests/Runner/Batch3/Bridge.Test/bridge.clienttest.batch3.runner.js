@@ -32,7 +32,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3516 - TestManagedExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestManagedExternalCastRule);
             QUnit.test("#3516 - TestDefaultExternalCastRule", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3516.TestDefaultExternalCastRule);
             QUnit.test("#3519 - TestInjectScript", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3519.TestInjectScript);
-            QUnit.test("#3545 - TestSwitchCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3545.TestSwitchCase);
+            QUnit.test("#3545 - TestSetValueByReflection", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3545.TestSetValueByReflection);
             QUnit.test("#3546 - TestScriptNewLines", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3546.TestScriptNewLines);
             QUnit.test("#3550 - TestSwitchCaseWhen", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3550.TestSwitchCaseWhen);
             QUnit.test("#3550 - TestSwitchCaseTypedDefault", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3550.TestSwitchCaseTypedDefault);
@@ -16575,10 +16575,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         $kind: "nested class",
         statics: {
             methods: {
-                TestSwitchCase: function (assert) {
+                TestSetValueByReflection: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3545, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSwitchCase()", $t.Line = "30", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.TestSwitchCase();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3545, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSetValueByReflection()", $t.Line = "30", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.TestSetValueByReflection();
                 }
             }
         },
