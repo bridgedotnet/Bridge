@@ -28,7 +28,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         /// out.
         /// </summary>
         [Test]
-        public static void TestSwitchCase()
+        public static void TestSetValueByReflection()
         {
             // Init value typed data-structure
             Size Test = new Size { Width = 10, Height = 20 };
