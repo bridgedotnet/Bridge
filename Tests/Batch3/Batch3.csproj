@@ -732,15 +732,18 @@
     <Compile Include="BridgeIssues\3500\N3502.cs" />
     <Compile Include="BridgeIssues\3500\N3513.cs" />
     <Compile Include="BridgeIssues\3500\N3516.cs" />
-    <Compile Include="BridgeIssues\3500\N3550.cs" />
-    <Compile Include="BridgeIssues\3500\N3585.cs" />
-    <Compile Include="BridgeIssues\3500\N3584.cs" />
-    <Compile Include="BridgeIssues\3500\N3583.cs" />
-    <Compile Include="BridgeIssues\3500\N3580.cs" />
-    <Compile Include="BridgeIssues\3500\N3567.cs" />
     <Compile Include="BridgeIssues\3500\N3519.cs" />
+    <Compile Include="BridgeIssues\3500\N3545.cs" />
+    <Compile Include="BridgeIssues\3500\N3546.cs" />
+    <Compile Include="BridgeIssues\3500\N3550.cs" />
     <Compile Include="BridgeIssues\3500\N3558.cs" />
     <Compile Include="BridgeIssues\3500\N3560.cs" />
+    <Compile Include="BridgeIssues\3500\N3567.cs" />
+    <Compile Include="BridgeIssues\3500\N3570.cs" />
+    <Compile Include="BridgeIssues\3500\N3580.cs" />
+    <Compile Include="BridgeIssues\3500\N3583.cs" />
+    <Compile Include="BridgeIssues\3500\N3584.cs" />
+    <Compile Include="BridgeIssues\3500\N3585.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>

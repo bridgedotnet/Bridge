@@ -11195,7 +11195,7 @@
                 },
                 ShowAssertDialog: function (stackTrace, message, detailMessage) {
                     if (System.Diagnostics.Debugger.IsAttached) {
-                        System.Diagnostics.Debugger.Break();
+                        debugger;
                     } else {
                         var ex = new System.Diagnostics.Debug.DebugAssertException(message, detailMessage, stackTrace);
                         System.Environment.FailFast$1(ex.Message, ex);
@@ -11245,9 +11245,6 @@
                 }
             },
             methods: {
-                Break: function () {
-                    debugger;
-                },
                 IsLogging: function () {
                     return true;
                 },
@@ -15149,7 +15146,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15505,7 +15502,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             return this._getResult(false);
         },
 
-        Dispose: function () {},
+        dispose: function () {},
 
         getAwaiter: function () {
             return this;
@@ -15587,7 +15584,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15665,7 +15662,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             }
         },
 
-        Dispose: function () {
+        dispose: function () {
             this.clean();
         },
 
@@ -15679,7 +15676,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
             if (this.links) {
                 for (var i = 0; i < this.links.length; i++) {
-                    this.links[i].Dispose();
+                    this.links[i].dispose();
                 }
 
                 this.links = null;
@@ -15779,7 +15776,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -15789,7 +15786,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             this.o = o;
         },
 
-        Dispose: function () {
+        dispose: function () {
             if (this.cts) {
                 this.cts.deregister(this.o);
                 this.cts = this.o = null;
@@ -31432,26 +31429,13 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             $ctor1: function (dateTime) {
                 this.$initialize();
                 var offset;
-                if (System.DateTime.getKind(dateTime) !== 1) {
-                    offset = System.DateTime.subdd(System.DateTime.getNow(), System.DateTime.getUtcNow());
 
-                } else {
-                    offset = new System.TimeSpan(System.Int64(0));
-                }
+                offset = new System.TimeSpan(System.Int64(0));
                 this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(offset);
                 this.m_dateTime = System.DateTimeOffset.ValidateDate(dateTime, offset);
             },
             $ctor2: function (dateTime, offset) {
                 this.$initialize();
-                if (System.DateTime.getKind(dateTime) === 2) {
-                    if (System.TimeSpan.neq(offset, (System.DateTime.subdd(System.DateTime.getNow(), System.DateTime.getUtcNow())))) {
-                        throw new System.ArgumentException.$ctor3(System.Environment.GetResourceString("Argument_OffsetLocalMismatch"), "offset");
-                    }
-                } else if (System.DateTime.getKind(dateTime) === 1) {
-                    if (System.TimeSpan.neq(offset, System.TimeSpan.zero)) {
-                        throw new System.ArgumentException.$ctor3(System.Environment.GetResourceString("Argument_OffsetUtcMismatch"), "offset");
-                    }
-                }
                 this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(offset);
                 this.m_dateTime = System.DateTimeOffset.ValidateDate(dateTime, offset);
             },
@@ -31584,19 +31568,19 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 return new System.DateTimeOffset.$ctor1(System.DateTime.toLocalTime(this.UtcDateTime, throwOnOverflow));
             },
             toString: function () {
-                return System.DateTime.format(this.DateTime);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2));
 
             },
             ToString$1: function (format) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), format);
 
             },
             ToString: function (formatProvider) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), null, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), null, formatProvider);
 
             },
             format: function (format, formatProvider) {
-                return System.DateTime.format(System.DateTime.specifyKind(this.DateTime, 2), format, formatProvider);
+                return System.DateTime.format(System.DateTime.specifyKind(this.ClockDateTime, 2), format, formatProvider);
 
             },
             ToUniversalTime: function () {

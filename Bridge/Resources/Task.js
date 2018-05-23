@@ -3,7 +3,7 @@
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -359,7 +359,7 @@
             return this._getResult(false);
         },
 
-        Dispose: function () {},
+        dispose: function () {},
 
         getAwaiter: function () {
             return this;
@@ -441,7 +441,7 @@
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -519,7 +519,7 @@
             }
         },
 
-        Dispose: function () {
+        dispose: function () {
             this.clean();
         },
 
@@ -533,7 +533,7 @@
 
             if (this.links) {
                 for (var i = 0; i < this.links.length; i++) {
-                    this.links[i].Dispose();
+                    this.links[i].dispose();
                 }
 
                 this.links = null;
@@ -633,7 +633,7 @@
 
         config: {
             alias: [
-                "Dispose", "System$IDisposable$Dispose"
+                "dispose", "System$IDisposable$Dispose"
             ]
         },
 
@@ -643,7 +643,7 @@
             this.o = o;
         },
 
-        Dispose: function () {
+        dispose: function () {
             if (this.cts) {
                 this.cts.deregister(this.o);
                 this.cts = this.o = null;
