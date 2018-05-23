@@ -23,7 +23,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     
         Bridge.define("A", {
             $kind: "nested class",
-            $metadata : function () { return {"td":,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
+            $metadata : function () { return {"td":Bridge.global,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; }
         });
         Bridge.init();
     });
