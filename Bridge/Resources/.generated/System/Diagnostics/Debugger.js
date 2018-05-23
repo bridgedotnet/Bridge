@@ -11,9 +11,6 @@
                 }
             },
             methods: {
-                Break: function () {
-                    debugger;
-                },
                 IsLogging: function () {
                     return true;
                 },

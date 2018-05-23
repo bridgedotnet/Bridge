@@ -3,10 +3,8 @@ namespace System.Diagnostics
     [Bridge.Reflectable(false)]
     public static class Debugger
     {
-        public static void Break()
-        {
-            Bridge.Script.Write("debugger");
-        }
+        [Bridge.Template("debugger")]
+        public static extern void Break();
 
         public static readonly string DefaultCategory;
         public static bool IsAttached { get { return true; } }

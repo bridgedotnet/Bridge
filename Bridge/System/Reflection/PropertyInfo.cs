@@ -57,10 +57,10 @@ namespace System.Reflection
         [Bridge.Template("Bridge.Reflection.midel({this}.g, {obj}).apply(null, {index})")]
         public extern object GetValue(object obj, object[] index);
 
-        [Bridge.Template("Bridge.Reflection.midel({this}.s, {obj})({value})")]
+        [Bridge.Template("Bridge.Reflection.midel({this}.s, {obj:nobox})({value:nobox})")]
         public extern void SetValue(object obj, object value);
 
-        [Bridge.Template("Bridge.Reflection.midel({this}.s, {obj}).apply(null, ({index} || []).concat({value}))")]
+        [Bridge.Template("Bridge.Reflection.midel({this}.s, {obj:nobox}).apply(null, ({index:nobox} || []).concat({value:nobox}))")]
         public extern void SetValue(object obj, object value, object[] index);
 
         /// <summary>
