@@ -237,7 +237,7 @@ namespace Bridge.Translator
             this.Write(name);
         }
 
-        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module", CS.Methods.GETHASHCODE, CS.Methods.TOSTRING };
+        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module", "nobox", CS.Methods.GETHASHCODE, CS.Methods.TOSTRING };
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {

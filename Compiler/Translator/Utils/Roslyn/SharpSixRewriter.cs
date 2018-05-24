@@ -968,7 +968,7 @@ namespace Bridge.Translator
 
             var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
-            var isIdentifier = node.Expression.Kind() == SyntaxKind.IdentifierName;
+            var isIdentifier = node.Expression.Kind() == SyntaxKind.IdentifierName || node.Expression.Kind() == SyntaxKind.GenericName;
 
             if (isIdentifier && symbolNode.Value != null && symbolNode.Value is IPropertySymbol ps && ps.RefKind == RefKind.In)
             {
