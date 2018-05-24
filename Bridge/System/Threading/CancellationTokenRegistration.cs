@@ -1,5 +1,6 @@
 namespace System.Threading
 {
+    [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
     [Bridge.Reflectable]
     public struct CancellationTokenRegistration : IEquatable<CancellationTokenRegistration>, IDisposable
