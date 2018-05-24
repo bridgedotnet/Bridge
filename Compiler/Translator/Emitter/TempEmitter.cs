@@ -18,6 +18,11 @@ namespace Bridge.Translator
 
         }
 
+        public string TemplateModifier
+        {
+            get; set;
+        }
+
         public bool HasModules
         {
             get; set;

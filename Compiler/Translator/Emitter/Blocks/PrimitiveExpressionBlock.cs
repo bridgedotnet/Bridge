@@ -30,9 +30,10 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (this.PrimitiveExpression.Value is RawValue)
+            var isTplRaw = this.Emitter.TemplateModifier == "raw";
+            if (this.PrimitiveExpression.Value is RawValue || isTplRaw)
             {
-                this.Write(this.PrimitiveExpression.Value.ToString());
+                this.Write(AbstractEmitterBlock.UpdateIndentsInString(this.PrimitiveExpression.Value.ToString(), 0));
             }
             else
             {
