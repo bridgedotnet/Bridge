@@ -32027,21 +32027,52 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This test consists in ensuring a 'using static' to a local class
+     won't result in invalid emitted Bridge code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589", {
         statics: {
             methods: {
+                /**
+                 * Just ensure whether the static-used class can be referenced.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589
+                 * @return  {void}
+                 */
                 TestUsingStaticOnGeneric: function () {
                     var s = "Hello, World!";
-                    Bridge.Test.NUnit.Assert.AreEqual(s, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1(System.String).Log(s));
+                    Bridge.Test.NUnit.Assert.AreEqual(s, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1(System.String).Log(s), "Method from a 'using static' class can be called.");
                 }
             }
         }
     });
 
+    /**
+     * A local class to be 'statically used'.
+     *
+     * @static
+     * @abstract
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root", {
         $kind: "nested class"
     });
 
+    /**
+     * The definition here should be valid once output to JavaScript.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1
+     * @param   {Function}    [name]
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3589.Root.Logger$1", function (T) { return {
         $kind: "nested class",
         statics: {
