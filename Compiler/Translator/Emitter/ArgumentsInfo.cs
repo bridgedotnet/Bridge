@@ -178,11 +178,11 @@ namespace Bridge.Translator
                     this.ArgumentsNames = list.ToArray();
 
                     var expr = this.ArgumentsExpressions.ToList();
-                    expr.Add(invocationExpression);
+                    expr.Insert(0, invocationExpression);
                     this.ArgumentsExpressions = expr.ToArray();
 
                     var namedExpr = this.NamedExpressions.ToList();
-                    namedExpr.Add(new NamedParamExpression(name, invocationExpression));
+                    namedExpr.Insert(0, new NamedParamExpression(name, invocationExpression));
                     this.NamedExpressions = namedExpr.ToArray();
                 }
             }
@@ -621,6 +621,8 @@ namespace Bridge.Translator
                                         resolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface;
                 }
 
+                var expandParams = resolveResult.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExpandParamsAttribute");
+
                 foreach (var arg in arguments)
                 {
                     if (arg is NamedArgumentExpression)
@@ -647,7 +649,7 @@ namespace Bridge.Translator
                     {
                         if (paramsArg == null && (parameters.Count > (i + shift)) && parameters[i + shift].IsParams)
                         {
-                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(resolveResult.Member.DeclaringTypeDefinition))
+                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(resolveResult.Member.DeclaringTypeDefinition) || expandParams)
                             {
                                 paramsArg = arg;
                             }

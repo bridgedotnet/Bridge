@@ -80,9 +80,9 @@
 
         "Resources/.generated/System/Collections/Generic/KeyValuePair.js",
         "Resources/Collections/Interfaces.js",
-
         "Resources/.generated/System/Collections/IEnumerator.js",
         "Resources/.generated/System/Collections/IComparer.js",
+        "Resources/.generated/System/Collections/IDictionaryEnumerator.js",
         "Resources/.generated/System/Collections/IEqualityComparer.js",
         "Resources/.generated/System/Collections/IStructuralComparable.js",
         "Resources/.generated/System/Collections/IStructuralEquatable.js",
