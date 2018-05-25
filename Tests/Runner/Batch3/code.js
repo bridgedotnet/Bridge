@@ -32084,25 +32084,45 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    /**
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3590
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3590", {
         statics: {
             methods: {
+                /**
+                 * Test by just making an instance of the Test class and populating it
+                 with values.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3590
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3590
+                 * @return  {void}
+                 */
                 TestExternalExpandParams: function () {
+                    // There will be a client-side "side effect" to change the value of
+                    // this variable.
                     var count = -1;
+
+                    // The block below will output the client-side implementation of the
+                    // "external" Test class.
                     var Test = function () {
                         count = arguments.length;
                         this.Foo = function () {
                             count = arguments.length;
                         };
                     };
+
                     var arr = System.Array.init([1, 2, 3], System.Int32);
 
                     var test = Bridge.Reflection.applyConstructor(Test, arr);
-                    Bridge.Test.NUnit.Assert.AreEqual(3, count);
+                    Bridge.Test.NUnit.Assert.AreEqual(3, count, "External implementation of class can be run.");
 
                     arr = System.Array.init([1, 2, 3, 4, 5], System.Int32);
                     test.Foo.apply(test, arr);
-                    Bridge.Test.NUnit.Assert.AreEqual(5, count);
+                    Bridge.Test.NUnit.Assert.AreEqual(5, count, "External implementation of class' side effect works.");
                 }
             }
         }
