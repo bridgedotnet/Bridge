@@ -742,6 +742,7 @@
     <Compile Include="BridgeIssues\3500\N3570.cs" />
     <Compile Include="BridgeIssues\3500\N3580.cs" />
     <Compile Include="BridgeIssues\3500\N3588.cs" />
+    <Compile Include="BridgeIssues\3500\N3599.cs" />
     <Compile Include="BridgeIssues\3500\N3589.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
