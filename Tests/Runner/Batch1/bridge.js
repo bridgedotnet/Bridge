@@ -12905,6 +12905,13 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         $kind: "interface"
     });
 
+    // @source IDictionaryEnumerator.js
+
+    Bridge.define("System.Collections.IDictionaryEnumerator", {
+        inherits: [System.Collections.IEnumerator],
+        $kind: "interface"
+    });
+
     // @source IEqualityComparer.js
 
     Bridge.define("System.Collections.IEqualityComparer", {
