@@ -1,7 +1,5 @@
 using Bridge.Test.NUnit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -140,6 +138,55 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(val1.EndsWith("e"));
             Assert.False(val1.EndsWith("v"));
             Assert.False(val1.EndsWith("X"));
+        }
+
+        /// <summary>
+        /// The tests here were failing because of the initial implementation of
+        /// the fix for this issue. Several other tests were failing because of
+        /// the broken string comparison, when startsWith/endsWith() were used.
+        /// </summary>
+        [Test]
+        public static void CheckAdditionalBrokenCases()
+        {
+            var fullString = "System.Collections.Generic.ICollection$1$System.Int32";
+
+            var startChunk = fullString.Substring(0, fullString.Length - 1);
+            var endChunk = fullString.Substring(1);
+
+            var firstChar = ' ';
+            var lastChar = ' ';
+
+            // Just iterate thru the original string taking one character a
+            // time and check if it is equal. Remove the last character, and
+            // append a different character and ensure it is different.
+            while (startChunk.Length > 0)
+            {
+                Assert.True(fullString.StartsWith(startChunk), "String '" + fullString + "' starts with '" + startChunk + "'.");
+
+                lastChar = startChunk[startChunk.Length - 1];
+
+                // ensure the character we append is different than the one we just removed.
+                lastChar = lastChar == 'x' ? 'y' : 'x';
+
+                startChunk = startChunk.Substring(0, startChunk.Length - 1);
+
+                Assert.False(fullString.StartsWith(startChunk + lastChar), "String '" + fullString + "' does not start with '" + startChunk + lastChar + "'.");
+            }
+
+            while (endChunk.Length > 0)
+            {
+                Assert.True(fullString.EndsWith(endChunk), "String '" + fullString + "' ends with '" + endChunk + "'.");
+
+                firstChar = endChunk[0];
+
+                // ensure the character we append is different than the one we just removed.
+                firstChar = firstChar == 'x' ? 'y' : 'x';
+
+                endChunk = endChunk.Substring(1);
+
+                Assert.False(fullString.EndsWith(firstChar + endChunk), "String '" + fullString + "' does not end with '" + firstChar + endChunk + "'.");
+
+            }
         }
     }
 }
