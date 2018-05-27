@@ -262,8 +262,6 @@
                     return false;
                 }
 
-                prefix = System.String.escape(prefix);
-
                 return System.String.equals(str.slice(0, prefix.length), prefix, arguments[2]);
             },
 
@@ -275,8 +273,6 @@
                 if (suffix.length > str.length) {
                     return false;
                 }
-
-                suffix = System.String.escape(suffix);
 
                 return System.String.equals(str.slice(str.length - suffix.length, str.length), suffix, arguments[2]);
             },
