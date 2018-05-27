@@ -48,6 +48,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3590 - TestExternalExpandParams", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3590.TestExternalExpandParams);
             QUnit.test("#3593 - CheckStringStartsWithString", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593.CheckStringStartsWithString);
             QUnit.test("#3593 - CheckStringEndsWithString", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593.CheckStringEndsWithString);
+            QUnit.test("#3593 - CheckAdditionalBrokenCases", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593.CheckAdditionalBrokenCases);
             QUnit.test("#3599 - TestCustomListImplementation", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3599.TestCustomListImplementation);
             QUnit.module("Issues3");
             QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge069.ThisKeywordInStructConstructorWorks);
@@ -16884,13 +16885,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 CheckStringStartsWithString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CheckStringStartsWithString()", $t.Line = "19", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CheckStringStartsWithString()", $t.Line = "17", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593.CheckStringStartsWithString();
                 },
                 CheckStringEndsWithString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CheckStringEndsWithString()", $t.Line = "82", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CheckStringEndsWithString()", $t.Line = "80", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593.CheckStringEndsWithString();
+                },
+                CheckAdditionalBrokenCases: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CheckAdditionalBrokenCases()", $t.Line = "148", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593.CheckAdditionalBrokenCases();
                 }
             }
         },

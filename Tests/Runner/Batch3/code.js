@@ -32261,6 +32261,56 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e"));
                     Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v"));
                     Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X"));
+                },
+                /**
+                 * The tests here were failing because of the initial implementation of
+                 the fix for this issue. Several other tests were failing because of
+                 the broken string comparison, when startsWith/endsWith() were used.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+                 * @return  {void}
+                 */
+                CheckAdditionalBrokenCases: function () {
+                    var fullString = "System.Collections.Generic.ICollection$1$System.Int32";
+
+                    var startChunk = fullString.substr(0, ((fullString.length - 1) | 0));
+                    var endChunk = fullString.substr(1);
+
+                    var firstChar = 32;
+                    var lastChar = 32;
+
+                    // Just iterate thru the original string taking one character a
+                    // time and check if it is equal. Remove the last character, and
+                    // append a different character and ensure it is different.
+                    while (startChunk.length > 0) {
+                        Bridge.Test.NUnit.Assert.True(System.String.startsWith(fullString, startChunk), "String '" + (fullString || "") + "' starts with '" + (startChunk || "") + "'.");
+
+                        lastChar = startChunk.charCodeAt(((startChunk.length - 1) | 0));
+
+                        // ensure the character we append is different than the one we just removed.
+                        lastChar = lastChar === 120 ? 121 : 120;
+
+                        startChunk = startChunk.substr(0, ((startChunk.length - 1) | 0));
+
+                        Bridge.Test.NUnit.Assert.False(System.String.startsWith(fullString, (startChunk || "") + String.fromCharCode(lastChar)), "String '" + (fullString || "") + "' does not start with '" + (startChunk || "") + String.fromCharCode(lastChar) + "'.");
+                    }
+
+                    while (endChunk.length > 0) {
+                        Bridge.Test.NUnit.Assert.True(System.String.endsWith(fullString, endChunk), "String '" + (fullString || "") + "' ends with '" + (endChunk || "") + "'.");
+
+                        firstChar = endChunk.charCodeAt(0);
+
+                        // ensure the character we append is different than the one we just removed.
+                        firstChar = firstChar === 120 ? 121 : 120;
+
+                        endChunk = endChunk.substr(1);
+
+                        Bridge.Test.NUnit.Assert.False(System.String.endsWith(fullString, String.fromCharCode(firstChar) + (endChunk || "")), "String '" + (fullString || "") + "' does not end with '" + String.fromCharCode(firstChar) + (endChunk || "") + "'.");
+
+                    }
                 }
             }
         }
