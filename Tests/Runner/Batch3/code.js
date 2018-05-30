@@ -31970,59 +31970,169 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here consists in ensuring the array's IsFixedSize test works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583", {
         statics: {
             methods: {
+                /**
+                 * Make a fixed-size array, and also cast it into an IList and check
+                 whether its fixed size state is retained.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+                 * @return  {void}
+                 */
                 TestIsFixedSize: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
-                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr));
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr), "Fixed-size array's IsFixedSize is true.");
 
                     var ilist = Bridge.cast(arr, System.Collections.IList);
-                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(ilist));
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(ilist), "Fixed-size array cast into IList has its IsFixedSize retained as true.");
                 }
             }
         }
     });
 
+    /**
+     * The tests here ensures that the Insert, Add, Remove and RemoveAt
+     array methods throw the NotSupported exception when performing the
+     operation in either a readonly list or fixed-size array.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584", {
         statics: {
             methods: {
+                /**
+                 * Tests IList.Insert() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
                 TestInsert: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
                     var ilist = Bridge.cast(arr, System.Collections.IList);
                     Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
                         System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
-                    });
+                    }, "Array cast into an IList denies Insert() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.insert(rolist, 0, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Insert() operation.");
                 },
+                /**
+                 * Tests IList.Add() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
                 TestAdd: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
                     var ilist = Bridge.cast(arr, System.Collections.IList);
                     Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
                         System.Array.add(ilist, Bridge.box(0, System.Int32), Object);
-                    });
+                    }, "Array cast into an IList denies Add() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.add(rolist, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Add() operation.");
                 },
+                /**
+                 * Tests IList.remove() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
                 TestRemove: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
                     var ilist = Bridge.cast(arr, System.Collections.IList);
                     Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
                         System.Array.remove(ilist, Bridge.box(0, System.Int32), Object);
-                    });
+                    }, "Array cast into an IList denies Remove() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.remove(rolist, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Remove() operation.");
                 },
+                /**
+                 * Tests IList.RemoveAt() over fixed-length array and readonly List
+                 cast into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
                 TestRemoveAt: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
                     var ilist = Bridge.cast(arr, System.Collections.IList);
                     Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
                         System.Array.removeAt(ilist, 0, Object);
-                    });
+                    }, "Array cast into an IList denies RemoveAt() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.removeAt(rolist, 0, Object);
+                    }, "Read-only List cast into IList denies RemoveAt() operation.");
                 },
+                /**
+                 * Tests IList.Clear() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
                 TestClear: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
                     var ilist = Bridge.cast(arr, System.Collections.IList);
                     Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
                         System.Array.clear(ilist, Object);
-                    });
+                    }, "Array cast into an IList denies Clear() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.clear(rolist, Object);
+                    }, "Read-only List cast into IList denies Clear() operation.");
                 }
             }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584, {
+        f1: function (_o1) {
+            _o1.add(1);
+            _o1.add(2);
+            _o1.add(3);
+            return _o1;
         }
     });
 
