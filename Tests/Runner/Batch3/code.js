@@ -32026,21 +32026,56 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here consists in checking exception message thrown when tryig
+     to insert/append elements to readonly and fixed-size arrays.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585", {
         statics: {
             methods: {
+                /**
+                 * Make a fixed-length array and a readonly list then try to add
+                 elements to them, checking for not only the expected exception
+                 type, but also the exception very message.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+                 * @return  {void}
+                 */
                 TestInsert: function () {
-                    var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
-                    var roList = list.AsReadOnly();
-                    var ilist = Bridge.cast(roList, System.Collections.IList);
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
 
+                    // Here we don't just use 'Assert.Throws' because we care not only
+                    // for the type of the thrown exception, but also its descriptive
+                    // message.
                     try {
                         System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
-                        Bridge.Test.NUnit.Assert.Fail();
+                        Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to fixed-size array.");
                     }
                     catch (ex) {
                         ex = System.Exception.create(ex);
-                        Bridge.Test.NUnit.Assert.AreEqual("Collection is read-only.", ex.Message);
+                        Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex), "Type of exception is \"NotSupported\"");
+                        Bridge.Test.NUnit.Assert.AreEqual("Collection was of a fixed size.", ex.Message, "Expected exception message is thrown.");
+                    }
+
+                    var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
+                    var roList = list.AsReadOnly();
+                    var ilist2 = Bridge.cast(roList, System.Collections.IList);
+
+                    try {
+                        System.Array.insert(ilist2, 0, Bridge.box(0, System.Int32), Object);
+                        Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to read-only collection.");
+                    }
+                    catch (ex1) {
+                        ex1 = System.Exception.create(ex1);
+                        Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex1), "Type of exception is \"NotSupported\"");
+                        Bridge.Test.NUnit.Assert.AreEqual("Collection is read-only.", ex1.Message, "Expected exception message is thrown.");
                     }
                 }
             }
