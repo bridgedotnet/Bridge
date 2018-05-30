@@ -48,6 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActivatorTests.cs" />
+    <Compile Include="Attributes\CollectionDataContractAttributeTest.cs" />
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
     <Compile Include="Bridge.Core\Validation.cs" />

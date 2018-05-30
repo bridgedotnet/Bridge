@@ -27,6 +27,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("ActivatorTests - CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545);
             QUnit.test("ActivatorTests - CreateInstanceWithNoArgumentsWorksForClassWithStaticMethodDefaultConstructor", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.CreateInstanceWithNoArgumentsWorksForClassWithStaticMethodDefaultConstructor);
             QUnit.test("ActivatorTests - CreateInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.CreateInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor);
+            QUnit.module("Attribute");
+            QUnit.test("CollectionDataContract attribute - AttributeUsageWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CollectionDataContractAttributeTest.AttributeUsageWorks);
             QUnit.module("BitConverter");
             QUnit.test("BitConverter - ValueArgumentNull", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.ValueArgumentNull);
             QUnit.test("BitConverter - StartIndexBeyondLength", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.StartIndexBeyondLength);
@@ -6515,6 +6517,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.IO.CloseTests", $t.File = "Batch1\\IO\\StreamWriter\\StreamWriter.CloseTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.CollectionDataContractAttributeTest", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.CollectionDataContractAttributeTest)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                AttributeUsageWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.CollectionDataContractAttributeTest).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CollectionDataContractAttributeTest, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AttributeUsageWorks()", $t.Line = "42", $t));
+                    Bridge.ClientTest.BasicCSharp.CollectionDataContractAttributeTest.AttributeUsageWorks();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.CollectionDataContractAttributeTest", $t.File = "Batch1\\Attributes\\CollectionDataContractAttributeTest.cs", $t);
                 }
                 return this.context;
             }

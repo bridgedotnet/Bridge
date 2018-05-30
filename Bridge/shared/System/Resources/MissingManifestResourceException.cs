@@ -13,7 +13,8 @@ namespace System.Resources
     {
         public MissingManifestResourceException()
             : base("Unable to find manifest resource.")
-            //: base(SR.Arg_MissingManifestResourceException)
+        // TODO: SR
+        //: base(SR.Arg_MissingManifestResourceException)
         {
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }
