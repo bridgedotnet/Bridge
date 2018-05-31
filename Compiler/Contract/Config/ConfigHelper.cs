@@ -188,13 +188,13 @@ namespace Bridge.Contract
 
             try
             {
-                this.Logger.Trace("Reading base configuration at " + (configPath ?? "") + " ...");
+                Logger.Trace("Reading base configuration at " + (configPath ?? "") + " ...");
                 var json = File.ReadAllText(configPath);
 
                 T config;
                 if (mergePath != null)
                 {
-                    this.Logger.Trace("Reading merge configuration at " + (mergePath ?? "") + " ...");
+                    Logger.Trace("Reading merge configuration at " + (mergePath ?? "") + " ...");
                     var jsonMerge = File.ReadAllText(mergePath);
 
                     var cfgMain = JObject.Parse(json);
@@ -217,7 +217,7 @@ namespace Bridge.Contract
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException("Cannot read configuration file " + configFileName, e);
+                throw new InvalidOperationException("Cannot read configuration file " + configPath + ": " + e.Message, e);
             }
         }
 

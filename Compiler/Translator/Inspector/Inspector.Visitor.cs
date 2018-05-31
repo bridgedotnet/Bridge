@@ -860,19 +860,19 @@ namespace Bridge.Translator
 
                     if (obj is bool)
                     {
-                        module = new Module((bool)obj);
+                        module = new Module((bool)obj, null);
                     }
                     else if (obj is string)
                     {
-                        module = new Module(obj.ToString());
+                        module = new Module(obj.ToString(), null);
                     }
                     else if (obj is int)
                     {
-                        module = new Module("", (ModuleType)(int)obj);
+                        module = new Module("", (ModuleType)(int)obj, null);
                     }
                     else
                     {
-                        module = new Module();
+                        module = new Module(null);
                     }
                 }
                 else if (args.Count == 2)
@@ -885,21 +885,21 @@ namespace Bridge.Translator
                         var mname = first;
                         var preventName = second;
 
-                        module = new Module(mname != null ? mname.ToString() : "", (bool)preventName);
+                        module = new Module(mname != null ? mname.ToString() : "", null, (bool)preventName);
                     }
                     else if (second is bool)
                     {
                         var mtype = first;
                         var preventName = second;
 
-                        module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                        module = new Module("", (ModuleType)(int)mtype, null, (bool)preventName);
                     }
                     else
                     {
                         var mtype = first;
                         var mname = second;
 
-                        module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype);
+                        module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, null);
                     }
                 }
                 else if (args.Count == 3)
@@ -908,11 +908,11 @@ namespace Bridge.Translator
                     var mname = args[1];
                     var preventName = args[2];
 
-                    module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
+                    module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, null, (bool)preventName);
                 }
                 else
                 {
-                    module = new Module();
+                    module = new Module(null);
                 }
 
                 if (positionArgs.Count > 0)
@@ -1025,7 +1025,7 @@ namespace Bridge.Translator
 
                     if (nameObj is string)
                     {
-                        dependency.DependencyName = nameObj.ToString();
+                        dependency.DependencyName = nameObj.ToString();                        
                     }
 
                     nameObj = this.GetAttributeArgumentValue(attr, resolveResult, 1);
@@ -1033,6 +1033,10 @@ namespace Bridge.Translator
                     if (nameObj is string)
                     {
                         dependency.VariableName = nameObj.ToString();
+                    }
+                    else
+                    {
+                        dependency.VariableName = Module.EscapeName(dependency.DependencyName);
                     }
 
                     this.AssemblyInfo.Dependencies.Add(dependency);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Contract
 {
@@ -29,25 +30,32 @@ namespace Bridge.Contract
 
     public class Module
     {
-        public Module(string name, ModuleType type, bool preventModuleName = false)
+        public Module(string name, ModuleType type, IEmitter emitter, bool preventModuleName = false)
         {
             this.Name = name;
             this.Type = type;
             this.PreventModuleName = preventModuleName;
+            this.Emitter = emitter;
             this.InitName();
         }
 
-        public Module(string name, bool preventModuleName = false)
+        public Module(string name, IEmitter emitter, bool preventModuleName = false)
         {
             this.Name = name;
             this.Type = ModuleType.AMD;
             this.PreventModuleName = preventModuleName;
+            this.Emitter = emitter;
             this.InitName();
         }
 
-        public Module(bool preventModuleName): this()
+        public Module(bool preventModuleName, IEmitter emitter) : this(emitter)
         {
             this.PreventModuleName = preventModuleName;
+        }
+
+        public Module(IEmitter emitter) : this()
+        {
+            this.Emitter = emitter;
         }
 
         public Module()
@@ -56,6 +64,11 @@ namespace Bridge.Contract
             this.Type = ModuleType.AMD;
             this.PreventModuleName = false;
             this.InitName();
+        }
+
+        public static string EscapeName(string value)
+        {
+            return Regex.Replace(value, "[^\\w_\\d]", "_");
         }
 
         private string _name;
@@ -67,9 +80,16 @@ namespace Bridge.Contract
             }
             set
             {
-                this._name = value;
+                this.OriginalName = value;
+                this._name = EscapeName(value);
                 this.NoName = false;
             }
+        }
+
+        public string OriginalName
+        {
+            get;
+            private set;
         }
 
         public ModuleType Type
@@ -84,6 +104,11 @@ namespace Bridge.Contract
             private set;
         }
 
+        public IEmitter Emitter
+        {
+            get; set;
+        }
+
         public bool NoName
         {
             get;
@@ -95,11 +120,18 @@ namespace Bridge.Contract
         {
             get
             {
+                var currentTypeInfo = this.Emitter?.TypeInfo;
+
+                if (currentTypeInfo != null && currentTypeInfo.Module != null && currentTypeInfo.Module.Equals(this))
+                {
+                    return this.Name;
+                }
+
                 return this._exportAsNamespace ?? this.Name;
             }
             set
             {
-                this._exportAsNamespace = value;
+                this._exportAsNamespace = Regex.Replace(value, "[^\\w_\\d]", "_");
             }
         }
 

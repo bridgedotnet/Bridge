@@ -25,13 +25,13 @@ namespace Bridge.Translator.Tests
 
                 var currentTypeInfo = Substitute.For<ITypeInfo>();
                 currentTypeInfo.Key = "Type1";
-                currentTypeInfo.Module = new Module("Module1");
+                currentTypeInfo.Module = new Module("Module1", null);
 
                 var type = Substitute.For<BridgeType>("Type2");
 
                 var moduleName = "Module2";
                 var moduleType = ModuleType.ES6;
-                var module = new Module(moduleName, moduleType);
+                var module = new Module(moduleName, moduleType, null);
                 var moduleDependency = new ModuleDependency()
                 {
                     DependencyName = module.Name,
@@ -61,13 +61,13 @@ namespace Bridge.Translator.Tests
 
                 var currentTypeInfo = Substitute.For<ITypeInfo>();
                 currentTypeInfo.Key = "Type1";
-                currentTypeInfo.Module = new Module("Module1");
+                currentTypeInfo.Module = new Module("Module1", null);
 
                 var type = Substitute.For<BridgeType>("Type2");
 
                 var moduleName = "Module2";
                 var moduleType = ModuleType.ES6;
-                var module = new Module(moduleName, moduleType);
+                var module = new Module(moduleName, moduleType, null);
 
                 BridgeTypes.EnsureDependencies(type, emitter, currentTypeInfo, module);
 

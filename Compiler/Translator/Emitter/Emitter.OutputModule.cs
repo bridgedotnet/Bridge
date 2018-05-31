@@ -65,7 +65,7 @@ namespace Bridge.Translator
 
             if (!module.NoName)
             {
-                moduleOutput.Append(this.ToJavaScript(module.Name));
+                moduleOutput.Append(this.ToJavaScript(module.OriginalName));
                 moduleOutput.Append(", ");
             }
 
@@ -185,7 +185,7 @@ namespace Bridge.Translator
             moduleOutput.Append(JS.Funcs.DEFINE + "(");
             if (!module.NoName)
             {
-                moduleOutput.Append(this.ToJavaScript(module.Name));
+                moduleOutput.Append(this.ToJavaScript(module.OriginalName));
                 moduleOutput.Append(", ");
             }
 
