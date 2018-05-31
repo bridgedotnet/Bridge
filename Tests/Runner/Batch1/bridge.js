@@ -11823,8 +11823,12 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         },
 
         checkReadOnly: function (obj, T, msg) {
-            if (System.Array.getIsReadOnly(obj, T)) {
-                throw new System.NotSupportedException.$ctor1(msg || "Collection was of a fixed size.");
+            if (Bridge.isArray(obj)) {
+                if (T) {
+                    throw new System.NotSupportedException.$ctor1(msg || "Collection was of a fixed size.");
+                }
+            } else if (System.Array.getIsReadOnly(obj, T)) {
+                throw new System.NotSupportedException.$ctor1(msg || "Collection is read-only.");
             }
         },
 
@@ -14820,9 +14824,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     return false;
                 }
 
-                prefix = System.String.escape(prefix);
-
-                return str.match("^" + prefix) !== null;
+                return System.String.equals(str.slice(0, prefix.length), prefix, arguments[2]);
             },
 
             endsWith: function (str, suffix) {
@@ -14834,9 +14836,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     return false;
                 }
 
-                suffix = System.String.escape(suffix);
-
-                return str.match(suffix + "$") !== null;
+                return System.String.equals(str.slice(str.length - suffix.length, str.length), suffix, arguments[2]);
             },
 
             contains: function (str, value) {
@@ -21043,6 +21043,312 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
     System.Linq.OrderedEnumerable$1 = OrderedEnumerable;
 })(Bridge.global);
 
+    // @source CollectionDataContractAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.CollectionDataContractAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _name: null,
+            _ns: null,
+            _itemName: null,
+            _keyName: null,
+            _valueName: null,
+            _isReference: false,
+            _isNameSetExplicitly: false,
+            _isNamespaceSetExplicitly: false,
+            _isReferenceSetExplicitly: false,
+            _isItemNameSetExplicitly: false,
+            _isKeyNameSetExplicitly: false,
+            _isValueNameSetExplicitly: false
+        },
+        props: {
+            Namespace: {
+                get: function () {
+                    return this._ns;
+                },
+                set: function (value) {
+                    this._ns = value;
+                    this._isNamespaceSetExplicitly = true;
+                }
+            },
+            IsNamespaceSetExplicitly: {
+                get: function () {
+                    return this._isNamespaceSetExplicitly;
+                }
+            },
+            Name: {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                    this._isNameSetExplicitly = true;
+                }
+            },
+            IsNameSetExplicitly: {
+                get: function () {
+                    return this._isNameSetExplicitly;
+                }
+            },
+            ItemName: {
+                get: function () {
+                    return this._itemName;
+                },
+                set: function (value) {
+                    this._itemName = value;
+                    this._isItemNameSetExplicitly = true;
+                }
+            },
+            IsItemNameSetExplicitly: {
+                get: function () {
+                    return this._isItemNameSetExplicitly;
+                }
+            },
+            KeyName: {
+                get: function () {
+                    return this._keyName;
+                },
+                set: function (value) {
+                    this._keyName = value;
+                    this._isKeyNameSetExplicitly = true;
+                }
+            },
+            IsReference: {
+                get: function () {
+                    return this._isReference;
+                },
+                set: function (value) {
+                    this._isReference = value;
+                    this._isReferenceSetExplicitly = true;
+                }
+            },
+            IsReferenceSetExplicitly: {
+                get: function () {
+                    return this._isReferenceSetExplicitly;
+                }
+            },
+            IsKeyNameSetExplicitly: {
+                get: function () {
+                    return this._isKeyNameSetExplicitly;
+                }
+            },
+            ValueName: {
+                get: function () {
+                    return this._valueName;
+                },
+                set: function (value) {
+                    this._valueName = value;
+                    this._isValueNameSetExplicitly = true;
+                }
+            },
+            IsValueNameSetExplicitly: {
+                get: function () {
+                    return this._isValueNameSetExplicitly;
+                }
+            }
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            }
+        }
+    });
+
+    // @source ContractNamespaceAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.ContractNamespaceAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _clrNamespace: null,
+            _contractNamespace: null
+        },
+        props: {
+            ClrNamespace: {
+                get: function () {
+                    return this._clrNamespace;
+                },
+                set: function (value) {
+                    this._clrNamespace = value;
+                }
+            },
+            ContractNamespace: {
+                get: function () {
+                    return this._contractNamespace;
+                }
+            }
+        },
+        ctors: {
+            ctor: function (contractNamespace) {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+                this._contractNamespace = contractNamespace;
+            }
+        }
+    });
+
+    // @source DataContractAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.DataContractAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _name: null,
+            _ns: null,
+            _isNameSetExplicitly: false,
+            _isNamespaceSetExplicitly: false,
+            _isReference: false,
+            _isReferenceSetExplicitly: false
+        },
+        props: {
+            IsReference: {
+                get: function () {
+                    return this._isReference;
+                },
+                set: function (value) {
+                    this._isReference = value;
+                    this._isReferenceSetExplicitly = true;
+                }
+            },
+            IsReferenceSetExplicitly: {
+                get: function () {
+                    return this._isReferenceSetExplicitly;
+                }
+            },
+            Namespace: {
+                get: function () {
+                    return this._ns;
+                },
+                set: function (value) {
+                    this._ns = value;
+                    this._isNamespaceSetExplicitly = true;
+                }
+            },
+            IsNamespaceSetExplicitly: {
+                get: function () {
+                    return this._isNamespaceSetExplicitly;
+                }
+            },
+            Name: {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                    this._isNameSetExplicitly = true;
+                }
+            },
+            IsNameSetExplicitly: {
+                get: function () {
+                    return this._isNameSetExplicitly;
+                }
+            }
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            }
+        }
+    });
+
+    // @source DataMemberAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.DataMemberAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _name: null,
+            _isNameSetExplicitly: false,
+            _order: 0,
+            _isRequired: false,
+            _emitDefaultValue: false
+        },
+        props: {
+            Name: {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                    this._isNameSetExplicitly = true;
+                }
+            },
+            IsNameSetExplicitly: {
+                get: function () {
+                    return this._isNameSetExplicitly;
+                }
+            },
+            Order: {
+                get: function () {
+                    return this._order;
+                },
+                set: function (value) {
+                    if (value < 0) {
+                        throw new System.Runtime.Serialization.InvalidDataContractException.$ctor1("Property 'Order' in DataMemberAttribute attribute cannot be a negative number.");
+                    }
+                    this._order = value;
+                }
+            },
+            IsRequired: {
+                get: function () {
+                    return this._isRequired;
+                },
+                set: function (value) {
+                    this._isRequired = value;
+                }
+            },
+            EmitDefaultValue: {
+                get: function () {
+                    return this._emitDefaultValue;
+                },
+                set: function (value) {
+                    this._emitDefaultValue = value;
+                }
+            }
+        },
+        ctors: {
+            init: function () {
+                this._order = -1;
+                this._emitDefaultValue = true;
+            },
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            }
+        }
+    });
+
+    // @source EnumMemberAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.EnumMemberAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _value: null,
+            _isValueSetExplicitly: false
+        },
+        props: {
+            Value: {
+                get: function () {
+                    return this._value;
+                },
+                set: function (value) {
+                    this._value = value;
+                    this._isValueSetExplicitly = true;
+                }
+            },
+            IsValueSetExplicitly: {
+                get: function () {
+                    return this._isValueSetExplicitly;
+                }
+            }
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            }
+        }
+    });
+
     // @source IDeserializationCallback.js
 
     Bridge.define("System.Runtime.Serialization.IDeserializationCallback", {
@@ -21053,6 +21359,38 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
     Bridge.define("System.Runtime.Serialization.IFormatterConverter", {
         $kind: "interface"
+    });
+
+    // @source IgnoreDataMemberAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.IgnoreDataMemberAttribute", {
+        inherits: [System.Attribute],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            }
+        }
+    });
+
+    // @source InvalidDataContractException.js
+
+    Bridge.define("System.Runtime.Serialization.InvalidDataContractException", {
+        inherits: [System.Exception],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Exception.ctor.call(this);
+            },
+            $ctor1: function (message) {
+                this.$initialize();
+                System.Exception.ctor.call(this, message);
+            },
+            $ctor2: function (message, innerException) {
+                this.$initialize();
+                System.Exception.ctor.call(this, message, innerException);
+            }
+        }
     });
 
     // @source IObjectReference.js
@@ -21071,6 +21409,50 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
     Bridge.define("System.Runtime.Serialization.ISerializable", {
         $kind: "interface"
+    });
+
+    // @source ISerializationSurrogateProvider.js
+
+    Bridge.define("System.Runtime.Serialization.ISerializationSurrogateProvider", {
+        $kind: "interface"
+    });
+
+    // @source KnownTypeAttribute.js
+
+    Bridge.define("System.Runtime.Serialization.KnownTypeAttribute", {
+        inherits: [System.Attribute],
+        fields: {
+            _methodName: null,
+            _type: null
+        },
+        props: {
+            MethodName: {
+                get: function () {
+                    return this._methodName;
+                }
+            },
+            Type: {
+                get: function () {
+                    return this._type;
+                }
+            }
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+            },
+            $ctor2: function (type) {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+                this._type = type;
+            },
+            $ctor1: function (methodName) {
+                this.$initialize();
+                System.Attribute.ctor.call(this);
+                this._methodName = methodName;
+            }
+        }
     });
 
     // @source SerializationEntry.js
@@ -30394,7 +30776,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 get: function () {
                     var list = Bridge.as(this.items, System.Collections.IList);
                     if (list != null) {
-                        return list.System$Collections$IList$IsFixedSize;
+                        return System.Array.isFixedSize(list);
                     }
                     return System.Array.getIsReadOnly(this.items, T);
                 }

@@ -54,7 +54,7 @@
                 get: function () {
                     var list = Bridge.as(this.items, System.Collections.IList);
                     if (list != null) {
-                        return list.System$Collections$IList$IsFixedSize;
+                        return System.Array.isFixedSize(list);
                     }
                     return System.Array.getIsReadOnly(this.items, T);
                 }

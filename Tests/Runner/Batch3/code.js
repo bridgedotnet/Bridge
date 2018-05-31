@@ -31971,6 +31971,239 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * The test here consists in ensuring the array's IsFixedSize test works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583", {
+        statics: {
+            methods: {
+                /**
+                 * Make a fixed-size array, and also cast it into an IList and check
+                 whether its fixed size state is retained.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3583
+                 * @return  {void}
+                 */
+                TestIsFixedSize: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr), "Fixed-size array's IsFixedSize is true.");
+
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(ilist), "Fixed-size array cast into IList has its IsFixedSize retained as true.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here ensures that the Insert, Add, Remove and RemoveAt
+     array methods throw the NotSupported exception when performing the
+     operation in either a readonly list or fixed-size array.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584", {
+        statics: {
+            methods: {
+                /**
+                 * Tests IList.Insert() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
+                TestInsert: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
+                    }, "Array cast into an IList denies Insert() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.insert(rolist, 0, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Insert() operation.");
+                },
+                /**
+                 * Tests IList.Add() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
+                TestAdd: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.add(ilist, Bridge.box(0, System.Int32), Object);
+                    }, "Array cast into an IList denies Add() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.add(rolist, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Add() operation.");
+                },
+                /**
+                 * Tests IList.remove() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
+                TestRemove: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.remove(ilist, Bridge.box(0, System.Int32), Object);
+                    }, "Array cast into an IList denies Remove() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.remove(rolist, Bridge.box(0, System.Int32), Object);
+                    }, "Read-only List cast into IList denies Remove() operation.");
+                },
+                /**
+                 * Tests IList.RemoveAt() over fixed-length array and readonly List
+                 cast into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
+                TestRemoveAt: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.removeAt(ilist, 0, Object);
+                    }, "Array cast into an IList denies RemoveAt() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.removeAt(rolist, 0, Object);
+                    }, "Read-only List cast into IList denies RemoveAt() operation.");
+                },
+                /**
+                 * Tests IList.Clear() over fixed-length array and readonly List cast
+                 into IList.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584
+                 * @return  {void}
+                 */
+                TestClear: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.clear(ilist, Object);
+                    }, "Array cast into an IList denies Clear() operation.");
+
+                    var rolist = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor()).AsReadOnly();
+                    Bridge.Test.NUnit.Assert.Throws$2(System.NotSupportedException, function () {
+                        System.Array.clear(rolist, Object);
+                    }, "Read-only List cast into IList denies Clear() operation.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3584, {
+        f1: function (_o1) {
+            _o1.add(1);
+            _o1.add(2);
+            _o1.add(3);
+            return _o1;
+        }
+    });
+
+    /**
+     * The tests here consists in checking exception message thrown when tryig
+     to insert/append elements to readonly and fixed-size arrays.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585", {
+        statics: {
+            methods: {
+                /**
+                 * Make a fixed-length array and a readonly list then try to add
+                 elements to them, checking for not only the expected exception
+                 type, but also the exception very message.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585
+                 * @return  {void}
+                 */
+                TestInsert: function () {
+                    var arr = System.Array.init([1, 2, 3], System.Int32);
+                    var ilist = Bridge.cast(arr, System.Collections.IList);
+
+                    // Here we don't just use 'Assert.Throws' because we care not only
+                    // for the type of the thrown exception, but also its descriptive
+                    // message.
+                    try {
+                        System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
+                        Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to fixed-size array.");
+                    }
+                    catch (ex) {
+                        ex = System.Exception.create(ex);
+                        Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex), "Type of exception is \"NotSupported\"");
+                        Bridge.Test.NUnit.Assert.AreEqual("Collection was of a fixed size.", ex.Message, "Expected exception message is thrown.");
+                    }
+
+                    var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585.f1(new (System.Collections.Generic.List$1(System.Int32)).ctor());
+                    var roList = list.AsReadOnly();
+                    var ilist2 = Bridge.cast(roList, System.Collections.IList);
+
+                    try {
+                        System.Array.insert(ilist2, 0, Bridge.box(0, System.Int32), Object);
+                        Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to read-only collection.");
+                    }
+                    catch (ex1) {
+                        ex1 = System.Exception.create(ex1);
+                        Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex1), "Type of exception is \"NotSupported\"");
+                        Bridge.Test.NUnit.Assert.AreEqual("Collection is read-only.", ex1.Message, "Expected exception message is thrown.");
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3585, {
+        f1: function (_o1) {
+            _o1.add(1);
+            _o1.add(2);
+            _o1.add(3);
+            return _o1;
+        }
+    });
+
+    /**
      * The tests here consists in ensuring the template substitution accepts
      the {0} placeholder in some situations elucidated by the issue's
      report.
@@ -32123,6 +32356,194 @@ Bridge.$N1391Result =                     r;
                     arr = System.Array.init([1, 2, 3, 4, 5], System.Int32);
                     test.Foo.apply(test, arr);
                     Bridge.Test.NUnit.Assert.AreEqual(5, count, "External implementation of class' side effect works.");
+                }
+            }
+        }
+    });
+
+    /**
+     * The tests here consists in verifying the Script.Return method works
+     in a generic situation.
+     Notice despite the tests here just check whether it takes over return
+     values from methods, its intended use is for javascript events which
+     can be represented in regular C# blocks, which can't handle a 'return'
+     statement.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593", {
+        statics: {
+            methods: {
+                CheckStringStartsWithString: function () {
+                    var val1 = "Value";
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu"));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X"));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 0));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 1));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 1));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 2));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 3));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 3));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Va", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Val", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Valu", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "Value", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X", 4));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "v", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vA", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vAL", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALU", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "vALUE", 5));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "vALUEX", 5));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.startsWith(val1, "V"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.startsWith(val1, "X"));
+                },
+                CheckStringEndsWithString: function () {
+                    var val1 = "Value";
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue"));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X"));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 0));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 0));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 0));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 1));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 1));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 1));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 2));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 2));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 2));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 3));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 3));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 3));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "lue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "alue", 4));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "Value", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v", 4));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X", 4));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "E", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "UE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "LUE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "ALUE", 5));
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "vALUE", 5));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "vALUEX", 5));
+
+                    Bridge.Test.NUnit.Assert.True(System.String.endsWith(val1, "e"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "v"));
+                    Bridge.Test.NUnit.Assert.False(System.String.endsWith(val1, "X"));
+                },
+                /**
+                 * The tests here were failing because of the initial implementation of
+                 the fix for this issue. Several other tests were failing because of
+                 the broken string comparison, when startsWith/endsWith() were used.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3593
+                 * @return  {void}
+                 */
+                CheckAdditionalBrokenCases: function () {
+                    var fullString = "System.Collections.Generic.ICollection$1$System.Int32";
+
+                    var startChunk = fullString.substr(0, ((fullString.length - 1) | 0));
+                    var endChunk = fullString.substr(1);
+
+                    var firstChar = 32;
+                    var lastChar = 32;
+
+                    // Just iterate thru the original string taking one character a
+                    // time and check if it is equal. Remove the last character, and
+                    // append a different character and ensure it is different.
+                    while (startChunk.length > 0) {
+                        Bridge.Test.NUnit.Assert.True(System.String.startsWith(fullString, startChunk), "String '" + (fullString || "") + "' starts with '" + (startChunk || "") + "'.");
+
+                        lastChar = startChunk.charCodeAt(((startChunk.length - 1) | 0));
+
+                        // ensure the character we append is different than the one we just removed.
+                        lastChar = lastChar === 120 ? 121 : 120;
+
+                        startChunk = startChunk.substr(0, ((startChunk.length - 1) | 0));
+
+                        Bridge.Test.NUnit.Assert.False(System.String.startsWith(fullString, (startChunk || "") + String.fromCharCode(lastChar)), "String '" + (fullString || "") + "' does not start with '" + (startChunk || "") + String.fromCharCode(lastChar) + "'.");
+                    }
+
+                    while (endChunk.length > 0) {
+                        Bridge.Test.NUnit.Assert.True(System.String.endsWith(fullString, endChunk), "String '" + (fullString || "") + "' ends with '" + (endChunk || "") + "'.");
+
+                        firstChar = endChunk.charCodeAt(0);
+
+                        // ensure the character we append is different than the one we just removed.
+                        firstChar = firstChar === 120 ? 121 : 120;
+
+                        endChunk = endChunk.substr(1);
+
+                        Bridge.Test.NUnit.Assert.False(System.String.endsWith(fullString, String.fromCharCode(firstChar) + (endChunk || "")), "String '" + (fullString || "") + "' does not end with '" + String.fromCharCode(firstChar) + (endChunk || "") + "'.");
+
+                    }
                 }
             }
         }

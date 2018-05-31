@@ -26,6 +26,8 @@
         public const string MODULE_TUPLE = PREFIX_SYSTEM_CLASSES; // + "Tuple";
         public const string MODULE_VERSION = PREFIX_SYSTEM_CLASSES; // + "Version";
 
+        public const string MODULE_ATTRIBUTE = "Attribute";
+
         public const string MODULE_BASIC_CSHARP = "C#"; // "";
         public const string MODULE_LINQ = "LINQ"; // "";
         public const string MODULE_LINQ_EXPRESSIONS = "LINQ Expressions"; // "";
