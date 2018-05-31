@@ -13299,7 +13299,7 @@ Bridge.$N1391Result =                     r;
                     var $t;
                     var dt = System.DateTime.getNow();
                     var ndt = Bridge.cast(dt, System.DateTime, true);
-                    var s1 = !Bridge.equals(System.Nullable.getValue(ndt), null) ? System.DateTime.format(System.Nullable.getValue(ndt), "yyyy-MM-dd HH:mm:ss") : null;
+                    var s1 = !Bridge.equals(ndt, null) ? System.DateTime.format(System.Nullable.getValue(ndt), "yyyy-MM-dd HH:mm:ss") : null;
                     var s2 = !Bridge.equals(($t = Bridge.cast(dt, System.DateTime, true)), null) ? System.DateTime.format($t, "yyyy-MM-dd HH:mm:ss") : null;
 
                     Bridge.Test.NUnit.Assert.AreEqual(s1, s2);
@@ -29270,7 +29270,7 @@ Bridge.$N1391Result =                     r;
                     program.status = 'Bridge.ClientTest.Batch3.BridgeIssues.Bridge3418.Handler+';;
                     Bridge.Test.NUnit.Assert.AreEqual((expected || "") + "+", program.status, "Template applied correctly for event.add().");
 
-                    program.status = 'Bridge.ClientTest.Batch3.BridgeIssues.Bridge3418.Handler-';;
+                    program.status = 'Bridge.ClientTest.Batch3.BridgeIssues.Bridge3418.Handler-';
                     Bridge.Test.NUnit.Assert.AreEqual((expected || "") + "-", program.status, "Template applied correctly for event.remove().");
                 }
             }
@@ -33479,6 +33479,34 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607", {
+        statics: {
+            methods: {
+                TestNullConditional: function () {
+                    var test = null;
+                    !Bridge.equals(test, null) ? System.DateTime.format(System.Nullable.getValue(test)) : null;
+
+                    var feature = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607.SomeFeature();
+                    feature != null ? feature.dowork({ type: "test" }) : null;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("test", feature.type);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607.SomeFeature", {
+        $kind: "nested class",
+        fields: {
+            type: null
+        },
+        methods: {
+            dowork: function (obj) {
+                this.type = Bridge.toString(obj.type);
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {

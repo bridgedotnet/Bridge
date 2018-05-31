@@ -241,6 +241,11 @@ namespace Bridge.Translator
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {
+            if (inline != null && inline.Trim().EndsWith(";"))
+            {
+                inline = inline.Trim().TrimEnd(';');
+            }
+
             IMember member = this.Method ?? argsInfo.Method ?? argsInfo.ResolveResult?.Member;
             if (member == null && argsInfo.Expression != null && argsInfo.Expression.Parent != null)
             {
