@@ -53,12 +53,16 @@ namespace Bridge.Contract
             this.PreventModuleName = preventModuleName;
         }
 
-        public Module(IEmitter emitter)
+        public Module(IEmitter emitter) : this()
+        {
+            this.Emitter = emitter;
+        }
+
+        public Module()
         {
             this.Name = "";
             this.Type = ModuleType.AMD;
             this.PreventModuleName = false;
-            this.Emitter = emitter;
             this.InitName();
         }
 
