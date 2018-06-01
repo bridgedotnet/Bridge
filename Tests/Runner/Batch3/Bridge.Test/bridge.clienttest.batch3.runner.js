@@ -58,6 +58,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3593 - CheckAdditionalBrokenCases", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3593.CheckAdditionalBrokenCases);
             QUnit.test("#3599 - TestCustomListImplementation", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3599.TestCustomListImplementation);
             QUnit.test("#3607 - TestNullConditional", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3607.TestNullConditional);
+            QUnit.test("#3607 - TestSemicolonStripping", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3607.TestSemicolonStripping);
             QUnit.module("Issues3");
             QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge069.ThisKeywordInStructConstructorWorks);
             QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1000.TestStaticViaChild);
@@ -17053,8 +17054,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestNullConditional: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3607, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestNullConditional()", $t.Line = "24", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3607, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestNullConditional()", $t.Line = "31", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607.TestNullConditional();
+                },
+                TestSemicolonStripping: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3607, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSemicolonStripping()", $t.Line = "43", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607.TestSemicolonStripping();
                 }
             }
         },

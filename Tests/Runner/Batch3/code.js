@@ -33480,17 +33480,45 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    /**
+     * The tests here consists in ensuring that trailing semicolons are
+     removed from template strings and also conditional inlining
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607", {
         statics: {
             methods: {
+                /**
+                 * Tests whether
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607
+                 * @return  {void}
+                 */
                 TestNullConditional: function () {
                     var test = null;
-                    !Bridge.equals(test, null) ? System.DateTime.format(System.Nullable.getValue(test)) : null;
+                    var x = !Bridge.equals(test, null) ? System.DateTime.format(System.Nullable.getValue(test)) : null;
 
+                    Bridge.Test.NUnit.Assert.Null(x, "Null inline conditional's ToString() resolves to empty string.");
+                },
+                /**
+                 * Tests whether semicolon is stripped from templates.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607
+                 * @return  {void}
+                 */
+                TestSemicolonStripping: function () {
                     var feature = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3607.SomeFeature();
                     feature != null ? feature.dowork({ type: "test" }) : null;
 
-                    Bridge.Test.NUnit.Assert.AreEqual("test", feature.type);
+                    Bridge.Test.NUnit.Assert.AreEqual("test", feature.type, "Template ending with semicolon has its semicolon stripped at build time.");
                 }
             }
         }
