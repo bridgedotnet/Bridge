@@ -342,7 +342,7 @@ namespace Bridge.ClientTest.BasicCSharp
             Assert.AreEqual("ASD", ClassA.StatitStringNotInitialized, "ClassA.StatitStringNotInitialized ASD");
             Assert.AreDeepEqual(double.NaN, a.DoubleA, "DoubleA double.NaN");
 
-            a = ClassA.StaticMethod2((object)678, "QWE", 234);
+            a = ClassA.StaticMethod2((object)678, "QWE", 234.0);
             Assert.AreEqual(1678, ClassA.StatitIntNotInitialized, "StatitIntNotInitialized 1678");
             Assert.AreEqual("QWE", ClassA.StatitStringNotInitialized, "ClassA.StatitStringNotInitialized QWE");
             Assert.AreEqual(234, a.DoubleA, "DoubleA 234");

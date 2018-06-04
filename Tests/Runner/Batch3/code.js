@@ -12287,7 +12287,7 @@ Bridge.$N1391Result =                     r;
             },
             Value2: {
                 get: function () {
-                    return Bridge.cast(Bridge.unbox(this.value), T);
+                    return Bridge.cast(Bridge.unbox(this.value, T), T);
                 }
             }
         },
@@ -14449,7 +14449,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(5, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"]);
 
                     Bridge.Test.NUnit.Assert.True(System.Int64(7).equals(c1["0l"]));
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(c1["0l"]), System.Int64)).equals(c1["0l"]));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(c1["0l"], System.Int64), System.Int64)).equals(c1["0l"]));
 
                     Bridge.Test.NUnit.Assert.AreEqual(2, c1["0a3"]);
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(c1["0a3"]), c1["0a3"]);
@@ -14546,7 +14546,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             testMethod: function () {
                 if (arguments.length > 0) {
-                    this.f = System.Nullable.getValue(Bridge.cast(Bridge.unbox(arguments[0]), System.Int32));
+                    this.f = System.Nullable.getValue(Bridge.cast(Bridge.unbox(arguments[0], System.Int32), System.Int32));
                 }
                 return this.f;
             }
@@ -16942,7 +16942,7 @@ Bridge.$N1391Result =                     r;
                     var list = a;
                     System.Array.setItem(list, 0, null);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int32)));
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0), System.Int32), System.Int32)));
                     // Expected InvalidCastException will be fixed as part of another issue
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
                         System.Array.setItem(list, 0, "string");
@@ -16995,11 +16995,11 @@ Bridge.$N1391Result =                     r;
 
                     System.Array.setItem(list, 0, null);
                     Bridge.Test.NUnit.Assert.True(Bridge.is(System.Array.getItem(list, 0), System.Int64));
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int64)).equals(System.Int64(0)));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0), System.Int64), System.Int64)).equals(System.Int64(0)));
 
                     System.Array.setItem(list, 0, Bridge.box(1, System.Int32));
                     Bridge.Test.NUnit.Assert.True(Bridge.is(System.Array.getItem(list, 0), System.Int64));
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int64)).equals(System.Int64(1)));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0), System.Int64), System.Int64)).equals(System.Int64(1)));
 
                     // Expected InvalidCastException will be fixed as part of another issue
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
@@ -17022,11 +17022,11 @@ Bridge.$N1391Result =                     r;
 
                     System.Array.setItem(list, 0, null);
                     Bridge.Test.NUnit.Assert.True(Bridge.is(System.Array.getItem(list, 0), System.Decimal));
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(0.0)));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0), System.Decimal), System.Decimal)).equalsT(System.Decimal(0.0)));
 
                     System.Array.setItem(list, 0, System.Decimal(1.0));
                     Bridge.Test.NUnit.Assert.True(Bridge.is(System.Array.getItem(list, 0), System.Decimal));
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(1.0)));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0), System.Decimal), System.Decimal)).equalsT(System.Decimal(1.0)));
 
                     // Expected InvalidCastException will be fixed as part of another issue
                     //Assert.Throws<ArgumentException>(() => list[0] = 1);
@@ -17326,9 +17326,9 @@ Bridge.$N1391Result =                     r;
                     try {
                         while ($t.moveNext()) {
                             var data = $t.Current;
-                            var n1 = Bridge.cast(Bridge.unbox(data[System.Array.index(0, data)]), System.Int32, true);
-                            var n2 = Bridge.cast(Bridge.unbox(data[System.Array.index(1, data)]), System.Int32, true);
-                            var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[System.Array.index(2, data)]), System.Int32));
+                            var n1 = Bridge.cast(Bridge.unbox(data[System.Array.index(0, data)], System.Int32), System.Int32, true);
+                            var n2 = Bridge.cast(Bridge.unbox(data[System.Array.index(1, data)], System.Int32), System.Int32, true);
+                            var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[System.Array.index(2, data)], System.Int32), System.Int32));
 
                             Bridge.Test.NUnit.Assert.AreEqual(expected === 0, System.Nullable.equals(n1, n2));
                             Bridge.Test.NUnit.Assert.AreEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), function ($t, other) { return System.Int32.equals($t, other); }));
@@ -17449,7 +17449,7 @@ Bridge.$N1391Result =                     r;
                     var o = p.$clone();
                     Bridge.Test.NUnit.Assert.AreEqual("(2, 2)", Bridge.toString(o));
 
-                    System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point)).Change(3, 3);
+                    System.Nullable.getValue(Bridge.cast(Bridge.unbox(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point)).Change(3, 3);
                     Bridge.Test.NUnit.Assert.AreEqual("(2, 2)", Bridge.toString(o));
 
                     Bridge.cast(p.$clone(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.IChangeBoxedPoint).Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$Change(4, 4);
@@ -20289,7 +20289,7 @@ Bridge.$N1391Result =                     r;
                                 };
                             })(this, api)(new (System.Collections.Generic.List$1(System.Object)).ctor())));
 
-                        Bridge.Test.NUnit.Assert.AreEqual(2, System.Nullable.getValue(Bridge.cast(Bridge.unbox(args.getItem(0)), System.Int32)));
+                        Bridge.Test.NUnit.Assert.AreEqual(2, System.Nullable.getValue(Bridge.cast(Bridge.unbox(args.getItem(0), System.Int32), System.Int32)));
                     }
                 },
                 TestChangeableCapturedReferenceVariable: function () {
@@ -25330,7 +25330,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 ToEnum: function (T, name) {
-                    var value = System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(T, name, true)), T));
+                    var value = System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(T, name, true), T), T));
 
                     return value;
                 },
@@ -28307,7 +28307,7 @@ Bridge.$N1391Result =                     r;
             },
             CheckInt: function (i) {
                 if (Bridge.is(i, System.Int32)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(5, System.Nullable.getValue(Bridge.cast(Bridge.unbox(i), System.Int32)), "Provided object value is Integer and its value is 5.");
+                    Bridge.Test.NUnit.Assert.AreEqual(5, System.Nullable.getValue(Bridge.cast(Bridge.unbox(i, System.Int32), System.Int32)), "Provided object value is Integer and its value is 5.");
                 } else {
                     Bridge.Test.NUnit.Assert.Fail("Provided object is not an Integer.");
                 }
@@ -31363,7 +31363,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Reflection.midel(Bridge.Reflection.getMembers(Bridge.getType(Boxed), 16, 284, "Height").s, Boxed)(1234);
 
                     // Unbox it back
-                    Test = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Boxed), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size));
+                    Test = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Boxed, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size), Bridge.ClientTest.Batch3.BridgeIssues.Bridge3545.Size));
 
                     // Should output: Width=10, Height=1234
                     // (correct output observed on C# Windows Console Application)
@@ -33533,6 +33533,26 @@ Bridge.$N1391Result =                     r;
             dowork: function (obj) {
                 this.type = Bridge.toString(obj.type);
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613", {
+        statics: {
+            methods: {
+                TestUnboxCast: function () {
+                    Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613.f1);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613, {
+        f1: function () {
+            var byteVal = 255;
+            var boxed = Bridge.box(byteVal, System.Byte);
+            var unboxed = System.Nullable.getValue(Bridge.cast(Bridge.unbox(boxed, System.Int32), System.Int32));
         }
     });
 
@@ -36931,7 +36951,7 @@ Bridge.$N1391Result =                     r;
                 TestUndefinedToValueType: function () {
                     var o = undefined;
                     Bridge.Test.NUnit.Assert.Throws$1(function () {
-                        var i = System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), System.Int32));
+                        var i = System.Nullable.getValue(Bridge.cast(Bridge.unbox(o, System.Int32), System.Int32));
                     }, "Unable to cast 'undefined' to type int");
                 }
             }
@@ -38516,7 +38536,7 @@ Bridge.$N1391Result =                     r;
                 if (!(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A))) {
                     return false;
                 }
-                return System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A)).Value === this.Value;
+                return System.Nullable.getValue(Bridge.cast(Bridge.unbox(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A), Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A)).Value === this.Value;
             },
             getHashCode: function () {
                 return this.Value;
@@ -38572,7 +38592,7 @@ Bridge.$N1391Result =                     r;
                     return false;
                 }
 
-                return System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B)).Value === this.Value;
+                return System.Nullable.getValue(Bridge.cast(Bridge.unbox(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B), Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B)).Value === this.Value;
             },
             getHashCode: function () {
                 return this.Value;
@@ -44459,7 +44479,7 @@ Bridge.$N1391Result =                     r;
                     return this.value;
                 },
                 set: function (value) {
-                    this.value = Bridge.cast(Bridge.unbox(value), T);
+                    this.value = Bridge.cast(Bridge.unbox(value, T), T);
                 }
             }
         },

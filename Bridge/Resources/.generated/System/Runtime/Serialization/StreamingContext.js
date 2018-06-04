@@ -39,7 +39,7 @@
                 if (!(Bridge.is(obj, System.Runtime.Serialization.StreamingContext))) {
                     return false;
                 }
-                var ctx = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.Runtime.Serialization.StreamingContext));
+                var ctx = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.Runtime.Serialization.StreamingContext), System.Runtime.Serialization.StreamingContext));
                 return Bridge.referenceEquals(ctx._additionalContext, this._additionalContext) && ctx._state === this._state;
             },
             getHashCode: function () {
