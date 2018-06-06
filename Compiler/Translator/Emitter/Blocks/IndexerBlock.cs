@@ -1354,7 +1354,16 @@ namespace Bridge.Translator
                 this.Write(" = ");
             }
 
-            indexerExpression.Target.AcceptVisitor(this.Emitter);
+            var rr = this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as MemberResolveResult;
+
+            if (indexerExpression.Target is BaseReferenceExpression && rr != null && this.Emitter.Validator.IsExternalType(rr.Member.DeclaringTypeDefinition) && !this.Emitter.Validator.IsBridgeClass(rr.Member.DeclaringTypeDefinition))
+            {
+                this.Write("this");
+            }
+            else
+            {
+                indexerExpression.Target.AcceptVisitor(this.Emitter);
+            }            
 
             if (!isSimple)
             {
