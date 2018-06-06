@@ -38,6 +38,12 @@ var Bridge3494_A = (function () {
     Bridge3494_A.InstancesCount = 0;
     return Bridge3494_A;
 }());
+var Bridge3622_A = (function () {
+    function Bridge3622_A() {
+        this.A_initialized = true;
+    }
+    return Bridge3622_A;
+}());
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -734,6 +740,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         ctors: {
             ctor: function (n) {
                 this.$initialize();
+                SomeExternalNamespace.SomeNonBridgeClass.call(this);
                 this.number = n;
             }
         },
@@ -33532,6 +33539,28 @@ Bridge.$N1391Result =                     r;
         methods: {
             dowork: function (obj) {
                 this.type = Bridge.toString(obj.type);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622", {
+        statics: {
+            methods: {
+                TestExternalBaseDefaultCtor: function () {
+                    var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622.B();
+                    Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.unbox(b.A_initialized));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622.B", {
+        inherits: [Bridge.virtualc("Bridge3622_A")],
+        $kind: "nested class",
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                Bridge.virtualc("Bridge3622_A").call(this);
             }
         }
     });

@@ -18,6 +18,7 @@
         ctors: {
             ctor: function (exception, isTerminating) {
                 this.$initialize();
+                System.Object.call(this);
                 this._exception = exception;
                 this._isTerminating = isTerminating;
             }
