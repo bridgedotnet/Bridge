@@ -33536,6 +33536,18 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3626", {
+        statics: {
+            methods: {
+                TestStringFormat: function () {
+                    var TestVariable = "Hey";
+                    var Result = System.String.format("{{TEST:{0}HelloWorld}}", [TestVariable]);
+                    Bridge.Test.NUnit.Assert.AreEqual("{TEST:HeyHelloWorld}", Result);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
