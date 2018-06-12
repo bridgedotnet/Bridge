@@ -28292,11 +28292,11 @@ Bridge.$N1391Result =                     r;
                 var type = Bridge.getType(this);
                 var method = Bridge.Reflection.getMembers(type, 8, 284, "CheckDateTime");
 
-                Bridge.Reflection.midel(method, this).apply(null, System.Array.init([Bridge.box(time, System.DateTime, System.DateTime.format)], System.Object));
+                Bridge.Reflection.midel(method, this).apply(null, Bridge.unbox(System.Array.init([Bridge.box(time, System.DateTime, System.DateTime.format)], System.Object)));
 
                 method = Bridge.Reflection.getMembers(type, 8, 284, "CheckInt");
 
-                Bridge.Reflection.midel(method, this).apply(null, System.Array.init([Bridge.box(5, System.Int32)], System.Object));
+                Bridge.Reflection.midel(method, this).apply(null, Bridge.unbox(System.Array.init([Bridge.box(5, System.Int32)], System.Object)));
             },
             CheckDateTime: function (time) {
                 if (System.DateTime.gt(System.DateTime.getMaxValue(), time)) {
@@ -33532,6 +33532,20 @@ Bridge.$N1391Result =                     r;
         methods: {
             dowork: function (obj) {
                 this.type = Bridge.toString(obj.type);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3628", {
+        statics: {
+            methods: {
+                TestConversion: function () {
+                    var good = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3628.A.op_Implicit(System.Array.init([Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)], System.Object));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, good.f.length);
+
+                    var bad = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3628.A.op_Implicit(System.Array.init([Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)], System.Object));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, bad.f.length);
+                }
             }
         }
     });
@@ -44006,6 +44020,31 @@ Bridge.$N1391Result =                     r;
             "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Value",
             "Text", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge3550$IProbe$Text"
         ]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3628.A", {
+        inherits: [System.Collections.Generic.IEnumerable$1(System.Object)],
+        $kind: "nested class",
+        statics: {
+            methods: {
+                op_Implicit: function (f) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3628.A.$ctor1(f);
+                }
+            }
+        },
+        fields: {
+            f: null
+        },
+        alias: ["GetEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Object$GetEnumerator", "System$Collections$Generic$IEnumerable$1$GetEnumerator"]],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            },
+            $ctor1: function (f) {
+                this.$initialize();
+                this.f = f;
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second", {
