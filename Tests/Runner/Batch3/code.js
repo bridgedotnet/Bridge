@@ -38,6 +38,16 @@ var Bridge3494_A = (function () {
     Bridge3494_A.InstancesCount = 0;
     return Bridge3494_A;
 }());
+var Bridge3627_Logger = (function () {
+    function Bridge3627_Logger() {
+    }
+    Bridge3627_Logger.prototype.Log = function (s) {
+        var args = [].slice.call(arguments, 1);
+        var msg = args.join(", ");
+        return arguments[0] + ": " + msg;
+    };
+    return Bridge3627_Logger;
+}());
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -33532,6 +33542,19 @@ Bridge.$N1391Result =                     r;
         methods: {
             dowork: function (obj) {
                 this.type = Bridge.toString(obj.type);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627", {
+        statics: {
+            methods: {
+                TestExpandParams: function () {
+                    var arr = System.Array.init(["one", "two", "three"], System.String);
+
+                    var logger = new Bridge3627_Logger();
+                    Bridge.Test.NUnit.Assert.AreEqual("Info: one, two, three", logger.Log.apply(logger, ["Info"].concat(arr)));
+                }
             }
         }
     });
