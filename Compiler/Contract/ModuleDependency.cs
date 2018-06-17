@@ -151,7 +151,7 @@ namespace Bridge.Contract
             {
                 return false;
             }
-            return string.Equals(this.Name, other.Name) && this.Type == other.Type;
+            return string.Equals(this.Name, other.Name) && this.Type == other.Type && this._exportAsNamespace == other._exportAsNamespace;
         }
 
         public override bool Equals(object obj)
