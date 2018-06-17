@@ -1229,6 +1229,18 @@
         },
 
         unroll: function (value, scope) {
+            if (Bridge.isArray(value)) {
+                for (var i = 0; i < value.length; i++) {
+                    var v = value[i];
+
+                    if (Bridge.isString(v)) {
+                        value[i] = Bridge.unroll(v, scope);
+                    }
+                }
+
+                return;
+            }
+
             var d = value.split("."),
                 o = (scope || Bridge.global)[d[0]],
                 i = 1;

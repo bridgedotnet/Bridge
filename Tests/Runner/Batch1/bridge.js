@@ -1247,6 +1247,18 @@
         },
 
         unroll: function (value, scope) {
+            if (Bridge.isArray(value)) {
+                for (var i = 0; i < value.length; i++) {
+                    var v = value[i];
+
+                    if (Bridge.isString(v)) {
+                        value[i] = Bridge.unroll(v, scope);
+                    }
+                }
+
+                return;
+            }
+
             var d = value.split("."),
                 o = (scope || Bridge.global)[d[0]],
                 i = 1;
@@ -3216,7 +3228,7 @@
                     for (var i = 0; i < len; i++) {
                         var item = metas[i];
 
-                        Bridge.setMetadata(item.typeName, item.metadata);
+                        Bridge.setMetadata(item.typeName, item.metadata, item.ns);
                     }
                 }
             }
@@ -3404,17 +3416,18 @@
     Bridge.Reflection = {
         deferredMeta: [],
 
-        setMetadata: function (type, metadata) {
+        setMetadata: function (type, metadata, ns) {
             if (Bridge.isString(type)) {
                 var typeName = type;
                 type = Bridge.unroll(typeName);
 
                 if (type == null) {
-                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata });
+                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata, ns: ns });
                     return;
                 }
             }
 
+            ns = Bridge.unroll(ns);
             type.$getMetadata = Bridge.Reflection.getMetadata;
             type.$metadata = metadata;
         },
