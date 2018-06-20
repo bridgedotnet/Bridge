@@ -14938,6 +14938,16 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 return System.String.compare.apply(this, arguments) === 0;
             },
 
+            swapCase: function (letters) {
+                return letters.replace(/\w/g, function (c) {
+                    if (c === c.toLowerCase()) {
+                        return c.toUpperCase();
+                    } else {
+                        return c.toLowerCase();
+                    }
+                });
+            },
+
             compare: function (strA, strB) {
                 if (strA == null) {
                     return (strB == null) ? 0 : -1;
@@ -20654,11 +20664,32 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
     };
 
     // private
+    var defaultComparer = {
+        compare: function (x, y) {
+            if (!Bridge.hasValue(x)) {
+                return !Bridge.hasValue(y) ? 0 : -1;
+            } else if (!Bridge.hasValue(y)) {
+                return 1;
+            }
 
+            if (typeof x == "string" && typeof y == "string") {
+                var result = System.String.compare(x, y, true);
+
+                if (result !== 0) {
+                    return result;
+                }
+
+                x = System.String.swapCase(x);
+                y = System.String.swapCase(y);
+            }
+
+            return Bridge.compare(x, y);
+        }
+    };
     var OrderedEnumerable = function (source, keySelector, comparer, descending, parent) {
         this.source = source;
         this.keySelector = Utils.createLambda(keySelector);
-        this.comparer = comparer || System.Collections.Generic.Comparer$1.$default;
+        this.comparer = comparer || defaultComparer;
         this.descending = descending;
         this.parent = parent;
     };

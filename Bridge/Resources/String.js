@@ -376,6 +376,16 @@
                 return System.String.compare.apply(this, arguments) === 0;
             },
 
+            swapCase: function (letters) {
+                return letters.replace(/\w/g, function (c) {
+                    if (c === c.toLowerCase()) {
+                        return c.toUpperCase();
+                    } else {
+                        return c.toLowerCase();
+                    }
+                });
+            },
+
             compare: function (strA, strB) {
                 if (strA == null) {
                     return (strB == null) ? 0 : -1;

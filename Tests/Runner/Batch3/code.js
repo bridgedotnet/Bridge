@@ -30511,6 +30511,34 @@ Bridge.$N1391Result =                     r;
 
     /**
      * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477", {
+        statics: {
+            methods: {
+                TestOrderByComparer: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
+                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
+                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
+                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477, {
+        f1: function (x) {
+            return x;
+        },
+        f2: function (x) {
+            return true;
+        }
+    });
+
+    /**
+     * @public
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3478", {
