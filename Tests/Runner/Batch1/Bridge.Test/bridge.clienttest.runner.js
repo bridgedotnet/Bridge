@@ -24008,12 +24008,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestStaticConstructorsAndMethods: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestReferenceTypes).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestReferenceTypes, 13, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStaticConstructorsAndMethods()", $t.Line = "322", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestReferenceTypes).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestReferenceTypes, 14, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStaticConstructorsAndMethods()", $t.Line = "322", $t));
                     Bridge.ClientTest.BasicCSharp.TestReferenceTypes.TestStaticConstructorsAndMethods();
                 },
                 TestMethodParameters: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestReferenceTypes).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestReferenceTypes, 16, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMethodParameters()", $t.Line = "354", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestReferenceTypes).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestReferenceTypes, 16, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMethodParameters()", $t.Line = "358", $t));
                     Bridge.ClientTest.BasicCSharp.TestReferenceTypes.TestMethodParameters();
                 }
             }

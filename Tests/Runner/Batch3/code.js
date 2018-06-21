@@ -33641,11 +33641,29 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The test here ensures that invalid cast exception is thrown when a type
+     is boxed then cast back, when the type can't be actually cast over,
+     following native .NET implementation.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613", {
         statics: {
             methods: {
+                /**
+                 * Makes the test boxing a byte variable then trying to cast it back
+                 as an integer.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613
+                 * @return  {void}
+                 */
                 TestUnboxCast: function () {
-                    Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613.f1);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613.f1, "Boxing byte and trying to cast back to int throws InvalidCastException.");
                 }
             }
         }
