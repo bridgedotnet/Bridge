@@ -1580,7 +1580,7 @@
                 throw new System.NullReferenceException.$ctor1("instance is null");
             }
 
-            if (T) {
+            if (T) {               
                 var type = Bridge.getType(instance);
                 return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
@@ -2042,7 +2042,7 @@
             };
         }());
     } else {
-        core.setImmediate = globals.setImmediate;
+        core.setImmediate = globals.setImmediate.bind(globals);
     }
 
     globals.Bridge = core;

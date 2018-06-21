@@ -41,10 +41,10 @@ var Bridge3494_A = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 17.1.0
+ * @version 17.1.2
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 17.1.0
+ * @compiler Bridge.NET 17.1.2
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -6599,7 +6599,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             methods: {
                 TestFieldInitializer: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.b);
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinValue(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.time);
+
+                    // Ignore the test due to #3633
+                    if (Bridge.Browser.isChrome && Bridge.Browser.chromeVersion >= 67) {
+                        Bridge.Test.NUnit.Assert.True(true, "Test ignored in google chrome 67+ due to #3633 (https://github.com/bridgedotnet/Bridge/issues/3633).");
+                    } else {
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinValue(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.time);
+                    }
+
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.d1);
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.ar1);
                     Bridge.Test.NUnit.Assert.AreEqual(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.order2);
@@ -33536,6 +33543,104 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here ensures the {value} template placeholder works
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3609
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3609", {
+        statics: {
+            methods: {
+                TestIndexerTemplate: function () {
+                    var a = { };
+                    a["a"] = new $asm.$AnonymousType$20(1, 2);
+                    var b = a["a"];
+
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.unbox(b.a), "Placeholder substitution works.");
+                }
+            }
+        }
+    });
+
+    Bridge.define("$AnonymousType$20", $asm, {
+        $kind: "anonymous",
+        ctors: {
+            ctor: function (a, b) {
+                this.a = a;
+                this.b = b;
+            }
+        },
+        methods: {
+            equals: function (o) {
+                if (!Bridge.is(o, $asm.$AnonymousType$20)) {
+                    return false;
+                }
+                return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([7550208475, this.a, this.b]);
+                return h;
+            },
+            toJSON: function () {
+                return {
+                    a : this.a,
+                    b : this.b
+                };
+            }
+        },
+        statics : {
+            methods: {
+                $metadata : function () { return {"m":[{"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_a","t":8,"rt":System.Int32,"fg":"a","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"a"},{"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_b","t":8,"rt":System.Int32,"fg":"b","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"b"}]}; }
+            }
+        }
+    });
+
+    /**
+     * The test here consists in ensuring 'Managed' boxing rule works on
+     nullable enums.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612", {
+        statics: {
+            methods: {
+                SetModeStronglyTyped: function (mode) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612.SetMode(Bridge.box(mode, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612.Mode, System.Nullable.toStringFn(System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612.Mode)), System.Nullable.getHashCode));
+                },
+                SetMode: function (mode) {
+                    var $t;
+                    Bridge.Test.NUnit.Assert.AreEqual("Null", Bridge.unbox(($t = mode, $t != null ? $t : "Null")));
+                },
+                /**
+                 * Ensures a null "nullable enum" is emitted as "Null" instead of
+                 throwing an exception.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612
+                 * @return  {void}
+                 */
+                TestEnumNullable: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612.SetModeStronglyTyped(null);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3612.Mode", {
+        $kind: "nested enum",
+        statics: {
+            fields: {
+                Slow: 0,
+                Medium: 1,
+                Fast: 2
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3613", {
         statics: {
             methods: {
@@ -33553,6 +33658,54 @@ Bridge.$N1391Result =                     r;
             var byteVal = 255;
             var boxed = Bridge.box(byteVal, System.Byte);
             var unboxed = System.Nullable.getValue(Bridge.cast(Bridge.unbox(boxed, System.Int32), System.Int32));
+        }
+    });
+
+    /**
+     * The tests here consists in ensuring emission order of local functions
+     obey the order they are actually entered in code.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625", {
+        statics: {
+            methods: {
+                /**
+                 * Tests the order by declaring two local funcions, in such a way
+                 that the second calls the first. If the local function is not
+                 emitted in the correct order, the return value would not match
+                 the expected one.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625
+                 * @return  {void}
+                 */
+                TestLocalFns: function () {
+                    var Two = null;
+                    var One = null;
+
+
+
+                    One = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625.f1;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("One", One("One"), "First local function call matches expected result.");
+                    Two = function (msg) {
+                        return "Two:" + (One(msg) || "");
+                    };
+                    Bridge.Test.NUnit.Assert.AreEqual("Two:One", Two("One"), "Second local function call matches expected result.");
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3625, {
+        f1: function (msg) {
+            return msg;
         }
     });
 
@@ -33888,11 +34041,11 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$20("", "")], $asm.$AnonymousType$20)).skip(1).toList(System.Object);
-                    list.add(new $asm.$AnonymousType$20("Ruth", "Babe"));
-                    list.add(new $asm.$AnonymousType$20("Johnson", "Walter"));
-                    list.add(new $asm.$AnonymousType$20("Cobb", "Ty"));
-                    list.add(new $asm.$AnonymousType$20("Schmidt", "Mike"));
+                    var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$21("", "")], $asm.$AnonymousType$21)).skip(1).toList(System.Object);
+                    list.add(new $asm.$AnonymousType$21("Ruth", "Babe"));
+                    list.add(new $asm.$AnonymousType$21("Johnson", "Walter"));
+                    list.add(new $asm.$AnonymousType$21("Cobb", "Ty"));
+                    list.add(new $asm.$AnonymousType$21("Schmidt", "Mike"));
 
                     var query = System.Linq.Enumerable.from(list).where($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f1).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f2);
 
@@ -33904,7 +34057,7 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("$AnonymousType$20", $asm, {
+    Bridge.define("$AnonymousType$21", $asm, {
         $kind: "anonymous",
         ctors: {
             ctor: function (lastName, firstName) {
@@ -33914,13 +34067,13 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             equals: function (o) {
-                if (!Bridge.is(o, $asm.$AnonymousType$20)) {
+                if (!Bridge.is(o, $asm.$AnonymousType$21)) {
                     return false;
                 }
                 return Bridge.equals(this.LastName, o.LastName) && Bridge.equals(this.FirstName, o.FirstName);
             },
             getHashCode: function () {
-                var h = Bridge.addHash([7550208475, this.LastName, this.FirstName]);
+                var h = Bridge.addHash([7550208731, this.LastName, this.FirstName]);
                 return h;
             },
             toJSON: function () {
@@ -33944,7 +34097,7 @@ Bridge.$N1391Result =                     r;
             return p.LastName.length === 4;
         },
         f2: function (p) {
-            return new $asm.$AnonymousType$20(p.LastName, p.FirstName);
+            return new $asm.$AnonymousType$21(p.LastName, p.FirstName);
         }
     });
 
@@ -41078,8 +41231,8 @@ Bridge.$N1391Result =                     r;
                     var b1 = System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(o11, o12);
                     Bridge.Test.NUnit.Assert.False(b1, "EqualityComparer<object>.Default.Equals(o11, o12) works");
 
-                    var o21 = new $asm.$AnonymousType$21(7);
-                    var o22 = new $asm.$AnonymousType$21(7);
+                    var o21 = new $asm.$AnonymousType$22(7);
+                    var o22 = new $asm.$AnonymousType$22(7);
                     var b2 = System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(o21, o22);
                     Bridge.Test.NUnit.Assert.True(b2, "EqualityComparer<object>.Default.Equals(o21, o22) works");
 
@@ -41474,7 +41627,7 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("$AnonymousType$21", $asm, {
+    Bridge.define("$AnonymousType$22", $asm, {
         $kind: "anonymous",
         ctors: {
             ctor: function (i) {
@@ -41483,13 +41636,13 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             equals: function (o) {
-                if (!Bridge.is(o, $asm.$AnonymousType$21)) {
+                if (!Bridge.is(o, $asm.$AnonymousType$22)) {
                     return false;
                 }
                 return Bridge.equals(this.i, o.i);
             },
             getHashCode: function () {
-                var h = Bridge.addHash([7550208731, this.i]);
+                var h = Bridge.addHash([7550208987, this.i]);
                 return h;
             },
             toJSON: function () {
