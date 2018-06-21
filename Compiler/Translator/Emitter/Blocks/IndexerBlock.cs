@@ -255,11 +255,9 @@ namespace Bridge.Translator
                 inlineCode = inlineCode.Replace("{this}", thisArg);
 
                 this.Emitter.Output = new StringBuilder();
-                //inlineCode = inlineCode.Replace("{0}", "[[0]]");
                 inlineCode = inlineCode.Replace("{value}", "[[value]]");
                 new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, indexerExpression, rr as InvocationResolveResult), inlineCode).Emit();
                 inlineCode = this.Emitter.Output.ToString();
-                //inlineCode = inlineCode.Replace("[[0]]", "{0}");
                 inlineCode = inlineCode.Replace("[[value]]", "{0}");
 
                 this.Emitter.IsAssignment = oldIsAssignment;
@@ -273,15 +271,10 @@ namespace Bridge.Translator
                 }
 
                 this.PushWriter(inlineCode, null, thisArg, range);
-                //new ExpressionListBlock(this.Emitter, indexerExpression.Arguments, null, null, 0).Emit();
 
                 if (!this.Emitter.IsAssignment)
                 {
                     this.PopWriter();
-                }
-                else
-                {
-                  //  this.WriteComma();
                 }
 
                 return;
