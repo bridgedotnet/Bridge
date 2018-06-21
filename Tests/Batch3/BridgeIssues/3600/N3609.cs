@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
+    /// <summary>
+    /// The tests here ensures the {value} template placeholder works
+    /// </summary>
     [TestFixture(TestNameFormat = "#3609 - {0}")]
     public class Bridge3609
     {
@@ -14,12 +17,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Map<TValue>
         {
             [Field]
-#pragma warning disable CS0114 // „лен скрывает унаследованный член: отсутствует ключевое слово переопределени€
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
             public extern TValue this[string idx]
-#pragma warning restore CS0114 // „лен скрывает унаследованный член: отсутствует ключевое слово переопределени€
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
             {
                 [Template("{this}[{idx}]")]
                 get;
+                // The 'value' placeholder here was being ignored by Bridge.
                 [Template("{this}[{idx}] = {value}")]
                 set;
             }
@@ -32,7 +36,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             a["a"] = new { a = 1, b = 2 };
             var b = a["a"];
 
-            Assert.AreEqual(1, b["a"]);
+            Assert.AreEqual(1, b["a"], "Placeholder substitution works.");
         }
     }
 }
