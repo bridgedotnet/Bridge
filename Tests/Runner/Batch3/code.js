@@ -33543,6 +33543,12 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * The tests here ensures the {value} template placeholder works
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3609
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3609", {
         statics: {
             methods: {
@@ -33551,7 +33557,7 @@ Bridge.$N1391Result =                     r;
                     a["a"] = new $asm.$AnonymousType$20(1, 2);
                     var b = a["a"];
 
-                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.unbox(b.a));
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.unbox(b.a), "Placeholder substitution works.");
                 }
             }
         }
