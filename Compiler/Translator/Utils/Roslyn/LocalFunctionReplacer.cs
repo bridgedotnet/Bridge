@@ -11,7 +11,7 @@ namespace Bridge.Translator
 {
     public class LocalFunctionReplacer : ICSharpReplacer
     {
-        private static SyntaxNode GetFirstUsageLocalFunc(SemanticModel model, LocalFunctionStatementSyntax node, SyntaxNode root)
+        private static SyntaxNode GetFirstUsageLocalFunc(SemanticModel model, LocalFunctionStatementSyntax node, SyntaxNode root, List<SyntaxNode> ignore = null)
         {
             var symbol = model.GetSymbolInfo(node).Symbol ?? model.GetDeclaredSymbol(node);
 
@@ -31,6 +31,11 @@ namespace Bridge.Translator
                 }
 
                 if (xSymbol == null || !symbol.Equals(xSymbol))
+                {
+                    return false;
+                }
+
+                if (ignore != null && ignore.Contains(x))
                 {
                     return false;
                 }
@@ -56,8 +61,23 @@ namespace Bridge.Translator
 
                     if (beforeStatement is LocalFunctionStatementSyntax beforeFn)
                     {
+                        List<SyntaxNode> ignore = new List<SyntaxNode>();
+                        var usageFn = usage;
+                        var beforeStatementFn = beforeStatement;
+                        while (beforeStatementFn != null && beforeStatementFn is LocalFunctionStatementSyntax)
+                        {
+                            ignore.Add(usageFn);
+                            usageFn = GetFirstUsageLocalFunc(model, fn, parentNode, ignore);
+                            beforeStatementFn = usageFn?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+                        }
+
                         usage = GetFirstUsageLocalFunc(model, beforeFn, parentNode);
                         beforeStatement = usage?.Ancestors().OfType<StatementSyntax>().FirstOrDefault(ss => ss.Parent == parentNode);
+
+                        if (beforeStatementFn != null && (beforeStatement == null || beforeStatementFn.SpanStart < beforeStatement.SpanStart))
+                        {
+                            beforeStatement = beforeStatementFn;
+                        }
                     }
 
                     var customDelegate = false;
