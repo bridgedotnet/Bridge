@@ -17281,7 +17281,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestExpandParams: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3627, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExpandParams()", $t.Line = "37", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3627, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExpandParams()", $t.Line = "52", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627.TestExpandParams();
                 }
             }

@@ -33867,14 +33867,31 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures External class with ExpandParams attribute references won't
+     incur into double 'apply()' calls.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627", {
         statics: {
             methods: {
+                /**
+                 * Instantiates and reference the external class, expecting it should
+                 return a composed string according to its external implementation.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3627
+                 * @return  {void}
+                 */
                 TestExpandParams: function () {
                     var arr = System.Array.init(["one", "two", "three"], System.String);
 
                     var logger = new Bridge3627_Logger();
-                    Bridge.Test.NUnit.Assert.AreEqual("Info: one, two, three", logger.Log.apply(logger, ["Info"].concat(arr)));
+                    Bridge.Test.NUnit.Assert.AreEqual("Info: one, two, three", logger.Log.apply(logger, ["Info"].concat(arr)), "External+ExpandParams method call returns the expected result.");
                 }
             }
         }
