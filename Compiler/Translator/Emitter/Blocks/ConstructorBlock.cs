@@ -486,8 +486,7 @@ namespace Bridge.Translator
                         }
                         this.EmitBaseConstructor(ctor, ctorName, false);
                     }
-                    else if (baseType != null && ctor.Initializer != null &&
-                             ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
+                    else if (baseType != null && (ctor.Initializer == null || ctor.Initializer.IsNull || ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base))
                     {
                         this.EmitExternalBaseCtor(ctor, ref requireNewLine);
                     }
@@ -570,10 +569,17 @@ namespace Bridge.Translator
 
         private void EmitExternalBaseCtor(ConstructorDeclaration ctor, ref bool requireNewLine)
         {
-            if (ctor.Initializer != null && !ctor.Initializer.IsNull)
-            {
-                var member = ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(ctor.Initializer, this.Emitter)).Member;
+            IMember member = null;
+            var hasInitializer = ctor.Initializer != null && !ctor.Initializer.IsNull;
+            var baseType = this.Emitter.GetBaseTypeDefinition();
 
+            if (hasInitializer)
+            {
+                member = ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(ctor.Initializer, this.Emitter)).Member;
+            }
+
+            if (member != null)
+            {
                 var inlineCode = this.Emitter.GetInline(member);
 
                 if (!string.IsNullOrEmpty(inlineCode))
@@ -593,46 +599,49 @@ namespace Bridge.Translator
                     this.WriteCloseParentheses();
                     this.WriteSemiColon();
                     this.WriteNewLine();
+
+                    return;
+                }
+            }
+
+            if (hasInitializer || (baseType.FullName != "System.Object" && baseType.FullName != "System.ValueType" && baseType.FullName != "System.Enum" && !baseType.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute") && !baseType.IsInterface))
+            {
+                if (requireNewLine)
+                {
+                    this.WriteNewLine();
+                    requireNewLine = false;
+                }
+
+                
+                string name = null;
+                if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
+                {
+                    name = BridgeTypes.ToJsName(this.TypeInfo.GetBaseClass(this.Emitter), this.Emitter);
                 }
                 else
                 {
-                    if (requireNewLine)
-                    {
-                        this.WriteNewLine();
-                        requireNewLine = false;
-                    }
-
-                    var baseType = this.Emitter.GetBaseTypeDefinition();
-                    string name = null;
-                    if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
-                    {
-                        name = BridgeTypes.ToJsName(this.TypeInfo.GetBaseClass(this.Emitter), this.Emitter);
-                    }
-                    else
-                    {
-                        name = BridgeTypes.ToJsName(baseType, this.Emitter);
-                    }
-
-                    this.Write(name);
-                    this.WriteCall();
-                    int openPos = this.Emitter.Output.Length;
-                    this.WriteOpenParentheses();
-                    this.Write("this");
-
-                    if (ctor.Initializer.Arguments.Count > 0)
-                    {
-                        this.Write(", ");
-                        var argsInfo = new ArgumentsInfo(this.Emitter, ctor.Initializer);
-                        var argsExpressions = argsInfo.ArgumentsExpressions;
-                        var paramsArg = argsInfo.ParamsExpression;
-
-                        new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, ctor.Initializer, openPos).Emit();
-                    }
-
-                    this.WriteCloseParentheses();
-                    this.WriteSemiColon();
-                    this.WriteNewLine();
+                    name = BridgeTypes.ToJsName(baseType, this.Emitter);
                 }
+
+                this.Write(name);
+                this.WriteCall();
+                int openPos = this.Emitter.Output.Length;
+                this.WriteOpenParentheses();
+                this.Write("this");
+
+                if (hasInitializer && ctor.Initializer.Arguments.Count > 0)
+                {
+                    this.Write(", ");
+                    var argsInfo = new ArgumentsInfo(this.Emitter, ctor.Initializer);
+                    var argsExpressions = argsInfo.ArgumentsExpressions;
+                    var paramsArg = argsInfo.ParamsExpression;
+
+                    new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, ctor.Initializer, openPos).Emit();
+                }
+
+                this.WriteCloseParentheses();
+                this.WriteSemiColon();
+                this.WriteNewLine();
             }
         }
 
