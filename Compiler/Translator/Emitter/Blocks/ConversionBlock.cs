@@ -468,7 +468,15 @@ namespace Bridge.Translator
                     {
                         block.Write(JS.Types.Bridge.UNBOX);
                         block.WriteOpenParentheses();
-                        block.AfterOutput2 += ")";
+                        if (conversion.IsUnboxingConversion)
+                        {
+                            block.AfterOutput2 += string.Format(", {0})", ConversionBlock.GetBoxedType(expectedType, block.Emitter));
+                        }
+                        else
+                        {
+                            block.AfterOutput2 += ")";
+                        }
+                        
                     }
                 }
                 else if (conversion.IsUnboxingConversion && !Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))

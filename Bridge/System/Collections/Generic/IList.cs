@@ -7,9 +7,9 @@ namespace System.Collections.Generic
     {
         T this[int index]
         {
-            [Bridge.Template("System.Array.getItem({this}, {0}, {T})")]
+            [Bridge.Template("System.Array.getItem({this}, {index}, {T})")]
             get;
-            [Bridge.Template("System.Array.setItem({this}, {0}, {T})")]
+            [Bridge.Template("System.Array.setItem({this}, {index}, {value}, {T})")]
             set;
         }
 

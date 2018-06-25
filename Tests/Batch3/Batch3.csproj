@@ -733,6 +733,7 @@
     <Compile Include="BridgeIssues\3500\N3513.cs" />
     <Compile Include="BridgeIssues\3500\N3516.cs" />
     <Compile Include="BridgeIssues\3500\N3519.cs" />
+    <Compile Include="BridgeIssues\3500\N3528.cs" />
     <Compile Include="BridgeIssues\3500\N3545.cs" />
     <Compile Include="BridgeIssues\3500\N3546.cs" />
     <Compile Include="BridgeIssues\3500\N3550.cs" />
@@ -749,8 +750,15 @@
     <Compile Include="BridgeIssues\3500\N3590.cs" />
     <Compile Include="BridgeIssues\3500\N3593.cs" />
     <Compile Include="BridgeIssues\3500\N3599.cs" />
-    <Compile Include="BridgeIssues\3600\N3628.cs" />
     <Compile Include="BridgeIssues\3600\N3607.cs" />
+    <Compile Include="BridgeIssues\3600\N3609.cs" />
+    <Compile Include="BridgeIssues\3600\N3612.cs" />
+    <Compile Include="BridgeIssues\3600\N3613.cs" />
+    <Compile Include="BridgeIssues\3600\N3622.cs" />
+    <Compile Include="BridgeIssues\3600\N3625.cs" />
+    <Compile Include="BridgeIssues\3600\N3626.cs" />
+    <Compile Include="BridgeIssues\3600\N3627.cs" />
+    <Compile Include="BridgeIssues\3600\N3628.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
   </ItemGroup>
@@ -789,7 +797,7 @@
       <HintPath>..\..\packages\Bridge.Html5.17.1.0\lib\net40\Bridge.Html5.dll</HintPath>
     </Reference>
     <Reference Include="Bridge.Test, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.5.0\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.5.2\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
