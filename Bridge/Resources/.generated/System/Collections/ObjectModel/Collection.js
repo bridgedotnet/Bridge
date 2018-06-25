@@ -116,7 +116,7 @@
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.setItem(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -142,7 +142,7 @@
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.add(Bridge.cast(Bridge.unbox(value), T));
+                    this.add(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -222,7 +222,7 @@
             },
             System$Collections$IList$contains: function (value) {
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(value), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return false;
             },
@@ -237,7 +237,7 @@
             },
             System$Collections$IList$indexOf: function (value) {
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(value), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return -1;
             },
@@ -259,7 +259,7 @@
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.insert(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.insert(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -288,7 +288,7 @@
                 }
 
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    this.remove(Bridge.cast(Bridge.unbox(value), T));
+                    this.remove(Bridge.cast(Bridge.unbox(value, T), T));
                 }
             },
             removeAt: function (index) {
