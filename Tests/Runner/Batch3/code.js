@@ -33727,13 +33727,42 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures the .NET's composite format string feature works.
+     Bug report by Christian "ChrML" Lundheim
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3626
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3626", {
         statics: {
             methods: {
+                /**
+                 * Checks the value of a string variable filled using the composite
+                 format string syntax.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3626
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3626
+                 * @return  {void}
+                 */
                 TestStringFormat: function () {
                     var TestVariable = "Hey";
                     var Result = System.String.format("{{TEST:{0}HelloWorld}}", [TestVariable]);
-                    Bridge.Test.NUnit.Assert.AreEqual("{TEST:HeyHelloWorld}", Result);
+                    Bridge.Test.NUnit.Assert.AreEqual("{TEST:HeyHelloWorld}", Result, "Composite format string feature evaluates to the expected result.");
+                },
+                TestMultiBracketStringFormat: function () {
+                    var l1 = "l1s";
+                    var l2 = "l2s";
+                    var result = System.String.format("{{TEST{{:{0}Hello}}World}}", [l1]);
+                    Bridge.Test.NUnit.Assert.AreEqual("{TEST{:l1sHello}World}", result, "Two-bracket-enclosed composite format works.");
+
+                    result = System.String.format("{{TEST{{:{{{0}}}Hello}}World}}", [l1]);
+                    Bridge.Test.NUnit.Assert.AreEqual("{TEST{:{l1s}Hello}World}", result, "Three-bracket-enclosed composite format works.");
+
+                    result = System.String.format("{{T{{E{{S{{T{{:{{{0}}}H}}e{1}l}}lo}}Wor}}ld}}", l1, l2);
+                    Bridge.Test.NUnit.Assert.AreEqual("{T{E{S{T{:{l1s}H}el2sl}lo}Wor}ld}", result, "Six-bracket-enclosed composite format works.");
                 }
             }
         }
