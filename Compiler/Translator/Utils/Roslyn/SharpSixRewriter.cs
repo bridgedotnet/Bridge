@@ -67,12 +67,12 @@ namespace Bridge.Translator
             };
 
             var result = new ExpressionBodyToStatementRewriter(semanticModel).Visit(syntaxTree.GetRoot());
+            modelUpdater(result);           
+
+            result = new DiscardReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
             modelUpdater(result);
 
             result = new DeconstructionReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
-            modelUpdater(result);
-
-            result = new DiscardReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
             modelUpdater(result);
 
             result = this.Visit(syntaxTree.GetRoot());
