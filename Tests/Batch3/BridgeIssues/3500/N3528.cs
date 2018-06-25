@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
+    /// <summary>
+    /// Ensures GetIndexerVal implementation on classes carry on to indexer
+    /// methods in inherited, mapped and external classes.
+    /// </summary>
     [TestFixture(TestNameFormat = "#3528 - {0}")]
     public class Bridge3528
     {
@@ -38,8 +42,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestExternalBaseIndexer()
         {
             var b = new B();
-            Assert.AreEqual("one", b[1]);
-            Assert.AreEqual("one", b.GetIndexerVal(1));
+            Assert.AreEqual("one", b[1], "Value by bracket indexer can be fetched.");
+            Assert.AreEqual("one", b.GetIndexerVal(1), "Value by indexer method can be fetched.");
         }
     }
 }
