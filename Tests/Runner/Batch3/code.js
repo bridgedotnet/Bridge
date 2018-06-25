@@ -31351,13 +31351,20 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures GetIndexerVal implementation on classes carry on to indexer
+     methods in inherited, mapped and external classes.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3528
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3528", {
         statics: {
             methods: {
                 TestExternalBaseIndexer: function () {
                     var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3528.B();
-                    Bridge.Test.NUnit.Assert.AreEqual("one", b[1]);
-                    Bridge.Test.NUnit.Assert.AreEqual("one", b.GetIndexerVal(1));
+                    Bridge.Test.NUnit.Assert.AreEqual("one", b[1], "Value by bracket indexer can be fetched.");
+                    Bridge.Test.NUnit.Assert.AreEqual("one", b.GetIndexerVal(1), "Value by indexer method can be fetched.");
                 }
             }
         }
