@@ -33686,17 +33686,41 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensuring base class calling works even when inheriting from an
+     external class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622", {
         statics: {
             methods: {
+                /**
+                 * Tests by instantiating the child class and checking whether the
+                 arbitrarily-crafted external class constructor was called.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622
+                 * @return  {void}
+                 */
                 TestExternalBaseDefaultCtor: function () {
                     var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622.B();
-                    Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.unbox(b.A_initialized));
+                    Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.unbox(b.A_initialized), "External, inherited, and mapped class' constructor called.");
                 }
             }
         }
     });
 
+    /**
+     * A class inheriting from the mapped C# class.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622.B
+     * @augments Bridge3622_A
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3622.B", {
         inherits: [Bridge.virtualc("Bridge3622_A")],
         $kind: "nested class",
