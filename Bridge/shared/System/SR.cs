@@ -13,6 +13,9 @@ namespace System
 {
     internal static partial class SR
     {
+        public const string ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";
+        public const string ArgumentException_ValueTupleLastArgumentNotAValueTuple = "The last element of an eight element ValueTuple must be a ValueTuple.";
+
         private static ResourceManager ResourceManager
         {
             get;

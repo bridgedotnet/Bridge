@@ -2,12 +2,14 @@
         statics: {
             fields: {
                 HashPrime: 0,
+                RandomSeed: 0,
                 primes: null,
                 MaxPrimeArrayLength: 0
             },
             ctors: {
                 init: function () {
                     this.HashPrime = 101;
+                    this.RandomSeed = System.Guid.NewGuid().getHashCode();
                     this.primes = System.Array.init([
                         3, 
                         7, 
@@ -86,6 +88,10 @@
                 }
             },
             methods: {
+                Combine: function (h1, h2) {
+                    var rol5 = (((((h1 >>> 0) << 5) >>> 0)) | ((h1 >>> 0) >>> 27)) >>> 0;
+                    return ((((rol5 | 0) + h1) | 0)) ^ h2;
+                },
                 IsPrime: function (candidate) {
                     if ((candidate & 1) !== 0) {
                         var limit = Bridge.Int.clip32(Math.sqrt(candidate));

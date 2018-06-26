@@ -1,6 +1,8 @@
     Bridge.define("System.SR", {
         statics: {
             fields: {
+                ArgumentException_ValueTupleIncorrectType: null,
+                ArgumentException_ValueTupleLastArgumentNotAValueTuple: null,
                 _lock: null
             },
             props: {
@@ -8,6 +10,8 @@
             },
             ctors: {
                 init: function () {
+                    this.ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";
+                    this.ArgumentException_ValueTupleLastArgumentNotAValueTuple = "The last element of an eight element ValueTuple must be a ValueTuple.";
                     this._lock = { };
                 }
             },
