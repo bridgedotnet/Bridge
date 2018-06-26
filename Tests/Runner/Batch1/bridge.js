@@ -1,5 +1,5 @@
 /**
- * @version   : 17.1.1 - Bridge.NET
+ * @version   : 17.1.2 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -121,8 +121,36 @@
         },
 
         unbox: function (o, noclone) {
+            var T;
+
+            if (noclone && Bridge.isFunction(noclone)) {
+                T = noclone;
+                noclone = false;
+            }
+
             if (o && o.$boxed) {
-                var v = o.v;
+                var v = o.v,
+                    t = o.type;
+
+                if (T && T.$nullable) {
+                    T = T.$nullableType;
+                }
+
+                if (T && T.$kind === "enum") {
+                    T = System.Enum.getUnderlyingType(T);
+                }
+
+                if (t.$nullable) {
+                    t = t.$nullableType;
+                }
+
+                if (t.$kind === "enum") {
+                    t = System.Enum.getUnderlyingType(t);
+                }
+
+                if (T && T !== t && !Bridge.isObject(T)) { 
+                    throw new System.InvalidCastException.$ctor1("Specified cast is not valid.");
+                }
 
                 if (!noclone && v && v.$clone) {
                     v = v.$clone();
@@ -1582,7 +1610,7 @@
                 throw new System.NullReferenceException.$ctor1("instance is null");
             }
 
-            if (T) {
+            if (T) {               
                 var type = Bridge.getType(instance);
                 return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
@@ -3405,8 +3433,8 @@
     // @source SystemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "17.1.1";
-        Bridge.SystemAssembly.compiler = "17.1.1";
+        Bridge.SystemAssembly.version = "17.1.2";
+        Bridge.SystemAssembly.compiler = "17.1.2";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -13862,7 +13890,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
 
                 try {
-                    this.setItem(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -13886,7 +13914,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
 
                 try {
-                    this.add(Bridge.cast(Bridge.unbox(item), T));
+                    this.add(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -13951,7 +13979,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$contains: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(item), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 return false;
             },
@@ -14149,7 +14177,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$indexOf: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(item), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 return -1;
             },
@@ -14190,7 +14218,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
 
                 try {
-                    this.insert(index, Bridge.cast(Bridge.unbox(item), T));
+                    this.insert(index, Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -14293,7 +14321,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$remove: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    this.remove(Bridge.cast(Bridge.unbox(item), T));
+                    this.remove(Bridge.cast(Bridge.unbox(item, T), T));
                 }
             },
             RemoveAll: function (match) {
@@ -14716,11 +14744,21 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     throw new System.ArgumentNullException.$ctor1("format");
                 }
 
+                var reverse = function (s) {
+                    return s.split("").reverse().join("");
+                };
+
+                format = reverse(reverse(format.replace(/\{\{/g, function (m) {
+                    return String.fromCharCode(1, 1);
+                })).replace(/\}\}/g, function (m) {
+                    return String.fromCharCode(2, 2);
+                }));
+
                 var me = this,
                     _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
                     fn = this.decodeBraceSequence;
 
-                return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
+                format = format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
                     if (repeatOpenBrace) {
                         return fn(repeatOpenBrace);
                     }
@@ -14734,6 +14772,16 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     }
 
                     return fn(openBrace, true) + me.handleElement(provider, index, align, format, args) + fn(closeBrace, true);
+                });
+
+                return format.replace(/(\x01\x01)|(\x02\x02)/g, function (m) {
+                    if (m == String.fromCharCode(1, 1)) {
+                        return "{";
+                    }
+
+                    if (m == String.fromCharCode(2, 2)) {
+                        return "}";
+                    }
                 });
             },
 
@@ -21693,7 +21741,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 if (!(Bridge.is(obj, System.Runtime.Serialization.StreamingContext))) {
                     return false;
                 }
-                var ctx = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.Runtime.Serialization.StreamingContext));
+                var ctx = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.Runtime.Serialization.StreamingContext), System.Runtime.Serialization.StreamingContext));
                 return Bridge.referenceEquals(ctx._additionalContext, this._additionalContext) && ctx._state === this._state;
             },
             getHashCode: function () {
@@ -21869,6 +21917,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         ctors: {
             ctor: function (exception, isTerminating) {
                 this.$initialize();
+                System.Object.call(this);
                 this._exception = exception;
                 this._isTerminating = isTerminating;
             }
@@ -30851,7 +30900,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.setItem(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -30877,7 +30926,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.add(Bridge.cast(Bridge.unbox(value), T));
+                    this.add(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -30957,7 +31006,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$contains: function (value) {
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(value), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return false;
             },
@@ -30972,7 +31021,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$indexOf: function (value) {
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(value), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return -1;
             },
@@ -30994,7 +31043,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 System.ThrowHelper.IfNullAndNullsAreIllegalThenThrow(T, value, System.ExceptionArgument.value);
 
                 try {
-                    this.insert(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.insert(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -31023,7 +31072,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
 
                 if (System.Collections.ObjectModel.Collection$1(T).IsCompatibleObject(value)) {
-                    this.remove(Bridge.cast(Bridge.unbox(value), T));
+                    this.remove(Bridge.cast(Bridge.unbox(value, T), T));
                 }
             },
             removeAt: function (index) {
@@ -31151,7 +31200,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$contains: function (value) {
                 if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).IsCompatibleObject(value)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(value), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return false;
             },
@@ -31211,7 +31260,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             System$Collections$IList$indexOf: function (value) {
                 if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).IsCompatibleObject(value)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(value), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return -1;
             },
@@ -31894,7 +31943,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     throw new System.ArgumentException.$ctor1(System.Environment.GetResourceString("Arg_MustBeDateTimeOffset"));
                 }
 
-                var objUtc = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.DateTimeOffset)).UtcDateTime;
+                var objUtc = System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.DateTimeOffset), System.DateTimeOffset)).UtcDateTime;
                 var utc = this.UtcDateTime;
                 if (System.DateTime.gt(utc, objUtc)) {
                     return 1;
@@ -31917,7 +31966,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             },
             equals: function (obj) {
                 if (Bridge.is(obj, System.DateTimeOffset)) {
-                    return Bridge.equalsT(this.UtcDateTime, System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.DateTimeOffset)).UtcDateTime);
+                    return Bridge.equalsT(this.UtcDateTime, System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.DateTimeOffset), System.DateTimeOffset)).UtcDateTime);
                 }
                 return false;
             },
@@ -32953,7 +33002,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     return false;
                 }
 
-                return this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), System.Guid)));
+                return this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(o, System.Guid), System.Guid)));
             },
             equalsT: function (o) {
                 if ((this._a !== o._a) || (this._b !== o._b) || (this._c !== o._c) || (this._d !== o._d) || (this._e !== o._e) || (this._f !== o._f) || (this._g !== o._g) || (this._h !== o._h) || (this._i !== o._i) || (this._j !== o._j) || (this._k !== o._k)) {

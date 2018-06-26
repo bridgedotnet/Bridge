@@ -103,8 +103,36 @@
         },
 
         unbox: function (o, noclone) {
+            var T;
+
+            if (noclone && Bridge.isFunction(noclone)) {
+                T = noclone;
+                noclone = false;
+            }
+
             if (o && o.$boxed) {
-                var v = o.v;
+                var v = o.v,
+                    t = o.type;
+
+                if (T && T.$nullable) {
+                    T = T.$nullableType;
+                }
+
+                if (T && T.$kind === "enum") {
+                    T = System.Enum.getUnderlyingType(T);
+                }
+
+                if (t.$nullable) {
+                    t = t.$nullableType;
+                }
+
+                if (t.$kind === "enum") {
+                    t = System.Enum.getUnderlyingType(t);
+                }
+
+                if (T && T !== t && !Bridge.isObject(T)) { 
+                    throw new System.InvalidCastException.$ctor1("Specified cast is not valid.");
+                }
 
                 if (!noclone && v && v.$clone) {
                     v = v.$clone();
@@ -1564,7 +1592,7 @@
                 throw new System.NullReferenceException.$ctor1("instance is null");
             }
 
-            if (T) {
+            if (T) {               
                 var type = Bridge.getType(instance);
                 return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }

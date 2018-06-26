@@ -1,5 +1,5 @@
 /**
- * @version   : 17.1.1 - Bridge.NET
+ * @version   : 17.1.2 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -39149,7 +39149,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 })(this);
 
 /**
- * @version   : 17.1.1 - Bridge.NET
+ * @version   : 17.1.2 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -39426,7 +39426,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
 
 /**
  * Bridge Test library.
- * @compiler Bridge.NET 17.1.1
+ * @compiler Bridge.NET 17.1.2
  */
 Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     "use strict";
