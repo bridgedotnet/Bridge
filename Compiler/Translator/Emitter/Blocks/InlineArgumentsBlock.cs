@@ -685,7 +685,7 @@ namespace Bridge.Translator
                             bool skipType = false;
 
                             var typeDef = this.Emitter.BridgeTypes.Get(type, true)?.TypeDefinition;
-                            if ((typeDef == null || !typeDef.IsValueType || NullableType.IsNullable(type)))
+                            if (typeDef == null || !typeDef.IsValueType || NullableType.IsNullable(type) && NullableType.GetUnderlyingType(type).Kind == TypeKind.Struct)
                             {
                                 if (argExpr != null)
                                 {
@@ -1244,7 +1244,7 @@ namespace Bridge.Translator
         {
             string s;
             var typeDef = this.Emitter.BridgeTypes.Get(type, true)?.TypeDefinition;
-            if (node != null && (typeDef == null || !typeDef.IsValueType || NullableType.IsNullable(type)))
+            if (node != null && (typeDef == null || !typeDef.IsValueType || NullableType.IsNullable(type) && NullableType.GetUnderlyingType(type).Kind == TypeKind.Struct))
             {
                 var writer = this.SaveWriter();
                 this.NewWriter();
