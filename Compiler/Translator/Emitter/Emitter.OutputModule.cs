@@ -77,9 +77,9 @@ namespace Bridge.Translator
                 enabledDependecies.Each(md =>
                 {
                     moduleOutput.Append(this.ToJavaScript(md.DependencyName));
-                    moduleOutput.Append(",");
+                    moduleOutput.Append(", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
                 moduleOutput.Append("], ");
             }
 
@@ -90,9 +90,9 @@ namespace Bridge.Translator
                 enabledDependecies.Each(md =>
                 {
                     moduleOutput.Append(md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName);
-                    moduleOutput.Append(",");
+                    moduleOutput.Append(", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
             }
 
             this.WriteNewLine(moduleOutput, ") {");
@@ -139,9 +139,9 @@ namespace Bridge.Translator
                 enabledDependecies.Each(md =>
                 {
                     moduleOutput.Append(md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName);
-                    moduleOutput.Append(",");
+                    moduleOutput.Append(", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
             }
 
             this.WriteNewLine(moduleOutput, ") {");
@@ -164,9 +164,9 @@ namespace Bridge.Translator
             {
                 enabledDependecies.Each(md =>
                 {
-                    moduleOutput.Append("require(" + this.ToJavaScript(md.DependencyName) + "),");
+                    moduleOutput.Append("require(" + this.ToJavaScript(md.DependencyName) + "), ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
             }
 
             this.WriteNewLine(moduleOutput, ");");
@@ -197,9 +197,9 @@ namespace Bridge.Translator
                 enabledDependecies.Each(md =>
                 {
                     moduleOutput.Append(this.ToJavaScript(md.DependencyName));
-                    moduleOutput.Append(",");
+                    moduleOutput.Append(", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
                 moduleOutput.Append("], ");
             }
             this.WriteNewLine(moduleOutput, "factory);");
@@ -212,9 +212,9 @@ namespace Bridge.Translator
             {
                 enabledDependecies.Each(md =>
                 {
-                    moduleOutput.Append("require(" + this.ToJavaScript(md.DependencyName) + "),");
+                    moduleOutput.Append("require(" + this.ToJavaScript(md.DependencyName) + "), ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1);
+                moduleOutput.Remove(moduleOutput.Length - 2, 2);
             }
 
             this.WriteNewLine(moduleOutput, ");");
@@ -228,10 +228,9 @@ namespace Bridge.Translator
             {
                 enabledDependecies.Each(md =>
                 {
-                    moduleOutput.Append("root." + md.DependencyName);
-                    moduleOutput.Append(",");
+                    moduleOutput.Append("root." + md.DependencyName + ", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
             }
 
             this.WriteNewLine(moduleOutput, ");");
@@ -246,9 +245,9 @@ namespace Bridge.Translator
                 enabledDependecies.Each(md =>
                 {
                     moduleOutput.Append(md.VariableName ?? md.DependencyName);
-                    moduleOutput.Append(",");
+                    moduleOutput.Append(", ");
                 });
-                moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
+                moduleOutput.Remove(moduleOutput.Length - 2, 2); // remove trailing comma
             }
 
             moduleOutput.Append(") {");

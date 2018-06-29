@@ -95,7 +95,7 @@
             },
             System$Collections$IList$contains: function (value) {
                 if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).IsCompatibleObject(value)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(value), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return false;
             },
@@ -155,7 +155,7 @@
             },
             System$Collections$IList$indexOf: function (value) {
                 if (System.Collections.ObjectModel.ReadOnlyCollection$1(T).IsCompatibleObject(value)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(value), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 return -1;
             },

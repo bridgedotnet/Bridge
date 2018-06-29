@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Bridge.Translator
 {
-    public class ArrayCreateBlock : AbstractEmitterBlock
+    public class ArrayCreateBlock : ConversionBlock
     {
         public ArrayCreateBlock(IEmitter emitter, ArrayCreateExpression arrayCreateExpression)
             : base(emitter, arrayCreateExpression)
@@ -36,7 +36,12 @@ namespace Bridge.Translator
             set;
         }
 
-        protected override void DoEmit()
+        protected override Expression GetExpression()
+        {
+            return this.ArrayCreateExpression;
+        }
+
+        protected override void EmitConversionExpression()
         {
             this.VisitArrayCreateExpression();
         }

@@ -11,10 +11,32 @@ namespace Bridge.Contract
             set;
         }
 
+        private string variableName;
+
         public string VariableName
         {
-            get;
-            set;
+            // The logic here should be compatible with Bridge.Contract.Module.ExportAsNamespace.get() below.
+            get
+            {
+                // Ensure a valid variable name is returned even if not specified.
+                if (string.IsNullOrWhiteSpace(this.variableName))
+                {
+                    this.variableName = this.DependencyName;
+                }
+
+                // Even after trying to tie DependencyName, if still invalid,
+                // then throw an exception.
+                if (string.IsNullOrWhiteSpace(this.variableName))
+                {
+                    throw new System.FieldAccessException("Tried to access ModuleDependency name and variable before both variable and module name had a valid value.");
+                }
+
+                return this.variableName;
+            }
+            set
+            {
+                this.variableName = value;
+            }
         }
 
         public ModuleType? Type
@@ -151,7 +173,7 @@ namespace Bridge.Contract
             {
                 return false;
             }
-            return string.Equals(this.Name, other.Name) && this.Type == other.Type;
+            return string.Equals(this.Name, other.Name) && this.Type == other.Type && this._exportAsNamespace == other._exportAsNamespace;
         }
 
         public override bool Equals(object obj)

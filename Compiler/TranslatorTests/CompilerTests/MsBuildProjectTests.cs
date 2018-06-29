@@ -124,8 +124,8 @@ namespace Bridge.Translator.Tests.CompilerTests
                 Assert.AreEqual("Test.cs", files[1]);
 
                 var constants = translator.DefineConstants.OrderBy(c => c).ToArray();
-                Assert.AreEqual("BRIDGE", constants[0]);
-                Assert.AreEqual("TRACE", constants[1]);
+                Assert.AreEqual("BRIDGE", constants.First(ct => ct == "BRIDGE"));
+                Assert.AreEqual("TRACE", constants.First(ct => ct == "TRACE"));
             }
             finally
             {
@@ -204,10 +204,10 @@ namespace Bridge.Translator.Tests.CompilerTests
                 Assert.AreEqual("test2.cs", files[1]);
 
                 var constants = translator.DefineConstants.OrderBy(c => c).ToArray();
-                Assert.AreEqual("BRIDGE", constants[0]);
-                Assert.AreEqual("NET40", constants[1]);
-                Assert.AreEqual("RELEASE", constants[2]);
-                Assert.AreEqual("TRACE", constants[3]);
+                Assert.AreEqual("BRIDGE", constants.First(ct => ct == "BRIDGE"));
+                Assert.AreEqual("NET40", constants.First(ct => ct == "NET40"));
+                Assert.AreEqual("RELEASE", constants.First(ct => ct == "RELEASE"));
+                Assert.AreEqual("TRACE", constants.First(ct => ct == "TRACE"));
             }
             finally
             {

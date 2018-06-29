@@ -27,9 +27,9 @@ namespace System.Collections
         [Bridge.Unbox(false)]
         object this[int index]
         {
-            [Bridge.Template("System.Array.getItem({this}, {0})")]
+            [Bridge.Template("System.Array.getItem({this}, {index})")]
             get;
-            [Bridge.Template("System.Array.setItem({this}, {0})")]
+            [Bridge.Template("System.Array.setItem({this}, {index}, {value})")]
             set;
         }
 
