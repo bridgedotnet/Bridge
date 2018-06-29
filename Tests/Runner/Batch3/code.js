@@ -30541,17 +30541,30 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * Ensures linq's OrderBy and ThenBy default sort behavior matches native
+     .NET logic.
+     *
      * @public
      * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477
      */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477", {
         statics: {
             methods: {
+                /**
+                 * Tests by just joining an array after ordering and checking whether
+                 it mathces the expected string.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477
+                 * @return  {void}
+                 */
                 TestOrderByComparer: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
-                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
-                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
-                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "));
+                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "), "OrderBy 'A-a-b-B' results in 'a-A-b-B'.");
+                    Bridge.Test.NUnit.Assert.AreEqual("a - A - b - B", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "), "OrderBy.ThenBy 'A-a-b-B' results in 'a-A-b-B'.");
+                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "), "OrderByDescending 'A-a-b-B' results in 'B-b-A-a'.");
+                    Bridge.Test.NUnit.Assert.AreEqual("B - b - A - a", Bridge.toArray(System.Linq.Enumerable.from(System.Array.init(["A", "a", "b", "B"], System.String)).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f2).thenByDescending($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3477.f1)).join(" - "), "OrderBy.ThenByDescending 'A-a-b-B' results in 'B-b-A-a'.");
                 }
             }
         }
