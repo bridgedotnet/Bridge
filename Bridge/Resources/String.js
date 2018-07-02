@@ -141,11 +141,21 @@
                     throw new System.ArgumentNullException.$ctor1("format");
                 }
 
+                var reverse = function (s) {
+                    return s.split("").reverse().join("");
+                };
+
+                format = reverse(reverse(format.replace(/\{\{/g, function (m) {
+                    return String.fromCharCode(1, 1);
+                })).replace(/\}\}/g, function (m) {
+                    return String.fromCharCode(2, 2);
+                }));
+
                 var me = this,
                     _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
                     fn = this.decodeBraceSequence;
 
-                return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
+                format = format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
                     if (repeatOpenBrace) {
                         return fn(repeatOpenBrace);
                     }
@@ -159,6 +169,16 @@
                     }
 
                     return fn(openBrace, true) + me.handleElement(provider, index, align, format, args) + fn(closeBrace, true);
+                });
+
+                return format.replace(/(\x01\x01)|(\x02\x02)/g, function (m) {
+                    if (m == String.fromCharCode(1, 1)) {
+                        return "{";
+                    }
+
+                    if (m == String.fromCharCode(2, 2)) {
+                        return "}";
+                    }
                 });
             },
 
@@ -374,6 +394,16 @@
 
             equals: function () {
                 return System.String.compare.apply(this, arguments) === 0;
+            },
+
+            swapCase: function (letters) {
+                return letters.replace(/\w/g, function (c) {
+                    if (c === c.toLowerCase()) {
+                        return c.toUpperCase();
+                    } else {
+                        return c.toLowerCase();
+                    }
+                });
             },
 
             compare: function (strA, strB) {

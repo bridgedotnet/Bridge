@@ -1,9 +1,9 @@
 /**
  * Bridge Test library for TypeScript.
- * @version 17.1.1
+ * @version 17.1.2
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2018 Object.NET, Inc.
- * @compiler Bridge.NET 17.1.1
+ * @compiler Bridge.NET 17.1.2
  */
 Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
