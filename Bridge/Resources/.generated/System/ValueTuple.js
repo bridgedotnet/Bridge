@@ -152,7 +152,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$1(T1)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$1(T1))));
+                return Bridge.is(obj, System.ValueTuple$1(T1)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$1(T1)), System.ValueTuple$1(T1))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$1(T1).s_t1Comparer.equals2(this.Item1, other.Item1);
@@ -162,7 +162,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$1(T1)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$1(T1)), System.ValueTuple$1(T1)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1);
             },
@@ -175,7 +175,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$1(T1)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$1(T1)), System.ValueTuple$1(T1)));
 
                 return new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, objTuple.Item1);
             },
@@ -191,7 +191,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$1(T1)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$1(T1)), System.ValueTuple$1(T1)));
 
                 return comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
             },
@@ -263,7 +263,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$2(T1,T2)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$2(T1,T2))));
+                return Bridge.is(obj, System.ValueTuple$2(T1,T2)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$2(T1,T2)), System.ValueTuple$2(T1,T2))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$2(T1,T2).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$2(T1,T2).s_t2Comparer.equals2(this.Item2, other.Item2);
@@ -273,7 +273,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$2(T1,T2)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$2(T1,T2)), System.ValueTuple$2(T1,T2)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2);
             },
@@ -286,7 +286,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$2(T1,T2))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$2(T1,T2)), System.ValueTuple$2(T1,T2))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -305,7 +305,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$2(T1,T2)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$2(T1,T2)), System.ValueTuple$2(T1,T2)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -390,7 +390,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$3(T1,T2,T3)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$3(T1,T2,T3))));
+                return Bridge.is(obj, System.ValueTuple$3(T1,T2,T3)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$3(T1,T2,T3)), System.ValueTuple$3(T1,T2,T3))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$3(T1,T2,T3).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$3(T1,T2,T3).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$3(T1,T2,T3).s_t3Comparer.equals2(this.Item3, other.Item3);
@@ -400,7 +400,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$3(T1,T2,T3)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$3(T1,T2,T3)), System.ValueTuple$3(T1,T2,T3)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3);
             },
@@ -413,7 +413,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$3(T1,T2,T3))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$3(T1,T2,T3)), System.ValueTuple$3(T1,T2,T3))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -437,7 +437,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$3(T1,T2,T3)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$3(T1,T2,T3)), System.ValueTuple$3(T1,T2,T3)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -532,7 +532,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$4(T1,T2,T3,T4)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$4(T1,T2,T3,T4))));
+                return Bridge.is(obj, System.ValueTuple$4(T1,T2,T3,T4)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$4(T1,T2,T3,T4)), System.ValueTuple$4(T1,T2,T3,T4))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$4(T1,T2,T3,T4).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$4(T1,T2,T3,T4).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$4(T1,T2,T3,T4).s_t3Comparer.equals2(this.Item3, other.Item3) && System.ValueTuple$4(T1,T2,T3,T4).s_t4Comparer.equals2(this.Item4, other.Item4);
@@ -542,7 +542,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$4(T1,T2,T3,T4)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$4(T1,T2,T3,T4)), System.ValueTuple$4(T1,T2,T3,T4)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3) && comparer.System$Collections$IEqualityComparer$equals(this.Item4, objTuple.Item4);
             },
@@ -555,7 +555,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$4(T1,T2,T3,T4))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$4(T1,T2,T3,T4)), System.ValueTuple$4(T1,T2,T3,T4))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -584,7 +584,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$4(T1,T2,T3,T4)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$4(T1,T2,T3,T4)), System.ValueTuple$4(T1,T2,T3,T4)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -689,7 +689,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$5(T1,T2,T3,T4,T5)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$5(T1,T2,T3,T4,T5))));
+                return Bridge.is(obj, System.ValueTuple$5(T1,T2,T3,T4,T5)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$5(T1,T2,T3,T4,T5)), System.ValueTuple$5(T1,T2,T3,T4,T5))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$5(T1,T2,T3,T4,T5).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$5(T1,T2,T3,T4,T5).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$5(T1,T2,T3,T4,T5).s_t3Comparer.equals2(this.Item3, other.Item3) && System.ValueTuple$5(T1,T2,T3,T4,T5).s_t4Comparer.equals2(this.Item4, other.Item4) && System.ValueTuple$5(T1,T2,T3,T4,T5).s_t5Comparer.equals2(this.Item5, other.Item5);
@@ -699,7 +699,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$5(T1,T2,T3,T4,T5)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$5(T1,T2,T3,T4,T5)), System.ValueTuple$5(T1,T2,T3,T4,T5)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3) && comparer.System$Collections$IEqualityComparer$equals(this.Item4, objTuple.Item4) && comparer.System$Collections$IEqualityComparer$equals(this.Item5, objTuple.Item5);
             },
@@ -712,7 +712,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$5(T1,T2,T3,T4,T5))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$5(T1,T2,T3,T4,T5)), System.ValueTuple$5(T1,T2,T3,T4,T5))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -746,7 +746,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$5(T1,T2,T3,T4,T5)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$5(T1,T2,T3,T4,T5)), System.ValueTuple$5(T1,T2,T3,T4,T5)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -861,7 +861,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$6(T1,T2,T3,T4,T5,T6))));
+                return Bridge.is(obj, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)), System.ValueTuple$6(T1,T2,T3,T4,T5,T6))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t3Comparer.equals2(this.Item3, other.Item3) && System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t4Comparer.equals2(this.Item4, other.Item4) && System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t5Comparer.equals2(this.Item5, other.Item5) && System.ValueTuple$6(T1,T2,T3,T4,T5,T6).s_t6Comparer.equals2(this.Item6, other.Item6);
@@ -871,7 +871,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$6(T1,T2,T3,T4,T5,T6)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)), System.ValueTuple$6(T1,T2,T3,T4,T5,T6)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3) && comparer.System$Collections$IEqualityComparer$equals(this.Item4, objTuple.Item4) && comparer.System$Collections$IEqualityComparer$equals(this.Item5, objTuple.Item5) && comparer.System$Collections$IEqualityComparer$equals(this.Item6, objTuple.Item6);
             },
@@ -884,7 +884,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$6(T1,T2,T3,T4,T5,T6))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)), System.ValueTuple$6(T1,T2,T3,T4,T5,T6))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -923,7 +923,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$6(T1,T2,T3,T4,T5,T6)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$6(T1,T2,T3,T4,T5,T6)), System.ValueTuple$6(T1,T2,T3,T4,T5,T6)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -1048,7 +1048,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7))));
+                return Bridge.is(obj, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t3Comparer.equals2(this.Item3, other.Item3) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t4Comparer.equals2(this.Item4, other.Item4) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t5Comparer.equals2(this.Item5, other.Item5) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t6Comparer.equals2(this.Item6, other.Item6) && System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7).s_t7Comparer.equals2(this.Item7, other.Item7);
@@ -1058,7 +1058,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3) && comparer.System$Collections$IEqualityComparer$equals(this.Item4, objTuple.Item4) && comparer.System$Collections$IEqualityComparer$equals(this.Item5, objTuple.Item5) && comparer.System$Collections$IEqualityComparer$equals(this.Item6, objTuple.Item6) && comparer.System$Collections$IEqualityComparer$equals(this.Item7, objTuple.Item7);
             },
@@ -1071,7 +1071,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -1115,7 +1115,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)), System.ValueTuple$7(T1,T2,T3,T4,T5,T6,T7)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {
@@ -1255,7 +1255,7 @@
         },
         methods: {
             equals: function (obj) {
-                return Bridge.is(obj, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest))));
+                return Bridge.is(obj, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)) && this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(obj, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest))));
             },
             equalsT: function (other) {
                 return System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t1Comparer.equals2(this.Item1, other.Item1) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t2Comparer.equals2(this.Item2, other.Item2) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t3Comparer.equals2(this.Item3, other.Item3) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t4Comparer.equals2(this.Item4, other.Item4) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t5Comparer.equals2(this.Item5, other.Item5) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t6Comparer.equals2(this.Item6, other.Item6) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_t7Comparer.equals2(this.Item7, other.Item7) && System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest).s_tRestComparer.equals2(this.Rest, other.Rest);
@@ -1265,7 +1265,7 @@
                     return false;
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)));
 
                 return comparer.System$Collections$IEqualityComparer$equals(this.Item1, objTuple.Item1) && comparer.System$Collections$IEqualityComparer$equals(this.Item2, objTuple.Item2) && comparer.System$Collections$IEqualityComparer$equals(this.Item3, objTuple.Item3) && comparer.System$Collections$IEqualityComparer$equals(this.Item4, objTuple.Item4) && comparer.System$Collections$IEqualityComparer$equals(this.Item5, objTuple.Item5) && comparer.System$Collections$IEqualityComparer$equals(this.Item6, objTuple.Item6) && comparer.System$Collections$IEqualityComparer$equals(this.Item7, objTuple.Item7) && comparer.System$Collections$IEqualityComparer$equals(this.Rest, objTuple.Rest);
             },
@@ -1278,7 +1278,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest))));
+                return this.compareTo(System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest))));
             },
             compareTo: function (other) {
                 var c = new (System.Collections.Generic.Comparer$1(T1))(System.Collections.Generic.Comparer$1.$default.fn).compare(this.Item1, other.Item1);
@@ -1327,7 +1327,7 @@
                     throw new System.ArgumentException.$ctor3(System.SR.ArgumentException_ValueTupleIncorrectType, "other");
                 }
 
-                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)));
+                var objTuple = System.Nullable.getValue(Bridge.cast(Bridge.unbox(other, System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)), System.ValueTuple$8(T1,T2,T3,T4,T5,T6,T7,TRest)));
 
                 var c = comparer.System$Collections$IComparer$compare(this.Item1, objTuple.Item1);
                 if (c !== 0) {

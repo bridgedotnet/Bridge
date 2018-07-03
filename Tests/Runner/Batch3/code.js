@@ -34089,25 +34089,69 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures that a 3-uple's default values works.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3649
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3649", {
         statics: {
             methods: {
+                /**
+                 * Tests by issuing n-uples with different values and ensuring the
+                 defaults are correctly selected.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3649
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3649
+                 * @return  {void}
+                 */
                 TestValueTuple: function () {
+                    var $t, $t1, $t2, $t3, $t4, $t5, $t6;
                     var a = { };
                     var b = { };
                     var c = { };
                     Bridge.Deconstruct(Bridge.getDefaultValue(System.ValueTuple$3(System.String,System.Int32,System.Boolean)), a, b, c);
 
-                    Bridge.Test.NUnit.Assert.Null(a.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(0, b.v);
-                    Bridge.Test.NUnit.Assert.False(c.v);
+                    Bridge.Test.NUnit.Assert.Null(a.v, "Default value for string in 3-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, b.v, "Default value for integer in 3-uple is correct.");
+                    Bridge.Test.NUnit.Assert.False(c.v, "Default value for bool in 3-uple is correct.");
+                    var d = { };
+                    var e = { };
+                    var f = { };
+                    var g = { };
+                    var h = { };
+                    var i = { };
+                    var j = { };
+                    Bridge.Deconstruct(Bridge.getDefaultValue(System.ValueTuple$7(System.String,System.String,System.String,System.String,System.String,System.String,System.String)), d, e, f, g, h, i, j);
+
+                    Bridge.Test.NUnit.Assert.Null(d.v, "Default value for 1st string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t = d.v, $t != null ? $t : "null"), "Default value for 1st string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(e.v, "Default value for 2nd string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t1 = e.v, $t1 != null ? $t1 : "null"), "Default value for 2nd string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(f.v, "Default value for 3rd string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t2 = f.v, $t2 != null ? $t2 : "null"), "Default value for 3rd string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(g.v, "Default value for 4th string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t3 = g.v, $t3 != null ? $t3 : "null"), "Default value for 4th string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(h.v, "Default value for 5th string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t4 = h.v, $t4 != null ? $t4 : "null"), "Default value for 5th string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(i.v, "Default value for 6th string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t5 = i.v, $t5 != null ? $t5 : "null"), "Default value for 6th string in 7-uple works with ?? operator.");
+                    Bridge.Test.NUnit.Assert.Null(j.v, "Default value for last string in 7-uple is correct.");
+                    Bridge.Test.NUnit.Assert.AreEqual("null", ($t6 = j.v, $t6 != null ? $t6 : "null"), "Default value for last string in 7-uple works with ?? operator.");
 
                     var val2 = Bridge.getDefaultValue(System.ValueTuple$3(System.String,System.String,System.String));
                     var val1 = val2.$clone();
                     val2.Item1 = "xcv";
 
-                    Bridge.Test.NUnit.Assert.Null(val1.Item1);
-                    Bridge.Test.NUnit.Assert.AreEqual("xcv", val2.Item1);
+                    Bridge.Test.NUnit.Assert.Null(val1.Item1, "Change in tuple variable bound to another does not propagate.");
+                    Bridge.Test.NUnit.Assert.AreEqual("xcv", val2.Item1, "Change in tuple variable affect the direct reference.");
+                    Bridge.Test.NUnit.Assert.Null(val1.Item2, "Change in tuple variable bound to another does not affect original's 2nd variable.");
+                    Bridge.Test.NUnit.Assert.Null(val1.Item3, "Change in tuple variable bound to another does not affect original's 3rd variable.");
+                    Bridge.Test.NUnit.Assert.Null(val2.Item2, "Change in tuple variable bound to another does not affect its 2nd variable.");
+                    Bridge.Test.NUnit.Assert.Null(val2.Item3, "Change in tuple variable bound to another does not affect its 3rd variable.");
                 }
             }
         }
