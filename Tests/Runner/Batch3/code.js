@@ -33971,19 +33971,69 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures referencing tuples' values from C# maps into valid and
+     congruent JavaScript code in different scenarios.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645", {
         statics: {
             methods: {
-                TestNullableTuple: function () {
+                /**
+                 * The value returned from funcions may be just 'false'.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645
+                 * @return  {System.Object}
+                 */
+                Test: function () {
+                    return { Item1: "testsf0", Item2: "testsf1" };
+                },
+                /**
+                 * Checks each case of tuples against the expected returned value.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645
+                 * @return  {void}
+                 */
+                TestTupleUseCases: function () {
+                    var val3 = null;
                     var val1 = { Item1: "test1", Item2: "test2" };
                     var test1 = val1.Item1;
-                    Bridge.Test.NUnit.Assert.AreEqual("test1", test1);
+                    var test11 = val1.Item2;
+                    Bridge.Test.NUnit.Assert.AreEqual("test1", test1, "Non nullable tuple 1st value can be retrieved.");
+                    Bridge.Test.NUnit.Assert.AreEqual("test2", test11, "Non nullable tuple 2nd value can be retrieved.");
 
-                    var val2 = { Item1: "test1", Item2: "test2" };
+                    var val2 = { Item1: "testn1", Item2: "testn2" };
                     var test2 = System.Nullable.getValue(val2).Item1;
-                    Bridge.Test.NUnit.Assert.AreEqual("test1", test2);
+                    var test21 = System.Nullable.getValue(val2).Item2;
+                    Bridge.Test.NUnit.Assert.AreEqual("testn1", test2, "Nullable tuple 1st value can be retrieved.");
+                    Bridge.Test.NUnit.Assert.AreEqual("testn2", test21, "Nullable tuple 2nd value can be retrieved.");
+
+                    // The test here must inline the function in order to reproduce the scenario
+                    Bridge.Test.NUnit.Assert.AreEqual("testsf0", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645.Test().Item1, "Inlined static function tuple 1st value can be retrieved.");
+                    Bridge.Test.NUnit.Assert.AreEqual("testsf1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645.Test().Item2, "Inlined static function tuple 2nd value can be retrieved.");
+
+                    ;
+                    val3 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645.f1;
+                    Bridge.Test.NUnit.Assert.AreEqual("testlf0", val3().Item1, "Inlined local function tuple 1st value can be retrieved.");
+                    Bridge.Test.NUnit.Assert.AreEqual("testlf1", val3().Item2, "Inlined local function tuple 2nd value can be retrieved.");
                 }
             }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645, {
+        f1: function () {
+            return { Item1: "testlf0", Item2: "testlf1" };
         }
     });
 

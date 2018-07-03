@@ -69,7 +69,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3626 - TestMultiBracketStringFormat", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3626.TestMultiBracketStringFormat);
             QUnit.test("#3627 - TestExpandParams", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3627.TestExpandParams);
             QUnit.test("#3628 - TestConversion", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3628.TestConversion);
-            QUnit.test("#3645 - TestNullableTuple", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3645.TestNullableTuple);
+            QUnit.test("#3645 - TestTupleUseCases", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3645.TestTupleUseCases);
             QUnit.module("Issues3");
             QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge069.ThisKeywordInStructConstructorWorks);
             QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1000.TestStaticViaChild);
@@ -17360,10 +17360,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         $kind: "nested class",
         statics: {
             methods: {
-                TestNullableTuple: function (assert) {
+                TestTupleUseCases: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3645, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestNullableTuple()", $t.Line = "12", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645.TestNullableTuple();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3645, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTupleUseCases()", $t.Line = "24", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3645.TestTupleUseCases();
                 }
             }
         },
