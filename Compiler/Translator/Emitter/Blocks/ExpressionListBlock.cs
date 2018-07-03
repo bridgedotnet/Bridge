@@ -52,6 +52,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public bool IgnoreExpandParams
+        {
+            get;
+            set;
+        }
+
         protected override void DoEmit()
         {
             var oldIsAssignment = this.Emitter.IsAssignment;
@@ -67,11 +73,11 @@ namespace Bridge.Translator
         {
             bool needComma = false;
             int count = this.Emitter.Writers.Count;
-            bool wrapByBrackets = true;
+            bool wrapByBrackets = !this.IgnoreExpandParams;
             bool expandParams = false;
             bool isApply = false;
 
-            if (paramArg != null && this.InvocationExpression != null)
+            if (paramArg != null && this.InvocationExpression != null && !this.IgnoreExpandParams)
             {
                 var rr = this.Emitter.Resolver.ResolveNode(this.InvocationExpression, this.Emitter) as CSharpInvocationResolveResult;
                 if (rr != null)

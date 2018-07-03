@@ -179,7 +179,7 @@
                 }
 
                 try {
-                    this.setItem(index, Bridge.cast(Bridge.unbox(value), T));
+                    this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -203,7 +203,7 @@
                 }
 
                 try {
-                    this.add(Bridge.cast(Bridge.unbox(item), T));
+                    this.add(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -268,7 +268,7 @@
             },
             System$Collections$IList$contains: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    return this.contains(Bridge.cast(Bridge.unbox(item), T));
+                    return this.contains(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 return false;
             },
@@ -466,7 +466,7 @@
             },
             System$Collections$IList$indexOf: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    return this.indexOf(Bridge.cast(Bridge.unbox(item), T));
+                    return this.indexOf(Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 return -1;
             },
@@ -507,7 +507,7 @@
                 }
 
                 try {
-                    this.insert(index, Bridge.cast(Bridge.unbox(item), T));
+                    this.insert(index, Bridge.cast(Bridge.unbox(item, T), T));
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -610,7 +610,7 @@
             },
             System$Collections$IList$remove: function (item) {
                 if (System.Collections.Generic.List$1(T).IsCompatibleObject(item)) {
-                    this.remove(Bridge.cast(Bridge.unbox(item), T));
+                    this.remove(Bridge.cast(Bridge.unbox(item, T), T));
                 }
             },
             RemoveAll: function (match) {

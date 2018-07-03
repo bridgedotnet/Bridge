@@ -33,7 +33,7 @@
             methods: {
                 If: function If (T, source, work) {
                     if (Bridge.is(source, T)) {
-                        work(Bridge.cast(Bridge.unbox(source), T));
+                        work(Bridge.cast(Bridge.unbox(source, T), T));
                     }
                     return source;
                 }
