@@ -67,7 +67,7 @@ namespace Bridge.Translator
             };
 
             var result = new ExpressionBodyToStatementRewriter(semanticModel).Visit(syntaxTree.GetRoot());
-            modelUpdater(result);           
+            modelUpdater(result);
 
             result = new DiscardReplacer().Replace(syntaxTree.GetRoot(), semanticModel, modelUpdater);
             modelUpdater(result);

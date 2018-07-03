@@ -26,7 +26,7 @@ namespace Bridge.Translator
                 .DescendantNodes()
                 .OfType<ArgumentSyntax>()
                 .Where(arg => {
-                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER/* && arg.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword*/)
+                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER)
                     {
                         var si = model.GetSymbolInfo(arg.Expression);
                         return si.Symbol == null || si.Symbol.Kind == SymbolKind.Discard;
