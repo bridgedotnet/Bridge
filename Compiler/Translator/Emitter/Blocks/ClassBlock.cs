@@ -161,6 +161,12 @@ namespace Bridge.Translator
 
             if (this.IsGeneric)
             {
+                if (this.TypeInfo.Module != null)
+                {
+                    this.Write(this.TypeInfo.Module.Name);
+                    this.Write(", ");
+                }
+
                 this.WriteFunction();
                 this.WriteOpenParentheses();
 
