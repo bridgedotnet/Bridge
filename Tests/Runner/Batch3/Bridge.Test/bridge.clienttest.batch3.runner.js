@@ -17389,7 +17389,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestDiscard: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3647, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDiscard()", $t.Line = "17", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3647, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDiscard()", $t.Line = "27", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647.TestDiscard();
                 }
             }

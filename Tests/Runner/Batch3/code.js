@@ -34037,25 +34037,53 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures discarders are correctly positioned in tuple definitions.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647", {
         statics: {
             methods: {
+                /**
+                 * A tuple-returning function to be subject to discarders applying.
+                 *
+                 * @static
+                 * @private
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647
+                 * @return  {System.Object}
+                 */
                 Test: function () {
                     return { Item1: "test1", Item2: "test2" };
                 },
+                /**
+                 * Tests the discarders with KeyValuePair object and tuple functions.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647
+                 * @return  {void}
+                 */
                 TestDiscard: function () {
                     var _discard1 = { };
                     var value = { };
                     new (System.Collections.Generic.KeyValuePair$2(System.String,System.String)).$ctor1("key", "value").Deconstruct(_discard1, value);
-                    Bridge.Test.NUnit.Assert.AreEqual("value", value.v);
-                    var a = { };
+                    Bridge.Test.NUnit.Assert.AreEqual("value", value.v, "Value portion of KeyValuePair can be selected with discarder.");
+                    var key = { };
                     var _discard2 = { };
-                    Bridge.Deconstruct(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647.Test(), a, _discard2);
-                    Bridge.Test.NUnit.Assert.AreEqual("test1", a.v);
+                    new (System.Collections.Generic.KeyValuePair$2(System.String,System.String)).$ctor1("key", "value").Deconstruct(key, _discard2);
+                    Bridge.Test.NUnit.Assert.AreEqual("key", key.v, "Key portion of KeyValuePair can be selected with discarder.");
+                    var a = { };
                     var _discard3 = { };
+                    Bridge.Deconstruct(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647.Test(), a, _discard3);
+                    Bridge.Test.NUnit.Assert.AreEqual("test1", a.v, "First position of Tuple can be selected with discarder.");
+                    var _discard4 = { };
                     var b = { };
-                    Bridge.Deconstruct(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647.Test(), _discard3, b);
-                    Bridge.Test.NUnit.Assert.AreEqual("test2", b.v);
+                    Bridge.Deconstruct(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3647.Test(), _discard4, b);
+                    Bridge.Test.NUnit.Assert.AreEqual("test2", b.v, "Second position of Tuple can be selected with discarder.");
                 }
             }
         }
