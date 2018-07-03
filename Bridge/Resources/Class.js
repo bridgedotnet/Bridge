@@ -1038,7 +1038,7 @@
                     for (var i = 0; i < len; i++) {
                         var item = metas[i];
 
-                        Bridge.setMetadata(item.typeName, item.metadata);
+                        Bridge.setMetadata(item.typeName, item.metadata, item.ns);
                     }
                 }
             }

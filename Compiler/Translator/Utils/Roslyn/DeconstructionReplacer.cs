@@ -218,7 +218,7 @@ namespace Bridge.Translator
                         .WithTrailingTrivia(n2.GetTrailingTrivia());
 
                     var deconstructionInfo = infos[n1];
-                    var invocation = DeconstructionToMethod(variable, SyntaxFactory.IdentifierName(instance), deconstructionInfo);
+                    var invocation = DeconstructionToMethod(model, variable, SyntaxFactory.IdentifierName(instance), deconstructionInfo);
 
                     if (newloop.Statement is BlockSyntax b)
                     {
@@ -285,14 +285,14 @@ namespace Bridge.Translator
                     var tuple = assignment.Left;
                     var obj = assignment.Right;
 
-                    return DeconstructionToMethod(tuple, obj, deconstructionInfo);
+                    return DeconstructionToMethod(model, tuple, obj, deconstructionInfo);
                 });
             }
 
             return root;
         }
 
-        private ExpressionSyntax DeconstructionToMethod(ExpressionSyntax tuple, ExpressionSyntax obj, DeconstructionInfo deconstructionInfo)
+        private ExpressionSyntax DeconstructionToMethod(SemanticModel model, ExpressionSyntax tuple, ExpressionSyntax obj, DeconstructionInfo deconstructionInfo)
         {
             List<ArgumentSyntax> arguments = new List<ArgumentSyntax>();
 

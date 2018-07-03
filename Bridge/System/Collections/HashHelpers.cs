@@ -4,6 +4,17 @@ namespace System.Collections
     {
         private const Int32 HashPrime = 101;
 
+        public static readonly int RandomSeed = Guid.NewGuid().GetHashCode();
+
+        public static int Combine(int h1, int h2)
+        {
+            unchecked
+            {
+                uint rol5 = ((uint)h1 << 5) | ((uint)h1 >> 27);
+                return ((int)rol5 + h1) ^ h2;
+            }
+        }
+
         public static readonly int[] primes = {
             3, 7, 11, 17, 23, 29, 37, 47, 59, 71, 89, 107, 131, 163, 197, 239, 293, 353, 431, 521, 631, 761, 919,
             1103, 1327, 1597, 1931, 2333, 2801, 3371, 4049, 4861, 5839, 7013, 8419, 10103, 12143, 14591,

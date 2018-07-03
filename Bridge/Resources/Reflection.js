@@ -1,17 +1,18 @@
     Bridge.Reflection = {
         deferredMeta: [],
 
-        setMetadata: function (type, metadata) {
+        setMetadata: function (type, metadata, ns) {
             if (Bridge.isString(type)) {
                 var typeName = type;
                 type = Bridge.unroll(typeName);
 
                 if (type == null) {
-                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata });
+                    Bridge.Reflection.deferredMeta.push({ typeName: typeName, metadata: metadata, ns: ns });
                     return;
                 }
             }
 
+            ns = Bridge.unroll(ns);
             type.$getMetadata = Bridge.Reflection.getMetadata;
             type.$metadata = metadata;
         },
