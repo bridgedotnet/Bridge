@@ -311,17 +311,17 @@ namespace Bridge.Translator
                     amd.Each(md =>
                     {
                         tmp.Append(this.ToJavaScript(md.DependencyName));
-                        tmp.Append(",");
+                        tmp.Append(", ");
                     });
-                    tmp.Remove(tmp.Length - 1, 1); // remove trailing comma
+                    tmp.Remove(tmp.Length - 2, 2); // remove trailing comma
                     tmp.Append("], function (");
 
                     amd.Each(md =>
                     {
                         tmp.Append(md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName);
-                        tmp.Append(",");
+                        tmp.Append(", ");
                     });
-                    tmp.Remove(tmp.Length - 1, 1); // remove trailing comma
+                    tmp.Remove(tmp.Length - 2, 2); // remove trailing comma
 
                     this.WriteNewLine(tmp, ") {");
 

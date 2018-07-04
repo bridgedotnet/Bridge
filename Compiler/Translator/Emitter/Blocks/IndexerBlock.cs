@@ -255,10 +255,10 @@ namespace Bridge.Translator
                 inlineCode = inlineCode.Replace("{this}", thisArg);
 
                 this.Emitter.Output = new StringBuilder();
-                inlineCode = inlineCode.Replace("{0}", "[[0]]");
+                inlineCode = inlineCode.Replace("{value}", "[[value]]");
                 new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, indexerExpression, rr as InvocationResolveResult), inlineCode).Emit();
                 inlineCode = this.Emitter.Output.ToString();
-                inlineCode = inlineCode.Replace("[[0]]", "{0}");
+                inlineCode = inlineCode.Replace("[[value]]", "{0}");
 
                 this.Emitter.IsAssignment = oldIsAssignment;
                 this.Emitter.IsUnaryAccessor = oldUnary;
@@ -271,15 +271,10 @@ namespace Bridge.Translator
                 }
 
                 this.PushWriter(inlineCode, null, thisArg, range);
-                new ExpressionListBlock(this.Emitter, indexerExpression.Arguments, null, null, 0).Emit();
 
                 if (!this.Emitter.IsAssignment)
                 {
                     this.PopWriter();
-                }
-                else
-                {
-                    this.WriteComma();
                 }
 
                 return;
@@ -1354,7 +1349,16 @@ namespace Bridge.Translator
                 this.Write(" = ");
             }
 
-            indexerExpression.Target.AcceptVisitor(this.Emitter);
+            var rr = this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as MemberResolveResult;
+
+            if (indexerExpression.Target is BaseReferenceExpression && rr != null && this.Emitter.Validator.IsExternalType(rr.Member.DeclaringTypeDefinition) && !this.Emitter.Validator.IsBridgeClass(rr.Member.DeclaringTypeDefinition))
+            {
+                this.Write("this");
+            }
+            else
+            {
+                indexerExpression.Target.AcceptVisitor(this.Emitter);
+            }            
 
             if (!isSimple)
             {

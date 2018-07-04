@@ -219,6 +219,9 @@
 
         "Resources/.generated/System/Guid.js",
 
+        "Resources/.generated/System/ITupleInternal.js",
+        "Resources/.generated/System/ValueTuple.js",
+
         "Resources/.generated/System/IndexOutOfRangeException.js",
         "Resources/.generated/System/InvalidCastException.js",
         "Resources/.generated/System/InvalidOperationException.js",

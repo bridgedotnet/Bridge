@@ -26,7 +26,7 @@ namespace Bridge.Translator
                 .DescendantNodes()
                 .OfType<ArgumentSyntax>()
                 .Where(arg => {
-                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER && arg.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword)
+                    if (arg.Expression is IdentifierNameSyntax ins && ins.Identifier.ValueText == DISCARD_IDENTIFIER)
                     {
                         var si = model.GetSymbolInfo(arg.Expression);
                         return si.Symbol == null || si.Symbol.Kind == SymbolKind.Discard;
@@ -58,6 +58,13 @@ namespace Bridge.Translator
             {
                 try
                 {
+                    var noLocal = false;
+                    var parentTuple = discard.GetParent<TupleExpressionSyntax>();
+                    if (parentTuple != null && parentTuple.Parent is AssignmentExpressionSyntax ae && ae.Left == parentTuple)
+                    {
+                        noLocal = true;
+                    }
+
                     var typeInfo = model.GetTypeInfo(discard.Parent);
                     var beforeStatement = discard.Ancestors().OfType<StatementSyntax>().FirstOrDefault();
 
@@ -76,15 +83,19 @@ namespace Bridge.Translator
                                 }
                             }
 
-                            var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
-                            var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discard.Parent.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                                SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
-                            ));
+                            if (!noLocal)
+                            {
+                                var locals = updatedStatements.ContainsKey(beforeStatement) ? updatedStatements[beforeStatement] : new List<LocalDeclarationStatementSyntax>();
+                                var varDecl = SyntaxFactory.VariableDeclaration(SyntaxHelper.GenerateTypeSyntax(typeInfo.Type, model, discard.Parent.GetLocation().SourceSpan.Start)).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                    SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(instance))
+                                ));
 
-                            var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
-                            locals.Add(local);
+                                var local = SyntaxFactory.LocalDeclarationStatement(varDecl).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.Whitespace("\n"));
+                                locals.Add(local);
 
-                            updatedStatements[beforeStatement] = locals;
+                                updatedStatements[beforeStatement] = locals;
+                            }                            
+
                             updatedDiscards[discard] = instance;
                         }
                         else if (discard.Parent is DeclarationPatternSyntax && !(discard.Parent.Parent is IsPatternExpressionSyntax))

@@ -9,7 +9,7 @@
 #---------------------------------#
 
 # version format
-version: 17.1.1.{build}-{branch}
+version: 17.1.2.{build}-{branch}
 
 # branches to build
 #branches:

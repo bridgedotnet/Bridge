@@ -1038,7 +1038,7 @@
                     for (var i = 0; i < len; i++) {
                         var item = metas[i];
 
-                        Bridge.setMetadata(item.typeName, item.metadata);
+                        Bridge.setMetadata(item.typeName, item.metadata, item.ns);
                     }
                 }
             }
@@ -1070,7 +1070,15 @@
                 if (t.prototype.$main) {
                     (function (cls, name) {
                         Bridge.ready(function () {
-                             cls[name]();
+                            var task = cls[name]();
+
+                            if (task && task.continueWith) {
+                                task.continueWith(function () {
+                                    setTimeout(function () {
+                                        task.getAwaitedResult();
+                                    }, 0);                                    
+                                });
+                            }
                         });
                     })(t, t.prototype.$main.name || "Main");
 
