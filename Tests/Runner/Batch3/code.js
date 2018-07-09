@@ -34157,6 +34157,67 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658", {
+        statics: {
+            methods: {
+                TestNullableClone: function () {
+                    var $t;
+                    // Initialize a nullable struct variable
+                    var A = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point(), $t.X = 10, $t.Y = 20, $t);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, System.Nullable.getValue(A).X);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, System.Nullable.getValue(A).Y);
+
+                    // Copy the struct and modify the copy. Observe that the original struct variable is also modified.
+                    var B = System.Nullable.getValue(A).$clone();
+                    B.X = 100;
+                    B.Y = 200;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(10, System.Nullable.getValue(A).X);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, System.Nullable.getValue(A).Y);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(100, B.X);
+                    Bridge.Test.NUnit.Assert.AreEqual(200, B.Y);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point", {
+        $kind: "nested struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point(); }
+            }
+        },
+        props: {
+            X: 0,
+            Y: 0
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([1852403652, this.X, this.Y]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point)) {
+                    return false;
+                }
+                return Bridge.equals(this.X, o.X) && Bridge.equals(this.Y, o.Y);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point();
+                s.X = this.X;
+                s.Y = this.Y;
+                return s;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
