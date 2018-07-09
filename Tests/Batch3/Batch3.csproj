@@ -750,6 +750,7 @@
     <Compile Include="BridgeIssues\3500\N3589.cs" />
     <Compile Include="BridgeIssues\3500\N3590.cs" />
     <Compile Include="BridgeIssues\3500\N3593.cs" />
+    <Compile Include="BridgeIssues\3500\N3540.cs" />
     <Compile Include="BridgeIssues\3500\N3599.cs" />
     <Compile Include="BridgeIssues\3600\N3607.cs" />
     <Compile Include="BridgeIssues\3600\N3609.cs" />
