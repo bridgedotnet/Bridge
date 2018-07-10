@@ -39,19 +39,7 @@ namespace Bridge.Translator
 
         internal static void CloseProject(Project project)
         {
-            bool isOnMono = Translator.IsRunningOnMono();
-            if (isOnMono)
-            {
-                // This UnloadProject overload should be used if the project created by new Project(XmlReader.Create(this.Location)...)
-                // Otherwise it does NOT work either on Windows or Linux
-                project.ProjectCollection.UnloadProject(project.Xml);
-            }
-            else
-            {
-                // This UnloadProject overload should be used if the project created by new Project(this.Location...)
-                // Otherwise it does NOT work either on Windows or Linux
-                project.ProjectCollection.UnloadProject(project);
-            }
+            project.ProjectCollection.UnloadProject(project);
         }
 
         internal virtual void EnsureProjectProperties()

@@ -33774,6 +33774,50 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * Ensures DateTime.AddSeconds() wont change the current day as long as
+     the time addition does not switch to a different day.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621", {
+        statics: {
+            methods: {
+                /**
+                 * Creates a DateTime object, then incrementing one of the time units
+                 to it; By the provided time, it shouldn't switch to the next day
+                 thus the 'Date' component of the object should be equal across the
+                 two copies.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+                 * @return  {void}
+                 */
+                TestDateFromDateTime: function () {
+                    var first = System.DateTime.create(2018, 5, 5, 1, 1, 1, 1, 1);
+
+                    var second = System.DateTime.addSeconds(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding seconds, as long as the change do not switch the current day/month/year.");
+
+                    second = System.DateTime.addMinutes(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding minutes.");
+
+                    second = System.DateTime.addHours(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding hours.");
+
+                    second = System.DateTime.addMilliseconds(first, 100);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding milisseconds.");
+
+                    second = System.DateTime.addTicks(first, System.Int64(250));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding to the tick count.");
+                }
+            }
+        }
+    });
+
+    /**
      * Ensuring base class calling works even when inheriting from an
      external class.
      *

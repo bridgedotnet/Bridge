@@ -10313,7 +10313,7 @@
                 if (isUTC === true) {
                     dt.setUTCHours(0);
                     dt.setUTCMinutes(0);
-                    dt.setUTCMinutes(0);
+                    dt.setUTCSeconds(0);
                     dt.setUTCMilliseconds(0);
                 } else {
                     dt.setHours(0);
