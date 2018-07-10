@@ -33803,6 +33803,50 @@ Bridge.$N1391Result =                     r;
     });
 
     /**
+     * Ensures DateTime.AddSeconds() wont change the current day as long as
+     the time addition does not switch to a different day.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621", {
+        statics: {
+            methods: {
+                /**
+                 * Creates a DateTime object, then incrementing one of the time units
+                 to it; By the provided time, it shouldn't switch to the next day
+                 thus the 'Date' component of the object should be equal across the
+                 two copies.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3621
+                 * @return  {void}
+                 */
+                TestDateFromDateTime: function () {
+                    var first = System.DateTime.create(2018, 5, 5, 1, 1, 1, 1, 1);
+
+                    var second = System.DateTime.addSeconds(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding seconds, as long as the change do not switch the current day/month/year.");
+
+                    second = System.DateTime.addMinutes(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding minutes.");
+
+                    second = System.DateTime.addHours(first, 1);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding hours.");
+
+                    second = System.DateTime.addMilliseconds(first, 100);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding milisseconds.");
+
+                    second = System.DateTime.addTicks(first, System.Int64(250));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDate(first), System.DateTime.getDate(second), "DateTime's 'Date' is not affected by adding to the tick count.");
+                }
+            }
+        }
+    });
+
+    /**
      * Ensuring base class calling works even when inheriting from an
      external class.
      *
@@ -34182,6 +34226,93 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.Null(val2.Item2, "Change in tuple variable bound to another does not affect its 2nd variable.");
                     Bridge.Test.NUnit.Assert.Null(val2.Item3, "Change in tuple variable bound to another does not affect its 3rd variable.");
                 }
+            }
+        }
+    });
+
+    /**
+     * Ensures nullable versions of structs' .Value member is copied rather
+     than referenced when bound to a non-nullable version of the struct.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658", {
+        statics: {
+            methods: {
+                /**
+                 * Instantiate a nullable version of the struct above, then bind its
+                 '.Value' member to a non-nullable instance. Change the value of the
+                 copy and checks it did not affect the value of the original copy.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658
+                 * @return  {void}
+                 */
+                TestNullableClone: function () {
+                    var $t;
+                    // Initialize a nullable struct variable
+                    var A = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point(), $t.X = 10, $t.Y = 20, $t);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, System.Nullable.getValue(A).X, "Initialized nullable struct value works.");
+                    Bridge.Test.NUnit.Assert.AreEqual(20, System.Nullable.getValue(A).Y, "Another initialized value also works.");
+
+                    // Copy the struct and modify the copy. Observe that the original struct variable is also modified.
+                    var B = System.Nullable.getValue(A).$clone();
+                    B.X = 100;
+                    B.Y = 200;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(10, System.Nullable.getValue(A).X, "Original struct value untouched when changing struct copy's value.");
+                    Bridge.Test.NUnit.Assert.AreEqual(20, System.Nullable.getValue(A).Y, "Another struct member also not changed due to changes in the copy.");
+
+                    Bridge.Test.NUnit.Assert.AreEqual(100, B.X, "Value change in copied struct is reflected therein.");
+                    Bridge.Test.NUnit.Assert.AreEqual(200, B.Y, "Another value change is also effective.");
+                }
+            }
+        }
+    });
+
+    /**
+     * An ordinary struct. It will be used as nullable and .Value bound to
+     another insance to check whether they are copied or just
+     referenced.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point
+     */
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point", {
+        $kind: "nested struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point(); }
+            }
+        },
+        props: {
+            X: 0,
+            Y: 0
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([1852403652, this.X, this.Y]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point)) {
+                    return false;
+                }
+                return Bridge.equals(this.X, o.X) && Bridge.equals(this.Y, o.Y);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3658.Point();
+                s.X = this.X;
+                s.Y = this.Y;
+                return s;
             }
         }
     });

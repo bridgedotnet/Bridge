@@ -756,6 +756,7 @@
     <Compile Include="BridgeIssues\3600\N3609.cs" />
     <Compile Include="BridgeIssues\3600\N3612.cs" />
     <Compile Include="BridgeIssues\3600\N3613.cs" />
+    <Compile Include="BridgeIssues\3600\N3621.cs" />
     <Compile Include="BridgeIssues\3600\N3622.cs" />
     <Compile Include="BridgeIssues\3600\N3625.cs" />
     <Compile Include="BridgeIssues\3600\N3626.cs" />
@@ -763,6 +764,7 @@
     <Compile Include="BridgeIssues\3600\N3628.cs" />
     <Compile Include="BridgeIssues\3600\N3645.cs" />
     <Compile Include="BridgeIssues\3600\N3647.cs" />
+    <Compile Include="BridgeIssues\3600\N3658.cs" />
     <Compile Include="BridgeIssues\3600\N3649.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

@@ -566,6 +566,10 @@ namespace Bridge.Translator
                     inline = inline.Replace("[[0]]", "{0}");
                 }
 
+                this.Emitter.Output = new StringBuilder(inline);
+                Helpers.CheckValueTypeClone(resolveResult, this.MemberReferenceExpression, this, pos);
+                inline = this.Emitter.Output.ToString();
+
                 this.Emitter.IsAssignment = oldIsAssignment;
                 this.Emitter.IsUnaryAccessor = oldUnary;
                 this.Emitter.Output = oldBuilder;

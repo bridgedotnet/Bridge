@@ -28,7 +28,7 @@
     <file src="../../.build/files/Bridge.Min.targets" target="build/Bridge.Min.targets" />
 
     <!--tools-->
-    <file src="../../Compiler/Build/bin/Release/Bridge.Build.dll" target="tools/Bridge.Builder.v16.dll" />
+    <file src="../../Compiler/Build/bin/Release/Bridge.Build.dll" target="tools/Bridge.Builder.v17.dll" />
     <file src="../../Compiler/Build/bin/Release/Bridge.Contract.dll" target="tools/Bridge.Contract.dll" />
     <file src="../../Compiler/Build/bin/Release/Bridge.Translator.dll" target="tools/Bridge.Translator.dll" />
     <file src="../../Compiler/Builder/bin/Release/bridge.exe" target="tools/bridge.exe" />
@@ -73,6 +73,7 @@
     <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.dll" target="tools/Microsoft.Build.dll" />
     <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.Framework.dll" target="tools/Microsoft.Build.Framework.dll" />
     <file src="../../Compiler/Translator/bin/Release/Microsoft.Build.Utilities.Core.dll" target="tools/Microsoft.Build.Utilities.Core.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Threading.Tasks.Dataflow.dll" target="tools/System.Threading.Tasks.Dataflow.dll" />
     <file src="../../Compiler/Translator/bin/Release/System.Runtime.InteropServices.RuntimeInformation.dll" target="tools/System.Runtime.InteropServices.RuntimeInformation.dll" />
   </files>
 </package>
