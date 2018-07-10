@@ -16662,7 +16662,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestTemplateCtor: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3540, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTemplateCtor()", $t.Line = "27", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3540, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTemplateCtor()", $t.Line = "52", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540.TestTemplateCtor();
                 }
             }

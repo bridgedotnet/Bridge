@@ -31431,21 +31431,55 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * Ensures an external, template-driven constructor works on Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540", {
         statics: {
             methods: {
+                /**
+                 * A generics parameter-driven method, necessary to reproduce the issue.
+                 *
+                 * @static
+                 * @private
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540
+                 * @param   {Function}    T
+                 * @return  {T}
+                 */
                 TemplateMethod: function (T) {
                     return Bridge.createInstance(T);
                 },
+                /**
+                 * To test, we'd just call the template method specifying the Test
+                 class as its generics' specialized type, and expect the custom
+                 constructor to be executed.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540
+                 * @return  {void}
+                 */
                 TestTemplateCtor: function () {
                     var test = Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540.TemplateMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540.Test);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(1, test.a);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, test.a, "Custom, template-driven constructor is correctly called.");
                 }
             }
         }
     });
 
+    /**
+     * This class should be marked as reflectable, so that the custom
+     constructor's template can be handled by Bridge.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540.Test
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3540.Test", {
         $kind: "nested class",
         statics: {
