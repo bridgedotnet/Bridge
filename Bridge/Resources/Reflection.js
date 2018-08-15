@@ -463,6 +463,13 @@
             return type.$kind === "interface";
         },
 
+        isAbstract: function (type) {
+            if (type === Function) {
+                return true;
+            }
+            return ((Bridge.Reflection.getMetaValue(type, "att", 0) & 128) != 0);
+        },
+
         _getType: function (typeName, asm, re, noinit) {
             var outer = !re;
 

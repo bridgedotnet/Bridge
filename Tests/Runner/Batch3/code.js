@@ -34351,6 +34351,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3683", {
+        statics: {
+            methods: {
+                TestIsAbstract: function () {
+                    var type = Function;
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAbstract(type));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {

@@ -6,7 +6,7 @@ namespace System
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
     [Bridge.Name("Function")]
-    public class Type
+    public abstract class Type
     {
         public extern string FullName
         {
@@ -85,7 +85,7 @@ namespace System
         /// </summary>
         public extern bool IsAbstract
         {
-            [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 128)  != 0)")]
+            [Bridge.Template("Bridge.Reflection.isAbstract({this})")]
             get;
         }
 
