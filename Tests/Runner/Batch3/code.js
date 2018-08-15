@@ -34351,6 +34351,20 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685", {
+        statics: {
+            methods: {
+                TestIsFixedSize: function () {
+                    var arr = System.Array.init(10, 0, System.Int32);
+                    var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
+
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr));
+                    Bridge.Test.NUnit.Assert.False(System.Array.isFixedSize(list));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
