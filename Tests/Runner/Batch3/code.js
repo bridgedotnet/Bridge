@@ -34351,6 +34351,26 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3682", {
+        statics: {
+            methods: {
+                TestIntParse: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Int32.parse(" 1"));
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.Int32.parse("2 "));
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Int32.parse(" 3 "));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(4, System.Int32.parse("\t4"));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, System.Int32.parse("5\t"));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, System.Int32.parse("\t6\t"));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(7, System.Int32.parse("\r\n7"));
+                    Bridge.Test.NUnit.Assert.AreEqual(8, System.Int32.parse("8\n"));
+                    Bridge.Test.NUnit.Assert.AreEqual(9, System.Int32.parse("\r\n9\n"));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
