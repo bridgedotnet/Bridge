@@ -850,7 +850,7 @@
             if (obj.$boxed) {
                 if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
-                } else if (type.$kind !== "interface" && !type.$nullable) {
+                } else if (!Bridge.Reflection.isInterface(type) && !type.$nullable) {
                     return obj.type === type || Bridge.isObject(type);
                 }
 
@@ -3253,6 +3253,7 @@
 
                 fn.prototype = prototype;
                 fn.prototype.constructor = fn;
+                fn.$kind = cfg.$kind || "class";
             };
 
             Bridge.Class.$queue.push(fn);
@@ -3632,7 +3633,7 @@
         },
 
         getBaseType: function (type) {
-            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || Bridge.Reflection.isInterface(type) || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Bridge.Reflection.convertType(Object.getPrototypeOf(type.prototype).constructor);
@@ -3914,7 +3915,7 @@
         },
 
         isClass: function (type) {
-            return (type.$kind === "class" || type === Array || type === Function || type === RegExp || type === String || type === Error || type === Object);
+            return (type.$kind === "class" || type.$kind === "nested class" || type === Array || type === Function || type === RegExp || type === String || type === Error || type === Object);
         },
 
         isEnum: function (type) {
@@ -3926,7 +3927,7 @@
         },
 
         isInterface: function (type) {
-            return type.$kind === "interface";
+            return type.$kind === "interface" || type.$kind === "nested interface";
         },
 
         _getType: function (typeName, asm, re, noinit) {

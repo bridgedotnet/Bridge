@@ -34351,6 +34351,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684", {
+        statics: {
+            methods: {
+                TestIsInterface: function () {
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2(System.String,System.String)));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {

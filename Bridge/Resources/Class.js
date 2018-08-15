@@ -1020,6 +1020,7 @@
 
                 fn.prototype = prototype;
                 fn.prototype.constructor = fn;
+                fn.$kind = cfg.$kind || "class";
             };
 
             Bridge.Class.$queue.push(fn);
