@@ -220,6 +220,7 @@
         "Resources/.generated/System/Guid.js",
 
         "Resources/.generated/System/ITupleInternal.js",
+        "Resources/.generated/System/Tuple.js",
         "Resources/.generated/System/ValueTuple.js",
 
         "Resources/.generated/System/IndexOutOfRangeException.js",

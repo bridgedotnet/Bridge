@@ -9806,7 +9806,7 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.True(Bridge.objectEquals(key1, key2), "Equals works");
 
-                var dic = new (System.Collections.Generic.Dictionary$2(System.Object,System.Int32))();
+                var dic = new (System.Collections.Generic.Dictionary$2(System.Tuple$2(System.Int32,System.Int32),System.Int32))();
                 dic.add(key1, 1);
 
                 var output1 = { };

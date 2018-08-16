@@ -1,10 +1,7 @@
 namespace System
 {
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1>
     {
         [Bridge.Template("{ Item1: {item1} }")]
@@ -24,10 +21,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2} }")]
@@ -53,10 +47,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3} }")]
@@ -88,10 +79,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4} }")]
@@ -129,10 +117,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5} }")]
@@ -176,10 +161,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6} }")]
@@ -229,10 +211,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6, T7>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7} }")]
@@ -288,10 +267,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6, T7, TRest>
     {
         [Bridge.Template("{ Item1: {item1}, Item2: {item2}, Item3: {item3}, Item4: {item4}, Item5: {item5}, Item6: {item6}, Item7: {item7}, rest: {rest} }")]
@@ -353,10 +329,7 @@ namespace System
     }
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    [Bridge.External]
-    [Bridge.IgnoreGeneric]
     [Bridge.IgnoreCast]
-    [Bridge.Name("System.Object")]
     public static class Tuple
     {
         [Bridge.Template("{ Item1: {item1} }")]
