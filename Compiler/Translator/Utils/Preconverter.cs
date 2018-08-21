@@ -401,12 +401,12 @@ namespace Bridge.Translator
             usingStatement.AcceptVisitor(awaitSearch);
 
             var awaiters = awaitSearch.GetAwaitExpressions().ToArray();
-
+            UsingStatement node = (UsingStatement)base.VisitUsingStatement(usingStatement) ?? (UsingStatement)usingStatement.Clone();
             if (awaiters.Length > 0)
             {
                 IEnumerable<AstNode> inner = null;
 
-                var res = usingStatement.ResourceAcquisition;
+                var res = node.ResourceAcquisition;
                 var varStat = res as VariableDeclarationStatement;
                 if (varStat != null)
                 {
@@ -414,10 +414,10 @@ namespace Bridge.Translator
                     res = varStat.Variables.First();
                 }
 
-                return this.EmitUsing(usingStatement, res, inner, varStat);
+                return this.EmitUsing(node, res, inner, varStat);
             }
 
-            return base.VisitUsingStatement(usingStatement);
+            return node;
         }
 
         private static int counter = 0;

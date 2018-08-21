@@ -6471,6 +6471,7 @@
                             $t.System$IDisposable$Dispose();
                         }
                     }
+
                     return name;
                 },
                 FailFast: function (message) {
@@ -28921,7 +28922,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                             if (Bridge.is($t, System.IDisposable)) {
                                 $t.System$IDisposable$Dispose();
                             }
-                        }return true;
+                        }
+                        return true;
                     } else {
                         $t1 = Bridge.getEnumerator(set2);
                         try {
@@ -28941,7 +28943,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                                     if (Bridge.is($t2, System.IDisposable)) {
                                         $t2.System$IDisposable$Dispose();
                                     }
-                                }if (!found) {
+                                }
+                                if (!found) {
                                     return false;
                                 }
                             }
@@ -28949,7 +28952,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                             if (Bridge.is($t1, System.IDisposable)) {
                                 $t1.System$IDisposable$Dispose();
                             }
-                        }return true;
+                        }
+                        return true;
                     }
                 },
                 AreEqualityComparersEqual: function (set1, set2) {
@@ -29155,7 +29159,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             intersectWith: function (other) {
                 if (other == null) {
                     throw new System.ArgumentNullException.$ctor1("other");
@@ -29199,7 +29204,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             symmetricExceptWith: function (other) {
                 if (other == null) {
                     throw new System.ArgumentNullException.$ctor1("other");
@@ -29318,7 +29324,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }return false;
+                }
+                return false;
             },
             setEquals: function (other) {
                 if (other == null) {
@@ -29469,7 +29476,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }return true;
+                }
+                return true;
             },
             IsSubsetOfHashSetWithSameEC: function (other) {
                 var $t;
@@ -29485,7 +29493,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }return true;
+                }
+                return true;
             },
             IntersectWithHashSetWithSameEC: function (other) {
                 for (var i = 0; i < this._lastIndex; i = (i + 1) | 0) {
@@ -29517,7 +29526,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }for (var i = 0; i < originalLastIndex; i = (i + 1) | 0) {
+                }
+                for (var i = 0; i < originalLastIndex; i = (i + 1) | 0) {
                     if (this._slots[System.Array.index(i, this._slots)].hashCode >= 0 && !bitHelper.IsMarked(i)) {
                         this.remove(this._slots[System.Array.index(i, this._slots)].value);
                     }
@@ -29546,7 +29556,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             SymmetricExceptWithEnumerable: function (other) {
                 var $t;
                 var originalLastIndex = this._lastIndex;
@@ -29575,7 +29586,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }for (var i = 0; i < originalLastIndex; i = (i + 1) | 0) {
+                }
+                for (var i = 0; i < originalLastIndex; i = (i + 1) | 0) {
                     if (itemsToRemove.IsMarked(i)) {
                         this.remove(this._slots[System.Array.index(i, this._slots)].value);
                     }
@@ -29627,7 +29639,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$Dispose();
                         }
-                    }result.uniqueCount = 0;
+                    }
+                    result.uniqueCount = 0;
                     result.unfoundCount = numElementsInOther;
                     return result.$clone();
                 }
@@ -29659,7 +29672,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (Bridge.is($t1, System.IDisposable)) {
                         $t1.System$IDisposable$Dispose();
                     }
-                }result.uniqueCount = uniqueFoundCount;
+                }
+                result.uniqueCount = uniqueFoundCount;
                 result.unfoundCount = unfoundCount;
                 return result.$clone();
             },

@@ -1801,6 +1801,7 @@ namespace Bridge.Translator
             public ConditionalAccessInfo(SemanticModel semanticModel, ConditionalAccessExpressionSyntax node)
             {
                 Node = node;
+                var trueSymbolNode = semanticModel.GetSymbolInfo(node.WhenNotNull).Symbol;
 
                 var expressionType = semanticModel.GetTypeInfo(node.Expression).Type;
                 ExpressionType = SyntaxFactory.ParseTypeName(expressionType.ToMinimalDisplayString(semanticModel, node.Expression.GetLocation().SourceSpan.Start));
@@ -1817,6 +1818,13 @@ namespace Bridge.Translator
 
                 IsResultVoid = resultType.SpecialType == SpecialType.System_Void;
                 IsComplex = IsExpressionComplexEnoughToGetATemporaryVariable.IsComplex(semanticModel, node.Expression);
+
+                if (trueSymbolNode != null && trueSymbolNode is IFieldSymbol && trueSymbolNode.ContainingType.IsTupleType)
+                {
+                    var field = trueSymbolNode as IFieldSymbol;
+                    var tupleField = field.CorrespondingTupleField;
+                    TupleField = "." + tupleField.Name;
+                }
             }
 
             public ConditionalAccessExpressionSyntax Node;
@@ -1826,6 +1834,7 @@ namespace Bridge.Translator
             public bool IsComplex;
             public bool IsNullable;
             public ITypeSymbol UnderlyingNullableType;
+            public string TupleField;
         }
 
         public override SyntaxNode VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
@@ -1909,7 +1918,7 @@ namespace Bridge.Translator
             }
 
             ConditionalAccessInfo lastInfo = infos.Last();
-            ExpressionSyntax whenTrue = SyntaxFactory.ParseExpression(parentTarget.ToString() + lastInfo.Node.WhenNotNull.WithoutTrivia().ToString());
+            ExpressionSyntax whenTrue = SyntaxFactory.ParseExpression(parentTarget.ToString() + (lastInfo.TupleField ?? lastInfo.Node.WhenNotNull.WithoutTrivia().ToString()));
 
             if (lastInfo.IsResultVoid && lastInfo.Node.WhenNotNull is InvocationExpressionSyntax)
             {
