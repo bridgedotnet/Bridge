@@ -34694,12 +34694,33 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * This test ensures Type.IsInterface works as it does in native C#.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684", {
         statics: {
             methods: {
+                /**
+                 * Check IsInterface result off various types.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684
+                 * @return  {void}
+                 */
                 TestIsInterface: function () {
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2));
-                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2(System.String,System.String)));
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2), "IDictionary<,> is an interface.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2(System.String,System.String)), "IDictionary<string,string> is not an interface.");
+                    Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isInterface(System.IDisposable), "IDisposable is an interface.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInterface(System.Int32), "int base type is not an interface.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInterface(System.String), "string base type is not an interface.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInterface(System.Int32), "Int32 struct is not an interface.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInterface(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3684), "Bridge3684 class is not an interface.");
+                    Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isInterface(System.Collections.Generic.Dictionary$2(System.String,System.String)), "Dictionary<string, string> is not an interface.");
                 }
             }
         }
