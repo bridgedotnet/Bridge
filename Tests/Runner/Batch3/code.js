@@ -34726,15 +34726,36 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    /**
+     * THis tests whether the System.IList.IsFixed system property returns the
+     correct result depending on the list being fixed-size or not.
+     *
+     * @public
+     * @class Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685
+     */
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685", {
         statics: {
             methods: {
+                /**
+                 * Simply tests a fixed array and a List against its fixed size
+                 property result.
+                 *
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685
+                 * @return  {void}
+                 */
                 TestIsFixedSize: function () {
                     var arr = System.Array.init(10, 0, System.Int32);
                     var list = new (System.Collections.Generic.List$1(System.Int32)).ctor();
+                    var ltdList = new (System.Collections.Generic.List$1(System.Int32)).$ctor2(10);
 
-                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr));
-                    Bridge.Test.NUnit.Assert.False(System.Array.isFixedSize(list));
+                    Bridge.Test.NUnit.Assert.True(System.Array.isFixedSize(arr), "IList.IsFixedSize is true for a fixed-length array.");
+                    Bridge.Test.NUnit.Assert.False(System.Array.isFixedSize(list), "IList.IsFixedSize is false for an instance of System.Collections.Generic.List.");
+
+                    // Right or wrong, this matches native .NET results.
+                    Bridge.Test.NUnit.Assert.False(System.Array.isFixedSize(ltdList), "IList.IsFixedSize is false for an instance of System.Collections.Generic.List with specified capacity.");
                 }
             }
         }

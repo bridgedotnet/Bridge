@@ -17665,7 +17665,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestIsFixedSize: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3685, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsFixedSize()", $t.Line = "13", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3685, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsFixedSize()", $t.Line = "18", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3685.TestIsFixedSize();
                 }
             }
