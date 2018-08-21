@@ -710,7 +710,7 @@
                     || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     throw new System.FormatException.$ctor1("Input string was not in a correct format.");
                 }
-                
+
                 var result = parseInt(str, radix);
 
                 if (isNaN(result)) {
@@ -728,7 +728,7 @@
                 result.v = 0;
                 radix = radix || 10;
 
-                if (str != null) {
+                if (str != null && str.trim === "".trim) {
                     str = str.trim();
                 }
 
