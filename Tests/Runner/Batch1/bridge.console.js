@@ -431,7 +431,8 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             obj2Css: function (obj) {
                 var $t;
                 var str = "";
@@ -447,6 +448,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         $t.System$IDisposable$Dispose();
                     }
                 }
+
                 return str;
             }
         }

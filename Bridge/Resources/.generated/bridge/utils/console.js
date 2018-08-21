@@ -422,7 +422,8 @@
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             obj2Css: function (obj) {
                 var $t;
                 var str = "";
@@ -438,6 +439,7 @@
                         $t.System$IDisposable$Dispose();
                     }
                 }
+
                 return str;
             }
         }
