@@ -128,6 +128,7 @@
                             $t.System$IDisposable$Dispose();
                         }
                     }
+
                     return name;
                 },
                 FailFast: function (message) {

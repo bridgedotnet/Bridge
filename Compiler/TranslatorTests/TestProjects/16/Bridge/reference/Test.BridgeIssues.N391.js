@@ -32,6 +32,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                             $t.System$IDisposable$Dispose();
                         }
                     }
+
                     $t2 = Bridge.getEnumerator(TestArray1);
                     try {
                         while ($t2.moveNext()) {
@@ -52,7 +53,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                         if (Bridge.is($t2, System.IDisposable)) {
                             $t2.System$IDisposable$Dispose();
                         }
-                    }}
+                    }
+                }
             }
         }
     });

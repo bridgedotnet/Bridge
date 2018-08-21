@@ -81,7 +81,8 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }}
+                }
+            }
         },
         methods: {
             Add: function (t1, t2) {

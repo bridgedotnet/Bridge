@@ -472,6 +472,7 @@ namespace Bridge.Translator
             this.EndBlock();
             this.WriteNewLine();
             this.EndBlock();
+            this.WriteNewLine();
             this.Emitter.JumpStatements = jumpStatements;
         }
 
