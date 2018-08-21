@@ -34632,17 +34632,49 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestIntParse: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Int32.parse(" 1"));
-                    Bridge.Test.NUnit.Assert.AreEqual(2, System.Int32.parse("2 "));
-                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Int32.parse(" 3 "));
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Int32.parse(" 1"), "The ' 1' string is parsed into 1.");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.Int32.parse("2 "), "The '2 ' string is parsed into 2.");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Int32.parse(" 3 "), "The ' 3 ' string is parsed into 3.");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(4, System.Int32.parse("\t4"));
-                    Bridge.Test.NUnit.Assert.AreEqual(5, System.Int32.parse("5\t"));
-                    Bridge.Test.NUnit.Assert.AreEqual(6, System.Int32.parse("\t6\t"));
+                    Bridge.Test.NUnit.Assert.AreEqual(4, System.Int32.parse("\t4"), "The '\\t4' string is parsed into 4.");
+                    Bridge.Test.NUnit.Assert.AreEqual(5, System.Int32.parse("5\t"), "The '5\\t' string is parsed into 5.");
+                    Bridge.Test.NUnit.Assert.AreEqual(6, System.Int32.parse("\t6\t"), "The '\\t6\\t' string is parsed into 6.");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(7, System.Int32.parse("\r\n7"));
-                    Bridge.Test.NUnit.Assert.AreEqual(8, System.Int32.parse("8\n"));
-                    Bridge.Test.NUnit.Assert.AreEqual(9, System.Int32.parse("\r\n9\n"));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, System.Int32.parse("\r\n7"), "The '\\r\\n7' string is parsed into 7.");
+                    Bridge.Test.NUnit.Assert.AreEqual(8, System.Int32.parse("8\n"), "The '8\\n' string is parsed into 8.");
+                    Bridge.Test.NUnit.Assert.AreEqual(9, System.Int32.parse("\r\n9\n"), "The '\\r\\n9\\n' string is parsed into 9.");
+                },
+                TestIntTryParse: function () {
+                    var res = { };
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse(" 1", res), "The ' 1' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, res.v, "The parsed string resulted in 1.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("2 ", res), "The '2 ' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, res.v, "The parsed string resulted in 2.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse(" 3 ", res), "The ' 3 ' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, res.v, "The parsed string resulted in 3.");
+
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("\t4", res), "The '\\t4' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(4, res.v, "The parsed string resulted in 4.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("5\t", res), "The '5\\t' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(5, res.v, "The parsed string resulted in 5.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("\t6\t", res), "The '\\t6\\t' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(6, res.v, "The parsed string resulted in 6.");
+
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("\r\n7", res), "The '\\r\\n7' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(7, res.v, "The parsed string resulted in 7.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("8\n", res), "The '8\\n' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(8, res.v, "The parsed string resulted in 8.");
+                    Bridge.Test.NUnit.Assert.True(System.Int32.tryParse("\r\n9\n", res), "The '\\r\n9\\n' string can be parsed.");
+                    Bridge.Test.NUnit.Assert.AreEqual(9, res.v, "The parsed string resulted in 9.");
+
+                    // Force passing an int as parameter from client side, what can
+                    // happen from some implementations, like Bridge.Newtonsoft.Json
+                    var success = false;
+                    success = System.Int32.tryParse(10, res);
+                    Bridge.Test.NUnit.Assert.True(success, "Client-side crafted call with integer as parameter works.");
+                    Bridge.Test.NUnit.Assert.AreEqual(10, res.v, "The crafted int '10' is parsed as 10.");
+
+                    Bridge.Test.NUnit.Assert.False(System.Int32.tryParse("11 n", res), "The '11 n' string can't be parsed.");
                 }
             }
         }

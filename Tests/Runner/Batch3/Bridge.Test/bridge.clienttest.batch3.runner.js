@@ -78,6 +78,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3667 - TestNullableTuple", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3667.TestNullableTuple);
             QUnit.test("#3678 - TestNestedUsing", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3678.TestNestedUsing);
             QUnit.test("#3682 - TestIntParse", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3682.TestIntParse);
+            QUnit.test("#3682 - TestIntTryParse", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3682.TestIntTryParse);
             QUnit.module("Issues3");
             QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge069.ThisKeywordInStructConstructorWorks);
             QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1000.TestStaticViaChild);
@@ -17580,6 +17581,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3682).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3682, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIntParse()", $t.Line = "12", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3682.TestIntParse();
+                },
+                TestIntTryParse: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3682).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3682, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIntTryParse()", $t.Line = "28", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3682.TestIntTryParse();
                 }
             }
         },
