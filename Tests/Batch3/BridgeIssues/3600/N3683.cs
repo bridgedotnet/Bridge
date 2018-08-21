@@ -12,8 +12,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestIsAbstract()
         {
-            Type type = typeof(Type);
-            Assert.True(type.IsAbstract);
+            Type abstractType = typeof(Type);
+            Assert.True(abstractType.IsAbstract, "Abstract type's 'IsAbstract' is true.");
+
+            Type concreteType = typeof(Bridge3683);
+            Assert.False(concreteType.IsAbstract, "Concrete type's 'IsAbstract' is false.");
         }
     }
 }
