@@ -36,7 +36,8 @@
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             UseNestedFunOneIntStatic: function UseNestedFunOneIntStatic () {
                 var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(500);
                 System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f2);

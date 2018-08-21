@@ -704,6 +704,8 @@
                     throw new System.ArgumentNullException.$ctor1("str");
                 }
 
+                str = str.trim();
+
                 if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
                     || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     throw new System.FormatException.$ctor1("Input string was not in a correct format.");
@@ -725,6 +727,10 @@
             tryParseInt: function (str, result, min, max, radix) {
                 result.v = 0;
                 radix = radix || 10;
+
+                if (str != null && str.trim === "".trim) {
+                    str = str.trim();
+                }
 
                 if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
                     || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
