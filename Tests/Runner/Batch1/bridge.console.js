@@ -1,5 +1,5 @@
 /**
- * @version   : 17.2.0 - Bridge.NET
+ * @version   : 17.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
@@ -431,7 +431,8 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$Dispose();
                     }
-                }},
+                }
+            },
             obj2Css: function (obj) {
                 var $t;
                 var str = "";
@@ -447,6 +448,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         $t.System$IDisposable$Dispose();
                     }
                 }
+
                 return str;
             }
         }

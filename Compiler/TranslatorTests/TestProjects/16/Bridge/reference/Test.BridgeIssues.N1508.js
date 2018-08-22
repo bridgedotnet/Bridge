@@ -31,7 +31,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                             if (Bridge.is($t, System.IDisposable)) {
                                 $t.System$IDisposable$Dispose();
                             }
-                        }}
+                        }
+                    }
                     return false;
                 }
             }

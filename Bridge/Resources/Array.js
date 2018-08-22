@@ -1014,6 +1014,18 @@
         },
 
         isFixedSize: function (array) {
+            if (Bridge.isArray(array)) {
+                return true;
+            } else if (array["System$Collections$IList$isFixedSize"] != null) {
+                return array["System$Collections$IList$isFixedSize"];
+            } else if(array["System$Collections$IList$IsFixedSize"] != null) {
+                return array["System$Collections$IList$IsFixedSize"];
+            } else if (array.isFixedSize != null) {
+                return array.isFixedSize;
+            } else if (array.IsFixedSize != null) {
+                return array.IsFixedSize;
+            }
+
             return true;
         },
 

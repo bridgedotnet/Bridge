@@ -166,7 +166,7 @@
         },
 
         getBaseType: function (type) {
-            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || Bridge.Reflection.isInterface(type) || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Bridge.Reflection.convertType(Object.getPrototypeOf(type.prototype).constructor);
@@ -448,7 +448,7 @@
         },
 
         isClass: function (type) {
-            return (type.$kind === "class" || type === Array || type === Function || type === RegExp || type === String || type === Error || type === Object);
+            return (type.$kind === "class" || type.$kind === "nested class" || type === Array || type === Function || type === RegExp || type === String || type === Error || type === Object);
         },
 
         isEnum: function (type) {
@@ -460,7 +460,14 @@
         },
 
         isInterface: function (type) {
-            return type.$kind === "interface";
+            return type.$kind === "interface" || type.$kind === "nested interface";
+        },
+
+        isAbstract: function (type) {
+            if (type === Function) {
+                return true;
+            }
+            return ((Bridge.Reflection.getMetaValue(type, "att", 0) & 128) != 0);
         },
 
         _getType: function (typeName, asm, re, noinit) {
