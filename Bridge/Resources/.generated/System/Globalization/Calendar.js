@@ -294,8 +294,7 @@
                 try {
                     result.v = this.ToDateTime$1(year, month, day, hour, minute, second, millisecond, era);
                     return true;
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArgumentException)) {
                         return false;

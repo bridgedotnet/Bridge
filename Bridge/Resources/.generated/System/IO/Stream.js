@@ -174,8 +174,7 @@
                 try {
                     var numRead = this.Read(buffer, offset, count);
                     asyncResult = new System.IO.Stream.SynchronousAsyncResult.$ctor1(numRead, state);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var ex;
                     if (Bridge.is($e1, System.IO.IOException)) {
@@ -198,8 +197,7 @@
                 try {
                     this.Write(buffer, offset, count);
                     asyncResult = new System.IO.Stream.SynchronousAsyncResult.$ctor2(state);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var ex;
                     if (Bridge.is($e1, System.IO.IOException)) {

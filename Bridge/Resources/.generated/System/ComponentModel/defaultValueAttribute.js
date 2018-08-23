@@ -22,8 +22,7 @@
                     } else {
                         throw System.NotImplemented.ByDesign;
                     }
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                 }
             },

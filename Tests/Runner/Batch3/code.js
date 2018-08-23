@@ -6055,8 +6055,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         System.Console.WriteLine(System.Boolean.toString(Bridge.referenceEquals(value, "hello world")));
 
                         Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["True", "False", "True"]), Bridge.Console.instance.bufferedOutput);
-                    }
-                    finally {
+                    } finally {
                         Bridge.Console.instance.bufferedOutput = null;
                         Bridge.Console.hide();
                     }
@@ -6328,8 +6327,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var m = System.DateTime.getMonth(System.DateTime.getDefaultValue());
 
                         Bridge.Test.NUnit.Assert.AreEqual(3, $Date, "Date");
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         Bridge.Test.NUnit.Assert.Fail("Date variable");
                     }
@@ -6340,8 +6338,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var s = "".charCodeAt(0);
 
                         Bridge.Test.NUnit.Assert.AreEqual(4, $String, "String");
-                    }
-                    catch ($e2) {
+                    } catch ($e2) {
                         $e2 = System.Exception.create($e2);
                         Bridge.Test.NUnit.Assert.Fail("String variable");
                     }
@@ -6353,8 +6350,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         (0);
 
                         Bridge.Test.NUnit.Assert.AreEqual(7, $Number, "Number");
-                    }
-                    catch ($e3) {
+                    } catch ($e3) {
                         $e3 = System.Exception.create($e3);
                         Bridge.Test.NUnit.Assert.Fail("Number variable");
                     }
@@ -6365,8 +6361,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var c = document.children;
 
                         Bridge.Test.NUnit.Assert.AreEqual(8, document, "document");
-                    }
-                    catch ($e4) {
+                    } catch ($e4) {
                         $e4 = System.Exception.create($e4);
                         Bridge.Test.NUnit.Assert.Fail("document variable");
                     }
@@ -6376,8 +6371,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.value, "value");
                         Bridge.Test.NUnit.Assert.AreEqual(9, $Bridge, "Bridge");
-                    }
-                    catch ($e5) {
+                    } catch ($e5) {
                         $e5 = System.Exception.create($e5);
                         Bridge.Test.NUnit.Assert.Fail("Bridge variable");
                     }
@@ -6391,8 +6385,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var i = System.Array.indexOfT(m, 1);
 
                         Bridge.Test.NUnit.Assert.AreEqual(2, $Array, "Array");
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         Bridge.Test.NUnit.Assert.Fail("Array variable");
                     }
@@ -6403,8 +6396,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         eval("");
 
                         Bridge.Test.NUnit.Assert.AreEqual(3, $eval, "eval");
-                    }
-                    catch ($e2) {
+                    } catch ($e2) {
                         $e2 = System.Exception.create($e2);
                         Bridge.Test.NUnit.Assert.Fail("eval variable");
                     }
@@ -6416,8 +6408,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         o.hasOwnProperty("v");
 
                         Bridge.Test.NUnit.Assert.AreEqual(4, $hasOwnProperty, "hasOwnProperty");
-                    }
-                    catch ($e3) {
+                    } catch ($e3) {
                         $e3 = System.Exception.create($e3);
                         Bridge.Test.NUnit.Assert.Fail("hasOwnProperty variable");
                     }
@@ -6428,8 +6419,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var o1 = Infinity;
 
                         Bridge.Test.NUnit.Assert.AreEqual(5, $Infinity, "Infinity");
-                    }
-                    catch ($e4) {
+                    } catch ($e4) {
                         $e4 = System.Exception.create($e4);
                         Bridge.Test.NUnit.Assert.Fail("Infinity variable");
                     }
@@ -6440,8 +6430,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var o2 = isFinite(null);
 
                         Bridge.Test.NUnit.Assert.AreEqual(6, $isFinite, "isFinite");
-                    }
-                    catch ($e5) {
+                    } catch ($e5) {
                         $e5 = System.Exception.create($e5);
                         Bridge.Test.NUnit.Assert.Fail("isFinite variable");
                     }
@@ -6452,8 +6441,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var o3 = isNaN(null);
 
                         Bridge.Test.NUnit.Assert.AreEqual(6, $isNaN, "isNaN");
-                    }
-                    catch ($e6) {
+                    } catch ($e6) {
                         $e6 = System.Exception.create($e6);
                         Bridge.Test.NUnit.Assert.Fail("isNaN variable");
                     }
@@ -6464,8 +6452,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var o4 = { }.isPrototypeOf(null);
 
                         Bridge.Test.NUnit.Assert.AreEqual(7, $isPrototypeOf, "isPrototypeOf");
-                    }
-                    catch ($e7) {
+                    } catch ($e7) {
                         $e7 = System.Exception.create($e7);
                         Bridge.Test.NUnit.Assert.Fail("isPrototypeOf variable");
                     }
@@ -6476,8 +6463,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         var o5 = Math.abs(0);
 
                         Bridge.Test.NUnit.Assert.AreEqual(8, $Math, "Math");
-                    }
-                    catch ($e8) {
+                    } catch ($e8) {
                         $e8 = System.Exception.create($e8);
                         Bridge.Test.NUnit.Assert.Fail("Math variable");
                     }
@@ -6489,8 +6475,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(9, $NaN, "NaN");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o6), $NaN, "Not NaN");
-                    }
-                    catch ($e9) {
+                    } catch ($e9) {
                         $e9 = System.Exception.create($e9);
                         Bridge.Test.NUnit.Assert.Fail("NaN variable");
                     }
@@ -6502,8 +6487,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(10, $Object, "Object");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o7), $Object, "Not Object");
-                    }
-                    catch ($e10) {
+                    } catch ($e10) {
                         $e10 = System.Exception.create($e10);
                         Bridge.Test.NUnit.Assert.Fail("Object variable");
                     }
@@ -6515,8 +6499,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(11, $prototype, "prototype");
                         Bridge.Test.NUnit.Assert.AreNotEqual(o8, $prototype, "Not prototype");
-                    }
-                    catch ($e11) {
+                    } catch ($e11) {
                         $e11 = System.Exception.create($e11);
                         Bridge.Test.NUnit.Assert.Fail("prototype variable");
                     }
@@ -6528,8 +6511,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(12, $toString, "toString");
                         Bridge.Test.NUnit.Assert.AreNotEqual(o9, $toString, "Not toString");
-                    }
-                    catch ($e12) {
+                    } catch ($e12) {
                         $e12 = System.Exception.create($e12);
                         Bridge.Test.NUnit.Assert.Fail("toString variable");
                     }
@@ -6541,8 +6523,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(13, $undefined, "undefined");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o10), $undefined, "Not undefined");
-                    }
-                    catch ($e13) {
+                    } catch ($e13) {
                         $e13 = System.Exception.create($e13);
                         Bridge.Test.NUnit.Assert.Fail("undefined variable");
                     }
@@ -6554,8 +6535,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                         Bridge.Test.NUnit.Assert.AreEqual(14, $valueOf, "valueOf");
                         Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.unbox(o11), $valueOf, "Not valueOf");
-                    }
-                    catch ($e14) {
+                    } catch ($e14) {
                         $e14 = System.Exception.create($e14);
                         Bridge.Test.NUnit.Assert.Fail("valueOf variable");
                     }
@@ -8795,8 +8775,7 @@ Bridge.$N1391Result =                     r;
                 try {
                     Bridge.Reflection.midel(t, null).apply(null, System.Array.init(["Test #1698"], System.String));
                     Bridge.Test.NUnit.Assert.True(true, "Method executed");
-                }
-                catch (ex) {
+                } catch (ex) {
                     ex = System.Exception.create(ex);
                     Bridge.Test.NUnit.Assert.Fail(Bridge.toString(ex));
                 }
@@ -13910,8 +13889,7 @@ Bridge.$N1391Result =                     r;
                         System.Console.WriteLine("Language: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum.English));
 
                         Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Language: English"]), Bridge.Console.instance.bufferedOutput);
-                    }
-                    finally {
+                    } finally {
                         Bridge.Console.instance.bufferedOutput = null;
                         Bridge.Console.hide();
                     }
@@ -15560,8 +15538,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2195.Generic(System.String);
                         Bridge.Test.NUnit.Assert.AreEqual(1, i);
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         var ex;
                         if (Bridge.is($e1, System.ArgumentException)) {
@@ -16791,21 +16768,18 @@ Bridge.$N1391Result =                     r;
 
                     try {
                         try {
-                        }
-                        catch (e) {
+                        } catch (e) {
                             e = System.Exception.create(e);
                             throw e;
                         }
 
                         try {
                             throw new System.Exception("Second try block");
-                        }
-                        catch (e1) {
+                        } catch (e1) {
                             e1 = System.Exception.create(e1);
                             throw e1;
                         }
-                    }
-                    catch (e2) {
+                    } catch (e2) {
                         e2 = System.Exception.create(e2);
                         message = e2.Message;
                         catched = true;
@@ -17930,8 +17904,7 @@ Bridge.$N1391Result =                     r;
 
                         var isArray = Bridge.isArray(array);
                         Bridge.Test.NUnit.Assert.True(isArray, "Checks that an array created in another frame returns true for Bridge.isArray(array)");
-                    }
-                    finally {
+                    } finally {
                         if (frame != null && frame.parentNode != null) {
                             frame.parentNode.removeChild(frame);
                         }
@@ -17947,8 +17920,7 @@ Bridge.$N1391Result =                     r;
                 Rethrow: function () {
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.DivideByZero();
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         throw new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException(ex);
                     }
@@ -17957,8 +17929,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         var zero = 0;
                         var ecks = (Bridge.Int.div(1, zero)) | 0;
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         throw new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException(ex);
                     }
@@ -17966,8 +17937,7 @@ Bridge.$N1391Result =                     r;
                 TestGetBaseException: function () {
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.Rethrow();
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         var list = new (System.Collections.Generic.List$1(System.Exception)).ctor();
                         var current;
@@ -19398,8 +19368,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThrowsException1();
                         Bridge.Test.NUnit.Assert.Fail("Should have thrown at MethodThrowsException1");
-                    }
-                    catch (e) {
+                    } catch (e) {
                         e = System.Exception.create(e);
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e.StackTrace, "MethodThrowsException1");
                     }
@@ -19407,8 +19376,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThrowsException2();
                         Bridge.Test.NUnit.Assert.Fail("Should have thrown at MethodThrowsException2");
-                    }
-                    catch (e1) {
+                    } catch (e1) {
                         e1 = System.Exception.create(e1);
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "MethodThrowsException2");
                     }
@@ -19518,8 +19486,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         var result = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.TryToGetResult(System.String, myValue);
                         Bridge.Test.NUnit.Assert.AreEqual("WOOOO", result.Value);
-                    }
-                    catch (e) {
+                    } catch (e) {
                         e = System.Exception.create(e);
                         Bridge.Test.NUnit.Assert.Fail(e.Message);
                     }
@@ -22402,8 +22369,7 @@ Bridge.$N1391Result =                     r;
                     for (var i = 0; i < 1; i = (i + 1) | 0) {
                         try {
                             throw new System.Exception();
-                        }
-                        catch ($e1) {
+                        } catch ($e1) {
                             $e1 = System.Exception.create($e1);
                             var i1 = { v : 2 };
 
@@ -32392,8 +32358,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         System.Array.insert(ilist, 0, Bridge.box(0, System.Int32), Object);
                         Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to fixed-size array.");
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex), "Type of exception is \"NotSupported\"");
                         Bridge.Test.NUnit.Assert.AreEqual("Collection was of a fixed size.", ex.Message, "Expected exception message is thrown.");
@@ -32406,8 +32371,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         System.Array.insert(ilist2, 0, Bridge.box(0, System.Int32), Object);
                         Bridge.Test.NUnit.Assert.Fail("No Exception thrown while trying to add element to read-only collection.");
-                    }
-                    catch (ex1) {
+                    } catch (ex1) {
                         ex1 = System.Exception.create(ex1);
                         Bridge.Test.NUnit.Assert.AreEqual(System.NotSupportedException, Bridge.getType(ex1), "Type of exception is \"NotSupported\"");
                         Bridge.Test.NUnit.Assert.AreEqual("Collection is read-only.", ex1.Message, "Expected exception message is thrown.");
@@ -33419,8 +33383,7 @@ Bridge.$N1391Result =                     r;
                 try {
                     // defer error checking to Array.Copy
                     System.Array.copy(this._dict.keys, 0, array, arrayIndex, this._dict.Count);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArrayTypeMismatchException)) {
                         throw new System.ArgumentException.$ctor1("SR.Argument_InvalidArrayType, nameof(array)");
@@ -33673,8 +33636,7 @@ Bridge.$N1391Result =                     r;
                 try {
                     // defer error checking to Array.Copy
                     System.Array.copy(this._dict.values, 0, array, index, this._dict.Count);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArrayTypeMismatchException)) {
                         throw new System.ArgumentException.$ctor1("SR.Argument_InvalidArrayType, nameof(array)");
@@ -40018,8 +39980,7 @@ Bridge.$N1391Result =                     r;
                         Bridge.Test.NUnit.Assert.AreEqual("1,25", System.Single.format(f, "G", System.Globalization.CultureInfo.getCultureInfo("ru-RU")));
                         System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
                         Bridge.Test.NUnit.Assert.AreEqual("1,25", System.Single.format(f));
-                    }
-                    finally {
+                    } finally {
                         System.Globalization.CultureInfo.setCurrentCulture(defaultCulture);
                     }
                 }
@@ -41216,8 +41177,7 @@ Bridge.$N1391Result =                     r;
                                         case 3: {
                                             try {
                                                 throw new System.Exception("test");
-                                            }
-                                            catch ($e1) {
+                                            } catch ($e1) {
                                                 $e1 = System.Exception.create($e1);
                                             }
 
@@ -41357,8 +41317,7 @@ Bridge.$N1391Result =                     r;
                                         case 3: {
                                             try {
                                                 throw new System.Exception("catch");
-                                            }
-                                            catch ($e1) {
+                                            } catch ($e1) {
                                                 $e1 = System.Exception.create($e1);
                                             }
                                             throw $async_e;

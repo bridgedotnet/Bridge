@@ -26,8 +26,7 @@
                     var resourceString = null;
                     try {
                         resourceString = System.SR.InternalGetResourceString(resourceKey);
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         if (Bridge.is($e1, System.Resources.MissingManifestResourceException)) {
                         } else {
