@@ -12700,7 +12700,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 var old = Bridge.Class.staticInitAllow;
 
                 result = Bridge.define(name, {
-                    $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t), System.Collections.Generic.IReadOnlyCollection$1(t)],
+                    $inherits: [System.Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t), System.Collections.Generic.IReadOnlyCollection$1(t)],
                     $noRegister: true,
                     statics: {
                         $elementType: t,
@@ -12753,7 +12753,10 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         }
     };
 
-    System.Array = array;
+    Bridge.define('System.Array', {
+        statics: array
+    });
+
     System.Array.$cache = {};
 
     // @source ArraySegment.js
