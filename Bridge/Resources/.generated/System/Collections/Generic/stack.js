@@ -138,8 +138,7 @@
                 try {
                     System.Array.copy(this._array, 0, array, arrayIndex, this._size);
                     System.Array.reverse(array, arrayIndex, this._size);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     throw new System.ArgumentException.$ctor1("Target array type is not compatible with the type of items in the collection.");
                 }

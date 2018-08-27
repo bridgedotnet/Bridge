@@ -180,8 +180,7 @@
                         this._writable = false;
                         this._expandable = false;
                     }
-                }
-                finally {
+                } finally {
                     System.IO.Stream.prototype.Dispose$1.call(this, disposing);
                 }
             },

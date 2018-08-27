@@ -163,13 +163,11 @@
                     if (disposing && this._stream != null) {
                         try {
                             this.Flush();
-                        }
-                        finally {
+                        } finally {
                             this._stream.Close();
                         }
                     }
-                }
-                finally {
+                } finally {
                     this._stream = null;
                     this._buffer = null;
 
@@ -266,8 +264,7 @@
                     error.v = null;
                     return this.ReadFromBuffer(array, offset, count);
 
-                }
-                catch (ex) {
+                } catch (ex) {
                     ex = System.Exception.create(ex);
                     error.v = ex;
                     return 0;
@@ -368,8 +365,7 @@
                     error.v = null;
                     this.WriteToBuffer(array, offset, count);
 
-                }
-                catch (ex) {
+                } catch (ex) {
                     ex = System.Exception.create(ex);
                     error.v = ex;
                 }

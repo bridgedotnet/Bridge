@@ -356,8 +356,7 @@
                 try {
                     this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(this.Offset);
                     this.m_dateTime = System.DateTimeOffset.ValidateDate(this.ClockDateTime, this.Offset);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var e;
                     if (Bridge.is($e1, System.ArgumentException)) {

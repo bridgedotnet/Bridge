@@ -50,8 +50,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                     try {
                         instance.SetUp();
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         assert.ok(false, "The test failed SetUp");
 
@@ -425,8 +424,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                     try {
                         block();
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         actual = Bridge.Reflection.getTypeFullName(Bridge.getType(ex));
                     }

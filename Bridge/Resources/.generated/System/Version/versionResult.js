@@ -43,8 +43,7 @@
                     case System.Version.ParseFailureKind.FormatException: 
                         try {
                             System.Int32.parse(this.m_exceptionArgument);
-                        }
-                        catch ($e1) {
+                        } catch ($e1) {
                             $e1 = System.Exception.create($e1);
                             var e;
                             if (Bridge.is($e1, System.FormatException)) {

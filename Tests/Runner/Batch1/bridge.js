@@ -11150,8 +11150,7 @@
 
                         try {
                             throw System.NotImplemented.ByDesign;
-                        }
-                        catch ($e1) {
+                        } catch ($e1) {
                             $e1 = System.Exception.create($e1);
                             stackTrace = "";
                         }
@@ -13941,8 +13940,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("value");
@@ -13965,8 +13963,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.add(Bridge.cast(Bridge.unbox(item, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("item");
@@ -14269,8 +14266,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.insert(index, Bridge.cast(Bridge.unbox(item, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("item");
@@ -30564,8 +30560,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 try {
                     System.Array.copy(this._array, 0, array, arrayIndex, this._size);
                     System.Array.reverse(array, arrayIndex, this._size);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     throw new System.ArgumentException.$ctor1("Target array type is not compatible with the type of items in the collection.");
                 }
@@ -31001,8 +30996,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         System.ThrowHelper.ThrowWrongValueTypeArgumentException(System.Object, value, T);
@@ -31027,8 +31021,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.add(Bridge.cast(Bridge.unbox(value, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         System.ThrowHelper.ThrowWrongValueTypeArgumentException(System.Object, value, T);
@@ -31090,8 +31083,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         for (var i = 0; i < count; i = (i + 1) | 0) {
                             objects[System.Array.index(Bridge.identity(index, (index = (index + 1) | 0)), objects)] = System.Array.getItem(this.items, i, T);
                         }
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         if (Bridge.is($e1, System.ArrayTypeMismatchException)) {
                             System.ThrowHelper.ThrowArgumentException_Argument_InvalidArrayType();
@@ -31144,8 +31136,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
                 try {
                     this.insert(index, Bridge.cast(Bridge.unbox(value, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         System.ThrowHelper.ThrowWrongValueTypeArgumentException(System.Object, value, T);
@@ -31477,8 +31468,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     } else {
                         throw System.NotImplemented.ByDesign;
                     }
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                 }
             },
@@ -32080,8 +32070,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 try {
                     this.m_offsetMinutes = System.DateTimeOffset.ValidateOffset(this.Offset);
                     this.m_dateTime = System.DateTimeOffset.ValidateDate(this.ClockDateTime, this.Offset);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var e;
                     if (Bridge.is($e1, System.ArgumentException)) {
@@ -35230,8 +35219,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 try {
                     result.v = this.ToDateTime$1(year, month, day, hour, minute, second, millisecond, era);
                     return true;
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArgumentException)) {
                         return false;
@@ -36322,8 +36310,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 this.FillBuffer(23);
                 try {
                     return System.Decimal.fromBytes(this.m_buffer);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var e;
                     if (Bridge.is($e1, System.ArgumentException)) {
@@ -36516,8 +36503,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         if (!allowSurrogate && charsRead === 2) {
                             throw new System.ArgumentException.ctor();
                         }
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
 
                         if (this.m_stream.CanSeek) {
@@ -37039,8 +37025,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 try {
                     var numRead = this.Read(buffer, offset, count);
                     asyncResult = new System.IO.Stream.SynchronousAsyncResult.$ctor1(numRead, state);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var ex;
                     if (Bridge.is($e1, System.IO.IOException)) {
@@ -37063,8 +37048,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 try {
                     this.Write(buffer, offset, count);
                     asyncResult = new System.IO.Stream.SynchronousAsyncResult.$ctor2(state);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var ex;
                     if (Bridge.is($e1, System.IO.IOException)) {
@@ -37251,13 +37235,11 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (disposing && this._stream != null) {
                         try {
                             this.Flush();
-                        }
-                        finally {
+                        } finally {
                             this._stream.Close();
                         }
                     }
-                }
-                finally {
+                } finally {
                     this._stream = null;
                     this._buffer = null;
 
@@ -37354,8 +37336,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     error.v = null;
                     return this.ReadFromBuffer(array, offset, count);
 
-                }
-                catch (ex) {
+                } catch (ex) {
                     ex = System.Exception.create(ex);
                     error.v = ex;
                     return 0;
@@ -37456,8 +37437,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     error.v = null;
                     this.WriteToBuffer(array, offset, count);
 
-                }
-                catch (ex) {
+                } catch (ex) {
                     ex = System.Exception.create(ex);
                     error.v = ex;
                 }
@@ -38338,8 +38318,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         this._writable = false;
                         this._expandable = false;
                     }
-                }
-                finally {
+                } finally {
                     System.IO.Stream.prototype.Dispose$1.call(this, disposing);
                 }
             },
@@ -38672,8 +38651,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                             this._reader.Dispose();
                         }
                     }
-                }
-                finally {
+                } finally {
                     this._reader = null;
                     System.IO.Iterator$1(System.String).prototype.Dispose$1.call(this, disposing);
                 }
@@ -39153,8 +39131,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     if (!this.LeaveOpen && disposing && (this.stream != null)) {
                         this.stream.Close();
                     }
-                }
-                finally {
+                } finally {
                     if (!this.LeaveOpen && (this.stream != null)) {
                         this.stream = null;
                         this.encoding = null;
@@ -39936,15 +39913,13 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                             this.Flush$1(true, true);
                         }
                     }
-                }
-                finally {
+                } finally {
                     if (!this.LeaveOpen && this.stream != null) {
                         try {
                             if (disposing) {
                                 this.stream.Close();
                             }
-                        }
-                        finally {
+                        } finally {
                             this.stream = null;
                             this.byteBuffer = null;
                             this.charBuffer = null;
@@ -41043,8 +41018,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     var resourceString = null;
                     try {
                         resourceString = System.SR.InternalGetResourceString(resourceKey);
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                         if (Bridge.is($e1, System.Resources.MissingManifestResourceException)) {
                         } else {
@@ -42448,8 +42422,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
 
                 return arr;
-            }
-            catch ($e1) {
+            } catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 return System.Array.init(0, 0, System.Char);
             }
@@ -43397,8 +43370,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     case System.Version.ParseFailureKind.FormatException: 
                         try {
                             System.Int32.parse(this.m_exceptionArgument);
-                        }
-                        catch ($e1) {
+                        } catch ($e1) {
                             $e1 = System.Exception.create($e1);
                             var e;
                             if (Bridge.is($e1, System.FormatException)) {

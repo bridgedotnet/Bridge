@@ -49,8 +49,7 @@
                             this._reader.Dispose();
                         }
                     }
-                }
-                finally {
+                } finally {
                     this._reader = null;
                     System.IO.Iterator$1(System.String).prototype.Dispose$1.call(this, disposing);
                 }

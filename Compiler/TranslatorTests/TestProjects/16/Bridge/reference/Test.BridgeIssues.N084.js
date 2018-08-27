@@ -6,8 +6,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         methods: {
             Test1: function () {
                 try {
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                 }
             }
