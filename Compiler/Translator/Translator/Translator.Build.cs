@@ -170,7 +170,8 @@ namespace Bridge.Translator
             IList<SyntaxTree> trees = new List<SyntaxTree>(files.Count);
             foreach (var file in files)
             {
-                var syntaxTree = SyntaxFactory.ParseSyntaxTree(File.ReadAllText(Path.IsPathRooted(file) ? file : Path.GetFullPath((new Uri(Path.Combine(baseDir, file))).LocalPath)), parseOptions);
+                var filePath = Path.IsPathRooted(file) ? file : Path.GetFullPath((new Uri(Path.Combine(baseDir, file))).LocalPath);
+                var syntaxTree = SyntaxFactory.ParseSyntaxTree(File.ReadAllText(filePath), parseOptions, filePath, Encoding.Default);
                 trees.Add(syntaxTree);
             }
 
@@ -212,18 +213,32 @@ namespace Bridge.Translator
             {
                 StringBuilder sb = new StringBuilder("C# Compilation Failed");
                 sb.AppendLine();
+                
+                baseDir = File.Exists(this.Location) ? Path.GetDirectoryName(this.Location) : Path.GetFullPath(this.Location);
+
                 foreach (var d in emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error))
                 {
+                    var filePath = d.Location?.SourceTree.FilePath ?? "";
+                    if (filePath.StartsWith(baseDir))
+                    {
+                        filePath = filePath.Substring(baseDir.Length + 1);
+                    }
+
                     var mapped = d.Location != null ? d.Location.GetMappedLineSpan() : default(FileLinePositionSpan);
-                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "\t({0},{1}): {2}: {3}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, d.Id, d.GetMessage()));
+                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "\t{4}({0},{1}): {2}: {3}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, d.Id, d.GetMessage(), filePath));
                     foreach (var l in d.AdditionalLocations)
                     {
+                        filePath = l.SourceTree.FilePath ?? "";
+                        if (filePath.StartsWith(baseDir))
+                        {
+                            filePath = filePath.Substring(baseDir.Length + 1);
+                        }
                         mapped = l.GetMappedLineSpan();
-                        sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "\t({0},{1}): (Related location)", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1));
+                        sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "\t{2}({0},{1}): (Related location)", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, filePath));
                     }
                 }
 
-                Bridge.Translator.TranslatorException.Throw(sb.ToString());
+                throw new Bridge.Translator.TranslatorException(sb.ToString());
             }
 
             this.Log.Info("Building assembly done");
