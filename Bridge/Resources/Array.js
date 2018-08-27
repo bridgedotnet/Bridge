@@ -1166,7 +1166,7 @@
         }
     };
 
-    Bridge.define('System.Array', {
+    Bridge.define("System.Array", {
         statics: array
     });
 

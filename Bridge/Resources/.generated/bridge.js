@@ -12753,7 +12753,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         }
     };
 
-    Bridge.define('System.Array', {
+    Bridge.define("System.Array", {
         statics: array
     });
 
