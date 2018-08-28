@@ -180,8 +180,7 @@
 
                 try {
                     this.setItem(index, Bridge.cast(Bridge.unbox(value, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("value");
@@ -204,8 +203,7 @@
 
                 try {
                     this.add(Bridge.cast(Bridge.unbox(item, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("item");
@@ -508,8 +506,7 @@
 
                 try {
                     this.insert(index, Bridge.cast(Bridge.unbox(item, T), T));
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.InvalidCastException)) {
                         throw new System.ArgumentException.$ctor1("item");

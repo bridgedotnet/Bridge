@@ -245,6 +245,7 @@ namespace Bridge.Translator
 
             if (!tryCatchStatement.FinallyBlock.IsNull)
             {
+                this.WriteSpace();
                 this.WriteFinally();
                 tryCatchStatement.FinallyBlock.AcceptVisitor(this.Emitter);
             }
@@ -272,6 +273,7 @@ namespace Bridge.Translator
                 var oldVar = this.Emitter.CatchBlockVariable;
                 this.Emitter.CatchBlockVariable = varName;
 
+                this.WriteSpace();
                 this.WriteCatch();
                 this.WriteOpenParentheses();
                 this.Write(varName);
@@ -290,7 +292,11 @@ namespace Bridge.Translator
                 }
 
                 this.EndBlock();
-                this.WriteNewLine();
+
+                if (tryCatchStatement.FinallyBlock.IsNull)
+                {
+                    this.WriteNewLine();
+                }
 
                 this.PopLocals();
                 this.Emitter.CatchBlockVariable = oldVar;
@@ -301,6 +307,7 @@ namespace Bridge.Translator
         {
             TryCatchStatement tryCatchStatement = this.TryCatchStatement;
 
+            this.WriteSpace();
             this.WriteCatch();
             this.WriteOpenParentheses();
             var varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), null, AstType.Null);
@@ -410,7 +417,10 @@ namespace Bridge.Translator
             }
 
             this.EndBlock();
-            this.WriteNewLine();
+            if (tryCatchStatement.FinallyBlock.IsNull)
+            {
+                this.WriteNewLine();
+            }
             this.Emitter.CatchBlockVariable = oldVar;
         }
     }

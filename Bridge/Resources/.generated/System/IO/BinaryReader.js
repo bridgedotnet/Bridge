@@ -229,8 +229,7 @@
                 this.FillBuffer(23);
                 try {
                     return System.Decimal.fromBytes(this.m_buffer);
-                }
-                catch ($e1) {
+                } catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     var e;
                     if (Bridge.is($e1, System.ArgumentException)) {
@@ -423,8 +422,7 @@
                         if (!allowSurrogate && charsRead === 2) {
                             throw new System.ArgumentException.ctor();
                         }
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
 
                         if (this.m_stream.CanSeek) {

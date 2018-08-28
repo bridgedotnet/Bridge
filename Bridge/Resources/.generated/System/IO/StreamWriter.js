@@ -144,15 +144,13 @@
                             this.Flush$1(true, true);
                         }
                     }
-                }
-                finally {
+                } finally {
                     if (!this.LeaveOpen && this.stream != null) {
                         try {
                             if (disposing) {
                                 this.stream.Close();
                             }
-                        }
-                        finally {
+                        } finally {
                             this.stream = null;
                             this.byteBuffer = null;
                             this.charBuffer = null;

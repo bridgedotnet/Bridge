@@ -139,8 +139,7 @@
                 }
 
                 return arr;
-            }
-            catch ($e1) {
+            } catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 return System.Array.init(0, 0, System.Char);
             }

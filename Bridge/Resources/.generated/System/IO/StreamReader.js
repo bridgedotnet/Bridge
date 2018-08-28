@@ -162,8 +162,7 @@
                     if (!this.LeaveOpen && disposing && (this.stream != null)) {
                         this.stream.Close();
                     }
-                }
-                finally {
+                } finally {
                     if (!this.LeaveOpen && (this.stream != null)) {
                         this.stream = null;
                         this.encoding = null;

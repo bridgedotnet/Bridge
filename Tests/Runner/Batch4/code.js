@@ -736,8 +736,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Safe: function (a) {
                     try {
                         a();
-                    }
-                    catch ($e1) {
+                    } catch ($e1) {
                         $e1 = System.Exception.create($e1);
                     }
                 }

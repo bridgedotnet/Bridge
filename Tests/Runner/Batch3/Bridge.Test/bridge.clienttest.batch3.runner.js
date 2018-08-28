@@ -3236,8 +3236,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString()", $t.Line = "37", $t));
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.TestWriteFormatString();
-                    }
-                    finally {
+                    } finally {
                         t.TearDown();
                     }
                 },
@@ -3246,8 +3245,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString()", $t.Line = "64", $t));
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.TestWriteLineFormatString();
-                    }
-                    finally {
+                    } finally {
                         t.TearDown();
                     }
                 }
@@ -4423,8 +4421,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1458, 1, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestConsoleWriteLineForLong()", $t.Line = "35", $t));
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.TestConsoleWriteLineForLong();
-                    }
-                    finally {
+                    } finally {
                         t.TearDown();
                     }
                 }
@@ -5627,8 +5624,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1698, 14, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestReflectionForNativeTypes()", $t.Line = "39", $t));
                     try {
                         t.Fixture.TestReflectionForNativeTypes();
-                    }
-                    finally {
+                    } finally {
                         t.TearDown();
                     }
                 }
@@ -9186,8 +9182,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2186, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestConsoleWriteLineParameterless()", $t.Line = "37", $t));
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.TestConsoleWriteLineParameterless();
-                    }
-                    finally {
+                    } finally {
                         t.TearDown();
                     }
                 }

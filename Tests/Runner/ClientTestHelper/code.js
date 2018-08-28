@@ -23,8 +23,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     if (failMessage === void 0) { failMessage = null; }
                     try {
                         a();
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         ex = System.Exception.create(ex);
                         Bridge.Test.NUnit.Assert.Fail((failMessage || "") + (Bridge.toString(ex) || ""));
                     }

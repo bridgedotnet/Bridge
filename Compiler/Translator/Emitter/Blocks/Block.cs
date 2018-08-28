@@ -110,6 +110,16 @@ namespace Bridge.Translator
                 return true;
             }
 
+            if (parent is TryCatchStatement tcs && tcs.TryBlock.Equals(this.BlockStatement))
+            {
+                return true;
+            }
+
+            if (parent is CatchClause)
+            {
+                return true;
+            }
+
             if (parent is AnonymousMethodExpression)
             {
                 return true;
