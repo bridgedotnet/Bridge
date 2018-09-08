@@ -4,6 +4,7 @@ using ICSharpCode.NRefactory.CSharp;
 using Object.Net.Utilities;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -128,6 +129,12 @@ namespace Bridge.Translator.TypeScript
                 this.WriteColon();
                 name = BridgeTypes.ToTypeScriptName(p.Type, this.Emitter);
                 this.Write(name);
+
+                var resolveResult = this.Emitter.Resolver.ResolveNode(p.Type, this.Emitter);
+                if (resolveResult != null && (resolveResult.Type.IsReferenceType.HasValue && resolveResult.Type.IsReferenceType.Value || resolveResult.Type.IsKnownType(KnownTypeCode.NullableOfT)))
+                {
+                    this.Write(" | null");
+                }
             }
 
             this.WriteCloseParentheses();

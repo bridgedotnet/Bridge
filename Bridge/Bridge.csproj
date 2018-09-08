@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\Convention.cs" />
+    <Compile Include="Attributes\OptionalAttribute.cs" />
     <Compile Include="Attributes\PrivateProtectedAttribute.cs" />
     <Compile Include="Attributes\ExternalInterfaceAttribute.cs" />
     <Compile Include="Attributes\CastAttribute.cs" />

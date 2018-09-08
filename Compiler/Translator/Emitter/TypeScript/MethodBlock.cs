@@ -108,6 +108,12 @@ namespace Bridge.Translator.TypeScript
             var retType = BridgeTypes.ToTypeScriptName(methodDeclaration.ReturnType, this.Emitter);
             this.Write(retType);
 
+            var resolveResult = this.Emitter.Resolver.ResolveNode(methodDeclaration.ReturnType, this.Emitter);
+            if (resolveResult != null && (resolveResult.Type.IsReferenceType.HasValue && resolveResult.Type.IsReferenceType.Value || resolveResult.Type.IsKnownType(KnownTypeCode.NullableOfT)))
+            {
+                this.Write(" | null");
+            }
+
             this.WriteSemiColon();
             this.WriteNewLine();
         }
@@ -136,6 +142,13 @@ namespace Bridge.Translator.TypeScript
 
                 this.WriteColon();
                 name = BridgeTypes.ToTypeScriptName(p.Type, this.Emitter);
+
+                var resolveResult = this.Emitter.Resolver.ResolveNode(p.Type, this.Emitter);
+                if (resolveResult != null && (resolveResult.Type.IsReferenceType.HasValue && resolveResult.Type.IsReferenceType.Value || resolveResult.Type.IsKnownType(KnownTypeCode.NullableOfT)))
+                {
+                    name += " | null";
+                }
+
                 if (p.ParameterModifier == ParameterModifier.Out || p.ParameterModifier == ParameterModifier.Ref)
                 {
                     name = "{v: " + name + "}";

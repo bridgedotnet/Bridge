@@ -61,9 +61,23 @@ namespace Bridge.Translator.TypeScript
         {
             string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, false, false, ignoreInterface);
             this.Write(name);
+
+            var property_rr = this.Emitter.Resolver.ResolveNode(p, this.Emitter);
+            if (property_rr is MemberResolveResult mrr && mrr.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.OptionalAttribute"))
+            {
+                this.Write("?");
+            }
+
             this.WriteColon();
             name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
             this.Write(name);
+
+            var resolveResult = this.Emitter.Resolver.ResolveNode(p.ReturnType, this.Emitter);
+            if (resolveResult != null && (resolveResult.Type.IsReferenceType.HasValue && resolveResult.Type.IsReferenceType.Value || resolveResult.Type.IsKnownType(KnownTypeCode.NullableOfT)))
+            {
+                this.Write(" | null");
+            }
+
             this.WriteSemiColon();
             this.WriteNewLine();
         }
