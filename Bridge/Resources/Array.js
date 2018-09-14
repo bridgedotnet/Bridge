@@ -559,7 +559,12 @@
                 v;
 
             if (Bridge.isArray(obj)) {
-                return obj.$type && Bridge.getDefaultValue(obj.$type.$elementType) != null ? Bridge.box(obj[idx], obj.$type.$elementType) : obj[idx];
+                v = obj[idx];
+                if (T) {
+                    return v;
+                }
+
+                return (obj.$type && (Bridge.isNumber(v) || Bridge.isBoolean(v) || Bridge.isDate(v))) ? Bridge.box(v, obj.$type.$elementType) : v;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
                 v = obj[name](idx);
                 return v;
