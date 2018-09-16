@@ -102,6 +102,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.BaseClass", {
+        props: {
+            Value: System.Decimal(0.0)
+        },
+        ctors: {
+            ctor: function (value) {
+                this.$initialize();
+                this.Value = value;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge069", {
         statics: {
             methods: {
@@ -34723,6 +34735,19 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3714", {
+        statics: {
+            methods: {
+                TestBaseCtorArgumentConversion: function () {
+                    var test = new Bridge.ClientTest.Batch3.BridgeIssues.SubClass();
+                    var v = test.Value.add(test.Value);
+
+                    Bridge.Test.NUnit.Assert.True(v.equalsT(System.Decimal(2.0)));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {
@@ -45528,6 +45553,17 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.AreEqual("Something1", test);
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.SubClass", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.BaseClass],
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                Bridge.ClientTest.Batch3.BridgeIssues.BaseClass.ctor.call(this, System.Decimal(1));
+
             }
         }
     });

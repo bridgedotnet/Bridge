@@ -156,7 +156,30 @@ namespace Bridge.Translator
                 var expectedType = block.Emitter.Resolver.Resolver.GetExpectedType(expression);
                 int level = 0;
 
-                if (expression.Parent is ParenthesizedExpression && expression.Parent.Parent is CastExpression)
+                if (expression.Parent is ConstructorInitializer ci && expectedType.Equals(rr.Type))
+                {
+                    var prr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter);
+                    
+                    if (prr is InvocationResolveResult irr)
+                    {
+                        var args = irr.GetArgumentsForCall();
+
+                        for (int i = 0; i < ci.Arguments.Count; i++)
+                        {
+                            var item = ci.Arguments.ElementAt(i);
+                            if (item.Equals(expression))
+                            {
+                                if(args.Count > i)
+                                {
+                                    expectedType = args[i].Type;
+                                }
+                                
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (expression.Parent is ParenthesizedExpression && expression.Parent.Parent is CastExpression)
                 {
                     var prr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter);
                     var pconversion = block.Emitter.Resolver.Resolver.GetConversion((Expression)expression.Parent);
