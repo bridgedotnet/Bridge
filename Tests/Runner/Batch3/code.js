@@ -34723,6 +34723,22 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3713", {
+        statics: {
+            methods: {
+                TestValueType: function () {
+                    var test = 123;
+                    var o = Bridge.box(test, System.Int32);
+                    var vt = Bridge.cast(Bridge.box(test, System.Int32), System.ValueType);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(123, System.Nullable.getValue(Bridge.cast(Bridge.unbox(vt, System.Int32), System.Int32)));
+                    Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.toString(vt));
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.ValueType));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             methods: {

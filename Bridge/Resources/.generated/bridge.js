@@ -851,7 +851,7 @@
                 if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
                 } else if (!Bridge.Reflection.isInterface(type) && !type.$nullable) {
-                    return obj.type === type || Bridge.isObject(type);
+                    return obj.type === type || Bridge.isObject(type) || type === System.ValueType && Bridge.Reflection.isValueType(obj.type);
                 }
 
                 if (ignoreFn !== true && type.$is) {
@@ -4633,6 +4633,18 @@
     Bridge.define("System.IAsyncResult", {
         $kind: "interface"
     });
+
+    // @source ValueType.js
+
+Bridge.define("System.ValueType", {
+    statics: {
+        methods: {
+            $is: function (obj) {
+                return Bridge.Reflection.isValueType(Bridge.getType(obj));
+            }
+        }
+    }
+});
 
     // @source Enum.js
 

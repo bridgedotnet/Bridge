@@ -1617,6 +1617,7 @@
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\ClientWebSocket.js" />
     <Content Include="Resources\Object.js" />
+    <Content Include="Resources\ValueType.js" />
     <Content Include="Resources\Uri.js" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />

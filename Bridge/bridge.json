@@ -35,6 +35,7 @@
         "Resources/.generated/Bridge/Utils/SystemAssemblyVersion.js",
         "Resources/Reflection.js",
         "Resources/Interfaces.js",
+        "Resources/ValueType.js",
         "Resources/Enum.js",
         "Resources/Nullable.js",
         "Resources/Char.js",

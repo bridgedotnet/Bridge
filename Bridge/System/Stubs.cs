@@ -2,10 +2,8 @@ using System.ComponentModel;
 
 namespace System
 {
-    [EditorBrowsable(EditorBrowsableState.Never)]
     [Bridge.External]
-    [Bridge.NonScriptable]
-    public class ValueType
+    public abstract class ValueType
     {
     }
 
