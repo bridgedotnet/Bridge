@@ -269,7 +269,7 @@
 
         getTypeAssembly: function (type) {
             if (type.$isArray) {
-                return type.$elementType.$assembly;
+                return Bridge.Reflection.getTypeAssembly(type.$elementType);
             }
 
             if (System.Array.contains([Date, Number, Boolean, String, Function, Array], type)) {
