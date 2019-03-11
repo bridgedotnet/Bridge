@@ -42,11 +42,11 @@ namespace System.Collections.Generic
 
         public Dictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
+            this.isSimpleKey = ((typeof(TKey) == typeof(System.String)) || (Script.Get<bool>("TKey.$number") == true && typeof(TKey) != typeof(System.Int64) && typeof(TKey) != typeof(System.UInt64)) || (typeof(TKey) == typeof(System.Char))) && (this.comparer == EqualityComparer<TKey>.Default);
+
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
-            this.comparer = comparer ?? EqualityComparer<TKey>.Default;
-
-            this.isSimpleKey = ((typeof(TKey) == typeof(System.String)) || (Script.Get<bool>("TKey.$number") == true && typeof(TKey) != typeof(System.Int64) && typeof(TKey) != typeof(System.UInt64)) || (typeof(TKey) == typeof(System.Char))) && (this.comparer == EqualityComparer<TKey>.Default);
+            this.comparer = comparer ?? EqualityComparer<TKey>.Default;            
         }
 
         public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
