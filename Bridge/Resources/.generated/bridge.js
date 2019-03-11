@@ -680,10 +680,6 @@
                 throw new System.InvalidOperationException.$ctor1("HashCode cannot be calculated for empty value");
             }
 
-            if (deep !== false && value.hasOwnProperty("Item1") && Bridge.isPlainObject(value)) {
-                deep = true;
-            }
-
             if (value.getHashCode && Bridge.isFunction(value.getHashCode) && !value.__insideHashCode && value.getHashCode.length === 0) {
                 value.__insideHashCode = true;
                 var r = value.getHashCode();
@@ -718,18 +714,25 @@
             }
 
             if (Bridge.isString(value)) {
-                var hash = 0,
-                    i;
-
-                for (i = 0; i < value.length; i++) {
-                    hash = (((hash << 5) - hash) + value.charCodeAt(i)) & 0xFFFFFFFF;
+                if (Math.imul) {
+                    for (var i = 0, h = 0; i < value.length; i++)
+                        h = Math.imul(31, h) + value.charCodeAt(i) | 0;
+                    return h;
+                } else {
+                    var h = 0, l = value.length, i = 0;
+                    if (l > 0)
+                        while (i < l)
+                            h = (h << 5) - h + value.charCodeAt(i++) | 0;
+                    return h;
                 }
-
-                return hash;
             }
 
             if (value.$$hashCode) {
                 return value.$$hashCode;
+            }
+
+            if (deep !== false && value.hasOwnProperty("Item1") && Bridge.isPlainObject(value)) {
+                deep = true;
             }
 
             if (deep && typeof value == "object") {
@@ -18431,6 +18434,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         },
         fields: {
             buckets: null,
+            simpleBuckets: null,
             entries: null,
             count: 0,
             version: 0,
@@ -18438,7 +18442,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             freeCount: 0,
             comparer: null,
             keys: null,
-            values: null
+            values: null,
+            isSimpleKey: false
         },
         props: {
             Comparer: {
@@ -18581,6 +18586,8 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     this.Initialize(capacity);
                 }
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
+
+                this.isSimpleKey = ((Bridge.referenceEquals(TKey, System.String)) || (TKey.$number === true && !Bridge.referenceEquals(TKey, System.Int64) && !Bridge.referenceEquals(TKey, System.UInt64)) || (Bridge.referenceEquals(TKey, System.Char))) && (Bridge.referenceEquals(this.comparer, System.Collections.Generic.EqualityComparer$1(TKey).def));
             },
             $ctor1: function (dictionary) {
                 System.Collections.Generic.Dictionary$2(TKey,TValue).$ctor2.call(this, dictionary, null);
@@ -18714,22 +18721,37 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     System.ThrowHelper.ThrowArgumentNullException(System.ExceptionArgument.key);
                 }
 
-                if (this.buckets != null) {
-                    var hashCode = this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2")](key) & 2147483647;
-                    var bucket = hashCode % this.buckets.length;
-                    var last = -1;
-                    for (var i = this.buckets[System.Array.index(bucket, this.buckets)]; i >= 0; last = i, i = this.entries[System.Array.index(i, this.entries)].next) {
-                        if (this.entries[System.Array.index(i, this.entries)].hashCode === hashCode && this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2")](this.entries[System.Array.index(i, this.entries)].key, key)) {
-                            if (last < 0) {
-                                this.buckets[System.Array.index(bucket, this.buckets)] = this.entries[System.Array.index(i, this.entries)].next;
-                            } else {
-                                this.entries[System.Array.index(last, this.entries)].next = this.entries[System.Array.index(i, this.entries)].next;
-                            }
+                if (this.isSimpleKey) {
+                    if (this.simpleBuckets != null) {
+                        if (this.simpleBuckets.hasOwnProperty(key)) {
+                            var i = this.simpleBuckets[key];
+                            delete this.simpleBuckets[key];
                             this.entries[System.Array.index(i, this.entries)].hashCode = -1;
                             this.entries[System.Array.index(i, this.entries)].next = this.freeList;
                             this.entries[System.Array.index(i, this.entries)].key = Bridge.getDefaultValue(TKey);
                             this.entries[System.Array.index(i, this.entries)].value = Bridge.getDefaultValue(TValue);
                             this.freeList = i;
+                            this.freeCount = (this.freeCount + 1) | 0;
+                            this.version = (this.version + 1) | 0;
+                            return true;
+                        }
+                    }
+                } else if (this.buckets != null) {
+                    var hashCode = this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2")](key) & 2147483647;
+                    var bucket = hashCode % this.buckets.length;
+                    var last = -1;
+                    for (var i1 = this.buckets[System.Array.index(bucket, this.buckets)]; i1 >= 0; last = i1, i1 = this.entries[System.Array.index(i1, this.entries)].next) {
+                        if (this.entries[System.Array.index(i1, this.entries)].hashCode === hashCode && this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2")](this.entries[System.Array.index(i1, this.entries)].key, key)) {
+                            if (last < 0) {
+                                this.buckets[System.Array.index(bucket, this.buckets)] = this.entries[System.Array.index(i1, this.entries)].next;
+                            } else {
+                                this.entries[System.Array.index(last, this.entries)].next = this.entries[System.Array.index(i1, this.entries)].next;
+                            }
+                            this.entries[System.Array.index(i1, this.entries)].hashCode = -1;
+                            this.entries[System.Array.index(i1, this.entries)].next = this.freeList;
+                            this.entries[System.Array.index(i1, this.entries)].key = Bridge.getDefaultValue(TKey);
+                            this.entries[System.Array.index(i1, this.entries)].value = Bridge.getDefaultValue(TValue);
+                            this.freeList = i1;
                             this.freeCount = (this.freeCount + 1) | 0;
                             this.version = (this.version + 1) | 0;
                             return true;
@@ -18747,6 +18769,9 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 if (this.count > 0) {
                     for (var i = 0; i < this.buckets.length; i = (i + 1) | 0) {
                         this.buckets[System.Array.index(i, this.buckets)] = -1;
+                    }
+                    if (this.isSimpleKey) {
+                        this.simpleBuckets = { };
                     }
                     System.Array.fill(this.entries, System.Collections.Generic.Dictionary$2.Entry(TKey,TValue).getDefaultValue, 0, this.count);
                     this.freeList = -1;
@@ -18872,7 +18897,11 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     System.ThrowHelper.ThrowArgumentNullException(System.ExceptionArgument.key);
                 }
 
-                if (this.buckets != null) {
+                if (this.isSimpleKey) {
+                    if (this.simpleBuckets != null && this.simpleBuckets.hasOwnProperty(key)) {
+                        return this.simpleBuckets[key];
+                    }
+                } else if (this.buckets != null) {
                     var hashCode = this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2")](key) & 2147483647;
                     for (var i = this.buckets[System.Array.index(hashCode % this.buckets.length, this.buckets)]; i >= 0; i = this.entries[System.Array.index(i, this.entries)].next) {
                         if (this.entries[System.Array.index(i, this.entries)].hashCode === hashCode && this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2")](this.entries[System.Array.index(i, this.entries)].key, key)) {
@@ -18892,6 +18921,10 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                     return new (System.Collections.Generic.Dictionary$2.Entry(TKey,TValue))();
                 }, System.Collections.Generic.Dictionary$2.Entry(TKey,TValue));
                 this.freeList = -1;
+
+                if (this.isSimpleKey) {
+                    this.simpleBuckets = { };
+                }
             },
             Insert: function (key, value, add) {
 
@@ -18902,6 +18935,42 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 if (this.buckets == null) {
                     this.Initialize(0);
                 }
+
+                if (this.isSimpleKey) {
+                    if (this.simpleBuckets.hasOwnProperty(key)) {
+                        if (add) {
+                            System.ThrowHelper.ThrowArgumentException(System.ExceptionResource.Argument_AddingDuplicate);
+                        }
+
+                        this.entries[System.Array.index(this.simpleBuckets[key], this.entries)].value = value;
+                        this.version = (this.version + 1) | 0;
+                        return;
+                    }
+
+                    var simpleIndex;
+                    if (this.freeCount > 0) {
+                        simpleIndex = this.freeList;
+                        this.freeList = this.entries[System.Array.index(simpleIndex, this.entries)].next;
+                        this.freeCount = (this.freeCount - 1) | 0;
+                    } else {
+                        if (this.count === this.entries.length) {
+                            this.Resize();
+                        }
+                        simpleIndex = this.count;
+                        this.count = (this.count + 1) | 0;
+                    }
+
+                    this.entries[System.Array.index(simpleIndex, this.entries)].hashCode = 1;
+                    this.entries[System.Array.index(simpleIndex, this.entries)].next = -1;
+                    this.entries[System.Array.index(simpleIndex, this.entries)].key = key;
+                    this.entries[System.Array.index(simpleIndex, this.entries)].value = value;
+
+                    this.simpleBuckets[key] = simpleIndex;
+                    this.version = (this.version + 1) | 0;
+
+                    return;
+                }
+
                 var hashCode = this.comparer[Bridge.geti(this.comparer, "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(TKey) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2")](key) & 2147483647;
                 var targetBucket = hashCode % this.buckets.length;
 
@@ -18944,6 +19013,9 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 for (var i = 0; i < newBuckets.length; i = (i + 1) | 0) {
                     newBuckets[System.Array.index(i, newBuckets)] = -1;
                 }
+                if (this.isSimpleKey) {
+                    this.simpleBuckets = { };
+                }
                 var newEntries = System.Array.init(newSize, function (){
                     return new (System.Collections.Generic.Dictionary$2.Entry(TKey,TValue))();
                 }, System.Collections.Generic.Dictionary$2.Entry(TKey,TValue));
@@ -18957,9 +19029,14 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 }
                 for (var i2 = 0; i2 < this.count; i2 = (i2 + 1) | 0) {
                     if (newEntries[System.Array.index(i2, newEntries)].hashCode >= 0) {
-                        var bucket = newEntries[System.Array.index(i2, newEntries)].hashCode % newSize;
-                        newEntries[System.Array.index(i2, newEntries)].next = newBuckets[System.Array.index(bucket, newBuckets)];
-                        newBuckets[System.Array.index(bucket, newBuckets)] = i2;
+                        if (this.isSimpleKey) {
+                            newEntries[System.Array.index(i2, newEntries)].next = -1;
+                            this.simpleBuckets[newEntries[System.Array.index(i2, newEntries)].key] = i2;
+                        } else {
+                            var bucket = newEntries[System.Array.index(i2, newEntries)].hashCode % newSize;
+                            newEntries[System.Array.index(i2, newEntries)].next = newBuckets[System.Array.index(bucket, newBuckets)];
+                            newBuckets[System.Array.index(bucket, newBuckets)] = i2;
+                        }
                     }
                 }
                 this.buckets = newBuckets;

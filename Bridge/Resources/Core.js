@@ -662,10 +662,6 @@
                 throw new System.InvalidOperationException.$ctor1("HashCode cannot be calculated for empty value");
             }
 
-            if (deep !== false && value.hasOwnProperty("Item1") && Bridge.isPlainObject(value)) {
-                deep = true;
-            }
-
             if (value.getHashCode && Bridge.isFunction(value.getHashCode) && !value.__insideHashCode && value.getHashCode.length === 0) {
                 value.__insideHashCode = true;
                 var r = value.getHashCode();
@@ -700,18 +696,25 @@
             }
 
             if (Bridge.isString(value)) {
-                var hash = 0,
-                    i;
-
-                for (i = 0; i < value.length; i++) {
-                    hash = (((hash << 5) - hash) + value.charCodeAt(i)) & 0xFFFFFFFF;
+                if (Math.imul) {
+                    for (var i = 0, h = 0; i < value.length; i++)
+                        h = Math.imul(31, h) + value.charCodeAt(i) | 0;
+                    return h;
+                } else {
+                    var h = 0, l = value.length, i = 0;
+                    if (l > 0)
+                        while (i < l)
+                            h = (h << 5) - h + value.charCodeAt(i++) | 0;
+                    return h;
                 }
-
-                return hash;
             }
 
             if (value.$$hashCode) {
                 return value.$$hashCode;
+            }
+
+            if (deep !== false && value.hasOwnProperty("Item1") && Bridge.isPlainObject(value)) {
+                deep = true;
             }
 
             if (deep && typeof value == "object") {

@@ -1,6 +1,6 @@
 namespace System.Collections.Generic
 {
-
+    using Bridge;
     using System;
     using System.Collections;
     //using System.Diagnostics.Contracts;
@@ -17,6 +17,7 @@ namespace System.Collections.Generic
         }
 
         private int[] buckets;
+        private object simpleBuckets;
         private Entry[] entries;
         private int count;
         private int version;
@@ -25,6 +26,7 @@ namespace System.Collections.Generic
         private IEqualityComparer<TKey> comparer;
         private KeyCollection keys;
         private ValueCollection values;
+        private bool isSimpleKey;
 
         // constants for serialization
         private const String VersionName = "Version";
@@ -43,6 +45,8 @@ namespace System.Collections.Generic
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
             this.comparer = comparer ?? EqualityComparer<TKey>.Default;
+
+            this.isSimpleKey = ((typeof(TKey) == typeof(System.String)) || (Script.Get<bool>("TKey.$number") == true && typeof(TKey) != typeof(System.Int64) && typeof(TKey) != typeof(System.UInt64)) || (typeof(TKey) == typeof(System.Char))) && (this.comparer == EqualityComparer<TKey>.Default);
         }
 
         public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
@@ -143,6 +147,14 @@ namespace System.Collections.Generic
             }
         }
 
+        [Bridge.Template("{obj}[{key}]")]
+        [Bridge.External]
+        public static extern int GetBucket(object obj, TKey key);
+
+        [Bridge.Template("{obj}[{key}] = {value}")]
+        [Bridge.External]
+        public static extern void SetBucket(object obj, TKey key, int value);
+
         public void Add(TKey key, TValue value)
         {
             Insert(key, value, true);
@@ -179,6 +191,10 @@ namespace System.Collections.Generic
             if (count > 0)
             {
                 for (int i = 0; i < buckets.Length; i++) buckets[i] = -1;
+                if (this.isSimpleKey)
+                {
+                    this.simpleBuckets = new object();
+                }
                 Array.Clear(entries, 0, count);
                 freeList = -1;
                 count = 0;
@@ -257,7 +273,14 @@ namespace System.Collections.Generic
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            if (buckets != null)
+            if (this.isSimpleKey)
+            {
+                if (this.simpleBuckets != null && this.simpleBuckets.HasOwnProperty(key))
+                {
+                    return GetBucket(this.simpleBuckets, key);
+                }
+            }
+            else if (buckets != null)
             {
                 int hashCode = comparer.GetHashCode(key) & 0x7FFFFFFF;
                 for (int i = buckets[hashCode % buckets.Length]; i >= 0; i = entries[i].next)
@@ -275,6 +298,11 @@ namespace System.Collections.Generic
             for (int i = 0; i < buckets.Length; i++) buckets[i] = -1;
             entries = new Entry[size];
             freeList = -1;
+
+            if (this.isSimpleKey)
+            {
+                this.simpleBuckets = new object();
+            }
         }
 
         private void Insert(TKey key, TValue value, bool add)
@@ -286,6 +314,49 @@ namespace System.Collections.Generic
             }
 
             if (buckets == null) Initialize(0);
+
+            if(this.isSimpleKey)
+            {
+                if(this.simpleBuckets.HasOwnProperty(key))
+                {
+                    if (add)
+                    {
+                        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_AddingDuplicate);
+                    }
+                    
+                    entries[GetBucket(this.simpleBuckets, key)].value = value;
+                    version++;
+                    return;
+                }
+
+                int simpleIndex;
+                if (freeCount > 0)
+                {
+                    simpleIndex = freeList;
+                    freeList = entries[simpleIndex].next;
+                    freeCount--;
+                }
+                else
+                {
+                    if (count == entries.Length)
+                    {
+                        Resize();
+                    }
+                    simpleIndex = count;
+                    count++;
+                }
+
+                entries[simpleIndex].hashCode = 1;
+                entries[simpleIndex].next = -1;
+                entries[simpleIndex].key = key;
+                entries[simpleIndex].value = value;
+
+                SetBucket(simpleBuckets, key, simpleIndex);
+                version++;
+
+                return;
+            }
+
             int hashCode = comparer.GetHashCode(key) & 0x7FFFFFFF;
             int targetBucket = hashCode % buckets.Length;
 
@@ -338,6 +409,10 @@ namespace System.Collections.Generic
             //Contract.Assert(newSize >= entries.Length);
             int[] newBuckets = new int[newSize];
             for (int i = 0; i < newBuckets.Length; i++) newBuckets[i] = -1;
+            if(this.isSimpleKey)
+            {
+                this.simpleBuckets = new object();
+            }
             Entry[] newEntries = new Entry[newSize];
             Array.Copy(entries, 0, newEntries, 0, count);
             if (forceNewHashCodes)
@@ -354,9 +429,17 @@ namespace System.Collections.Generic
             {
                 if (newEntries[i].hashCode >= 0)
                 {
-                    int bucket = newEntries[i].hashCode % newSize;
-                    newEntries[i].next = newBuckets[bucket];
-                    newBuckets[bucket] = i;
+                    if (this.isSimpleKey)
+                    {
+                        newEntries[i].next = -1;
+                        SetBucket(this.simpleBuckets, newEntries[i].key, i);
+                    }
+                    else
+                    {
+                        int bucket = newEntries[i].hashCode % newSize;
+                        newEntries[i].next = newBuckets[bucket];
+                        newBuckets[bucket] = i;
+                    }                    
                 }
             }
             buckets = newBuckets;
@@ -370,7 +453,26 @@ namespace System.Collections.Generic
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            if (buckets != null)
+            if(this.isSimpleKey)
+            {
+                if(this.simpleBuckets != null)
+                {
+                    if(this.simpleBuckets.HasOwnProperty(key))
+                    {
+                        var i = GetBucket(this.simpleBuckets, key);
+                        Script.Delete(GetBucket(this.simpleBuckets, key));
+                        entries[i].hashCode = -1;
+                        entries[i].next = freeList;
+                        entries[i].key = default(TKey);
+                        entries[i].value = default(TValue);
+                        freeList = i;
+                        freeCount++;
+                        version++;
+                        return true;
+                    }
+                }
+            }
+            else if (buckets != null)
             {
                 int hashCode = comparer.GetHashCode(key) & 0x7FFFFFFF;
                 int bucket = hashCode % buckets.Length;
