@@ -171,8 +171,6 @@
             },
             $ctor5: function (capacity, comparer) {
                 this.$initialize();
-                this.isSimpleKey = ((Bridge.referenceEquals(TKey, System.String)) || (TKey.$number === true && !Bridge.referenceEquals(TKey, System.Int64) && !Bridge.referenceEquals(TKey, System.UInt64)) || (Bridge.referenceEquals(TKey, System.Char))) && (Bridge.referenceEquals(this.comparer, System.Collections.Generic.EqualityComparer$1(TKey).def));
-
                 if (capacity < 0) {
                     System.ThrowHelper.ThrowArgumentOutOfRangeException$1(System.ExceptionArgument.capacity);
                 }
@@ -180,6 +178,8 @@
                     this.Initialize(capacity);
                 }
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
+
+                this.isSimpleKey = ((Bridge.referenceEquals(TKey, System.String)) || (TKey.$number === true && !Bridge.referenceEquals(TKey, System.Int64) && !Bridge.referenceEquals(TKey, System.UInt64)) || (Bridge.referenceEquals(TKey, System.Char))) && (Bridge.referenceEquals(this.comparer, System.Collections.Generic.EqualityComparer$1(TKey).def));
             },
             $ctor1: function (dictionary) {
                 System.Collections.Generic.Dictionary$2(TKey,TValue).$ctor2.call(this, dictionary, null);
@@ -513,10 +513,7 @@
                     return new (System.Collections.Generic.Dictionary$2.Entry(TKey,TValue))();
                 }, System.Collections.Generic.Dictionary$2.Entry(TKey,TValue));
                 this.freeList = -1;
-
-                if (this.isSimpleKey) {
-                    this.simpleBuckets = { };
-                }
+                this.simpleBuckets = { };
             },
             Insert: function (key, value, add) {
 
