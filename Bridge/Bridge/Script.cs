@@ -366,7 +366,7 @@ namespace Bridge
         [Template("Bridge.Deconstruct({obj}, {t1}, {t2}, {t3}, {t4}, {t5}, {t6}, {t7}, {rest})")]
         public extern static void Deconstruct<T1, T2, T3, T4, T5, T6, T7, TRest>(object obj, out T1 t1, out T2 t2, out T3 t3, out T4 t4, out T5 t5, out T6 t6, out T7 t7, out TRest rest);
 
-        [Name("Bridge._")]
+        [Name("_")]
         [Unbox(false)]
         public static object Discard;
     }
