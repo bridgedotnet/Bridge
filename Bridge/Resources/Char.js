@@ -97,7 +97,7 @@
             $isNullMatch: new RegExp("\u0000"),
 
             isNull: function (value) {
-                return $isNullMatch.test(String.fromCharCode(value));
+                return System.Char.$isNullMatch.test(String.fromCharCode(value));
             },
 
             $isSymbolMatch: new RegExp(/[\u20A0-\u20CF\u20D0-\u20FF\u2100-\u214F\u2150-\u218F\u2190-\u21FF\u2200-\u22FF\u2300-\u23FF\u25A0-\u25FF\u2600-\u26FF\u2700-\u27BF\u27C0-\u27EF\u27F0-\u27FF\u2800-\u28FF\u2900-\u297F\u2980-\u29FF\u2A00-\u2AFF\u2B00-\u2BFF]/),
