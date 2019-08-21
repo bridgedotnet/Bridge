@@ -47470,6 +47470,71 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge953", {
+        statics: {
+            methods: {
+                TestMethod1: function (s) {
+                    s.testField = 1;
+                },
+                TestMethod2: function (s) {
+                    s.testField = 2;
+                },
+                TestMethod3: function (s) {
+                    s.testField = 3;
+                },
+                TestNoPureAttribute: function () {
+                    var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestMethod1(s.$clone());
+                    Bridge.Test.NUnit.Assert.AreEqual(0, s.testField, "Compare fields");
+                },
+                TestPureAttributeOnMethod: function () {
+                    var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestMethod2(s);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, s.testField, "Compare fields");
+                },
+                TestPureAttributeOnParameter: function () {
+                    var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestMethod3(s);
+                    Bridge.Test.NUnit.Assert.AreEqual(3, s.testField, "Compare fields");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct", {
+        $kind: "nested struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct(); }
+            }
+        },
+        fields: {
+            testField: 0
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([3924184586, this.testField]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct)) {
+                    return false;
+                }
+                return Bridge.equals(this.testField, o.testField);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge953.TestStruct();
+                s.testField = this.testField;
+                return s;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge968", {
         statics: {
             methods: {

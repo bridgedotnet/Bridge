@@ -451,6 +451,11 @@ namespace Bridge.Contract
                     return;
                 }
 
+                if (Helpers.IsPure(expression, block.Emitter))
+                {
+                    return;
+                }
+
                 if (writeClone)
                 {
                     Helpers.WriteClone(block, insertPosition, nullable);
@@ -535,6 +540,51 @@ namespace Bridge.Contract
             {
                 return true;
             }
+            return false;
+        }
+
+        public static bool IsPure(Expression expression, IEmitter emitter)
+        {
+            var invocationExpression = expression?.Parent as InvocationExpression;
+
+            if (invocationExpression == null || invocationExpression.Target == expression)
+            {
+                return false;
+            }
+
+            var irr = emitter.Resolver.ResolveNode(invocationExpression, emitter) as InvocationResolveResult;
+
+            if (irr == null)
+            {
+                return false;
+            }
+
+            const string pureAttributeName = "System.Diagnostics.Contracts.PureAttribute";
+            var pureAttribute = emitter.Validator.GetAttribute(irr.Member.Attributes, pureAttributeName);
+
+            if (pureAttribute != null)
+            {
+                return true;
+            }
+
+            var i = 0;
+
+            foreach (var argument in invocationExpression.Arguments)
+            {
+                if (argument != expression)
+                {
+                    ++i;
+                    continue;
+                }
+
+                pureAttribute = emitter.Validator.GetAttribute(irr.Member.Parameters[i].Attributes, pureAttributeName);
+
+                if (pureAttribute != null)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 

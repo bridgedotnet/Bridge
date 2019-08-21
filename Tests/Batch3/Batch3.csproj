@@ -180,6 +180,7 @@
     <Compile Include="BridgeIssues\0900\N930.cs" />
     <Compile Include="BridgeIssues\0900\N933.cs" />
     <Compile Include="BridgeIssues\0900\N952.cs" />
+    <Compile Include="BridgeIssues\0900\N953.cs" />
     <Compile Include="BridgeIssues\0900\N968.cs" />
     <Compile Include="BridgeIssues\0900\N975.cs" />
     <Compile Include="BridgeIssues\0900\N989.cs" />
