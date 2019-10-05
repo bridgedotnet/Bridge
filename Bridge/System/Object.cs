@@ -24,6 +24,7 @@ namespace System
         public virtual extern object ValueOf();
 
         [Bridge.Convention(Bridge.Notation.CamelCase)]
+        [Bridge.Template("Object.prototype.hasOwnProperty.call({this}, {v})")]
         public virtual extern bool HasOwnProperty(object v);
 
         [Bridge.Convention(Bridge.Notation.CamelCase)]
