@@ -149,7 +149,7 @@ namespace Bridge.Translator
             var i = 0;
             foreach (var r in this.translator.References)
             {
-                references[i++] = MetadataReference.CreateFromFile(r.MainModule.FullyQualifiedName, new MetadataReferenceProperties(MetadataImageKind.Assembly, ImmutableArray.Create("global")));
+                references[i++] = MetadataReference.CreateFromFile(r.MainModule.FileName, new MetadataReferenceProperties(MetadataImageKind.Assembly, ImmutableArray.Create("global")));
             }
 
             return CSharpCompilation.Create(GetAssemblyName(), syntaxTrees, references, compilationOptions);

@@ -137,7 +137,7 @@ namespace Bridge.Translator
                     TypeDefinition iDef = null;
                     try
                     {
-                        iDef = @interface.Resolve();
+                        iDef = @interface.InterfaceType.Resolve();
                     }
                     catch (Exception)
                     {
@@ -229,7 +229,7 @@ namespace Bridge.Translator
         {
             foreach (var i in type.Interfaces)
             {
-                if (i.FullName == JS.Types.BRIDGE_IBridgeClass)
+                if (i.InterfaceType.FullName == JS.Types.BRIDGE_IBridgeClass)
                 {
                     return true;
                 }

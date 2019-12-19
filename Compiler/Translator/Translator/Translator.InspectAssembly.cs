@@ -18,6 +18,8 @@ namespace Bridge.Translator
             get; set;
         } = new Stack<string>();
 
+        private List<IAssemblyResolver> assemblyResolvers = new List<IAssemblyResolver>();
+
         private class CecilAssemblyResolver : DefaultAssemblyResolver
         {
             public ILogger Logger
@@ -42,13 +44,6 @@ namespace Bridge.Translator
                 return null;
             }
 
-            public override AssemblyDefinition Resolve(string fullName)
-            {
-                this.Logger.Trace("CecilAssemblyResolver: Resolve(string) " + (fullName ?? ""));
-
-                return base.Resolve(fullName);
-            }
-
             public override AssemblyDefinition Resolve(AssemblyNameReference name)
             {
                 string fullName = name != null ? name.FullName : "";
@@ -56,18 +51,6 @@ namespace Bridge.Translator
                 this.Logger.Trace("CecilAssemblyResolver: Resolve(AssemblyNameReference) " + (fullName ?? ""));
 
                 return base.Resolve(name);
-            }
-
-            public override AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
-            {
-                this.Logger.Trace(
-                    "CecilAssemblyResolver: Resolve(string, ReaderParameters) "
-                    + (fullName ?? "")
-                    + ", "
-                    + (parameters != null ? parameters.ReadingMode.ToString() : "")
-                    );
-
-                return base.Resolve(fullName, parameters);
             }
 
             public override AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
@@ -88,15 +71,17 @@ namespace Bridge.Translator
         protected virtual void LoadReferenceAssemblies(List<AssemblyDefinition> references)
         {
             var locations = this.GetProjectReferenceAssemblies().Distinct();
+            var assemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation);
 
+            assemblyResolvers.Add(assemblyResolver);
             foreach (var path in locations)
             {
                 var reference = AssemblyDefinition.ReadAssembly(
-                    path,
+                    new MemoryStream(File.ReadAllBytes(path)),
                     new ReaderParameters()
                     {
                         ReadingMode = ReadingMode.Deferred,
-                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+                        AssemblyResolver = assemblyResolver
                     }
                 );
 
@@ -121,12 +106,16 @@ namespace Bridge.Translator
 
             CurrentAssemblyLocationInspected.Push(location);
 
+            var assemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation);
+
+            assemblyResolvers.Add(assemblyResolver);
+
             var assemblyDefinition = AssemblyDefinition.ReadAssembly(
-                    location,
+                    new MemoryStream(File.ReadAllBytes(location)),
                     new ReaderParameters()
                     {
                         ReadingMode = ReadingMode.Deferred,
-                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+                        AssemblyResolver = assemblyResolver
                     }
                 );
 

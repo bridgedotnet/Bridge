@@ -345,31 +345,34 @@ namespace Bridge.Translator
 
         private void AddNestedReferences(IList<string> referencesPathes, string refPath)
         {
-            var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, new ReaderParameters()
+            var assemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation);
+            assemblyResolvers.Add(assemblyResolver);
+            using (var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, new ReaderParameters()
             {
                 ReadingMode = ReadingMode.Deferred,
-                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
-            });
-
-            foreach (AssemblyNameReference r in asm.MainModule.AssemblyReferences)
+                AssemblyResolver = assemblyResolver
+            }))
             {
-                var name = r.Name;
-
-                if (name == SystemAssemblyName || name == "System.Core")
+                foreach (AssemblyNameReference r in asm.MainModule.AssemblyReferences)
                 {
-                    continue;
+                    var name = r.Name;
+
+                    if (name == SystemAssemblyName || name == "System.Core")
+                    {
+                        continue;
+                    }
+
+                    var path = Path.Combine(Path.GetDirectoryName(refPath), name) + ".dll";
+
+                    if (referencesPathes.Any(rp => Path.GetFileNameWithoutExtension(rp).Equals(name, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
+                    }
+
+                    referencesPathes.Add(path);
+
+                    AddNestedReferences(referencesPathes, path);
                 }
-
-                var path = Path.Combine(Path.GetDirectoryName(refPath), name) + ".dll";
-
-                if (referencesPathes.Any(rp => Path.GetFileNameWithoutExtension(rp).Equals(name, StringComparison.OrdinalIgnoreCase)))
-                {
-                    continue;
-                }
-
-                referencesPathes.Add(path);
-
-                AddNestedReferences(referencesPathes, path);
             }
         }
     }
