@@ -46,19 +46,15 @@ namespace Bridge.Translator.Tests.Helpers
                 return GetBridgeAssembly();
             }
 
-            public AssemblyDefinition Resolve(string fullName)
-            {
-                return GetBridgeAssembly();
-            }
-
             public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
             {
                 return GetBridgeAssembly();
             }
 
-            public AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
+            /// <inheritdoc />
+            public void Dispose()
             {
-                return GetBridgeAssembly();
+                BridgeAssemblyCache?.Dispose();
             }
         }
 

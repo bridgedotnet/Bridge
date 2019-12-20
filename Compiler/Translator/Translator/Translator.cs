@@ -15,7 +15,7 @@ using AssemblyDefinition = Mono.Cecil.AssemblyDefinition;
 
 namespace Bridge.Translator
 {
-    public partial class Translator : ITranslator
+    public partial class Translator : ITranslator, IDisposable
     {
         public const string Bridge_ASSEMBLY = CS.NS.BRIDGE;
         public const string Bridge_ASSEMBLY_DOT = Bridge_ASSEMBLY + ".";
@@ -484,6 +484,28 @@ namespace Bridge.Translator
         public EmitterException CreateExceptionFromLastNode()
         {
             return this.EmitNode != null ? new EmitterException(this.EmitNode) : null;
+        }
+
+        /// <inheritdoc />
+        public virtual void Dispose()
+        {
+            AssemblyDefinition?.Dispose();
+            AssemblyDefinition = null;
+
+            if (References != null)
+            {
+                foreach (var assemblyDefinition in References)
+                {
+                    assemblyDefinition.Dispose();
+                }
+
+                References = null;
+            }
+
+            foreach (var assemblyResolver in assemblyResolvers)
+            {
+                assemblyResolver.Dispose();
+            }
         }
     }
 }

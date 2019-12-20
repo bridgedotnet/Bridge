@@ -79,7 +79,7 @@ namespace Bridge.Contract
 
         public static bool IsTypeArgInSubclass(TypeDefinition thisTypeDefinition, TypeDefinition typeArgDefinition, IEmitter emitter, bool deep = true)
         {
-            foreach (TypeReference interfaceReference in thisTypeDefinition.Interfaces)
+            foreach (TypeReference interfaceReference in thisTypeDefinition.Interfaces.Select(i => i.InterfaceType))
             {
                 var gBaseType = interfaceReference as GenericInstanceType;
                 if (gBaseType != null && Helpers.HasGenericArgument(gBaseType, typeArgDefinition, emitter, deep))
@@ -138,7 +138,7 @@ namespace Bridge.Contract
 
         public static bool IsImplementationOf(TypeDefinition thisTypeDefinition, TypeDefinition interfaceTypeDefinition, IEmitter emitter)
         {
-            foreach (TypeReference interfaceReference in thisTypeDefinition.Interfaces)
+            foreach (TypeReference interfaceReference in thisTypeDefinition.Interfaces.Select(i => i.InterfaceType))
             {
                 var iref = interfaceReference;
                 if (interfaceReference.IsGenericInstance)
