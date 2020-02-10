@@ -19,7 +19,7 @@
     <PrepareForRunDependsOn>$(PrepareForRunDependsOn);$(BridgeNetCompilerTarget)</PrepareForRunDependsOn>
   </PropertyGroup>
 
-  <Target Name="BridgeNetCompilerTask">
+  <Target Name="BridgeNetCompilerTask" Inputs="$(OutputPath)$(AssemblyName).dll" Outputs="$(OutputPath)bridge\$(AssemblyName).js">
     <Message Text="Bridge started" Importance="high" />
 
     <BridgeCompilerTask
