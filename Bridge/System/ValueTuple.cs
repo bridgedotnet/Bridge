@@ -17,7 +17,9 @@ namespace System
     public struct ValueTuple<T1>
         : IEquatable<ValueTuple<T1>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1}"/> instance's first component.
@@ -165,8 +167,10 @@ namespace System
     public struct ValueTuple<T1, T2>
         : IEquatable<ValueTuple<T1, T2>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2}"/> instance's first component.
@@ -354,9 +358,11 @@ namespace System
     public struct ValueTuple<T1, T2, T3>
         : IEquatable<ValueTuple<T1, T2, T3>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's first component.
@@ -540,10 +546,12 @@ namespace System
     public struct ValueTuple<T1, T2, T3, T4>
         : IEquatable<ValueTuple<T1, T2, T3, T4>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
         private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's first component.
@@ -744,11 +752,13 @@ namespace System
     public struct ValueTuple<T1, T2, T3, T4, T5>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
         private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
         private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's first component.
@@ -966,12 +976,14 @@ namespace System
     public struct ValueTuple<T1, T2, T3, T4, T5, T6>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
         private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
         private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
         private static readonly EqualityComparer<T6> s_t6Comparer = EqualityComparer<T6>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's first component.
@@ -1206,6 +1218,7 @@ namespace System
     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, ITupleInternal
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
@@ -1213,6 +1226,7 @@ namespace System
         private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
         private static readonly EqualityComparer<T6> s_t6Comparer = EqualityComparer<T6>.Default;
         private static readonly EqualityComparer<T7> s_t7Comparer = EqualityComparer<T7>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's first component.
@@ -1465,6 +1479,7 @@ namespace System
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>, ITupleInternal
         where TRest : struct
     {
+		#pragma warning disable 0649    // Field is never assigned to, and will always have its default value null
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
         private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
@@ -1473,6 +1488,7 @@ namespace System
         private static readonly EqualityComparer<T6> s_t6Comparer = EqualityComparer<T6>.Default;
         private static readonly EqualityComparer<T7> s_t7Comparer = EqualityComparer<T7>.Default;
         private static readonly EqualityComparer<TRest> s_tRestComparer = EqualityComparer<TRest>.Default;
+		#pragma warning restore 0649
 
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first component.
