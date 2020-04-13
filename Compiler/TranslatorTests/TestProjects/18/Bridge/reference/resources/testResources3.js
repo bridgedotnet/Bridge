@@ -1,4 +1,4 @@
-// Content header:   {notdate} 2019
+// Content header:   {notdate} 2020
 // ---
 // Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
