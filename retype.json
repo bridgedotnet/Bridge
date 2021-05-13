@@ -1,0 +1,64 @@
+{
+  "input": "./docs",
+  "output": "./.retype",
+  "cname": "bridge.net",
+  "meta":
+  {
+    "title": " | Write C#. Run in a web browser."
+  },
+
+  "branding":
+  {
+    "title": "Bridge.NET",
+    "label": "Docs",
+    "logo": "./static/bridge-logo.svg",
+    "logoDark": "./static/bridge-logo-dark.svg"
+  },
+
+  "edit":
+  {
+    "repo": "https://github.com/bridgedotnet/www.bridge.net",
+    "base": "src"
+  },
+
+  "links": [
+    {
+      "text": "Getting Started",
+      "link": "/introduction/getting_started/"
+    },
+    {
+      "text": "GitHub",
+      "link": "https://github.com/bridgedotnet/Bridge"
+    },
+    {
+      "text": "Deck.NET",
+      "link": "https://deck.net/"
+    }
+  ],
+
+  "code": [
+    {
+      "input": "Bridge/Bridge"
+    }
+  ],
+
+  "nav": [
+    {
+      "path": "/",
+      "icon": "home"
+    }
+  ],
+
+  "footer":
+  {
+    "copyright": "Copyright 2008-2021 [Object.NET](https://object.net/), Inc."
+  },
+
+  "plugins":
+  {
+    "googleAnalytics":
+    {
+      "id": "UA-60583944-1"
+    }
+  }
+}

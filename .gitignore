@@ -210,3 +210,4 @@ Tests/**/App_Readme/
 # y no work?
 # !/Bridge/Bridge/Resources/.generated/System/Diagnostics/Debug/*
 /Bridge.Dev.Sandbox.sln
+.retype/

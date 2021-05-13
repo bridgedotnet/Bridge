@@ -9,7 +9,7 @@
 // A task runner that calls the Mono compiler (xbuild) and 
 // Compiles the Bridge Demo program
 {
-	"version": "0.1.0",
+	"version": "2.0.0",
 
 	// The command is xbuild. Assumes that you have Mono correctly set up
 	"command": "xbuild",
@@ -20,16 +20,25 @@
 		"command": "C:/Windows/Microsoft.NET/Framework/v4.0.30319/msbuild.exe"
 	},
 
-	// The command is a shell script
-	"isShellCommand": true,
-
-	// Show the output window only if unrecognized errors occur. 
-	"showOutput": "silent",
-
 	// args is the solution file name.
 
     // Release Build
-	"args": [ "/p:Configuration=Release", "Bridge.NoTest.sln" ]
+	"args": [
+		"/p:Configuration=Release",
+		"Bridge.NoTest.sln"
+	],
+	"tasks": [
+		{
+			"label": "xbuild",
+			"type": "shell",
+			"args": [
+				"/p:Configuration=Release",
+				"Bridge.NoTest.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
 	
     // Debug Build
     // "args": [ "Bridge.NoTest.sln" ]
